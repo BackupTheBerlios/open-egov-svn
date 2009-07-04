@@ -1,0 +1,3 @@
+$Id:$
+
+Open eGovernment is a eGovernment suite. Please visit the homepage www.open-egov.de for information about the purpose, the applications and much more.
