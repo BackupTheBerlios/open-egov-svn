@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<application base="laws and regulations">
+  <strings>
+    <group lang="en_US">
+      <string name="title">laws and regulations</string>
+      <string name="category">Justice</string>
+      <string name="description">Collection of up-to-date laws, standards, guidelines, and regulations.</string>
+    </group>
+
+    <group lang="de_DE">
+      <string name="title">Gesetze und Vorschriften</string>
+      <string name="category">Recht</string>
+      <string name="description">Sammlung aktueller Gesetze, Standards, Richtlinien und Vorschriften.</string>
+    </group>
+  </strings>
+
+  <properties>
+    <property name="dbus" value="false" />
+    <property name="embed" value="false" />
+    <property name="stable" value="false" />
+  </properties>
+
+  <setup>
+    <requires>base</requires>
+  </setup>
+
+  <database name="laws and regulations" type="sqlite" public="true" />
+</application>

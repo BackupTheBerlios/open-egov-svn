@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+
+<application base="arbitration board management">
+  <strings>
+    <group lang="en_US">
+      <string name="title">Arbitration Board Management</string>
+      <string name="category">Justice</string>
+      <string name="description">Board of arbitration management software.</string>
+    </group>
+
+    <group lang="de_DE">
+      <string name="title">Schiedsstellen-Verwaltung</string>
+      <string name="category">Recht</string>
+      <string name="description">Hilft bei der Verwaltung einer Schiedsstelle.</string>
+    </group>
+  </strings>
+
+  <properties>
+    <property name="dbus" value="false" />
+    <property name="embed" value="false" />
+    <property name="stable" value="false" />
+    <property name="database" value="true" />
+  </properties>
+
+  <setup>
+    <requires>base contacts</requires>
+  </setup>
+
+  <features>
+    <todos>
+    </todos>
+    <changes>
+    </changes>
+  </features>
+
+  <datastructure>
+    <table name="">
+      
+    </table>
+  </datastructure>
+
+  <databases>
+    <database type="sqlite" public="false" versioning="false">
+    </database>
+  </databases>
+</application>
