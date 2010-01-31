@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+
+<category base="components">
+  <strings lang="en_US">
+    <string name="title">Components</string>
+    <string name="description">Applications as parts of other OEG applications.</string>
+  </strings>
+
+  <strings lang="de_DE">
+    <string name="title">Komponenten</string>
+    <string name="description">Anwendungen als Bestandteile anderer OEG-Anwendungen.</string>
+  </strings>
+</application>
