@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+
+<category base="languages">
+  <strings lang="en_US">
+    <string name="title">Languages</string>
+    <string name="description">Applications with the topics languages and learning of languages.</string>
+  </strings>
+
+  <strings lang="de_DE">
+    <string name="title">Sprachen</string>
+    <string name="description">Anwendungen zu den Themen Sprachen und lernen von Sprachen.</string>
+  </strings>
+</application>

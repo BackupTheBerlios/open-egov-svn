@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+
+<category base="justice">
+  <strings lang="en_US">
+    <string name="title">Justice</string>
+    <string name="description">Applications with the topics law and rules.</string>
+  </strings>
+
+  <strings lang="de_DE">
+    <string name="title">Recht</string>
+    <string name="description">Anwendungen zu den Themen Recht und Gesetz.</string>
+  </strings>
+</application>
