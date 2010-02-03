@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+
+<category base="health">
+  <strings lang="en_US">
+    <string name="title">Health</string>
+    <string name="description">Health care, public health service, and disease recovery.</string>
+  </strings>
+
+  <strings lang="de_DE">
+    <string name="title">Gesundheit</string>
+    <string name="description">Gesundheitsvorsorge, öffentliches Gesundheitswesen und Krankheitsversorgung.</string>
+  </strings>
+</application>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+
+<category base="office">
+  <strings lang="en_US">
+    <string name="title">Office</string>
+    <string name="description">Office applications like word processor and spreadsheet.</string>
+  </strings>
+
+  <strings lang="de_DE">
+    <string name="title">Büro</string>
+    <string name="description">Büroanwendungen wie Textverarbeitung und Tabellenkalkulation.</string>
+  </strings>
+</application>
+
