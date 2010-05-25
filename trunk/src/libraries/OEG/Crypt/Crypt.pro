@@ -1,10 +1,19 @@
 # $Id$
 
-TARGET    = oegcrypt
-TEMPLATE  = lib
-CONFIG   += qt warn_on release
-RC_FILE   = resources.rc
+TARGET       = oegcrypt
+TEMPLATE     = lib
+VERSION      = 1.0.0.0
 
-HEADERS  += *.h
-SOURCES  += *.cpp
+CONFIG      += qt warn_on release
+QT          += core
+QT          -= gui
+RC_FILE      = resources.rc
+DEFINES     += 
+INCLUDEPATH += ../..
+LIBS        +=
+DESTDIR      = ../../../../bin
+
+FORMS       +=
+HEADERS     += *.h
+SOURCES     += *.cpp
 
