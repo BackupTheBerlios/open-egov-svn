@@ -1,16 +1,16 @@
 // $Id$
 
-# if defined(UNDER_CE)
+#if defined(UNDER_CE)
 #  include <winbase.h>
-# else
+#else
 #  include <winver.h>
-# endif
+#endif
 
-IDI_ICON1               ICON    DISCARDABLE     "library.ico"
+IDI_ICON1  ICON DISCARDABLE  "library.ico"
 
 VS_VERSION_INFO VERSIONINFO
-	FILEVERSION 4,3,1,0
-	PRODUCTVERSION 4,3,1,0
+	FILEVERSION 1,0,0,0
+	PRODUCTVERSION 1,0,0,0
 	FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
 	FILEFLAGS VS_FF_DEBUG
@@ -27,9 +27,9 @@ VS_VERSION_INFO VERSIONINFO
 			BEGIN
 				VALUE "CompanyName", "GASI\0"
 				VALUE "FileDescription", "Open E-Government :: Crypt Library.\0"
-				VALUE "FileVersion", "1.0.1.0\0"
+				VALUE "FileVersion", "1.0.0.0\0"
 				VALUE "LegalCopyright", "Copyright (C) 2010 GASI.\0"
-				VALUE "OriginalFilename", "oegcrypt1.dll\0"
+				VALUE "OriginalFilename", "oegCrypt1.dll\0"
 				VALUE "ProductName", "Open E-Government :: Crypt Library\0"
 			END
 		END
