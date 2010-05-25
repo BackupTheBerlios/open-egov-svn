@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+          "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd">
+<book>
+  <bookinfo>
+    <title>Open eGovernment Developer's Guide</title>
+    <authorgroup>
+      <corpauthor>OEG Team</corpauthor>
+    </authorgroup>
+    <copyright>
+      <year>2009, 2010</year>
+      <holder>Gerrit M. Albrecht</holder>
+    </copyright>
+    <legalnotice>
+      <para>This work is licensed under the Creative Commons Attribution License. To view a copy of this license, visit <ulink url="http://creativecommons.org/licenses/by/2.5/">http://creativecommons.org/licenses/by/2.5/</ulink> or send a letter to Creative Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.</para>
+    </legalnotice>
+  </bookinfo>
+
+  <chapter>
+    <title>Introduction</title>
+    <section>
+      <title>Overview</title>
+      <para>The <ulink url="http://www.open-egov.de/">Open eGovernment</ulink> project is a collection of Qt-based applications created for eGovernment purposes.</para>
+    </section>
+    <section>
+      <title>Background and Goals</title>
+      <para>Free standard office applications not perfect ... <emphasis>..</emphasis> .</para>
+
+      <para>Goals for Open eGovernment:
+        <itemizedlist>
+          <listitem><para>Data Protection.</para></listitem>
+          <listitem><para>Simplicity.</para></listitem>
+          <listitem><para>Documented data streams.</para></listitem>
+          <listitem><para>And more...</para></listitem>
+        </itemizedlist>
+      </para>
+      <para>...</para>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>Directory Structure</title>
+    <section>
+      <title>Overview</title>
+      <para></para>
+    </section>
+    <section>
+      <title>Packs</title>
+      <para>Every package, OEG is able to use, can be found in the subdirectory "packs".
+A pack is a package which contains download and build instructions, patches,
+dependencies and other information used to compile a package and integrate
+it into the OEG directory structure.</para>
+      <para>The directory packs/archives contains binary archives which can be installed
+without compiling them yourself. The packs/instructions contains files needed
+to build a pack from zero. This directory needs to get recursively updated
+every time you want install something new in order to always use the latest
+sources and instrcutions. The directory packs/downloads contains distributed
+source codes downloaded from the homepages of the packs.</para>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>Application Development</title>
+    <section>
+      <title>Overview</title>
+      <para></para>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>DBUS Scripting</title>
+    <section>
+      <title>Overview</title>
+      <para></para>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>File storage</title>
+    <section>
+      <title>Overview</title>
+      <para>Documents may be stored into databases and XML files.</para>
+    </section>
+  </chapter>
+</book>
+
