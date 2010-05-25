@@ -1,6 +1,8 @@
-<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
-<application base="arbitration board management" category="justice">
+<!-- $Id$ -->
+
+<application base="arbitration-board-management" category="justice">
   <strings>
     <group lang="en_US">
       <string name="title">Arbitration Board Management</string>
