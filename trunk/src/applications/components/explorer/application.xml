@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<application base="explorer" category="components">
+  <strings>
+    <group lang="en_US">
+      <string name="title">Explorer</string>
+      <string name="description">The Explorer allows working with objects and files.</string>
+    </group>
+
+    <group lang="de_DE">
+      <string name="title">Explorer</string>
+      <string name="description">Der Explorer erlaubt das Arbeiten mit Objekten und Dateien.</string>
+    </group>
+  </strings>
+
+  <properties>
+    <property name="dbus" value="false" />
+    <property name="embed" value="false" />
+    <property name="stable" value="true" />
+    <property name="database" value="false" />
+  </properties>
+
+  <setup>
+    <requires>base</requires>
+  </setup>
+
+  <features>
+    <todos>
+    </todos>
+    <changes>
+    </changes>
+  </features>
+
+  <datastructure>
+    <table name="">
+      
+    </table>
+  </datastructure>
+
+  <databases>
+  </databases>
+</application>
