@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
 
 <category base="health">
   <strings lang="en_US">
@@ -8,6 +10,6 @@
 
   <strings lang="de_DE">
     <string name="title">Gesundheit</string>
-    <string name="description">Gesundheitsvorsorge, �ffentliches Gesundheitswesen und Krankheitsversorgung.</string>
+    <string name="description">Gesundheitsvorsorge, öffentliches Gesundheitswesen und Krankheitsversorgung.</string>
   </strings>
 </application>
