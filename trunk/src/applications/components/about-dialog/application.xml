@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<application base="about-dialog" category="components">
+  <strings>
+    <group lang="en_US">
+      <string name="title">About Dialog</string>
+      <string name="description">This dialog presents information about the current application.</string>
+    </group>
+
+    <group lang="de_DE">
+      <string name="title">Über-Dialog</string>
+      <string name="description">Dieser Dialog präsentiert Informationen über die aktuelle Anwendung.</string>
+    </group>
+  </strings>
+
+  <properties>
+    <property name="dbus" value="false" />
+    <property name="embed" value="false" />
+    <property name="stable" value="true" />
+    <property name="database" value="false" />
+  </properties>
+
+  <setup>
+    <requires>base</requires>
+  </setup>
+
+  <features>
+    <todos>
+    </todos>
+    <changes>
+    </changes>
+  </features>
+
+  <datastructure>
+    <table name="">
+      
+    </table>
+  </datastructure>
+
+  <databases>
+  </databases>
+</application>
