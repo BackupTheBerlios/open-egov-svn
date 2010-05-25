@@ -1,5 +1,5 @@
 # $Id$
 
 TEMPLATE = subdirs
-SUBDIRS  = dictionary virtual-keyboard
+SUBDIRS  = dictionary virtual-keyboard vocabulary-trainer
 
