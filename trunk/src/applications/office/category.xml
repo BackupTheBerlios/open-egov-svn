@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+ï»¿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
 
 <category base="office">
   <strings lang="en_US">
@@ -7,8 +9,8 @@
   </strings>
 
   <strings lang="de_DE">
-    <string name="title">Büro</string>
-    <string name="description">Büroanwendungen wie Textverarbeitung und Tabellenkalkulation.</string>
+    <string name="title">BÃ¼ro</string>
+    <string name="description">BÃ¼roanwendungen wie Textverarbeitung und Tabellenkalkulation.</string>
   </strings>
 </application>
 
