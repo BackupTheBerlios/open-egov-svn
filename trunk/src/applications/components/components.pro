@@ -1,5 +1,5 @@
 # $Id$
 
 TEMPLATE = subdirs
-SUBDIRS  = control-center desktop
+SUBDIRS  = about-dialog builder database-manager desktop file-manager help-viewer settings updater
 
