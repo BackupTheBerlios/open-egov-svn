@@ -25,12 +25,12 @@ VS_VERSION_INFO VERSIONINFO
 		BEGIN
 			BLOCK "040904B0"
 			BEGIN
-				VALUE "CompanyName", "GASI\0"
-				VALUE "FileDescription", "Open E-Government :: Crypt Library.\0"
+				VALUE "CompanyName", "gasi.de\0"
+				VALUE "FileDescription", "Open E-Government: Crypt Library.\0"
 				VALUE "FileVersion", "1.0.0.0\0"
 				VALUE "LegalCopyright", "Copyright (C) 2010 GASI.\0"
 				VALUE "OriginalFilename", "oegCrypt1.dll\0"
-				VALUE "ProductName", "Open E-Government :: Crypt Library\0"
+				VALUE "ProductName", "Open E-Government Suite\0"
 			END
 		END
 	END
