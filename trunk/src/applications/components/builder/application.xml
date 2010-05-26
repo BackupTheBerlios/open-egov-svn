@@ -2,16 +2,16 @@
 
 <!-- $Id$ -->
 
-<application base="control-center" category="components">
+<application base="builder" category="components">
   <strings>
     <group lang="en_US">
-      <string name="title">Control Center</string>
-      <string name="description">The Control Center allows the installation and removal of applications.</string>
+      <string name="title">Builder</string>
+      <string name="description">The Builder allows the installation and removal of applications.</string>
     </group>
 
     <group lang="de_DE">
-      <string name="title">Kontrollzentrum</string>
-      <string name="description">Das Kontrollzentrum erlaubt das Installieren und Entfernen von Anwendungen.</string>
+      <string name="title">Bauunternehmen</string>
+      <string name="description">Das Bauunternehmen erlaubt das Installieren und Entfernen von Anwendungen.</string>
     </group>
   </strings>
 
