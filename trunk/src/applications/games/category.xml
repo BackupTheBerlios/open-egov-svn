@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
 
 <category base="games">
   <strings lang="en_US">
@@ -8,6 +10,7 @@
 
   <strings lang="de_DE">
     <string name="title">Spiele</string>
-    <string name="description">Spiel und Spa�.</string>
+    <string name="description">Spiel und Spaß.</string>
   </strings>
 </application>
+

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<category base="specialized-apps">
+  <strings lang="en_US">
+    <string name="title">Specialized Applications</string>
+    <string name="description">Collection of specialized applications.</string>
+  </strings>
+
+  <strings lang="de_DE">
+    <string name="title">Fachanwendungen</string>
+    <string name="description">Sammlung von Fachanwendungen.</string>
+  </strings>
+</application>
