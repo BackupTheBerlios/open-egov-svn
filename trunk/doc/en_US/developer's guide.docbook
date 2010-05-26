@@ -20,30 +20,14 @@
   </bookinfo>
 
   <chapter>
-    <title>Introduction</title>
+    <title>Introduction für Developers</title>
     <section>
       <title>Overview</title>
-      <para>The <ulink url="http://www.open-egov.de/">Open eGovernment</ulink> project is a collection of Qt-based applications created for eGovernment purposes.</para>
+      <para>.</para>
     </section>
     <section>
-      <title>Background and Goals</title>
-      <para>Free standard applications are not perfect. While working for an german Land authority which decided to use open source software in a heterogeneous environment a lot of imperfections were revealed. OpenOffice, Firefox, KDE - there was no standard software which we could recommend without hesitation. OpenOffice seemed to be perfect first but in practice there were other authorities sending documents which it couldn't read correctly. There were missing record tokens, wrong contents in autofilled form fields, wrong fonts if they embedded corporate style fonts, documents, that could not be opened in a simple way because they were contained within an ActiveX container, failing (VBA) scripts, or wrong layouted presentations. KDE was not better. Using it at home in its latest version and mostly without tears, @work it showed its true, cruel face: kmail zoomed out the printed mails if it contained long links (some people print out the internet...), the kaddressbook was unable to hold its data. It simply destroyed the contacts file from time to time (maybe because someone used user defined fields with german Umlauts). The addressbook was even unable to let one insert the whole data contained in a business card of a standard politician. They have several occupations, roles, companies, offices and addresses. The staff of an authority needed to always contain the authority data as duplicate because there is no separtion between company/worker or authority/employee. Applications didn't work together (except kaddressbook/kmail/kgpg, ...) as expected.</para>
-      <para>The Open eGovernment Project provides applications for use by authorities. But also other application types are allowed. OEG should not become a KDE replacement, it's more a supplement which implements missing features and applications.
-      <emphasis>..</emphasis> .</para>
-
-      <para>Goals for Open eGovernment:
-        <itemizedlist>
-          <listitem><para>Strengthening of Data Protection.</para></listitem>
-          <listitem><para>Data minimality, System Data Protection.</para></listitem>
-          <listitem><para>Portability (at least Windows and Linux).</para></listitem>
-          <listitem><para>Simplicity.</para></listitem>
-          <listitem><para>Documented data streams.</para></listitem>
-          <listitem><para>Use of encryption.</para></listitem>
-          <listitem><para>ISO 9000 and ISO 27000 support.</para></listitem>
-          <listitem><para>And more...</para></listitem>
-        </itemizedlist>
-      </para>
-      <para>...</para>
+      <title></title>
+      <para>.</para>
     </section>
   </chapter>
 
