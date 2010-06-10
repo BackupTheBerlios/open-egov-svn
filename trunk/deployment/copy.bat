@@ -1,4 +1,4 @@
-@echo off
+@ECHO OFF
 
 rem $Id$
 
@@ -7,18 +7,19 @@ rem After this step it should be possible to use the applications without
 rem a MinGW/Qt (SDK) installation. Files not copied here must not be required
 rem by an OEG application.
 
-SET BASE=D:\Projekte\berlios\open-egov
-CD /D C:\Qt\4.7.0-beta1\bin
+SET SRCDIR=C:\Qt\4.7.0-beta1\bin
+CD /D "%0"\..\..\bin
 
-COPY /B /Y mingwm10.dll   "%BASE%\bin"
-COPY /B /Y phonon4.dll    "%BASE%\bin"
-COPY /B /Y QtCore4.dll    "%BASE%\bin"
-COPY /B /Y QtGui4.dll     "%BASE%\bin"
-COPY /B /Y QtNetwork4.dll "%BASE%\bin"
-COPY /B /Y QtOpenGL4.dll  "%BASE%\bin"
-COPY /B /Y QtScript4.dll  "%BASE%\bin"
-COPY /B /Y QtSql4.dll     "%BASE%\bin"
-COPY /B /Y QtSvg4.dll     "%BASE%\bin"
+COPY /B /Y "%SRCDIR%\mingwm10.dll" .
+COPY /B /Y "%SRCDIR%\phonon4.dll" .
+COPY /B /Y "%SRCDIR%\QtCore4.dll" .
+COPY /B /Y "%SRCDIR%\QtGui4.dll" .
+COPY /B /Y "%SRCDIR%\QtNetwork4.dll" .
+COPY /B /Y "%SRCDIR%\QtOpenGL4.dll" .
+COPY /B /Y "%SRCDIR%\QtScript4.dll" .
+COPY /B /Y "%SRCDIR%\QtSql4.dll" .
+COPY /B /Y "%SRCDIR%\QtSvg4.dll" .
 
+ECHO Check output for errors!
 PAUSE
 
