@@ -1,4 +1,4 @@
-// $Id:$
+// $Id$
 
 #ifndef OEG_DATA_DIAGRAMS_H
 #define OEG_DATA_DIAGRAMS_H

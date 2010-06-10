@@ -1,4 +1,4 @@
-# $Id:$
+# $Id$
 
 TEMPLATE = app
 TARGET   = charts
