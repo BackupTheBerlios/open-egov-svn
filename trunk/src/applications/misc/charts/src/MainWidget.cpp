@@ -5,7 +5,7 @@
 #include "MainWidget.h"
 
 MainWidget::MainWidget(QWidget *parent /*=0*/, const char *name /*=0*/)
- : QTextEdit(parent, name)
+ : QTextEdit(parent)
 {
 }
 
