@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="peflags">
+  <meta>
+    <homepage>http://www.videolan.org/</homepage>
+    <download></download>
+    <descriptions>
+      <description lang="en" type="short"></description>
+      <description lang="en" type="long">PEFlags is a command-line tool, which allows the setting of the DEP and ASLR flags of the PE header of binary files. So Windows applications and DLLs can use Data Execution Prevention and Adress Space Layout Randomisation and make attacks on vulnerabilities more difficult.</description>
+      <description lang="de" type="long">PEFlags ist ein Kommandozeilen-Werkzeug, welches die DEP und ASLR Kennzeichnungen im PE-Header von Binärdateien setzen kann. Damit können Windows Anwendungen und DLLs die Datenausführungsverhinderung (Data Execution Prevention, DEP) und die Speicherverwürfelung (Adress Space Layout Randomisation, ASLR) nutzen und Angriffe auf Schwachstellen erschweren.</description>
+    </descriptions>
+    <keywords>DEP, ASLR, Exploit Prevention Mechanism, XPM</keywords>
+  </meta>
+
+  <comments>
+  
+  </comments>
+
+  <set version="1.0" date="2010-07-07" working="true">
+    <requires>
+      <app name="gcc" type="compile" />
+      <app name="" version="" type="recommended" />
+    </requires>
+
+    <downloads>
+      <download type="direct" checked="2010-07-06">
+        <url>http://download.videolan.org/pub/videolan/contrib/peflags.c</url>
+        <hash type="SHA1"></hash>
+        <hash type="MD5"></hash>
+    </downloads>
+
+    <install>
+    </install>
+
+    <compile>
+gcc -o peflags.exe -DVERSION='"2.4.5"' peflags.c
+    </compile>
+  </set>
+
+  <set version="0.01" date="2000-01-01" working="false">
+  </set>
+</pack>
+
