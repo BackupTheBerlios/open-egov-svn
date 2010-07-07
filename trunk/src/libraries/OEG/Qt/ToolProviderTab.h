@@ -20,6 +20,8 @@ namespace OEG { namespace Qt {
 
 class ToolProviderTab : public QObject
 {
+  Q_OBJECT
+
   public:
     ToolProviderTab(QObject *parent = 0);
     ~ToolProviderTab();

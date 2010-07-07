@@ -27,6 +27,8 @@ namespace OEG { namespace Qt {
 
 class ToolProvider : public QWidget
 {
+  Q_OBJECT
+
   public:
     ToolProvider(QWidget *parent = 0, ::Qt::WindowFlags flags = 0);
     ~ToolProvider();
