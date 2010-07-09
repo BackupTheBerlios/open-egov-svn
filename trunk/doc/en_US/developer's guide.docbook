@@ -36,13 +36,20 @@
     <section>
       <title>Overview</title>
       <para>This chapter describes the steps needed to get an environment for building
-own applications with latest tools and using no prebuilt packages from this project.</para>
+own applications with latest tools and without using prebuilt packages from this project.</para>
     </section>
     <section>
       <title>Preparation and Setup</title>
-      <para>.
+      <para>To build everything you first need a setup with some prebuilt stuff. Applications need e.g. gettext and it's simpler to use a binary version to build the "builder" package (which needs gettext). Later you may rebuild such applications and all of their dependent packages.
 </para>
-      <para>...</para>
+      <para>The first setup step is the installation of Qt. Retrieve a complete development package (with MinGW and precompiled libraries) from <ulink url="http://qt.nokia.com/">qt.nokia.com</ulink>, because it is all you need to be ready for working. Then download the Open eGovernment source package and extract it to any path you want. This is your base installation path. You don't need to set an environment variable. It's possible to put the directory structure onto an USB stick.</para>
+      <para>To build applications you need a lot of standard tools and applications. Most of them only compile with patches or when other tools are available. So you have to build a nearly complete GNU toolchain.</para>
+      <para>Independent binary tools may be downloaded from their respective websites. The following tools may be installed as binaries:
+        <itemizedlist>
+          <listitem><para>Git,</para></listitem>
+          <listitem><para>Perl.</para></listitem>
+        </itemizedlist>
+      </para>
     </section>
   </chapter>
 
@@ -71,7 +78,12 @@ source codes downloaded from the homepages of the packs.</para>
     <title>Application Development</title>
     <section>
       <title>Overview</title>
-      <para></para>
+      <para>The best method to get ready is using the template application.</para>
+      <para>Every application may, at its option, use Qt's or OEG's classes. It's recommended to
+      make use of the (enhanced) OEG classes, which provide a lot of standard-offer capabilities
+      already built-in. The common way to open your application's window is to derive a class from
+      OEG::Qt::MainWindow.</para>
+      <para>While development it may help to add "CONFIG += console" into your .pro file.</para>
     </section>
   </chapter>
 
@@ -87,7 +99,7 @@ source codes downloaded from the homepages of the packs.</para>
     <title>File storage</title>
     <section>
       <title>Overview</title>
-      <para>Documents may be stored into databases and XML files.</para>
+      <para>Documents may be stored into databases and XML files. This is configurable.</para>
     </section>
   </chapter>
 </book>
