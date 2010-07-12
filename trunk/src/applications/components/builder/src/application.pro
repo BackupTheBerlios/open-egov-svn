@@ -1,11 +1,10 @@
 # $Id$
 
-include(../../../common.pri)
-
 TARGET   = builder
-RC_FILE  = application.rc
 SOURCES  = *.cpp
 HEADERS  = *.h
 FORMS    = 
+USE      = QT
 
+include(..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}common.pri)
 

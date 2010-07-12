@@ -6,6 +6,9 @@
 
 #include <QString.h>
 #include <QWidget.h>
+#include <QList.h>
+
+class OEG::Qt::ToolProvider;
 
 class MainWindow : public OEG::Qt::MainWindow
 {
@@ -15,6 +18,12 @@ class MainWindow : public OEG::Qt::MainWindow
 
   public:
     MainWindow(QWidget *parent = 0);
+
+    void createActions();
+    void createMenus();
+    void createToolBars();
+    void createStatusBar();
+    void createDockWidgets();
 
     void setTitle(const QString &title);
     QString title() const;
