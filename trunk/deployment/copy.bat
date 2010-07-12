@@ -14,7 +14,7 @@ REM Also there are two places with plugins... Chaos.
 CD /D "%0"\..\..\bin
 
 SET SRCDIR=C:\Qt\4.7.0-beta1\bin
-SET SRCDIR=C:\Qt\2010.03\qt\bin
+SET SRCDIR=C:\Qt\2010.04\qt\bin
 
 COPY /B /Y "%SRCDIR%\mingwm10.dll" .
 COPY /B /Y "%SRCDIR%\libgcc_s_dw2-1.dll" .
@@ -34,7 +34,7 @@ COPY /B /Y "%SRCDIR%\QtWebKit4.dll" .
 COPY /B /Y "%SRCDIR%\QtXml4.dll" .
 COPY /B /Y "%SRCDIR%\QtXmlPatterns4.dll" .
 
-SET SRCDIR=C:\Qt\2010.03\bin
+SET SRCDIR=C:\Qt\2010.04\bin
 
 COPY /B /Y "%SRCDIR%\QtConcurrent.dll" .
 
@@ -52,7 +52,7 @@ XCOPY /E /H /Y "%SRCDIR%\imageformats" imageformats
 XCOPY /E /H /Y "%SRCDIR%\sqldrivers"   sqldrivers
 
 REM SET SRCDIR=C:\MinGW\bin
-SET SRCDIR=C:\Qt\2010.03\mingw\bin
+SET SRCDIR=C:\Qt\2010.04\mingw\bin
 
 COPY /B /Y "%SRCDIR%\mingwm10.dll" .
 COPY /B /Y "%SRCDIR%\libstdc++-6.dll" .
