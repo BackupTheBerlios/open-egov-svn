@@ -1,7 +1,5 @@
 # $Id$
 
-include(../common.pri)
-
 TARGET       = oegQt
 VERSION      = 1.0.0.0
 QT          += gui
@@ -14,4 +12,6 @@ LIBS        +=
 FORMS       +=
 HEADERS     += *.h
 SOURCES     += *.cpp
+
+include(../common.pri)
 

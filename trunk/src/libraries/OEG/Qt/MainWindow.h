@@ -3,6 +3,9 @@
 #pragma once
 
 #include <QMainWindow>
+#include <QList>
+
+class QAction;
 
 namespace OEG { namespace Qt {
 
@@ -17,12 +20,18 @@ class MainWindow : public QMainWindow
     ~MainWindow();
 
   protected:
-
+    void createActions();
+    void createDockWidgets();
+    void createMenus();
+    void createStatusBar();
+    void createToolBars();
+    void createToolProvider();
 
   private:
 
   protected:
-    ToolProvider  *m_tool_provider;
+    ToolProvider      *m_tool_provider;
+    QList<QAction *>   m_actions;
 };
 
 }}

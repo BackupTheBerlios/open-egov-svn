@@ -1,8 +1,6 @@
 # $Id$
 
-include(../common.pri)
-
-TARGET       = oegCrypt
+TARGET       = oegSAML
 VERSION      = 1.0.0.0
 
 RC_FILE      = resources.rc
@@ -13,4 +11,6 @@ LIBS        +=
 FORMS       +=
 HEADERS     += *.h
 SOURCES     += *.cpp
+
+include(../common.pri)
 

@@ -1,7 +1,5 @@
 # $Id$
 
-include(../common.pri)
-
 TARGET       = oegCrypt
 VERSION      = 1.0.0.0
 
@@ -13,4 +11,6 @@ LIBS        +=
 FORMS       +=
 HEADERS     += *.h
 SOURCES     += *.cpp
+
+include(../common.pri)
 
