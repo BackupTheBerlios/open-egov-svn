@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="gcc">
+  <meta>
+    <homepage>http://gcc.gnu.org/</homepage>
+    <download>http://ftp.gnu.org/pub/gnu/gcc/</download>
+    <descriptions>
+      <description lang="en" type="short">GNU Compiler Collection.</description>
+      <description lang="en" type="long">GNU Compiler Collection.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>compiler, gnu, gcc</keywords>
+  </meta>
+
+  <comments>
+http://gcc.gnu.org/install/prerequisites.html
+  </comments>
+
+  <set version="4.5.0" checked="2010-07-13" from="2010-05-28" working="true">
+    <requires>
+      <app name="gcc" type="compile" />
+    </requires>
+
+    <downloads>
+      <download type="direct" from="2009-04-14">
+        <url>http://ftp.gnu.org/pub/gnu/gcc/gcc-4.5.0/gcc-4.5.0.tar.bz2</url>
+        <hash type="SHA1"></hash>
+        <hash type="MD5"></hash>
+        <size></size>
+    </downloads>
+
+    <options>
+    </options>
+
+    <patch>
+    </patch>
+
+    <compile>
+./configure --prefix=/mingw
+make
+make install
+    </compile>
+
+    <install>
+    </install>
+  </set>
+</pack>
+
