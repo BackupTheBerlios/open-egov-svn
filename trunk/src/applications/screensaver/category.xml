@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+
+<category base="screensaver">
+  <strings lang="en_US">
+    <string name="title">Screensaver</string>
+    <string name="description">Some nice Screensaver.</string>
+  </strings>
+
+  <strings lang="de_DE">
+    <string name="title">Bildschirmschoner</string>
+    <string name="description">Einige nette Bildschirmschoner.</string>
+  </strings>
+</application>
+
