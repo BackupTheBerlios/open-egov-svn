@@ -19,7 +19,7 @@ QT          += core gui xml
 DESTDIR      = $${PRO_OUT_PATH}$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}bin
 INCLUDEPATH += ..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}libraries
 
-win32-g++ {
+win32 {
   QMAKE_POST_LINK += strip --strip-unneeded \"$${DESTDIR}$${DIR_SEPARATOR}$${TARGET}.exe\"
   exists("$${DESTDIR}$${DIR_SEPARATOR}peflags.exe") {
     #QMAKE_POST_LINK += && $${DESTDIR}$${DIR_SEPARATOR}peflags.exe --dynamicbase=true --nxcompat=true $${DESTDIR}$${DIR_SEPARATOR}$$replace(TARGET, " ", "\ ").exe
@@ -46,7 +46,7 @@ contains(USE, MATH) {
 }
 LIBS += $$LIBSLINE
 
-# win32:debug adds the CONFIG option even if a release build gets compiled. Why?
+# win32:debug adds this CONFIG option even if only a release build gets compiled. Why?
 win32 {
   debug {
     #CONFIG += console
@@ -60,5 +60,9 @@ win32 {
   else {
     message("This Windows build is missing an application.rc!")
   }
+}
+
+exists($${PRO_OUT_PATH}$${DIR_SEPARATOR}application.qrc) {
+  RESOURCES += application.qrc
 }
 

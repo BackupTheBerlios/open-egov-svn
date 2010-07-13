@@ -3,6 +3,8 @@
 #pragma once
 
 #include <QApplication>
+#include <QString>
+#include <QStringList>
 
 #include <QDebug>
 
@@ -15,6 +17,9 @@ class Application : public QApplication
   public:
     Application(int &argc, char *argv[]);
     virtual ~Application();
+
+    static void runComponent(const QString &cmd);
+    static void runComponent(const QString &cmd, const QStringList &arguments);
 
   protected:
 
