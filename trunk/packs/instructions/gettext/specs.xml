@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="gettext">
+  <meta>
+    <homepage>http://www.gnu.org/software/gettext/</homepage>
+    <download>http://ftp.gnu.org/pub/gnu/gettext/</download>
+    <descriptions>
+      <description lang="en" type="short"></description>
+      <description lang="en" type="long"></description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>gettext, localization, internationalization, i10n, i18n</keywords>
+  </meta>
+
+  <comments>
+When compiling gettext 0.16.1, an error occurs:
+
+./localename.c:1145: error: duplicate case value
+./localename.c:1144: error: previously used here
+./localename.c:1359: error: duplicate case value
+./localename.c:1358: error: previously used here
+./localename.c:1367: error: duplicate case value
+./localename.c:1366: error: previously used here
+
+You just have to open the file localename.c and replace the constant names directly by their corresponding values (0x00, 0x01):
+
+Example:
+      case /*SUBLANG_BENGALI_INDIA*/0x00: return "bn_IN";
+      case /*SUBLANG_BENGALI_BANGLADESH*/0x01: return "bn_BD"; 
+  </comments>
+
+  <set version="0.18.1.1" date="2010-07-13" working="true">
+    <requires>
+      <app name="gcc" type="compile" />
+      <app name="libiconv" version="" type="required" />
+      <app name="xxx" version="" type="recommended" />
+    </requires>
+
+    <downloads>
+      <download type="direct" checked="2010-07-13" from="2010-06-06">
+        <url>http://ftp.gnu.org/pub/gnu/gettext/gettext-0.18.1.1.tar.gz</url>
+        <hash type="SHA1"></hash>
+        <hash type="MD5"></hash>
+    </downloads>
+
+    <options>
+    </options>
+
+    <patch>
+    </patch>
+
+    <compile>
+./configure --prefix=/mingw
+make
+make install
+    </compile>
+
+    <install>
+    </install>
+  </set>
+</pack>
+
