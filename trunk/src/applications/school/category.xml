@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<category base="office">
+  <strings lang="en_US">
+    <string name="title">School</string>
+    <string name="description">Offers the electronic class-register and absentee lists.</string>
+  </strings>
+
+  <strings lang="de_DE">
+    <string name="title">Schule</string>
+    <string name="description">Bietet das elektronische Klassenbuch und Abwesenheitslisten.</string>
+  </strings>
+</application>
+
