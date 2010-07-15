@@ -38,25 +38,42 @@ SET SRCDIR=C:\Qt\2010.04\bin
 
 COPY /B /Y "%SRCDIR%\QtConcurrent.dll" .
 
-REM Oder nach "plugins" verschieben?
-
-MD accessible
-MD codecs
-MD iconengines
-MD imageformats
-MD sqldrivers
-XCOPY /E /H /Y "%SRCDIR%\accessible"   accessible
-XCOPY /E /H /Y "%SRCDIR%\codecs"       codecs
-XCOPY /E /H /Y "%SRCDIR%\iconengines"  iconengines
-XCOPY /E /H /Y "%SRCDIR%\imageformats" imageformats
-XCOPY /E /H /Y "%SRCDIR%\sqldrivers"   sqldrivers
-
 REM SET SRCDIR=C:\MinGW\bin
 SET SRCDIR=C:\Qt\2010.04\mingw\bin
 
 COPY /B /Y "%SRCDIR%\mingwm10.dll" .
 COPY /B /Y "%SRCDIR%\libstdc++-6.dll" .
 COPY /B /Y "%SRCDIR%\libgcc_s_dw2-1.dll" .
+
+CD /D "%0"\..\..\
+
+SET SRCDIR=C:\Qt\2010.04\bin
+
+IF EXIST plugins (
+  ECHO The plugins directory already exists.
+  CD plugins
+) ELSE (
+  ECHO No plugins directory found. Creating.
+  MD plugins
+)
+
+RD /S /Q accessible
+RD /S /Q codecs
+RD /S /Q iconengines
+RD /S /Q imageformats
+RD /S /Q sqldrivers
+
+MD accessible
+MD codecs
+MD iconengines
+MD imageformats
+MD sqldrivers
+
+XCOPY /E /H /Y "%SRCDIR%\accessible"   accessible
+XCOPY /E /H /Y "%SRCDIR%\codecs"       codecs
+XCOPY /E /H /Y "%SRCDIR%\iconengines"  iconengines
+XCOPY /E /H /Y "%SRCDIR%\imageformats" imageformats
+XCOPY /E /H /Y "%SRCDIR%\sqldrivers"   sqldrivers
 
 ECHO Check output for errors!
 PAUSE
