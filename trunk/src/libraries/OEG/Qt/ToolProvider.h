@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <OEG/Common.h>
+
 #include <QColor>
 #include <QEvent>
 #include <QIcon>

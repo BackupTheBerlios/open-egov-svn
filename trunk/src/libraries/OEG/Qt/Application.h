@@ -2,11 +2,17 @@
 
 #pragma once
 
+#include <OEG/Common.h>
+
 #include <QApplication>
 #include <QString>
 #include <QStringList>
 
 #include <QDebug>
+
+#define MODULE_INFO(txt) static const char oeg_ident[] =  \
+  "   Open eGovernment (www.open-egov.de), " txt "   "; \
+  const char *oeg_ident_x = oeg_ident;
 
 namespace OEG { namespace Qt {
 
