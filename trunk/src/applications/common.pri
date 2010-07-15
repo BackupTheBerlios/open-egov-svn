@@ -30,21 +30,40 @@ win32 {
   }
 }
 
-isEmpty(USE) {
-  USE += QT
+isEmpty(PACKAGES) {
+  PACKAGES += QT
 }
 # Want to avoid several -L but can't make them unique because "-L" should be placed in front of "-l".
 LIBSLINE = -L..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}bin
-contains(USE, QT) {
+contains(PACKAGES, QT) {
+  message(Adding support for OEG-Qt ...)
   LIBSLINE += -loegQt1
 }
-contains(USE, CRYPT) {
+contains(PACKAGES, CRYPT) {
+  message(Adding support for OEG-Crypt ...)
   LIBSLINE += -loegCrypt1
 }
-contains(USE, MATH) {
+contains(PACKAGES, MATH) {
+  message(Adding support for OEG-Math ...)
   LIBSLINE += -loegMath1
 }
 LIBS += $$LIBSLINE
+
+contains(PACKAGES, GETTEXT) {
+  message(Adding support for GNU gettext ...)
+
+  # Needed to automatically include the gettext headers while using the OEG libraries.
+  DEFINES += USE_GETTEXT
+
+  win32 {
+    INCLUDEPATH += ../../../../../include
+    LIBS += -L../../../../../lib -lintl -lgettextpo
+  }
+}
+
+win32 {
+  #DEFINES += XP_WIN WIN32 _WIN32 _WINDOWS _MINGW
+}
 
 # win32:debug adds this CONFIG option even if only a release build gets compiled. Why?
 win32 {
@@ -65,4 +84,7 @@ win32 {
 exists($${PRO_OUT_PATH}$${DIR_SEPARATOR}application.qrc) {
   RESOURCES += application.qrc
 }
+
+run.commands = @echo Running $${TARGET} && $${DESTDIR}$${DIR_SEPARATOR}$${TARGET}
+QMAKE_EXTRA_TARGETS += run
 
