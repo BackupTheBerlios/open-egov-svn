@@ -1,10 +1,11 @@
 # $Id$
 
-TARGET   = help-viewer
-SOURCES  = *.cpp
-HEADERS  = *.h
-FORMS    = 
-USE      = QT
+TARGET    = help-viewer
+SOURCES   = *.cpp
+HEADERS   = *.h
+FORMS     = 
+QT       += xml network
+PACKAGES  = QT GETTEXT
 
 include(..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}common.pri)
 

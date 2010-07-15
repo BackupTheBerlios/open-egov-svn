@@ -4,15 +4,13 @@
 
 #include "MainWindow.h"
 
-#define MODULE_ID(id) static const char Ident[] = id;
+MODULE_INFO("File: " __FILE__ ", Build: " __DATE__)
 
 int main(int argc, char *argv[])
 {
   OEG::Qt::Application app(argc, argv);
 
-  MODULE_ID("$Id$")
-
-  MainWindow *mw = new MainWindow();
+  MainWindow *mw __attribute__ ((__unused__)) = new MainWindow();
 
   return app.exec();
 }

@@ -3,17 +3,90 @@
 <!-- $Id$ -->
 
 <application base="settings" category="components">
-  <strings>
+  <head>
+    <text name="title"       stringnumber="1" />
+    <text name="description" stringnumber="2" />
+  </head>
+
+  <dictionary>
     <group lang="en_US">
-      <string name="title">Settings</string>
-      <string name="description">Allows the change of the predefined and current settings.</string>
+      <string number="1">Settings</string>
+      <string number="2">Allows the change of the predefined and current settings.</string>
+      <string number="3">Proxy</string>
+      <string number="4">Use</string>
+      <string number="5">Allows to switch the use of a proxy server on or off.</string>
+      <string number="6">Host</string>
+      <string number="7">Host name or IP number of the proxy server.</string>
+      <string number="8">Port</string>
+      <string number="9">Port number under which the server can be reached.</string>
+      <string number="10">Exceptions</string>
+      <string number="11">Don't use the proxy settings to access these computers.</string>
+      <string number="12"></string>
+      <string number="13"></string>
+      <string number="14"></string>
+      <string number="15"></string>
+      <string number="16"></string>
+      <string number="17"></string>
+      <string number="18"></string>
+      <string number="19"></string>
+      <string number="20"></string>
+      <string number="21"></string>
+      <string number="22"></string>
+      <string number="23"></string>
+      <string number="24"></string>
+      <string number="25"></string>
     </group>
 
     <group lang="de_DE">
-      <string name="title">Einstellungen</string>
-      <string name="description">Erlaubt das Verändern der Voreinstellungen und aktuellen Einstellungen.</string>
+      <string number="1">Einstellungen</string>
+      <string number="2">Erlaubt das Verändern der Voreinstellungen und aktuellen Einstellungen.</string>
+      <string number="3">Proxy</string>
+      <string number="4">benutzen</string>
+      <string number="5">Verwendung eines Proxy-Servers ein- oder ausschalten.</string>
+      <string number="6">Rechner</string>
+      <string number="7">Rechner-Name oder IP-Nummer des Proxy-Servers.</string>
+      <string number="8">Port</string>
+      <string number="9">Port-Nummer, unter welcher der Server erreicht werden kann.</string>
+      <string number="10">Ausnahmen</string>
+      <string number="11">Proxy-Einstellungen nicht beim Zugriff auf diese Rechner verwenden.</string>
+      <string number="12"></string>
+      <string number="13"></string>
+      <string number="14"></string>
+      <string number="15"></string>
+      <string number="16"></string>
+      <string number="17"></string>
+      <string number="18"></string>
+      <string number="19"></string>
+      <string number="20"></string>
+      <string number="21"></string>
+      <string number="22"></string>
+      <string number="23"></string>
+      <string number="24"></string>
+      <string number="25"></string>
     </group>
-  </strings>
+  </dictionary>
+
+  <configuration>
+    <!-- Proxy -->
+    <section name="proxy" icon="" stringnumber="3" context="global">
+      <entry name="use" type="boolean" default="false" context="global">
+        <text name="title" stringnumber="4" />
+        <text name="description" stringnumber="5" />
+      </entry>
+      <entry name="host" type="string" condition="is(HOST)" default="" context="global">
+        <text name="title" stringnumber="6" />
+        <text name="description" stringnumber="7" />
+      </entry>
+      <entry name="port" type="integer" condition="is(PORT)" default="" context="global">
+        <text name="title" stringnumber="8" />
+        <text name="description" stringnumber="9" />
+      </entry>
+      <entry name="exceptions" type="string" condition="list(is(HOST)),size()<200" default="" context="global">
+        <text name="title" stringnumber="10" />
+        <text name="description" stringnumber="11" />
+      </entry>
+    </section>
+  </configuration>
 
   <properties>
     <property name="dbus" value="false" />

@@ -22,8 +22,6 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
 
   setWindowTitle("Builder");
   setWindowIcon(QIcon("icon.png"));
-
-  show();
 }
 
 void MainWindow::createActions()
@@ -32,19 +30,19 @@ void MainWindow::createActions()
 
 void MainWindow::createMenus()
 {
-  QMenu *fileMenu = menuBar()->addMenu(tr("&File"));
+  QMenu *fileMenu = menuBar()->addMenu(_("&File"));
 
 }
 
 void MainWindow::createToolBars()
 {
-  QToolBar *fileToolBar = addToolBar(tr("File"));
+  QToolBar *fileToolBar = addToolBar(_("File"));
 
 }
 
 void MainWindow::createStatusBar()
 {
-  statusBar()->showMessage(tr("Ready."));
+  statusBar()->showMessage(_("Ready."));
 }
 
 void MainWindow::createDockWidgets()

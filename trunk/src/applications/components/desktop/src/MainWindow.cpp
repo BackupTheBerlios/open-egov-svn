@@ -35,33 +35,33 @@ DesktopWidget::DesktopWidget(QWidget *parent /*=0*/)
 
 void DesktopWidget::createActions()
 {
-  m_action_exit = new QAction(tr("E&xit"), this);
-  m_action_exit->setShortcut(tr("Ctrl+Q"));
-  m_action_exit->setStatusTip(tr("Exit the application"));
+  m_action_exit = new QAction(_("E&xit"), this);
+  m_action_exit->setShortcut(QKeySequence(_("Ctrl+Q")));
+  m_action_exit->setStatusTip(_("Exit the application"));
   connect(m_action_exit, SIGNAL(triggered()), this, SLOT(close()));
 
-  m_action_help = new QAction(tr("&Help"), this);
-  m_action_help->setStatusTip(tr("Open the help viewer"));
+  m_action_help = new QAction(_("&Help"), this);
+  m_action_help->setStatusTip(_("Open the help viewer"));
   connect(m_action_help, SIGNAL(triggered()), this, SLOT(helpViewer()));
 
-  m_action_about_app = new QAction(tr("&About"), this);
-  m_action_about_app->setStatusTip(tr("Show the application's About box"));
+  m_action_about_app = new QAction(_("&About"), this);
+  m_action_about_app->setStatusTip(_("Show the application's About box"));
   connect(m_action_about_app, SIGNAL(triggered()), this, SLOT(about()));
 
-  m_action_about_qt = new QAction(tr("About &Qt"), this);
-  m_action_about_qt->setStatusTip(tr("Show the Qt library's About box"));
+  m_action_about_qt = new QAction(_("About &Qt"), this);
+  m_action_about_qt->setStatusTip(_("Show the Qt library's About box"));
   connect(m_action_about_qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 }
 
 void DesktopWidget::createMenus()
 {
-  m_menu_file = m_menubar->addMenu(tr("&File"));
+  m_menu_file = m_menubar->addMenu(_("&File"));
   //m_menu_file->addSeparator();
   m_menu_file->addAction(m_action_exit);
 
   m_menubar->addSeparator();
 
-  m_menu_help = m_menubar->addMenu(tr("&Help"));
+  m_menu_help = m_menubar->addMenu(_("&Help"));
   m_menu_help->addAction(m_action_help);
   m_menu_help->addSeparator();
   m_menu_help->addAction(m_action_about_app);

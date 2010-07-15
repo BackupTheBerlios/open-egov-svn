@@ -6,12 +6,12 @@
   <strings>
     <group lang="en_US">
       <string name="title">Database Manager</string>
-      <string name="description">The application allows the configuration of the database and the data streams.</string>
+      <string name="description">The application allows the configuration of the databases and the data streams.</string>
     </group>
 
     <group lang="de_DE">
       <string name="title">Datenbanken-Verwaltung</string>
-      <string name="description">Diese Anwendung erlaubt das Konfigurieren der Datenbank und der Datenströme.</string>
+      <string name="description">Diese Anwendung erlaubt das Konfigurieren der Datenbanken und der Datenströme.</string>
     </group>
   </strings>
 
