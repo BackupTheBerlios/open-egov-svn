@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<application base="installer" category="components">
+  <strings>
+    <group lang="en_US">
+      <string name="title">Installer</string>
+      <string name="description">Installs binary OEG packs and manages their dependencies.</string>
+    </group>
+
+    <group lang="de_DE">
+      <string name="title">Installierer</string>
+      <string name="description">Installiert binäre OEG-Pakete und kontrolliert deren Abhängigkeiten.</string>
+    </group>
+  </strings>
+
+  <properties>
+    <property name="dbus" value="false" />
+    <property name="embed" value="false" />
+    <property name="stable" value="false" />
+    <property name="database" value="false" />
+  </properties>
+
+  <setup>
+    <requires>base</requires>
+  </setup>
+
+  <features>
+    <todos>
+    </todos>
+    <changes>
+    </changes>
+  </features>
+
+  <datastructure>
+    <table name="">
+      
+    </table>
+  </datastructure>
+
+  <databases>
+  </databases>
+</application>
+
