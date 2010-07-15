@@ -68,9 +68,10 @@ it into the OEG directory structure.</para>
       <para>The directory packs/archives contains binary archives which can be installed
 without compiling them yourself. The packs/instructions contains files needed
 to build a pack from zero. This directory needs to get recursively updated
-every time you want install something new in order to always use the latest
-sources and instrcutions. The directory packs/downloads contains distributed
-source codes downloaded from the homepages of the packs.</para>
+every time you want to install something new in order to always use the latest
+sources and instructions. The directory packs/downloads contains distributed
+source codes downloaded from the homepages of the packs. It is not complete and contains only
+rare files or files extracted from a repository.</para>
     </section>
   </chapter>
 
@@ -78,12 +79,67 @@ source codes downloaded from the homepages of the packs.</para>
     <title>Application Development</title>
     <section>
       <title>Overview</title>
-      <para>The best method to get ready is using the template application.</para>
       <para>Every application may, at its option, use Qt's or OEG's classes. It's recommended to
       make use of the (enhanced) OEG classes, which provide a lot of standard-offer capabilities
       already built-in. The common way to open your application's window is to derive a class from
       OEG::Qt::MainWindow.</para>
       <para>While development it may help to add "CONFIG += console" into your .pro file.</para>
+    </section>
+
+    <section>
+      <title>Get Started</title>
+      <para>The best method to get ready is using the template application.</para>
+      <para></para>
+      <programlisting language="c++"><![CDATA[  ]]></programlisting>
+    </section>
+
+    <section>
+      <title>Compilation</title>
+      <para></para>
+    </section>
+
+    <section>
+      <title>Error Messages</title>
+      <para>The compilation of standard applications should always run successfully because no non-functional software should be checked in into the repository. If nevertheless you experience any difficulties, it is often due to third party software. While compiling you may see such warnings:</para>
+      <screen><![CDATA[# In file included from c:\Qt\2010.04\qt\include/QtCore/qglobal.h:1,
+                 from c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/q
+namespace.h:45,
+                 from c:\Qt\2010.04\qt\include/QtCore/qnamespace.h:1,
+                 from c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/kernel/q
+objectdefs.h:45,
+                 from c:\Qt\2010.04\qt\include/QtCore/qobjectdefs.h:1,
+                 from c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/kernel/q
+object.h:47,
+                 from c:\Qt\2010.04\qt\include/QtCore/qobject.h:1,
+                 from c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/kernel/q
+coreapplication.h:45,
+                 from c:\Qt\2010.04\qt\include/QtCore/qcoreapplication.h:1,
+                 from c:\Qt\2010.04\qt\include\QtGui/../../src/gui/kernel/qappli
+cation.h:45,
+                 from c:\Qt\2010.04\qt\include\QtGui/qapplication.h:1,
+                 from c:\Qt\2010.04\qt\include\QtGui/QApplication:1,
+                 from ..\..\..\..\libraries/OEG/Qt/Application.h:7,
+                 from MainWindow.cpp:3:
+c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/qglobal.h:1594: warning
+: 'libintl_printf' is an unrecognized format function type
+c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/qglobal.h:1600: warning
+: 'libintl_printf' is an unrecognized format function type
+c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/qglobal.h:1608: warning
+: 'libintl_printf' is an unrecognized format function type
+c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/qglobal.h:1613: warning
+: 'libintl_printf' is an unrecognized format function type]]></screen>
+      <para>These indicate, that the include files of gettext are out of date. Install current libiconv and gettext packages to get rid of the message.</para>
+    </section>
+
+    <section>
+      <title>Post Compilation Steps</title>
+      <para>After compilation some additional build steps are executed. First, the newly build executable
+      gets stripped to reduce the file size. This needs the strip.exe, usually found in the MinGW/MSYS
+      environment. Next the application or DLL is marked to use Data Execution Prevention and Adress
+      Space Layout Randomisation to avoid a to simple exploitation. This is done with the peflags.exe
+      which has to exists in the bin folder in order to be used automatically. In a last step the application
+      gets signed using a self-generated certificate. This ensures the official origin of it, but unfortunately
+      it's a simple certificate and not one from a big trust center.</para>
     </section>
   </chapter>
 
@@ -96,10 +152,48 @@ source codes downloaded from the homepages of the packs.</para>
   </chapter>
 
   <chapter>
-    <title>File storage</title>
+    <title>JavaScript Scripting</title>
+    <section>
+      <title>Overview</title>
+      <para></para>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>Data Storage</title>
     <section>
       <title>Overview</title>
       <para>Documents may be stored into databases and XML files. This is configurable.</para>
+    </section>
+
+    <section>
+      <title>XML Files</title>
+      Using a XML file allows the storage of documents in files. However, it's also possible
+      to store them as binary blobs in a database, but in this case consider to use a real database.
+      The advantage of XML files is to possibility to use them as sources for other areas of application.
+      So you may generate derived data files using simply XSL scripts.</para>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>Database Support</title>
+    <section>
+      <title>Overview</title>
+      <para>Applications may use databases as desired. Every OEG application may provide a database description in its
+      application.xml file. This file informs OEG about the database to be used and (while compiling) a SQL file gets
+      written which contains the initialzation code for an empty database. The database component is able to use it to
+      create a new database or to update an existing database. Many applications come with pre-filled databases. Databases
+      may be public (group or role-based spreading), private (role-based accesss) or official. Official databases may be
+      updated from the OEG website. Others are spread by using peer-to-peer techniques or encrypted mail transfer.</para>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>Localization</title>
+    <section>
+      <title>Overview</title>
+      <para>OEG uses GNU gettext and not Qt's internal translation system to provide localized messages and user interfaces.</para>
+      <para></para>
     </section>
   </chapter>
 </book>
