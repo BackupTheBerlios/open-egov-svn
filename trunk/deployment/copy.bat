@@ -51,12 +51,12 @@ SET SRCDIR=C:\Qt\2010.04\bin
 
 IF EXIST plugins (
   ECHO The plugins directory already exists.
-  CD plugins
 ) ELSE (
   ECHO No plugins directory found. Creating.
   MD plugins
 )
 
+CD plugins
 RD /S /Q accessible
 RD /S /Q codecs
 RD /S /Q iconengines
