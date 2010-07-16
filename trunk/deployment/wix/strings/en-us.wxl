@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 
 <!-- $Id$ -->
 <!-- Compiles fine with WiX 3.5 -->
@@ -6,5 +6,7 @@
 <WixLocalization Culture="en-us" xmlns="http://schemas.microsoft.com/wix/2006/localization">
   <String Id="ApplicationName">Open E-Government</String>
   <String Id="ManufacturerName">gasi.de</String>
+  <String Id="PackageBaseDescription">Open E-Government Base Windows Installer package</String>
+  <String Id="PackageBaseComments">This is the core package needed for every Open E-Government Application.</String>
 </WixLocalization>
 
