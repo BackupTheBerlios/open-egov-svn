@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- $Id$ -->
+<!-- Compiles fine with WiX 3.5 -->
+
+<?define BasePath = "..\.." ?>
+<?define LocalePath = "$(var.BasePath)\locale" ?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="E19225BA-90C6-11DF-B29B-3882DFD72085"
+    Name="Open E-Government - App - MudMania"
+    Language="1033" Version="0.0.1"
+    Manufacturer="gasi.de"
+    UpgradeCode="D9F9E20C-90C6-11DF-BA43-3782DFD72085">
+
+    <Package Id="*"
+      Description="Open E-Government Application 'MudMania' Windows Installer package"
+      Comments="This is an additional package for the Open E-Government Application Suite."
+      Manufacturer="gasi.de"
+      InstallerVersion="200"
+      Compressed="yes" />
+
+<Property Id="OEGBASECHECK">
+  <ComponentSearch Id="OEGBASESearch" Guid="4A217218-90BB-11DF-A10C-5774DFD72085" />
+</Property>
+
+<Condition Message="base missing">
+    Installed OR OEGBASECHECK
+</Condition>
+
+<!--
+<CustomAction Id='ShowOEGBASECHECK' Error='[OEGBASECHECK]' />
+
+<InstallExecuteSequence>
+  <Custom Action='ShowOEGBASECHECK' Before='InstallInitialize' />
+</InstallExecuteSequence>
+-->
+    <Media Id="1" Cabinet="product.cab" EmbedCab="yes" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder" Name="ProgramFilesDir">
+        <Directory Id="MainDir" Name="Open E-Government">
+          <Directory Id="dir1" Name="bin">
+            <Component Id="BaseBinComponent" Guid="E731A86A-90C6-11DF-8123-3A82DFD72085">
+              <CreateFolder />
+              <File Source="$(var.BasePath)\bin\mudmania.exe" Vital="yes" />
+            </Component>
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Feature Id="MudmaniaFeature" Title="OEG Mudmania Feature" Level="1">
+      <ComponentRef Id="BaseBinComponent" />
+    </Feature>
+  </Product>
+</Wix>
+

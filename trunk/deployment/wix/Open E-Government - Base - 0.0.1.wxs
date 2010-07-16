@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- $Id$ -->
+<!-- Compiles fine with WiX 3.5 -->
+
+<?define BasePath = "..\.." ?>
+<?define LocalePath = "$(var.BasePath)\locale" ?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="8858C58E-90A9-11DF-BCB0-905FDFD72085"
+    Name="Open E-Government - Base"
+    Language="1033" Version="0.0.1"
+    Manufacturer="gasi.de"
+    UpgradeCode="{94316AAA-90A9-11DF-8CB0-A15FDFD72085}">
+
+    <Package Id="*"
+      Description="Open E-Government Base Windows Installer package"
+      Comments="This is the core package needed for every Open E-Government Application."
+      Manufacturer="gasi.de"
+      InstallerVersion="200"
+      Compressed="yes" />
+
+    <Media Id="1" Cabinet="product.cab" EmbedCab="yes" />
+ 
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder" Name="ProgramFilesDir">
+        <Directory Id="MainDir" Name="Open E-Government">
+          <Component Id="BaseComponent" Guid="B828569E-90A9-11DF-AEFA-0D60DFD72085"><!-- DiskId="1" -->
+            <CreateFolder />
+            <File Id="info.txt" Name="info.txt" LongName="info.txt" DiskId="1" Source="../../info.txt" />
+          </Component>
+
+          <Directory Id="dir1" Name="bin">
+            <Component Id="BaseBinComponent" Guid="4A217218-90BB-11DF-A10C-5774DFD72085">
+              <CreateFolder />
+              <File Source="$(var.BasePath)\bin\about-dialog.exe" />
+              <File Source="$(var.BasePath)\bin\builder.exe" />
+              <File Source="$(var.BasePath)\bin\desktop.exe" />
+              <File Source="$(var.BasePath)\bin\help-viewer.exe" />
+              <File Source="$(var.BasePath)\bin\settings.exe" />
+
+              <File Source="$(var.BasePath)\bin\libgcc_s_dw2-1.dll" />
+              <File Source="$(var.BasePath)\bin\libiconv-2.dll" />
+              <File Source="$(var.BasePath)\bin\libintl-8.dll" />
+              <File Source="$(var.BasePath)\bin\libstdc++-6.dll" />
+              <File Source="$(var.BasePath)\bin\mingwm10.dll" />
+              <File Source="$(var.BasePath)\bin\oegCrypt1.dll" />
+              <File Source="$(var.BasePath)\bin\oegMath1.dll" />
+              <File Source="$(var.BasePath)\bin\oegQt1.dll" />
+              <File Source="$(var.BasePath)\bin\phonon4.dll" />
+              <File Source="$(var.BasePath)\bin\QtConcurrent.dll" />
+              <File Source="$(var.BasePath)\bin\QtCore4.dll" Vital="yes" />
+              <File Source="$(var.BasePath)\bin\QtGui4.dll" DefaultLanguage="1033" />
+              <File Source="$(var.BasePath)\bin\QtHelp4.dll" />
+              <File Source="$(var.BasePath)\bin\QtMultimedia4.dll" />
+              <File Source="$(var.BasePath)\bin\QtNetwork4.dll" />
+              <File Source="$(var.BasePath)\bin\QtOpenGL4.dll" />
+              <File Source="$(var.BasePath)\bin\QtScript4.dll" />
+              <File Source="$(var.BasePath)\bin\QtScriptTools4.dll" />
+              <File Source="$(var.BasePath)\bin\QtSql4.dll" />
+              <File Source="$(var.BasePath)\bin\QtSvg4.dll" />
+              <File Source="$(var.BasePath)\bin\QtWebKit4.dll" />
+              <File Source="$(var.BasePath)\bin\QtXml4.dll" />
+              <File Source="$(var.BasePath)\bin\QtXmlPatterns4.dll" />
+            </Component>
+          </Directory>
+
+          <Directory Id="dir2" Name="plugins">
+            <Component Id="BasePluginsComponent" Guid="D78E7348-90BC-11DF-AA7E-F775DFD72085">
+              <CreateFolder />
+            </Component>
+
+            <Directory Id="dir3" Name="accessible">
+              <Component Id="BasePluginsAccessibleComponent" Guid="F7C22360-90BE-11DF-9BF0-9B78DFD72085">
+                <CreateFolder />
+              </Component>
+            </Directory>
+
+            <Directory Id="dir4" Name="codecs">
+              <Component Id="BasePluginsCodecsComponent" Guid="26A6345A-90BF-11DF-9801-E178DFD72085">
+                <CreateFolder />
+              </Component>
+            </Directory>
+
+            <Directory Id="dir5" Name="iconengines">
+              <Component Id="BasePluginsIconEnginesComponent" Guid="B05A9D3C-90BD-11DF-8E07-3477DFD72085">
+                <CreateFolder />
+                <File Source="$(var.BasePath)\plugins\iconengines\qsvgicon4.dll" />
+              </Component>
+            </Directory>
+
+            <Directory Id="dir6" Name="imageformats">
+              <Component Id="BasePluginsImageFormatsComponent" Guid="65C54694-90BF-11DF-AD9D-0E79DFD72085">
+                <CreateFolder />
+              </Component>
+            </Directory>
+
+            <Directory Id="dir7" Name="sqldrivers">
+              <Component Id="BasePluginsSqlDriversComponent" Guid="6C0BF11A-90BF-11DF-9333-1579DFD72085">
+                <CreateFolder />
+                <File Source="$(var.BasePath)\plugins\sqldrivers\qsqlite4.dll" />
+              </Component>
+            </Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Feature Id="BaseFeature" Title="OEG Base Feature" Level="1">
+      <ComponentRef Id="BaseComponent" />
+      <ComponentRef Id="BaseBinComponent" />
+      <ComponentRef Id="BasePluginsComponent" />
+      <ComponentRef Id="BasePluginsAccessibleComponent" />
+      <ComponentRef Id="BasePluginsCodecsComponent" />
+      <ComponentRef Id="BasePluginsIconEnginesComponent" />
+      <ComponentRef Id="BasePluginsImageFormatsComponent" />
+      <ComponentRef Id="BasePluginsSqlDriversComponent" />
+    </Feature>
+  </Product>
+</Wix>
+

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- $Id$ -->
+<!-- Compiles fine with WiX 3.5 -->
+
+<WixLocalization Culture="en-us" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+  <String Id="ApplicationName">Open E-Government</String>
+  <String Id="ManufacturerName">gasi.de</String>
+</WixLocalization>
+
