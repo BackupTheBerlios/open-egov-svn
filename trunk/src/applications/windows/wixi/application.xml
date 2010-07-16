@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<application base="wixi" category="windows">
+  <strings>
+    <group lang="en_US">
+      <string name="title">WiXi</string>
+      <string name="description">Graphical User Interface for building MSI setup files using WiX.</string>
+    </group>
+
+    <group lang="de_DE">
+      <string name="title">WiXi</string>
+      <string name="description">Grafische Benutzeroberfläche um MSI-Archive mit Hilfe von WiX zu erstellen.</string>
+    </group>
+  </strings>
+
+  <properties>
+    <property name="dbus" value="false" />
+    <property name="embed" value="false" />
+    <property name="stable" value="false" />
+    <property name="database" value="false" />
+  </properties>
+
+  <setup>
+    <requires>base</requires>
+  </setup>
+
+  <features>
+    <todos>
+    </todos>
+    <changes>
+    </changes>
+  </features>
+
+  <datastructure>
+    <table name="">
+      
+    </table>
+  </datastructure>
+
+  <databases>
+  </databases>
+</application>
+
