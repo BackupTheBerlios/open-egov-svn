@@ -4,6 +4,7 @@
 
 #include <OEG/Qt/ToolProvider.h>
 
+#include <QApplication>
 #include <QMenuBar>
 #include <QToolBar>
 #include <QDockWidget>
@@ -14,35 +15,34 @@
 MainWindow::MainWindow(QWidget *parent /*=0*/)
  : OEG::Qt::MainWindow(parent)
 {
-  createActions();
-  createMenus();
-  createToolBars();
-  createStatusBar();
-  createDockWidgets();
-
-  setWindowTitle("Builder");
   setWindowIcon(QIcon("icon.png"));
+
+  createAll();
 }
 
 void MainWindow::createActions()
 {
+  OEG::Qt::MainWindow::createActions();
+
 }
 
 void MainWindow::createMenus()
 {
   QMenu *fileMenu = menuBar()->addMenu(_("&File"));
-
+  fileMenu->addAction(standardAction("quit"));
 }
 
 void MainWindow::createToolBars()
 {
-  QToolBar *fileToolBar = addToolBar(_("File"));
+  QAction  *a;
+  QToolBar *t;
 
-}
+  t = addToolBar(_("File"));
+  a = standardAction("quit");
+  a->setShortcuts(QKeySequence::Quit);
+  t->addAction(a);
+  connect(a, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
 
-void MainWindow::createStatusBar()
-{
-  statusBar()->showMessage(_("Ready."));
 }
 
 void MainWindow::createDockWidgets()
