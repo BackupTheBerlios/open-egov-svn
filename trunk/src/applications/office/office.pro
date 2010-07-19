@@ -1,5 +1,5 @@
 # $Id$
 
 TEMPLATE = subdirs
-SUBDIRS  = word-processor web-browser spreadsheet presenter image-processor database
+SUBDIRS  = address-book database image-processor presenter spreadsheet web-browser word-processor
 

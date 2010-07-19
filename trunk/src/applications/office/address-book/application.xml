@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<application base="address-book" category="office">
+  <strings>
+    <group lang="en_US">
+      <string name="title">Address Book</string>
+      <string name="description">Manages your contacts.</string>
+    </group>
+
+    <group lang="de_DE">
+      <string name="title">Adressbuch</string>
+      <string name="description">Verwaltet Ihre Kontakte.</string>
+    </group>
+  </strings>
+
+  <properties>
+    <property name="dbus" value="false" />
+    <property name="embed" value="false" />
+    <property name="stable" value="false" />
+    <property name="database" value="false" />
+  </properties>
+
+  <setup>
+    <requires>base</requires>
+  </setup>
+
+  <features>
+    <todos>
+    </todos>
+    <changes>
+    </changes>
+  </features>
+
+  <datastructure>
+    <table name="">
+      
+    </table>
+  </datastructure>
+
+  <databases>
+  </databases>
+</application>
