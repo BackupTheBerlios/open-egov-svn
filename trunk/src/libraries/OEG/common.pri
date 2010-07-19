@@ -27,3 +27,15 @@ win32 {
   }
 }
 
+contains(PACKAGES, GETTEXT) {
+  message(Adding support for GNU gettext ...)
+
+  # Needed to automatically include the gettext headers while using the OEG libraries.
+  DEFINES += USE_GETTEXT
+
+  win32 {
+    INCLUDEPATH += ../../../../include
+    LIBS += -L../../../../lib -lintl -lgettextpo
+  }
+}
+

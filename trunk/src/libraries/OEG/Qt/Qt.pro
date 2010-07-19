@@ -3,6 +3,7 @@
 TARGET       = oegQt
 VERSION      = 1.0.0.0
 QT          += gui
+PACKAGES     = GETTEXT
 
 RC_FILE      = resources.rc
 DEFINES     += 
