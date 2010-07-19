@@ -1,4 +1,4 @@
-# $Id:$
+# $Id$
 
 TARGET    = dictionary
 SOURCES   = *.cpp

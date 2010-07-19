@@ -1,4 +1,4 @@
-// $Id:$
+// $Id$
 
 #include "winver.h"
 
@@ -25,13 +25,13 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName",      "gasi.de"
-            VALUE "FileDescription",  "Dictionary"
+            VALUE "FileDescription",  "MUDmania"
             VALUE "FileVersion",      "1, 0, 0, 0\0"
             VALUE "LegalCopyright",   "Copyright (C) 2010 gasi.de."
-            VALUE "InternalName",     "dictionary.exe\0"
+            VALUE "InternalName",     "mudmania.exe\0"
             VALUE "LegalTrademarks",  "\0"
-            VALUE "OriginalFilename", "dictionary.exe"
-            VALUE "ProductName",      "OEG :: Dictionary"
+            VALUE "OriginalFilename", "mudmania.exe"
+            VALUE "ProductName",      "OEG :: MUDmania"
             VALUE "ProductVersion",   "1, 0, 0, 0\0"
         END
     END

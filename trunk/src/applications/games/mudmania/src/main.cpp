@@ -1,4 +1,4 @@
-// $Id:$
+// $Id$
 
 #include <OEG/Qt/Application.h>
 
