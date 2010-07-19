@@ -8,7 +8,7 @@
   <bookinfo>
     <title>Open eGovernment Developer's Guide</title>
     <authorgroup>
-      <corpauthor>OEG Team</corpauthor>
+      <corpauthor>Open E-Government Team</corpauthor>
     </authorgroup>
     <copyright>
       <year>2009, 2010</year>
@@ -97,9 +97,12 @@ rare files or files extracted from a repository.</para>
       <title>Compilation</title>
       <para></para>
     </section>
+  </chapter>
 
+  <chapter>
+    <title>Well-known Error Messages</title>
     <section>
-      <title>Error Messages</title>
+      <title>Old Include Files</title>
       <para>The compilation of standard applications should always run successfully because no non-functional software should be checked in into the repository. If nevertheless you experience any difficulties, it is often due to third party software. While compiling you may see such warnings:</para>
       <screen><![CDATA[# In file included from c:\Qt\2010.04\qt\include/QtCore/qglobal.h:1,
                  from c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/q
@@ -132,6 +135,20 @@ c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/qglobal.h:1613: warning
     </section>
 
     <section>
+      <title>Unused Variables</title>
+      <para>If you see a warning about unused variables and want to get rid of it, you may disable them globally or (better) mark the variable as unused. E. g. if you open your MainWindow this warning may appear.</para>
+      <code><![CDATA[MainWindow *mw __attribute__ ((__unused__)) = new MainWindow();]]></code>
+      <para>A simpler solution (only in this case) is it, to place the call of the show() method after the definition.</para>
+    </section>
+
+    <section>
+      <title>Untranslated texts are in English</title>
+      <para>While translating and localizing your application it is possible, that gettext asks you to include 
+      a --from-code=iso-8859-1. This means, it has found some text, which should be english (as all untranslated texts),
+      but contains non-english characters. This may be an untranslated german text. Yes, this is a bug.</para>
+    </section>
+
+    <section>
       <title>Post Compilation Steps</title>
       <para>After compilation some additional build steps are executed. First, the newly build executable
       gets stripped to reduce the file size. This needs the strip.exe, usually found in the MinGW/MSYS
@@ -140,6 +157,16 @@ c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/qglobal.h:1613: warning
       which has to exists in the bin folder in order to be used automatically. In a last step the application
       gets signed using a self-generated certificate. This ensures the official origin of it, but unfortunately
       it's a simple certificate and not one from a big trust center.</para>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>Hints and Tips</title>
+    <section>
+      <title>Compile and Run</title>
+      <para>After compilation the executables are created in the bin directory far away from the work directory.
+      To run the application it is possible to add the target run to your make, e. g. type "mingw32-make run".
+      This executes the newly created file.</para>
     </section>
   </chapter>
 
