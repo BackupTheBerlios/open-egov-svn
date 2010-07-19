@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- $Id$ -->
+<!-- Compiles fine with WiX 3.5 -->
+
+<?define BasePath = "..\.." ?>
+<?define LocalePath = "$(var.BasePath)\locale" ?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="XXX"
+    Name="Open E-Government - App - Other"
+    Language="1033" Version="0.0.1"
+    Manufacturer="gasi.de"
+    UpgradeCode="XXX">
+
+    <Package Id="*"
+      Description="Open E-Government Applications Windows Installer package"
+      Comments="Additional Open E-Government package containing most of the applications."
+      Manufacturer="gasi.de"
+      InstallerVersion="200"
+      Compressed="yes" />
+
+<Property Id="OEGBASECHECK">
+  <ComponentSearch Id="OEGBASESearch" Guid="4A217218-90BB-11DF-A10C-5774DFD72085" />
+</Property>
+
+<Condition Message="base missing">
+    Installed OR OEGBASECHECK
+</Condition>
+
+    <Media Id="1" Cabinet="product.cab" EmbedCab="yes" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder" Name="ProgramFilesDir">
+        <Directory Id="MainDir" Name="Open E-Government">
+          <Directory Id="dir1" Name="bin">
+            <Component Id="BaseBinComponent" Guid="XXX">
+              <CreateFolder />
+              <File Source="$(var.BasePath)\bin\dictionary.exe" Vital="yes" />
+            </Component>
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Feature Id="MudmaniaFeature" Title="OEG Mudmania Feature" Level="1">
+      <ComponentRef Id="BaseBinComponent" />
+    </Feature>
+  </Product>
+</Wix>
+
