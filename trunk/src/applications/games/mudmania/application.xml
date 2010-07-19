@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<application base="mudmania" category="games">
+  <strings>
+    <group lang="en_US">
+      <string name="title">MUDmania</string>
+      <string name="description">A client to play text-based online role-playing games (MUDs).</string>
+    </group>
+
+    <group lang="de_DE">
+      <string name="title">MUDmania</string>
+      <string name="description">Ein Klient, um textbasierte Online-Rollenspiele (MUDs) zu spielen.</string>
+    </group>
+  </strings>
+
+  <properties>
+    <property name="dbus" value="false" />
+    <property name="embed" value="false" />
+    <property name="stable" value="false" />
+    <property name="database" value="false" />
+  </properties>
+
+  <setup>
+    <requires>base</requires>
+  </setup>
+
+  <features>
+    <todos>
+    </todos>
+    <changes>
+    </changes>
+  </features>
+
+  <datastructure>
+    <table name="">
+      
+    </table>
+  </datastructure>
+
+  <databases>
+  </databases>
+</application>
+
