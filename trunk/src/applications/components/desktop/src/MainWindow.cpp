@@ -1,6 +1,7 @@
 // $Id$
 
 #include <OEG/Qt/Application.h>
+#include <OEG/Qt/ProcessList.h>
 
 #include "MainWindow.h"
 
@@ -75,6 +76,9 @@ void DesktopWidget::helpViewer()
 
 void DesktopWidget::about()
 {
+  OEG::Qt::ProcessList pl;
+  pl.update();
+
   OEG::Qt::Application::runComponent("about-dialog");
 }
 
