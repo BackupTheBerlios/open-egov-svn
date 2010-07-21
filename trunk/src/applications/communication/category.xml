@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<category base="office">
+  <strings lang="en_US">
+    <string name="title">Communication</string>
+    <string name="description">Active and passive applications for communication and support tools.</string>
+  </strings>
+
+  <strings lang="de_DE">
+    <string name="title">Kommunikation</string>
+    <string name="description">Aktive und passive Anwendungen für die Kommunikation und unterstützende Werkzeuge.</string>
+  </strings>
+</application>
+
