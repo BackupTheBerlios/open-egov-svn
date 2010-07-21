@@ -23,7 +23,7 @@ void ThreadInfo::setProcessId(unsigned long pid)
   m_process_id = pid;
 }
 
-unsigned long ThreadInfo::processId()
+int ThreadInfo::processId()
 {
   return m_process_id;
 }
@@ -33,7 +33,7 @@ void ThreadInfo::setThreadId(unsigned long tid)
   m_thread_id = tid;
 }
 
-unsigned long ThreadInfo::threadId()
+int ThreadInfo::threadId()
 {
   return m_thread_id;
 }

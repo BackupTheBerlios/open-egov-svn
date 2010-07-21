@@ -18,8 +18,14 @@ class ProcessInfo : public QObject
     ~ProcessInfo();
 
     void setProcessName(const QString &name);
-    void setProcessId(unsigned long pid);
+    QString processName();
+
+    void setProcessId(unsigned long int pid);
+    int processId();
+
     void setParentProcessId(unsigned long pid);
+    int parentProcessId();
+
     void setThreadCount(unsigned long count);
     void setPriorityClassBase(long base);
     void setPriorityClass(unsigned long pc);

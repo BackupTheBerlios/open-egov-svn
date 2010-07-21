@@ -26,14 +26,29 @@ void ModuleInfo::setProcessId(unsigned long pid)
   m_process_id = pid;
 }
 
+int ModuleInfo::processId()
+{
+  return m_process_id;
+}
+
 void ModuleInfo::setModuleName(const QString &name)
 {
   m_module_name = name;
 }
 
+QString ModuleInfo::moduleName()
+{
+  return m_module_name;
+}
+
 void ModuleInfo::setModulePath(const QString &path)
 {
   m_module_path = path;
+}
+
+QString ModuleInfo::modulePath()
+{
+  return m_module_path;
 }
 
 void ModuleInfo::setBaseAddress(unsigned char *address)

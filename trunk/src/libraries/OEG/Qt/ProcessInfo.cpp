@@ -26,14 +26,29 @@ void ProcessInfo::setProcessName(const QString &name)
   m_process_name = name;
 }
 
-void ProcessInfo::setProcessId(unsigned long pid)
+QString ProcessInfo::processName()
+{
+  return m_process_name;
+}
+
+void ProcessInfo::setProcessId(unsigned long int pid)
 {
   m_process_id = pid;
+}
+
+int ProcessInfo::processId()
+{
+  return m_process_id;
 }
 
 void ProcessInfo::setParentProcessId(unsigned long pid)
 {
   m_parent_process_id = pid;
+}
+
+int ProcessInfo::parentProcessId()
+{
+  return m_parent_process_id;
 }
 
 void ProcessInfo::setThreadCount(unsigned long count)

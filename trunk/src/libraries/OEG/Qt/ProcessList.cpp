@@ -203,7 +203,7 @@ bool ProcessList::searchProcessThreads(unsigned long int pid)
     return false;
   }
 
-  do {                                 // Display information about each thread associated with the specified process.
+  do {                                           // Display information about each thread associated with the specified process.
     if (te32.th32OwnerProcessID == pid) {
       ThreadInfo *info = new ThreadInfo();
       if (! info) {
@@ -224,8 +224,89 @@ bool ProcessList::searchProcessThreads(unsigned long int pid)
   return true;
 }
 
-unsigned long int ProcessList::numberOfProcesses() const
+int ProcessList::numberOfProcesses() const
 {
   return m_process_list.size();
+}
+
+int ProcessList::numberOfModules(int processId) const
+{
+  int number = 0;
+
+  for (int i=0; i<m_module_list.size(); i++) {
+    if (m_module_list.at(i)->processId() == processId)
+      number++;
+  }
+
+  return number;
+}
+
+int ProcessList::numberOfThreads(int processId) const
+{
+  int number = 0;
+
+  for (int i=0; i<m_thread_list.size(); i++) {
+    if (m_thread_list.at(i)->processId() == processId)
+      number++;
+  }
+
+  return number;
+}
+
+ProcessInfo *ProcessList::processInfo(int processNumber)
+{
+  return m_process_list.at(processNumber);
+}
+
+ProcessInfo *ProcessList::processInfoById(int processId)
+{
+  ProcessInfo *pi;
+  int size = m_process_list.size();
+
+  for (int i=0; i<size; i++) {
+    pi = m_process_list.at(i);
+    if (pi->processId() == processId)
+      return pi;
+  }
+}
+
+ModuleInfo *ProcessList::moduleInfo(int processId, int moduleNumber)
+{
+  ModuleInfo *mi;
+  int size = m_module_list.size();
+  int number = -1;
+
+  for (int i=0; i<size; i++) {
+    mi = m_module_list.at(i);
+    if (mi) {
+      if (mi->processId() == processId) {
+        number++;
+        if (number == moduleNumber)
+          return mi;
+      }
+    }
+  }
+
+  return 0;
+}
+
+ThreadInfo *ProcessList::threadInfo(int processId, int threadNumber)
+{
+  ThreadInfo *ti;
+  int size = m_thread_list.size();
+  int number = -1;
+
+  for (int i=0; i<size; i++) {
+    ti = m_thread_list.at(i);
+    if (ti) {
+      if (ti->processId() == processId) {
+        number++;
+        if (number == threadNumber)
+          return ti;
+      }
+    }
+  }
+
+  return 0;
 }
 

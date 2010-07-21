@@ -16,10 +16,10 @@ class ThreadInfo : public QObject
     ThreadInfo(QObject *parent = 0);
 
     void setProcessId(unsigned long pid);
-    unsigned long processId();
+    int processId();
 
     void setThreadId(unsigned long tid);
-    unsigned long threadId();
+    int threadId();
 
     void setBasePriority(long priority);
     long basePriority();

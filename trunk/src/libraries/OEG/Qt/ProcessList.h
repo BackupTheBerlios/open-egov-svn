@@ -20,12 +20,19 @@ class ProcessList : public QObject
 
   public:
     ProcessList(QObject *parent = 0);
-    ~ProcessList();
+    virtual ~ProcessList();
 
+    int numberOfProcesses() const;
+    int numberOfModules(int processId) const;
+    int numberOfThreads(int processId) const;
+
+    ProcessInfo *processInfo(int processNumber);
+    ProcessInfo *processInfoById(int processId);
+    ModuleInfo  *moduleInfo(int processId, int moduleNumber);
+    ThreadInfo  *threadInfo(int processId, int threadNumber);
+
+  public slots:
     void update();
-    unsigned long int numberOfProcesses() const;
-
-  private slots:
 
   protected:
     void printError(const QString &funName);
@@ -35,8 +42,8 @@ class ProcessList : public QObject
     bool searchProcessThreads(unsigned long int pid);
 
   protected:
-    QList<ModuleInfo *>   m_module_list;
     QList<ProcessInfo *>  m_process_list;
+    QList<ModuleInfo *>   m_module_list;
     QList<ThreadInfo *>   m_thread_list;
 };
 

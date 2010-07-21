@@ -17,8 +17,14 @@ class ModuleInfo : public QObject
     ModuleInfo(QObject *parent = 0);
 
     void setProcessId(unsigned long pid);
+    int processId();
+
     void setModuleName(const QString &name);
+    QString moduleName();
+
     void setModulePath(const QString &path);
+    QString modulePath();
+
     void setBaseAddress(unsigned char *address);
     // QString(" Base address  = 0x%08X").arg((DWORD) me32.modBaseAddr, 0, 16);
     void setModuleSize(unsigned long size);
