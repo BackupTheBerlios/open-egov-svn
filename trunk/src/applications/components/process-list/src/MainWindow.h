@@ -14,8 +14,6 @@ class MainWindow : public OEG::Qt::MainWindow
 {
   Q_OBJECT
 
-  //Q_PROPERTY(QString title READ title WRITE setTitle)
-
   public:
     MainWindow(QWidget *parent = 0);
 
@@ -25,10 +23,7 @@ class MainWindow : public OEG::Qt::MainWindow
     virtual void createToolBars();
     virtual void createToolProvider() {};
 
-    void setTitle(const QString &title);
-    QString title() const;
-
   protected:
-    QString m_title;
+
 };
 

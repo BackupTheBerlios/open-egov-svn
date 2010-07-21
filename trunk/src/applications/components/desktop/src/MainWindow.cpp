@@ -36,6 +36,11 @@ DesktopWidget::DesktopWidget(QWidget *parent /*=0*/)
 
 void DesktopWidget::createActions()
 {
+  m_action_process_list = new QAction(_("&Process List"), this);
+  m_action_process_list->setShortcut(QKeySequence(_("Ctrl+Alt+Del")));
+  m_action_process_list->setStatusTip(_("Open the process list."));
+  connect(m_action_process_list, SIGNAL(triggered()), this, SLOT(actionProcessList()));
+
   m_action_exit = new QAction(_("E&xit"), this);
   m_action_exit->setShortcut(QKeySequence(_("Ctrl+Q")));
   m_action_exit->setStatusTip(_("Exit the application"));
@@ -57,7 +62,8 @@ void DesktopWidget::createActions()
 void DesktopWidget::createMenus()
 {
   m_menu_file = m_menubar->addMenu(_("&File"));
-  //m_menu_file->addSeparator();
+  m_menu_file->addAction(m_action_process_list);
+  m_menu_file->addSeparator();
   m_menu_file->addAction(m_action_exit);
 
   m_menubar->addSeparator();
@@ -67,6 +73,11 @@ void DesktopWidget::createMenus()
   m_menu_help->addSeparator();
   m_menu_help->addAction(m_action_about_app);
   m_menu_help->addAction(m_action_about_qt);
+}
+
+void DesktopWidget::actionProcessList()
+{
+  OEG::Qt::Application::runComponent("process-list");
 }
 
 void DesktopWidget::helpViewer()

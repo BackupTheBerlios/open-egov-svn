@@ -14,20 +14,15 @@
 MainWindow::MainWindow(QWidget *parent /*=0*/)
  : OEG::Qt::MainWindow(parent)
 {
-  createActions();
-  createMenus();
-  createToolBars();
-  createStatusBar();
-  createDockWidgets();
+  createAll();
 
-  setWindowTitle("Help Viewer");
   setWindowIcon(QIcon("icon.png"));
-
-  show();
 }
 
 void MainWindow::createActions()
 {
+  OEG::Qt::MainWindow::createActions();
+
 }
 
 void MainWindow::createMenus()
@@ -40,11 +35,6 @@ void MainWindow::createToolBars()
 {
   QToolBar *fileToolBar = addToolBar(tr("File"));
 
-}
-
-void MainWindow::createStatusBar()
-{
-  statusBar()->showMessage(tr("Ready."));
 }
 
 void MainWindow::createDockWidgets()

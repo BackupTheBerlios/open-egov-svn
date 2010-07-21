@@ -20,6 +20,7 @@ class DesktopWidget : public QWidget //OEG::Qt::MainWindow
     DesktopWidget(QWidget *parent = 0);
 
   private slots:
+    void actionProcessList();
     void about();
     void helpViewer();
 
@@ -37,6 +38,7 @@ class DesktopWidget : public QWidget //OEG::Qt::MainWindow
     QMenu       *m_menu_help;
     QAction     *m_action_exit;
     QAction     *m_action_help;
+    QAction     *m_action_process_list;
     QAction     *m_action_about_app;
     QAction     *m_action_about_qt;
 };

@@ -20,7 +20,6 @@ class MainWindow : public OEG::Qt::MainWindow
     void createActions();
     void createMenus();
     void createToolBars();
-    void createStatusBar();
     void createDockWidgets();
 
   protected:

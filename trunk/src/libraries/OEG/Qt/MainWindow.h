@@ -6,6 +6,7 @@
 
 #include <QMainWindow>
 #include <QList>
+#include <QString>
 
 class QAction;
 
@@ -17,35 +18,43 @@ class MainWindow : public QMainWindow
 {
   Q_OBJECT
 
-  enum StandardActions {
-    New,
-    Open,
+  enum StandardAction {
+    AboutApp,
+    AboutQt,
     Close,
-    Save,
-    SaveAs,
-    Reload,
-    Print,
-    PrintSettings,
-    Quit,
-    Undo,
-    Redo,
-    Cut,
     Copy,
-    Paste,
+    Cut,
     Delete,
-    SelectAll,
-    Preferences,
-    Plugins,
+    Exit,
     HelpContents,
     HelpIndex,
     HelpSearch,
-    LicenseOEG,
-    LicenseQt
+    New,
+    Open,
+    Paste,
+    Plugins,
+    Preferences,
+    PreferencesColors,
+    PreferencesCommon,
+    PreferencesFonts,
+    PreferencesShortcuts,
+    Print,
+    PrintPreview,
+    PrintSettings,
+    Redo,
+    Reload,
+    Save,
+    SaveAs,
+    SelectAll,
+    Undo
   };
 
   public:
     MainWindow(QWidget *parent = 0, ::Qt::WindowFlags flags = 0);
     ~MainWindow();
+
+    QAction *standardAction(const QString &baseName);
+    QAction *standardAction(const StandardAction &action);
 
   protected:
     void createAll();
@@ -58,10 +67,10 @@ class MainWindow : public QMainWindow
     virtual void createToolProvider();
 
     QAction *addStandardAction(const QString &baseName, const QString &title,
-                               const QString &info, const QString &keySequence);
-    QAction *standardAction(const QString &baseName);
+                               const QString &info, const QString &keySequence = QString());
 
   private:
+    QString standardActionName(const StandardAction &action);
 
   protected:
     ToolProvider      *m_tool_provider;

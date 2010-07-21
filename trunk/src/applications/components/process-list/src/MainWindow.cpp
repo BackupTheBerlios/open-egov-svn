@@ -29,7 +29,7 @@ void MainWindow::createActions()
 void MainWindow::createMenus()
 {
   QMenu *fileMenu = menuBar()->addMenu(_("&File"));
-  fileMenu->addAction(standardAction("quit"));
+  fileMenu->addAction(standardAction("exit"));
 }
 
 void MainWindow::createToolBars()
@@ -38,24 +38,13 @@ void MainWindow::createToolBars()
   QToolBar *t;
 
   t = addToolBar(_("File"));
-  a = standardAction("quit");
+  a = standardAction("exit");
   a->setShortcuts(QKeySequence::Quit);
   t->addAction(a);
-  connect(a, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
 
 }
 
 void MainWindow::createDockWidgets()
 {
-}
-
-void MainWindow::setTitle(const QString &title)
-{
-  m_title = title;
-}
-
-QString MainWindow::title() const
-{
-  return m_title;
 }
 

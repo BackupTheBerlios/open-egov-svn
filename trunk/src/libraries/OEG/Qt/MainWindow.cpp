@@ -9,14 +9,17 @@
 #include <QKeySequence>
 #include <QList>
 #include <QStatusBar>
+#include <QLatin1String>
 
 using namespace OEG::Qt;
 using namespace Qt;
 
 MainWindow::MainWindow(QWidget *parent /*=0*/, ::Qt::WindowFlags flags /*=0*/)
- : QMainWindow(parent, flags)
+ : QMainWindow(parent, flags), m_tool_provider(0)
 {
   setWindowTitle(qApp->applicationName());
+
+  resize(400, 300);
 }
 
 MainWindow::~MainWindow()
@@ -41,8 +44,7 @@ void MainWindow::createAll()
 
 void MainWindow::createActions()
 {
-  addStandardAction("quit", _("&Quit"), _("Exits the application and closes all windows."), _("Alt+F4"));
-
+  standardAction("exit");
 }
 
 void MainWindow::createDockWidgets()
@@ -70,7 +72,7 @@ void MainWindow::createToolProvider()
 }
 
 QAction *MainWindow::addStandardAction(const QString &baseName, const QString &title,
-                                       const QString &info, const QString &keySequence)
+                                       const QString &info, const QString &keySequence /*=QString()*/)
 {
   QAction *a = new QAction(title, this);
   if (! a)
@@ -98,6 +100,64 @@ QAction *MainWindow::standardAction(const QString &baseName)
       return a;
   }
 
+  if (baseName == "exit") {
+    a = addStandardAction(baseName, _("E&xit"), _("Exits the application and closes all windows."), _("Alt+F4"));
+    connect(a, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
+    return a;
+  }
+  if (baseName == "help")
+    return addStandardAction(baseName, _("&Help ..."), _("Open the help window."), _("F1"));
+  if (baseName == "about_app")
+    return addStandardAction(baseName, _("About &App ..."), _("Information about this appliciation."));
+  if (baseName == "about_qt")
+    return addStandardAction(baseName, _("About &Qt ..."), _("Information about the Qt framework."));
+
+  // If at least an action name is given, we'll return an action object without additional settings.
+  if (baseName.length() > 0)
+    return addStandardAction(baseName, _("Unnamed Action"), _("This action is unnamed and therefore without description."));
+
   return 0;
+}
+
+QAction *MainWindow::standardAction(const StandardAction &action)
+{
+  return standardAction(standardActionName(action));
+}
+
+// This are the possible standard actions together with their base names. The names are needed to specify
+// the associated SVG icon.
+
+QString MainWindow::standardActionName(const StandardAction &action)
+{
+  if (action == AboutApp)              return QLatin1String("about_app");
+  if (action == AboutQt)               return QLatin1String("about_qt");
+  if (action == Close)                 return QLatin1String("close");
+  if (action == Copy)                  return QLatin1String("copy");
+  if (action == Cut)                   return QLatin1String("cut");
+  if (action == Delete)                return QLatin1String("delete");
+  if (action == Exit)                  return QLatin1String("exit");
+  if (action == HelpContents)          return QLatin1String("help_contents");
+  if (action == HelpIndex)             return QLatin1String("help_index");
+  if (action == HelpSearch)            return QLatin1String("help_search");
+  if (action == New)                   return QLatin1String("new");
+  if (action == Open)                  return QLatin1String("open");
+  if (action == Paste)                 return QLatin1String("paste");
+  if (action == Plugins)               return QLatin1String("plugins");
+  if (action == Preferences)           return QLatin1String("preferences");
+  if (action == PreferencesColors)     return QLatin1String("preferences_colors");
+  if (action == PreferencesCommon)     return QLatin1String("preferences_common");
+  if (action == PreferencesFonts)      return QLatin1String("preferences_fonts");
+  if (action == PreferencesShortcuts)  return QLatin1String("preferences_shortcuts");
+  if (action == Print)                 return QLatin1String("print");
+  if (action == PrintPreview)          return QLatin1String("print_preview");
+  if (action == PrintSettings)         return QLatin1String("print_settings");
+  if (action == Redo)                  return QLatin1String("redo");
+  if (action == Reload)                return QLatin1String("reload");
+  if (action == Save)                  return QLatin1String("save");
+  if (action == SaveAs)                return QLatin1String("save_as");
+  if (action == SelectAll)             return QLatin1String("select_all");
+  if (action == Undo)                  return QLatin1String("undo");
+
+  return "";
 }
 

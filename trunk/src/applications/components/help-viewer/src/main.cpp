@@ -8,7 +8,12 @@ int main(int argc, char *argv[])
 {
   OEG::Qt::Application app(argc, argv);
 
-  MainWindow *mw = new MainWindow();
+  app.setApplicationName(_("Help Viewer"));
+  app.setOrganizationName(_("G.A.S.I."));
+  app.setOrganizationDomain(_("open-egov.de"));
+
+  MainWindow mw;
+  mw.show();
 
   return app.exec();
 }
