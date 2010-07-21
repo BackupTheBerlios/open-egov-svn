@@ -3,6 +3,7 @@
 #pragma once
 
 #include <OEG/Qt/MainWindow.h>
+#include <OEG/Qt/ProcessList.h>
 
 #include <QString.h>
 #include <QWidget.h>
@@ -24,6 +25,6 @@ class MainWindow : public OEG::Qt::MainWindow
     virtual void createToolProvider() {};
 
   protected:
-
+    OEG::Qt::ProcessList *m_processes;
 };
 

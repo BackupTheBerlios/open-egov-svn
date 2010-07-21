@@ -20,8 +20,8 @@ int main(int argc, char *argv[])
     qDebug() << __FILE__ ": settings error: " << settings.status();
   }
 
-  MainWindow *mw = new MainWindow();
-  mw->show();
+  MainWindow mw;
+  mw.show();
 
   return app.exec();
 }
