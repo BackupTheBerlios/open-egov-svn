@@ -97,6 +97,17 @@ rare files or files extracted from a repository.</para>
       <title>Compilation</title>
       <para></para>
     </section>
+
+    <section>
+      <title>Post Compilation Steps</title>
+      <para>After compilation some additional build steps are executed. First, the newly build executable
+      gets stripped to reduce the file size. This needs the strip.exe, usually found in the MinGW/MSYS
+      environment. Next the application or DLL is marked to use Data Execution Prevention and Adress
+      Space Layout Randomisation to avoid a to simple exploitation. This is done with the peflags.exe
+      which has to exists in the bin folder in order to be used automatically. In a last step the application
+      gets signed using a self-generated certificate. This ensures the official origin of it, but unfortunately
+      it's a simple certificate and not one from a big trust center.</para>
+    </section>
   </chapter>
 
   <chapter>
@@ -149,14 +160,11 @@ c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/qglobal.h:1613: warning
     </section>
 
     <section>
-      <title>Post Compilation Steps</title>
-      <para>After compilation some additional build steps are executed. First, the newly build executable
-      gets stripped to reduce the file size. This needs the strip.exe, usually found in the MinGW/MSYS
-      environment. Next the application or DLL is marked to use Data Execution Prevention and Adress
-      Space Layout Randomisation to avoid a to simple exploitation. This is done with the peflags.exe
-      which has to exists in the bin folder in order to be used automatically. In a last step the application
-      gets signed using a self-generated certificate. This ensures the official origin of it, but unfortunately
-      it's a simple certificate and not one from a big trust center.</para>
+      <title>HANDLE vs. Qt::HANDLE</title>
+      <para>While compiling Windows API source code into a Qt library there may be errors because of ambigous variables
+      where the compiler is unable to resolve the datatype HANDLE (is it ::HANDLE or Qt::HANDLE?). Don't try to
+      mark the variables with ::, better is, to remove the "using namespace Qt;" line from the top of the file.
+      It is only there to allow the use of Qt constants without a "Qt::" prefix.</para>
     </section>
   </chapter>
 
@@ -219,7 +227,8 @@ c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/qglobal.h:1613: warning
     <title>Localization</title>
     <section>
       <title>Overview</title>
-      <para>OEG uses GNU gettext and not Qt's internal translation system to provide localized messages and user interfaces.</para>
+      <para>OEG uses GNU gettext and not Qt's internal translation system to provide localized messages and user
+      interfaces. This allows you to make use of the proved and tested translation tools around gettext.</para>
       <para></para>
     </section>
   </chapter>
