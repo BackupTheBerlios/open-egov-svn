@@ -64,6 +64,8 @@ void ProcessList::update()
 
   clearLists();
 
+  setDebugPrivileges(true);
+
   // Take a snapshot of all processes in the system.
   hProcessSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
   if (hProcessSnap == INVALID_HANDLE_VALUE) {
@@ -120,6 +122,8 @@ void ProcessList::update()
   } while (Process32Next(hProcessSnap, &pe32));
 
   CloseHandle(hProcessSnap);
+
+  setDebugPrivileges(false);
 }
 
 void ProcessList::printError(const QString &funName)
@@ -268,6 +272,8 @@ ProcessInfo *ProcessList::processInfoById(int processId)
     if (pi->processId() == processId)
       return pi;
   }
+
+  return 0;
 }
 
 ModuleInfo *ProcessList::moduleInfo(int processId, int moduleNumber)
@@ -308,5 +314,43 @@ ThreadInfo *ProcessList::threadInfo(int processId, int threadNumber)
   }
 
   return 0;
+}
+
+bool ProcessList::setDebugPrivileges(bool enable /*=true*/)
+{
+  HANDLE           token;
+  LUID             luid;      // Locally unique identifier, used by the local system to identify the privilege.
+  TOKEN_PRIVILEGES tp;
+  LPCTSTR          privilege; // http://msdn.microsoft.com/en-us/library/aa375728(v=VS.85).aspx
+
+  if (! OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &token)) {
+    printError("OpenProcessToken");
+    return false;
+  }
+
+  privilege = L"SeDebugPrivilege";               // SE_DEBUG_NAME = TEXT("SeDebugPrivilege")
+  if (! LookupPrivilegeValue(NULL, privilege, &luid)) {
+    printError("LookupPrivilegeValue");
+    CloseHandle(token);
+    return false;
+  }
+
+  tp.PrivilegeCount           = 1;
+  tp.Privileges[0].Luid       = luid;
+  tp.Privileges[0].Attributes = (enable) ? SE_PRIVILEGE_ENABLED : 0;
+
+  if (! AdjustTokenPrivileges(token, FALSE, &tp, sizeof(tp), NULL, NULL)) {
+    printError("AdjustTokenPrivileges");
+    CloseHandle(token);
+    return false;
+  }
+
+  if (GetLastError() == ERROR_NOT_ALL_ASSIGNED) {
+    qDebug() << "The token does not have the specified privilege.";
+    return false;
+  } 
+
+  CloseHandle(token);
+  return true;
 }
 

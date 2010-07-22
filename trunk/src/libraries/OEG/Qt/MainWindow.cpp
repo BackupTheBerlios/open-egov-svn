@@ -101,20 +101,32 @@ QAction *MainWindow::standardAction(const QString &baseName)
   }
 
   if (baseName == "exit") {
-    a = addStandardAction(baseName, _("E&xit"), _("Exits the application and closes all windows."), _("Alt+F4"));
+    a = addStandardAction(baseName, _("E&xit"), _("Exits the application."), _("Alt+F4"));
     connect(a, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
     return a;
   }
-  if (baseName == "help")
-    return addStandardAction(baseName, _("&Help ..."), _("Open the help window."), _("F1"));
-  if (baseName == "about_app")
-    return addStandardAction(baseName, _("About &App ..."), _("Information about this appliciation."));
-  if (baseName == "about_qt")
-    return addStandardAction(baseName, _("About &Qt ..."), _("Information about the Qt framework."));
+  if (baseName == "reload") {
+    a = addStandardAction(baseName, _("&Reload"), _("Reloads data."), _("F5"));
+    return a;
+  }
+  if (baseName == "help") {
+    a = addStandardAction(baseName, _("&Help ..."), _("Open the help window."), _("F1"));
+    return a;
+  }
+  if (baseName == "about_app") {
+    a = addStandardAction(baseName, _("About &App ..."), _("Information about this appliciation."));
+    return a;
+  }
+  if (baseName == "about_qt") {
+    a = addStandardAction(baseName, _("About &Qt ..."), _("Information about the Qt framework."));
+    return a;
+  }
 
   // If at least an action name is given, we'll return an action object without additional settings.
-  if (baseName.length() > 0)
+  if (baseName.length() > 0) {
+    qDebug() << "MainWindow::standardAction(): Unknown action name: " << baseName;
     return addStandardAction(baseName, _("Unnamed Action"), _("This action is unnamed and therefore without description."));
+  }
 
   return 0;
 }

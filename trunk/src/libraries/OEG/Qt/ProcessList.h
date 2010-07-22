@@ -31,6 +31,8 @@ class ProcessList : public QObject
     ModuleInfo  *moduleInfo(int processId, int moduleNumber);
     ThreadInfo  *threadInfo(int processId, int threadNumber);
 
+    bool setDebugPrivileges(bool enable = true);
+
   public slots:
     void update();
 
