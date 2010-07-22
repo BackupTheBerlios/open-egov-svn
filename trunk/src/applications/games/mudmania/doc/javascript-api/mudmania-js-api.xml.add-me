@@ -1,0 +1,402 @@
+  <functions>
+string format ( string text, int width, bool blocksatz )
+void key ( string keyName, string action )
+void load ( string fileName )
+void log ( string flags, string file )
+void play ( string fileName )
+string pretext ( string text, string pretext )
+void recall ( int count )
+void repeat ( int count, string command, string flags )
+void replace ( string findText, string replacementText )
+void reset ( )
+void sleep ( int time )
+void sound ( int duration, int height )
+void sync ( )
+void trigger ( string name, string pattern, string function )
+void unalias ( string name )
+void unkey ( string keyName )
+void untrigger ( string name )
+void url ( string url )
+void write ( string text )
+void writeline ( string text )
+
+load
+unload
+isloaded
+
+database
+
+    <function name="beep">
+      <parameters>
+      </parameters>
+      <results>
+        <result type="void">
+        </result>
+      </results>
+      <examples>
+        <example>
+        </example>
+      </examples>
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="clear">
+      <parameters>
+      </parameters>
+      <results>
+        <result type="void">
+        </result>
+      </results>
+      <examples>
+        <example>
+        </example>
+      </examples>
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="connect">
+      <parameters>
+        <parameter type="string" name="profileName">
+          Dieser Parameter ist der Name des Profiles,
+          also der Welt- und Spieler-Kombination, zu
+          welcher sich der MUD-Client verbinden soll.
+        </parameter>
+      </parameters>
+      <results>
+        <result type="void">
+          Diese Funktion hat keinen Rückgabewert. Um zu
+          überprüfen, ob zur Zeit eine Verbindung zum Profile
+          besteht, dient die isconnected() Funktion.
+        </result>
+      </results>
+      <examples>
+        <example>
+        </example>
+      </examples>
+      <description>
+      </description>
+      <related>
+        <function>disconnect</function>
+        <function>isconnected</function>
+      </related>
+    </function>
+
+    <function name="debug">
+      <parameters>
+        <parameter type="string" name="text">
+        </parameter>
+      </parameters>
+      <results>
+        <result type="void">
+        </result>
+      </results>
+      <examples>
+        <example>
+        </example>
+      </examples>
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="disconnect">
+      <parameters>
+        <parameter type="string" name="profileName">
+        </parameter>
+      </parameters>
+      <results>
+        <result type="void">
+        </result>
+      </results>
+      <examples>
+        <example>
+        </example>
+      </examples>
+      <description>
+      </description>
+      <related>
+        <function>connect</function>
+        <function>isconnected</function>
+      </related>
+    </function>
+
+    <function name="error">
+      <parameters>
+        <parameter type="string" name="text">
+        </parameter>
+      </parameters>
+      <results>
+        <result type="void">
+        </result>
+      </results>
+      <examples>
+        <example>
+        </example>
+      </examples>
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="exec">
+      <parameters>
+        <parameter type="string" name="command">
+        </parameter>
+      </parameters>
+      <results>
+        <result type="void">
+        </result>
+      </results>
+      <examples>
+        <example>
+        </example>
+      </examples>
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="findme">
+      <parameters>
+      </parameters>
+      <results>
+        <result type="void">
+        </result>
+      </results>
+      <examples>
+        <example>
+        </example>
+      </examples>
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="format">
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="go">
+      <parameters>
+        <parameter type="string" name="name">
+        </parameter>
+      </parameters>
+      <results>
+        <result type="void">
+        </result>
+      </results>
+      <examples>
+        <example>
+        </example>
+      </examples>
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="hide">
+      <parameters>
+        <parameter type="string" name="pattern">
+        </parameter>
+      </parameters>
+      <results>
+        <result type="void">
+        </result>
+      </results>
+      <examples>
+        <example>
+        </example>
+      </examples>
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="isconnected">
+      <parameters>
+        <parameter type="string" name="profileName">
+        </parameter>
+      </parameters>
+      <results>
+        <result type="bool">
+        </result>
+      </results>
+      <examples>
+        <example>
+        </example>
+      </examples>
+      <description>
+      </description>
+      <related>
+        <function>connect</function>
+        <function>disconnect</function>
+      </related>
+    </function>
+
+    <function name="key">
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="killall">
+      <parameters>
+      </parameters>
+      <results>
+        <result type="void">
+        </result>
+      </results>
+      <examples>
+        <example>
+        </example>
+      </examples>
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="load">
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="log">
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="play">
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="pretext">
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="recall">
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="repeat">
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="replace">
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="reset">
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="sleep">
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="sound">
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="sync">
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="trigger">
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="unalias">
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="unkey">
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="untrigger">
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="url">
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="write">
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+
+    <function name="writeline">
+      <description>
+      </description>
+      <related>
+      </related>
+    </function>
+  </functions>
+</data>
+

@@ -1,0 +1,928 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+
+<api>
+  <functions>
+<!-- Template:
+    <function name="">
+      <declaration>
+        <return type="void">
+          <description>
+          </description>
+        </return>
+        <parameters>
+          <parameter type="string" name="">
+            <description>
+            </description>
+          </parameter>
+        </parameters>
+      </declaration>
+      <description>
+      </description>
+      <links></links>
+      <examples>
+        <example>
+          <code></code>
+          <description>
+          </description>
+        </example>
+      </examples>
+    </function>
+-->
+
+    <function name="alias">
+      <declaration>
+        <return type="void">
+          <description>
+            Es gibt keinen Rückgabewert, da keine Fehler auftreten können.
+          </description>
+        </return>
+        <parameters>
+          <parameter type="string" name="name">
+            <description>
+              Der Name des Aliases. Vorhandene Aliase werden einfach überschrieben.
+            </description>
+          </parameter>
+          <parameter type="string" name="value">
+            <description>
+              Inhalt des Aliases.
+            </description>
+          </parameter>
+        </parameters>
+      </declaration>
+      <description>
+      </description>
+      <links></links>
+      <examples>
+        <example>
+          <code>
+alias sl selbstloeschung
+alias sl selbstloeschung, worlds.currentWorld.password
+          </code>
+          <description>
+          </description>
+        </example>
+      </examples>
+    </function>
+
+    <function name="all">
+      <declaration>
+        <return type="void">
+          <description></description>
+        </return>
+        <parameters>
+          <parameter type="string" name="command">
+            <description>
+              Befehl, der ausgeführt werden soll.
+            </description>
+          </parameter>
+        </parameters>
+      </declaration>
+      <description>
+        Der Befehl führt einen Befehl oder eine Funktion in allen aktiven Profilen aus.
+      </description>
+      <links></links>
+      <examples>
+        <example>
+          <code>all("schlafe ein");</code>
+          <description>
+            Loggt alle Spieler mit dem MUD-spezifischen Befehl "schlafe ein" auf einmal aus.
+          </description>
+        </example>
+      </examples>
+    </function>
+
+    <function name="at">
+      <declaration>
+        <return type="void">
+          <description>
+          </description>
+        </return>
+        <parameters>
+          <parameter type="string" name="time">
+            <description>
+            </description>
+          </parameter>
+          <parameter type="string" name="command">
+            <description>
+            </description>
+          </parameter>
+        </parameters>
+      </declaration>
+      <description>
+      </description>
+      <links></links>
+      <examples>
+        <example>
+          <code>at("0800", "echo Es ist jetzt um 8");</code>
+          <description>
+          </description>
+        </example>
+      </examples>
+    </function>
+
+    <function name="banner">
+      <declaration>
+        <return type="string">
+          <description>
+            Der generierte Banner-Text in Form mehrerer Zeilen.
+            Die einzelnen Zeilen sind per \n voneinander getrennt.
+          </description>
+        </return>
+        <parameters>
+          <parameter type="string" name="text">
+            <description>
+            </description>
+          </parameter>
+          <parameter type="int" name="width">
+            <description>
+            </description>
+          </parameter>
+        </parameters>
+      </declaration>
+      <description>
+        Einfache Banner-Funktion, welche Banner-Texte mit einer bestimmten Breite erstellt.
+      </description>
+      <links>
+        <function>echo</function>
+      </links>
+      <examples>
+        <example>
+          <code>echo(banner("Test", 78));</code>
+          <description>
+            Gibt den Text "Test" mit einer maximalen Breite von 78
+            Zeichen in mehreren Zeilen aus.
+          </description>
+        </example>
+      </examples>
+    </function>
+
+    <function name="clear">
+      <declaration>
+        <return type="void">
+          <description>
+            Kein Rückgabewert.
+          </description>
+        </return>
+        <parameters>
+          <parameter type="string" name="profileName">
+            <description>
+              Dieser optionale Parameter gibt das Profil an, dessen Ausgabefenster gelöscht werden soll.
+              Wird er weggelassen, wird das derzeit aktive Profil genommen.
+            </description>
+          </parameter>
+        </parameters>
+      </declaration>
+      <description>
+        Das Ausgabefenster wird gelöscht. Tatsächlich wird allerdings nicht wirklich gelöscht,
+        sondern es wird nur Platz für neuen Text gemacht. Um Daten wirklich zu entfernen,
+        sollte man auch die Ausgabe-History und die Logdateien löschen.
+      </description>
+      <links></links>
+      <examples>
+        <example>
+          <code>clear()</code>
+          <description>
+            Löscht den Bildschirm.
+          </description>
+        </example>
+      </examples>
+    </function>
+
+    <function name="connect">
+      <declaration>
+        <return type="void">
+          <description>
+            Kein Rückgabewert.
+          </description>
+        </return>
+        <parameters>
+          <parameter type="string" name="profileName">
+            <description>
+              Das Profil, welches aktiviert werden soll. Man kann alternativ auch einen Welt-Namen
+              angeben, muss dann allerdings Spielernamen und Passwort per Hand eingeben.
+              Gängig dürfte die Variante sein, dass ein Profil-Kürzel angegeben wird.
+            </description>
+          </parameter>
+        </parameters>
+      </declaration>
+      <description>
+        Stellt eine Verbindung mit einem bereits eingerichteten Spieler-Profil her. Das MUD
+        wird angewählt und der Spieler wird automatisch angemeldet.
+      </description>
+      <links>
+        <function>disconnect</function>
+      </links>
+      <examples>
+        <example>
+          <code>connect("jehova@morgengrauen")</code>
+          <description>
+            Stellt eine Verbindung mit Hilfe des angegebenen Profils her.
+            Der Spieler wird, sofern ein Passwort hinterlegt ist, automatisch angemeldet.
+          </description>
+        </example>
+        <example>
+          <code>connect("mgj")</code>
+          <description>
+            Verbindet mit dem Profil, dessen Kürzel mgj ist.
+          </description>
+        </example>
+        <example>
+          <code>/co mgj</code>
+          <description>
+            Verbindet mit dem Profil, dessen Kürzel mgj ist. Hierbei wird der Befehl
+            in Kurzschreibweise gegeben und zusätzlich abgekürzt. Ist kein Alias-Name
+            für den Befehl hinterlegt, kann man den ganz normalen Befehlsnamen abkürzen,
+            indem dieser nur soweit notiert wird, wie man es benötigt, um diesen eindeutig
+            zu identifizieren.
+          </description>
+        </example>
+      </examples>
+    </function>
+
+    <function name="disconnect" alias="dc">
+      <declaration>
+        <return type="void">
+          <description>
+            Kein Rückgabewert.
+          </description>
+        </return>
+        <parameters>
+          <parameter type="string" name="profileName">
+            <description>
+              Name des Profils, dessen Spieler getrennt werden soll.
+            </description>
+          </parameter>
+        </parameters>
+      </declaration>
+      <description>
+        Trennt die Verbindung zum Spieler mit dem angegebenen Profil.
+        Wird -all als Parameter übergeben, werden alle Spieler getrennt.
+         Ohne Parameter werden die aktiven Profile angezeigt.
+      </description>
+      <links>
+        <function>logout</function>
+      </links>
+      <examples>
+        <example>
+          <code>disconnect("jehova@morgengrauen");</code>
+          <description>
+            Unterbricht die Netzwerkverbindung des angegebenen Spielers.
+          </description>
+        </example>
+        <example>
+          <code>/dc mgj</code>
+          <description>
+            Unterbricht die Netzwerkverbindung des angegebenen Spielers.
+          </description>
+        </example>
+      </examples>
+    </function>
+
+    <function name="exit">
+      <declaration>
+        <return type="void">
+          <description>
+            Kein Rückgabewert.
+          </description>
+        </return>
+        <parameters>
+          <parameter type="string" name="">
+            <description>
+            </description>
+          </parameter>
+        </parameters>
+      </declaration>
+      <description>
+  When called directly or indirectly during a /load, /exit aborts execution of 
+  all enclosing macro bodies, and aborts n (default 1) enclosing /load's.  
+
+  When called outside of a /load, /exit has no effect.  
+
+  Example: one way to prevent a file from being loaded more than once is to 
+  put commands like these at the beginning of the file: 
+
+    /if (variable) /exit%; /endif
+    /set variable=1
+
+  ...where variable is the name of the file or some other unique name.  
+
+  See: /load, /return, /break, /loaded 
+      </description>
+      <links></links>
+      <examples>
+        <example>
+          <code></code>
+          <description>
+          </description>
+        </example>
+      </examples>
+    </function>
+
+    <function name="key">
+      <declaration>
+        <return type="void">
+          <description>
+          </description>
+        </return>
+        <parameters>
+          <parameter type="string" name="">
+            <description>
+            </description>
+          </parameter>
+        </parameters>
+      </declaration>
+      <description>
+      </description>
+      <links></links>
+      <examples>
+        <example>
+          <code></code>
+          <description>
+          </description>
+        </example>
+      </examples>
+    </function>
+
+    <function name="load">
+      <declaration>
+        <return type="void">
+          <description>
+          </description>
+        </return>
+        <parameters>
+          <parameter type="string" name="">
+            <description>
+            </description>
+          </parameter>
+        </parameters>
+      </declaration>
+      <description>
+      </description>
+      <links></links>
+      <examples>
+        <example>
+          <code></code>
+          <description>
+          </description>
+        </example>
+      </examples>
+    </function>
+
+<!--
+    <function name="logout">
+      <declaration>
+        <return type="void">
+          <description>
+            Kein Rückgabewert.
+          </description>
+        </return>
+        <parameters>
+          <parameter type="string" name="profileName">
+            <description>
+              Name des Profils, dessen Spieler regulär ausgeloggt werden soll.
+            </description>
+          </parameter>
+        </parameters>
+      </declaration>
+      <description>
+        Dieser Befehl meldet einen Spieler ordentlich ab. Es wird onLogout() aufgerufen,
+        was dem Spieler die Möglichkeit gibt, seine Dinge zu regeln, beispielsweise sich
+        einen sicheren Schlafplatz zu suchen oder sich zu verabschieden.
+        Wird die Methode verlassen, wird das in der
+        Welt hinterlegte Abmelde-Kommando gegeben. Dieses Kommando kann auch
+        beispielsweise "weg bin nicht da" oder so heissen! Dann wird der Spieler nicht
+        vom MUD getrennt. Fehlt das Kommando ganz, wird der exit()-Befehl gerufen.
+      </description>
+      <links></links>
+      <examples>
+        <example>
+          <code></code>
+          <description>
+          </description>
+        </example>
+      </examples>
+    </function>
+-->
+
+    <function name="quit">
+      <declaration>
+        <return type="void">
+          <description>
+            Beendet MUDmania. Alle Netzwerk-Verbindungen werden unterbrochen, alle
+            Logdateien werden geschlossen. Aktive Funtionen und Programme werden
+            unterbrochen und alle noch nicht gesicherten Daten gehen verloren.
+            Das betrifft per Hand angelegte Trigger, Makros und Aliase, aber auch
+            die History und Variableninhalte.
+          </description>
+        </return>
+        <parameters>
+        </parameters>
+      </declaration>
+      <description>
+      </description>
+      <links></links>
+      <examples>
+        <example>
+          <code></code>
+          <description>
+          </description>
+        </example>
+      </examples>
+    </function>
+
+    <function name="recall">
+      <declaration>
+        <return type="void">
+          <description></description>
+        </return>
+        <parameters>
+          <parameter name="count" type="int">
+            <description>
+            </description>
+          </parameter>
+          <parameter name="pattern" type="string" optional="yes">
+            <description>
+            </description>
+          </parameter>
+        </parameters>
+      </declaration>
+      <description>
+        Diese Funktion zeigt die letzten count Zeilen im Ausgabefenster an.
+        Wird im zweiten Parameter ein pattern angegeben, werden nur Zeilen
+        ausgegeben, die auf dieses Muster passen.
+      </description>
+      <links></links>
+      <examples>
+        <example>
+          <code>recall(10, "knuddelt dich");</code>
+          <description>
+            Zeigt die letzten 10 Zeilen an, die den Text "knuddelt Dich" enthalten.
+            Gross- bzw. Kleinschreibung ist dabei egal.
+          </description>
+        </example>
+        <example>
+          <code>recall(10, "/^(.*) knuddelt Dich.$/");</code>
+          <description>
+            Zeigt die letzten 10 Zeilen an, die den Text "knuddelt Dich" enthalten.
+            Hier muss die Gross- bzw. Kleinschreibung beachtet werden,
+            da auch grosse Buchstaben vorkommen. Text vor dem Muster-Text wird beginnend vom
+            Zeilenanfang Text ausgeschnitten und zwischengespeichert.
+          </description>
+        </example>
+      </examples>
+    </function>
+
+    <function name="save">
+      <declaration>
+        <return type="void">
+          <description>
+          </description>
+        </return>
+        <parameters>
+          <parameter type="string" name="">
+            <description>
+            </description>
+          </parameter>
+        </parameters>
+      </declaration>
+      <description>
+      </description>
+      <links></links>
+      <examples>
+        <example>
+          <code></code>
+          <description>
+          </description>
+        </example>
+      </examples>
+    </function>
+
+    <function name="set" alias="assign">
+      <declaration>
+        <return type="void">
+          <description>
+          </description>
+        </return>
+        <parameters>
+          <parameter type="string" name="">
+            <description>
+            </description>
+          </parameter>
+        </parameters>
+      </declaration>
+      <description>
+      </description>
+      <links></links>
+      <examples>
+        <example>
+          <code></code>
+          <description>
+          </description>
+        </example>
+      </examples>
+    </function>
+
+    <function name="trigger">
+      <declaration>
+        <return type="void">
+          <description></description>
+        </return>
+        <parameters>
+          <parameter name="name" type="string">
+            <description>
+            </description>
+          </parameter>
+          <parameter name="pattern" type="string">
+            <description>
+            </description>
+          </parameter>
+          <parameter name="function" type="string">
+            <description>
+            </description>
+          </parameter>
+        </parameters>
+      </declaration>
+      <description>
+        Eine schnelle Kommandozeilen-Variante zum Hinzufügen eines Triggers.
+        JavaScript-Programme sollten diese Funktion nicht nehmen, denn es geht
+        auch besser, indem ein Trigger-Objekt instantiiert wird. Dort lassen
+        sich dann weitere Parameter setzen. Bei dieser Version fehlen beispielsweise
+        Matching-Flags oder Prioritäten. Vorteil: Man kann auch schnell in der
+        Eingabezeile Trigger einrichten.
+      </description>
+      <links>
+        <function>replace</function>
+        <function>hide</function>
+        <function>untrigger</function>
+      </links>
+      <examples>
+        <example>
+          <code></code>
+          <description>
+          </description>
+        </example>
+      </examples>
+    </function>
+
+    <function name="unkey">
+      <declaration>
+        <return type="void">
+          <description></description>
+        </return>
+        <parameters>
+          <parameter name="keyName" type="string">
+            <description>
+              Der Name der Taste oder Tastenkombination deren Belegung
+              entfernt werden soll.
+            </description>
+          </parameter>
+        </parameters>
+      </declaration>
+      <description>
+        Eine auf eine Taste gelegte Aktion wird hiermit wieder entfernt.
+      </description>
+      <links>
+        <function>key</function>
+      </links>
+      <examples>
+        <example>
+          <code>unkey("Control-A");</code>
+          <description>
+            Entfernt die Verknüpfung der Tastenkombination Control-A mit einem Skript,
+            einer Aktion des GUIs oder einem Objekt.
+          </description>
+        </example>
+      </examples>
+    </function>
+
+    <function name="unload">
+      <declaration>
+        <return type="void">
+          <description>
+          </description>
+        </return>
+        <parameters>
+          <parameter type="string" name="">
+            <description>
+            </description>
+          </parameter>
+        </parameters>
+      </declaration>
+      <description>
+      </description>
+      <links></links>
+      <examples>
+        <example>
+          <code></code>
+          <description>
+          </description>
+        </example>
+      </examples>
+    </function>
+  </functions>
+
+  <objects>
+<!-- Template:
+    <object name="" global="">
+      <description>
+      </description>
+      <methods>
+      </methods>
+      <members>
+      </members>
+      <links>
+        <function></function>
+        <object></object>
+      </links>
+      <examples>
+        <example>
+          <code>
+          </code>
+          <description>
+          </description>
+        </example>
+      </examples>
+    </object>
+-->
+
+    <object name="alias" global="no">
+      <description>
+        Ein alias-Objekt einhält eine Kurzform für einen üblicherweise per Tastatur zu tippenden,
+        oft wesentlich komplexeren Befehl.
+      </description>
+      <methods>
+      </methods>
+      <members>
+      </members>
+      <links>
+        <function>alias</function>
+      </links>
+      <examples>
+      </examples>
+    </object>
+
+    <object name="aliases" global="yes">
+      <description>
+        Das globale aliases-Objekt einhält eine alle für den jeweiligen Spieler
+        gültige Aliase. Damit hat man uneingeschränkten Zugriff auf jedes
+        Alias per Skript oder von der Kommandozeile und kann alle Eigenschaften
+        der Aliase verändern, als ob man den grafischen Editor benutzen würde.
+      </description>
+      <methods>
+      </methods>
+      <members>
+      </members>
+      <links>
+        <function>alias</function>
+        <object>alias</object>
+      </links>
+      <examples>
+      </examples>
+    </object>
+
+    <object name="application" global="yes">
+      <description>
+        Dieses globale Objekt gewährt Zugriff auf die MUDmania-Anwendung selbst.
+        Es können verschiedene Objekt-Handles über dieses Objekt beschafft werden.
+      </description>
+      <methods>
+      </methods>
+      <members>
+      </members>
+      <links>
+      </links>
+      <examples>
+      </examples>
+    </object>
+
+    <object name="crypt" global="yes">
+      <description>
+      </description>
+      <methods>
+      </methods>
+      <members>
+      </members>
+      <links>
+      </links>
+      <examples>
+      </examples>
+    </object>
+
+    <object name="filesystem" global="yes">
+      <description>
+      </description>
+      <methods>
+      </methods>
+      <members>
+      </members>
+      <links>
+      </links>
+      <examples>
+      </examples>
+    </object>
+
+    <object name="history" global="no">
+      <description>
+      </description>
+      <methods>
+      </methods>
+      <members>
+      </members>
+      <links>
+      </links>
+      <examples>
+      </examples>
+    </object>
+
+    <object name="icq" global="yes">
+      <description>
+      </description>
+      <methods>
+      </methods>
+      <members>
+      </members>
+      <links>
+      </links>
+      <examples>
+      </examples>
+    </object>
+
+    <object name="logs" global="yes">
+      <description>
+      </description>
+      <methods>
+      </methods>
+      <members>
+      </members>
+      <links>
+      </links>
+      <examples>
+      </examples>
+    </object>
+
+    <object name="player" global="no">
+      <description>
+      </description>
+      <methods>
+      </methods>
+      <members>
+      </members>
+      <links>
+      </links>
+      <examples>
+      </examples>
+    </object>
+
+    <object name="preferences" global="yes">
+      <description>
+      </description>
+      <methods>
+      </methods>
+      <members>
+      </members>
+      <links>
+      </links>
+      <examples>
+      </examples>
+    </object>
+
+    <object name="profile" global="no">
+      <description>
+      </description>
+      <methods>
+      </methods>
+      <members>
+      </members>
+      <links>
+        <object>profiles</object>
+      </links>
+      <examples>
+      </examples>
+    </object>
+
+    <object name="profiles" global="yes">
+      <description>
+      </description>
+      <methods>
+      </methods>
+      <members>
+      </members>
+      <links>
+        <object>profile</object>
+      </links>
+      <examples>
+      </examples>
+    </object>
+
+    <object name="room" global="no">
+      <description>
+      </description>
+      <methods>
+      </methods>
+      <members>
+      </members>
+      <links>
+        <object>rooms</object>
+      </links>
+      <examples>
+      </examples>
+    </object>
+
+    <object name="rooms" global="yes">
+      <description>
+      </description>
+      <methods>
+      </methods>
+      <members>
+      </members>
+      <links>
+        <object>room</object>
+      </links>
+      <examples>
+      </examples>
+    </object>
+
+    <object name="trigger" global="no">
+      <description>
+        Ein Trigger-Objekt enthält alle Daten eines Triggers und erlaubt die
+        Veränderung dieser Werte.
+      </description>
+      <methods>
+      </methods>
+      <members>
+      </members>
+      <links>
+        <function>trigger</function>
+        <object>triggers</object>
+      </links>
+      <examples>
+      </examples>
+    </object>
+
+    <object name="triggers" global="yes">
+      <description>
+        Globales Objekt, welches alle zum jeweiligen Spieler gehörende Trigger enthält.
+      </description>
+      <methods>
+      </methods>
+      <members>
+      </members>
+      <links>
+        <function>trigger</function>
+        <object>trigger</object>
+      </links>
+      <examples>
+      </examples>
+    </object>
+
+    <object name="webserver" global="yes">
+      <description>
+        Ein einfacher Webserver, welcher auf einem Port auf Anfragen lauert und
+        diese beantwortet. Zeigt zur Zeit eine Standard-Webseite und kann
+        alle denkbaren Webseiten und Daten darstellen. Diese sollten zur Zeit
+        noch statisch sein. Eine dynamische Version mittels JWAS ist angedacht,
+        es kann aber noch lange dauern, bis es implementiert wird. Wer dynamische
+        Seiten braucht, sollte einfach auf einen richtigen Webserver weiterleiten.
+        Hier können auch freigegebene oder gemeinsam verwendete Dateien
+        angeboten werden. Eventuell gibt's hier auch mal WebServices per
+        XMLRPC oder SOAP. Hab' aber derzeit Wichtigeres zu tun :-(
+      </description>
+      <methods>
+      </methods>
+      <members>
+      </members>
+      <links>
+      </links>
+      <examples>
+      </examples>
+    </object>
+
+    <object name="world" global="no">
+      <description>
+      </description>
+      <methods>
+      </methods>
+      <members>
+      </members>
+      <links>
+        <object>worlds</object>
+      </links>
+      <examples>
+      </examples>
+    </object>
+
+    <object name="worlds" global="yes">
+      <description>
+      </description>
+      <methods>
+      </methods>
+      <members>
+      </members>
+      <links>
+        <object>world</object>
+      </links>
+      <examples>
+      </examples>
+    </object>
+  </objects>
+</api>
