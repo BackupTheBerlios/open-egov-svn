@@ -20,6 +20,7 @@ class MainWindow : public OEG::Qt::MainWindow
 
   public:
     MainWindow(QWidget *parent = 0);
+    virtual ~MainWindow();
 
     virtual void createActions();
     virtual void createStatusBar();

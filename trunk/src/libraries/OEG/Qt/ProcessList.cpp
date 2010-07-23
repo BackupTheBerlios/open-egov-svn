@@ -38,6 +38,8 @@ ProcessList::ProcessList(QObject *parent /*=0*/)
   m_module_list.clear();
   m_process_list.clear();
   m_thread_list.clear();
+
+  setDebugPrivileges(true);
 }
 
 ProcessList::~ProcessList()
@@ -63,8 +65,6 @@ void ProcessList::update()
   DWORD dwPriorityClass;
 
   clearLists();
-
-  setDebugPrivileges(true);
 
   // Take a snapshot of all processes in the system.
   hProcessSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
@@ -122,8 +122,6 @@ void ProcessList::update()
   } while (Process32Next(hProcessSnap, &pe32));
 
   CloseHandle(hProcessSnap);
-
-  setDebugPrivileges(false);
 }
 
 void ProcessList::printError(const QString &funName)
@@ -352,5 +350,97 @@ bool ProcessList::setDebugPrivileges(bool enable /*=true*/)
 
   CloseHandle(token);
   return true;
+}
+
+bool ProcessList::killProcess(int processId)
+{
+  if (processId <= 0)
+    return false;
+
+  setDebugPrivileges(true); // The security descriptor will be ignored, if we have debug privileges.
+
+  HANDLE handle = OpenProcess(PROCESS_TERMINATE, FALSE, processId); // | SYNCHRONIZE.
+  if (! handle)
+    return false;
+
+  DWORD code = 0;
+  GetExitCodeProcess(handle, &code);
+
+  if (code == STILL_ACTIVE) {
+    if (TerminateProcess(handle, 0)) {
+      CloseHandle(handle);
+      return true;
+    }
+  }
+
+  CloseHandle(handle);
+
+  return false;
+}
+
+// http://msdn.microsoft.com/en-us/library/ms686219%28VS.85%29.aspx
+
+bool ProcessList::getPriority(int *priority, int processId /*=0*/)
+{
+  setDebugPrivileges(true); // The security descriptor will be ignored, if we have debug privileges.
+
+  DWORD p;
+  if (processId == 0) {
+    p = GetPriorityClass(GetCurrentProcess());
+  }
+  else {
+    if (processId < 0)
+      return false;
+
+    HANDLE handle = OpenProcess(PROCESS_SET_INFORMATION, FALSE, processId);
+    if (! handle)
+      return false;
+
+    p = GetPriorityClass(handle);
+    CloseHandle(handle);
+  }
+
+  switch (p) {
+    case REALTIME_PRIORITY_CLASS:     *priority =  3; break;
+    case HIGH_PRIORITY_CLASS:         *priority =  2; break;
+    case ABOVE_NORMAL_PRIORITY_CLASS: *priority =  1; break;
+    case NORMAL_PRIORITY_CLASS:       *priority =  0; break;
+    case BELOW_NORMAL_PRIORITY_CLASS: *priority = -1; break;
+    case IDLE_PRIORITY_CLASS:         *priority = -2; break;
+  }
+
+  return true;
+}
+
+bool ProcessList::setPriority(int priority, int processId)
+{
+  if (processId <= 0)
+    return false;
+
+  setDebugPrivileges(true); // The security descriptor will be ignored, if we have debug privileges.
+
+  HANDLE handle = OpenProcess(PROCESS_SET_INFORMATION, FALSE, processId); // PROCESS_ALL_ACCESS.
+  if (! handle)
+    return false;
+
+  DWORD pri;
+  if (priority >  3) priority =  3;
+  if (priority < -2) priority = -2;
+  switch (priority) {
+    case  3: pri = REALTIME_PRIORITY_CLASS;     break; // Disallow it?
+    case  2: pri = HIGH_PRIORITY_CLASS;         break;
+    case  1: pri = ABOVE_NORMAL_PRIORITY_CLASS; break;
+    case  0: pri = NORMAL_PRIORITY_CLASS;       break;
+    case -1: pri = BELOW_NORMAL_PRIORITY_CLASS; break;
+    case -2: pri = IDLE_PRIORITY_CLASS;         break;
+  }
+
+  if (SetPriorityClass(handle, pri) != 0) {
+    CloseHandle(handle);
+    return true;
+  }
+
+  CloseHandle(handle);
+  return false;
 }
 

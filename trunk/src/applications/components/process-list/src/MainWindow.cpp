@@ -16,6 +16,8 @@
 #include <QLabel>
 #include <QMenu>
 #include <QMenuBar>
+#include <QMessageBox>
+#include <QSet>
 #include <QStatusBar>
 #include <QTableWidget>
 #include <QTime>
@@ -63,11 +65,22 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
   m_table->resizeColumnToContents(0);
   m_table->resizeColumnToContents(1);
   m_table->resizeColumnToContents(2);
+  m_table->clearSelection();
+  m_table->clearFocus();
 
   m_timer = new QTimer(this);
-  m_timer->setInterval(5 * 1000);
+  m_timer->setInterval(5 * 100);
   connect(m_timer, SIGNAL(timeout()), this, SLOT(action_reload()));
   m_timer->start();
+}
+
+MainWindow::~MainWindow()
+{
+  m_timer->stop();
+
+  if (m_processes) {
+    delete m_processes; m_processes = 0;
+  }
 }
 
 void MainWindow::createActions()
@@ -218,12 +231,70 @@ void MainWindow::action_reload()
 
 void MainWindow::action_terminate_process()
 {
-  
+  // We first get a list of the selected items. The list contains all items of the row(s).
+
+  QList<QTableWidgetItem *> list = m_table->selectedItems();
+  QSet<int> rows;
+  QTableWidgetItem *item;
+
+  if (list.size() <= 0) {
+    QMessageBox::information(this, _("No selection!"),
+                             _("There was no selected row. You have to select one first."), QMessageBox::Ok);
+    return;
+  }
+
+  // Then the items will be traversed and their row numbers put into the rows set.
+  // rows now contains a list of unique row numbers.
+
+  for (int i=0; i<list.size(); i++) {
+    item = list.at(i);
+    if (item) {
+      rows << item->row();
+    }
+  }
+
+  // Retrieve the process name for each row number and format them for the dialog.
+
+  QString text;
+  foreach (int row, rows) {
+    item = m_table->item(row, 0);    // Name.
+    if (item) {
+      text += item->text() + " ";
+    }
+    item = m_table->item(row, 1);    // PID.
+    if (item) {
+      text += QString("(%1)<br>").arg(item->text());
+    }
+  }
+  text = text.trimmed();
+
+  QMessageBox mb(this);
+  mb.setWindowTitle(qApp->applicationName());
+  mb.setIcon(QMessageBox::Question);
+  if (list.size() == 1)
+    mb.setText(_("Delete this process?"));
+  else
+    mb.setText(_("Delete these processes?"));
+  mb.setInformativeText(text);
+  mb.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+  mb.setDefaultButton(QMessageBox::No);
+  if (mb.exec() == QMessageBox::No)
+    return;
+
+  // Fetch the PID for every row and kill the process.
+
+  foreach (int row, rows) {
+    item = m_table->itemAt(row, 1);
+    if (item) {
+      m_processes->killProcess(item->text().toInt());
+    }
+  }
+
+  action_reload();
 }
 
 void MainWindow::action_open_process_dialog()
 {
-
 }
 
 void MainWindow::contextMenuEvent(QContextMenuEvent *event)
@@ -239,9 +310,15 @@ void MainWindow::contextMenuEvent(QContextMenuEvent *event)
   //item->setText(QString("OK"));
   //item->setBackground(QBrush(QColor(255, 0, 255)));
 
+  bool timer_was_active = m_timer->isActive();             // Switch of auto-updates of the list.
+  m_timer->stop();
+
   menu->addAction("&Terminate process", this, SLOT(action_terminate_process()), QKeySequence(Qt::Key_Control + Qt::Key_T));
 
   menu->exec(event->globalPos()); //QCursor::pos());
-  delete menu;
+  delete menu; menu = 0;
+
+  if (timer_was_active)
+    m_timer->start();
 }
 

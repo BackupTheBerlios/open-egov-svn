@@ -32,6 +32,9 @@ class ProcessList : public QObject
     ThreadInfo  *threadInfo(int processId, int threadNumber);
 
     bool setDebugPrivileges(bool enable = true);
+    bool killProcess(int processId);
+    bool getPriority(int *priority, int processId = 0);
+    bool setPriority(int priority, int processId);
 
   public slots:
     void update();
