@@ -9,6 +9,7 @@
 #include <QList.h>
 
 class OEG::Qt::ToolProvider;
+class Splitter;
 
 class MainWindow : public OEG::Qt::MainWindow
 {
@@ -29,6 +30,7 @@ class MainWindow : public OEG::Qt::MainWindow
     QString title() const;
 
   protected:
-    QString m_title;
+    QString   m_title;
+    Splitter *m_splitter;
 };
 
