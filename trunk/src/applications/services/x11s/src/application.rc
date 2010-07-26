@@ -1,0 +1,43 @@
+// $Id$
+
+#include "winver.h"
+
+1 ICON DISCARDABLE "application.ico"
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION    1,0,0,0
+ PRODUCTVERSION 1,0,0,0
+ FILEFLAGSMASK  0x3fL
+#ifdef _DEBUG
+  //VS_FF_DEBUG
+  FILEFLAGS 0x1L
+#else
+  FILEFLAGS 0x0L
+#endif
+ //VOS__WINDOWS32
+ FILEOS         0x00040000L
+ //VFT_DLL
+ FILETYPE       0x2L
+ FILESUBTYPE    0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName",      "gasi.de"
+            VALUE "FileDescription",  "X11 Server"
+            VALUE "FileVersion",      "1, 0, 0, 0\0"
+            VALUE "LegalCopyright",   "Copyright (C) 2005-2010 gasi.de."
+            VALUE "InternalName",     "x11s.exe\0"
+            VALUE "LegalTrademarks",  "\0"
+            VALUE "OriginalFilename", "x11s.exe"
+            VALUE "ProductName",      "OEG :: X11 Server"
+            VALUE "ProductVersion",   "1, 0, 0, 0\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+

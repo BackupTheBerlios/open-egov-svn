@@ -1,0 +1,22 @@
+$Id$
+
+Introduction
+
+X11S ist ein X11-Server, welcher mit den Zielen einer schlanken
+Architektur, eines fehlerfreien und ressourcenschonenden Betriebs
+und einem möglichst umfassenden Support aktueller Erweiterungen
+entwickelt wird. X11-Anwendungen sollen sich nahtlos in die
+Windows-Umgebung einfügen. Schriftarten sollen z.B. von Windows
+benutzt werden und keine X11-Schriften sein. Es sollen aber auch
+exotischere Dinge, wie z.B. arabische Texte im Editor gehen.
+Das bedeutet, dass das X11-Protokoll nicht zu 100% umgesetzt,
+sondern die jeweilige Realisierung an Windows angepasst wird.
+
+Es wird bewusst kein Wert darauf gelegt, antike Rechner oder Grafikkarten
+zu unterstützen. Das betrifft beispielsweise Screens mit unter 1024x768
+Bildpunkten Auflösung oder weniger als 24 Bit Farbtiefe. Es gibt keinen
+extra Font-Server o.ä. Stattdessen sind für die gängigen Schriftarten
+Ersatz-Schriften unter Windows gemappt, und es wird kein 1:1 Abbild
+erstellt, sondern es wird ein möglichst gut aussehendes Bild mit den
+normalen Windows-Werkzeugen erzeugt.
+
