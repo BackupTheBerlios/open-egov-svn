@@ -4,6 +4,8 @@
 #include <tlhelp32.h>
 #include <tchar.h>
 
+#include <QApplication>
+#include <QMessageBox>
 #include <QDebug>
 
 #include <OEG/Common.h>
@@ -153,6 +155,8 @@ bool ProcessList::searchProcessModules(unsigned long int pid)
   // Take a snapshot of all modules in the specified process.
   hModuleSnap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pid);
   if (hModuleSnap == INVALID_HANDLE_VALUE) {
+    // For pid 4 (System) I get GetLastError() == 8 (not enough memory for this command).
+    // qDebug() << "PID = " << QString::number(pid);
     printError("CreateToolhelp32Snapshot (of modules)");
     return false;
   }
@@ -352,6 +356,22 @@ bool ProcessList::setDebugPrivileges(bool enable /*=true*/)
   return true;
 }
 
+// Called for every window. Posts WM_CLOSE to all windows with the
+// correct processId.
+
+BOOL CALLBACK KillAppEnumWindowsCallback(HWND hwnd, LPARAM processId)
+{
+  DWORD pid;
+
+  GetWindowThreadProcessId(hwnd, &pid);
+
+  if (pid == (DWORD)processId) {
+    PostMessage(hwnd, WM_CLOSE, 0, 0);
+  }
+
+  return TRUE;
+}
+
 bool ProcessList::killProcess(int processId)
 {
   if (processId <= 0)
@@ -359,18 +379,39 @@ bool ProcessList::killProcess(int processId)
 
   setDebugPrivileges(true); // The security descriptor will be ignored, if we have debug privileges.
 
-  HANDLE handle = OpenProcess(PROCESS_TERMINATE, FALSE, processId); // | SYNCHRONIZE.
-  if (! handle)
+  HANDLE handle = OpenProcess(PROCESS_TERMINATE | SYNCHRONIZE, FALSE, processId);
+  if (! handle) {
+    QMessageBox::information(0, qApp->applicationName(), QString(_("No handle")));
     return false;
+  }
 
-  DWORD code = 0;
-  GetExitCodeProcess(handle, &code);
+  QMessageBox::information(0, QString("Titel"), QString("Text %1").arg(processId));
 
-  if (code == STILL_ACTIVE) {
-    if (TerminateProcess(handle, 0)) {
-      CloseHandle(handle);
-      return true;
-    }
+  //DWORD code = 0;
+  //if (GetExitCodeProcess(handle, &code) == 0) {
+  //  // Error 5 (Zugriff verweigert). Why?
+  //  printError("GetExitCodeProcess");
+  //  CloseHandle(handle);
+  //  return false;
+  //}
+  //if (code == STILL_ACTIVE) {
+  //QMessageBox::information(0, "", "");
+  //}
+
+  EnumWindows((WNDENUMPROC) KillAppEnumWindowsCallback, (LPARAM) processId);
+
+  // Wait on the handle. If it signals, great. If it times out, then you kill it.
+
+  if (WaitForSingleObject(handle, 1000) == WAIT_OBJECT_0) {
+    CloseHandle(handle);
+    QMessageBox::information(0, qApp->applicationName(), QString(_("Process closed successfully.")));
+    return true;
+  }
+
+  if (TerminateProcess(handle, 0)) {
+    CloseHandle(handle);
+    QMessageBox::information(0, qApp->applicationName(), QString(_("Process terminated.")));
+    return true;
   }
 
   CloseHandle(handle);
