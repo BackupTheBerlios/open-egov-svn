@@ -27,7 +27,7 @@ BEGIN
             VALUE "CompanyName",      "gasi.de"
             VALUE "FileDescription",  "Desktop"
             VALUE "FileVersion",      "1, 0, 0, 0\0"
-            VALUE "LegalCopyright",   "Copyright (C) 2010 gasi.de."
+            VALUE "LegalCopyright",   "Copyright (C) 2005-2010 gasi.de."
             VALUE "InternalName",     "desktop.exe\0"
             VALUE "LegalTrademarks",  "\0"
             VALUE "OriginalFilename", "desktop.exe"
