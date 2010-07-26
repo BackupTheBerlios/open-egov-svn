@@ -11,6 +11,7 @@
 #include <QAction>
 #include <QApplication>
 #include <QContextMenuEvent>
+#include <QClipboard>
 #include <QDockWidget>
 #include <QHeaderView>
 #include <QLabel>
@@ -284,7 +285,7 @@ void MainWindow::action_terminate_process()
   // Fetch the PID for every row and kill the process.
 
   foreach (int row, rows) {
-    item = m_table->itemAt(row, 1);
+    item = m_table->item(row, 1);
     if (item) {
       m_processes->killProcess(item->text().toInt());
     }
@@ -295,6 +296,23 @@ void MainWindow::action_terminate_process()
 
 void MainWindow::action_open_process_dialog()
 {
+}
+
+void MainWindow::action_copy_details()
+{
+  QList<QTableWidgetItem *> list = m_table->selectedItems();
+  QTableWidgetItem *item;
+
+  if (list.size() <= 0)
+    return;
+
+  for (int i=0; i<list.size(); i++) {
+    item = list.at(i);
+    if (item) {
+      qApp->clipboard()->setText("test");
+      QMessageBox::information(this, "", item->text());
+    }
+  }
 }
 
 void MainWindow::contextMenuEvent(QContextMenuEvent *event)
@@ -313,7 +331,9 @@ void MainWindow::contextMenuEvent(QContextMenuEvent *event)
   bool timer_was_active = m_timer->isActive();             // Switch of auto-updates of the list.
   m_timer->stop();
 
-  menu->addAction("&Terminate process", this, SLOT(action_terminate_process()), QKeySequence(Qt::Key_Control + Qt::Key_T));
+  // ERROR: Keys marked as "Bass Down" in the menu.
+  menu->addAction("&Terminate process ...", this, SLOT(action_terminate_process()), QKeySequence(Qt::Key_Control + Qt::Key_T));
+  menu->addAction("&Copy", this, SLOT(action_copy_details()), QKeySequence(_("Ctrl+C")));
 
   menu->exec(event->globalPos()); //QCursor::pos());
   delete menu; menu = 0;
