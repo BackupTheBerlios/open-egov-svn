@@ -32,6 +32,7 @@ class MainWindow : public OEG::Qt::MainWindow
     void action_reload();
     void action_terminate_process();
     void action_open_process_dialog();
+    void action_copy_details();
 
   protected:
     virtual void contextMenuEvent(QContextMenuEvent *event);
