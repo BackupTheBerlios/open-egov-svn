@@ -1,0 +1,14 @@
+$Id$
+
+2010-07-27  Gerrit M. Albrecht  <mail (at) gerrit-albrecht.de>
+
+	* System tray icon added.
+
+2010-07-26  Gerrit M. Albrecht  <mail (at) gerrit-albrecht.de>
+
+	* Restarted development using Qt.
+
+2003-12-16  Gerrit M. Albrecht  <mail (at) gerrit-albrecht.de>
+
+	* Started project using MFC. Implemented some little
+	  test applications to learn/snoop the X11 protocol.
