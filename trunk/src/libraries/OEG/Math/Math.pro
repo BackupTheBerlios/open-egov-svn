@@ -2,6 +2,8 @@
 
 TARGET       = oegMath
 VERSION      = 1.0.0.0
+QT          += 
+PACKAGES     = GETTEXT
 
 RC_FILE      = resources.rc
 DEFINES     += 

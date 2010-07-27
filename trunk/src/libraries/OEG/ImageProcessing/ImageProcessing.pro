@@ -1,9 +1,9 @@
 # $Id$
 
-include(../common.pri)
-
 TARGET       = oegImageProcessing
 VERSION      = 1.0.0.0
+QT          += gui
+PACKAGES     = GETTEXT
 
 RC_FILE      = resources.rc
 DEFINES     += 
@@ -13,4 +13,6 @@ LIBS        +=
 FORMS       +=
 HEADERS     += *.h
 SOURCES     += *.cpp
+
+include(../common.pri)
 
