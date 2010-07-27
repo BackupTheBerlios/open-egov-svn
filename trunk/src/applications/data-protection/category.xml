@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<category base="data-protection">
+  <strings lang="en_US">
+    <string name="title">Data Protection</string>
+    <string name="description">Applications for data and privacy protection.</string>
+  </strings>
+
+  <strings lang="de_DE">
+    <string name="title">Datenschutz</string>
+    <string name="description">Anwendungen zum Schutz von Daten und Privatsphäre.</string>
+  </strings>
+</application>
+
