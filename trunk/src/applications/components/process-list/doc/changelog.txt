@@ -1,0 +1,17 @@
+$Id$
+
+2010-07-27  Gerrit M. Albrecht  <mail (at) gerrit-albrecht.de>
+
+	* Copying data to the clipboard works now as expected.
+
+2010-07-26  Gerrit M. Albrecht  <mail (at) gerrit-albrecht.de>
+
+	* Removed a hard to find bug where item() instead of itemAt()
+	  was needed. They are different but get the same parameters.
+	* Killing processes fixed. Using GetExitCodeProcess() to wait for
+	  process termination was a bad idea. Using EnumWindows with
+	  WaitForSingleObject to close processes smart works.
+
+2010-07-20  Gerrit M. Albrecht  <mail (at) gerrit-albrecht.de>
+
+	* Started project.
