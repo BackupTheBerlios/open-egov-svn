@@ -47,6 +47,14 @@ contains(PACKAGES, MATH) {
   message(Adding support for OEG-Math ...)
   LIBSLINE += -loegMath1
 }
+contains(PACKAGES, PAGES) {
+  message(Adding support for OEG-Pages ...)
+  LIBSLINE += -loegPages1
+}
+contains(PACKAGES, 3D) {
+  message(Adding support for OEG-3D ...)
+  LIBSLINE += -loeg3D1
+}
 LIBS += $$LIBSLINE
 
 contains(PACKAGES, GETTEXT) {

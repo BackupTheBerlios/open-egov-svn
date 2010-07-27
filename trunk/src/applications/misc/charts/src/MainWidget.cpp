@@ -1,6 +1,6 @@
 // $Id$
 
-#include <QWidget.h>
+#include <QWidget>
 
 #include "MainWidget.h"
 

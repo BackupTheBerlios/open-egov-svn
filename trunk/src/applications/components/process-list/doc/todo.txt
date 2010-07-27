@@ -2,11 +2,15 @@ $Id$
 
 The OEG::Qt::ProcessList class deletes everything on update(). It would be
 better to update the fields separately because this would allow to recognize
-changes and also to mark process with an age flag.
+changes and also to mark processes with an age flag.
 
 All data ist stored in 3 lists contained in the ProcessList class. However,
-the modules and threads data is related to an process. It would be better to
-store these data within the ProcessInfo, but currently it is not, because
+the modules and threads data are related to a process. It would be better to
+store such data within the ProcessInfo, but currently it is not, because
 pointers to the ...Info classes are returned everywhere while working with
 the data. Storing and deleting original data needs to be rewritten.
+
+Updating is slow.
+
+Windows 7 is missing some path names of the executables. Why?
 

@@ -1,4 +1,20 @@
 // $Id$
+//
+// Open-eGovernment
+// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+//
+// This program is free software: you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 3
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+// See the GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "MainWindow.h"
 
@@ -63,14 +79,12 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
 
   action_reload();
 
-  m_table->resizeColumnToContents(0);
-  m_table->resizeColumnToContents(1);
-  m_table->resizeColumnToContents(2);
+  m_table->resizeColumnsToContents();
   m_table->clearSelection();
   m_table->clearFocus();
 
   m_timer = new QTimer(this);
-  m_timer->setInterval(5 * 100);
+  m_timer->setInterval(1000 / 2);
   connect(m_timer, SIGNAL(timeout()), this, SLOT(action_reload()));
   m_timer->start();
 }
@@ -300,18 +314,9 @@ void MainWindow::action_open_process_dialog()
 
 void MainWindow::action_copy_details()
 {
-  QList<QTableWidgetItem *> list = m_table->selectedItems();
-  QTableWidgetItem *item;
-
-  if (list.size() <= 0)
-    return;
-
-  for (int i=0; i<list.size(); i++) {
-    item = list.at(i);
-    if (item) {
-      qApp->clipboard()->setText("test");
-      QMessageBox::information(this, "", item->text());
-    }
+  if (m_last_item_clicked) {
+    qApp->clipboard()->setText(m_last_item_clicked->text());
+    m_last_item_clicked = 0;
   }
 }
 
@@ -325,15 +330,16 @@ void MainWindow::contextMenuEvent(QContextMenuEvent *event)
   QTableWidgetItem *item = m_table->itemAt(m_table->viewport()->mapFromGlobal(event->globalPos()));
   if (! item)
     return;
-  //item->setText(QString("OK"));
+
+  m_last_item_clicked = item;  // Store, to allow a text copy without having the coordinates.
   //item->setBackground(QBrush(QColor(255, 0, 255)));
 
-  bool timer_was_active = m_timer->isActive();             // Switch of auto-updates of the list.
+  bool timer_was_active = m_timer->isActive();             // Switch off auto-updates of the list.
   m_timer->stop();
 
-  // ERROR: Keys marked as "Bass Down" in the menu.
-  menu->addAction("&Terminate process ...", this, SLOT(action_terminate_process()), QKeySequence(Qt::Key_Control + Qt::Key_T));
-  menu->addAction("&Copy", this, SLOT(action_copy_details()), QKeySequence(_("Ctrl+C")));
+  menu->addAction("&Terminate process ...", this, SLOT(action_terminate_process()), QKeySequence(_("Del")));
+  menu->addSeparator();
+  menu->addAction("&Copy",                  this, SLOT(action_copy_details()),      QKeySequence(_("Ctrl+C")));
 
   menu->exec(event->globalPos()); //QCursor::pos());
   delete menu; menu = 0;

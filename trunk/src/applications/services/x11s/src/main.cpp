@@ -33,6 +33,7 @@ int main(int argc, char *argv[])
 
   if (! QSystemTrayIcon::isSystemTrayAvailable()) {
     QMessageBox::warning(0, qApp->applicationName(), _("System tray is unavailable"));
+    return 1;
   }
 
   TrayIcon icon;

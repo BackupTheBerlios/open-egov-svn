@@ -1,13 +1,11 @@
 // $Id$
 
-#ifndef OEG_APP_MISC_CHARTS_H
-#define OEG_APP_MISC_CHARTS_H
+#pragma once
 
-#include <QString.h>
-
-#include <QAxBindable.h>
-#include <QTextEdit.h>
-#include <QWidget.h>
+#include <QAxBindable>
+#include <QString>
+#include <QTextEdit>
+#include <QWidget>
 
 class MainWidget : public QTextEdit, public QAxBindable
 {
@@ -33,6 +31,4 @@ class MainWidget : public QTextEdit, public QAxBindable
 
     QString m_title;
 };
-
-#endif
 

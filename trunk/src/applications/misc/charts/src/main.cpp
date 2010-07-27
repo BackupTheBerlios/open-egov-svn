@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
   QApplication app(argc, argv);
 
   if (! QAxFactory::isServer()) {                // Create and show main window.
-    MainWidget *w = new MainWidget();
+    MainWidget *w = new MainWidget;
     w->setPlainText("Text");
     w->resize(400, 200);
     w->show();
