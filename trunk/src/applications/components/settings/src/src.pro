@@ -4,8 +4,8 @@ TARGET    = settings
 SOURCES   = *.cpp
 HEADERS   = *.h
 FORMS     = 
-QT       += xml network
+QT       += xml sql network
 PACKAGES  = QT GETTEXT
 
-include(..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}common.pri)
+include(../../../common.pri)
 

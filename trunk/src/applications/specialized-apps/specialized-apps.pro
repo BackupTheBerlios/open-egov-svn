@@ -1,5 +1,5 @@
 # $Id$
 
 TEMPLATE = subdirs
-SUBDIRS  = 
+SUBDIRS  = green-area-cadaster play-equipment-cadaster property-management tree-cadaster
 

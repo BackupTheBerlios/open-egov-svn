@@ -2,117 +2,156 @@
 
 <!-- $Id$ -->
 
-<application base="settings" category="components">
+<application category="components" base="settings">
   <head>
     <text name="title"       stringnumber="1" />
     <text name="description" stringnumber="2" />
+    <text name="author"      stringnumber="3" />
+    <text name="email"       stringnumber="4" />
   </head>
 
   <dictionary>
+    <!-- solely required group, other groups overlay these values -->
     <group lang="en_US">
       <string number="1">Settings</string>
       <string number="2">Allows the change of the predefined and current settings.</string>
-      <string number="3">Proxy</string>
-      <string number="4">Use</string>
-      <string number="5">Allows to switch the use of a proxy server on or off.</string>
-      <string number="6">Host</string>
-      <string number="7">Host name or IP number of the proxy server.</string>
-      <string number="8">Port</string>
-      <string number="9">Port number under which the server can be reached.</string>
-      <string number="10">Exceptions</string>
-      <string number="11">Don't use the proxy settings to access these computers.</string>
-      <string number="12"></string>
-      <string number="13"></string>
-      <string number="14"></string>
-      <string number="15"></string>
-      <string number="16"></string>
-      <string number="17"></string>
-      <string number="18"></string>
-      <string number="19"></string>
-      <string number="20"></string>
-      <string number="21"></string>
-      <string number="22"></string>
-      <string number="23"></string>
-      <string number="24"></string>
+      <string number="3">Gerrit M. Albrecht</string>
+      <string number="4">mail@gerrit-albrecht.de</string>
+      <string number="10">Proxy</string>
+      <string number="11">Use</string>
+      <string number="12">Allows to switch the use of a proxy server on or off.</string>
+      <string number="13">Host</string>
+      <string number="14">Host name or IP number of the proxy server.</string>
+      <string number="15">Port</string>
+      <string number="16">Port number to reach the server.</string>
+      <string number="17">Exceptions</string>
+      <string number="18">Don't use the proxy settings to access these computers.</string>
+      <string number="19">Language</string>
+      <string number="20">Paths</string>
+
+      <string number="21">MySQL Base Directory</string>
+      <string number="22">The base directory is the installation directory of MySQL. In many cases C:/MySQL is used, but also paths under %programfiles% are possible. This is, for example, the default setting while an automatic installation via the MSI archive.</string>
+      <string number="23">MySQL Data Directory</string>
+      <string number="24">The database is created under "data" in the default base directory. However, it is also possible to move this directory or create a new database using a different name.</string>
       <string number="25"></string>
     </group>
 
     <group lang="de_DE">
       <string number="1">Einstellungen</string>
       <string number="2">Erlaubt das Verändern der Voreinstellungen und aktuellen Einstellungen.</string>
-      <string number="3">Proxy</string>
-      <string number="4">benutzen</string>
-      <string number="5">Verwendung eines Proxy-Servers ein- oder ausschalten.</string>
-      <string number="6">Rechner</string>
-      <string number="7">Rechner-Name oder IP-Nummer des Proxy-Servers.</string>
-      <string number="8">Port</string>
-      <string number="9">Port-Nummer, unter welcher der Server erreicht werden kann.</string>
-      <string number="10">Ausnahmen</string>
-      <string number="11">Proxy-Einstellungen nicht beim Zugriff auf diese Rechner verwenden.</string>
-      <string number="12"></string>
-      <string number="13"></string>
-      <string number="14"></string>
-      <string number="15"></string>
-      <string number="16"></string>
-      <string number="17"></string>
-      <string number="18"></string>
-      <string number="19"></string>
-      <string number="20"></string>
-      <string number="21"></string>
-      <string number="22"></string>
-      <string number="23"></string>
-      <string number="24"></string>
+      <string number="3">Gerrit M. Albrecht</string>
+      <string number="4">mail@gerrit-albrecht.de</string>
+      <string number="10">Proxy</string>
+      <string number="11">Benutzen</string>
+      <string number="12">Verwendung eines Proxy-Servers ein- oder ausschalten.</string>
+      <string number="13">Rechner</string>
+      <string number="14">Rechner-Name oder IP-Nummer des Proxy-Servers.</string>
+      <string number="15">Port</string>
+      <string number="16">Port-Nummer, um den Server zu erreichen.</string>
+      <string number="17">Ausnahmen</string>
+      <string number="18">Proxy-Einstellungen nicht beim Zugriff auf diese Rechner verwenden.</string>
+      <string number="19">Sprache</string>
+      <string number="20">Pfade</string>
+      <string number="21">MySQL-Basisverzeichnis</string>
+      <string number="22">Das Basisverzeichnis ist das Installationsverzeichnis von MySQL. Häufig wird C:/MySQL genutzt, jedoch sind auch Pfade unterhalb von %programfiles% möglich. Das sind bspw. die Vorgaben bei einer automatischen Installation via MSI-Archiv.</string>
+      <string number="23">MySQL-Datenbankverzeichnis</string>
+      <string number="24">Die Datenbank wird im Basisverzeichnis standardmäßig unter "data" angelegt. Es ist jedoch auch möglich, das Verzeichnis zu verschieben oder eine Datenbank unter anderem Namen anzulegen.</string>
       <string number="25"></string>
+    </group>
+
+    <group lang="ar_JO">
+    </group>
+
+    <group lang="ru_RU">
     </group>
   </dictionary>
 
+  <comments>
+  </comments>
+
   <configuration>
     <!-- Proxy -->
-    <section name="proxy" icon="" stringnumber="3" context="global">
+    <section name="proxy" icon="" stringnumber="10" context="global">
       <entry name="use" type="boolean" default="false" context="global">
-        <text name="title" stringnumber="4" />
-        <text name="description" stringnumber="5" />
+        <text name="title"       stringnumber="11" />
+        <text name="description" stringnumber="12" />
       </entry>
       <entry name="host" type="string" condition="is(HOST)" default="" context="global">
-        <text name="title" stringnumber="6" />
-        <text name="description" stringnumber="7" />
+        <text name="title"       stringnumber="13" />
+        <text name="description" stringnumber="14" />
       </entry>
       <entry name="port" type="integer" condition="is(PORT)" default="" context="global">
-        <text name="title" stringnumber="8" />
-        <text name="description" stringnumber="9" />
+        <text name="title"       stringnumber="15" />
+        <text name="description" stringnumber="16" />
       </entry>
       <entry name="exceptions" type="string" condition="list(is(HOST)),size()<200" default="" context="global">
-        <text name="title" stringnumber="10" />
-        <text name="description" stringnumber="11" />
+        <text name="title"       stringnumber="17" />
+        <text name="description" stringnumber="18" />
+      </entry>
+    </section>
+    <!-- Language -->
+    <section name="language" icon="" stringnumber="19" context="global">
+    </section>
+    <!-- Paths -->
+    <section name="paths" icon="" stringnumber="20" context="global">
+      <entry name="mysql-base-dir" type="string" condition="" comment="Format: c:/xy or c:\\xy" default="C:/MySQL" context="global">
+        <text name="title"       stringnumber="21" />
+        <text name="description" stringnumber="22" />
+      </entry>
+      <entry name="mysql-data-dir" type="string" condition="" comment="Format: c:/xy or c:\\xy" default="C:/MySQL/data" context="global">
+        <text name="title"       stringnumber="23" />
+        <text name="description" stringnumber="24" />
       </entry>
     </section>
   </configuration>
 
   <properties>
-    <property name="dbus" value="false" />
-    <property name="embed" value="false" />
-    <property name="stable" value="false" />
+    <property name="dbus"     value="false" />
+    <property name="embed"    value="false" />
+    <property name="stable"   value="false" />
     <property name="database" value="false" />
   </properties>
 
   <setup>
-    <requires>base</requires>
+    <requires>
+      <package name="gettext" type="bin" minversion="" maxversion="current" />
+    </requires>
   </setup>
 
-  <features>
-    <todos>
-    </todos>
-    <changes>
-    </changes>
-  </features>
+  <compilation>
+    <requires>
+      <libraries>
+        <library name="gettext" minversion="" maxversion="current" />
+      </libraries>
+      <tools>
+        <tool name="strip" type="optional" />
+        <tool name="peflags" type="optional" />
+        <tool name="signtool" type="optional" />
+      </tools>
+    </requires>
+  </compilation>
 
-  <datastructure>
+  <todos>
+    <todo priority="normal" author="3" email="4"></todo>
+  </todos>
+
+  <changes>
+    <change date="2010-07-14" author="3" email="4">Project started.</change>
+    <change date="2010-07-29" author="3" email="4">Enhanced structure and contents of the application.xml file.</change>
+  </changes>
+
+  <datastructures>
     <table name="">
       
     </table>
-  </datastructure>
+  </datastructures>
 
   <databases>
+    <tables names="*"> <!-- "*" selects only this application's tables -->
+      <database name="mysql"  version="5.1.49" os="win32" checked="2010-07-29" engine="myisam" default="false" />
+      <database name="mysql"  version="5.1.49" os="win32" checked=""           engine="innodb" default="false" />
+      <database name="sqlite" version="3"      os="win32" checked="2010-07-29" engine=""       default="true" />
+    </tables>
   </databases>
 </application>
 
