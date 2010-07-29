@@ -1,11 +1,11 @@
 # $Id$
 
-TARGET    = process-list
+TARGET    = tree-register
 SOURCES   = *.cpp
 HEADERS   = *.h
 FORMS     = 
 QT       += 
-PACKAGES  = QT GETTEXT
+PACKAGES  = QT GETTEXT GIS
 #CONFIG   += console
 
 include(../../../common.pri)

@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 {
   OEG::Qt::Application app(argc, argv);
 
-  app.setApplicationName(_("Process List"));
+  app.setApplicationName(_("Tree Cadaster"));
   app.setOrganizationName(_("G.A.S.I."));
   app.setOrganizationDomain(_("open-egov.de"));
 

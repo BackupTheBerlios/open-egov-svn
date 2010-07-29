@@ -19,7 +19,6 @@
 #pragma once
 
 #include <OEG/Qt/MainWindow.h>
-#include <OEG/Qt/ProcessList.h>
 
 #include <QList>
 #include <QString>
@@ -27,9 +26,12 @@
 
 class QAction;
 class QLabel;
-class QTableWidget;
-class QTableWidgetItem;
+class QTabWidget;
 class QTimer;
+
+namespace OEG { namespace GIS {
+  class MapWidget;
+}}
 
 class MainWindow : public OEG::Qt::MainWindow
 {
@@ -46,21 +48,12 @@ class MainWindow : public OEG::Qt::MainWindow
     virtual void createToolProvider() {};
 
   public slots:
-    void action_reload();
-    void action_terminate_process();
-    void action_open_process_dialog();
-    void action_copy_details();
 
   protected:
     virtual void contextMenuEvent(QContextMenuEvent *event);
 
   protected:
-    OEG::Qt::ProcessList *m_processes;
-    QTableWidget         *m_table;
-    QTableWidgetItem     *m_last_item_clicked;                // Needed for ContextMenu/Copy.
-    QAction              *m_action_colorize;
-    QLabel               *m_number_of_processes;
-    QLabel               *m_current_time;
-    QTimer               *m_timer;
+    OEG::GIS::MapWidget  *m_map;
+    QTabWidget           *m_tabs;
 };
 
