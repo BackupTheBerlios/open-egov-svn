@@ -16,14 +16,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <OEG/Common.h>
 #include <OEG/GIS/MapWidget.h>
 
 #include <QKeySequence>
 #include <QList>
 #include <QLatin1String>
 
-using namespace OEG::Qt;
+using namespace OEG::GIS;
 using namespace Qt;
 
 MapWidget::MapWidget(QWidget *parent /*=0*/)

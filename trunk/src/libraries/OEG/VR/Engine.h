@@ -20,36 +20,27 @@
 
 #include <OEG/Common.h>
 
-#include <QWidget>
-#include <QList>
+#include <QObject>
 #include <QString>
+#include <QStringList>
+#include <QList>
 
-class QAction;
+#include <QDebug>
 
-namespace OEG { namespace GIS {
+namespace OEG { namespace VR {
 
-class MapWidget : public QWidget
+class Engine : public QObject
 {
   Q_OBJECT
 
-  enum Engine {
-    Custom,
-    GoogleMaps,
-    OpenStreetMap
-  };
-
   public:
-    MapWidget(QWidget *parent = 0);
-    ~MapWidget();
+    Engine(QObject *parent = 0);
+    virtual ~Engine();
 
   protected:
 
   protected:
-    Engine  m_engine;
-    float   m_box_left;
-    float   m_box_right;
-    float   m_box_top;
-    float   m_box_bottom;
+
 };
 
 }}

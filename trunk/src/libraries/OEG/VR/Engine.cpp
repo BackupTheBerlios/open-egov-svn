@@ -16,41 +16,51 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
+#include <OEG/VR/Engine.h>
 
-#include <OEG/Common.h>
+using namespace OEG::VR;
+using namespace Qt;
 
-#include <QWidget>
-#include <QList>
-#include <QString>
-
-class QAction;
-
-namespace OEG { namespace GIS {
-
-class MapWidget : public QWidget
+Engine::Engine(QObject *parent /*=0*/)
+ : QObject(parent)
 {
-  Q_OBJECT
+}
 
-  enum Engine {
-    Custom,
-    GoogleMaps,
-    OpenStreetMap
-  };
+Engine::~Engine()
+{
+}
 
-  public:
-    MapWidget(QWidget *parent = 0);
-    ~MapWidget();
+// Resets the environment. Clears all variables and stacked values.
 
-  protected:
+void Engine::clearEnvironment()
+{
+}
 
-  protected:
-    Engine  m_engine;
-    float   m_box_left;
-    float   m_box_right;
-    float   m_box_top;
-    float   m_box_bottom;
-};
+// Returns the result as QString.
 
-}}
+QString Engine::compute(const QString &eq)
+{
+  m_error_message = "";
+
+  
+
+  return 0;
+}
+
+// Returns 0 if no errors found. Else the position of the first error in the string.
+// Stores an error message.
+
+unsigned int Engine::parseEquation(const QString &eq)
+{
+  m_error_message = "";
+
+  
+
+  return 0;
+}
+
+QString Engine::errorMessage() const
+{
+  return m_error_message;
+}
 
