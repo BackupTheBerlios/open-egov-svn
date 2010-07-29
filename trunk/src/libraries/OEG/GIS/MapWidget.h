@@ -20,46 +20,36 @@
 
 #include <OEG/Common.h>
 
-#include <QColor>
-#include <QIcon>
-#include <QPainter>
-#include <QStyle>
-#include <QStyleOption>
-#include <QToolButton>
-#include <QVariantAnimation>
 #include <QWidget>
-
-#include <QObject>
+#include <QList>
 #include <QString>
 
-#include <QDebug>
+class QAction;
 
 namespace OEG { namespace Qt {
 
-class ToolProviderTab : public QObject
+class MapWidget : public QWidget
 {
   Q_OBJECT
 
+  enum Engine {
+    Custom,
+    GoogleMaps,
+    OpenStreetMap
+  };
+
   public:
-    ToolProviderTab(QObject *parent = 0);
-    ~ToolProviderTab();
-
-    QString text;
-    QString toolTip;
-    QString whatsThis;
-    QColor  selectedTextColor;
-    QColor  selectedBackgroundColor;
-    QColor  textColor;
-    QColor  backgroundColor;
-
-  protected:
-    
-
-  private:
-
+    MapWidget(QWidget *parent = 0);
+    ~MapWidget();
 
   protected:
 
+  protected:
+    Engine  m_engine;
+    float   m_box_left;
+    float   m_box_right;
+    float   m_box_top;
+    float   m_box_bottom;
 };
 
 }}

@@ -16,51 +16,28 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
-
 #include <OEG/Common.h>
+#include <OEG/GIS/MapWidget.h>
 
-#include <QColor>
-#include <QIcon>
-#include <QPainter>
-#include <QStyle>
-#include <QStyleOption>
-#include <QToolButton>
-#include <QVariantAnimation>
-#include <QWidget>
+#include <QKeySequence>
+#include <QList>
+#include <QLatin1String>
 
-#include <QObject>
-#include <QString>
+using namespace OEG::Qt;
+using namespace Qt;
 
-#include <QDebug>
-
-namespace OEG { namespace Qt {
-
-class ToolProviderTab : public QObject
+MapWidget::MapWidget(QWidget *parent /*=0*/)
+ : QWidget(parent)
 {
-  Q_OBJECT
+  m_engine     = OpenStreetMap;
+  m_box_left   = 0.0;
+  m_box_right  = 0.0;
+  m_box_top    = 0.0;
+  m_box_bottom = 0.0;
 
-  public:
-    ToolProviderTab(QObject *parent = 0);
-    ~ToolProviderTab();
+}
 
-    QString text;
-    QString toolTip;
-    QString whatsThis;
-    QColor  selectedTextColor;
-    QColor  selectedBackgroundColor;
-    QColor  textColor;
-    QColor  backgroundColor;
-
-  protected:
-    
-
-  private:
-
-
-  protected:
-
-};
-
-}}
+MapWidget::~MapWidget()
+{
+}
 
