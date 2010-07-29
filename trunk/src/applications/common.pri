@@ -43,6 +43,10 @@ contains(PACKAGES, CRYPT) {
   message(Adding support for OEG-Crypt ...)
   LIBSLINE += -loegCrypt1
 }
+contains(PACKAGES, GIS) {
+  message(Adding support for OEG-GIS ...)
+  LIBSLINE += -loegGIS1
+}
 contains(PACKAGES, MATH) {
   message(Adding support for OEG-Math ...)
   LIBSLINE += -loegMath1
