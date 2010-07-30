@@ -198,15 +198,30 @@ c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/qglobal.h:1613: warning
     <title>Data Storage</title>
     <section>
       <title>Overview</title>
-      <para>Documents may be stored into databases and XML files. This is configurable.</para>
+      <para>Documents may be stored into databases and files. This is configurable. As databases at least MySQL and SQLite are always supported. The Database Manager is able backup, mix, update or convert databases between the different engines (e.g. MySQL/Inno-DB and MySQL/MyISAM), or applications (MySQL, SQLite). It allows to upgrade from one data format to another (but not back to an older!). This allows you to work first with SQLite-Databases and later switch to a real database management system if you really need one.</para>
     </section>
 
     <section>
-      <title>XML Files</title>
-      Using a XML file allows the storage of documents in files. However, it's also possible
+      <title>MySQL</title>
+      <para></para>
+    </section>
+
+    <section>
+      <title>SQLite</title>
+      <para></para>
+    </section>
+
+    <section>
+      <title>XML Files for Documents</title>
+      <para>Application may store their data into XML based documents. file allows the storage of documents in files. However, it's also possible
       to store them as binary blobs in a database, but in this case consider to use a real database.
       The advantage of XML files is to possibility to use them as sources for other areas of application.
-      So you may generate derived data files using simply XSL scripts.</para>
+      So you may generate derived data files using simple XSL scripts.</para>
+    </section>
+
+    <section>
+      <title>Flat Files as Table Replacement</title>
+      <para>Flat files are configured and handled like databases. Typical applications are for storage purposes, e.g. in the document management system or special applications. Think of a tree cadaster, where the database contains the (textual) data in SQLite files and you will not place the big fotos of the trees into your small database. Then you are able to select the "table" and put the entries with random names into a directory.</para>
     </section>
   </chapter>
 
