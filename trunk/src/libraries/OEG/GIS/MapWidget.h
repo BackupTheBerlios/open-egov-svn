@@ -25,6 +25,8 @@
 #include <QString>
 
 class QAction;
+class QMouseEvent;
+class QPaintEvent;
 
 namespace OEG { namespace GIS {
 
@@ -32,20 +34,37 @@ class MapWidget : public QWidget
 {
   Q_OBJECT
 
-  enum Engine {
-    Custom,
-    GoogleMaps,
-    OpenStreetMap
-  };
+  public:
+    enum MapEngine {
+      OpenStreetMap,                             // Download from OpenStreetMap.
+      Google,                                    // Download from Google Maps.
+      Yahoo,                                     // Download from Yahoo.
+      DOPViewer,                                 // Use the DOP (Digitale Ortho Photos) Viewer.
+      LSAViewer,                                 // Use the Land-Sachsen-Anhalt-Viewer.
+      Custom                                     // Other services may be inserted.
+    };
+
+    enum LeftMouseMode {
+      Pan,                                       // Move map.
+      Drag,                                      // Select area.
+      Zoom,                                      // Zoom into map.
+      None                                       // Do nothing.
+    };
 
   public:
     MapWidget(QWidget *parent = 0);
     ~MapWidget();
 
   protected:
+    void paintEvent(QPaintEvent *event);
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
 
   protected:
-    Engine  m_engine;
+    MapEngine      m_engine;
+    LeftMouseMode  m_lmb_mode;
+
     float   m_box_left;
     float   m_box_right;
     float   m_box_top;

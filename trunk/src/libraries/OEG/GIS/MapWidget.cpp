@@ -21,6 +21,9 @@
 #include <QKeySequence>
 #include <QList>
 #include <QLatin1String>
+#include <QMouseEvent>
+#include <QPainter>
+#include <QPaintEvent>
 
 using namespace OEG::GIS;
 using namespace Qt;
@@ -29,6 +32,8 @@ MapWidget::MapWidget(QWidget *parent /*=0*/)
  : QWidget(parent)
 {
   m_engine     = OpenStreetMap;
+  m_lmb_mode   = None;
+
   m_box_left   = 0.0;
   m_box_right  = 0.0;
   m_box_top    = 0.0;
@@ -38,5 +43,31 @@ MapWidget::MapWidget(QWidget *parent /*=0*/)
 
 MapWidget::~MapWidget()
 {
+}
+
+void MapWidget::paintEvent(QPaintEvent *event)
+{
+  QWidget::paintEvent(event);
+
+  QPainter painter(this);
+
+}
+
+void MapWidget::mousePressEvent(QMouseEvent *event)
+{
+  QWidget::mousePressEvent(event);
+
+}
+
+void MapWidget::mouseReleaseEvent(QMouseEvent *event)
+{
+  QWidget::mouseReleaseEvent(event);
+
+}
+
+void MapWidget::mouseMoveEvent(QMouseEvent *event)
+{
+  QWidget::mouseMoveEvent(event);
+
 }
 
