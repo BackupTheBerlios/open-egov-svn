@@ -20,35 +20,34 @@
 
 #include <OEG/Common.h>
 
-#include <QWidget>
 #include <QString>
-#include <QLineEdit>
+#include <QTabWidget>
 #include <QDebug>
 
 class QToolButton;
-class QResizeEvent;
 
 namespace OEG { namespace Qt {
 
-// This line edit widget provides a clear text button.
-
-class LineEdit : public QLineEdit
+class TabWidget : public QTabWidget
 {
   Q_OBJECT
 
   public:
-    LineEdit(QWidget *parent = 0);
-	LineEdit(const QString &contents, QWidget *parent = 0);
-    ~LineEdit();
+    TabWidget(QWidget *parent = 0);
+    ~TabWidget();
+
+    void separateCloseTabButton(const QString &tooltip);
+
+  public slots:
+    void closeTab();
 
   protected:
-    void resizeEvent(QResizeEvent *event);
-
-  private slots:
-    void onTextChanged(const QString &text);
+    virtual void tabInserted(int index);
+    virtual void tabRemoved(int index);
+    virtual void tabLayoutChanged();
 
   private:
-    QToolButton *m_clear_button;
+    QToolButton *m_close_tab_button;
 };
 
 }}

@@ -1,4 +1,4 @@
-// $Id: LineEdit.cpp 196 2010-08-01 20:05:02Z gerrit-albrecht $
+// $Id$
 //
 // Open-eGovernment
 // Copyright (C) 2005-2010 by Gerrit M. Albrecht

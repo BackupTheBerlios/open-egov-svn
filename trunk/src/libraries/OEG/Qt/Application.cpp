@@ -18,18 +18,27 @@
 
 #include <OEG/Qt/Application.h>
 
+#include <QMenu>
 #include <QProcess>
+#include <QSystemTrayIcon>
+
+#include <stdlib.h>
+#include <time.h>
 
 using namespace OEG::Qt;
 using namespace Qt;
 
 Application::Application(int &argc, char *argv[])
- : QApplication(argc, argv)
+ : QApplication(argc, argv), m_tray_icon(0)
 {
+  srand(time(0));
+
+  m_basename = "";
 }
 
 Application::~Application()
 {
+  removeSystemTrayIcon();
 }
 
 void Application::runComponent(const QString &cmd)
@@ -43,5 +52,75 @@ void Application::runComponent(const QString &cmd, const QStringList &arguments)
 
   process.setWorkingDirectory(QCoreApplication::applicationDirPath());
   process.startDetached(cmd, arguments);
+}
+
+void Application::setApplicationVersion(const QString &version)
+{
+  m_application_version = version;
+}
+
+QString Application::applicationVersion() const
+{
+  return m_application_version;
+}
+
+void Application::setApplicationBuildData(const char *date, const char *time)
+{
+  m_application_build_date = date;
+  m_application_build_time = time;
+}
+
+QString Application::applicationBuildDate() const
+{
+  return m_application_build_date;
+}
+
+QString Application::applicationBuildTime() const
+{
+  return m_application_build_time;
+}
+
+void Application::setHomepage(const QString &url)
+{
+  m_homepage = url;
+}
+
+void Application::setBaseName(const QString &basename)
+{
+  m_basename = basename;
+}
+
+QString Application::baseName() const
+{
+  if (m_basename.isEmpty())
+    return applicationName().toLower();
+
+  return m_basename;
+}
+
+QString Application::homepage() const
+{
+  return m_homepage;
+}
+
+void Application::addSystemTrayIcon(const QIcon &icon, QMenu *menu, const QString &title)
+{
+  removeSystemTrayIcon();
+
+  m_tray_icon = new QSystemTrayIcon(this);
+  m_tray_icon->setIcon(icon);
+  m_tray_icon->setToolTip(title);
+  m_tray_icon->setContextMenu(menu);
+  m_tray_icon->show();
+}
+
+void Application::removeSystemTrayIcon()
+{
+  if (m_tray_icon) {
+    if (m_tray_icon->isVisible())
+      m_tray_icon->hide();
+
+    delete m_tray_icon; m_tray_icon = 0;
+  }
 }
 

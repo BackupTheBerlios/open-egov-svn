@@ -33,7 +33,7 @@ using namespace Qt;
 MainWindow::MainWindow(QWidget *parent /*=0*/, ::Qt::WindowFlags flags /*=0*/)
  : QMainWindow(parent, flags), m_tool_provider(0)
 {
-  setWindowTitle(qApp->applicationName());
+  setWindowTitle(QCoreApplication::applicationName());
 
   resize(400, 300);
 }

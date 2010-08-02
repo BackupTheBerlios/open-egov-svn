@@ -21,10 +21,13 @@
 #include <OEG/Common.h>
 
 #include <QApplication>
+#include <QIcon>
 #include <QString>
 #include <QStringList>
-
 #include <QDebug>
+
+class QMenu;
+class QSystemTrayIcon;
 
 namespace OEG { namespace Qt {
 
@@ -33,17 +36,39 @@ class Application : public QApplication
   Q_OBJECT
 
   public:
+    enum DirectoryType { Temp, User, Common, Program };
+    enum FileType { Icon, Database, Image, Text, Plugin, Unknown };
+
+  public:
     Application(int &argc, char *argv[]);
     virtual ~Application();
 
     static void runComponent(const QString &cmd);
     static void runComponent(const QString &cmd, const QStringList &arguments);
 
+    void addSystemTrayIcon(const QIcon &icon, QMenu *menu, const QString &title);
+    void removeSystemTrayIcon();
+
+    void setApplicationVersion(const QString &version);
+    QString applicationVersion() const;
+
+    void setApplicationBuildData(const char *date, const char *time);
+    QString applicationBuildDate() const;
+    QString applicationBuildTime() const;
+
+    void setHomepage(const QString &url);
+    QString homepage() const;
+
+    void setBaseName(const QString &basename);
+    QString baseName() const;
+
   protected:
-
-
-  protected:
-
+    QSystemTrayIcon *m_tray_icon;
+    QString          m_application_version;
+    QString          m_application_build_date;
+    QString          m_application_build_time;
+    QString          m_homepage;
+    QString          m_basename;
 };
 
 }}

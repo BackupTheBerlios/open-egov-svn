@@ -401,7 +401,7 @@ bool ProcessList::killProcess(int processId)
     return false;
   }
 
-  QMessageBox::information(0, QString("Titel"), QString("Text %1").arg(processId));
+  //QMessageBox::information(0, QString("Titel"), QString("Text %1").arg(processId));
 
   //DWORD code = 0;
   //if (GetExitCodeProcess(handle, &code) == 0) {
