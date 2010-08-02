@@ -1,8 +1,6 @@
 // $Id$
 
-#include "MainWindow.h"
-
-#include <OEG/Qt/ToolProvider.h>
+#include <OEG/Qt/TabWidget.h>
 
 #include <QMenuBar>
 #include <QToolBar>
@@ -13,6 +11,7 @@
 #include <QAction>
 #include <QIcon>
 
+#include "MainWindow.h"
 #include "Splitter.h"
 
 MainWindow::MainWindow(QWidget *parent /*=0*/)
@@ -24,19 +23,26 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
 
   m_splitter = new Splitter(this);
   m_splitter->setOrientation(Qt::Vertical);
+  m_tabs = new OEG::Qt::TabWidget(this);
+  m_tabs->addTab(new QWidget(this), _("No active game"));
+  m_tabs->setTabsClosable(false);
+  m_tabs->separateCloseTabButton(_("Close current tab."));
+  m_splitter->addWidget(m_tabs);
   QLabel *label;
   label = new QLabel(this);
   label->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-  label->setText("first line\nsecond line");
-  label->setAlignment(Qt::AlignBottom | Qt::AlignRight);
-  m_splitter->addWidget(label);
-  label = new QLabel(this);
-  label->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-  label->setText("first line\nsecond line");
+  label->setText("input are\n(TODO)");
   label->setAlignment(Qt::AlignBottom | Qt::AlignRight);
   m_splitter->addWidget(label);
   m_splitter->setHandleWidth(20);
   setCentralWidget(m_splitter);
+}
+
+MainWindow::~MainWindow()
+{
+  if (m_tabs) {
+    delete m_tabs; m_tabs = 0;
+  }
 }
 
 void MainWindow::createActions()

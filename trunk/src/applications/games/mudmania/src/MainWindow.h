@@ -3,12 +3,12 @@
 #pragma once
 
 #include <OEG/Qt/MainWindow.h>
+#include <OEG/Qt/TabWidget.h>
 
 #include <QString.h>
 #include <QWidget.h>
 #include <QList.h>
 
-class OEG::Qt::ToolProvider;
 class Splitter;
 
 class MainWindow : public OEG::Qt::MainWindow
@@ -19,6 +19,7 @@ class MainWindow : public OEG::Qt::MainWindow
 
   public:
     MainWindow(QWidget *parent = 0);
+    ~MainWindow();
 
     void createActions();
     void createMenus();
@@ -30,7 +31,8 @@ class MainWindow : public OEG::Qt::MainWindow
     QString title() const;
 
   protected:
-    QString   m_title;
-    Splitter *m_splitter;
+    OEG::Qt::TabWidget *m_tabs;
+    QString             m_title;
+    Splitter           *m_splitter;
 };
 
