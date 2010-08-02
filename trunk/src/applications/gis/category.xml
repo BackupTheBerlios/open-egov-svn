@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<category base="games">
+  <strings lang="en_US">
+    <string name="title">GIS</string>
+    <string name="description">Applications using Geographic Information Systems.</string>
+  </strings>
+
+  <strings lang="de_DE">
+    <string name="title">GIS</string>
+    <string name="description">Anwendungen, die Geographische Informationssysteme nutzen.</string>
+  </strings>
+</application>
+
