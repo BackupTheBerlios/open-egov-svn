@@ -1,4 +1,4 @@
-// $Id$
+// $Id: LineEdit.h 196 2010-08-01 20:05:02Z gerrit-albrecht $
 //
 // Open-eGovernment
 // Copyright (C) 2005-2010 by Gerrit M. Albrecht
@@ -20,23 +20,17 @@
 
 #include <OEG/Common.h>
 
-#include <QColor>
-#include <QIcon>
-#include <QPainter>
-#include <QStyle>
-#include <QStyleOption>
+#include <QWidget>
+#include <QString>
 #include <QLineEdit>
-
-#include <QList>
-
 #include <QDebug>
+
+class QToolButton;
+class QResizeEvent;
 
 namespace OEG { namespace Qt {
 
-// The ToolProvider class implements a widget which combines the features of
-// QMenu and QToolBar without being a Microsoft Ribbon. It looks like an improved QTabBar,
-// but it isn't one, because it's nearly impossible to improve the original QTabBar class.
-// Needed features: multi-selection, background colors, a bigger tab spacing, ...
+// This line edit widget provides a clear text button.
 
 class LineEdit : public QLineEdit
 {
@@ -44,14 +38,17 @@ class LineEdit : public QLineEdit
 
   public:
     LineEdit(QWidget *parent = 0);
-	  LineEdit(const QString &contents, QWidget *parent = 0);
+	LineEdit(const QString &contents, QWidget *parent = 0);
     ~LineEdit();
 
   protected:
+    void resizeEvent(QResizeEvent *event);
 
+  private slots:
+    void onTextChanged(const QString &text);
 
-  protected:
-
+  private:
+    QToolButton *m_clear_button;
 };
 
 }}

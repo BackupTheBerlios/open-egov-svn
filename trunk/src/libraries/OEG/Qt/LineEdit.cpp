@@ -1,4 +1,4 @@
-// $Id$
+// $Id: LineEdit.cpp 196 2010-08-01 20:05:02Z gerrit-albrecht $
 //
 // Open-eGovernment
 // Copyright (C) 2005-2010 by Gerrit M. Albrecht
@@ -18,20 +18,51 @@
 
 #include <OEG/Qt/LineEdit.h>
 
+#include <QToolButton>
+#include <QIcon>
+#include <QStyle>
+#include <QStyleOption>
+#include <QColor>
+#include <QPainter>
+
 using namespace OEG::Qt;
 using namespace Qt;
 
 LineEdit::LineEdit(QWidget *parent /*=0*/)
- : QLineEdit(parent)
+ : QLineEdit("", parent)
 {
 }
 
 LineEdit::LineEdit(const QString &contents, QWidget *parent /*=0*/)
  : QLineEdit(contents, parent)
 {
+  m_clear_button = new QToolButton(this);
+  if (! m_clear_button)
+    return;
+  m_clear_button->setCursor(ArrowCursor);
+  m_clear_button->setStyleSheet("QToolButton { border: none; padding: 0px; }");
+  m_clear_button->setToolTip(_("Clear the text."));
+  m_clear_button->hide();
+
+  connect(m_clear_button, SIGNAL(clicked()),
+          this,           SLOT(clear()));
+  connect(this,           SIGNAL(textChanged(const QString &)),
+          this,           SLOT(onTextChanged(const QString &)));
 }
 
 LineEdit::~LineEdit()
 {
+  if (m_clear_button) {
+    delete m_clear_button; m_clear_button = 0;
+  }
+}
+
+void LineEdit::resizeEvent(QResizeEvent *event)
+{
+}
+
+void LineEdit::onTextChanged(const QString &text)
+{
+  m_clear_button->setVisible(! text.isEmpty());
 }
 
