@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<mapprovider>
+  <meta>
+    <text name="provider" stringnumber="1" />
+    <text name="homepage" stringnumber="2" />
+    <text name="author"   stringnumber="3" />
+    <text name="email"    stringnumber="4" />
+  </meta>
+
+  <dictionary>
+    <!-- solely required group, other groups overlay these values -->
+    <group lang="en_US">
+      <string number="1">Google Maps</string>
+      <string number="2">http://maps.google.com/</string>
+      <string number="3">Gerrit M. Albrecht</string>
+      <string number="4">mail@gerrit-albrecht.de</string>
+    </group>
+
+    <group lang="de_DE">
+      <string number="1">Google Maps</string>
+      <string number="2">http://maps.google.de/</string>
+      <string number="3">Gerrit M. Albrecht</string>
+      <string number="4">mail@gerrit-albrecht.de</string>
+    </group>
+  </dictionary>
+
+  <comments>
+    <comment author="3" date="2010-08-02" private="no">
+http://code.google.com/intl/de-DE/apis/maps/documentation/staticmaps/
+http://code.google.com/intl/de-DE/apis/maps/documentation/javascript/
+Neuer Schlüssel: http://code.google.com/apis/maps/
+
+Google Maps - Terrain (doesnt work at all zoomlevels)
+http://khm.google.com/vt/lbw/lyrs=p&x=X&y=Y&z=Z
+
+Google Maps - Terrain, Streets and Water (doesnt work at all zoomlevels)
+http://mt1.google.com/vt/lyrs=p&x=X&y=Y&z=Z
+
+Google Maps (Street, alternative) - BROKEN?
+http://mt.google.com/mt?v=ap.999&x=X&y=Y&zoom=Z
+    </comment>
+  </comments>
+
+  <maps>
+    <map id="1" title="satellite" type="picture" comment="without text, two servers: 0 and 1">
+      <examples>
+http://khm1.google.de/kh/v=65&x=139547&s=&y=86425&z=18&s=Galileo
+http://khm1.google.de/kh/v=65&x=8723&y=5403&z=14&s=Gali
+http://khm1.google.de/kh/v=55&x=34889&s=&y=21604&z=16
+http://khm0.google.de/kh/v=65&x=139550&s=&y=86424&z=18&s=Ga
+      </examples>
+      <url>http://khm1.google.de/kh/v=65&x=%1&y=%2&z=%3</url>
+    </map>
+
+    <map id="2" title="map" type="picture" comment="lyrs=m@130 is optional">
+      <examples>
+http://mt0.google.com/vt/lyrs=m@130&hl=de&x=34892&s=&y=21607&z=16
+http://mt0.google.com/vt/x=34892&y=21607&z=16
+http://mt0.google.com/vt/x=139548&y=86427&z=18
+http://mt0.google.com/vt/x=139547&y=86425&z=18 - Uniplatz
+      </examples>
+      <url>http://mt0.google.com/vt/x=%1&y=%2&z=%3</url>
+    </map>
+
+    <map id="3" title="map" type="layer" comment="transparent background, for layered hybrid maps">
+      <examples>
+http://mt0.google.com/vt/lyrs=h@130&hl=de&x=34890&y=21606&z=16
+      </examples>
+      <url>http://mt0.google.com/vt/lyrs=h@130&x=%1&y=%2&z=%3</url>
+    </map>
+
+    <map id="4" title="hybrid" type="picture" comment="picture with text">
+      <examples>
+http://mt0.google.com/vt/lyrs=y&x=34892&y=21607&z=16
+      </examples>
+      <url>http://mt0.google.com/vt/lyrs=y&x=%1&y=%2&z=%3</url>
+    </map>
+
+    <map id="5" title="photos" type="layer" comment="user-contributed photos">
+      <examples>
+http://mt3.google.com/mapslt?lyrs=lmc:photos_outside_streetview_76&x=34892&y=21607&z=16&w=256&h=256&gl=de&hl=de
+      </examples>
+      <url>http://mt0.google.com/mapslt?lyrs=lmc:photos_outside_streetview_76&x=%1&y=%2&z=%3</url>
+    </map>
+
+    <map id="6" title="static-map" type="picture" comment="">
+      <examples>
+http://maps.google.com/staticmap?center=52.130956,11.636701&zoom=12&size=400x400&sensor=false
+      </examples>
+      <url>http://maps.google.com/staticmap?center=%a,%o&zoom=%3&size=%wx%h&sensor=false</url>
+    </map>
+  </maps>
+</mapprovider>
+

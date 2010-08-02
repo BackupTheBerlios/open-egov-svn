@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<mapprovider>
+  <meta>
+    <text name="provider" stringnumber="1" />
+    <text name="homepage" stringnumber="2" />
+    <text name="author"   stringnumber="3" />
+    <text name="email"    stringnumber="4" />
+  </meta>
+
+  <dictionary>
+    <!-- solely required group, other groups overlay these values -->
+    <group lang="en_US">
+      <string number="1"></string>
+      <string number="2">http://www.lvermgeo.sachsen-anhalt.de/de/geoservice/viewer/main.htm?</string>
+      <string number="3">Gerrit M. Albrecht</string>
+      <string number="4">mail@gerrit-albrecht.de</string>
+    </group>
+
+    <group lang="de_DE">
+      <string number="1">Sachsen-Anhalt-Viewer</string>
+      <string number="2">http://www.lvermgeo.sachsen-anhalt.de/de/geoservice/viewer/main.htm?</string>
+      <string number="3">Gerrit M. Albrecht</string>
+      <string number="4">mail@gerrit-albrecht.de</string>
+    </group>
+  </dictionary>
+
+  <comments>
+    <comment author="3" date="2010-08-02" private="no">
+http://www.lvermgeo.sachsen-anhalt.de/de/geoservice/viewer/htmlviewer/htmlviewer.htm?powerProxyRequestURL=/navigator/basicviewer.jsp&MAP_NAME=map_one&BBOX=4433563.644859813%2C5827615.495327103%2C4511741.214953272%2C5887365.495327103&SRS=EPSG%3A31468
+
+http://www.lvermgeo.sachsen-anhalt.de/de/geoservice/viewer/htmlviewer/htmlviewer.htm?powerProxyRequestURL=/navigator/basicviewer.jsp&MAP_NAME=map_one&BBOX=4407597.523364486%2C5807791.897196262%2C4485775.093457945%2C5867541.897196262&SRS=EPSG%3A31468
+
+
+von geotask.ch:
+Landesamt für Vermessung und Geoinformation Sachsen-Anhalt (LVermGeo)
+
+Konzeption, Lieferung und Implementierung des Geoportals Sachsen-Anhalt mit Teilkomponenten für die Geodatenverwaltung (Geodata Warehouse), Metadaten- und Geoservice-Verwaltung. Die gelieferten Kartenviewer und die Geodatensuche sind in das Portal des Landesamtes integriert. Landesbehörden können die Geobasisdaten des LVermGeo über OGC-Schnittstellen beziehen.
+
+
+http://www.opengeospatial.org/
+http://www.opengeospatial.org/standards
+http://de.wikipedia.org/wiki/Open_Geospatial_Consortium
+    </comment>
+  </comments>
+
+  <maps>
+    <map id="1" title="satellite" type="picture" comment="">
+      <examples>
+      </examples>
+      <url></url>
+    </map>
+
+    <map id="2" title="map" type="picture" comment="">
+      <examples>
+      </examples>
+      <url></url>
+    </map>
+
+    <map id="3" title="hybrid" type="picture" comment="">
+      <examples>
+      </examples>
+      <url></url>
+    </map>
+  </maps>
+</mapprovider>
+
