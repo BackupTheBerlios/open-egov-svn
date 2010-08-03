@@ -1,6 +1,6 @@
 // $Id$
 //
-// Open-eGovernment
+// Open eGovernment
 // Copyright (C) 2005-2010 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
@@ -104,7 +104,7 @@ void MainWindow::createActions()
 
   OEG::Qt::MainWindow::createActions();
 
-  a = standardAction("reload");
+  a = standardAction(Reload);
   if (a) {
     
     connect(a, SIGNAL(triggered()), this, SLOT(action_reload()));
@@ -127,33 +127,33 @@ void MainWindow::createActions()
 void MainWindow::createMenus()
 {
   QMenu *fileMenu = menuBar()->addMenu(_("&File"));
-  fileMenu->addAction(standardAction("reload"));
+  fileMenu->addAction(standardAction(Reload));
   fileMenu->addSeparator();
-  fileMenu->addAction(standardAction("exit"));
+  fileMenu->addAction(standardAction(Exit));
+
+  addHelpMenu();
 }
 
 void MainWindow::createToolBars()
 {
   QToolBar *toolbar = addToolBar(_("File"));
-  toolbar->addAction(standardAction("exit"));
-  toolbar->addAction(standardAction("reload"));
+  toolbar->addAction(standardAction(Exit));
+  toolbar->addAction(standardAction(Reload));
 }
 
 void MainWindow::createStatusBar()
 {
-  QStatusBar *sb = statusBar();
-
   m_number_of_processes = new QLabel(" 000 ");
   m_number_of_processes->setMinimumSize(m_number_of_processes->sizeHint());
   m_number_of_processes->setAlignment(Qt::AlignCenter);
   m_number_of_processes->setToolTip(_("The number of processes."));
-  sb->addPermanentWidget(m_number_of_processes);
+  statusBar()->addPermanentWidget(m_number_of_processes);
 
   m_current_time = new QLabel(" 00:00:00 ");
   m_current_time->setMinimumSize(m_current_time->sizeHint());
   m_current_time->setAlignment(Qt::AlignCenter);
   m_current_time->setToolTip(_("The current time."));
-  sb->addPermanentWidget(m_current_time);
+  statusBar()->addPermanentWidget(m_current_time);
 
   OEG::Qt::MainWindow::createStatusBar();
 }
@@ -168,7 +168,7 @@ void MainWindow::action_reload()
   m_number_of_processes->setText(QString::number(numP));
   m_current_time->setText(QTime::currentTime().toString("hh:mm:ss"));
 
-  QTableWidgetItem *item;
+  QTableWidgetItem     *item;
   OEG::Qt::ProcessInfo *pi;
   OEG::Qt::ModuleInfo  *mi;
   OEG::Qt::ThreadInfo  *ti;
@@ -335,7 +335,7 @@ void MainWindow::contextMenuEvent(QContextMenuEvent *event)
   menu->addSeparator();
   menu->addAction("&Copy",                  this, SLOT(action_copy_details()),      QKeySequence(_("Ctrl+C")));
 
-  menu->exec(event->globalPos()); //QCursor::pos());
+  menu->exec(event->globalPos());
   delete menu; menu = 0;
 
   if (timer_was_active)
