@@ -48,11 +48,11 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
   m_map = new OEG::GIS::MapWidget(this);
   if (! m_map)
     return;
-
-  setCentralWidget(m_map);
-
+  connect(m_map, SIGNAL(coordinatesAtMouse(double, double)),
+          this,  SLOT(receiveCoordinatesAtMouse(double, double)));
   m_map->setZoom(11);
   m_map->setArea(11.389, 52.243, 11.877, 52.033);
+  setCentralWidget(m_map);
 }
 
 MainWindow::~MainWindow()
@@ -68,7 +68,7 @@ void MainWindow::createActions()
 
   OEG::Qt::MainWindow::createActions();
 
-  a = standardAction("zoom_in");
+  a = standardAction(ZoomIn);
   if (a) {
     
     connect(a, SIGNAL(triggered()), this, SLOT(action_zoom_in()));
@@ -90,9 +90,21 @@ void MainWindow::createActions()
 
 void MainWindow::createMenus()
 {
-  QMenu *fileMenu = menuBar()->addMenu(_("&File"));
-  //fileMenu->addSeparator();
-  fileMenu->addAction(standardAction("exit"));
+  QMenu *menu;
+
+  menu = menuBar()->addMenu(_("&File"));
+  menu->addSeparator();
+  menu->addAction(standardAction(Exit));
+
+  menu = menuBar()->addMenu(_("&Map"));
+  menu->addAction(standardAction(ZoomNormal));
+  menu->addAction(standardAction(ZoomIn));
+  menu->addAction(standardAction(ZoomOut));
+  menu->addSeparator();
+  //menu->addAction(standardAction("engine_google"));
+  //menu->addAction(standardAction("engine_osm"));
+
+  addHelpMenu();
 }
 
 void MainWindow::createToolBars()
@@ -101,32 +113,23 @@ void MainWindow::createToolBars()
   QToolBar *t;
 
   t = addToolBar(_("File"));
-  a = standardAction("exit");
-  a->setShortcuts(QKeySequence::Quit);
-  t->addAction(a);
-
-  //t->addAction(standardAction("reload"));
+  t->addAction(standardAction(Exit));
 }
 
 void MainWindow::createStatusBar()
 {
-#if 0
-  QStatusBar *sb = this->statusBar();
-
-  m_number_of_processes = new QLabel(" 000 ");
-  m_number_of_processes->setMinimumSize(m_number_of_processes->sizeHint());
-  m_number_of_processes->setAlignment(Qt::AlignCenter);
-  m_number_of_processes->setToolTip(_("The number of processes."));
-  sb->addPermanentWidget(m_number_of_processes);
-
-  m_current_time = new QLabel(" 00:00:00 ");
-  m_current_time->setMinimumSize(m_current_time->sizeHint());
-  m_current_time->setAlignment(Qt::AlignCenter);
-  m_current_time->setToolTip(_("The current time."));
-  sb->addPermanentWidget(m_current_time);
-#endif
+  m_coordinates = new QLabel(" 00.0000, 00.0000 ");
+  m_coordinates->setMinimumSize(m_coordinates->sizeHint());
+  m_coordinates->setAlignment(Qt::AlignCenter);
+  m_coordinates->setToolTip(_("Current coordinates."));
+  statusBar()->addPermanentWidget(m_coordinates);
 
   OEG::Qt::MainWindow::createStatusBar();
+}
+
+void MainWindow::receiveCoordinatesAtMouse(double x, double y)
+{
+  m_coordinates->setText(QString(_("%1 , %2")).arg(x).arg(y));
 }
 
 void MainWindow::contextMenuEvent(QContextMenuEvent *event)

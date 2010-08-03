@@ -48,11 +48,13 @@ class MainWindow : public OEG::Qt::MainWindow
     virtual void createToolProvider() {};
 
   public slots:
+    void receiveCoordinatesAtMouse(double x, double y);
 
   protected:
     virtual void contextMenuEvent(QContextMenuEvent *event);
 
   protected:
     OEG::GIS::MapWidget *m_map;
+    QLabel              *m_coordinates;
 };
 
