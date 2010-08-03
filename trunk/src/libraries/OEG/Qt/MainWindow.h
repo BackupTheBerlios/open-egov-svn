@@ -34,42 +34,50 @@ class MainWindow : public QMainWindow
 {
   Q_OBJECT
 
-  enum StandardAction {
-    AboutApp,
-    AboutQt,
-    Close,
-    Copy,
-    Cut,
-    Delete,
-    Exit,
-    HelpContents,
-    HelpIndex,
-    HelpSearch,
-    New,
-    Open,
-    Paste,
-    Plugins,
-    Preferences,
-    PreferencesColors,
-    PreferencesCommon,
-    PreferencesFonts,
-    PreferencesShortcuts,
-    Print,
-    PrintPreview,
-    PrintSettings,
-    Redo,
-    Reload,
-    Save,
-    SaveAs,
-    SelectAll,
-    Undo
-  };
+  public:
+    enum StandardAction {
+      AboutApp,
+      AboutQt,
+      Close,
+      Copy,
+      Cut,
+      Delete,
+      Exit,
+      GoToHomepage,
+      HelpContents,
+      HelpIndex,
+      HelpSearch,
+      HelpForum,
+      New,
+      Open,
+      Paste,
+      Plugins,
+      Preferences,
+      PreferencesColors,
+      PreferencesCommon,
+      PreferencesFonts,
+      PreferencesShortcuts,
+      Print,
+      PrintPreview,
+      PrintSettings,
+      Redo,
+      Reload,
+      ReportBug,
+      Save,
+      SaveAs,
+      SelectAll,
+      Undo,
+      ZoomFitWidth,
+      ZoomFitWindow,
+      ZoomIn,
+      ZoomOut,
+      ZoomNormal
+    };
 
   public:
     MainWindow(QWidget *parent = 0, ::Qt::WindowFlags flags = 0);
     virtual ~MainWindow();
 
-    QAction *standardAction(const QString &baseName);
     QAction *standardAction(const StandardAction &action);
 
   protected:
@@ -87,6 +95,8 @@ class MainWindow : public QMainWindow
     void addHelpMenu();
 
   private:
+    QAction *createStandardAction(const StandardAction &action, const QString &baseName);
+    QAction *findStandardAction(const QString &baseName);         // TODO: avoid string search, store enum value.
     QString standardActionName(const StandardAction &action);
 
   protected:
