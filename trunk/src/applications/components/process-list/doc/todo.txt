@@ -10,7 +10,9 @@ store such data within the ProcessInfo, but currently it is not, because
 pointers to the ...Info classes are returned everywhere while working with
 the data. Storing and deleting original data needs to be rewritten.
 
-Updating is slow.
+Updating is slow. Maybe a background worker thread would do it.
 
-Windows 7 is missing some path names of the executables. Why?
+Updating existing entries has lower priority or is maybe unneeded.
+
+Windows 7 is missing a lot of path names of the executables. Why?
 
