@@ -87,7 +87,7 @@ void MainWindow::createToolBars()
 void MainWindow::createToolProvider()
 {
   m_tool_provider = new ToolProvider(this);
-  m_tool_provider->show();
+  m_tool_provider->hide();
 
 }
 
