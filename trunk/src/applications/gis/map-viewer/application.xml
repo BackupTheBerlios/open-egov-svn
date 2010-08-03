@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<application category="components" base="settings">
+  <head>
+    <text name="title"       stringnumber="1" />
+    <text name="description" stringnumber="2" />
+    <text name="author"      stringnumber="3" />
+    <text name="email"       stringnumber="4" />
+  </head>
+
+  <dictionary>
+    <!-- solely required group, other groups overlay these values -->
+    <group lang="en_US">
+      <string number="1">Map Viewer</string>
+      <string number="2">Visualizes GIS data using different data providers.</string>
+      <string number="3">Gerrit M. Albrecht</string>
+      <string number="4">mail@gerrit-albrecht.de</string>
+    </group>
+
+    <group lang="de_DE">
+      <string number="1">Karten-Anzeiger</string>
+      <string number="2">Stellt GIS-Daten von verschiedenen Anbietern grafisch dar.</string>
+      <string number="3">Gerrit M. Albrecht</string>
+      <string number="4">mail@gerrit-albrecht.de</string>
+    </group>
+  </dictionary>
+
+  <comments>
+  </comments>
+
+  <configuration>
+  </configuration>
+
+  <properties>
+    <property name="dbus"     value="false" />
+    <property name="embed"    value="false" />
+    <property name="stable"   value="false" />
+    <property name="database" value="false" />
+  </properties>
+
+  <setup>
+    <requires>
+      <package name="gettext" type="bin" minversion="" maxversion="current" />
+    </requires>
+  </setup>
+
+  <compilation>
+    <requires>
+      <libraries>
+        <library name="gettext" minversion="" maxversion="current" />
+      </libraries>
+      <tools>
+        <tool name="strip" type="optional" />
+        <tool name="peflags" type="optional" />
+        <tool name="signtool" type="optional" />
+      </tools>
+    </requires>
+  </compilation>
+
+  <todos>
+  </todos>
+
+  <changes>
+    <change date="2010-08-02" author="3" email="4">Project started.</change>
+  </changes>
+
+  <datastructures>
+  </datastructures>
+
+  <databases>
+  </databases>
+</application>
+
