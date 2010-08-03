@@ -16,8 +16,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include "MainWindow.h"
-
 #include <OEG/GIS/MapWidget.h>
 
 #include <QAction>
@@ -38,6 +36,8 @@
 #include <QToolBar>
 #include <QIcon>
 
+#include "MainWindow.h"
+
 MainWindow::MainWindow(QWidget *parent /*=0*/)
  : OEG::Qt::MainWindow(parent)
 {
@@ -48,12 +48,16 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
   m_tabs = new QTabWidget(this);
   m_tabs->addTab(new QLabel("Last Changes"), _("&History"));
   m_map = new OEG::GIS::MapWidget(this);
+  if (! m_map)
+    return;
   m_tabs->addTab(m_map, _("&Map"));
   m_tabs->addTab(new QLabel("Reports"), _("&Reports"));
   m_tabs->setCurrentIndex(0);  // better use prefs.
 
   setCentralWidget(m_tabs);
 
+  m_map->setZoom(11);
+  m_map->setArea(11.389, 52.243, 11.877, 52.033);
 }
 
 MainWindow::~MainWindow()
@@ -69,7 +73,7 @@ void MainWindow::createActions()
 
   OEG::Qt::MainWindow::createActions();
 
-  a = standardAction("zoom_in");
+  a = standardAction(ZoomIn);
   if (a) {
     
     connect(a, SIGNAL(triggered()), this, SLOT(action_zoom_in()));
@@ -91,9 +95,11 @@ void MainWindow::createActions()
 
 void MainWindow::createMenus()
 {
-  QMenu *fileMenu = menuBar()->addMenu(_("&File"));
-  //fileMenu->addSeparator();
-  fileMenu->addAction(standardAction("exit"));
+  QMenu *menu = menuBar()->addMenu(_("&File"));
+  //menu->addSeparator();
+  menu->addAction(standardAction(Exit));
+
+  addHelpMenu();
 }
 
 void MainWindow::createToolBars()
@@ -102,7 +108,7 @@ void MainWindow::createToolBars()
   QToolBar *t;
 
   t = addToolBar(_("File"));
-  a = standardAction("exit");
+  a = standardAction(Exit);
   a->setShortcuts(QKeySequence::Quit);
   t->addAction(a);
 
@@ -111,21 +117,11 @@ void MainWindow::createToolBars()
 
 void MainWindow::createStatusBar()
 {
-#if 0
-  QStatusBar *sb = this->statusBar();
-
-  m_number_of_processes = new QLabel(" 000 ");
-  m_number_of_processes->setMinimumSize(m_number_of_processes->sizeHint());
-  m_number_of_processes->setAlignment(Qt::AlignCenter);
-  m_number_of_processes->setToolTip(_("The number of processes."));
-  sb->addPermanentWidget(m_number_of_processes);
-
-  m_current_time = new QLabel(" 00:00:00 ");
-  m_current_time->setMinimumSize(m_current_time->sizeHint());
-  m_current_time->setAlignment(Qt::AlignCenter);
-  m_current_time->setToolTip(_("The current time."));
-  sb->addPermanentWidget(m_current_time);
-#endif
+  m_number_of_trees = new QLabel(" 000.000 ");
+  m_number_of_trees->setMinimumSize(m_number_of_trees->sizeHint());
+  m_number_of_trees->setAlignment(Qt::AlignCenter);
+  m_number_of_trees->setToolTip(_("The number of trees in the database."));
+  statusBar()->addPermanentWidget(m_number_of_trees);
 
   OEG::Qt::MainWindow::createStatusBar();
 }

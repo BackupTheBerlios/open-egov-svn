@@ -1,10 +1,10 @@
 # $Id$
 
-TARGET    = tree-register
+TARGET    = tree-cadaster
 SOURCES   = *.cpp
 HEADERS   = *.h
 FORMS     = 
-QT       += 
+QT       += sql network
 PACKAGES  = QT GETTEXT GIS
 #CONFIG   += console
 

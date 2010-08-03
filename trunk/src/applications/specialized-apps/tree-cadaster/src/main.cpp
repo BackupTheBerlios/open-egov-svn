@@ -30,6 +30,9 @@ int main(int argc, char *argv[])
   app.setApplicationName(_("Tree Cadaster"));
   app.setOrganizationName(_("G.A.S.I."));
   app.setOrganizationDomain(_("open-egov.de"));
+  app.setApplicationVersion(_("0.1"));
+  app.setApplicationBuildData(__DATE__, __TIME__);
+  app.setHomepage(_("http://www.open-egov.de/"));
 
   QSettings settings(app.organizationName(), app.applicationName());
   if (settings.status() != QSettings::NoError) {

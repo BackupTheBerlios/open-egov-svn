@@ -25,13 +25,13 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName",      "gasi.de"
-            VALUE "FileDescription",  "Process List"
+            VALUE "FileDescription",  "Tree Cadaster"
             VALUE "FileVersion",      "1, 0, 0, 0\0"
             VALUE "LegalCopyright",   "Copyright (C) 2010 gasi.de."
-            VALUE "InternalName",     "process-list.exe\0"
+            VALUE "InternalName",     "tree-cadaster.exe\0"
             VALUE "LegalTrademarks",  "\0"
-            VALUE "OriginalFilename", "process-list.exe"
-            VALUE "ProductName",      "OEG :: Process List"
+            VALUE "OriginalFilename", "tree-cadaster.exe"
+            VALUE "ProductName",      "OEG :: Tree Cadaster"
             VALUE "ProductVersion",   "1, 0, 0, 0\0"
         END
     END
