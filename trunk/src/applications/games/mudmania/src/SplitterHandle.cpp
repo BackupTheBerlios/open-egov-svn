@@ -1,35 +1,86 @@
 // $Id$
+//
+// Open-eGovernment
+// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+//
+// This program is free software: you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 3
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+// See the GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <OEG/Common.h>
 
 #include <QApplication>
 #include <QLatin1String>
-
 #include <QGradient>
+#include <QGridLayout>
+#include <QIcon>
+#include <QHBoxLayout>
+#include <QLabel>
 #include <QPainter>
 #include <QPaintEvent>
+#include <QProgressBar>
 
+#include "SHPointBar.h"
+#include "SHLabel.h"
 #include "SplitterHandle.h"
 
 SplitterHandle::SplitterHandle(Qt::Orientation orientation, QSplitter *parent)
  : QSplitterHandle(orientation, parent)
 {
+  m_label = new QLabel(this);
+  m_label->setText("");
+  m_label->setCursor(Qt::ArrowCursor);
+  m_label->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+
+  setDefaultLayout();
 }
 
-void SplitterHandle::paintEvent(QPaintEvent *event)
+SplitterHandle::~SplitterHandle()
 {
-  QSplitterHandle::paintEvent(event);
-return;
+  while (! m_widgets.isEmpty())
+    delete m_widgets.takeFirst();
+}
 
-  QPainter painter(this);
-  if (orientation() == Qt::Horizontal) {
-         //gradient.setStart(rect().left(), rect().height()/2);
-         //gradient.setFinalStop(rect().right(), rect().height()/2);
-  } else {
-         //gradient.setStart(rect().width()/2, rect().top());
-         //gradient.setFinalStop(rect().width()/2, rect().bottom());
-  }
+void SplitterHandle::setText(const QString &text)
+{
+  m_label->setText(text);
+}
 
-  //painter.fillRect(event->rect(), QBrush(gradient));
+void SplitterHandle::addLabel(const QString &name)
+{
+  SHLabel *label = new SHLabel(this);
+
+  m_widgets.append(label);
+}
+
+void SplitterHandle::addPointBar(const QString &name)
+{
+  SHPointBar *bar = new SHPointBar(this);
+
+  m_widgets.append(bar);
+}
+
+void SplitterHandle::setDefaultLayout()
+{
+  deleteDefaultLayout();
+
+  QVBoxLayout *layout = new QVBoxLayout;
+  layout->addWidget(m_label);
+  setLayout(layout);
+}
+
+void SplitterHandle::deleteDefaultLayout()
+{
+  if (layout() > 0)
+    delete layout();
 }
 

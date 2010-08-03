@@ -16,32 +16,38 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <OEG/Qt/Application.h>
+#pragma once
 
-#include <QSettings>
-#include <QDebug>
+#include <OEG/Common.h>
 
-#include "MainWindow.h"
+#include <QColor>
+#include <QWidget>
 
-int main(int argc, char *argv[])
+#include "SplitterHandleWidget.h"
+
+class QPaintEvent;
+
+class SHPointBar : public SplitterHandleWidget
 {
-  OEG::Qt::Application app(argc, argv);
+  Q_OBJECT
 
-  app.setApplicationName(_("MUDmania"));
-  app.setOrganizationName(_("G.A.S.I."));
-  app.setOrganizationDomain(_("open-egov.de"));
-  app.setApplicationVersion(_("0.1"));
-  app.setApplicationBuildData(__DATE__, __TIME__);
-  app.setHomepage(_("http://www.open-egov.de/"));
+  public:
+    SHPointBar(QWidget *parent = 0);
 
-  QSettings settings(app.organizationName(), app.applicationName());
-  if (settings.status() != QSettings::NoError) {
-    qDebug() << __FILE__ ": settings error: " << settings.status();
-  }
+    void setCurrentValue(int value);
+    int currentValue();
 
-  MainWindow win;
-  win.show();
+    void setRange(int min, int max);
+    int minValue();
+    int maxValue();
 
-  return app.exec();
-}
+  protected:
+    virtual void paintEvent(QPaintEvent *event);
+
+  protected:
+    int     m_current_value;
+    int     m_min_value;
+    int     m_max_value;
+    QColor  m_color;
+};
 

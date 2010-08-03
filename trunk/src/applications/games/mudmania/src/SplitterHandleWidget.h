@@ -16,32 +16,29 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <OEG/Qt/Application.h>
+#pragma once
 
-#include <QSettings>
-#include <QDebug>
+#include <OEG/Common.h>
 
-#include "MainWindow.h"
+#include <QColor>
+#include <QList>
+#include <QString>
+#include <QWidget>
 
-int main(int argc, char *argv[])
+class SplitterHandleWidget : public QWidget
 {
-  OEG::Qt::Application app(argc, argv);
+  Q_OBJECT
 
-  app.setApplicationName(_("MUDmania"));
-  app.setOrganizationName(_("G.A.S.I."));
-  app.setOrganizationDomain(_("open-egov.de"));
-  app.setApplicationVersion(_("0.1"));
-  app.setApplicationBuildData(__DATE__, __TIME__);
-  app.setHomepage(_("http://www.open-egov.de/"));
+  public:
+    SplitterHandleWidget(QWidget *parent = 0);
 
-  QSettings settings(app.organizationName(), app.applicationName());
-  if (settings.status() != QSettings::NoError) {
-    qDebug() << __FILE__ ": settings error: " << settings.status();
-  }
+    void enableForWorld(const QString &name);
 
-  MainWindow win;
-  win.show();
+  public slots:
+    void newWorldActivated(const QString &name);
 
-  return app.exec();
-}
+  protected:
+    QList<QString>  m_world_names;
+
+};
 

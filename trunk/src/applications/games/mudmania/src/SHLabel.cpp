@@ -16,32 +16,29 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <OEG/Qt/Application.h>
+#include <OEG/Common.h>
 
-#include <QSettings>
-#include <QDebug>
+#include <QApplication>
+#include <QColor>
+#include <QLabel>
+#include <QLatin1String>
+#include <QPen>
+#include <QString>
 
-#include "MainWindow.h"
+#include "SHLabel.h"
 
-int main(int argc, char *argv[])
+SHLabel::SHLabel(QWidget *parent /*=0*/)
+ : SplitterHandleWidget(parent)
 {
-  OEG::Qt::Application app(argc, argv);
+}
 
-  app.setApplicationName(_("MUDmania"));
-  app.setOrganizationName(_("G.A.S.I."));
-  app.setOrganizationDomain(_("open-egov.de"));
-  app.setApplicationVersion(_("0.1"));
-  app.setApplicationBuildData(__DATE__, __TIME__);
-  app.setHomepage(_("http://www.open-egov.de/"));
+void SHLabel::setText(const QString &text)
+{
+  m_label.setText(text);
+}
 
-  QSettings settings(app.organizationName(), app.applicationName());
-  if (settings.status() != QSettings::NoError) {
-    qDebug() << __FILE__ ": settings error: " << settings.status();
-  }
-
-  MainWindow win;
-  win.show();
-
-  return app.exec();
+QString SHLabel::text()
+{
+  return m_label.text();
 }
 
