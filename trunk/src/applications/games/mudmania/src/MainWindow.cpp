@@ -86,7 +86,7 @@ void MainWindow::createMenus()
 
   menu = menuBar()->addMenu(_("&File"));
   menu->addSeparator();
-  menu->addAction(standardAction("exit"));
+  menu->addAction(standardAction(Exit));
 
   addHelpMenu();
 }
@@ -98,8 +98,7 @@ void MainWindow::createToolBars()
 
   toolbar = addToolBar(_("File"));
 
-  action = standardAction("exit");
-  action->setShortcuts(QKeySequence::Quit);
+  action = standardAction(Exit);
   toolbar->addAction(action);
 }
 
