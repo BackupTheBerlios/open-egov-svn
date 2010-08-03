@@ -18,12 +18,14 @@
 
 #include <OEG/GIS/MapWidget.h>
 
+#include <QDebug>
 #include <QKeySequence>
 #include <QList>
 #include <QLatin1String>
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPaintEvent>
+#include <QPoint>
 
 using namespace OEG::GIS;
 using namespace Qt;
@@ -40,6 +42,9 @@ MapWidget::MapWidget(QWidget *parent /*=0*/)
   m_area_top    = 0.0;
   m_area_bottom = 0.0;
 
+  m_valid_area  = false;
+
+  setMouseTracking(true);
 }
 
 MapWidget::~MapWidget()
@@ -70,6 +75,17 @@ void MapWidget::mouseMoveEvent(QMouseEvent *event)
 {
   QWidget::mouseMoveEvent(event);
 
+  if (! m_valid_area)
+    return;
+
+  QPoint p = mapFromGlobal(QCursor::pos());    // event->globalPos()
+
+  qDebug() << "MME: point:" << p << "size:" << size();
+
+  double x = m_area_left   + ((m_area_right - m_area_left)   / width())  * p.x();
+  double y = m_area_bottom + ((m_area_top   - m_area_bottom) / height()) * p.y();
+
+  emit coordinatesAtMouse(x, y);
 }
 
 void MapWidget::setZoom(int zoom)
@@ -84,5 +100,6 @@ void MapWidget::setArea(double left, double top, double right, double bottom)
   m_area_right  = right;
   m_area_bottom = bottom;
 
+  m_valid_area  = true;
 }
 

@@ -69,11 +69,15 @@ class MapWidget : public QWidget
     void mouseReleaseEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
 
+  signals:
+    void coordinatesAtMouse(double, double);
+
   protected:
     MapEngine      m_engine;
     LeftMouseMode  m_lmb_mode;
     RenderMode     m_render_mode;
 
+    bool           m_valid_area;
     int            m_zoom;
     double         m_area_left;        // Longitude of the left (westernmost) side of the bounding box.
     double         m_area_top;         // Latitude of the top (northernmost) side of the bounding box.
