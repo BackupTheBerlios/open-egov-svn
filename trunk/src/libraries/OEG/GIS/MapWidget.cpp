@@ -31,13 +31,14 @@ using namespace Qt;
 MapWidget::MapWidget(QWidget *parent /*=0*/)
  : QWidget(parent)
 {
-  m_engine     = OpenStreetMap;
-  m_lmb_mode   = None;
+  m_engine      = OpenStreetMap;
+  m_lmb_mode    = None;
+  m_render_mode = Tiles;
 
-  m_box_left   = 0.0;
-  m_box_right  = 0.0;
-  m_box_top    = 0.0;
-  m_box_bottom = 0.0;
+  m_area_left   = 0.0;
+  m_area_right  = 0.0;
+  m_area_top    = 0.0;
+  m_area_bottom = 0.0;
 
 }
 
@@ -68,6 +69,20 @@ void MapWidget::mouseReleaseEvent(QMouseEvent *event)
 void MapWidget::mouseMoveEvent(QMouseEvent *event)
 {
   QWidget::mouseMoveEvent(event);
+
+}
+
+void MapWidget::setZoom(int zoom)
+{
+  m_zoom = zoom;
+}
+
+void MapWidget::setArea(double left, double top, double right, double bottom)
+{
+  m_area_left   = left;
+  m_area_top    = top;
+  m_area_right  = right;
+  m_area_bottom = bottom;
 
 }
 

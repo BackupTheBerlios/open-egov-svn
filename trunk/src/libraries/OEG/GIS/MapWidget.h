@@ -51,9 +51,17 @@ class MapWidget : public QWidget
       None                                       // Do nothing.
     };
 
+    enum RenderMode {                            // Only relevant for OSM data.
+      Tiles,                                     // Display downloaded pictures and tile them.
+      XML                                        // Render own tiles using SVG engine.
+    };
+
   public:
     MapWidget(QWidget *parent = 0);
     ~MapWidget();
+
+    void setZoom(int zoom);
+    void setArea(double left, double top, double right, double bottom);
 
   protected:
     void paintEvent(QPaintEvent *event);
@@ -64,11 +72,13 @@ class MapWidget : public QWidget
   protected:
     MapEngine      m_engine;
     LeftMouseMode  m_lmb_mode;
+    RenderMode     m_render_mode;
 
-    float   m_box_left;
-    float   m_box_right;
-    float   m_box_top;
-    float   m_box_bottom;
+    int            m_zoom;
+    double         m_area_left;        // Longitude of the left (westernmost) side of the bounding box.
+    double         m_area_top;         // Latitude of the top (northernmost) side of the bounding box.
+    double         m_area_right;       // Longitude of the right (easternmost) side of the bounding box.
+    double         m_area_bottom;      // Latitude of the bottom (southernmost) side of the bounding box.
 };
 
 }}

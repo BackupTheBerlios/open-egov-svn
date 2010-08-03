@@ -67,13 +67,13 @@ class MainWindow : public QMainWindow
 
   public:
     MainWindow(QWidget *parent = 0, ::Qt::WindowFlags flags = 0);
-    ~MainWindow();
+    virtual ~MainWindow();
 
     QAction *standardAction(const QString &baseName);
     QAction *standardAction(const StandardAction &action);
 
   protected:
-    void createAll();
+    virtual void createAll();
 
     virtual void createActions();
     virtual void createDockWidgets();
@@ -84,6 +84,7 @@ class MainWindow : public QMainWindow
 
     QAction *addStandardAction(const QString &baseName, const QString &title,
                                const QString &info, const QString &keySequence = QString());
+    void addHelpMenu();
 
   private:
     QString standardActionName(const StandardAction &action);

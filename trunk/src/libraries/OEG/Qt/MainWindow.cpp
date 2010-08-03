@@ -24,6 +24,8 @@
 #include <QApplication>
 #include <QKeySequence>
 #include <QList>
+#include <QMenu>
+#include <QMenuBar>
 #include <QStatusBar>
 #include <QLatin1String>
 
@@ -36,6 +38,8 @@ MainWindow::MainWindow(QWidget *parent /*=0*/, ::Qt::WindowFlags flags /*=0*/)
   setWindowTitle(QCoreApplication::applicationName());
 
   resize(400, 300);
+
+  //createAll();
 }
 
 MainWindow::~MainWindow()
@@ -117,7 +121,7 @@ QAction *MainWindow::standardAction(const QString &baseName)
   }
 
   if (baseName == "exit") {
-    a = addStandardAction(baseName, _("E&xit"), _("Exits the application."), _("Alt+F4"));
+    a = addStandardAction(baseName, _("E&xit"), _("Exit the application."), _("Alt+F4"));
     connect(a, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
     return a;
   }
@@ -187,5 +191,18 @@ QString MainWindow::standardActionName(const StandardAction &action)
   if (action == Undo)                  return QLatin1String("undo");
 
   return "";
+}
+
+void MainWindow::addHelpMenu()
+{
+  QMenu *menu;
+
+  menuBar()->addSeparator();
+
+  menu = menuBar()->addMenu(_("&Help"));
+  menu->addAction(standardAction("help"));
+  menu->addSeparator();
+  menu->addAction(standardAction("about_app"));
+  menu->addAction(standardAction("about_qt"));
 }
 
