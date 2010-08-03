@@ -139,7 +139,7 @@ QAction *MainWindow::createStandardAction(const StandardAction &action, const QS
       connect(a, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
       break;
     case GoToHomepage:
-      a = addStandardAction(baseName, _("&Open Homepage ..."), _("Open the homepage in the standard browser."));
+      a = addStandardAction(baseName, _("&Homepage ..."), _("Open the homepage in the standard browser."));
       break;
     case HelpContents:
       a = addStandardAction(baseName, _("Help &Contents ..."), _("Open the help window with contents."), _("F1"));
@@ -151,7 +151,7 @@ QAction *MainWindow::createStandardAction(const StandardAction &action, const QS
       a = addStandardAction(baseName, _("Help &Search ..."), _("Open the help window with search."));
       break;
     case HelpForum:
-      a = addStandardAction(baseName, _("Help &Forum ..."), _("Open the webpage of a online-help forum."));
+      a = addStandardAction(baseName, _("&Forum ..."), _("Open the webpage of an online-help forum."));
       break;
     case New:
       a = addStandardAction(baseName, _("&New"), _("Create new document."), _("Ctrl+N"));
@@ -322,9 +322,9 @@ void MainWindow::addHelpMenu()
   menu->addAction(standardAction(HelpContents));
   menu->addAction(standardAction(HelpIndex));
   menu->addAction(standardAction(HelpSearch));
-  menu->addAction(standardAction(HelpForum));
   menu->addSeparator();
   menu->addAction(standardAction(GoToHomepage));
+  menu->addAction(standardAction(HelpForum));
   menu->addAction(standardAction(ReportBug));
   menu->addSeparator();
   menu->addAction(standardAction(AboutApp));
