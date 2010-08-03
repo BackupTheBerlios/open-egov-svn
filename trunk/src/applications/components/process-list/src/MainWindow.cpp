@@ -16,8 +16,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include "MainWindow.h"
-
 #include <OEG/Qt/ToolProvider.h>
 #include <OEG/Qt/ProcessList.h>
 #include <OEG/Qt/ProcessInfo.h>
@@ -41,6 +39,8 @@
 #include <QTimer>
 #include <QToolBar>
 #include <QIcon>
+
+#include "MainWindow.h"
 
 MainWindow::MainWindow(QWidget *parent /*=0*/)
  : OEG::Qt::MainWindow(parent)
@@ -84,7 +84,7 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
   m_table->clearFocus();
 
   m_timer = new QTimer(this);
-  m_timer->setInterval(1000 / 2);
+  m_timer->setInterval(1000 * 2); // every 2 seconds
   connect(m_timer, SIGNAL(timeout()), this, SLOT(action_reload()));
   m_timer->start();
 }
@@ -134,20 +134,14 @@ void MainWindow::createMenus()
 
 void MainWindow::createToolBars()
 {
-  QAction  *a;
-  QToolBar *t;
-
-  t = addToolBar(_("File"));
-  a = standardAction("exit");
-  a->setShortcuts(QKeySequence::Quit);
-  t->addAction(a);
-
-  t->addAction(standardAction("reload"));
+  QToolBar *toolbar = addToolBar(_("File"));
+  toolbar->addAction(standardAction("exit"));
+  toolbar->addAction(standardAction("reload"));
 }
 
 void MainWindow::createStatusBar()
 {
-  QStatusBar *sb = this->statusBar();
+  QStatusBar *sb = statusBar();
 
   m_number_of_processes = new QLabel(" 000 ");
   m_number_of_processes->setMinimumSize(m_number_of_processes->sizeHint());
