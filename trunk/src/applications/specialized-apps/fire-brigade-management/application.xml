@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<application category="specialized-apps" base="tree-cadaster">
+<application category="specialized-apps" base="fire-brigade-management">
   <head>
     <text name="title"       stringnumber="1" />
     <text name="description" stringnumber="2" />
@@ -13,8 +13,8 @@
   <dictionary>
     <!-- solely required group, other groups overlay these values -->
     <group lang="en_US">
-      <string number="1">Tree Cadaster</string>
-      <string number="2">The register manages the trees of a city.</string>
+      <string number="1">Fire Brigade Management</string>
+      <string number="2">.</string>
       <string number="3">Gerrit M. Albrecht</string>
       <string number="4">mail@gerrit-albrecht.de</string>
       <string number="10">Proxy</string>
@@ -32,8 +32,8 @@
     </group>
 
     <group lang="de_DE">
-      <string number="1">Baum-Kataster</string>
-      <string number="2">Das Register verwaltet den Baumbestand einer Stadt.</string>
+      <string number="1">Feuerwehr-Verwaltung</string>
+      <string number="2">.</string>
       <string number="3">Gerrit M. Albrecht</string>
       <string number="4">mail@gerrit-albrecht.de</string>
       <string number="10">Proxy</string>
