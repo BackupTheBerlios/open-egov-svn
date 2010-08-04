@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<application category="components" base="crossword-dictionary">
+  <strings>
+    <group lang="en_US">
+      <string name="title">crossword-dictionary</string>
+      <string name="description">Searches with placeholders for words.</string>
+    </group>
+
+    <group lang="de_DE">
+      <string name="title">Kreuzworträtsellexikon</string>
+      <string name="description">Sucht mit Platzhaltern nach Begriffen.</string>
+    </group>
+  </strings>
+
+  <properties>
+    <property name="dbus" value="false" />
+    <property name="embed" value="false" />
+    <property name="stable" value="true" />
+    <property name="database" value="false" />
+  </properties>
+
+  <setup>
+    <requires>base</requires>
+  </setup>
+
+  <features>
+    <todos>
+    </todos>
+    <changes>
+    </changes>
+  </features>
+
+  <datastructure>
+    <table name="">
+      
+    </table>
+  </datastructure>
+
+  <databases>
+  </databases>
+</application>
+
