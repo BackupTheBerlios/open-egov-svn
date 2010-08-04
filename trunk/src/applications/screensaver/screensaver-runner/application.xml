@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<application category="screensaver" base="screensaver-runner">
+  <strings>
+    <group lang="en_US">
+      <string name="title">Screensaver Runner</string>
+      <string name="description">Static application for the system directory, which is able to call screensavers from the OEG path.</string>
+    </group>
+
+    <group lang="de_DE">
+      <string name="title">Bildschirmsschoner-Starter</string>
+      <string name="description">Statische Anwendung für das System-Verzeichnis, die Bildschirmschoner im OEG-Pfad aufrufen kann.</string>
+    </group>
+  </strings>
+
+  <properties>
+    <property name="dbus" value="false" />
+    <property name="embed" value="false" />
+    <property name="stable" value="false" />
+    <property name="database" value="false" />
+  </properties>
+
+  <setup>
+    <requires>base</requires>
+  </setup>
+
+  <features>
+    <todos>
+    </todos>
+    <changes>
+    </changes>
+  </features>
+
+  <datastructure>
+    <table name="">
+      
+    </table>
+  </datastructure>
+
+  <databases>
+  </databases>
+</application>
+
