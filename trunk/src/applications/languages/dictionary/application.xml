@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<application base="dictionary" category="languages">
+<application category="languages" base="dictionary">
   <strings>
     <group lang="en_US">
       <string name="title">Dictionary</string>

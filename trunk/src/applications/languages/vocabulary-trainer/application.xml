@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<application base="vocabulary-trainer" category="languages">
+<application category="languages" base="vocabulary-trainer">
   <strings>
     <group lang="en_US">
       <string name="title">Vocabulary Trainer</string>
