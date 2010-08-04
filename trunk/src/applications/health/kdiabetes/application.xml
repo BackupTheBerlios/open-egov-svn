@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<application base="kdiabetes" category="health">
+<application category="health" base="kdiabetes">
   <strings>
     <group lang="en_US">
       <string name="title">KDiabetes</string>
