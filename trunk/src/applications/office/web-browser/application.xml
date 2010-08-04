@@ -2,16 +2,16 @@
 
 <!-- $Id$ -->
 
-<application category="office" base="address-book">
+<application category="office" base="web-browser">
   <strings>
     <group lang="en_US">
-      <string name="title">Address Book</string>
-      <string name="description">Manages your contacts.</string>
+      <string name="title">Web Browser</string>
+      <string name="description">Application to explore the World Wide Web.</string>
     </group>
 
     <group lang="de_DE">
-      <string name="title">Adressbuch</string>
-      <string name="description">Verwaltet Ihre Kontakte.</string>
+      <string name="title">Web-Browser</string>
+      <string name="description">Anwendung, um das WWW zu erkunden.</string>
     </group>
   </strings>
 
@@ -42,3 +42,4 @@
   <databases>
   </databases>
 </application>
+
