@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<application base="desktop" category="components">
+<application category="components" base="desktop">
   <strings>
     <group lang="en_US">
       <string name="title">Desktop</string>

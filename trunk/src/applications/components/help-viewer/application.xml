@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<application base="settings" category="components">
+<application category="components" base="help-viewer">
   <strings>
     <group lang="en_US">
       <string name="title">Help Viewer</string>

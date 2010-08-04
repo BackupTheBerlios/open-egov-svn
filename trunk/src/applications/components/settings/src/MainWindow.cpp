@@ -1,6 +1,6 @@
 // $Id$
 //
-// Open-eGovernment
+// Open eGovernment
 // Copyright (C) 2005-2010 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
@@ -41,13 +41,16 @@ void MainWindow::createActions()
 
 void MainWindow::createMenus()
 {
-  QMenu *fileMenu = menuBar()->addMenu(_("&File"));
+  QMenu *menu = menuBar()->addMenu(_("&File"));
+  menu->addAction(standardAction(Exit));
 
+  addHelpMenu();
 }
 
 void MainWindow::createToolBars()
 {
-  QToolBar *fileToolBar = addToolBar(_("File"));
+  QToolBar *toolbar = addToolBar(_("File"));
+  toolbar->addAction(standardAction(Exit));
 
 }
 

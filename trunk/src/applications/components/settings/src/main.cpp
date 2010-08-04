@@ -1,6 +1,6 @@
 // $Id$
 //
-// Open-eGovernment
+// Open eGovernment
 // Copyright (C) 2005-2010 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
@@ -30,6 +30,9 @@ int main(int argc, char *argv[])
   app.setApplicationName(_("Settings"));
   app.setOrganizationName(_("G.A.S.I."));
   app.setOrganizationDomain(_("open-egov.de"));
+  app.setApplicationVersion(_("0.1"));
+  app.setApplicationBuildData(__DATE__, __TIME__);
+  app.setHomepage(_("http://www.open-egov.de/"));
 
   QSettings settings(app.organizationName(), app.applicationName());
   if (settings.status() != QSettings::NoError) {

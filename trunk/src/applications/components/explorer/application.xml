@@ -2,16 +2,16 @@
 
 <!-- $Id$ -->
 
-<application base="file-manager" category="components">
+<application category="components" base="explorer">
   <strings>
     <group lang="en_US">
-      <string name="title">File Manager</string>
-      <string name="description">The File Manager allows working with objects and files.</string>
+      <string name="title">Explorer</string>
+      <string name="description">The Exporer component opens a usual file manager window.</string>
     </group>
 
     <group lang="de_DE">
-      <string name="title">Dateimanager</string>
-      <string name="description">Der Dateimanager erlaubt das Arbeiten mit Objekten und Dateien.</string>
+      <string name="title">Erkunder</string>
+      <string name="description">Der Erkunder-Komponente öffnet ein herkömmliches Dateimanager-Fenster.</string>
     </group>
   </strings>
 
@@ -42,3 +42,4 @@
   <databases>
   </databases>
 </application>
+

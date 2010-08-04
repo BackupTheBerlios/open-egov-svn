@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<application base="installer" category="components">
+<application category="components" base="installer">
   <strings>
     <group lang="en_US">
       <string name="title">Installer</string>

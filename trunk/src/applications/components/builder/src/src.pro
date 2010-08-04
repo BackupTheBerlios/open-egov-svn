@@ -6,8 +6,7 @@ HEADERS   = *.h
 FORMS     = 
 QT       += xml network
 PACKAGES  = QT GETTEXT
+CONFIG   += console
 
-CONFIG += console
-
-include(..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}common.pri)
+include(../../../common.pri)
 

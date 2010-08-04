@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<application base="builder" category="components">
+<application category="components" base="builder">
   <strings>
     <group lang="en_US">
       <string name="title">Builder</string>

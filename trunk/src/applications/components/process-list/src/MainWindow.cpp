@@ -126,10 +126,10 @@ void MainWindow::createActions()
 
 void MainWindow::createMenus()
 {
-  QMenu *fileMenu = menuBar()->addMenu(_("&File"));
-  fileMenu->addAction(standardAction(Reload));
-  fileMenu->addSeparator();
-  fileMenu->addAction(standardAction(Exit));
+  QMenu *menu = menuBar()->addMenu(_("&File"));
+  menu->addAction(standardAction(Reload));
+  menu->addSeparator();
+  menu->addAction(standardAction(Exit));
 
   addHelpMenu();
 }

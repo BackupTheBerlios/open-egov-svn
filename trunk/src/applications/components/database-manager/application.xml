@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<application base="database-manager" category="components">
+<application category="components" base="database-manager">
   <strings>
     <group lang="en_US">
       <string name="title">Database Manager</string>
