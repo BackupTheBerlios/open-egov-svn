@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<application category="components" base="bug-reporter">
+  <strings>
+    <group lang="en_US">
+      <string name="title">Bug Reporter</string>
+      <string name="description">This application collects data and sends a bug report toi the developer.</string>
+    </group>
+
+    <group lang="de_DE">
+      <string name="title">Fehler-Berichterstatter</string>
+      <string name="description">Diese Anwendung sammelt Daten und verschickt Fehlerberichte an den Entwickler.</string>
+    </group>
+  </strings>
+
+  <properties>
+    <property name="dbus" value="false" />
+    <property name="embed" value="false" />
+    <property name="stable" value="false" />
+    <property name="database" value="false" />
+  </properties>
+
+  <setup>
+    <requires>base</requires>
+  </setup>
+
+  <features>
+    <todos>
+    </todos>
+    <changes>
+    </changes>
+  </features>
+
+  <datastructure>
+    <table name="">
+      
+    </table>
+  </datastructure>
+
+  <databases>
+  </databases>
+</application>
+
