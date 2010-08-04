@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<application category="screensaver" base="clock-and-logo">
+  <strings>
+    <group lang="en_US">
+      <string name="title">Clock and Logo</string>
+      <string name="description">Shows the organization's logo and the current time.</string>
+    </group>
+
+    <group lang="de_DE">
+      <string name="title">Uhr und Logo</string>
+      <string name="description">Zeigt das Logo der Organsiation und die aktuelle Uhrzeit.</string>
+    </group>
+  </strings>
+
+  <properties>
+    <property name="dbus" value="false" />
+    <property name="embed" value="false" />
+    <property name="stable" value="false" />
+    <property name="database" value="false" />
+  </properties>
+
+  <setup>
+    <requires>base</requires>
+  </setup>
+
+  <features>
+    <todos>
+    </todos>
+    <changes>
+    </changes>
+  </features>
+
+  <datastructure>
+    <table name="">
+      
+    </table>
+  </datastructure>
+
+  <databases>
+  </databases>
+</application>
+
