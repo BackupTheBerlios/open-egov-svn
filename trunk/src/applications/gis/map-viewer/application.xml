@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<application category="components" base="settings">
+<application category="components" base="map-viewer">
   <head>
     <text name="title"       stringnumber="1" />
     <text name="description" stringnumber="2" />
