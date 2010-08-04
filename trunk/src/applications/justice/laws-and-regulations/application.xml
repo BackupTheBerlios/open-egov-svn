@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<application base="laws-and-regulations" category="justice">
+<application category="justice" base="laws-and-regulations">
   <strings>
     <group lang="en_US">
       <string name="title">Laws and Regulations</string>

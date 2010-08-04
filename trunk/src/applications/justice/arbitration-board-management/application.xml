@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<application base="arbitration-board-management" category="justice">
+<application category="justice" base="arbitration-board-management">
   <strings>
     <group lang="en_US">
       <string name="title">Arbitration Board Management</string>

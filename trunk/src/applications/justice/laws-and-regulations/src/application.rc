@@ -25,13 +25,13 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName",      "gasi.de"
-            VALUE "FileDescription",  "Builder"
+            VALUE "FileDescription",  "Laws and Regulations"
             VALUE "FileVersion",      "1, 0, 0, 0\0"
             VALUE "LegalCopyright",   "Copyright (C) 2010 gasi.de."
-            VALUE "InternalName",     "builder.exe\0"
+            VALUE "InternalName",     "laws-and-regulations.exe\0"
             VALUE "LegalTrademarks",  "\0"
-            VALUE "OriginalFilename", "builder.exe"
-            VALUE "ProductName",      "OEG :: Builder"
+            VALUE "OriginalFilename", "laws-and-regulations.exe"
+            VALUE "ProductName",      "OEG :: Laws and Regulations"
             VALUE "ProductVersion",   "1, 0, 0, 0\0"
         END
     END
