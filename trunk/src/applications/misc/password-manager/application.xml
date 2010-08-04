@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<application category="components" base="password-manager">
+  <strings>
+    <group lang="en_US">
+      <string name="title">Password Manager</string>
+      <string name="description">Manages passwords and other secrets.</string>
+    </group>
+
+    <group lang="de_DE">
+      <string name="title">Passwort-Verwaltung</string>
+      <string name="description">Verwaltet Passwörter und andere Geheimnisse.</string>
+    </group>
+  </strings>
+
+  <properties>
+    <property name="dbus" value="false" />
+    <property name="embed" value="false" />
+    <property name="stable" value="false" />
+    <property name="database" value="false" />
+  </properties>
+
+  <setup>
+    <requires>base database</requires>
+  </setup>
+
+  <features>
+    <todos>
+    </todos>
+    <changes>
+    </changes>
+  </features>
+
+  <datastructure>
+    <table name="">
+      
+    </table>
+  </datastructure>
+
+  <databases>
+  </databases>
+</application>
