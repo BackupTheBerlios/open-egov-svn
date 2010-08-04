@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<application category="misc" base="charts">
+  <strings>
+    <group lang="en_US">
+      <string name="title">Charts</string>
+      <string name="description">For the creation of program and process flow charts with symbols, boxes and arrows.</string>
+    </group>
+
+    <group lang="de_DE">
+      <string name="title">Flußdiagramme</string>
+      <string name="description">Für die Erstellung von Programm- und Prozessablaufplänen mit Symbolen, Kästchen und Pfeilen.</string>
+    </group>
+  </strings>
+
+  <properties>
+    <property name="dbus" value="false" />
+    <property name="embed" value="false" />
+    <property name="stable" value="false" />
+    <property name="database" value="false" />
+  </properties>
+
+  <setup>
+    <requires>base</requires>
+  </setup>
+
+  <features>
+    <todos>
+    </todos>
+    <changes>
+    </changes>
+  </features>
+
+  <datastructure>
+    <table name="">
+      
+    </table>
+  </datastructure>
+
+  <databases>
+  </databases>
+</application>
