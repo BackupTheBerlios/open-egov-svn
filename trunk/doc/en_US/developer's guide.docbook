@@ -95,7 +95,7 @@ rare files or files extracted from a repository.</para>
 
     <section>
       <title>Compilation</title>
-      <para></para>
+      <para>To compile a project, "qmake" and "mingw32-make" is all you have to type. The binary is placed into OEG's bin directory and my be startet by "mingw32-make run" or by double-click at its icon.</para>
     </section>
 
     <section>
@@ -198,43 +198,49 @@ c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/qglobal.h:1613: warning
     <title>Data Storage</title>
     <section>
       <title>Overview</title>
-      <para>Documents may be stored into databases and files. This is configurable. As databases at least MySQL and SQLite are always supported. The Database Manager is able backup, mix, update or convert databases between the different engines (e.g. MySQL/Inno-DB and MySQL/MyISAM), or applications (MySQL, SQLite). It allows to upgrade from one data format to another (but not back to an older!). This allows you to work first with SQLite-Databases and later switch to a real database management system if you really need one.</para>
+      <para>Data may be stored into databases and/or files. This is configurable. As databases at least MySQL and SQLite are always supported. The Database Manager is able to backup, mix, update or convert databases between the different engines (e.g. MySQL/Inno-DB, MySQL/MyISAM), or applications (MySQL, SQLite, XML). It allows to upgrade from one data format to another (but not back to an older!). This allows you to work first with SQLite-Databases and later switch to a real database management system if you really need one.</para>
+      <para>You have to distinguish document-centered applications (like a text processor) and record-based applications, like an address book. Documents may be stored in XML files, or as binary blobs in databases. Records may only be stored in databases or XML-based. XML is only possible, if there are only few entries and if the result should be an document containing the records.</para>
+      <para>As a general guideline, use XML documents, if you have an document centered application. If you have records, use a real database starting with SQLite up to MySQL.</para>
     </section>
 
     <section>
-      <title>MySQL</title>
+      <title>Database Support</title>
+      <para>Applications may use databases as desired. Every OEG application may provide a database description in its
+      application.xml file. This file informs OEG about the database to be used and it's possible to generate a SQL
+      file from it, which contains the initialization code for an empty database in the correct format for the desired
+      database application and engine. The database component is able to use it to create a new database or to update
+      an existing database. Many applications come with pre-filled databases. Databases or single records may be public
+      (group or role-based spreading), private (role-based accesss) or official. Official parts of databases may be
+      updated from the OEG website. Others are spread by using peer-to-peer techniques or encrypted mail transfer.
+      Updates of public parts (databases, records) are applied automatically.</para>
+    </section>
+
+    <section>
+      <title>XML Databases</title>
+      <para>Every database may be converted into a XML file and back.</para>
+    </section>
+
+    <section>
+      <title>SQLite Databases</title>
       <para></para>
     </section>
 
     <section>
-      <title>SQLite</title>
+      <title>MySQL Databases</title>
       <para></para>
     </section>
 
     <section>
-      <title>XML Files for Documents</title>
-      <para>Application may store their data into XML based documents. file allows the storage of documents in files. However, it's also possible
+      <title>XML Documents</title>
+      <para>Application may store their data into XML-based documents. However, it's also possible
       to store them as binary blobs in a database, but in this case consider to use a real database.
-      The advantage of XML files is to possibility to use them as sources for other areas of application.
+      The advantage of XML files is the possibility to use them as sources for other areas of application.
       So you may generate derived data files using simple XSL scripts.</para>
     </section>
 
     <section>
       <title>Flat Files as Table Replacement</title>
-      <para>Flat files are configured and handled like databases. Typical applications are for storage purposes, e.g. in the document management system or special applications. Think of a tree cadaster, where the database contains the (textual) data in SQLite files and you will not place the big fotos of the trees into your small database. Then you are able to select the "table" and put the entries with random names into a directory.</para>
-    </section>
-  </chapter>
-
-  <chapter>
-    <title>Database Support</title>
-    <section>
-      <title>Overview</title>
-      <para>Applications may use databases as desired. Every OEG application may provide a database description in its
-      application.xml file. This file informs OEG about the database to be used and (while compiling) a SQL file gets
-      written which contains the initialzation code for an empty database. The database component is able to use it to
-      create a new database or to update an existing database. Many applications come with pre-filled databases. Databases
-      may be public (group or role-based spreading), private (role-based accesss) or official. Official databases may be
-      updated from the OEG website. Others are spread by using peer-to-peer techniques or encrypted mail transfer.</para>
+      <para>Flat files are configured and handled like databases. Typical applications are for storage purposes, e.g. in the document management system or special applications. Think of a tree cadaster, where the database contains the (textual) data in SQLite files and you will not place the big fotos of the trees into your small database. Then you are able to select the "table" and put the entries with random names into a directory. Or, maybe, an address book wants to store the contacts each in a single file.</para>
     </section>
   </chapter>
 
@@ -243,8 +249,9 @@ c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/qglobal.h:1613: warning
     <section>
       <title>Overview</title>
       <para>OEG uses GNU gettext and not Qt's internal translation system to provide localized messages and user
-      interfaces. This allows you to make use of the proved and tested translation tools around gettext.</para>
-      <para></para>
+      interfaces. This allows you to make use of the proved and tested translation tools around gettext and to
+      contact translation groups using gettext or related to KDE.</para>
+      <para>Dialoge (Dateien mit der Endung .ui) werden, um ein einheitliches Erscheinungsbild zu gewährleisten, immer nur in einer Sprache, nämlich en_US, erstellt. Inhalte werden in einer separaten Methode lokalisiert und damit der Dialog an die Sprache angepasst. Separate, sprachspezifische Dialoge sind unbedingt zu vermeiden.</para>
     </section>
   </chapter>
 </book>

@@ -48,12 +48,13 @@ class MapWidget : public QWidget
       Pan,                                       // Move map.
       Drag,                                      // Select area.
       Zoom,                                      // Zoom into map.
+      DragAndZoom,                               // Select area and zoom into it.
       None                                       // Do nothing.
     };
 
     enum RenderMode {                            // Only relevant for OSM data.
       Tiles,                                     // Display downloaded pictures and tile them.
-      XML                                        // Render own tiles using SVG engine.
+      XML                                        // Render own tiles using SVG/Other engine.
     };
 
   public:

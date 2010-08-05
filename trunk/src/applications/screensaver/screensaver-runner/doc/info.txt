@@ -2,7 +2,8 @@ $Id$
 
 This creates a single file static application, intended to drop into c:\windows\system32 as xyz.scr.
 It reads from xyz.ini, where OEG is installed, runs there the non-static built xyz.exe, gives it all
-parameters and waits until finished.
+parameters and waits until finished. This eliminates the need to spread (copy= all needed DLLs into
+the windows system directory.
 
 TODO: some problems with the automatic build system! Builds fine as dynamic version...
 
