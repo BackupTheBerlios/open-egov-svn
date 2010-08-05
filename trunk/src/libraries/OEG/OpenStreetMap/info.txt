@@ -1,0 +1,4 @@
+$Id:$
+
+http://wiki.openstreetmap.org/wiki/API_v0.6
+
