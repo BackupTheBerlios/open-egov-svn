@@ -1,4 +1,4 @@
-# $Id:$
+# $Id$
 
 TARGET       = oegOpenStreetMap
 VERSION      = 1.0.0.0

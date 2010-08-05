@@ -1,4 +1,4 @@
-// $Id: MapWidget.cpp 246 2010-08-04 18:58:33Z gerrit-albrecht $
+// $Id$
 //
 // Open eGovernment
 // Copyright (C) 2005-2010 by Gerrit M. Albrecht
