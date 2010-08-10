@@ -1,4 +1,4 @@
-# $Id:$
+# $Id$
 
 TEMPLATE     = lib
 CONFIG      += plugin qt warn_on release
