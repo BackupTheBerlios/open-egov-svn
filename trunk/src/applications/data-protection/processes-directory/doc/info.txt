@@ -1,0 +1,15 @@
+$Id$
+
+The register of processing operations is the procedural directory of the Federal Data Protection Act.
+It is also required by an EU directive. From there is the english name.
+
+Das Verfahrensverzeichnis enthält Angaben zu Datenverarbeitungen. Es ist erforderlich, wenn bspw.
+automatisierte Verfahren personenbezogene Daten verarbeiten. Inhalte sind in § 18 Abs. 2 BDSG und
+(länderspezifisch) bspw. in § 14 DSG-LSA gelistet.
+
+maximum storage time
+
+EU directive 95/46/EG, Article 18, paragraph 2, bullet 4:
+http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:31995L0046:en:html
+http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:31995L0046:de:html
+
