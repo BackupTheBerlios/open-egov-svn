@@ -57,6 +57,13 @@ IF EXIST plugins (
 )
 
 CD plugins
+IF EXIST qt (
+  ECHO The plugins/qt directory already exists.
+) ELSE (
+  ECHO No plugins/qt directory found. Creating.
+  MD qt
+)
+CD qt
 RD /S /Q accessible
 RD /S /Q codecs
 RD /S /Q iconengines
