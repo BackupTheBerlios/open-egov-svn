@@ -1,6 +1,6 @@
 // $Id$
 //
-// Open-eGovernment
+// Open eGovernment
 // Copyright (C) 2004-2010 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
@@ -18,7 +18,9 @@
 
 #include <OEG/Qt/Application.h>
 
+#include <QDebug>
 #include <QMessageBox>
+#include <QSettings>
 #include <QSystemTrayIcon>
 
 #include "TrayIcon.h"
@@ -26,6 +28,18 @@
 int main(int argc, char *argv[])
 {
   OEG::Qt::Application app(argc, argv);
+
+  app.setApplicationName(_("X11S"));
+  app.setOrganizationName(_("G.A.S.I."));
+  app.setOrganizationDomain(_("open-egov.de"));
+  app.setApplicationVersion(_("0.1"));
+  app.setApplicationBuildData(__DATE__, __TIME__);
+  app.setHomepage(_("http://www.open-egov.de/"));
+
+  QSettings settings(app.organizationName(), app.applicationName());
+  if (settings.status() != QSettings::NoError) {
+    qDebug() << __FILE__ ": settings error: " << settings.status();
+  }
 
   // This is important, because else the closing of a QMessageBox will
   // terminate the application, if there are no other open windows!

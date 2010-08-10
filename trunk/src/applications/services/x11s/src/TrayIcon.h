@@ -1,6 +1,6 @@
 // $Id$
 //
-// Open-eGovernment
+// Open eGovernment
 // Copyright (C) 2004-2010 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
@@ -25,7 +25,7 @@ class QAction;
 class QIcon;
 class QMenu;
 class QTcpServer;
-class QTcpSocket;
+class Connection;
 
 class TrayIcon : public QSystemTrayIcon
 {
@@ -33,7 +33,7 @@ class TrayIcon : public QSystemTrayIcon
 
   public:
     TrayIcon(QWidget *parent = 0);
-    ~TrayIcon();
+    virtual ~TrayIcon();
 
     void createActions();
 
@@ -41,25 +41,27 @@ class TrayIcon : public QSystemTrayIcon
     void action_about_app();
     void action_help();
     void action_exit();
+    void action_information();
 
     void onActivated(QSystemTrayIcon::ActivationReason reason);
     void onNewConnection();
 
   protected:
-    QTcpServer   *m_server;
-    QTcpSocket   *m_connection;
-    QMenu        *m_tray_icon_menu;
-    QIcon        *m_tray_icon;
-    QAction      *m_action_exit;
-    QAction      *m_action_help;
-    QAction      *m_action_about_app;
-    QAction      *m_action_about_qt;
+    QTcpServer          *m_server;
+    QList<Connection *>  m_connections;
+    QMenu               *m_tray_icon_menu;
+    QIcon               *m_tray_icon;
+    QAction             *m_action_exit;
+    QAction             *m_action_info;
+    QAction             *m_action_help;
+    QAction             *m_action_about_app;
+    QAction             *m_action_about_qt;
 
-    QString       m_ip_address;         // The IP address the server uses.
-    unsigned int  m_server_number;      // 0 .. x, maps to port number 6000 .. 6000+x.
-    bool          m_auto_exit_x11s;     // If the last window closes X11S exists.
-    unsigned int  m_auto_exit_time;     // After closing last window the server waits X seconds.
-    bool          m_hide_everything;    // For DAU work places.
-    bool          m_disable_bell;       // Be nice.
+    QString              m_ip_address;         // The IP address the server uses.
+    unsigned int         m_server_number;      // 0 .. x, maps to port number 6000 .. 6000+x.
+    bool                 m_auto_exit_x11s;     // If the last window closes X11S exists.
+    unsigned int         m_auto_exit_time;     // After closing last window the server waits X seconds.
+    bool                 m_hide_everything;    // For DAU work places.
+    bool                 m_disable_bell;       // Be nice.
 };
 

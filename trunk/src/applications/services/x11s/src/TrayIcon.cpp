@@ -1,6 +1,6 @@
 // $Id$
 //
-// Open-eGovernment
+// Open eGovernment
 // Copyright (C) 2004-2010 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
@@ -32,6 +32,7 @@
 #include <QTcpSocket>
 #include <QVBoxLayout>
 
+#include "Connection.h"
 #include "X11defines.h"
 #include "TrayIcon.h"
 
@@ -42,6 +43,8 @@ TrayIcon::TrayIcon(QWidget *parent /*=0*/)
 
   m_tray_icon_menu = new QMenu;
   m_tray_icon_menu->addAction(m_action_help);
+  m_tray_icon_menu->addSeparator();
+  m_tray_icon_menu->addAction(m_action_info);
   m_tray_icon_menu->addSeparator();
   m_tray_icon_menu->addAction(m_action_about_app);
   m_tray_icon_menu->addAction(m_action_about_qt);
@@ -86,6 +89,8 @@ TrayIcon::TrayIcon(QWidget *parent /*=0*/)
     return;
   }
 
+  qDebug() << "Host:" << m_server->serverAddress().toString() << "Port:" << m_server->serverPort();
+
   showMessage(qApp->applicationName(),
               QString(_("The server is running on\n\nIP: %1\nPort: %2\n\n"))
                      .arg(m_server->serverAddress().toString()).arg(m_server->serverPort()));
@@ -97,6 +102,13 @@ TrayIcon::TrayIcon(QWidget *parent /*=0*/)
 
 TrayIcon::~TrayIcon()
 {
+  while (! m_connections.isEmpty()) {
+    Connection *connection = m_connections.takeFirst();
+    if (connection) {
+      delete connection;
+    }
+  }
+
   if (m_server) {
     m_server->close();
     delete m_server; m_server = 0;
@@ -113,6 +125,11 @@ void TrayIcon::createActions()
   m_action_exit->setShortcut(QKeySequence(_("Ctrl+Q")));
   m_action_exit->setStatusTip(_("Exit the application"));
   connect(m_action_exit, SIGNAL(triggered()), this, SLOT(action_exit()));
+
+  m_action_info = new QAction(_("&Information ..."), this);
+  m_action_info->setShortcut(QKeySequence(_("Ctrl+I")));
+  m_action_info->setStatusTip(_("Open a information dialog with statistical data"));
+  connect(m_action_info, SIGNAL(triggered()), this, SLOT(action_information()));
 
   m_action_help = new QAction(_("&Help"), this);
   m_action_help->setStatusTip(_("Open the help viewer"));
@@ -135,6 +152,13 @@ void TrayIcon::action_about_app()
 void TrayIcon::action_help()
 {
   OEG::Qt::Application::runComponent("help-viewer", QStringList() << "index");
+}
+
+void TrayIcon::action_information()
+{
+  QString s = QString(_("Number of connections: %1")).arg(m_connections.count());
+
+  QMessageBox::information(0, qApp->applicationName(), s, QMessageBox::Ok);
 }
 
 void TrayIcon::action_exit()
@@ -172,13 +196,9 @@ void TrayIcon::onActivated(QSystemTrayIcon::ActivationReason reason)
 
 void TrayIcon::onNewConnection()
 {
-  QByteArray data;
-  QTcpSocket *m_connection = m_server->nextPendingConnection();
-
-  connect(m_connection, SIGNAL(disconnected()),
-          m_connection, SLOT(deleteLater()));
-
-  //m_connection->write(data);
-  //m_connection->disconnectFromHost();
+  qDebug() << "onNewConnection(): New connection.";
+  Connection *conn = new Connection(m_server->nextPendingConnection());
+  if (conn)
+    m_connections.append(conn);
 }
 

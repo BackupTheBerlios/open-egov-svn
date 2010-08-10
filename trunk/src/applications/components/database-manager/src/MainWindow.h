@@ -26,6 +26,8 @@
 
 class OEG::Qt::ToolProvider;
 
+class QAction;
+
 class MainWindow : public OEG::Qt::MainWindow
 {
   Q_OBJECT
@@ -39,7 +41,17 @@ class MainWindow : public OEG::Qt::MainWindow
     virtual void createToolBars();
     virtual void createToolProvider() {};
 
-  protected:
+  public slots:
+    void saveDatabaseAsSQL();
+    void saveDatabaseAsCSV();
+    void saveDatabaseAsXML();
+    void loadDatabaseFromSQL();
+    void loadDatabaseFromCSV();
+    void loadDatabaseFromXML();
+    void initDatabase();
 
+  protected:
+    QString  m_application;
+    QString  m_database;
 };
 

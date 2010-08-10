@@ -23,10 +23,12 @@
 #include <QApplication>
 #include <QCoreApplication>
 #include <QCloseEvent>
+#include <QDebug>
 #include <QDir>
 #include <QMenu>
 #include <QMenuBar>
 #include <QMessageBox>
+#include <QPluginLoader>
 #include <QVBoxLayout>
 
 #include "MainWindow.h"
@@ -48,6 +50,7 @@ DesktopWidget::DesktopWidget(QWidget *parent /*=0*/)
 
   createActions();
   createMenus();
+  loadPlugins();
 }
 
 void DesktopWidget::createActions()
@@ -89,6 +92,37 @@ void DesktopWidget::createMenus()
   m_menu_help->addSeparator();
   m_menu_help->addAction(m_action_about_app);
   m_menu_help->addAction(m_action_about_qt);
+}
+
+void DesktopWidget::loadPlugins()
+{
+  QDir pluginsDir(qApp->applicationDirPath());
+
+  if (pluginsDir.dirName().toLower() == "bin")
+    pluginsDir.cdUp();
+  pluginsDir.cd("plugins/desktop");
+
+  DesktopPluginInterface *pluginInterface;
+  QObject *plugin;
+  QWidget *gui;
+
+  foreach (QString fileName, pluginsDir.entryList(QDir::Files)) {
+    QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
+    plugin = pluginLoader.instance();
+    if (plugin) {
+      pluginInterface = qobject_cast<DesktopPluginInterface *>(plugin);
+      if (pluginInterface) {
+        m_plugins.append(pluginInterface);
+
+        gui = pluginInterface->createGUI(this);
+        if (gui) {
+          gui->show();
+        }
+      }
+    }
+  }
+
+  qDebug() << "Plugins found: " << m_plugins.count();
 }
 
 void DesktopWidget::actionProcessList()

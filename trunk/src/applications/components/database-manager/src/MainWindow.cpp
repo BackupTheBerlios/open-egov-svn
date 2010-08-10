@@ -63,3 +63,31 @@ void MainWindow::createDockWidgets()
 {
 }
 
+void MainWindow::saveDatabaseAsSQL()
+{
+}
+
+void MainWindow::saveDatabaseAsCSV()
+{
+}
+
+void MainWindow::saveDatabaseAsXML()
+{
+}
+
+void MainWindow::loadDatabaseFromSQL()
+{
+}
+
+void MainWindow::loadDatabaseFromCSV()
+{
+}
+
+void MainWindow::loadDatabaseFromXML()
+{
+}
+
+void MainWindow::initDatabase()
+{
+}
+

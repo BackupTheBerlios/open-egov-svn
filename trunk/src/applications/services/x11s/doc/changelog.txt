@@ -1,5 +1,9 @@
 $Id$
 
+2010-08-10  Gerrit M. Albrecht  <mail (at) gerrit-albrecht.de>
+
+	* Connection class provides multiple connections without blocking.
+
 2010-07-27  Gerrit M. Albrecht  <mail (at) gerrit-albrecht.de>
 
 	* System tray icon added.

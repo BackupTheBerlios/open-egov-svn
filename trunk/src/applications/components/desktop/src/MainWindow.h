@@ -20,7 +20,10 @@
 
 #include <OEG/Qt/MainWindow.h>
 
+#include <QList>
 #include <QWidget>
+
+#include "DesktopPluginInterface.h"
 
 class QVBoxLayout;
 class QMenuBar;
@@ -43,11 +46,14 @@ class DesktopWidget : public QWidget //OEG::Qt::MainWindow
   private:
     void createActions();
     void createMenus();
+    void loadPlugins();
 
   protected:
     void closeEvent(QCloseEvent *event);
 
   protected:
+    QList<DesktopPluginInterface *> m_plugins;
+
     QVBoxLayout *m_layout;
     QMenuBar    *m_menubar;
     QMenu       *m_menu_file;
