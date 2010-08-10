@@ -1,6 +1,6 @@
 // $Id$
 //
-// Open-eGovernment
+// Open eGovernment
 // Copyright (C) 2005-2010 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
