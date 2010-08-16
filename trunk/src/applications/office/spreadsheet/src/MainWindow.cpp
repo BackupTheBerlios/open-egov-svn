@@ -60,9 +60,10 @@ MainWindow::MainWindow()
   vbox->addWidget(m_tabs);
   setCentralLayout(vbox);
 
-  createActions();
-  createMenus();
-  createToolBars();
+  //createActions();
+  //createMenus();
+  //createToolBars();
+  createAll();
 
   setMinimumSize(200, 180);
 
