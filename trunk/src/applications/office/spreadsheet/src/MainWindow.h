@@ -1,11 +1,11 @@
 // $Id$
 //
-// Spreadsheet
-// Copyright (C) 2006-2007 by Gerrit M. Albrecht
+// Open eGovernment
+// Copyright (C) 2005-2010 by Gerrit M. Albrecht
 //
-// This program is free software; you can redistribute it and/or
+// This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
+// as published by the Free Software Foundation; either version 3
 // of the License, or (at your option) any later version.
 //
 // This program is distributed in the hope that it will be useful,
@@ -14,15 +14,13 @@
 // See the GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-// MA 02110-1301, USA.
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef SPREADSHEET_MAINWINDOW_H
-#define SPREADSHEET_MAINWINDOW_H
+#pragma once
 
-#include <GASI/Qt/MainWindow.h>
-#include <GASI/Qt/TabWidget.h>
+#include <OEG/Common.h>
+#include <OEG/Qt/MainWindow.h>
+#include <OEG/Qt/TabWidget.h>
 
 #include "DocumentProperties.h"
 #include "Settings.h"
@@ -37,7 +35,7 @@ class PropertiesDock;
 class FunctionsDock;
 class QTableWidgetItem;
 
-class MainWindow : public GASI::Qt::MainWindow
+class MainWindow : public OEG::Qt::MainWindow
 {
   Q_OBJECT
 
@@ -115,7 +113,7 @@ class MainWindow : public GASI::Qt::MainWindow
     QAction             *m_action_settings_security;
     QAction             *m_action_settings_view;
 
-    GASI::Qt::TabWidget *m_tabs;
+    OEG::Qt::TabWidget  *m_tabs;
     QToolBar            *m_toolbar_edit;
     QToolBar            *m_toolbar_format;
     QToolBar            *m_toolbar_widgets;
@@ -125,6 +123,4 @@ class MainWindow : public GASI::Qt::MainWindow
     DocumentProperties   m_properties;
     Settings             m_settings;
 };
-
-#endif
 

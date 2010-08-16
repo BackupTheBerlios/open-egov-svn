@@ -1,11 +1,11 @@
 // $Id$
 //
-// Spreadsheet
-// Copyright (C) 2006-2007 by Gerrit M. Albrecht
+// Open eGovernment
+// Copyright (C) 2005-2010 by Gerrit M. Albrecht
 //
-// This program is free software; you can redistribute it and/or
+// This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2
+// as published by the Free Software Foundation; either version 3
 // of the License, or (at your option) any later version.
 //
 // This program is distributed in the hope that it will be useful,
@@ -14,16 +14,15 @@
 // See the GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with this program; if not, write to the Free Software
-// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-// MA 02110-1301, USA.
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+#include <OEG/Qt/Application.h>
+#include <OEG/Qt/TabWidget.h>
+#include <OEG/Qt/MessageBox.h>
 
 #include <QtGui>
 #include <QtXml>
-
-#include <GASI/Qt/Application.h>
-#include <GASI/Qt/TabWidget.h>
-#include <GASI/Qt/MessageBox.h>
+#include <QDomDocument>
 
 #include "CommonOptionsDialog.h"
 #include "DocumentOptionsDialog.h"
@@ -38,12 +37,12 @@
 #include "MainWindow.h"
 
 MainWindow::MainWindow()
- : GASI::Qt::MainWindow(0, 500, 350)
+ : OEG::Qt::MainWindow(0) //, 500, 350)
 {
-  m_tabs = new GASI::Qt::TabWidget();
+  m_tabs = new OEG::Qt::TabWidget();
   if (! m_tabs)
     return;
-  m_tabs->addCloseTabButton(_("Close current tab."));
+//  m_tabs->addCloseTabButton(_("Close current tab."));
   m_tabs->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   m_tabs->setTabShape(QTabWidget::Triangular);
   m_tabs->setTabPosition(QTabWidget::South);
@@ -206,11 +205,12 @@ void MainWindow::action_settings_view()
 
 void MainWindow::createActions()
 {
-  GASI::Qt::MainWindow::createActions();
+  OEG::Qt::MainWindow::createActions();
 
   //connect(m_action_file_load, SIGNAL(triggered()), this, SLOT(action_file_load()));
   //connect(m_action_file_save, SIGNAL(triggered()), this, SLOT(action_file_save()));
 
+#if 0
   m_action_file_properties = new QAction(_("Properties ..."), this);
   m_action_file_properties->setStatusTip(_("Edit document properties."));
   connect(m_action_file_properties, SIGNAL(triggered()), this, SLOT(action_file_properties()));
@@ -292,10 +292,12 @@ void MainWindow::createActions()
   m_action_insert_diagram = new QAction(_("Diagram"), this);
   m_action_insert_diagram->setStatusTip(_("Insert diagram."));
   connect(m_action_insert_diagram, SIGNAL(triggered()), this, SLOT(action_insert_diagram()));
+#endif
 }
 
 void MainWindow::createMenus()
 {
+#if 0
   m_menu_file = menuBar()->addMenu(_("&File"));
   m_menu_file->addAction(m_action_file_load);
   m_menu_file->addAction(m_action_file_save);
@@ -345,10 +347,12 @@ void MainWindow::createMenus()
   m_menu_help = menuBar()->addMenu(_("&Help"));
   m_menu_help->addAction(m_action_about_me);
   m_menu_help->addAction(m_action_about_qt);
+#endif
 }
 
 void MainWindow::createToolBars()
 {
+#if 0
   m_toolbar_file = addToolBar(_("File"));
   //m_toolbar_file->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
   m_toolbar_file->addAction(m_action_file_load);
@@ -372,7 +376,7 @@ void MainWindow::createToolBars()
   m_toolbar_format = addToolBar(_("Format"));
 
   m_toolbar_widgets = addToolBar(_("Widgets"));
-
+#endif
 }
 
 void MainWindow::tabWidgetTitleDoubleClicked(int index)
@@ -398,15 +402,15 @@ void MainWindow::tabWidgetContextMenu(const QPoint &pos)
 
   // There are three different areas: the widget, the tabbar, and the free space of the tabwidget.
 
-  if (m_tabs->unprotectTabBar()->geometry().contains(pos)) {
-    actions.append(m_action_insert_sheet);
-    actions.append(m_action_file_properties); // Close sheet
+  if (false) { // (m_tabs->unprotectTabBar()->geometry().contains(pos)) {
+    //actions.append(m_action_insert_sheet);
+    //actions.append(m_action_file_properties); // Close sheet
   }
   else if (m_tabs->currentWidget()->geometry().contains(pos)) {
-    actions.append(m_action_file_print);
+    //actions.append(m_action_file_print);
   }
   else {
-    actions.append(m_action_file_properties); // Close sheet
+    //actions.append(m_action_file_properties); // Close sheet
   }
 
   if (actions.count() > 0)
@@ -430,8 +434,8 @@ void MainWindow::loadDocument(const QString &filename)
   QFile file(filename);
 
   if (! file.open(QIODevice::ReadOnly)) {
-    GASI::Qt::MessageBox::WarnMessage(QString(_("Can't read file %1:\n%2."))
-                                      .arg(file.fileName()).arg(file.errorString()));
+    OEG::Qt::MessageBox::WarnMessage(QString(_("Can't read file %1:\n%2."))
+                                     .arg(file.fileName()).arg(file.errorString()));
     return;
   }
 
@@ -450,8 +454,8 @@ void MainWindow::saveDocument(const QString &filename)
   QFile file(filename);
 
   if (! file.open(QIODevice::WriteOnly)) {
-    GASI::Qt::MessageBox::WarnMessage(QString(_("Can't write file %1:\n%2."))
-                                      .arg(file.fileName()).arg(file.errorString()));
+    OEG::Qt::MessageBox::WarnMessage(QString(_("Can't write file %1:\n%2."))
+                                     .arg(file.fileName()).arg(file.errorString()));
     return;
   }
 
