@@ -2,8 +2,9 @@
 
 #include <QtGui>
 
+#include <OEG/Qt/ColorButton.h>
+
 #include "MainWindow.h"
-#include "ColorButton.h"
 
 MainWindow::MainWindow()
  : QMainWindow(0)
@@ -18,7 +19,7 @@ MainWindow::MainWindow()
   //infoLabel->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
   //infoLabel->setAlignment(Qt::AlignCenter);
   
-  ColorButton *infoLabel = new ColorButton(QColor("#ffffff"));
+  OEG::Qt::ColorButton *infoLabel = new OEG::Qt::ColorButton(QColor("#ffffff"));
 
   QWidget *bottomFiller = new QWidget;
   bottomFiller->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
