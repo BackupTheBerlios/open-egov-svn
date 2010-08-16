@@ -23,17 +23,19 @@
 #include <QAction>
 #include <QApplication>
 #include <QKeySequence>
+#include <QLatin1String>
+#include <QLayout>
 #include <QList>
 #include <QMenu>
 #include <QMenuBar>
+#include <QPrinter>
 #include <QStatusBar>
-#include <QLatin1String>
 
 using namespace OEG::Qt;
 using namespace Qt;
 
 MainWindow::MainWindow(QWidget *parent /*=0*/, ::Qt::WindowFlags flags /*=0*/)
- : QMainWindow(parent, flags), m_tool_provider(0)
+ : QMainWindow(parent, flags), m_tool_provider(0), m_printer(0)
 {
   setWindowTitle(QCoreApplication::applicationName());
 
@@ -49,6 +51,10 @@ MainWindow::~MainWindow()
 
   if (m_tool_provider) {
     delete m_tool_provider; m_tool_provider = 0;
+  }
+
+  if (m_printer) {
+    delete (QPrinter *) m_printer; m_printer = 0;
   }
 }
 
@@ -329,5 +335,23 @@ void MainWindow::addHelpMenu()
   menu->addSeparator();
   menu->addAction(standardAction(AboutApp));
   menu->addAction(standardAction(AboutQt));
+}
+
+void MainWindow::setDefaultWindowSize(unsigned int width, unsigned int height)
+{
+  m_default_width  = width;
+  m_default_height = height;
+}
+
+void MainWindow::setCentralLayout(QLayout *layout)
+{
+  if (! layout) {
+    qWarning() << "MainWindow::setCentralLayout: layout was zero.";
+    return;
+  }
+
+  QWidget *w = new QWidget;
+  setCentralWidget(w);
+  w->setLayout(layout);
 }
 

@@ -25,6 +25,8 @@
 #include <QString>
 
 class QAction;
+class QLayout;
+class QPrinter;
 
 namespace OEG { namespace Qt {
 
@@ -94,6 +96,9 @@ class MainWindow : public QMainWindow
                                const QString &info, const QString &keySequence = QString());
     void addHelpMenu();
 
+    void setDefaultWindowSize(unsigned int width, unsigned int height);
+    void setCentralLayout(QLayout *layout);
+
   private:
     QAction *createStandardAction(const StandardAction &action, const QString &baseName);
     QAction *findStandardAction(const QString &baseName);         // TODO: avoid string search, store enum value.
@@ -102,6 +107,10 @@ class MainWindow : public QMainWindow
   protected:
     ToolProvider      *m_tool_provider;
     QList<QAction *>   m_actions;
+    unsigned int       m_default_width;
+    unsigned int       m_default_height;
+    QPrinter          *m_printer;
+    bool               m_printer_initialized;
 };
 
 }}
