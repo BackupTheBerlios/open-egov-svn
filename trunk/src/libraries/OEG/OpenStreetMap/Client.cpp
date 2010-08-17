@@ -77,7 +77,7 @@ void Client::ensureConnectionOSM()
     qDebug() << "no socket";
 
   if (m_socket->state() != QAbstractSocket::ConnectedState)
-    qDebug() << "socket has not a connected state";
+    qDebug() << "socket isn't in connected state";
 }
 
 // http://wiki.openstreetmap.org/wiki/API_v0.6#Changesets
