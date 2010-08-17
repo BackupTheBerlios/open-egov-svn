@@ -58,11 +58,7 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
   m_splitter->setHandleWidth(50);
   setCentralWidget(m_splitter);
 
-  //createAll();
-  createActions();
-  createMenus();
-  createToolBars();
-  createStatusBar();
+  createAll();
 
   createJavaScriptObjects();
 }
@@ -78,6 +74,8 @@ void MainWindow::createActions()
 {
   OEG::Qt::MainWindow::createActions();
 
+  connect(standardAction(ConnectToggle), SIGNAL(triggered()),
+          this,                          SLOT(actionConnectToggle()));
 }
 
 void MainWindow::createMenus()
@@ -85,8 +83,24 @@ void MainWindow::createMenus()
   QMenu *menu;
 
   menu = menuBar()->addMenu(_("&File"));
+  menu->addAction(standardAction(New));
+  menu->addSeparator();
+  menu->addAction(standardAction(Save));
+  menu->addAction(standardAction(SaveAs));
+  menu->addSeparator();
+  menu->addAction(standardAction(Print));
+  menu->addAction(standardAction(PrintPreview));
+  menu->addAction(standardAction(PrintSettings));
   menu->addSeparator();
   menu->addAction(standardAction(Exit));
+
+  menu = menuBar()->addMenu(_("&Edit"));
+  menu->addAction(standardAction(Cut));
+  menu->addAction(standardAction(Copy));
+  menu->addAction(standardAction(Paste));
+
+  menu = menuBar()->addMenu(_("&Connection"));
+  menu->addAction(standardAction(ConnectToggle));
 
   addHelpMenu();
 }
@@ -160,5 +174,9 @@ void MainWindow::runJavaScriptFromFile(const QString &fileName)
     return;
 
   runJavaScript(s);
+}
+
+void MainWindow::actionConnectToggle()
+{
 }
 

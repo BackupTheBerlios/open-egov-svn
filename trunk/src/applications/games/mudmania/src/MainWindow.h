@@ -49,6 +49,9 @@ class MainWindow : public OEG::Qt::MainWindow
     void runJavaScript(const QString &s);
     void runJavaScriptFromFile(const QString &fileName);
 
+  public slots:
+    void actionConnectToggle();
+
   protected:
     OEG::Qt::TabWidget *m_tabs;
     MultiLineEdit      *m_input;
