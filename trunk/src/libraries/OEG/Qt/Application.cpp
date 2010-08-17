@@ -18,7 +18,10 @@
 
 #include <OEG/Qt/Application.h>
 
+#include <QDir>
+#include <QFile>
 #include <QMenu>
+#include <QMessageBox>
 #include <QProcess>
 #include <QSystemTrayIcon>
 
@@ -39,6 +42,27 @@ Application::Application(int &argc, char *argv[])
 Application::~Application()
 {
   removeSystemTrayIcon();
+}
+
+void Application::installGetText()
+{
+#ifdef _WINDOWS
+  setlocale(LC_ALL, "");
+#else
+  //setlocale(LC_ALL, "de_DE");
+  setlocale(LC_ALL, QLocale::system().name().toLatin1().constData());
+#endif
+
+  //QDir dir;
+  //dir.cd(standardDirectory(Program));
+  //if (dir.exists("locale"))
+  //  dir.cd("locale");
+
+  QByteArray a = baseName().toAscii();
+
+  // or with: app.baseName().toAscii()
+  bindtextdomain(a.constData(), "locale");
+  textdomain(a.constData());
 }
 
 void Application::runComponent(const QString &cmd)
@@ -80,11 +104,6 @@ QString Application::applicationBuildTime() const
   return m_application_build_time;
 }
 
-void Application::setHomepage(const QString &url)
-{
-  m_homepage = url;
-}
-
 void Application::setBaseName(const QString &basename)
 {
   m_basename = basename;
@@ -98,6 +117,11 @@ QString Application::baseName() const
   return m_basename;
 }
 
+void Application::setHomepage(const QString &url)
+{
+  m_homepage = url;
+}
+
 QString Application::homepage() const
 {
   return m_homepage;
@@ -105,12 +129,18 @@ QString Application::homepage() const
 
 void Application::addSystemTrayIcon(const QIcon &icon, QMenu *menu, const QString &title)
 {
+  if (! QSystemTrayIcon::isSystemTrayAvailable()) {
+    QMessageBox::critical(0, _("Systray"), _("Couldn't detect system tray."));
+    return;
+  }
+
   removeSystemTrayIcon();
 
   m_tray_icon = new QSystemTrayIcon(this);
   m_tray_icon->setIcon(icon);
   m_tray_icon->setToolTip(title);
-  m_tray_icon->setContextMenu(menu);
+  if (menu)
+    m_tray_icon->setContextMenu(menu);
   m_tray_icon->show();
 }
 
@@ -122,5 +152,159 @@ void Application::removeSystemTrayIcon()
 
     delete m_tray_icon; m_tray_icon = 0;
   }
+}
+
+QString Application::standardDirectory(DirectoryType type)
+{
+  switch (type) {
+    case Temp:
+      return QDir::tempPath();
+
+    case User:
+      return QDir::homePath();
+
+    case Common:  // C:\Programme\Gemeinsame Dateien\GASI\resources
+      return standardDirectory(Temp); // TODO
+      break;
+
+    case Program:
+      {
+        QDir dir(QCoreApplication::applicationDirPath());
+
+        if (dir.dirName() == "bin")
+          dir.cdUp();
+
+        return dir.canonicalPath();
+      }
+      break;
+  }
+
+  return QString();
+}
+
+QString Application::locateFile(const QString &filename, FileType type /*=Unknown*/)
+{
+  QString path;
+
+  switch (type) {
+    case Icon:
+      {
+        QDir dir;
+
+        // TODO: avoid change dirs
+
+        dir.cd(standardDirectory(User));
+        if (dir.exists("resources/icons")) {
+          dir.cd("resources/icons");
+          if (QFile::exists(dir.canonicalPath() + "/" + filename))
+            return dir.canonicalPath() + "/" + filename;
+        }
+
+        dir.cd(standardDirectory(Common));
+        if (dir.exists("resources/icons")) {
+          dir.cd("resources/icons");
+          if (QFile::exists(dir.canonicalPath() + "/" + filename))
+            return dir.canonicalPath() + "/" + filename;
+        }
+
+        dir.cd(standardDirectory(Program));
+        if (dir.exists("resources/icons")) {
+          dir.cd("resources/icons");
+          if (QFile::exists(dir.canonicalPath() + "/" + filename))
+            return dir.canonicalPath() + "/" + filename;
+        }
+
+        qWarning() << "Icon not found! Checked in user/common/app resources dir.";
+
+        return QString();
+      }
+      break;
+
+    case Database:
+      {
+        QDir dir;
+
+        // A database is always in the program folder. TODO: allows other directories.
+
+        dir.cd(standardDirectory(Program));
+        //if (dir.exists("db")) {
+        //  dir.cd("db");
+          if (QFile::exists(dir.canonicalPath() + "/" + filename))
+            return dir.canonicalPath() + "/" + filename;
+        //}
+
+        qWarning() << "Database not found! Checked only in program dir/db.";
+
+        return QString();
+      }
+      break;
+
+    case Image:
+      break;
+
+    case Text:
+      break;
+
+    case Help:
+      {
+        QDir dir;
+        QString lang = QLocale::system().name();
+
+        // Help files are always there, were also the program files are located.
+
+        dir.cd(standardDirectory(Program));
+        if (dir.exists("help")) {
+          dir.cd("help");
+          if (dir.exists(lang))
+            dir.cd(lang);
+          else if (dir.exists("en_US"))
+            dir.cd("en_US");
+          //GASI::Qt::MessageBox::InfoMessage(dir.canonicalPath());
+          if (QFile::exists(dir.canonicalPath() + "/" + filename))
+            return dir.canonicalPath() + "/" + filename;
+        }
+
+        qWarning() << "Help text not found! Checked in app/help dir.";
+
+        return QString();
+      }
+      break;
+
+    case Plugin:
+      {
+        QDir dir;
+
+        dir.cd(standardDirectory(Program));
+        if (dir.exists("plugins")) {
+          dir.cd("plugins");
+          if (QFile::exists(dir.canonicalPath() + "/" + filename))
+            return dir.canonicalPath() + "/" + filename;
+        }
+
+        dir.cd(standardDirectory(Common));
+        if (dir.exists("plugins")) {
+          dir.cd("plugins");
+          if (QFile::exists(dir.canonicalPath() + "/" + filename))
+            return dir.canonicalPath() + "/" + filename;
+        }
+
+        dir.cd(standardDirectory(User));
+        if (dir.exists("plugins")) {
+          dir.cd("plugins");
+          if (QFile::exists(dir.canonicalPath() + "/" + filename))
+            return dir.canonicalPath() + "/" + filename;
+        }
+
+        qWarning() << "Plugin not found! Checked in app/common/user plugins dir.";
+
+        return QString();
+      }
+      break;
+
+    case Unknown:
+      break;
+  }
+
+  return path;
 }
 

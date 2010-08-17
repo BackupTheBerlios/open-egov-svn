@@ -19,6 +19,7 @@
 #pragma once
 
 #include <OEG/Common.h>
+#include <OEG/Qt/Settings.h>
 
 #include <QApplication>
 #include <QIcon>
@@ -37,11 +38,13 @@ class Application : public QApplication
 
   public:
     enum DirectoryType { Temp, User, Common, Program };
-    enum FileType { Icon, Database, Image, Text, Plugin, Unknown };
+    enum FileType { Icon, Database, Image, Text, Plugin, Help, Unknown };
 
   public:
     Application(int &argc, char *argv[]);
     virtual ~Application();
+
+    void installGetText();
 
     static void runComponent(const QString &cmd);
     static void runComponent(const QString &cmd, const QStringList &arguments);
@@ -62,6 +65,9 @@ class Application : public QApplication
     void setBaseName(const QString &basename);
     QString baseName() const;
 
+    QString standardDirectory(DirectoryType type);
+    QString locateFile(const QString &filename, FileType type = Unknown);
+
   protected:
     QSystemTrayIcon *m_tray_icon;
     QString          m_application_version;
@@ -69,6 +75,7 @@ class Application : public QApplication
     QString          m_application_build_time;
     QString          m_homepage;
     QString          m_basename;
+    Settings        *m_settings;
 };
 
 }}
