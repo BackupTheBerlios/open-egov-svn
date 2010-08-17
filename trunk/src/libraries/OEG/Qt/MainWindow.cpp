@@ -39,6 +39,7 @@ MainWindow::MainWindow(QWidget *parent /*=0*/, ::Qt::WindowFlags flags /*=0*/)
  : QMainWindow(parent, flags), m_tool_provider(0), m_printer(0)
 {
   setWindowTitle(QCoreApplication::applicationName());
+  setObjectName("MainWindow");
 
   resize(400, 300);
 
