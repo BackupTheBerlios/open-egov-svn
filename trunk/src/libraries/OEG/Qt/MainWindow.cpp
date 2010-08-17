@@ -17,6 +17,7 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <OEG/Common.h>
+#include <OEG/Qt/Application.h>
 #include <OEG/Qt/MainWindow.h>
 #include <OEG/Qt/ToolProvider.h>
 
@@ -123,9 +124,18 @@ QAction *MainWindow::createStandardAction(const StandardAction &action, const QS
   switch (action) {
     case AboutApp:
       a = addStandardAction(baseName, _("About &App ..."), _("Information about this appliciation."));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionAboutApp()));
       break;
     case AboutQt:
       a = addStandardAction(baseName, _("About &Qt ..."), _("Information about the Qt framework."));
+      connect(a, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
+      break;
+    case Clear:
+      a = addStandardAction(baseName, _("Clear"), _("Clear output window."));
+      break;
+    case ConnectToggle:
+      a = addStandardAction(baseName, _("Connect"), _("Open a new Connection."));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionConnectToggle()));
       break;
     case Close:
       a = addStandardAction(baseName, _("&Close"), _("Close."), _("Ctrl+W"));
@@ -148,13 +158,16 @@ QAction *MainWindow::createStandardAction(const StandardAction &action, const QS
       a = addStandardAction(baseName, _("&Homepage ..."), _("Open the homepage in the standard browser."));
       break;
     case HelpContents:
-      a = addStandardAction(baseName, _("Help &Contents ..."), _("Open the help window with contents."), _("F1"));
+      a = addStandardAction(baseName, _("&Help ..."), _("Open the help window with contents."), _("F1"));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionHelpContents()));
       break;
     case HelpIndex:
       a = addStandardAction(baseName, _("Help &Index ..."), _("Open the help window with index."));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionHelpIndex()));
       break;
     case HelpSearch:
       a = addStandardAction(baseName, _("Help &Search ..."), _("Open the help window with search."));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionHelpSearch()));
       break;
     case HelpForum:
       a = addStandardAction(baseName, _("&Forum ..."), _("Open the webpage of an online-help forum."));
@@ -280,6 +293,8 @@ QString MainWindow::standardActionName(const StandardAction &action)
 {
   if (action == AboutApp)              return QLatin1String("about_app");
   if (action == AboutQt)               return QLatin1String("about_qt");
+  if (action == Clear)                 return QLatin1String("clear");
+  if (action == ConnectToggle)         return QLatin1String("connect_toggle");
   if (action == Close)                 return QLatin1String("close");
   if (action == Copy)                  return QLatin1String("copy");
   if (action == Cut)                   return QLatin1String("cut");
@@ -326,8 +341,8 @@ void MainWindow::addHelpMenu()
 
   menu = menuBar()->addMenu(_("&Help"));
   menu->addAction(standardAction(HelpContents));
-  menu->addAction(standardAction(HelpIndex));
-  menu->addAction(standardAction(HelpSearch));
+  //menu->addAction(standardAction(HelpIndex));    // into prefs.
+  //menu->addAction(standardAction(HelpSearch));
   menu->addSeparator();
   menu->addAction(standardAction(GoToHomepage));
   menu->addAction(standardAction(HelpForum));
@@ -353,5 +368,29 @@ void MainWindow::setCentralLayout(QLayout *layout)
   QWidget *w = new QWidget;
   setCentralWidget(w);
   w->setLayout(layout);
+}
+
+void MainWindow::standardActionAboutApp()
+{
+  OEG::Qt::Application::runComponent("about-dialog", QStringList() << qApp->applicationName());
+}
+
+void MainWindow::standardActionConnectToggle()
+{
+}
+
+void MainWindow::standardActionHelpContents()
+{
+  OEG::Qt::Application::runComponent("help-viewer", QStringList() << "contents");
+}
+
+void MainWindow::standardActionHelpIndex()
+{
+  OEG::Qt::Application::runComponent("help-viewer", QStringList() << "index");
+}
+
+void MainWindow::standardActionHelpSearch()
+{
+  OEG::Qt::Application::runComponent("help-viewer", QStringList() << "search");
 }
 

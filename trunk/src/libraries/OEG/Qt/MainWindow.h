@@ -40,6 +40,8 @@ class MainWindow : public QMainWindow
     enum StandardAction {
       AboutApp,
       AboutQt,
+      Clear,
+      ConnectToggle,
       Close,
       Copy,
       Cut,
@@ -81,6 +83,13 @@ class MainWindow : public QMainWindow
     virtual ~MainWindow();
 
     QAction *standardAction(const StandardAction &action);
+
+  public slots:
+    void standardActionAboutApp();
+    void standardActionConnectToggle();
+    void standardActionHelpContents();
+    void standardActionHelpIndex();
+    void standardActionHelpSearch();
 
   protected:
     virtual void createAll();
