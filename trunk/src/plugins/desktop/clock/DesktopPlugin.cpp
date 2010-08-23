@@ -33,7 +33,7 @@ QWidget *DesktopPlugin::createGUI(QWidget *parent)
 
 QString DesktopPlugin::name() const
 {
-  return "Clock";
+  return _("Clock");
 }
 
 void DesktopPlugin::startPlugin()

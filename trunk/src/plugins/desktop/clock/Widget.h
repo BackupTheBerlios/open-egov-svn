@@ -54,6 +54,7 @@ class Widget : public QWidget
     QLabel      *m_label;
     QWidget     *m_parent;
     QDockWidget *m_dock;
-    QPoint       m_diff;                 // Difference between pos of dock frame and its inner widget.
+    QPoint       m_diff_tl;            // Difference between pos of dock frame and its inner widget.
+    QPoint       m_diff_br;
 };
 

@@ -26,14 +26,16 @@
 #include <QSettings>
 #include <QTime>
 #include <QTimer>
+#include <QStyle>
 
 #include "Widget.h"
 
 Widget::Widget(QWidget *parent /*=0*/)
  : QWidget(parent), m_dock(0)
 {
-  m_diff   = QPoint(0, 0);
-  m_parent = parent;
+  m_diff_tl = QPoint(0, 0);
+  m_diff_br = QPoint(0, 0);
+  m_parent  = parent;
 
   m_label = new QLabel(this);
   if (! m_label)
@@ -41,8 +43,9 @@ Widget::Widget(QWidget *parent /*=0*/)
 
   m_label->move(0, 0);
   m_label->setText("00:00:00");
-  m_label->setFrameStyle(QFrame::Box | QFrame::Plain);
+  m_label->setFrameStyle(QFrame::Box | QFrame::Plain); // QFrame::Panel | QFrame::Sunken
   m_label->show();
+  m_label->setStyleSheet("QLabel { background-color: yellow }");
   move(100, 100);
   resize(m_label->sizeHint());
 
@@ -95,12 +98,17 @@ void Widget::mouseDoubleClickEvent(QMouseEvent *event)
       m_dock->setFloating(true);
       m_dock->setMinimumWidth(3);
       m_dock->setMinimumHeight(3);
-      if (m_diff == QPoint(0,0)) {
-        m_dock->show();
-        m_diff = m_dock->geometry().topLeft() -                      // Difference is 4,22.
-                 m_dock->frameGeometry().topLeft();
+      if (m_diff_tl.isNull()) {
+        m_diff_tl = m_dock->geometry().topLeft() -                   // Difference is 4,22.
+                    m_dock->frameGeometry().topLeft();
       }
-      m_dock->move(m_parent->mapFromGlobal(pos) - m_diff);
+      if (m_diff_br.isNull()) {
+        m_diff_br = m_dock->frameGeometry().bottomRight() -
+                    m_dock->geometry().bottomRight();
+      }
+      m_dock->move(m_parent->mapFromGlobal(pos) - m_diff_tl);
+      m_dock->resize(size() + QSize(m_diff_tl.x() + m_diff_br.x(),
+                                    m_diff_tl.y() + m_diff_br.y()));
       m_dock->show();
       //connect(m_dock, SIGNAL(topLevelChanged(bool)),
       //        this, SLOT(dockWidgetTopLevelChanged(bool)));

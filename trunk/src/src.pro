@@ -1,5 +1,5 @@
 # $Id$
 
 TEMPLATE = subdirs
-SUBDIRS  = applications libraries plugins
+SUBDIRS  = libraries applications plugins
 
