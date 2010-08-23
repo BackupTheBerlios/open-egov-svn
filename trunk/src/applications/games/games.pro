@@ -1,5 +1,5 @@
 # $Id$
 
 TEMPLATE = subdirs
-SUBDIRS  = mudmania peng
+SUBDIRS  = checkers mudmania peng
 

@@ -55,8 +55,8 @@ IF EXIST plugins (
   ECHO No plugins directory found. Creating.
   MD plugins
 )
-
 CD plugins
+
 IF EXIST qt (
   ECHO The plugins/qt directory already exists.
 ) ELSE (
@@ -64,17 +64,18 @@ IF EXIST qt (
   MD qt
 )
 CD qt
-RD /S /Q accessible
-RD /S /Q codecs
-RD /S /Q iconengines
-RD /S /Q imageformats
-RD /S /Q sqldrivers
 
-MD accessible
-MD codecs
-MD iconengines
-MD imageformats
-MD sqldrivers
+REM RD /S /Q accessible
+REM RD /S /Q codecs
+REM RD /S /Q iconengines
+REM RD /S /Q imageformats
+REM RD /S /Q sqldrivers
+
+IF NOT EXIST accessible   MD accessible
+IF NOT EXIST codecs       MD codecs
+IF NOT EXIST iconengines  MD iconengines
+IF NOT EXIST imageformats MD imageformats
+IF NOT EXIST sqldrivers   MD sqldrivers
 
 XCOPY /E /H /Y "%SRCDIR%\accessible"   accessible
 XCOPY /E /H /Y "%SRCDIR%\codecs"       codecs

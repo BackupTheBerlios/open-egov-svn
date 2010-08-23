@@ -1,5 +1,5 @@
 # $Id$
 
 TEMPLATE = subdirs
-SUBDIRS  = diary password-manager todo-lists
+SUBDIRS  = charts diary inventory news-collector organigram  password-manager todo-lists video-capture
 

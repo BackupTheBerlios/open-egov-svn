@@ -1,5 +1,5 @@
 # $Id$
 
 TEMPLATE = subdirs
-SUBDIRS  = map-viewer
+SUBDIRS  = geocaching map-viewer public-transport-system
 

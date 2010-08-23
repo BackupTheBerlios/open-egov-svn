@@ -44,20 +44,20 @@ void MainWindow::createActions()
 
 void MainWindow::createMenus()
 {
-  QMenu *fileMenu = menuBar()->addMenu(_("&File"));
-  fileMenu->addAction(standardAction("exit"));
+  QMenu *menu;
+
+  menu = menuBar()->addMenu(_("&File"));
+  menu->addAction(standardAction(Exit));
+
 }
 
 void MainWindow::createToolBars()
 {
-  QAction  *a;
-  QToolBar *t;
+  QAction  *action;
+  QToolBar *toolbar;
 
-  t = addToolBar(_("File"));
-  a = standardAction("exit");
-  a->setShortcuts(QKeySequence::Quit);
-  t->addAction(a);
-  connect(a, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
+  toolbar = addToolBar(_("File"));
+  toolbar->addAction(standardAction(Exit));
 
 }
 
