@@ -43,6 +43,8 @@ MainWindow::MainWindow(QWidget *parent /*=0*/, ::Qt::WindowFlags flags /*=0*/)
 
   resize(400, 300);
 
+  m_data_storage_mode = DoNothing;
+
   //createAll();
 }
 
@@ -133,6 +135,7 @@ QAction *MainWindow::createStandardAction(const StandardAction &action, const QS
       break;
     case Clear:
       a = addStandardAction(baseName, _("Clear"), _("Clear output window."));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionClear()));
       break;
     case ConnectToggle:
       a = addStandardAction(baseName, _("Connect"), _("Open a new Connection."));
@@ -140,12 +143,15 @@ QAction *MainWindow::createStandardAction(const StandardAction &action, const QS
       break;
     case Close:
       a = addStandardAction(baseName, _("&Close"), _("Close."), _("Ctrl+W"));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionClose()));
       break;
     case Copy:
       a = addStandardAction(baseName, _("Copy"), _("Copy data."), _("Ctrl+C"));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionCopy()));
       break;
     case Cut:
       a = addStandardAction(baseName, _("Cut"), _("Cut data."), _("Ctrl+X"));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionCut()));
       break;
     case Delete:
       a = addStandardAction(baseName, _("Delete"), _("Delete data."), _("Del"));
@@ -175,18 +181,22 @@ QAction *MainWindow::createStandardAction(const StandardAction &action, const QS
       break;
     case New:
       a = addStandardAction(baseName, _("&New"), _("Create new document."), _("Ctrl+N"));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionNew()));
       break;
     case Open:
       a = addStandardAction(baseName, _("&Open"), _("Open existing document."), _("Ctrl+O"));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionOpen()));
       break;
     case Paste:
       a = addStandardAction(baseName, _("Paste"), _("Paste data into document."), _("Ctrl+V"));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionPaste()));
       break;
     case Plugins:
       a = addStandardAction(baseName, _("Plugins ..."), _("Open the plugin manager."));
       break;
     case Preferences:
       a = addStandardAction(baseName, _("&Preferences ..."), _("Open the preferences dialog."));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionPreferences()));
       break;
     case PreferencesColors:
       a = addStandardAction(baseName, _("&Colors ..."), _("Open the preferences dialog for colors settings."));
@@ -202,48 +212,62 @@ QAction *MainWindow::createStandardAction(const StandardAction &action, const QS
       break;
     case Print:
       a = addStandardAction(baseName, _("&Print"), _("Print document."), _("Ctrl+P"));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionPrint()));
       break;
     case PrintPreview:
       a = addStandardAction(baseName, _("Print Preview ..."), _("Print preview."));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionPrintPreview()));
       break;
     case PrintSettings:
       a = addStandardAction(baseName, _("Print Settings ..."), _("Print Settings."));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionPrintSettings()));
       break;
     case Redo:
       a = addStandardAction(baseName, _("&Redo"), _("Redo changes."), _("Ctrl+Y"));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionRedo()));
       break;
     case Reload:
       a = addStandardAction(baseName, _("&Reload"), _("Reload data."), _("F5"));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionReload()));
       break;
     case ReportBug:
       a = addStandardAction(baseName, _("Report &Bug ..."), _("Open the bug report dialog."));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionReportBug()));
       break;
     case Save:
       a = addStandardAction(baseName, _("Save"), _("Save the document."), _("Ctrl+S"));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionSave()));
       break;
     case SaveAs:
       a = addStandardAction(baseName, _("Save &As ..."), _("Save document into a new file."), _("Ctrl+Alt+S"));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionSaveAs()));
       break;
     case SelectAll:
       a = addStandardAction(baseName, _("Select &All"), _("Select all."), _("Ctrl+A"));
       break;
     case Undo:
       a = addStandardAction(baseName, _("&Undo"), _("Undo changes."), _("Ctrl+Z"));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionUndo()));
       break;
     case ZoomFitWidth:
       a = addStandardAction(baseName, _("Zoom Fit Width"), _("Zoom document until it fits into the window with."));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionZoomFitWidth()));
       break;
     case ZoomFitWindow:
       a = addStandardAction(baseName, _("Zoom Fit Window"), _("Zoom document until it fits into the window."));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionZoomFitWindow()));
       break;
     case ZoomIn:
       a = addStandardAction(baseName, _("Zoom In"), _("Zoom into document."), _("Ctrl++"));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionZoomIn()));
       break;
     case ZoomOut:
       a = addStandardAction(baseName, _("Zoom Out"), _("Zoom out of document."), _("Ctrl+-"));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionZoomOut()));
       break;
     case ZoomNormal:
       a = addStandardAction(baseName, _("Zoom Normal"), _("Set normal zoom value."), _("Ctrl+Shift+-"));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionZoomNormal()));
       break;
     default:
       // If at least an action name is given, we'll return an action object without additional settings.
@@ -380,6 +404,22 @@ void MainWindow::standardActionConnectToggle()
 {
 }
 
+void MainWindow::standardActionCopy()
+{
+}
+
+void MainWindow::standardActionClear()
+{
+}
+
+void MainWindow::standardActionClose()
+{
+}
+
+void MainWindow::standardActionCut()
+{
+}
+
 void MainWindow::standardActionHelpContents()
 {
   OEG::Qt::Application::runComponent("help-viewer", QStringList() << "contents");
@@ -393,5 +433,78 @@ void MainWindow::standardActionHelpIndex()
 void MainWindow::standardActionHelpSearch()
 {
   OEG::Qt::Application::runComponent("help-viewer", QStringList() << "search");
+}
+
+void MainWindow::standardActionOpen()
+{
+}
+
+void MainWindow::standardActionNew()
+{
+}
+
+void MainWindow::standardActionPaste()
+{
+}
+
+void MainWindow::standardActionPreferences()
+{
+}
+
+void MainWindow::standardActionPrint()
+{
+}
+
+void MainWindow::standardActionPrintPreview()
+{
+}
+
+void MainWindow::standardActionPrintSettings()
+{
+}
+
+void MainWindow::standardActionRedo()
+{
+}
+
+void MainWindow::standardActionReload()
+{
+}
+
+void MainWindow::standardActionReportBug()
+{
+  OEG::Qt::Application::runComponent("bug-reporter", QStringList() << qApp->applicationName());
+}
+
+void MainWindow::standardActionSave()
+{
+}
+
+void MainWindow::standardActionSaveAs()
+{
+}
+
+void MainWindow::standardActionUndo()
+{
+}
+
+void MainWindow::standardActionZoomFitWidth()
+{
+}
+
+void MainWindow::standardActionZoomFitWindow()
+{
+}
+
+void MainWindow::standardActionZoomIn()
+{
+}
+
+void MainWindow::standardActionZoomOut()
+{
+}
+
+void MainWindow::standardActionZoomNormal()
+{
 }
 

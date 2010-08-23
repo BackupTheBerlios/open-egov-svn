@@ -36,6 +36,8 @@ LineEdit::LineEdit(QWidget *parent /*=0*/)
 LineEdit::LineEdit(const QString &contents, QWidget *parent /*=0*/)
  : QLineEdit(contents, parent)
 {
+  m_enable_clear_button = false;
+
   m_clear_button = new QToolButton(this);
   if (! m_clear_button)
     return;

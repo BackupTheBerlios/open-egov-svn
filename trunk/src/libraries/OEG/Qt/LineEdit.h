@@ -49,6 +49,7 @@ class LineEdit : public QLineEdit
 
   private:
     QToolButton *m_clear_button;
+    bool         m_enable_clear_button;
 };
 
 }}

@@ -52,6 +52,7 @@ class MainWindow : public QMainWindow
       HelpIndex,
       HelpSearch,
       HelpForum,
+      //Load: see "Open".
       New,
       Open,
       Paste,
@@ -64,6 +65,7 @@ class MainWindow : public QMainWindow
       Print,
       PrintPreview,
       PrintSettings,
+      //Quit: see "Exit".
       Redo,
       Reload,
       ReportBug,
@@ -78,6 +80,12 @@ class MainWindow : public QMainWindow
       ZoomNormal
     };
 
+    enum DataStorageMode {
+      DoNothing,
+      XmlFile,
+      Database
+    };
+
   public:
     MainWindow(QWidget *parent = 0, ::Qt::WindowFlags flags = 0);
     virtual ~MainWindow();
@@ -86,10 +94,32 @@ class MainWindow : public QMainWindow
 
   public slots:
     void standardActionAboutApp();
+    void standardActionClear();
+    void standardActionClose();
+    void standardActionCopy();
+    void standardActionCut();
     void standardActionConnectToggle();
     void standardActionHelpContents();
     void standardActionHelpIndex();
     void standardActionHelpSearch();
+    void standardActionOpen();
+    void standardActionNew();
+    void standardActionPaste();
+    void standardActionPreferences();
+    void standardActionPrint();
+    void standardActionPrintPreview();
+    void standardActionPrintSettings();
+    void standardActionRedo();
+    void standardActionReload();
+    void standardActionReportBug();
+    void standardActionSave();
+    void standardActionSaveAs();
+    void standardActionUndo();
+    void standardActionZoomFitWidth();
+    void standardActionZoomFitWindow();
+    void standardActionZoomIn();
+    void standardActionZoomOut();
+    void standardActionZoomNormal();
 
   protected:
     virtual void createAll();
@@ -120,6 +150,7 @@ class MainWindow : public QMainWindow
     unsigned int       m_default_height;
     QPrinter          *m_printer;
     bool               m_printer_initialized;
+    DataStorageMode    m_data_storage_mode;
 };
 
 }}

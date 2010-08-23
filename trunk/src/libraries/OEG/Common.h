@@ -29,7 +29,5 @@
 
 #define _(text) gettext(text)
 
-//#define _(text) (text)
-
 #endif
 

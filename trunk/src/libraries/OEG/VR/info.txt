@@ -1,0 +1,7 @@
+$Id$
+
+http://simplesamlphp.org/
+http://rnd.feide.no/anatomy_of_saml_messages/
+http://rnd.feide.no/2007/12/10/example_saml_2_0_request_and_response/
+
+
