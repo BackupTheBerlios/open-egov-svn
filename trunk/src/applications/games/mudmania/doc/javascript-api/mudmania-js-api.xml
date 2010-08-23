@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
 
+<!-- Id: -->
+
 <api>
   <functions>
 <!-- Template:
@@ -663,8 +665,8 @@ alias sl selbstloeschung, worlds.currentWorld.password
 
     <object name="aliases" global="yes">
       <description>
-        Das globale aliases-Objekt einhält eine alle für den jeweiligen Spieler
-        gültige Aliase. Damit hat man uneingeschränkten Zugriff auf jedes
+        Das globale aliases-Objekt einhält alle für den jeweiligen Spieler
+        gültigen Aliase. Damit hat man uneingeschränkten Zugriff auf jedes
         Alias per Skript oder von der Kommandozeile und kann alle Eigenschaften
         der Aliase verändern, als ob man den grafischen Editor benutzen würde.
       </description>
@@ -926,3 +928,4 @@ alias sl selbstloeschung, worlds.currentWorld.password
     </object>
   </objects>
 </api>
+
