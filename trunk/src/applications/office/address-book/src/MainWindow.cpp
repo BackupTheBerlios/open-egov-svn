@@ -47,18 +47,42 @@ void MainWindow::createMenus()
   QMenu *menu;
 
   menu = menuBar()->addMenu(_("&File"));
+  menu->addAction(standardAction(New));
+  menu->addAction(standardAction(Edit));
+  menu->addAction(standardAction(Print));
+  menu->addAction(standardAction(Edit));
+  menu->addSeparator();
   menu->addAction(standardAction(Exit));
 
+  menu = menuBar()->addMenu(_("&Edit"));
+  menu->addAction(standardAction(Undo));
+  menu->addAction(standardAction(Redo));
+  menu->addSeparator();
+  menu->addAction(standardAction(Cut));
+  menu->addAction(standardAction(Copy));
+  menu->addAction(standardAction(Paste));
+  menu->addAction(standardAction(Delete));
+
+  addHelpMenu();
 }
 
 void MainWindow::createToolBars()
 {
-  QAction  *action;
   QToolBar *toolbar;
 
   toolbar = addToolBar(_("File"));
-  toolbar->addAction(standardAction(Exit));
-
+  toolbar->addAction(standardAction(New));
+  toolbar->addAction(standardAction(Edit));
+  toolbar->addAction(standardAction(Print));
+  toolbar->addAction(standardAction(Edit));
+  toolbar->addSeparator();
+  toolbar->addAction(standardAction(Undo));
+  toolbar->addAction(standardAction(Redo));
+  toolbar->addSeparator();
+  toolbar->addAction(standardAction(Cut));
+  toolbar->addAction(standardAction(Copy));
+  toolbar->addAction(standardAction(Paste));
+  toolbar->addAction(standardAction(Delete));
 }
 
 void MainWindow::createDockWidgets()

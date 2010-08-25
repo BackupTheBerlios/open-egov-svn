@@ -131,7 +131,7 @@ void ProcessList::update()
     info->setProcessId(pe32.th32ProcessID);
     info->setParentProcessId(pe32.th32ParentProcessID);
     info->setThreadCount(pe32.cntThreads);
-    info->setPriorityClassBase(pe32.pcPriClassBase);        // Base priority of any threads created by this process.
+    info->setPriorityClassBase(pe32.pcPriClassBase);       // Base priority of any threads created by this process.
 
     searchProcessModules(pe32.th32ProcessID);              // List the modules associated with this process.
     searchProcessThreads(pe32.th32ProcessID);              // List the threads associated with this process.
@@ -185,7 +185,7 @@ bool ProcessList::searchProcessModules(unsigned long int pid)
     return false;
   }
 
-  // Now walk the module list of the process, and display information about each module.
+  // Now walk the module list of the process, and collect information about each module.
   do {
     ModuleInfo *info = new ModuleInfo();
     if (! info) {

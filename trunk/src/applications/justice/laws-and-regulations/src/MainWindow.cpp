@@ -53,6 +53,10 @@ void MainWindow::createToolBars()
   QToolBar *toolbar;
 
   toolbar = addToolBar(_("File"));
+  toolbar->addAction(standardAction(Cut));
+  toolbar->addAction(standardAction(Copy));
+  toolbar->addAction(standardAction(Paste));
+  toolbar->addSeparator();
   toolbar->addAction(standardAction(Exit));
 }
 

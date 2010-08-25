@@ -46,6 +46,7 @@ class MainWindow : public QMainWindow
       Copy,
       Cut,
       Delete,
+      Edit,
       Exit,
       GoToHomepage,
       HelpContents,
@@ -99,6 +100,8 @@ class MainWindow : public QMainWindow
     void standardActionCopy();
     void standardActionCut();
     void standardActionConnectToggle();
+    void standardActionDelete();
+    void standardActionEdit();
     void standardActionHelpContents();
     void standardActionHelpIndex();
     void standardActionHelpSearch();

@@ -155,6 +155,11 @@ QAction *MainWindow::createStandardAction(const StandardAction &action, const QS
       break;
     case Delete:
       a = addStandardAction(baseName, _("Delete"), _("Delete data."), _("Del"));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionDelete()));
+      break;
+    case Edit:
+      a = addStandardAction(baseName, _("Edit"), _("Edit data."));
+      connect(a, SIGNAL(triggered()), this, SLOT(standardActionEdit()));
       break;
     case Exit:
       a = addStandardAction(baseName, _("E&xit"), _("Exit the application."), _("Alt+F4"));
@@ -324,6 +329,7 @@ QString MainWindow::standardActionName(const StandardAction &action)
   if (action == Copy)                  return QLatin1String("copy");
   if (action == Cut)                   return QLatin1String("cut");
   if (action == Delete)                return QLatin1String("delete");
+  if (action == Edit)                  return QLatin1String("edit");
   if (action == Exit)                  return QLatin1String("exit");
   if (action == GoToHomepage)          return QLatin1String("go_to_homepage");
   if (action == HelpContents)          return QLatin1String("help_contents");
@@ -417,6 +423,14 @@ void MainWindow::standardActionClose()
 }
 
 void MainWindow::standardActionCut()
+{
+}
+
+void MainWindow::standardActionDelete()
+{
+}
+
+void MainWindow::standardActionEdit()
 {
 }
 

@@ -30,6 +30,9 @@ win32 {
   }
 }
 
+win32: DLLEXTENSION=dll
+else:  DLLEXTENSION=so
+
 isEmpty(PACKAGES) {
   PACKAGES += QT
 }
@@ -38,26 +41,33 @@ LIBSLINE = -L..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_S
 contains(PACKAGES, QT) {
   message(Adding support for OEG-Qt ...)
   LIBSLINE += -loegQt1
+  PRE_TARGETDEPS += $${DESTDIR}/liboegQt1.a
+  #PRE_TARGETDEPS += $${DESTDIR}/oegQt1.$${DLLEXTENSION}
 }
 contains(PACKAGES, CRYPT) {
   message(Adding support for OEG-Crypt ...)
   LIBSLINE += -loegCrypt1
+  PRE_TARGETDEPS += $${DESTDIR}/liboegCrypt1.a
 }
 contains(PACKAGES, GIS) {
   message(Adding support for OEG-GIS ...)
   LIBSLINE += -loegGIS1
+  PRE_TARGETDEPS += $${DESTDIR}/liboegGIS1.a
 }
 contains(PACKAGES, MATH) {
   message(Adding support for OEG-Math ...)
   LIBSLINE += -loegMath1
+  PRE_TARGETDEPS += $${DESTDIR}/liboegMath1.a
 }
 contains(PACKAGES, PAGES) {
   message(Adding support for OEG-Pages ...)
   LIBSLINE += -loegPages1
+  PRE_TARGETDEPS += $${DESTDIR}/liboegPages1.a
 }
 contains(PACKAGES, 3D) {
   message(Adding support for OEG-3D ...)
   LIBSLINE += -loeg3D1
+  PRE_TARGETDEPS += $${DESTDIR}/liboeg3D1.a
 }
 LIBS += $$LIBSLINE
 
