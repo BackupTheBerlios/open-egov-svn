@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- $Id$ -->
+<!-- Compiles fine with WiX 3.5 -->
+
+<Include>
+  <Property Id="ARPCOMMENTS" Value="This is Free Software" />
+  <Property Id="ARPCONTACT" Value="Gerrit M. Albrecht" />
+  <Property Id="ARPPRODUCTICON" Value="installer.ico" />
+  <Property Id="ARPHELPLINK" Value="http://www.open-egov.de/help/" />
+  <Property Id="ARPREADME" Value="http://www.open-egov.de/readme/" />
+  <Property Id="ARPURLINFOABOUT" Value="Your &apos;About&apos; information" />
+  <Property Id="ARPURLUPDATEINFO" Value="Your &apos;Update&apos; URL" />
+  <Property Id="ARPHELPTELEPHONE" Value="URL where users can find your support phone number" />
+  <Property Id="ARPAUTHORIZEDCDFPREFIX" Value="URL of the update channel for the application" />
+  <Property Id="ARPSIZE" Value="3" />
+
+  <!-- Do not set until you need it:
+  <Property Id="ARPNOMODIFY" Value="0" />
+  <Property Id="ARPNOREPAIR" Value="0" />
+  <Property Id="ARPNOREMOVE" Value="0" />
+  <Property Id="ARPSYSTEMCOMPONENT" Value="0" />
+  -->
+
+  <Icon Id="installer.ico" SourceFile="deployment\wix\installer.ico" />
+
+  <!-- Set up ARPINSTALLLOCATION property -->
+  <CustomAction Id="SetARPINSTALLLOCATION" Property="ARPINSTALLLOCATION" Value="[INSTALLDIR]" />
+
+  <!-- Sequences -->
+  <InstallExecuteSequence>
+    <Custom Action="SetARPINSTALLLOCATION" After="InstallValidate"></Custom>
+  </InstallExecuteSequence>
+</Include>
+

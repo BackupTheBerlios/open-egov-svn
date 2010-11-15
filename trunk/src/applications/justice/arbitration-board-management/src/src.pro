@@ -1,6 +1,6 @@
 # $Id$
 
-TARGET    = "arbitration-board-management"
+TARGET    = arbitration-board-management
 SOURCES   = *.cpp
 HEADERS   = *.h
 FORMS     = 

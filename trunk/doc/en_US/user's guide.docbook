@@ -50,7 +50,7 @@
       <para>Concrete goals:
         <itemizedlist>
           <listitem><para>Import of a lot of applications already realized for older Qt versions into the project and transferation of classes and ressources into a common code library.</para></listitem>
-          <listitem><para>Creating some bigger special applications and finding reference users.</para></listitem>
+          <listitem><para>Creating some bigger special applications and find reference users.</para></listitem>
           <listitem><para>Building a community and/or a company which is able to support the Open eGovernment Project.</para></listitem>
           <listitem><para>And more...</para></listitem>
         </itemizedlist>

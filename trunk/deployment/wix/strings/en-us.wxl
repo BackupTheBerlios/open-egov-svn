@@ -8,5 +8,6 @@
   <String Id="ManufacturerName">gasi.de</String>
   <String Id="PackageBaseDescription">Open E-Government Base Windows Installer package</String>
   <String Id="PackageBaseComments">This is the core package needed for every Open E-Government Application.</String>
+  <String Id="BasePackageMissing">You have to install the Open E-Government Base package first!</String>
 </WixLocalization>
 

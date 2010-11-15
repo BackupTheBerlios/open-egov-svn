@@ -1,6 +1,6 @@
 # $Id$
 
-TARGET    = "about-dialog"
+TARGET    = about-dialog
 SOURCES   = *.cpp
 HEADERS   = *.h
 FORMS     = 

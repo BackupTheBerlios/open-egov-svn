@@ -46,15 +46,24 @@ void MainWindow::createActions()
 
 void MainWindow::createMenus()
 {
-  QMenu *menu = menuBar()->addMenu(_("&File"));
+  QMenu *menu;
+
+  menu = menuBar()->addMenu(_("&File"));
   menu->addAction(standardAction(Exit));
+
+  menu = menuBar()->addMenu(_("&Edit"));
+  menu->addAction(standardAction(Cut));
+  menu->addAction(standardAction(Copy));
+  menu->addAction(standardAction(Paste));
 
   addHelpMenu();
 }
 
 void MainWindow::createToolBars()
 {
-  QToolBar *toolbar = addToolBar(_("File"));
+  QToolBar *toolbar;
+
+  toolbar = addToolBar(_("File"));
   toolbar->addAction(standardAction(Exit));
 
 }

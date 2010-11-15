@@ -7,31 +7,50 @@
 <?define LocalePath = "$(var.BasePath)\locale" ?>
 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="8858C58E-90A9-11DF-BCB0-905FDFD72085"
-    Name="Open E-Government - Base"
-    Language="1033" Version="0.0.1"
+  <Product Id="{8858C58E-90A9-11DF-BCB0-905FDFD72085}"
+    Name="Open E-Government: Base"
+    Language="1033" Codepage="1252" Version="0.0.1"
     Manufacturer="gasi.de"
     UpgradeCode="{94316AAA-90A9-11DF-8CB0-A15FDFD72085}">
 
     <Package Id="*"
-      Description="Open E-Government Base Windows Installer package"
-      Comments="This is the core package needed for every Open E-Government Application."
+      Description="Open E-Government: Base"
+      Comments="This installer database contains the main package needed for every Open E-Government Application."
       Manufacturer="gasi.de"
       InstallerVersion="200"
-      Compressed="yes" />
+      AdminImage="no"
+      Keywords="Installer"
+      ShortNames="no"
+      Compressed="yes"
+      Languages="1033"
+      SummaryCodepage="1252"
+      Platform="x86"
+      ReadOnly="no" /><!-- platform: x86, x64, ia64 -->
 
-    <Media Id="1" Cabinet="product.cab" EmbedCab="yes" />
+      <?include ControlPanel.wxi ?>
+
+      <WixVariable Id="WixUILicenseRtf" Value="deployment\wix\license.rtf" />
+      <WixVariable Id="WixUIBannerBmp" Value="deployment\wix\banner.bmp" />
+      <WixVariable Id="WixUIDialogBmp" Value="deployment\wix\dialog.bmp" />
+      <!-- WixVariable Id="WixUIExclamationIco" Value="path\exclamation.ico" />
+      <WixVariable Id="WixUIInfoIco" Value="path\information.ico" />
+      <WixVariable Id="WixUINewIco" Value="path\new.ico" />
+      <WixVariable Id="WixUIUpIco" Value="path\up.ico" / -->
+
+      <Media Id="1" Cabinet="oegbase.cab" CompressionLevel="high" EmbedCab="yes" />
  
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder" Name="ProgramFilesDir">
-        <Directory Id="MainDir" Name="Open E-Government">
-          <Component Id="BaseComponent" Guid="B828569E-90A9-11DF-AEFA-0D60DFD72085"><!-- DiskId="1" -->
+        <!-- The public property INSTALLDIR may be changed on command line using: -->
+        <!-- msiexec /i oeg-base.msi INSTALLDIR=C:\OEG -->
+        <Directory Id="INSTALLDIR" ShortName="OpenEGov" Name="Open E-Government">
+          <Component Id="BaseComponent" Guid="{B828569E-90A9-11DF-AEFA-0D60DFD72085}"><!-- DiskId="1" -->
             <CreateFolder />
-            <File Id="info.txt" Name="info.txt" LongName="info.txt" DiskId="1" Source="../../info.txt" />
+            <File Id="info.txt" Name="info.txt" ShortName="info.txt" DiskId="1" Source="../../info.txt" />
           </Component>
 
           <Directory Id="dir1" Name="bin">
-            <Component Id="BaseBinComponent" Guid="4A217218-90BB-11DF-A10C-5774DFD72085">
+            <Component Id="BaseBinComponent" Guid="{4A217218-90BB-11DF-A10C-5774DFD72085}">
               <CreateFolder />
               <File Source="$(var.BasePath)\bin\about-dialog.exe" />
               <File Source="$(var.BasePath)\bin\builder.exe" />
@@ -66,39 +85,44 @@
           </Directory>
 
           <Directory Id="dir2" Name="plugins">
-            <Component Id="BasePluginsComponent" Guid="D78E7348-90BC-11DF-AA7E-F775DFD72085">
+            <Component Id="BasePluginsComponent" Guid="{D78E7348-90BC-11DF-AA7E-F775DFD72085}">
               <CreateFolder />
             </Component>
 
             <Directory Id="dir3" Name="accessible">
-              <Component Id="BasePluginsAccessibleComponent" Guid="F7C22360-90BE-11DF-9BF0-9B78DFD72085">
+              <Component Id="BasePluginsAccessibleComponent" Guid="{F7C22360-90BE-11DF-9BF0-9B78DFD72085}">
                 <CreateFolder />
               </Component>
             </Directory>
 
             <Directory Id="dir4" Name="codecs">
-              <Component Id="BasePluginsCodecsComponent" Guid="26A6345A-90BF-11DF-9801-E178DFD72085">
+              <Component Id="BasePluginsCodecsComponent" Guid="{26A6345A-90BF-11DF-9801-E178DFD72085}">
                 <CreateFolder />
               </Component>
             </Directory>
 
             <Directory Id="dir5" Name="iconengines">
-              <Component Id="BasePluginsIconEnginesComponent" Guid="B05A9D3C-90BD-11DF-8E07-3477DFD72085">
+              <Component Id="BasePluginsIconEnginesComponent" Guid="{B05A9D3C-90BD-11DF-8E07-3477DFD72085}">
                 <CreateFolder />
-                <File Source="$(var.BasePath)\plugins\iconengines\qsvgicon4.dll" />
+                <File Source="$(var.BasePath)\plugins\qt\iconengines\qsvgicon4.dll" DefaultLanguage="1033" />
               </Component>
             </Directory>
 
             <Directory Id="dir6" Name="imageformats">
-              <Component Id="BasePluginsImageFormatsComponent" Guid="65C54694-90BF-11DF-AD9D-0E79DFD72085">
+              <Component Id="BasePluginsImageFormatsComponent" Guid="{65C54694-90BF-11DF-AD9D-0E79DFD72085}">
                 <CreateFolder />
+                <File Source="$(var.BasePath)\plugins\qt\imageformats\qgif4.dll" />
+                <File Source="$(var.BasePath)\plugins\qt\imageformats\qjpeg4.dll" />
+                <File Source="$(var.BasePath)\plugins\qt\imageformats\qmng4.dll" />
+                <File Source="$(var.BasePath)\plugins\qt\imageformats\qsvg4.dll" />
+                <File Source="$(var.BasePath)\plugins\qt\imageformats\qtiff4.dll" />
               </Component>
             </Directory>
 
             <Directory Id="dir7" Name="sqldrivers">
-              <Component Id="BasePluginsSqlDriversComponent" Guid="6C0BF11A-90BF-11DF-9333-1579DFD72085">
+              <Component Id="BasePluginsSqlDriversComponent" Guid="{6C0BF11A-90BF-11DF-9333-1579DFD72085}">
                 <CreateFolder />
-                <File Source="$(var.BasePath)\plugins\sqldrivers\qsqlite4.dll" />
+                <File Source="$(var.BasePath)\plugins\qt\sqldrivers\qsqlite4.dll" />
               </Component>
             </Directory>
           </Directory>
@@ -106,16 +130,36 @@
       </Directory>
     </Directory>
 
-    <Feature Id="BaseFeature" Title="OEG Base Feature" Level="1">
-      <ComponentRef Id="BaseComponent" />
-      <ComponentRef Id="BaseBinComponent" />
-      <ComponentRef Id="BasePluginsComponent" />
-      <ComponentRef Id="BasePluginsAccessibleComponent" />
-      <ComponentRef Id="BasePluginsCodecsComponent" />
-      <ComponentRef Id="BasePluginsIconEnginesComponent" />
-      <ComponentRef Id="BasePluginsImageFormatsComponent" />
-      <ComponentRef Id="BasePluginsSqlDriversComponent" />
+    <Feature Id="Complete" Title="Open E-Government Base" Description="Complete package of the Open E-Government Base files"
+             Display="expand" AllowAdvertise='no' Absent='allow' InstallDefault='local' TypicalDefault='install' Level="500" ConfigurableDirectory="INSTALLDIR">
+      <Feature Id='Binaries' Title='Binaries' Description='Required binary applications and libraries.' Level='1'
+       AllowAdvertise='no' Absent='disallow' InstallDefault='local' TypicalDefault='install'>
+        <ComponentRef Id='BaseComponent' />
+        <ComponentRef Id='BaseBinComponent' />
+        <!-- ComponentRef Id='HelperLibrary' />
+        <ComponentRef Id='ProgramMenuDir' / -->
+      </Feature>
+
+      <Feature Id='Documentation' Title='Documentation' Description='The instruction manuals.' AllowAdvertise='no' InstallDefault='local' TypicalDefault='install' Level='500' Absent='allow'>
+        <ComponentRef Id='BaseComponent' />
+        <ComponentRef Id="BasePluginsComponent" />
+        <ComponentRef Id="BasePluginsAccessibleComponent" />
+      </Feature>
+
+      <Feature Id='OptionalBinaries' Title='Optional' Description='Optional binary files not required for a standard setup.' AllowAdvertise='no' InstallDefault='local' TypicalDefault='install' Absent='allow' Level='1000'>
+        <ComponentRef Id='BaseComponent' />
+        <ComponentRef Id="BasePluginsComponent" />
+        <ComponentRef Id="BasePluginsAccessibleComponent" />
+        <ComponentRef Id="BasePluginsCodecsComponent" />
+        <ComponentRef Id="BasePluginsIconEnginesComponent" />
+        <ComponentRef Id="BasePluginsImageFormatsComponent" />
+        <ComponentRef Id="BasePluginsSqlDriversComponent" />
+      </Feature>
     </Feature>
+
+    <!-- http://www.tramontana.co.hu/wix/lesson2.php -->
+    <UIRef Id="WixUI_FeatureTree" />
+    <UIRef Id="WixUI_ErrorProgressText" />
   </Product>
 </Wix>
 

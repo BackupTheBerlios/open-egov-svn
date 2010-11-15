@@ -20,11 +20,15 @@
       InstallerVersion="200"
       Compressed="yes" />
 
+      <WixVariable Id="WixUILicenseRtf" Value="deployment\wix\license.rtf" />
+      <WixVariable Id="WixUIBannerBmp" Value="deployment\wix\banner.bmp" />
+      <WixVariable Id="WixUIDialogBmp" Value="deployment\wix\dialog.bmp" />
+
 <Property Id="OEGBASECHECK">
   <ComponentSearch Id="OEGBASESearch" Guid="4A217218-90BB-11DF-A10C-5774DFD72085" />
 </Property>
 
-<Condition Message="base missing">
+<Condition Message="!(loc.BasePackageMissing)">
     Installed OR OEGBASECHECK
 </Condition>
 
@@ -43,16 +47,31 @@
           <Directory Id="dir1" Name="bin">
             <Component Id="BaseBinComponent" Guid="E731A86A-90C6-11DF-8123-3A82DFD72085">
               <CreateFolder />
-              <File Source="$(var.BasePath)\bin\mudmania.exe" Vital="yes" />
+              <File Source="$(var.BasePath)\bin\mudmania.exe" KeyPath="yes" Checksum="yes" Vital="yes" />
             </Component>
+            <!-- Component Id="doc.html" Guid="*">
+              <CreateFolder />
+              <File Source="$(var.BasePath)\doc.html" KeyPath="yes" />
+            </Component -->
           </Directory>
         </Directory>
       </Directory>
     </Directory>
 
-    <Feature Id="MudmaniaFeature" Title="OEG Mudmania Feature" Level="1">
+    <Feature Id="MudmaniaFeature" Title="OEG Mudmania" Level="1">
       <ComponentRef Id="BaseBinComponent" />
+      <!-- ComponentRef Id="doc.html" / -->
     </Feature>
+
+    <UI>
+      <UIRef Id="WixUI_Minimal" />
+      <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction"
+       Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+    </UI>
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch MUDmania" />
+    <Property Id="WixShellExecTarget" Value="[#mudmania.exe]" />
+    <CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
+
   </Product>
 </Wix>
 
