@@ -1,0 +1,55 @@
+$Id$
+
+How to use the scripts and generate an multi-language MSI.
+
+The language transform can't be created using WiX. You can create several
+MSI packages (one for each language) and use another tool to compare the
+packages and create the language transformation. Use the english MSI as
+reference. Set the property ProductLanguage to 1033 (english). Now generate
+the language transformation (a patch containing the differences) to a
+german version with ProductLanguage 1031. This can be done with the
+C:\Program Files\Microsoft SDKs\Windows\v7.0\Bin\MsiTran.exe (part of the
+SDK), torch.exe (part of the new patch-building tools in WiX v3). Or use
+the provided Transform.vbs.
+
+  MsiTran.Exe -g en.msi de.msi language.de.mst
+    Or
+  "%WIX%bin\torch.exe" -p -t language en.msi de.msi -out de.mst
+
+Then embed the language transformation into the base MSI (the english one).
+Use the Language Id (1031 for German in this sample) as name of the sub-storage.
+WiSubStg.vbs is a sample script in Windows Platform SDK and you can find it at
+C:\Program Files\Microsoft Platform SDK\Samples\SysMgmt\Msi\Scripts or
+C:\Program Files\Microsoft SDKs\Windows\v7.0\Samples\sysmgmt\msi\scripts.
+
+  CScript.exe WiSubStg.vbs en.msi language.de.mst 1031
+
+Update the Summary Information Stream to list all supported languages of this
+package. Add a hint about the new language by changing the Summary Informations
+attribute (e.g. with Orca). If your MSI authoring tool added a language code of
+0 to the summary information stream remove it. First add the english language
+code to the LCID, then, comma separated, the codes for every other included
+language.
+
+  Languages = 1033,1031
+    Or
+  WiLangId.vbs setup.msi Package 1033,1031
+
+Check if everything works:
+
+  msiexec /i en.msi PRODUCTLANGUAGE=1033 bzw. 1031.
+  Or change the language settings with the 'Regional and Langage Options' in
+  the Control Panel of Windows and then double-click the MSI to run it.
+
+
+Links:
+
+Microsoft Windows SDK for Windows 7 and .NET Framework 3.5 SP1 (ISO)
+http://www.microsoft.com/downloads/en/details.aspx?FamilyID=71DEB800-C591-4F97-A900-BEA146E4FAE1
+
+Windows Installer Scripting Examples
+http://msdn.microsoft.com/en-us/library/aa372865%28VS.85%29.aspx?FamilyID
+
+Locale ID (LCID) Chart
+http://msdn.microsoft.com/en-us/library/0h88fahh%28VS.85%29.aspx
+

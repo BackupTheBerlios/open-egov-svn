@@ -10,7 +10,7 @@
   <Property Id="ARPHELPLINK" Value="http://www.open-egov.de/help/" />
   <Property Id="ARPREADME" Value="http://www.open-egov.de/readme/" />
   <Property Id="ARPURLINFOABOUT" Value="Your &apos;About&apos; information" />
-  <Property Id="ARPURLUPDATEINFO" Value="Your &apos;Update&apos; URL" />
+  <Property Id="ARPURLUPDATEINFO" Value="http://www.open-egov.de/updates/" />
   <Property Id="ARPHELPTELEPHONE" Value="URL where users can find your support phone number" />
   <Property Id="ARPAUTHORIZEDCDFPREFIX" Value="URL of the update channel for the application" />
   <Property Id="ARPSIZE" Value="3" />

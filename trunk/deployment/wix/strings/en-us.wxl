@@ -4,10 +4,12 @@
 <!-- Compiles fine with WiX 3.5 -->
 
 <WixLocalization Culture="en-us" xmlns="http://schemas.microsoft.com/wix/2006/localization">
-  <String Id="ApplicationName">Open E-Government</String>
+  <String Id="ApplicationName">Open eGovernment</String>
+  <String Id="FullProductName">Open eGovernment: Base</String>
   <String Id="ManufacturerName">gasi.de</String>
-  <String Id="PackageBaseDescription">Open E-Government Base Windows Installer package</String>
-  <String Id="PackageBaseComments">This is the core package needed for every Open E-Government Application.</String>
-  <String Id="BasePackageMissing">You have to install the Open E-Government Base package first!</String>
+  <String Id="PackageBaseDescription">Open eGovernment Base Windows Installer package</String>
+  <String Id="PackageBaseComments">This is the core package needed for every Open eGovernment Application.</String>
+  <String Id="BasePackageMissing">You have to install the Open eGovernment Base package first!</String>
+  <String Id="NewerPackageAlreadyInstalled">The Open eGovernment Base package seems to be already installed in a newer version!</String>
 </WixLocalization>
 

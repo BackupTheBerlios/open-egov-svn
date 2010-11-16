@@ -8,7 +8,7 @@
 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="E19225BA-90C6-11DF-B29B-3882DFD72085"
-    Name="Open E-Government - App - MudMania"
+    Name="Open E-Government: games/mudmania"
     Language="1033" Version="0.0.1"
     Manufacturer="gasi.de"
     UpgradeCode="D9F9E20C-90C6-11DF-BA43-3782DFD72085">
@@ -64,14 +64,15 @@
     </Feature>
 
     <UI>
-      <UIRef Id="WixUI_Minimal" />
+      <UIRef Id="WixUI_FeatureTree" />
+      <UIRef Id="WixUI_ErrorProgressText" />
+
       <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction"
        Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
     </UI>
     <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch MUDmania" />
     <Property Id="WixShellExecTarget" Value="[#mudmania.exe]" />
     <CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
-
   </Product>
 </Wix>
 

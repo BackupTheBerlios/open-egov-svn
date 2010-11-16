@@ -5,9 +5,11 @@
 
 <WixLocalization Culture="de-de" xmlns="http://schemas.microsoft.com/wix/2006/localization">
   <String Id="ApplicationName">Open E-Government</String>
+  <String Id="FullProductName">Open E-Government: Basis</String>
   <String Id="ManufacturerName">gasi.de</String>
   <String Id="PackageBaseDescription">Open E-Government Basis Windows Installer Paket</String>
   <String Id="PackageBaseComments">Das ist das Basis-Paket, welches für jede Open E-Government-Anwendung benötigt wird.</String>
   <String Id="BasePackageMissing">Bitte installieren Sie zuerst das "Open E-Government Base" Paket!</String>
+  <String Id="NewerPackageAlreadyInstalled">Das Open E-Government Base Paket scheint schon in einer neueren Version installiert zu sein!</String>
 </WixLocalization>
 
