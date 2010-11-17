@@ -9,13 +9,13 @@
 <!-- Open E-Government: Base" -->
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 
-  <?include $(sys.CURRENTDIR)Version.wxi ?>
+  <?include $(sys.CURRENTDIR)Settings.wxi ?>
 
   <!-- An auto-generated Id attribute (changes each time we build the MSI) means "Major Upgrade". -->
   <Product Id="*"
     Name="!(loc.FullProductName)"
-    Language="1033" Codepage="1252" Version="$(var.VersionNumber)"
-    Manufacturer="!(loc.ManufacturerName)" UpgradeCode="{94316AAA-90A9-11DF-8CB0-A15FDFD72085}">
+    Language="1033" Codepage="$(var.Codepage)" Version="$(var.VersionNumber)"
+    Manufacturer="!(loc.ManufacturerName)" UpgradeCode="$(var.UpgradeCode)">
 
     <Package Id="*"
       Description="!(loc.FullProductName) $(var.VersionNumber)"
@@ -27,7 +27,7 @@
       ShortNames="no"
       Compressed="yes"
       Languages="1033"
-      SummaryCodepage="1252"
+      SummaryCodepage="$(var.Codepage)"
       Platform="$(var.ProcessorArchitecture)"
       ReadOnly="no" />
 
@@ -44,9 +44,11 @@
       <RemoveExistingProducts After="InstallInitialize" />
     </InstallExecuteSequence>
 
+    <Property Id="HomePageURL" Value="http://www.open-egov.de/" />
+
     <?include ControlPanel.wxi ?>
 
-    <WixVariable Id="WixUILicenseRtf" Value="license.en.rtf" />
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.License)" /> <!-- license.en.rtf -->
     <WixVariable Id="WixUIBannerBmp" Value="banner.bmp" />
     <WixVariable Id="WixUIDialogBmp" Value="dialog.bmp" />
     <!-- WixVariable Id="WixUIExclamationIco" Value="path\exclamation.ico" />
@@ -61,7 +63,7 @@
         <!-- The public property INSTALLDIR may be changed on command line using: -->
         <!-- msiexec /i oeg-base.msi INSTALLDIR=C:\OEG -->
         <Directory Id="INSTALLDIR" ShortName="OpenEGov" Name="Open E-Government">
-          <Component Id="BaseComponent" Guid="{B828569E-90A9-11DF-AEFA-0D60DFD72085}"><!-- DiskId="1" -->
+          <Component Id="BaseComponent" Guid="{B828569E-90A9-11DF-AEFA-0D60DFD72085}" KeyPath="yes"><!-- DiskId="1" -->
             <CreateFolder />
             <File Id="info.txt" Name="info.txt" ShortName="info.txt" DiskId="1" Source="../../info.txt" />
           </Component>
@@ -70,7 +72,7 @@
             <!-- This GUID is checked for in other applications! -->
             <Component Id="BaseBinComponent" Guid="{4A217218-90BB-11DF-A10C-5774DFD72085}">
               <CreateFolder />
-              <File Source="$(var.BasePath)\bin\about-dialog.exe" />
+              <File Id="BinAboutDialog.exe" Source="$(var.BasePath)\bin\about-dialog.exe" />
               <File Source="$(var.BasePath)\bin\builder.exe" />
               <File Source="$(var.BasePath)\bin\bug-reporter.exe" />
               <File Source="$(var.BasePath)\bin\desktop.exe" KeyPath="yes" />
@@ -107,42 +109,42 @@
           </Directory>
 
           <Directory Id="dir2" Name="plugins">
-            <Component Id="BasePluginsComponent" Guid="{D78E7348-90BC-11DF-AA7E-F775DFD72085}">
+            <Component Id="BasePluginsComponent" Guid="{D78E7348-90BC-11DF-AA7E-F775DFD72085}" KeyPath="yes">
               <CreateFolder />
             </Component>
 
             <Directory Id="dir3" Name="accessible">
-              <Component Id="BasePluginsAccessibleComponent" Guid="{F7C22360-90BE-11DF-9BF0-9B78DFD72085}">
+              <Component Id="BasePluginsAccessibleComponent" Guid="{F7C22360-90BE-11DF-9BF0-9B78DFD72085}" KeyPath="yes">
                 <CreateFolder />
               </Component>
             </Directory>
 
             <Directory Id="dir4" Name="codecs">
-              <Component Id="BasePluginsCodecsComponent" Guid="{26A6345A-90BF-11DF-9801-E178DFD72085}">
+              <Component Id="BasePluginsCodecsComponent" Guid="{26A6345A-90BF-11DF-9801-E178DFD72085}" KeyPath="yes">
                 <CreateFolder />
               </Component>
             </Directory>
 
             <Directory Id="dir5" Name="iconengines">
-              <Component Id="BasePluginsIconEnginesComponent" Guid="{B05A9D3C-90BD-11DF-8E07-3477DFD72085}">
+              <Component Id="BasePluginsIconEnginesComponent" Guid="{B05A9D3C-90BD-11DF-8E07-3477DFD72085}" KeyPath="yes">
                 <CreateFolder />
                 <File Source="$(var.BasePath)\plugins\qt\iconengines\qsvgicon4.dll" DefaultLanguage="1033" Checksum="yes" />
               </Component>
             </Directory>
 
             <Directory Id="dir6" Name="imageformats">
-              <Component Id="BasePluginsImageFormatsComponent" Guid="{65C54694-90BF-11DF-AD9D-0E79DFD72085}">
+              <Component Id="BasePluginsImageFormatsComponent" Guid="{65C54694-90BF-11DF-AD9D-0E79DFD72085}" KeyPath="yes">
                 <CreateFolder />
-                <File Source="$(var.BasePath)\plugins\qt\imageformats\qgif4.dll" DefaultLanguage="1033" Checksum="yes" />
+                <File Source="$(var.BasePath)\plugins\qt\imageformats\qgif4.dll"  DefaultLanguage="1033" Checksum="yes" />
                 <File Source="$(var.BasePath)\plugins\qt\imageformats\qjpeg4.dll" DefaultLanguage="1033" Checksum="yes" />
-                <File Source="$(var.BasePath)\plugins\qt\imageformats\qmng4.dll" DefaultLanguage="1033" Checksum="yes" />
-                <File Source="$(var.BasePath)\plugins\qt\imageformats\qsvg4.dll" DefaultLanguage="1033" Checksum="yes" />
+                <File Source="$(var.BasePath)\plugins\qt\imageformats\qmng4.dll"  DefaultLanguage="1033" Checksum="yes" />
+                <File Source="$(var.BasePath)\plugins\qt\imageformats\qsvg4.dll"  DefaultLanguage="1033" Checksum="yes" />
                 <File Source="$(var.BasePath)\plugins\qt\imageformats\qtiff4.dll" DefaultLanguage="1033" Checksum="yes" />
               </Component>
             </Directory>
 
             <Directory Id="dir7" Name="sqldrivers">
-              <Component Id="BasePluginsSqlDriversComponent" Guid="{6C0BF11A-90BF-11DF-9333-1579DFD72085}">
+              <Component Id="BasePluginsSqlDriversComponent" Guid="{6C0BF11A-90BF-11DF-9333-1579DFD72085}" KeyPath="yes">
                 <CreateFolder />
                 <File Source="$(var.BasePath)\plugins\qt\sqldrivers\qsqlite4.dll" DefaultLanguage="1033" Checksum="yes" />
               </Component>
@@ -151,59 +153,69 @@
         </Directory><!-- end of oeg main dir -->
       </Directory><!-- end of programm files dir -->
 
-      <!-- start menu -->
+      <!-- start menu folders -->
       <Directory Id="ProgramMenuFolder">
-        <Directory Id="Dir_StartMenu_Base" Name="Open E-Government">
-          <Directory Id="Dir_StartMenu_BaseComponents" Name="Components">
-          </Directory>
-          <!-- Directory Id="Dir_StartMenu_BaseDocumentation" Name="Documentation">
-          </Directory -->
+        <Directory Id="ProgramMenuProductFolder" Name="Open E-Government">
+          <Directory Id="ProgramMenuProductExtrasFolder" Name="Extras" />
+          <Directory Id="ProgramMenuProductDocumentationFolder" Name="Documentation" />
+          <Directory Id="ProgramMenuProductComponentsFolder" Name="Components" />
         </Directory>
       </Directory>
     </Directory>
 
-
     <!-- Add shortcuts to the installer package -->
-    <DirectoryRef Id="Dir_StartMenu_Base">
-      <Component Id="Com_StartMenu_Base" Guid="{D37F653E-8D13-4DDF-AF2C-8FE4896FC38F}">
-        <RemoveFolder Id="RemDir_StartMenu_Base" On="uninstall" />
-        <!-- Why the following registry entry is needed: http://wix.mindcapers.com/wiki/ICE38 -->
+    <DirectoryRef Id="ProgramMenuProductFolder">
+      <Component Id="StartMenuComponent" Guid="{D37F653E-8D13-4DDF-AF2C-8FE4896FC38F}">
+        <!-- create folders -->
+        <CreateFolder Directory="ProgramMenuProductFolder" />
+        <CreateFolder Directory="ProgramMenuProductExtrasFolder" />
+        <CreateFolder Directory="ProgramMenuProductDocumentationFolder" />
+        <CreateFolder Directory="ProgramMenuProductComponentsFolder" />
+
+        <!-- remove folders -->
+        <RemoveFolder Id="RemoveProgramMenuProductFolder"
+          Directory="ProgramMenuProductFolder" On="uninstall" />
+        <RemoveFolder Id="RemoveProgramMenuProductExtrasFolder"
+          Directory="ProgramMenuProductExtrasFolder" On="uninstall" />
+        <RemoveFolder Id="RemoveProgramMenuProductDocumentationFolder"
+          Directory="ProgramMenuProductDocumentationFolder" On="uninstall" />
+        <RemoveFolder Id="RemoveProgramMenuProductComponentsFolder"
+          Directory="ProgramMenuProductComponentsFolder" On="uninstall" />
+
+        <!-- RegistryValue whichs serves as KeyPath (MSI requirement) -->
+        <!-- Why the registry entry is needed: http://wix.mindcapers.com/wiki/ICE38 -->
         <RegistryValue Root="HKCU" Key="SOFTWARE\GASI\Open eGovernment"
           Name="installed" Type="integer" Value="1" KeyPath="yes" />
 
+        <!-- shortcuts -->
         <Shortcut Id="UninstallProduct"
           Name="Uninstall OEG Base"
           Target="[System32Folder]msiexec.exe"
           Arguments="/x [ProductCode]"
-          Directory="Dir_StartMenu_Base"
+          Directory="ProgramMenuProductExtrasFolder"
           Description="Uninstalls OEG Base" />
-      </Component>
-    </DirectoryRef>
+        <Shortcut Id="WebShortcut" Name="Homepage" Description="Jump to the OEG website" Target="[HomePageURL]" />
 
-    <DirectoryRef Id="Dir_StartMenu_BaseComponents">
-      <Component Id="Com_StartMenu_BaseComponents" Guid="{0F327498-7E9A-4458-9227-0A51C8D0081C}">
-        <RemoveFolder Id="Dir_StartMenu_BaseComponents" On="uninstall" />
-        <RegistryValue Root='HKCU' Key='SOFTWARE\GASI\Open eGovernment'
-          Type='string' Value='Hello World' KeyPath='yes' />
-
+        <!-- Icon="" IconIndex="0" -->
+        <!-- Target="[#BinAboutDialog.exe]" - causes warning, different components -->
         <Shortcut Id="SC_StartMenu_BaseComponents_AboutDialog" WorkingDirectory="INSTALLDIR"
-          Name="About Dialog" Description="About Dialog"
-          Target="[INSTALLDIR]/bin/about-dialog.exe" />
+          Name="About Dialog" Description="About Dialog" Advertise='no'
+          Target="[INSTALLDIR]/bin/about-dialog.exe" Directory="ProgramMenuProductComponentsFolder" />
         <Shortcut Id="SC_StartMenu_BaseComponents_Builder" WorkingDirectory="INSTALLDIR"
-          Name="Builder" Description="Builder"
-          Target="[INSTALLDIR]/bin/builder.exe" />
+          Name="Builder" Description="Builder" Advertise='no'
+          Target="[INSTALLDIR]/bin/builder.exe" Directory="ProgramMenuProductComponentsFolder" />
         <Shortcut Id="SC_StartMenu_BaseComponents_Desktop" WorkingDirectory="INSTALLDIR"
-          Name="Desktop" Description="Desktop"
-          Target="[INSTALLDIR]/bin/desktop.exe" />
+          Name="Desktop" Description="Desktop" Advertise='no'
+          Target="[INSTALLDIR]/bin/desktop.exe" Directory="ProgramMenuProductComponentsFolder" />
         <Shortcut Id="SC_StartMenu_BaseComponents_HelpViewer" WorkingDirectory="INSTALLDIR"
-          Name="Help Viewer" Description="Help Viewer"
-          Target="[INSTALLDIR]/bin/help-viewer.exe" />
+          Name="Help Viewer" Description="Help Viewer" Advertise='no'
+          Target="[INSTALLDIR]/bin/help-viewer.exe" Directory="ProgramMenuProductComponentsFolder" />
         <Shortcut Id="SC_StartMenu_BaseComponents_ProcessList" WorkingDirectory="INSTALLDIR"
-          Name="Process List" Description="Process List"
-          Target="[INSTALLDIR]/bin/process-list.exe" />
+          Name="Process List" Description="Process List" Advertise='no'
+          Target="[INSTALLDIR]/bin/process-list.exe" Directory="ProgramMenuProductComponentsFolder" />
         <Shortcut Id="SC_StartMenu_BaseComponents_Settings" WorkingDirectory="INSTALLDIR"
-          Name="Settings" Description="Settings"
-          Target="[INSTALLDIR]/bin/settings.exe" />
+          Name="Settings" Description="Settings" Advertise='no'
+          Target="[INSTALLDIR]/bin/settings.exe" Directory="ProgramMenuProductComponentsFolder" />
       </Component>
     </DirectoryRef>
 
@@ -215,8 +227,8 @@
        AllowAdvertise='no' Absent='disallow' InstallDefault='local' TypicalDefault='install' Display="expand">
         <ComponentRef Id='BaseComponent' />
         <ComponentRef Id='BaseBinComponent' />
-        <!-- ComponentRef Id='HelperLibrary' />
-        <ComponentRef Id='ProgramMenuDir' / -->
+        <!-- ComponentRef Id='HelperLibrary' -->
+        <ComponentRef Id="StartMenuComponent" />               <!-- Tell WiX to install the shortcuts -->
       </Feature>
 
       <Feature Id='Documentation' Title='Documentation' Description='The instruction manuals.'
@@ -237,9 +249,6 @@
         <ComponentRef Id="BasePluginsImageFormatsComponent" />
         <ComponentRef Id="BasePluginsSqlDriversComponent" />
       </Feature>
-
-      <ComponentRef Id="Com_StartMenu_Base" />               <!-- Tell WiX to install the shortcuts -->
-      <ComponentRef Id="Com_StartMenu_BaseComponents" />
     </Feature>
 
     <!-- http://www.tramontana.co.hu/wix/lesson2.php -->
