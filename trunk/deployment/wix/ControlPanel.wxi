@@ -22,7 +22,7 @@
   <Property Id="ARPSYSTEMCOMPONENT" Value="0" />
   -->
 
-  <Icon Id="installer.ico" SourceFile="deployment\wix\installer.ico" />
+  <Icon Id="installer.ico" SourceFile="installer.ico" />
 
   <!-- Set up ARPINSTALLLOCATION property -->
   <CustomAction Id="SetARPINSTALLLOCATION" Property="ARPINSTALLLOCATION" Value="[INSTALLDIR]" />

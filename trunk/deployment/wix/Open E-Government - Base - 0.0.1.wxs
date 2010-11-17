@@ -11,16 +11,16 @@
 
   <?include $(sys.CURRENTDIR)Version.wxi ?>
 
-  <Product Id="{8858C58E-90A9-11DF-BCB0-905FDFD72085}"
+  <!-- An auto-generated Id attribute (changes each time we build the MSI) means "Major Upgrade". -->
+  <Product Id="*"
     Name="!(loc.FullProductName)"
-    Language="1033" Codepage="1252" Version="0.0.1"
-    Manufacturer="gasi.de"
-    UpgradeCode="{94316AAA-90A9-11DF-8CB0-A15FDFD72085}">
+    Language="1033" Codepage="1252" Version="$(var.VersionNumber)"
+    Manufacturer="!(loc.ManufacturerName)" UpgradeCode="{94316AAA-90A9-11DF-8CB0-A15FDFD72085}">
 
     <Package Id="*"
-      Description="Open E-Government: Base"
+      Description="!(loc.FullProductName) $(var.VersionNumber)"
       Comments="This installer database contains the main package needed for every Open E-Government Application."
-      Manufacturer="gasi.de"
+      Manufacturer="!(loc.ManufacturerName)"
       InstallerVersion="200"
       AdminImage="no"
       Keywords="Installer"
@@ -28,14 +28,27 @@
       Compressed="yes"
       Languages="1033"
       SummaryCodepage="1252"
-      Platform="x86"
-      ReadOnly="no" /><!-- platform: x86, x64, ia64 -->
+      Platform="$(var.ProcessorArchitecture)"
+      ReadOnly="no" />
+
+    <!-- This uninstalls all previous versions upon installing a version.     -->
+    <!-- It's important that Upgrade/@Id matches Product/@UpgradeCode.        -->
+    <!-- if you release a new build of the same version (Product/@Id changes, -->
+    <!-- but Product/@Version doesn't), this uninstalls the old one.          -->
+    <Upgrade Id="{94316AAA-90A9-11DF-8CB0-A15FDFD72085}">
+      <UpgradeVersion Property="PREVIOUSFOUND"
+        Minimum="0.0.0.0" IncludeMinimum="yes"
+        Maximum="$(var.VersionNumber)" IncludeMaximum="no" />
+    </Upgrade>
+    <InstallExecuteSequence>
+      <RemoveExistingProducts After="InstallInitialize" />
+    </InstallExecuteSequence>
 
     <?include ControlPanel.wxi ?>
 
-    <WixVariable Id="WixUILicenseRtf" Value="deployment\wix\license.rtf" />
-    <WixVariable Id="WixUIBannerBmp" Value="deployment\wix\banner.bmp" />
-    <WixVariable Id="WixUIDialogBmp" Value="deployment\wix\dialog.bmp" />
+    <WixVariable Id="WixUILicenseRtf" Value="license.rtf" />
+    <WixVariable Id="WixUIBannerBmp" Value="banner.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="dialog.bmp" />
     <!-- WixVariable Id="WixUIExclamationIco" Value="path\exclamation.ico" />
     <WixVariable Id="WixUIInfoIco" Value="path\information.ico" />
     <WixVariable Id="WixUINewIco" Value="path\new.ico" />
@@ -75,17 +88,17 @@
               <File Source="$(var.BasePath)\bin\oegCrypt1.dll" />
               <File Source="$(var.BasePath)\bin\oegMath1.dll" />
               <File Source="$(var.BasePath)\bin\oegQt1.dll" />
-              <File Source="$(var.BasePath)\bin\phonon4.dll" />
+              <File Source="$(var.BasePath)\bin\phonon4.dll" DefaultLanguage="1033" Checksum="yes" />
               <File Source="$(var.BasePath)\bin\QtConcurrent.dll" />
               <File Source="$(var.BasePath)\bin\QtCore4.dll" Vital="yes" DefaultLanguage="1033" Checksum="yes" />
               <File Source="$(var.BasePath)\bin\QtGui4.dll" DefaultLanguage="1033" Checksum="yes" />
-              <File Source="$(var.BasePath)\bin\QtHelp4.dll" />
-              <File Source="$(var.BasePath)\bin\QtMultimedia4.dll" />
-              <File Source="$(var.BasePath)\bin\QtNetwork4.dll" />
-              <File Source="$(var.BasePath)\bin\QtOpenGL4.dll" />
-              <File Source="$(var.BasePath)\bin\QtScript4.dll" />
-              <File Source="$(var.BasePath)\bin\QtScriptTools4.dll" />
-              <File Source="$(var.BasePath)\bin\QtSql4.dll" />
+              <File Source="$(var.BasePath)\bin\QtHelp4.dll" DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\QtMultimedia4.dll" DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\QtNetwork4.dll" DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\QtOpenGL4.dll" DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\QtScript4.dll" DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\QtScriptTools4.dll" DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\QtSql4.dll" DefaultLanguage="1033" Checksum="yes" />
               <File Source="$(var.BasePath)\bin\QtSvg4.dll" DefaultLanguage="1033" Checksum="yes" />
               <File Source="$(var.BasePath)\bin\QtWebKit4.dll" DefaultLanguage="1033" Checksum="yes" />
               <File Source="$(var.BasePath)\bin\QtXml4.dll" DefaultLanguage="1033" Checksum="yes" />
@@ -131,7 +144,7 @@
             <Directory Id="dir7" Name="sqldrivers">
               <Component Id="BasePluginsSqlDriversComponent" Guid="{6C0BF11A-90BF-11DF-9333-1579DFD72085}">
                 <CreateFolder />
-                <File Source="$(var.BasePath)\plugins\qt\sqldrivers\qsqlite4.dll" />
+                <File Source="$(var.BasePath)\plugins\qt\sqldrivers\qsqlite4.dll" DefaultLanguage="1033" Checksum="yes" />
               </Component>
             </Directory>
           </Directory><!-- end of plugins dir -->
