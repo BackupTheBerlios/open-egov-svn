@@ -46,7 +46,7 @@
 
     <?include ControlPanel.wxi ?>
 
-    <WixVariable Id="WixUILicenseRtf" Value="license.rtf" />
+    <WixVariable Id="WixUILicenseRtf" Value="license.en.rtf" />
     <WixVariable Id="WixUIBannerBmp" Value="banner.bmp" />
     <WixVariable Id="WixUIDialogBmp" Value="dialog.bmp" />
     <!-- WixVariable Id="WixUIExclamationIco" Value="path\exclamation.ico" />

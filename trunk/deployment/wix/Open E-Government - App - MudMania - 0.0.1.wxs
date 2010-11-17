@@ -20,9 +20,9 @@
       InstallerVersion="200"
       Compressed="yes" />
 
-      <WixVariable Id="WixUILicenseRtf" Value="deployment\wix\license.rtf" />
-      <WixVariable Id="WixUIBannerBmp" Value="deployment\wix\banner.bmp" />
-      <WixVariable Id="WixUIDialogBmp" Value="deployment\wix\dialog.bmp" />
+    <WixVariable Id="WixUILicenseRtf" Value="license.en.rtf" />
+    <WixVariable Id="WixUIBannerBmp" Value="banner.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="dialog.bmp" />
 
 <Property Id="OEGBASECHECK">
   <ComponentSearch Id="OEGBASESearch" Guid="4A217218-90BB-11DF-A10C-5774DFD72085" />
