@@ -24,6 +24,8 @@
 #include <QMessageBox>
 #include <QProcess>
 #include <QSystemTrayIcon>
+#include <QSettings>
+#include <QDebug>
 
 #include <stdlib.h>
 #include <time.h>
@@ -37,11 +39,26 @@ Application::Application(int &argc, char *argv[])
   srand(time(0));
 
   m_basename = "";
+
+  setOrganizationName(_("G.A.S.I."));
+  setOrganizationDomain(_("open-egov.de"));
 }
 
 Application::~Application()
 {
   removeSystemTrayIcon();
+}
+
+// General initializations. You have to set at least the applicationName() first.
+
+void Application::init()
+{
+  QSettings settings(organizationName(), baseName());
+  if (settings.status() != QSettings::NoError) {
+    qDebug() << __FILE__ ": settings error: " << settings.status();
+  }
+
+  installGetText();
 }
 
 void Application::installGetText()
@@ -78,16 +95,6 @@ void Application::runComponent(const QString &cmd, const QStringList &arguments)
   process.startDetached(cmd, arguments);
 }
 
-void Application::setApplicationVersion(const QString &version)
-{
-  m_application_version = version;
-}
-
-QString Application::applicationVersion() const
-{
-  return m_application_version;
-}
-
 void Application::setApplicationBuildData(const char *date, const char *time)
 {
   m_application_build_date = date;
@@ -104,16 +111,31 @@ QString Application::applicationBuildTime() const
   return m_application_build_time;
 }
 
-void Application::setBaseName(const QString &basename)
+void Application::setApplicationName(const QString &appName, const QString &baseName /*=""*/)
 {
-  m_basename = basename;
+  QApplication::setApplicationName(appName);
+
+  if (baseName.isEmpty()) {
+    if (appName.length() > 0) {
+      setBaseName(appName.toLower());                                // Caution: appName is a localized string!
+    }
+  }
+  else {
+    setBaseName(baseName);
+  }
+}
+
+void Application::setBaseName(const QString &baseName)
+{
+  m_basename = baseName;
+
+  if (homepage().isEmpty()) {                                        // Generate a homepage URL.
+    setHomepage("http://www.open-egov.de/applications/" + baseName + "/");
+  }
 }
 
 QString Application::baseName() const
 {
-  if (m_basename.isEmpty())
-    return applicationName().toLower();
-
   return m_basename;
 }
 

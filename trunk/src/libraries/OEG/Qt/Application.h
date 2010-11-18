@@ -44,7 +44,7 @@ class Application : public QApplication
     Application(int &argc, char *argv[]);
     virtual ~Application();
 
-    void installGetText();
+    void init();
 
     static void runComponent(const QString &cmd);
     static void runComponent(const QString &cmd, const QStringList &arguments);
@@ -52,21 +52,23 @@ class Application : public QApplication
     void addSystemTrayIcon(const QIcon &icon, QMenu *menu, const QString &title);
     void removeSystemTrayIcon();
 
-    void setApplicationVersion(const QString &version);
-    QString applicationVersion() const;
-
     void setApplicationBuildData(const char *date, const char *time);
     QString applicationBuildDate() const;
     QString applicationBuildTime() const;
 
+    void setApplicationName(const QString &appName, const QString &baseName = "");
+
     void setHomepage(const QString &url);
     QString homepage() const;
 
-    void setBaseName(const QString &basename);
+    void setBaseName(const QString &baseName);
     QString baseName() const;
 
     QString standardDirectory(DirectoryType type);
     QString locateFile(const QString &filename, FileType type = Unknown);
+
+  protected:
+    void installGetText();
 
   protected:
     QSystemTrayIcon *m_tray_icon;
