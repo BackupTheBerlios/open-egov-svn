@@ -56,5 +56,6 @@ class MainWindow : public OEG::Qt::MainWindow
     OEG::GIS::MapWidget  *m_map;
     QTabWidget           *m_tabs;
     QLabel               *m_number_of_trees;
+    QLabel               *m_tab_history;
 };
 

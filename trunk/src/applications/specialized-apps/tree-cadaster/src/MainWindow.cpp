@@ -17,6 +17,7 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <OEG/GIS/MapWidget.h>
+#include <OEG/Qt/Application.h>
 
 #include <QAction>
 #include <QApplication>
@@ -45,8 +46,9 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
 
   createAll();
 
+  m_tab_history = new QLabel(this);
   m_tabs = new QTabWidget(this);
-  m_tabs->addTab(new QLabel("Last Changes"), _("&History"));
+  m_tabs->addTab(m_tab_history, _("&History"));
   m_map = new OEG::GIS::MapWidget(this);
   if (! m_map)
     return;
@@ -55,6 +57,13 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
   m_tabs->setCurrentIndex(0);  // better use prefs.
 
   setCentralWidget(m_tabs);
+
+  // Init tab contents.
+  QString s;
+  s += "<h1>" + qApp->applicationName() + "</h1>";
+  s += "Version: " + qApp->applicationVersion() + "<br>";
+  s += "<h1>" + QString(_("Last Changes")) + "</h1>";
+  m_tab_history->setText(s);
 
   m_map->setZoom(11);
   m_map->setArea(11.389, 52.243, 11.877, 52.033);
@@ -117,7 +126,7 @@ void MainWindow::createToolBars()
 
 void MainWindow::createStatusBar()
 {
-  m_number_of_trees = new QLabel(" 000.000 ");
+  m_number_of_trees = new QLabel(" 000000 ");
   m_number_of_trees->setMinimumSize(m_number_of_trees->sizeHint());
   m_number_of_trees->setAlignment(Qt::AlignCenter);
   m_number_of_trees->setToolTip(_("The number of trees in the database."));
