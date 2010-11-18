@@ -1,5 +1,5 @@
 # $Id$
 
 TEMPLATE = subdirs
-SUBDIRS  = arbitration-board-management laws-and-regulations
+SUBDIRS  = arbitration-board-management gazettes laws-and-regulations
 
