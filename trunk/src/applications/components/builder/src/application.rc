@@ -54,11 +54,11 @@ BEGIN
       VALUE "InternalName",     "builder.exe\0"
       VALUE "OriginalFilename", "builder.exe\0"
       VALUE "FileDescription",  "Open eGovernment: Builder.\0"
+      VALUE "ProductName",      "Open eGovernment: Builder.\0"
       VALUE "Comments",         "Homepage: www.open-egov.de\0"
       VALUE "CompanyName",      "gasi.de\0"
       VALUE "LegalCopyright",   "Copyright (C) 2004-2010 GASI.\0"
       VALUE "LegalTrademarks",  "Open eGovernment.\0"
-      VALUE "ProductName",      "OEG :: Builder\0"
       VALUE "FileVersion",      VER_FILEVERSION_STR
       VALUE "ProductVersion",   VER_PRODUCTVERSION_STR
     END
