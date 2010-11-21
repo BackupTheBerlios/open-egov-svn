@@ -54,11 +54,11 @@ BEGIN
       VALUE "InternalName",     "gazettes.exe\0"
       VALUE "OriginalFilename", "gazettes.exe\0"
       VALUE "FileDescription",  "Open eGovernment: Gazettes.\0"
+      VALUE "ProductName",      "Open eGovernment: Gazettes.\0"
       VALUE "Comments",         "Homepage: www.open-egov.de\0"
       VALUE "CompanyName",      "gasi.de\0"
       VALUE "LegalCopyright",   "Copyright (C) 2004-2010 GASI.\0"
       VALUE "LegalTrademarks",  "Open eGovernment.\0"
-      VALUE "ProductName",      "OEG :: Gazettes\0"
       VALUE "FileVersion",      VER_FILEVERSION_STR
       VALUE "ProductVersion",   VER_PRODUCTVERSION_STR
     END

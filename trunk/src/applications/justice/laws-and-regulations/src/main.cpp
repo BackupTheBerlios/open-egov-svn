@@ -18,29 +18,19 @@
 
 #include <OEG/Qt/Application.h>
 
-#include <QSettings>
-#include <QDebug>
-
 #include "MainWindow.h"
 
 int main(int argc, char *argv[])
 {
   OEG::Qt::Application app(argc, argv);
 
-  app.setApplicationName(_("Laws and Regulations"));
-  app.setOrganizationName(_("G.A.S.I."));
-  app.setOrganizationDomain(_("open-egov.de"));
-  app.setApplicationVersion(_("0.1"));
+  app.setApplicationName(_("Laws and Regulations"), "laws-and-regulations");
+  app.setApplicationVersion("0.1");
   app.setApplicationBuildData(__DATE__, __TIME__);
-  app.setHomepage(_("http://www.open-egov.de/applications/laws-and-regulations/"));
+  app.init();
 
-  QSettings settings(app.organizationName(), app.applicationName());
-  if (settings.status() != QSettings::NoError) {
-    qDebug() << __FILE__ ": settings error: " << settings.status();
-  }
-
-  MainWindow mw;
-  mw.show();
+  MainWindow win;
+  win.show();
 
   return app.exec();
 }
