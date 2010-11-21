@@ -48,7 +48,7 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
 
   m_input = new MultiLineEdit(this);
   m_input->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-  m_input->setText(qApp->applicationName() + " " + dynamic_cast<OEG::Qt::Application *>(qApp)->applicationVersion() + "\n");
+  m_input->setText(qApp->applicationName() + " " + qApp->applicationVersion() + "\n");
   m_input->setAlignment(Qt::AlignBottom | Qt::AlignLeft);
 
   m_splitter = new Splitter(this);
