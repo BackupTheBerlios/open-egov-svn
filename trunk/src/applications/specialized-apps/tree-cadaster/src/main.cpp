@@ -29,8 +29,8 @@ int main(int argc, char *argv[])
   app.setApplicationBuildData(__DATE__, __TIME__);
   app.init();
 
-  MainWindow mw;
-  mw.show();
+  MainWindow win;
+  win.show();
 
   return app.exec();
 }

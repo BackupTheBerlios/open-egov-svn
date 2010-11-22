@@ -1,5 +1,5 @@
 # $Id$
 
 TEMPLATE = subdirs
-SUBDIRS  = video-chat telephone-directory
+SUBDIRS  = msg-viewer telephone-directory video-chat
 

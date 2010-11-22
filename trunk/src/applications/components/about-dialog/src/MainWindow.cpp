@@ -16,10 +16,20 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+#include <QCoreApplication>
+#include <QStringList>
+
+#include <QMessageBox>
+
 #include "MainWindow.h"
 
 MainWindow::MainWindow(QWidget *parent /*=0*/)
  : OEG::Qt::MainWindow(parent)
 {
+  QStringList arguments = QCoreApplication::arguments();
+  if (arguments.count() > 1) {
+    //QString s = arguments.join("");
+    QMessageBox::information(0, "", arguments.at(1));
+  }
 }
 

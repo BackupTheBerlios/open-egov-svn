@@ -6,8 +6,7 @@ HEADERS   = *.h
 FORMS     = 
 QT       += network
 PACKAGES  = QT GETTEXT
-
-CONFIG += console
+#CONFIG += console
 
 include(../../../common.pri)
 

@@ -49,7 +49,6 @@ void MainWindow::createMenus()
 
 void MainWindow::createToolBars()
 {
-  QAction  *action;
   QToolBar *toolbar;
 
   toolbar = addToolBar(_("File"));

@@ -59,6 +59,11 @@ contains(PACKAGES, MATH) {
   LIBSLINE += -loegMath1
   PRE_TARGETDEPS += $${DESTDIR}/liboegMath1.a
 }
+contains(PACKAGES, MAIL) {
+  message(Adding support for OEG-Mail ...)
+  LIBSLINE += -loegMail1
+  PRE_TARGETDEPS += $${DESTDIR}/liboegMail1.a
+}
 contains(PACKAGES, PAGES) {
   message(Adding support for OEG-Pages ...)
   LIBSLINE += -loegPages1
@@ -103,6 +108,7 @@ win32 {
   }
 }
 
+# We don't use QRC files.
 exists($${PRO_OUT_PATH}$${DIR_SEPARATOR}application.qrc) {
   RESOURCES += application.qrc
 }

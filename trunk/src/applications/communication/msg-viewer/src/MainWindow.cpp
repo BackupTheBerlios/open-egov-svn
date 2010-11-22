@@ -16,12 +16,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <QApplication>
-#include <QList>
-#include <QByteArray>
-#include <QString>
-
+#include <QFileDialog>
+#include <QMenuBar>
 #include <QTextEdit>
+#include <QToolBar>
+
+#include <QApplication>
+#include <QByteArray>
+#include <QList>
+#include <QString>
 
 #include <QDebug>
 
@@ -33,14 +36,58 @@
 MainWindow::MainWindow(QWidget *parent /*=0*/)
  : OEG::Qt::MainWindow(parent)
 {
+  setWindowIcon(QIcon("icon.png"));
+
   m_text = new QTextEdit(this);
   m_text->setReadOnly(true);
   setCentralWidget(m_text);
 
-  setWindowTitle(qApp->applicationName());
-  setUnifiedTitleAndToolBarOnMac(true);
+  createAll();
+}
 
-  parseMessageFile("..\\test1.msg");
+MainWindow::~MainWindow()
+{
+  while (! m_dirs.isEmpty())
+    delete m_dirs.takeFirst();
+}
+
+void MainWindow::createActions()
+{
+  OEG::Qt::MainWindow::createActions();
+
+}
+
+void MainWindow::createMenus()
+{
+  QMenu *menu;
+
+  menu = menuBar()->addMenu(_("&File"));
+  menu->addAction(standardAction(Open));
+  menu->addSeparator();
+  menu->addAction(standardAction(Exit));
+
+  addHelpMenu();
+}
+
+void MainWindow::createToolBars()
+{
+  QToolBar *toolbar;
+
+  toolbar = addToolBar(_("File"));
+  toolbar->addAction(standardAction(Open));
+  toolbar->addSeparator();
+  toolbar->addAction(standardAction(Exit));
+}
+
+void MainWindow::standardActionOpen()
+{
+  m_file_name = QFileDialog::getOpenFileName(this, _("Open MSG File"), "", _("MSG Files (*.msg)"));
+
+  while (! m_dirs.isEmpty())
+    delete m_dirs.takeFirst();
+
+  parseMessageFile(m_file_name);
+
 }
 
 void MainWindow::skipBytes(int bytes)
@@ -345,47 +392,29 @@ qWarning() << "ssat: " << y << sector_size << a_msat.at(y);
 
       // First lets check the type of the directory entry and if zero it is unused.
       if (vbNumber(ba.mid(x+66-1, 1)) != 0) {
-#if 0
-        If MyArrayLen(a_dir,2)=0 Then
-          ReDim Preserve a_dir(8, 1)
-        Else
-          ReDim Preserve a_dir(8,MyArrayLen(a_dir,2)+1)
-        End If
+        DirectoryEntry *e = new DirectoryEntry();
+        int length = vbNumber(ba.mid(x+64-1,2));
+        qWarning() << "L: " << length << ba.length();
+        e->m_id                  = z;                                            // DID.       a_dir(0, MyArrayLen(a_dir,2)-1)
+        e->m_name                = ba.mid(x-1, length).replace(QChar(0), "");    // Name.
+        e->m_type                = vbNumber(ba.mid(x+ 66-1, 1));                 // Type.
+        e->m_left_child          = vbNumber(ba.mid(x+ 68-1, 4));                 // DID Left Child.
+        e->m_right_child         = vbNumber(ba.mid(x+ 72-1, 4));                 // DID Right Child.
+        e->m_root_node           = vbNumber(ba.mid(x+ 76-1, 4));                 // DID root node.
+        e->m_sid_of_first_sector = vbNumber(ba.mid(x+116-1, 4));                 // SID of first sector.
+        e->m_stream_size         = vbNumber(ba.mid(x+120-1, 4));                 // Stream size.
+        m_dirs << e;
 
-        // Format of the array 
-        // 0 - DID 
-        // 1 - Name  
-        // 2 - Type 
-        // 3 - DID Left Child 
-        // 4 - DID Right Child 
-        // 5 - DID root node 
-        // 6 - SID of first sector 
-        // 7 - Stream size 
-
-        a_dir(0, MyArrayLen(a_dir,2)-1)=z
-        a_dir(1, MyArrayLen(a_dir,2)-1)=Replace(Mid(ba,x,vbNumber(Mid(ba,x+64,2))),Chr(0),"")
-        a_dir(2, MyArrayLen(a_dir,2)-1)=vbNumber(Mid(ba,x+66,1))
-        a_dir(3, MyArrayLen(a_dir,2)-1)=vbNumber(Mid(ba,x+68,4))
-        a_dir(4, MyArrayLen(a_dir,2)-1)=vbNumber(Mid(ba,x+72,4))
-        a_dir(5, MyArrayLen(a_dir,2)-1)=vbNumber(Mid(ba,x+76,4))
-        a_dir(6, MyArrayLen(a_dir,2)-1)=vbNumber(Mid(ba,x+116,4))
-        a_dir(7, MyArrayLen(a_dir,2)-1)=vbNumber(Mid(ba,x+120,4))
-#endif
-
-  text += "DID: " + QString::number(z);
-  int length = vbNumber(ba.mid(x+64-1,2));
-qWarning() << "L: " << length << ba.length();
-  text += " Name: " + ba.mid(x-1, length).replace(QChar(0), "");
-  text += " Type: " + QString::number(vbNumber(ba.mid(x+66-1, 1)));
-  text += "<br>";
-
+        text += "DID: " + QString::number(e->m_id);
+        text += " Name: " + e->m_name;
+        text += " Type: " + QString::number(e->m_type);
+        text += "<br>";
       }
     }
 
     y = vbNumber(ssat.mid(y*4, 4));     // vbNumber(Mid(s_Sat,(y*4)+1,4))
   }
   text += "</p>";
-
 
 
   //ba = m_file.read(8);

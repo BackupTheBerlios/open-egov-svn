@@ -40,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent /*=0*/, ::Qt::WindowFlags flags /*=0*/)
 {
   setWindowTitle(QCoreApplication::applicationName());
   setObjectName("MainWindow");
+  setUnifiedTitleAndToolBarOnMac(true);
 
   resize(400, 300);
 
@@ -403,7 +404,7 @@ void MainWindow::setCentralLayout(QLayout *layout)
 
 void MainWindow::standardActionAboutApp()
 {
-  OEG::Qt::Application::runComponent("about-dialog", QStringList() << qApp->applicationName());
+  OEG::Qt::Application::runComponent("about-dialog", QStringList() << dynamic_cast<OEG::Qt::Application *>(qApp)->baseName());
 }
 
 void MainWindow::standardActionConnectToggle()

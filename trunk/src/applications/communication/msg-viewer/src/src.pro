@@ -5,7 +5,7 @@ SOURCES   = *.cpp
 HEADERS   = *.h
 FORMS     = 
 QT       += xml
-PACKAGES  = QT GETTEXT
+PACKAGES  = QT GETTEXT MAIL
 
 include(../../../common.pri)
 

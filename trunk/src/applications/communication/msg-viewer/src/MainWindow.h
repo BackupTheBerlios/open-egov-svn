@@ -19,10 +19,12 @@
 #pragma once
 
 #include <OEG/Qt/MainWindow.h>
+#include <OEG/Mail/Mail.h>
 
 #include <QFile>
 #include <QByteArray>
 #include <QList>
+#include <QString>
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -39,6 +41,7 @@ class MainWindow : public OEG::Qt::MainWindow
 
   public:
     MainWindow(QWidget *parent = 0);
+    virtual ~MainWindow();
 
     void skipBytes(int bytes);
     long long int readNumber(int bytes);
@@ -47,16 +50,21 @@ class MainWindow : public OEG::Qt::MainWindow
     void parseMessageFile(const QString &fileName);
 
   private slots:
-    //void getNewList();
+    void createActions();
+    void createMenus();
+    void createToolBars();
+    void standardActionOpen();
 
   private:
-    QTextEdit               *m_text;
-    QFile                    m_file;
-    QList<DirectoryEntry *>  m_dirs;
-    QString                  m_current_list;
-    QMenu                   *m_menu_file;
-    QToolBar                *m_toolbar_file;
-    QAction                 *m_action_get_new_list;
-    QAction                 *m_action_get_file;
+    OEG::Mail::Mail          m_mail;                       // An eMail object filled by the plugin which parsed the file.
+    QString                  m_file_name;                  // Filename of the mail returned by the file selection dialog.
+    QTextEdit               *m_text;                       // Displays the E-Mail nicely.
+    QFile                    m_file;                       // File object which belongs to the filename.
+    QList<DirectoryEntry *>  m_dirs;                       // A list with directories provided by the MSG file.
+    QString                  m_current_list;               // ?
+    QMenu                   *m_menu_file;                  // GUI element.
+    QToolBar                *m_toolbar_file;               // GUI element.
+    QAction                 *m_action_get_new_list;        // TODO.
+    QAction                 *m_action_get_file;            // TODO.
 };
 
