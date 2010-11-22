@@ -179,6 +179,24 @@ c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/qglobal.h:1613: warning
   </chapter>
 
   <chapter>
+    <title>Rules</title>
+    <section>
+      <title>Coding Rules</title>
+      <para lang="de">Wir verwenden nicht die .qrc-Ressourcen-Dateien von Qt. Ressourcen sollten niemals in die ausführbare Datei eingelinkt werden, es sei denn, es ist absolut notwendig.</para>
+      <para lang="en">We don't use the .qrc ressources files from Qt. Resources should never be linked into the executable file unless it is absolutely necessary.</para>
+
+      <para lang="de">Die Schaltfläche zum Beenden der Anwendung erscheint nicht in der Werkzeugleiste.</para>
+      <para lang="en">The button to exit the application does not appear in the toolbar.</para>
+
+      <para lang="de">Wenn die Anwendung nicht fehlerfrei kompiliert werden kann, dann muss ihr Verzeichnis aus der Datei src/applications/xyz/xyz.pro entfernt werden. So kann sicher gestellt werden, dass die restlichen Anwendungen ohne Unterbrechungen aufgrund von Kompilierfehlern erstellt werden können.</para>
+      <para lang="en">If the application can't be compiled without errors, then its directory need to be removed from the file src/applications/xyz/xyz.pro. This assures that the rest of the applications can be created without interruptions due to compilation errors.</para>
+
+      <!-- para lang="de"></para>
+      <para lang="en"></para -->
+    </section>
+  </chapter>
+
+  <chapter>
     <title>DBUS Scripting</title>
     <section>
       <title>Overview</title>
