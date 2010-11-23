@@ -41,7 +41,7 @@ class Application : public QApplication
     enum FileType { Icon, Database, Image, Text, Plugin, Help, Unknown };
 
   public:
-    Application(int &argc, char *argv[]);
+    Application(int &argc, char *argv[], const QString &baseName);
     virtual ~Application();
 
     void init();
@@ -56,7 +56,7 @@ class Application : public QApplication
     QString applicationBuildDate() const;
     QString applicationBuildTime() const;
 
-    void setApplicationName(const QString &appName, const QString &baseName = "");
+    void setApplicationName(const QString &appName);
 
     void setHomepage(const QString &url);
     QString homepage() const;

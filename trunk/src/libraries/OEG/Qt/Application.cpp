@@ -33,12 +33,13 @@
 using namespace OEG::Qt;
 using namespace Qt;
 
-Application::Application(int &argc, char *argv[])
+Application::Application(int &argc, char *argv[], const QString &baseName)
  : QApplication(argc, argv), m_tray_icon(0)
 {
   srand(time(0));
 
-  m_basename = "";
+  setBaseName(baseName);                                   // Set it before any use of gettext!
+  installGetText();                                        // Init gettext.
 
   setOrganizationName(_("G.A.S.I."));
   setOrganizationDomain(_("open-egov.de"));
@@ -57,27 +58,14 @@ void Application::init()
   if (settings.status() != QSettings::NoError) {
     qDebug() << __FILE__ ": settings error: " << settings.status();
   }
-
-  installGetText();
 }
 
 void Application::installGetText()
 {
-#ifdef _WINDOWS
-  setlocale(LC_ALL, "");
-#else
   //setlocale(LC_ALL, "de_DE");
   setlocale(LC_ALL, QLocale::system().name().toLatin1().constData());
-#endif
-
-  //QDir dir;
-  //dir.cd(standardDirectory(Program));
-  //if (dir.exists("locale"))
-  //  dir.cd("locale");
 
   QByteArray a = baseName().toAscii();
-
-  // or with: app.baseName().toAscii()
   bindtextdomain(a.constData(), "locale");
   textdomain(a.constData());
 }
@@ -111,23 +99,17 @@ QString Application::applicationBuildTime() const
   return m_application_build_time;
 }
 
-void Application::setApplicationName(const QString &appName, const QString &baseName /*=""*/)
-{
-  QApplication::setApplicationName(appName);
-
-  if (baseName.isEmpty()) {
-    if (appName.length() > 0) {
-      setBaseName(appName.toLower());                                // Caution: appName is a localized string!
-    }
-  }
-  else {
-    setBaseName(baseName);
-  }
-}
-
 void Application::setBaseName(const QString &baseName)
 {
   m_basename = baseName;
+
+  if (baseName.isEmpty()) {
+    QString appName = applicationName();
+
+    if (appName.length() > 0) {
+      setBaseName(appName.toLower());                                // Caution: appName wants to be a localized string!
+    }
+  }
 
   if (homepage().isEmpty()) {                                        // Generate a homepage URL.
     setHomepage("http://www.open-egov.de/applications/" + baseName + "/");
