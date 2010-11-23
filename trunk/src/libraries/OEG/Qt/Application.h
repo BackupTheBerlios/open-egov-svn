@@ -44,19 +44,17 @@ class Application : public QApplication
     Application(int &argc, char *argv[], const QString &baseName);
     virtual ~Application();
 
-    void init();
-
     static void runComponent(const QString &cmd);
     static void runComponent(const QString &cmd, const QStringList &arguments);
 
     void addSystemTrayIcon(const QIcon &icon, QMenu *menu, const QString &title);
     void removeSystemTrayIcon();
 
+    void setApplicationName(const QString &name, const QString &version = "");
+
     void setApplicationBuildData(const char *date, const char *time);
     QString applicationBuildDate() const;
     QString applicationBuildTime() const;
-
-    void setApplicationName(const QString &appName);
 
     void setHomepage(const QString &url);
     QString homepage() const;
@@ -72,7 +70,6 @@ class Application : public QApplication
 
   protected:
     QSystemTrayIcon *m_tray_icon;
-    QString          m_application_version;
     QString          m_application_build_date;
     QString          m_application_build_time;
     QString          m_homepage;

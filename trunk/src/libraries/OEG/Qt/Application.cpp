@@ -38,26 +38,21 @@ Application::Application(int &argc, char *argv[], const QString &baseName)
 {
   srand(time(0));
 
-  setBaseName(baseName);                                   // Set it before any use of gettext!
+  setBaseName(baseName);                                   // Set it before any use of gettext or settings!
   installGetText();                                        // Init gettext.
 
   setOrganizationName(_("G.A.S.I."));
   setOrganizationDomain(_("open-egov.de"));
+
+  QSettings settings(organizationName(), baseName());
+  if (settings.status() != QSettings::NoError) {
+    qDebug() << __FILE__ ": settings error: " << settings.status();
+  }
 }
 
 Application::~Application()
 {
   removeSystemTrayIcon();
-}
-
-// General initializations. You have to set at least the applicationName() first.
-
-void Application::init()
-{
-  QSettings settings(organizationName(), baseName());
-  if (settings.status() != QSettings::NoError) {
-    qDebug() << __FILE__ ": settings error: " << settings.status();
-  }
 }
 
 void Application::installGetText()
@@ -81,6 +76,13 @@ void Application::runComponent(const QString &cmd, const QStringList &arguments)
 
   process.setWorkingDirectory(QCoreApplication::applicationDirPath());
   process.startDetached(cmd, arguments);
+}
+
+void Application::setApplicationName(const QString &name, const QString &version /*=""*/)
+{
+  QCoreApplication::setApplicationName(name);
+
+  setApplicationVersion(version);
 }
 
 void Application::setApplicationBuildData(const char *date, const char *time)
