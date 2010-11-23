@@ -33,7 +33,7 @@
 using namespace OEG::Qt;
 using namespace Qt;
 
-Application::Application(int &argc, char *argv[], const QString &baseName)
+Application::Application(int &argc, char *argv[], const QString &base)
  : QApplication(argc, argv), m_tray_icon(0)
 {
   srand(time(0));

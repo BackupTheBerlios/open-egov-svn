@@ -41,7 +41,7 @@ class Application : public QApplication
     enum FileType { Icon, Database, Image, Text, Plugin, Help, Unknown };
 
   public:
-    Application(int &argc, char *argv[], const QString &baseName);
+    Application(int &argc, char *argv[], const QString &base);
     virtual ~Application();
 
     static void runComponent(const QString &cmd);
