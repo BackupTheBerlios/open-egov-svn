@@ -22,12 +22,10 @@
 
 int main(int argc, char *argv[])
 {
-  OEG::Qt::Application app(argc, argv);
+  OEG::Qt::Application app(argc, argv, "settings");
 
-  app.setApplicationName(_("Settings"), "settings");
-  app.setApplicationVersion("0.1");
+  app.setApplicationName(_("Settings"), "0.1");
   app.setApplicationBuildData(__DATE__, __TIME__);
-  app.init();
 
   MainWindow win;
   win.show();

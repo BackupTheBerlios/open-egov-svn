@@ -22,12 +22,10 @@
 
 int main(int argc, char *argv[])
 {
-  OEG::Qt::Application app(argc, argv);
+  OEG::Qt::Application app(argc, argv, "bug-reporter");
 
-  app.setApplicationName(_("Bug Reporter"), "bug-reporter");
-  app.setApplicationVersion("0.1");
+  app.setApplicationName(_("Bug Reporter"), "0.1");
   app.setApplicationBuildData(__DATE__, __TIME__);
-  app.init();
 
   MainWindow win;
   win.show();

@@ -24,12 +24,10 @@
 
 int main(int argc, char *argv[])
 {
-  OEG::Qt::Application app(argc, argv);
+  OEG::Qt::Application app(argc, argv, "desktop");
 
-  app.setApplicationName(_("Desktop"), "desktop");
-  app.setApplicationVersion("0.1");
+  app.setApplicationName(_("Desktop"), "0.1");
   app.setApplicationBuildData(__DATE__, __TIME__);
-  app.init();
 
   MainWindow win(QApplication::desktop()->screen(0));
   win.show();

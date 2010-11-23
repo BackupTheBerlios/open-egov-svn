@@ -22,12 +22,10 @@
 
 int main(int argc, char *argv[])
 {
-  OEG::Qt::Application app(argc, argv);
+  OEG::Qt::Application app(argc, argv, "help-viewer");
 
-  app.setApplicationName(_("Help Viewer"), "help-viewer");
-  app.setApplicationVersion("0.1");
+  app.setApplicationName(_("Help Viewer"), "0.1");
   app.setApplicationBuildData(__DATE__, __TIME__);
-  app.init();
 
   MainWindow win;
   win.show();
