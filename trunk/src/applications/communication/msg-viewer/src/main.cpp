@@ -22,12 +22,10 @@
 
 int main(int argc, char *argv[])
 {
-  OEG::Qt::Application app(argc, argv);
+  OEG::Qt::Application app(argc, argv, "msg-viewer");
 
-  app.setApplicationName(_("MSG-Viewer"), "msg-viewer");
-  app.setApplicationVersion("0.1");
+  app.setApplicationName(_("MSG-Viewer"), "0.1");
   app.setApplicationBuildData(__DATE__, __TIME__);
-  app.init();
 
   MainWindow win;
   win.show();
