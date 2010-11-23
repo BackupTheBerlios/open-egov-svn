@@ -1,0 +1,81 @@
+// $Id$
+//
+// Open eGovernment
+// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+//
+// This program is free software: you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 3
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+// See the GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+#if defined(UNDER_CE)
+#  include <winbase.h>
+#else
+#  include <winver.h>
+#endif
+
+#pragma code_page(1252)
+
+IDI_ICON1  ICON DISCARDABLE  "..\\..\\..\\common\\library.ico"
+
+#define VER_FILEVERSION             1,0,0,0
+#define VER_FILEVERSION_STR         "1.0.0.0\0"
+
+#define VER_PRODUCTVERSION          1,0,0,0
+#define VER_PRODUCTVERSION_STR      "1.0.0.0\0"
+
+#ifdef _DEBUG
+#define VER_DEBUG VS_FF_DEBUG
+#else
+#define VER_DEBUG 0x0L
+#endif
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION     VER_FILEVERSION
+PRODUCTVERSION  VER_PRODUCTVERSION
+FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK   // 0x3fL
+FILEFLAGS       VER_DEBUG
+FILEOS          VOS__WINDOWS32
+FILETYPE        VFT_DLL
+FILESUBTYPE     VFT2_UNKNOWN           // 0x0L
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "040904B0"
+    BEGIN
+      VALUE "Comments",         "Homepage: www.open-egov.de\0"
+      VALUE "CompanyName",      "gasi.de\0"
+      VALUE "FileDescription",  "Open eGovernment: Mail Library.\0"
+      VALUE "FileVersion",      VER_FILEVERSION_STR
+      VALUE "InternalName",     "oegMail\0"
+      VALUE "LegalCopyright",   "Copyright (C) 2004-2010 GASI.\0"
+      VALUE "LegalTrademarks",  "Open eGovernment.\0"
+      VALUE "OriginalFilename", "oegMail1.dll\0"
+      VALUE "ProductName",      "Open eGovernment Suite\0"
+      VALUE "ProductVersion",   VER_PRODUCTVERSION_STR
+    END
+  END
+
+  BLOCK "VarFileInfo"
+  BEGIN
+    // The following line should only be modified for localized versions.
+    // It consists of any number of WORD,WORD pairs, with each pair
+    // describing a language,codepage combination supported by the file.
+    //
+    // For example, a file might have values "0x409,1252" indicating that it
+    // supports English language (0x409) in the Windows ANSI codepage (1252).
+    //
+    // http://msdn.microsoft.com/en-us/library/aa381058%28VS.85%29.aspx
+
+    VALUE "Translation", 0x409, 1252
+  END
+END
+
