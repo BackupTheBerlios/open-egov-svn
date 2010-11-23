@@ -1,0 +1,32 @@
+# German translations for PACKAGE package.
+# Copyright (C) 2010 Gerrit M. Albrecht
+# This file is distributed under the same license as the PACKAGE package.
+# <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OEG Builder 0.0.0.1\n"
+"Report-Msgid-Bugs-To: mail@gerrit-albrecht.de\n"
+"POT-Creation-Date: 2010-11-23 20:59+0100\n"
+"PO-Revision-Date: 2010-11-23 21:11+0100\n"
+"Last-Translator: <EMAIL@ADDRESS>\n"
+"Language-Team: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CP1252\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#
+# File: MainWindow.cpp, line: 47
+msgid "&File"
+msgstr "&Datei"
+
+#
+# File: MainWindow.cpp, line: 58
+msgid "File"
+msgstr "Datei"
+
+#
+# File: main.cpp, line: 27
+msgid "Builder"
+msgstr "Bauhof"

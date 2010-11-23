@@ -1,0 +1,29 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Gerrit M. Albrecht
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: mail@gerrit-albrecht.de\n"
+"POT-Creation-Date: 2010-11-23 20:59+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+#
+# File: MainWindow.cpp, line: 47
+msgid "&File"
+msgstr ""
+#
+# File: MainWindow.cpp, line: 58
+msgid "File"
+msgstr ""
+#
+# File: main.cpp, line: 27
+msgid "Builder"
+msgstr ""
