@@ -38,7 +38,7 @@ Application::Application(int &argc, char *argv[], const QString &base)
 {
   srand(time(0));
 
-  setBaseName(baseName);                                   // Set it before any use of gettext or settings!
+  setBaseName(base);                                       // Set it before any use of gettext or settings!
   installGetText();                                        // Init gettext.
 
   setOrganizationName(_("G.A.S.I."));
