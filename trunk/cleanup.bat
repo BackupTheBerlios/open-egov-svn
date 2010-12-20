@@ -2,7 +2,14 @@
 
 REM $Id$
 
-CD /D "%0"\..\
+REM Look into C:\Qt\2010.05\bin\qtenv.bat for updated data.
+
+set QTDIR=C:\Qt\2010.05\qt
+set PATH=%QTDIR%\bin;%PATH%;C:\Qt\2010.05\mingw\bin;%SystemRoot%\System32
+set QMAKESPEC=win32-g++
+
+
+CD /D "%0"\..
 
 ECHO Cleaning directory structure.
 
