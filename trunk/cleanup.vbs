@@ -1,4 +1,4 @@
-' $Id:$
+' $Id$
 
 ' Script for MinGW/Windows environments to remove all temporary files
 ' without removing notes and additional files. Needed because it was
