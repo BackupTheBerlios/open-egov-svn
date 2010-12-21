@@ -13,7 +13,6 @@ REM Also there are two places with plugins... Chaos.
 
 CD /D "%0"\..\bin
 
-SET SRCDIR=C:\Qt\4.7.0-beta1\bin
 SET SRCDIR=C:\Qt\2010.05\qt\bin
 
 COPY /B /Y "%SRCDIR%\mingwm10.dll" .
