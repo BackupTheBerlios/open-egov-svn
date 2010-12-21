@@ -23,6 +23,8 @@
 #include <QToolBar>
 #include <QDockWidget>
 #include <QStatusBar>
+#include <QTabWidget>
+#include <QTextEdit>
 #include <QAction>
 #include <QIcon>
 
@@ -34,6 +36,36 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
   setWindowIcon(QIcon("icon.png"));
 
   createAll();
+
+  m_tabs = new QTabWidget(this);
+  if (! m_tabs)
+    return;
+
+  m_tab_project    = new QWidget(this);
+  m_tab_part_list  = new QWidget(this);
+  m_tab_schematics = new QWidget(this);
+  m_tab_pcb_layout = new QWidget(this);
+  m_tab_simulation = new QWidget(this);
+  m_tab_notes      = new QTextEdit(this);
+
+  m_tabs->addTab(m_tab_project,    _("&Project"));
+  m_tabs->addTab(m_tab_part_list,  _("Part &List"));
+  m_tabs->addTab(m_tab_schematics, _("&Schematics"));
+  m_tabs->addTab(m_tab_pcb_layout, _("PCB &Layout"));
+  m_tabs->addTab(m_tab_simulation, _("Si&mulation"));
+  m_tabs->addTab(m_tab_notes,      _("&Notes"));
+  m_tabs->setCurrentIndex(0);                              // better use prefs.
+
+  setCentralWidget(m_tabs);
+
+
+}
+
+MainWindow::~MainWindow()
+{
+  if (m_tabs) {
+    delete m_tabs; m_tabs = 0;
+  }
 }
 
 void MainWindow::createActions()

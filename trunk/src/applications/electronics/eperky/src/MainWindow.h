@@ -24,6 +24,9 @@
 #include <QWidget>
 #include <QList>
 
+class QTabWidget;
+class QTextEdit;
+
 class OEG::Qt::ToolProvider;
 
 class MainWindow : public OEG::Qt::MainWindow
@@ -32,6 +35,7 @@ class MainWindow : public OEG::Qt::MainWindow
 
   public:
     MainWindow(QWidget *parent = 0);
+    virtual ~MainWindow();
 
     virtual void createActions();
     virtual void createDockWidgets();
@@ -40,6 +44,13 @@ class MainWindow : public OEG::Qt::MainWindow
     virtual void createToolProvider() {};
 
   protected:
-
+    QTabWidget           *m_tabs;
+    QWidget              *m_tab_project;
+    QWidget              *m_tab_part_list;
+    QWidget              *m_tab_schematics;
+    QWidget              *m_tab_pcb_layout;
+    QWidget              *m_tab_simulation;
+    QTextEdit            *m_tab_notes;
+    QObject *m_document;
 };
 

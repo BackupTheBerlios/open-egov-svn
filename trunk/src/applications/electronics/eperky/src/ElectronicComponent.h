@@ -57,9 +57,9 @@ class ElectronicComponent : public QObject
     long long int   m_type;
     QList<QString>  m_electrical_connections;
 
-    QString         m_manufacturer_name;
-    QDate           m_last_seen;
     unsigned int    m_manufacturer_id;
+    QString         m_manufacturer_name;
+    QDate           m_last_checked;
     QString         m_order_number;
     unsigned int    m_price;
     unsigned int    m_minimum_order_quantity;
