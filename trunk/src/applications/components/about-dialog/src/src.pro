@@ -3,7 +3,7 @@
 TARGET    = about-dialog
 SOURCES   = *.cpp
 HEADERS   = *.h
-FORMS     = 
+FORMS     = forms/*.ui
 QT       += xml network
 PACKAGES  = QT GETTEXT
 

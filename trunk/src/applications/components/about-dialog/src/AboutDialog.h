@@ -1,4 +1,4 @@
-// $Id$
+// $Id: MainWindow.h 223 2010-08-03 22:02:14Z gerrit-albrecht $
 //
 // Open eGovernment
 // Copyright (C) 2005-2010 by Gerrit M. Albrecht
@@ -16,21 +16,32 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <OEG/Qt/Application.h>
+#pragma once
 
-#include "MainWindow.h"
-#include "AboutDialog.h"
+#include <OEG/Common.h>
 
-int main(int argc, char *argv[])
+#include <QDialog>
+
+#include "ui_about.h"
+
+class AboutDialog : public QDialog, public Ui::AboutDialog
 {
-  OEG::Qt::Application app(argc, argv, "about-dialog");
+  Q_OBJECT
 
-  app.setApplicationName(_("About Dialog"), "0.1");
-  app.setApplicationBuildData(__DATE__, __TIME__);
+  public:
+    AboutDialog(QWidget *parent = 0);
 
-  AboutDialog *dialog = new AboutDialog(0);
-  dialog->show();
+    void setInformationText();
+    void setVersionText();
 
-  return app.exec();
-}
+    void setLocalizedLicenseText(QString &text);
+
+  protected:
+
+  protected slots:
+    void openUrl(const QUrl &link);
+
+  private:
+
+};
 

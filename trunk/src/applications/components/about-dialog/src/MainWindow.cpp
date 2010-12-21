@@ -29,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
   QStringList arguments = QCoreApplication::arguments();
   if (arguments.count() > 1) {
     //QString s = arguments.join("");
-    QMessageBox::information(0, "", arguments.at(1));
+    //QMessageBox::information(0, "", arguments.at(1));
   }
 }
 
