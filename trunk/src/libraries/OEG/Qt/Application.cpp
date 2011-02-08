@@ -16,8 +16,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+#include <OEG/Common.h>
 #include <OEG/Qt/Application.h>
+#include <OEG/Qt/HelpHandler.h>
 
+#include <QDesktopServices>
 #include <QDir>
 #include <QFile>
 #include <QMenu>
@@ -48,6 +51,10 @@ Application::Application(int &argc, char *argv[], const QString &base)
   if (settings.status() != QSettings::NoError) {
     qDebug() << __FILE__ ": settings error: " << settings.status();
   }
+
+  QDesktopServices::setUrlHandler("help", &m_help_handler, "showHelp");
+
+  QDir::setCurrent(standardDirectory(Program));            // Change into a well-known directory.
 }
 
 Application::~Application()

@@ -20,6 +20,7 @@
 
 #include <OEG/Common.h>
 #include <OEG/Qt/Settings.h>
+#include <OEG/Qt/HelpHandler.h>
 
 #include <QApplication>
 #include <QIcon>
@@ -65,6 +66,8 @@ class Application : public QApplication
     QString standardDirectory(DirectoryType type);
     QString locateFile(const QString &filename, FileType type = Unknown);
 
+    inline HelpHandler *helpHandler() { return &m_help_handler; }
+
   protected:
     void installGetText();
 
@@ -75,6 +78,7 @@ class Application : public QApplication
     QString          m_homepage;
     QString          m_basename;
     Settings        *m_settings;
+    HelpHandler      m_help_handler;
 };
 
 }}
