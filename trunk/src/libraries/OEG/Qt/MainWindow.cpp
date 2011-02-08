@@ -42,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent /*=0*/, ::Qt::WindowFlags flags /*=0*/)
   setObjectName("MainWindow");
   setUnifiedTitleAndToolBarOnMac(true);
 
-  resize(400, 300);
+  resize(500, 400);
 
   m_data_storage_mode = DoNothing;
 
