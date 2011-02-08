@@ -28,6 +28,10 @@
 #include <QAction>
 #include <QIcon>
 
+#include <QGraphicsView>
+
+#include "SchematicsScene.h"
+#include "SchematicsView.h"
 #include "MainWindow.h"
 
 MainWindow::MainWindow(QWidget *parent /*=0*/)
@@ -37,13 +41,15 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
 
   createAll();
 
+  m_schematics_scene = new SchematicsScene;
+
   m_tabs = new QTabWidget(this);
   if (! m_tabs)
     return;
 
   m_tab_project    = new QWidget(this);
   m_tab_part_list  = new QWidget(this);
-  m_tab_schematics = new QWidget(this);
+  m_tab_schematics = new SchematicsView(this);
   m_tab_pcb_layout = new QWidget(this);
   m_tab_simulation = new QWidget(this);
   m_tab_notes      = new QTextEdit(this);
@@ -57,12 +63,14 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
   m_tabs->setCurrentIndex(0);                              // better use prefs.
 
   setCentralWidget(m_tabs);
-
-
 }
 
 MainWindow::~MainWindow()
 {
+  if (m_schematics_scene) {
+    delete m_schematics_scene; m_schematics_scene = 0;
+  }
+
   if (m_tabs) {
     delete m_tabs; m_tabs = 0;
   }
