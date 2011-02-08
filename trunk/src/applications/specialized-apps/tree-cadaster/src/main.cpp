@@ -22,12 +22,10 @@
 
 int main(int argc, char *argv[])
 {
-  OEG::Qt::Application app(argc, argv);
+  OEG::Qt::Application app(argc, argv, "tree-cadaster");
 
-  app.setApplicationName(_("Tree Cadaster"), "tree-cadaster");
-  app.setApplicationVersion("0.1");
+  app.setApplicationName(_("Tree Cadaster"), "0.1");
   app.setApplicationBuildData(__DATE__, __TIME__);
-  app.init();
 
   MainWindow win;
   win.show();
