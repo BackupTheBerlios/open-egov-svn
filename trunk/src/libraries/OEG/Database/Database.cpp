@@ -34,3 +34,8 @@ Database::~Database()
 {
 }
 
+void Database::addDatabase(DatabaseSystem system, DatabaseType type,
+                           DatabaseAccess access, DatabaseRights rights)
+{
+}
+

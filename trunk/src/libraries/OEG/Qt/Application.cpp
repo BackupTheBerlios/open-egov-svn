@@ -54,7 +54,7 @@ Application::Application(int &argc, char *argv[], const QString &base)
 
   QDesktopServices::setUrlHandler("help", &m_help_handler, "showHelp");
 
-  QDir::setCurrent(standardDirectory(Program));            // Change into a well-known directory.
+  QDir::setCurrent(standardDirectory(Base));               // Change into a well-known directory.
 }
 
 Application::~Application()
@@ -169,6 +169,8 @@ void Application::removeSystemTrayIcon()
 
 QString Application::standardDirectory(DirectoryType type)
 {
+  QDir dir;
+
   switch (type) {
     case Temp:
       return QDir::tempPath();
@@ -180,15 +182,22 @@ QString Application::standardDirectory(DirectoryType type)
       return standardDirectory(Temp); // TODO
       break;
 
-    case Program:
-      {
-        QDir dir(QCoreApplication::applicationDirPath());
+    case Data:
+      dir.cd(standardDirectory(Base));
 
-        if (dir.dirName() == "bin")
-          dir.cdUp();
+      if (dir.exists("data/" + baseName()))
+        dir.cd("data/" + baseName());
 
-        return dir.canonicalPath();
-      }
+      return dir.canonicalPath();
+      break;
+
+    case Base:
+      dir.cd(QCoreApplication::applicationDirPath());
+
+      if (dir.dirName() == "bin")
+        dir.cdUp();
+
+      return dir.canonicalPath();
       break;
   }
 
@@ -220,7 +229,7 @@ QString Application::locateFile(const QString &filename, FileType type /*=Unknow
             return dir.canonicalPath() + "/" + filename;
         }
 
-        dir.cd(standardDirectory(Program));
+        dir.cd(standardDirectory(Base));
         if (dir.exists("resources/icons")) {
           dir.cd("resources/icons");
           if (QFile::exists(dir.canonicalPath() + "/" + filename))
@@ -237,9 +246,9 @@ QString Application::locateFile(const QString &filename, FileType type /*=Unknow
       {
         QDir dir;
 
-        // A database is always in the program folder. TODO: allows other directories.
+        // A database is always in the program folder. TODO: allow other directories.
 
-        dir.cd(standardDirectory(Program));
+        dir.cd(standardDirectory(Base));
         //if (dir.exists("db")) {
         //  dir.cd("db");
           if (QFile::exists(dir.canonicalPath() + "/" + filename))
@@ -265,7 +274,7 @@ QString Application::locateFile(const QString &filename, FileType type /*=Unknow
 
         // Help files are always there, were also the program files are located.
 
-        dir.cd(standardDirectory(Program));
+        dir.cd(standardDirectory(Base));
         if (dir.exists("help")) {
           dir.cd("help");
           if (dir.exists(lang))
@@ -287,7 +296,7 @@ QString Application::locateFile(const QString &filename, FileType type /*=Unknow
       {
         QDir dir;
 
-        dir.cd(standardDirectory(Program));
+        dir.cd(standardDirectory(Base));
         if (dir.exists("plugins")) {
           dir.cd("plugins");
           if (QFile::exists(dir.canonicalPath() + "/" + filename))

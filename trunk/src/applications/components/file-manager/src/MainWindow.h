@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2011 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -20,9 +20,9 @@
 
 #include <OEG/Qt/MainWindow.h>
 
-#include <QString.h>
-#include <QWidget.h>
-#include <QList.h>
+#include <QString>
+#include <QWidget>
+#include <QList>
 
 class OEG::Qt::ToolProvider;
 

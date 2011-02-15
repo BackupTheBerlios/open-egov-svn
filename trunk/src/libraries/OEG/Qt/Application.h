@@ -38,7 +38,7 @@ class Application : public QApplication
   Q_OBJECT
 
   public:
-    enum DirectoryType { Temp, User, Common, Program };
+    enum DirectoryType { Temp, User, Common, Data, Base };
     enum FileType { Icon, Database, Image, Text, Plugin, Help, Unknown };
 
   public:

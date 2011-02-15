@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2011 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -72,13 +72,28 @@ void ProcessInfo::setThreadCount(unsigned long count)
   m_thread_count = count;
 }
 
+unsigned long ProcessInfo::threadCount()
+{
+  return m_thread_count;
+}
+
 void ProcessInfo::setPriorityClassBase(long base)
 {
   m_priority_class_base = base;
 }
 
+long ProcessInfo::priorityClassBase()
+{
+  return m_priority_class_base;
+}
+
 void ProcessInfo::setPriorityClass(unsigned long pc)
 {
   m_priority_class = pc;
+}
+
+unsigned long ProcessInfo::priorityClass()
+{
+  return m_priority_class;
 }
 

@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2011 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -43,8 +43,13 @@ class ProcessInfo : public QObject
     int parentProcessId();
 
     void setThreadCount(unsigned long count);
+    unsigned long threadCount();
+
     void setPriorityClassBase(long base);
+    long priorityClassBase();
+
     void setPriorityClass(unsigned long pc);
+    unsigned long priorityClass();
 
   protected:
     QString        m_process_name;

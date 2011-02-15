@@ -31,9 +31,17 @@ class Database : public QObject
   Q_OBJECT
 
   public:
+    enum DatabaseSystem { XML, SQLITE, MYSQL };
+    enum DatabaseType   { LOCAL, REMOTE, CLOUD, PEERTOPEER };
+    enum DatabaseAccess { PRIVATE, WORKGROUP, PUBLIC };
+    enum DatabaseRights { READ, WRITE, ADD, DELETE };
+
+  public:
     Database(QObject *parent);
     ~Database();
 
+    void addDatabase(DatabaseSystem system, DatabaseType type,
+                     DatabaseAccess access, DatabaseRights rights);
   protected:
 
 };

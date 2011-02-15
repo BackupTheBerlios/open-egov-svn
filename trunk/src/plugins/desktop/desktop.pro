@@ -1,5 +1,5 @@
 # $Id$
 
 TEMPLATE = subdirs
-SUBDIRS  = 
+SUBDIRS  = clock
 
