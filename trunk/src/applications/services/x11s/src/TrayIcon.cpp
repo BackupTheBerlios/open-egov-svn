@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2004-2010 by Gerrit M. Albrecht
+// Copyright (C) 2004-2011 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@
 #include "TrayIcon.h"
 
 TrayIcon::TrayIcon(QWidget *parent /*=0*/)
- : QSystemTrayIcon(parent)
+ : QSystemTrayIcon(parent), m_tray_icon(0)
 {
   createActions();
 
@@ -52,12 +52,10 @@ TrayIcon::TrayIcon(QWidget *parent /*=0*/)
   m_tray_icon_menu->addAction(m_action_exit);
   setContextMenu(m_tray_icon_menu);
 
-  m_tray_icon = new QIcon;
-  //m_tray_icon->addFile(":/application.ico");
-  //setWindowIcon(*m_tray_icon);
+  updateTrayIcon();
+
   connect(this, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
           this, SLOT(onActivated(QSystemTrayIcon::ActivationReason)));
-  setIcon(*m_tray_icon);
 
   m_ip_address      = "";
   m_server_number   = 0;
@@ -97,7 +95,6 @@ TrayIcon::TrayIcon(QWidget *parent /*=0*/)
 
   connect(m_server, SIGNAL(newConnection()),
           this,     SLOT(onNewConnection()));
-
 }
 
 TrayIcon::~TrayIcon()
@@ -198,7 +195,46 @@ void TrayIcon::onNewConnection()
 {
   qDebug() << "onNewConnection(): New connection.";
   Connection *conn = new Connection(m_server->nextPendingConnection());
-  if (conn)
+  if (conn) {
+    connect(conn, SIGNAL(disconnected(Connection *)),
+            this, SLOT(deleteConnection(Connection *)));
+
     m_connections.append(conn);
+
+    updateTrayIcon();
+  }
+}
+
+void TrayIcon::deleteConnection(Connection *conn)
+{
+  if (! conn)
+    return;
+
+  for (int i=0; i<m_connections.size(); i++) {
+    if (m_connections.at(i) == conn) {
+      delete m_connections.takeAt(i);
+    }
+  }
+
+  updateTrayIcon();
+}
+
+void TrayIcon::updateTrayIcon()
+{
+  OEG::Qt::Application *app;
+  QString dir;
+
+  if (m_tray_icon)
+    delete m_tray_icon;
+
+  app = dynamic_cast<OEG::Qt::Application *>(qApp);
+  dir = app->standardDirectory(OEG::Qt::Application::Data);
+
+  if (m_connections.size() > 0)
+    m_tray_icon = new QIcon(dir + "/trayicon_in_use.ico");
+  else
+    m_tray_icon = new QIcon(dir + "/trayicon_ready.ico");
+
+  setIcon(*m_tray_icon);
 }
 

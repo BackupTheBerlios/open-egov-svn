@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2004-2010 by Gerrit M. Albrecht
+// Copyright (C) 2004-2011 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -35,7 +35,9 @@ class TrayIcon : public QSystemTrayIcon
     TrayIcon(QWidget *parent = 0);
     virtual ~TrayIcon();
 
+  protected:
     void createActions();
+    void updateTrayIcon();
 
   private slots:
     void action_about_app();
@@ -45,6 +47,7 @@ class TrayIcon : public QSystemTrayIcon
 
     void onActivated(QSystemTrayIcon::ActivationReason reason);
     void onNewConnection();
+    void deleteConnection(Connection *conn);
 
   protected:
     QTcpServer          *m_server;

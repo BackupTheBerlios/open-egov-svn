@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2011 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -26,12 +26,14 @@ Connection::Connection(QTcpSocket *socket)
  : QObject(0), m_socket(socket)
 {
   if (! m_socket) {
-    qDebug() << "no socket";
+    qDebug() << "No socket.";
     return;
   }
 
   connect(m_socket, SIGNAL(disconnected()),
           m_socket, SLOT(deleteLater()));
+  connect(m_socket, SIGNAL(disconnected()),
+          this,     SLOT(emitDisconnected()));
   connect(m_socket, SIGNAL(readyRead()),
           this,     SLOT(onReadyRead()));
 }
@@ -65,5 +67,10 @@ void Connection::onReadyRead()
 
   //m_socket->write(data);
   //m_socket->disconnectFromHost();
+}
+
+void Connection::emitDisconnected()
+{
+  emit disconnected(this);
 }
 

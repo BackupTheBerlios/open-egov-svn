@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2004-2010 by Gerrit M. Albrecht
+// Copyright (C) 2004-2011 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,6 +17,7 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <OEG/Qt/Application.h>
+#include <OEG/Qt/MessageBox.h>
 
 #include <QDebug>
 #include <QMessageBox>
@@ -27,14 +28,10 @@
 
 int main(int argc, char *argv[])
 {
-  OEG::Qt::Application app(argc, argv);
+  OEG::Qt::Application app(argc, argv, "x11s");
 
-  app.setApplicationName(_("X11S"));
-  app.setOrganizationName(_("G.A.S.I."));
-  app.setOrganizationDomain(_("open-egov.de"));
-  app.setApplicationVersion(_("0.1"));
+  app.setApplicationName(_("X11S"), "0.1");
   app.setApplicationBuildData(__DATE__, __TIME__);
-  app.setHomepage(_("http://www.open-egov.de/"));
 
   QSettings settings(app.organizationName(), app.applicationName());
   if (settings.status() != QSettings::NoError) {
@@ -43,10 +40,11 @@ int main(int argc, char *argv[])
 
   // This is important, because else the closing of a QMessageBox will
   // terminate the application, if there are no other open windows!
+
   app.setQuitOnLastWindowClosed(false);
 
   if (! QSystemTrayIcon::isSystemTrayAvailable()) {
-    QMessageBox::warning(0, qApp->applicationName(), _("System tray is unavailable"));
+    OEG::Qt::MessageBox::WarnMessage(_("System tray is unavailable"));
     return 1;
   }
 
