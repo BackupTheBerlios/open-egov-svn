@@ -11,7 +11,7 @@
       <corpauthor>Open E-Government Team</corpauthor>
     </authorgroup>
     <copyright>
-      <year>2009, 2010</year>
+      <year>2009, 2010, 2011</year>
       <holder>Gerrit M. Albrecht</holder>
     </copyright>
     <legalnotice>
@@ -42,12 +42,14 @@ own applications with latest tools and without using prebuilt packages from this
       <title>Preparation and Setup</title>
       <para>To build everything you first need a setup with some prebuilt stuff. Applications need e.g. gettext and it's simpler to use a binary version to build the "builder" package (which needs gettext). Later you may rebuild such applications and all of their dependent packages.
 </para>
-      <para>The first setup step is the installation of Qt. Retrieve a complete development package (with MinGW and precompiled libraries) from <ulink url="http://qt.nokia.com/">qt.nokia.com</ulink>, because it is all you need to be ready for working. Then download the Open eGovernment source package and extract it to any path you want. This is your base installation path. You don't need to set an environment variable. It's possible to put the directory structure onto an USB stick.</para>
+      <para>The first setup step is the installation of Qt. Retrieve a complete development package (with MinGW and precompiled libraries) from <ulink url="http://qt.nokia.com/">qt.nokia.com</ulink>, because it is all you need to be ready for working. Then download the Open eGovernment source package and extract it to any path you want. This is your base installation path. You don't need to set an environment variable because all binaries are installed into base/bin and know their base directory path. It's possible to put the directory structure onto an USB stick.</para>
       <para>To build applications you need a lot of standard tools and applications. Most of them only compile with patches or when other tools are available. So you have to build a nearly complete GNU toolchain.</para>
       <para>Independent binary tools may be downloaded from their respective websites. The following tools may be installed as binaries:
         <itemizedlist>
-          <listitem><para>Git,</para></listitem>
-          <listitem><para>Perl.</para></listitem>
+          <listitem><para>Git</para></listitem>
+          <listitem><para>Perl</para></listitem>
+          <listitem><para>peflags</para></listitem>
+          <listitem><para>signtool</para></listitem>
         </itemizedlist>
       </para>
     </section>
@@ -95,7 +97,7 @@ rare files or files extracted from a repository.</para>
 
     <section>
       <title>Compilation</title>
-      <para>To compile a project, "qmake" and "mingw32-make" is all you have to type. The binary is placed into OEG's bin directory and my be startet by "mingw32-make run" or by double-click at its icon.</para>
+      <para>To compile a project, "qmake" and "mingw32-make" is all you have to type. The binary is placed into OEG's bin directory and my be started with the command "mingw32-make run" or by double-click at its icon.</para>
     </section>
 
     <section>
@@ -104,7 +106,7 @@ rare files or files extracted from a repository.</para>
       gets stripped to reduce the file size. This needs the strip.exe, usually found in the MinGW/MSYS
       environment. Next the application or DLL is marked to use Data Execution Prevention and Adress
       Space Layout Randomisation to avoid a to simple exploitation. This is done with the peflags.exe
-      which has to exists in the bin folder in order to be used automatically. In a last step the application
+      which has to exist in the bin folder in order to be used automatically. In a last step the application
       gets signed using a self-generated certificate. This ensures the official origin of it, but unfortunately
       it's a simple certificate and not one from a big trust center.</para>
     </section>

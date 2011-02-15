@@ -11,7 +11,7 @@
       <corpauthor>OEG Team</corpauthor>
     </authorgroup>
     <copyright>
-      <year>2009, 2010</year>
+      <year>2009, 2010, 2011</year>
       <holder>Gerrit M. Albrecht</holder>
     </copyright>
     <legalnotice>
@@ -27,11 +27,11 @@
     </section>
     <section>
       <title>Background and Goals</title>
-      <para>Free standard applications are not perfect. While working for an german Land authority which decided to use open source software in a heterogeneous environment a lot of imperfections were revealed. OpenOffice, Firefox, KDE - there was no standard software which we could recommend without hesitation. OpenOffice seemed to be perfect first but in practice there were other authorities sending documents which it couldn't read correctly. There were missing record tokens, wrong contents in autofilled form fields, wrong fonts if they embedded corporate style fonts, documents, that could not be opened in a simple way because they were contained within an ActiveX container, failing (VBA) scripts, or wrong layouted presentations. KDE was not better. Using it at home in its latest version and mostly without tears, @work it showed its true, cruel face: kmail zoomed out the printed mails if it contained long links (some people print out the internet...), the kaddressbook was unable to hold its data. It simply destroyed (!) the contacts file from time to time (maybe because someone used user defined fields with german umlauts). The kaddressbook was even unable to let one insert the whole data contained in a business card of a standard politician. They have several occupations, roles, companies, offices and addresses. The staff contact of an authority contained always the authority data as duplicate because there is no separation between authority/company and its employees. Applications didn't work together (except kaddressbook/kmail/kgpg, ...) as expected. But a lot of other applications were still missing: organigrams, embeddable flow charts for modelling ISO 9001 processes, network plans, inventory managers, and also a lot of specialized software.</para>
-      <para>The Open eGovernment Project provides applications for use by authorities which fulfill their special needs. Applications have to provide APIs to access them from other applications. E.g. contacts should be accessible from and used in all other applications. Contacts have roles which allow applications to adapt to specific areas of interest. E.g. a link manager may offer only links marked with role "work". An audio recorder/player needs to provide plugins e.g. to write the minutes of a meeting. But also other application types (games, ...) are allowed. OEG should not become a KDE replacement, it's more a supplement which implements missing applications with different features. The main reason why OEG doesn't use KDE is, because KDE was not available for Windows development when first OEG applications appeared. But also some of the applications are complete rewrites of already existing KDE applications. Always remember: This is open source software!
+      <para>The currently available free standard applications are not perfect. While working for an german Land authority which decided to use open source software in a heterogeneous environment a lot of imperfections were revealed. OpenOffice, Firefox, KDE - there was no standard software which we could recommend without hesitation. OpenOffice seemed to be perfect first but in practice there were other authorities sending documents which it couldn't read correctly. There were missing record tokens, wrong contents in autofilled form fields, wrong fonts if they embedded corporate style fonts, documents, that could not be opened in a simple way because they were contained within an ActiveX container, failing (VBA) scripts, or wrong layouted presentations. KDE was not better. Using it at home in its latest version and mostly without tears, @work it showed its true, cruel face: kmail zoomed out the printed mails if it contained long links (some people print out the internet...), the kaddressbook was unable to hold its data. It simply destroyed (!) the contacts file from time to time (maybe because someone used user defined fields with german umlauts). The kaddressbook was even unable to let one insert the whole data contained in a business card of a standard politician. They have several occupations, roles, companies, offices and addresses. The staff contact of an authority contained always the authority data as duplicate because there is no separation between authority/company and its employees. Applications didn't work together (except kaddressbook/kmail/kgpg, ...) as expected. But a lot of other applications were still missing: organigrams, embeddable flow charts for modelling ISO 9001 processes, network plans, inventory managers, and also a lot of specialized software.</para>
+      <para>The Open eGovernment Project provides applications for use by authorities which fulfill their special needs. Applications have to provide APIs to access them from other applications. E.g. contacts should be accessible from and used in all other applications. Contacts have roles which allow applications to adapt to specific areas of interest. E.g. a link manager may offer only links marked with role "work". An audio recorder/player needs to provide plugins e.g. to write the minutes of a meeting. But also other application types (games, ...) are allowed. OEG should not become a KDE replacement, it's more a supplement which implements missing applications with different features. The main reason why OEG doesn't use KDE is, because KDE was not available for Windows development when first OEG applications appeared. But also some of the applications are complete rewrites of already existing KDE applications. Always remember: This is open source software! ... and currently far away from being finished.
       <emphasis></emphasis> .</para>
 
-      <para>Most german authorities don't use Open Source Software. They are bound via framework contracts to big companies like Microsoft and free software is often only used when there is no other option. The decision-makers don't want to use software without a responsible company which could help in case everything ceases to function. With Open eGoverment applications should be created that meet the needs of public administration and are supported by a community at the same time.
+      <para>Most german authorities don't use Open Source Software. They are bound via framework contracts to big companies like Microsoft and free software is often only used when there is no other option. The decision-makers don't want to use software without a responsible company which could help in case everything ceases to function. In reality there is no way e.g. to use Microsoft support, because te contracts are often not accessible for or communicated to the users. Open eGoverment applications should meet the needs of public administration and be supported by a community at the same time.
       </para>
 
       <para>Common goals for Open eGovernment:
@@ -39,7 +39,7 @@
           <listitem><para>Strengthening of data protection.</para></listitem>
           <listitem><para>Data minimality, system data protection.</para></listitem>
           <listitem><para>Portability (at least Windows and Linux).</para></listitem>
-          <listitem><para>Simplicity.</para></listitem>
+          <listitem><para>Simplicity (GUIs!).</para></listitem>
           <listitem><para>Documented data streams.</para></listitem>
           <listitem><para>Use of encryption wherever possible.</para></listitem>
           <listitem><para>ISO 9000 and ISO 27000 support.</para></listitem>
@@ -55,14 +55,6 @@
           <listitem><para>And more...</para></listitem>
         </itemizedlist>
       </para>
-
-      <para>To realize the concrete goals the following necessary steps will be taken:
-        <itemizedlist>
-          <listitem><para>Creating an OpenStreetMap widget to enable GIS features.</para></listitem>
-          <listitem><para></para></listitem>
-          <listitem><para>And more...</para></listitem>
-        </itemizedlist>
-      </para>
     </section>
   </chapter>
 
@@ -70,8 +62,9 @@
     <title>Databases</title>
     <section>
       <title>Introduction</title>
-      <para>Separate databases are not needed to use the applications. However, if there are performance troubles, it is suggested to use a real database management system. The products of all database manufacturers supported by Qt are convenient, because OEG applications mostly don't have special needs. MySQL is a tested external database which works well.</para>
+      <para>Separate database management systems are not needed to use the applications. However, if there are performance troubles, it is suggested to use a real database management system. The products of all database manufacturers supported by Qt are convenient, because OEG applications mostly don't have special needs. MySQL is a tested external database which works well. Fresh installed applications use a standard database basing on SQLite or XML documents. The administrator has to configure additional or alternative data sources like peer-to-peer networks, cloud ressources or services or locally installed databases.</para>
     </section>
+
     <section>
       <title>MySQL</title>
       <para>Setup.</para>
