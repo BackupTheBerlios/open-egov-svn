@@ -19,12 +19,22 @@
 #pragma once
 
 #include <OEG/Qt/MainWindow.h>
+#include <OEG/Qt/TabWidget.h>
 
+#include <QMainWindow>
+#include <QModelIndex>
 #include <QString>
-#include <QWidget>
 #include <QList>
+#include <QWidget>
 
-class OEG::Qt::ToolProvider;
+class QDockWidget;
+class QMenuBar;
+class QTabWidget;
+class QTreeView;
+
+class ButtonsDockWidget;
+class FileSystemModel;
+class FolderView;
 
 class MainWindow : public OEG::Qt::MainWindow
 {
@@ -32,6 +42,7 @@ class MainWindow : public OEG::Qt::MainWindow
 
   public:
     MainWindow(QWidget *parent = 0);
+    virtual ~MainWindow();
 
     virtual void createActions();
     virtual void createDockWidgets();
@@ -39,7 +50,28 @@ class MainWindow : public OEG::Qt::MainWindow
     virtual void createToolBars();
     virtual void createToolProvider() {};
 
-  protected:
+    FolderView *currentFolderView();
 
+  protected:
+    void runCommand(const QString &name);
+    void removeColumnsFromTree();
+
+  protected slots:
+    void viewCurrentChanged(const QModelIndex &current, const QModelIndex &previous);
+    void treeActivated(const QModelIndex &index);
+    void treeCollapsed(const QModelIndex &index);
+    void treeExpanded(const QModelIndex &index);
+    void updateFileSystemViews();
+    void directoryLoaded(const QString &path);
+
+    void tabCurrentChanged(int index);
+    void tabCloseRequested(int index);
+
+  private:
+    OEG::Qt::TabWidget  *m_tabs;
+    QDockWidget         *m_dock_tree;
+    QTreeView           *m_dock_tree_view;
+    ButtonsDockWidget   *m_dock_buttons;
+    QDockWidget         *m_dock_preview;
 };
 

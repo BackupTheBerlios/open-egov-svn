@@ -57,7 +57,7 @@ BEGIN
       VALUE "ProductName",      "Open eGovernment: File Manager.\0"
       VALUE "Comments",         "Homepage: www.open-egov.de\0"
       VALUE "CompanyName",      "gasi.de\0"
-      VALUE "LegalCopyright",   "Copyright (C) 2004-2010 GASI.\0"
+      VALUE "LegalCopyright",   "Copyright (C) 2004-2011 GASI.\0"
       VALUE "LegalTrademarks",  "Open eGovernment.\0"
       VALUE "FileVersion",      VER_FILEVERSION_STR
       VALUE "ProductVersion",   VER_PRODUCTVERSION_STR
