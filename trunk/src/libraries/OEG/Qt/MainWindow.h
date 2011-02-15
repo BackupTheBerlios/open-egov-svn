@@ -92,6 +92,7 @@ class MainWindow : public QMainWindow
     virtual ~MainWindow();
 
     QAction *standardAction(const StandardAction &action);
+    QString applicationBaseName() const;
 
   public slots:
     void standardActionAboutApp();

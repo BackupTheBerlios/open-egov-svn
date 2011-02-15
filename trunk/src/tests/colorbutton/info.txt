@@ -1,0 +1,4 @@
+$Id$
+
+This example demonstrates the use of OEG::Qt::ColorButton.
+

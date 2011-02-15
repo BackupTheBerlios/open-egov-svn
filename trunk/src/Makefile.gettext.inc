@@ -10,7 +10,7 @@ SOURCES := $(shell ls -1 ../src/*.cpp | grep -v moc_ | grep -v SMTP | xargs)
 
 EXTRACT := xgettext --add-location --no-wrap --sort-by-file --foreign-user --force-po \
            --trigraphs --default-domain=$(BASENAME) --add-comments --strict --language=C++ \
-	   --msgid-bugs-address="mail@gerrit-albrecht.de" --keyword=_
+           --msgid-bugs-address="mail@gerrit-albrecht.de" --keyword=_
 #--extract-all
 MERGE   := msgmerge --update --force-po --no-wrap --quiet
 #--compendium=test.po
@@ -18,7 +18,7 @@ FORMAT  := msgfmt --check --use-fuzzy --statistics --strict
 MSGINIT := msginit
 #--verbose
 
-LANGS   := $(shell find . -maxdepth 1 -type d -name "[a-zA-Z0-9]*" | sed 's/\.\///' | grep -v CVS | xargs)
+LANGS   := $(shell find . -maxdepth 1 -type d -name "[a-zA-Z0-9]*" | sed 's/\.\///' | grep -v CVS | grep -v .svn | xargs)
 
 .PHONY: $(DIRS)
 

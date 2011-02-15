@@ -33,18 +33,18 @@ MessageBox::~MessageBox()
 {
 }
 
-void MessageBox::ErrorMessage(const QString &message)
+void MessageBox::ErrorMessage(const QString &message, QWidget *parent /*=0*/)
 {
-  QMessageBox::critical(0, qApp->applicationName(), message);
+  QMessageBox::critical(parent, qApp->applicationName(), message);
 }
 
-void MessageBox::WarnMessage(const QString &message)
+void MessageBox::WarnMessage(const QString &message, QWidget *parent /*=0*/)
 {
-  QMessageBox::warning(0, qApp->applicationName(), message);
+  QMessageBox::warning(parent, qApp->applicationName(), message);
 }
 
-void MessageBox::InfoMessage(const QString &message)
+void MessageBox::InfoMessage(const QString &message, QWidget *parent /*=0*/)
 {
-  QMessageBox::information(0, qApp->applicationName(), message);
+  QMessageBox::information(parent, qApp->applicationName(), message);
 }
 

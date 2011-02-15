@@ -88,7 +88,7 @@ void MainWindow::createMenus()
 
 void MainWindow::createStatusBar()
 {
-  statusBar()->showMessage(_("Ready."));
+  statusBar()->showMessage(_("Ready."), 2000);
 }
 
 void MainWindow::createToolBars()
@@ -404,7 +404,7 @@ void MainWindow::setCentralLayout(QLayout *layout)
 
 void MainWindow::standardActionAboutApp()
 {
-  OEG::Qt::Application::runComponent("about-dialog", QStringList() << dynamic_cast<OEG::Qt::Application *>(qApp)->baseName());
+  OEG::Qt::Application::runComponent("about-dialog", QStringList() << applicationBaseName());
 }
 
 void MainWindow::standardActionConnectToggle()
@@ -437,17 +437,17 @@ void MainWindow::standardActionEdit()
 
 void MainWindow::standardActionHelpContents()
 {
-  OEG::Qt::Application::runComponent("help-viewer", QStringList() << "contents");
+  OEG::Qt::Application::runComponent("help-viewer", QStringList() << "contents" << applicationBaseName());
 }
 
 void MainWindow::standardActionHelpIndex()
 {
-  OEG::Qt::Application::runComponent("help-viewer", QStringList() << "index");
+  OEG::Qt::Application::runComponent("help-viewer", QStringList() << "index" << applicationBaseName());
 }
 
 void MainWindow::standardActionHelpSearch()
 {
-  OEG::Qt::Application::runComponent("help-viewer", QStringList() << "search");
+  OEG::Qt::Application::runComponent("help-viewer", QStringList() << "search" << applicationBaseName());
 }
 
 void MainWindow::standardActionOpen()
@@ -521,5 +521,10 @@ void MainWindow::standardActionZoomOut()
 
 void MainWindow::standardActionZoomNormal()
 {
+}
+
+QString MainWindow::applicationBaseName() const
+{
+  return dynamic_cast<OEG::Qt::Application *>(qApp)->baseName();
 }
 

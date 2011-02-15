@@ -1,9 +1,9 @@
 $Id$
 
+Example demonstrates finding an explorer window and adding a QLabel to it.
+
 Die Klasse gibt es mittlerweile auch als OSS-Version:
 http://qt.nokia.com/products/appdev/add-on-products/catalog/4/Windows/qtwinmigrate/
-
-Example demonstrates finding an explorer window and adding a QLabel to it.
 
 http://doc.qt.nokia.com/solutions/4/qtwinmigrate/qwinwidget.html
 http://doc.trolltech.com/solutions/qtwinmigrate/qwinwidget.html

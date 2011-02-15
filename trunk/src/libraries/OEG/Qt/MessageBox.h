@@ -36,9 +36,9 @@ class MessageBox : public QMessageBox
     ~MessageBox();
 
   public slots:
-    static void ErrorMessage(const QString &message);
-    static void WarnMessage(const QString &message);
-    static void InfoMessage(const QString &message);
+    static void ErrorMessage(const QString &message, QWidget *parent = 0);
+    static void WarnMessage(const QString &message, QWidget *parent = 0);
+    static void InfoMessage(const QString &message, QWidget *parent = 0);
 
   signals:
 
