@@ -1,5 +1,11 @@
 $Id$
 
+2011-02-15  Gerrit M. Albrecht  <mail (at) gerrit-albrecht.de>
+
+	* Tray icons are loaded from the data directory.
+	* Closed connections will be destroyed.
+	* Tray icon changes color if there are no active connections.
+
 2010-08-10  Gerrit M. Albrecht  <mail (at) gerrit-albrecht.de>
 
 	* Connection class provides multiple connections without blocking.
