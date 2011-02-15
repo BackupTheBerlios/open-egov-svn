@@ -16,8 +16,6 @@ ECHO Building libraries ...
 IF EXIST src\libraries (
   ECHO src\libraries
   CD src\libraries
-  IF EXIST Makefile RD /S /Q Makefile
-  REM mingw32-make distclean
   qmake
   mingw32-make
 )

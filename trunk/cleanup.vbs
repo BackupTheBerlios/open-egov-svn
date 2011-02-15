@@ -3,16 +3,19 @@
 ' Script for MinGW/Windows environments to remove all temporary files
 ' without removing notes and additional files. Needed because it was
 ' not possible to automatically remove all object files and other
-' generated files (which is required after bigger changes of certain
-' OEG classes). This gets a "fresh" copy without the need to reimport
-' virgin sources from SVN.
-' If debugging is turned on (see Const section), maybe you should call
-' the script from the command line: cscript path\cleanup.vbs
+' generated files (e.g. mingw32-make distclean). Bit this is required
+' after bigger changes of certain OEG classes). This creates a "fresh"
+' copy without the need to reimport virgin sources from SVN.
+'
+' If debugging is turned on (see Const section below), you should
+' call the script from the command line: cscript path\cleanup.vbs or
+' (recommended way, much simpler) by running cleanup.bat.
 
 Option Explicit
 
 Const DebugOutputDeletedNames = true
 Const DebugOutputMissedNames  = true
+Const DebugOutputReallyDelete = true
 
 ' Initializations.
 
@@ -26,7 +29,7 @@ Dim folder2
 foldername = Wscript.ScriptFullName & "\.."
 
 If Not fso.FolderExists(foldername) Then
-  MsgBox "Could not find base directory to operate from.", vbOKOnly + vbInformation, "Error"
+  MsgBox "Could not find base directory to operate from.", vbOKOnly + vbInformation, "Error:"
   WScript.Quit
 End If
 
@@ -72,7 +75,7 @@ Next
 
 Set files      = Nothing
 Set file       = Nothing
-SET foldername = Nothing
+Set foldername = Nothing
 Set folders    = Nothing
 Set folder     = Nothing
 Set folder2    = Nothing
@@ -82,7 +85,7 @@ Set shell      = Nothing
 
 Function debugOutputMissedName(text)
   If DebugOutputMissedNames = true Then
-    WScript.Echo "Missed Folder: " & text
+    WScript.Echo "Debug [Missed Name]: " & text
   End If
 End Function
 
@@ -110,6 +113,8 @@ Private Function FileNameMatches(ByVal name, ByVal pattern)
   FileNameMatches = False
 End Function
 
+' Removes unwanted files from a C++ working directory.
+
 Function cleanCppFolder(root)
   s = root
   If fso.FolderExists(s) Then
@@ -135,6 +140,9 @@ Function cleanCppFolder(root)
   End If
 End Function
 
+' Removes unwanted files from an application's directory.
+' Because they use a sub-directory structure for src, doc, ...
+
 Function cleanApplicationFolder(root)
   s = root
   If fso.FolderExists(s) Then
@@ -150,16 +158,15 @@ Function cleanApplicationFolder(root)
 
   s = root & "\src"
   If fso.FolderExists(s) Then
+    cleanCppFolder s
+
     For Each file In fso.getFolder(s).Files
-      If file.Name = "Makefile" Or _
-         file.Name = "Makefile.Debug" Or _
-         file.Name = "Makefile.Release" Then
+      If file.Name = "xxxxxxxxxxxxxxxxxx" Then
         'DeleteFileOrFolder(file)
       End If
     Next
     For Each folder In fso.getFolder(s).SubFolders
-      If folder.Name = "debug" Or _
-         folder.Name = "release" Then
+      If folder.Name = "xxxxxxxxxxxxxxxxxx" Then
         'DeleteFileOrFolder(folder)
       End If
     Next
@@ -170,27 +177,30 @@ Function cleanApplicationFolder(root)
 End Function
 
 ' One central place to delete files and directories.
+' Allows better debugging and logging such actions.
 
 Sub DeleteFileOrFolderByPath(ByRef path)
   On Error Resume Next
 
-  If fso.FileExists(path) Then
-    fso.DeleteFile path, true                    ' Keine Klammern.
+  If DebugOutputDeletedNames = true Then
+    WScript.Echo "Debug [Deleted Names]: " & path
   End If
-  If fso.FolderExists(path) Then
-    fso.DeleteFolder path, true
+
+  If DebugOutputReallyDelete = true Then
+    If fso.FileExists(path) Then
+      fso.DeleteFile path, true                  ' Keine Klammern.
+    End If
+    If fso.FolderExists(path) Then
+      fso.DeleteFolder path, true
+    End If
   End If
 
   On Error Goto 0                                ' System ist wieder für Fehler zuständig.
 End Sub
 
+' If there is only an object and not the name.
+
 Sub DeleteFileOrFolder(ByRef obj)
-  path = fso.GetAbsolutePathName(obj)
-
-  If DebugOutputDeletedNames = true Then
-    'WScript.Echo "DeleteFileOrFolder: " & path
-  End If
-
-  DeleteFileOrFolderByPath(path)
+  DeleteFileOrFolderByPath(fso.GetAbsolutePathName(obj))
 End Sub
 

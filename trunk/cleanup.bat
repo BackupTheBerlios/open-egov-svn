@@ -8,5 +8,6 @@ ECHO in diesem Verzeichnis umgeleitet.
 
 CD /D %0\..
 
-cscript.exe cleanup.vbs > log.txt
+IF EXIST log.txt DEL /F /S /Q log.txt
+cscript.exe //Nologo cleanup.vbs > log.txt
 
