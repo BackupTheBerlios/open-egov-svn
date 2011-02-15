@@ -1,0 +1,6 @@
+$Id$
+
+This directory contains custom-built applications.
+They are for customers and maybe they are not useful for you.
+However they are OSS and you may try and/or use them...
+
