@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2011 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -16,9 +16,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <QtCore>
-#include <QtGui>
-#include <QtNetwork>
+#include <QApplication>
+#include <QMessageBox>
+#include <QTcpSocket>
+#include <QThread>
+#include <QDebug>
 
 #include "ConnectionThread.h"
 #include "MainWindow.h"
