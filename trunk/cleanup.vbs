@@ -3,7 +3,7 @@
 ' Script for MinGW/Windows environments to remove all temporary files
 ' without removing notes and additional files. Needed because it was
 ' not possible to automatically remove all object files and other
-' generated files (e.g. mingw32-make distclean). Bit this is required
+' generated files (e.g. mingw32-make distclean). But this is required
 ' after bigger changes of certain OEG classes). This creates a "fresh"
 ' copy without the need to reimport virgin sources from SVN.
 '
