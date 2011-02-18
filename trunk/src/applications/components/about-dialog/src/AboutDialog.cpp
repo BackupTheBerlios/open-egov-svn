@@ -1,7 +1,7 @@
 // $Id: Application.cpp,v 1.30 2007/05/30 18:40:31 gerrit Exp $
 //
-// G.A.S.I. Libraries Pack: Qt Extension Library
-// Copyright (C) 2005-2008 by Gerrit M. Albrecht
+// Open eGovernment
+// Copyright (C) 2005-2011 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -16,8 +16,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <QUrl>
+#include <QCoreApplication>
 #include <QDesktopServices>
+#include <QMessageBox>
+#include <QStringList>
+#include <QUrl>
 
 #include <OEG/Qt/Application.h>
 
@@ -27,6 +30,14 @@ AboutDialog::AboutDialog(QWidget *parent /*=0*/)
  : QDialog(parent)
 {
   setupUi(this);
+
+  QStringList arguments = QCoreApplication::arguments();
+  if (arguments.count() > 1) {                                       // Called from CLI with parameters.
+    QString s = arguments.join("");
+    QMessageBox::information(0, s, arguments.at(1));
+
+
+  }
 
   QString headLine;
 

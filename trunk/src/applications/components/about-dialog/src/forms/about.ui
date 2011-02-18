@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <author>Gerrit M. Albrecht</author>
  <class>AboutDialog</class>
@@ -50,7 +50,7 @@
       <locale language="English" country="UnitedStates"/>
      </property>
      <property name="currentIndex">
-      <number>5</number>
+      <number>0</number>
      </property>
      <property name="tabsClosable">
       <bool>false</bool>
@@ -303,7 +303,24 @@ p, li { white-space: pre-wrap; }
  </widget>
  <layoutdefault spacing="5" margin="10"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>m_button_box</sender>
+   <signal>rejected()</signal>
+   <receiver>AboutDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>579</x>
+     <y>453</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>585</x>
+     <y>471</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <designerdata>
   <property name="gridDeltaX">
    <number>10</number>
