@@ -18,6 +18,17 @@ IF EXIST src\libraries (
   CD src\libraries
   qmake
   mingw32-make
+  CD ..\..
+)
+
+ECHO Building applications ...
+
+IF EXIST src\applications (
+  ECHO src\applications
+  CD src\applications
+  qmake
+  mingw32-make
+  CD ..\..
 )
 
 ECHO Check output for errors!

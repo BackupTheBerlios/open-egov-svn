@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2011 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -19,8 +19,9 @@
 #pragma once
 
 #include <OEG/Common.h>
-#include <OEG/Qt/Settings.h>
+#include <OEG/Qt/DatabaseManager.h>
 #include <OEG/Qt/HelpHandler.h>
+#include <OEG/Qt/Settings.h>
 
 #include <QApplication>
 #include <QIcon>
@@ -33,6 +34,8 @@ class QSystemTrayIcon;
 
 namespace OEG { namespace Qt {
 
+class DatabaseManager;
+
 class Application : public QApplication
 {
   Q_OBJECT
@@ -40,6 +43,20 @@ class Application : public QApplication
   public:
     enum DirectoryType { Temp, User, Common, Data, Base };
     enum FileType { Icon, Database, Image, Text, Plugin, Help, Unknown };
+
+    enum ApplicationFlag {                       // Flags are not frozen, they are in evaluation and may change...
+      AF_Application = 0x00000001,
+      AF_Service     = 0x00000002,
+      AF_Documents   = 0x00000004,
+      AF_Database    = 0x00000008,
+      AF_Network     = 0x00000010,
+      AF_PeerToPeer  = 0x00000020,
+      AF_AdminRights = 0x00000040,               // Needs administrator rights to work. Automatic role change.
+      AF_None        = 0x00000000                // Default value.
+    };
+    Q_DECLARE_FLAGS(ApplicationFlags, ApplicationFlag)
+
+     // Guest, User, Admin; Roles, ...
 
   public:
     Application(int &argc, char *argv[], const QString &base);
@@ -68,17 +85,21 @@ class Application : public QApplication
 
     inline HelpHandler *helpHandler() { return &m_help_handler; }
 
+    void addApplicationFlags(ApplicationFlags set);
+
   protected:
     void installGetText();
 
   protected:
-    QSystemTrayIcon *m_tray_icon;
-    QString          m_application_build_date;
-    QString          m_application_build_time;
-    QString          m_homepage;
-    QString          m_basename;
-    Settings        *m_settings;
-    HelpHandler      m_help_handler;
+    DatabaseManager   *m_database_manager;
+    QSystemTrayIcon   *m_tray_icon;
+    ApplicationFlags   m_application_flags;
+    QString            m_application_build_date;
+    QString            m_application_build_time;
+    QString            m_homepage;
+    QString            m_basename;
+    Settings           m_settings;
+    HelpHandler        m_help_handler;
 };
 
 }}

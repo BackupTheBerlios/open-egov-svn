@@ -1,7 +1,7 @@
 // $Id: MainWindow.cpp 228 2010-08-04 18:14:44Z gerrit-albrecht $
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2011 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -18,12 +18,12 @@
 
 #include <OEG/Qt/ToolProvider.h>
 
+#include <QAction>
 #include <QApplication>
+#include <QDockWidget>
 #include <QMenuBar>
 #include <QToolBar>
-#include <QDockWidget>
 #include <QStatusBar>
-#include <QAction>
 #include <QIcon>
 
 #include "MainWindow.h"

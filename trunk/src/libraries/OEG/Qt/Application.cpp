@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2011 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@ using namespace OEG::Qt;
 using namespace Qt;
 
 Application::Application(int &argc, char *argv[], const QString &base)
- : QApplication(argc, argv), m_tray_icon(0)
+ : QApplication(argc, argv), m_database_manager(0), m_tray_icon(0)
 {
   srand(time(0));
 
@@ -52,13 +52,23 @@ Application::Application(int &argc, char *argv[], const QString &base)
     qDebug() << __FILE__ ": settings error: " << settings.status();
   }
 
-  QDesktopServices::setUrlHandler("help", &m_help_handler, "showHelp");
+  if (1) { // TODO: ask settings
+    m_database_manager = new OEG::Qt::DatabaseManager();
+  }
 
   QDir::setCurrent(standardDirectory(Base));               // Change into a well-known directory.
+
+  QDesktopServices::setUrlHandler("help", &m_help_handler, "showHelp");
+
+  m_application_flags = AF_None;
 }
 
 Application::~Application()
 {
+  if (m_database_manager) {
+    delete m_database_manager; m_database_manager = 0;
+  }
+
   removeSystemTrayIcon();
 }
 
@@ -328,5 +338,13 @@ QString Application::locateFile(const QString &filename, FileType type /*=Unknow
   }
 
   return path;
+}
+
+// Removal of flags is not needed, because they are used to mark an application's
+// requirements and such things are constant values.
+
+void Application::addApplicationFlags(ApplicationFlags set)
+{
+  m_application_flags &= set;
 }
 

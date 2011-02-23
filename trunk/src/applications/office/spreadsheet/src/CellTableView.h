@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2011 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -16,10 +16,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <OEG/Qt/Application.h>
+#pragma once
 
-#ifndef SPREADSHEET_CELLTABLEVIEW_H
-#define SPREADSHEET_CELLTABLEVIEW_H
+#include <OEG/Qt/Application.h>
 
 #include <QWidget>
 #include <QString>
@@ -56,6 +55,4 @@ class CellTableView : public QWidget
     CellTable  *m_view_3;
     CellTable  *m_view_4;
 };
-
-#endif
 

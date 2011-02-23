@@ -1,13 +1,13 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <author>Gerrit M. Albrecht</author>
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>ConfigureProxyDialog</class>
+ <widget class="QDialog" name="ConfigureProxyDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>422</width>
+    <width>320</width>
     <height>185</height>
    </rect>
   </property>
@@ -176,7 +176,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>ConfigureProxyDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -192,7 +192,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>ConfigureProxyDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2011 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -20,12 +20,12 @@
 #include <QtGui>
 
 #include <QApplication>
-#include <QSettings>
 
 #include <OEG/Qt/Application.h>
 #include <OEG/Qt/HelpHandler.h>
 //#include <OEG/Qt/HelpWindow.h>
 #include <OEG/Qt/MessageBox.h>
+#include <OEG/Qt/Settings.h>
 
 using namespace OEG::Qt;
 

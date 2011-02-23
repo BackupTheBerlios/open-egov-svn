@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2011 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -16,10 +16,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <OEG/Qt/Application.h>
+#pragma once
 
-#ifndef SPREADSHEET_CELLDELEGATE_H
-#define SPREADSHEET_CELLDELEGATE_H
+#include <OEG/Qt/Application.h>
 
 #include <QItemDelegate>
 #include <QString>
@@ -36,6 +35,4 @@ class CellDelegate : public QItemDelegate
   private:
 
 };
-
-#endif
 
