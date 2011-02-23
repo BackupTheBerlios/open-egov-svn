@@ -59,7 +59,88 @@ own applications with latest tools and without using prebuilt packages from this
     <title>Directory Structure</title>
     <section>
       <title>Overview</title>
-      <para></para>
+      <para>This chapter describes the different directories and their tree structure.</para>
+    </section>
+    <section>
+      <title>Configuration files</title>
+      <para>
+Einführung
+
+Die Konfigurationsdateien befinden sich unter "/etc/open-egov/" und werden durch die "settings"-Anwendung erzeugt.
+Dazu werden die von den jeweiligen Projekten bereitgestellten XML-Dateien eingelesen und in einer grafischen
+Oberfläche dem Nutzer präsentiert. Beim Abspeichern der Eingaben, werden die XML-Dateien als flache Text-Dateien
+gespeichert, da es so möglich ist, Anwendungen ohne XML-Bibliothek zu linken (könnte schneller sein) und auch
+das Parsen der Dateien schneller ablaufen kann, wenn es reicht, zeilenweise einzulesen. Dazu wird eine Zeile gelesen,
+das jeweils erste Wort ist der Befehl, der ausgeführt wird. Dann folgen die jeweiligen Parameter bis zum Zeilenende.
+Leerzeichen werden rechts und links abgeschnitten und sonst als Parameter-Trenner interpretiert, es sei denn, eine
+Zeichenkette steht in Anführungszeichen, dann sind Leerzeichen natürlich in der Zeichenkette erlaubt.
+
+
+Mögliche Befehle
+
+load "pfad" "datei1 datei2 datei3"
+
+Der "load"-Befehl bekommt einen Pfad zu einem Verzeichnis und eine zu ladende Dateiliste (ohne die Endung ".txt") übergeben. Damit ist es möglich, auf externe Dateien zu verweisen, welche mitgeladen werden sollen. Es soll vermieden werden, alle globalen Einstellungen für jede Anwendung in die anwendungsspezifische Konfiguration übernehmen zu müssen, aber gleichzeitig sollten globale Einstellungen nicht komplett geladen werden müssen. Fehlt der "load"-Befehl wird implizit dennoch ein "load defaults *.txt" ausgeführt. Die Liste der relevanten Dateien kennt der "settings"-Editor, da er ja wissen muss, welche globalen Rubriken zusätzlich zu den eigentlichen Einstellungen angezeigt werden sollen, wenn der Editor von einer Anwendung aus aufgerufen wird. Das steht in der XML-Datei der Anwendung.
+
+default name wert
+
+Belegt einen Schlüssel mit einem Wert und merkt sich, dass dies ein Vorgabewert ist. Der Schlüssel kann also ohne Kenntnis des Wertes auf diesen zurückgestellt werden, wenn bspw. nur temporär (bspw. im Speicher, nicht in der Datei) eine Änderung notwendig war.
+
+set name wert
+
+Der "set"-Befehl ermöglicht das Setzen von Werten für Schlüssel vorzunehmen, sofern diese nicht bereits als "const" erstellt wurden.
+
+const name wert
+
+Der "const"-Befehl dient dazu, das Überschreiben wichtiger Einstellungen zu verhindern. So kann der Adminstrator Vorgaben einstellen, die in jedem Fall unverändert bleiben. Eine mit dem "set"-Befehl angelegte Variable wird so automatisch zur Konstante. Ein Aufruf ohne Wert führt zum fixieren des aktuellen Werts.
+
+reset name
+
+Setzt den aktuell hinterlegten Vorgabewert für den angegebenen Schlüssel.
+
+
+Verzeichnisstrukturen
+
+Das Dateisystem unterhalb von "/etc/open-egov/" hat folgende Struktur:
+
+"defaults" - enthält die Konfigurationsvorgaben von den Erstellern des OEG-Projekts. Viele Daten sind schlichtweg nicht in die Anwendungen einkompiliert, sondern werden erst zur Laufzeit korrekt gesetzt. Beispielsweise die Schriftarten für die Dialoge. Es würde nur wenig Sinn machen, diese im Designer perfekt zu gestalten, wenn später sowieso Nutzereinstellungen greifen sollen. Also werden Dialoge erstellt und erst danach automatisiert an Sprache und Designvorgaben angepasst. Solche (global für alle Anwendungen gültigen) Vorgaben befinden sich in diesem Verzeichnis. Für jedes Thema im Settings-Editor gibt es eine extra Datei, da es möglich ist, das eine Anwendung nur bestimmte Themen laden möchte (Derzeit nicht implementiert) und so Ressourcen gespart werden können. Die Werte in "defaults" müssen durch den Administrator erzeugt und an die Installation angepasst werden. Dazu braucht nur der "settings"-Editor mit Schreibrechten auf dieses Verzeichnis geöffnet werden und beim Schließen werden automatisch passende Dateien am richtigen Ort angelegt.
+
+Wer den Editor nicht als root starten kann oder möchte, kann auch die Dateien in einem Benutzerverzeichnis erzeugen lassen und anschließend verschieben. Benutzer können, je nach Vorgaben des Administrators (siehe "const"-Befehl) in den "defaults"- Dateien getroffene Entscheidungen und Vorgaben überschreiben, indem im Benutzerverzeichnis ein "HOME/.open-egov/etc/defaults"-Verzeichnis angelegt und gefüllt wird. Fehlen Schreibrechte auf "defaults", speichert der Editor hier automatisch komplette Dateien ab und nicht nur die geänderten Schlüssel als Überschreibungen der vorhandenen in "defaults".
+
+"applications" (optional) - Im Verzeichnis "applications" befinden sich TXT-Dateien, welche nach dem Basis-Namen der jeweiligen Anwendung benannt sind, für die sie Konfigurationsvorgaben enthalten. Sinn ist es, Anwendungs-bezogen Konfigurationen vornehmen zu können. Beispielsweise soll eine Komponente sich in verschiedenen Anwendungen verschieden verhalten. Bspw. kann ein Karten-Anzeiger im Baumkataster anderes konfiguriert werden als in einer Quadrokopter-Fernsteuersoftware.
+
+"settings" -  Die meisten Anwendungen bieten auch das Vornehmen nutzerspezifischer Einstellungen an. Im Verzeichnis "HOME/.open-egov/etc/settings/appname.txt" befinden sich unter dem Basis-Namen der Anwendung die im Settings-Dialog im Anwendungs-Kontext getätigten Einstellungen des Benutzers.
+
+"roles" (optional) - in diesem Verzeichnissen befinden sich Anpassungen an die jeweilige Rolle des Nutzers der Anwendung. So könnte ein Gast andere Informationen oder Farben eingeblendet bekommen als ein Administrator.
+
+"widgets" (nicht implementiert) - erlaubt das Überschreiben von Einstellungen auf Ebene der Elemente der grafischen Benutzeroberfläche. Dies sind in der Regel Stilvorgaben oder Ausblendungen von noch nicht funktionierenden GUI-Elementen. Dazu kann der Pfad bis zum jeweiligen Widget gegeben werden und es lassen sich Änderungen direkt an den Eigenschaften vornehmen.
+
+"hosts" (nicht implementiert) - erlaubt es, je nach Umgebung andere Pfade einzustellen. Also beispielsweise am PC zu Hause einen anderen Webbrowser zu nehmen als auf Arbeit auf dem Linux-Rechner.
+
+"scripts" - Zu guter Letzt lassen sich Scripte hinterlegen, welche bei bestimmten Handlungen (starten oder beenden der Anwendung, sichern der Datenbank, ...) anspringen und per JavaScript beliebige Aktionen erlauben.
+
+
+Reihenfolge beim Einlesen
+
+Konfigurationsdateien können mehrfach identische Konfigurationsparameter (Schlüssel) ändern. Die Werte können auch widersprüchlich sein, sollten aber dann auch assozierte Schlüssel anpassen, damit keine Anwendungen durcheinander kommen. Wenn also beispielsweise im Netzwerkmanager der Proxy eingeschaltet wird, dann muss klar sein, dass auch gültige Werte für Rechner und ggf. Zugangsdaten eingetragen sind.
+
+Eine Anwendung lädt die Konfigurationsdateien immer in der folgenden Reihenfolge:
+
+* BASE/etc/open-egov/defaults/*.txt            ; Administrative Vorgaben für alle Anwendungen.
+* HOME/.open-egov/etc/defaults/*.txt           ; Private Überschreibungen dieser Vorgaben ("defaults.user").
+* BASE/etc/open-egov/applications/appname.txt  ; Applikationsspezifische Einstellungen.
+* HOME/.open-egov/etc/settings/appname.txt     ; Die vom Nutzer eingestellten Daten (Konfigurationsdaten) ("settings.user").
+
+TODO:
+
+* widgets/*.txt
+* roles/*.txt
+* hosts/*.txt
+
+* BASE/etc/open-egov/scripts/appname.js
+
+BASE kann hierbei für "/" oder auch für ein Verzeichnis an einer beliebigen Stelle im Dateisystem (USB-Stick, Nutzerverzeichnis) stehen.
+</para>
     </section>
     <section>
       <title>Packs</title>
