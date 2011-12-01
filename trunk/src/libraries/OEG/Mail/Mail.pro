@@ -10,7 +10,7 @@ DEFINES     +=
 INCLUDEPATH += ../..
 LIBS        +=
 
-FORMS       +=
+FORMS       += forms/mail-editor.ui
 HEADERS     += *.h
 SOURCES     += *.cpp
 

@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2011 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@
 
 int main(int argc, char *argv[])
 {
-  OEG::Qt::Application app(argc, argv);
+  OEG::Qt::Application app(argc, argv, "clock-and-logo");
 
   app.setApplicationName(_("Clock and Logo Screensaver"));
   app.setOrganizationName(_("G.A.S.I."));

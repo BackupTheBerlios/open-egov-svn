@@ -1,11 +1,13 @@
 @ECHO OFF
 
-REM $Id: cleanup.bat 355 2010-12-20 23:21:25Z gerrit-albrecht $
+REM $Id:$
 
-REM Look into C:\Qt\2010.05\bin\qtenv.bat for updated data.
+REM Look into C:\QtSDK\Desktop\Qt\4.7.4\mingw\bin\qtenv2.bat for updated data.
+REM C:\Windows\System32\cmd.exe /A /Q /K C:\QtSDK\Desktop\Qt\4.7.4\mingw\bin\qtenv2.bat
 
-set QTDIR=C:\Qt\2010.05\qt
-set PATH=%QTDIR%\bin;%PATH%;C:\Qt\2010.05\mingw\bin;%SystemRoot%\System32
+set QTDIR=C:\QtSDK\Desktop\Qt\4.7.4\mingw
+set PATH=C:\QtSDK\mingw\bin;%PATH%
+set PATH=%QTDIR%\bin;%PATH%;%SystemRoot%\System32
 set QMAKESPEC=win32-g++
 
 
@@ -16,7 +18,7 @@ ECHO Building libraries ...
 IF EXIST src\libraries (
   ECHO src\libraries
   CD src\libraries
-  qmake
+  qmake -recursive
   mingw32-make
   CD ..\..
 )
@@ -26,7 +28,17 @@ ECHO Building applications ...
 IF EXIST src\applications (
   ECHO src\applications
   CD src\applications
-  qmake
+  qmake -recursive
+  mingw32-make
+  CD ..\..
+)
+
+ECHO Building plugins ...
+
+IF EXIST src\plugins (
+  ECHO src\plugins
+  CD src\plugins
+  qmake -recursive
   mingw32-make
   CD ..\..
 )

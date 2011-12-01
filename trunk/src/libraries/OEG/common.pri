@@ -4,6 +4,7 @@ TEMPLATE  = lib
 CONFIG   += qt warn_on release
 QT       += core
 DESTDIR   = ../../../../bin
+QMAKE_LFLAGS += -enable-stdcall-fixup -Wl,-enable-auto-import -Wl,-enable-runtime-pseudo-reloc
 
 # $$OUT_PWD contains the directory of our .pro file with slashes
 # like: C:/Test/123. Windows dislikes such paths. We could use

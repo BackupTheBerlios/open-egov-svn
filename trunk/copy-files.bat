@@ -6,17 +6,19 @@ REM Copies the files needed for deployment into the OEG directory structure.
 REM After this step it should be possible to use the applications without
 REM a MinGW/Qt (SDK) installation. Files not copied here must not be required
 REM by an OEG application.
-
-REM There are two dirs with Qt-DLLs containing different sized files, both
-REM are no complete file sets (OpenGL, Concurrent, ...).
-REM Also there are two places with plugins... Chaos.
+REM
+REM For Qt SDK 1.1.4.
 
 CD /D "%0"\..\bin
 
-SET SRCDIR=C:\Qt\2010.05\qt\bin
+SET SRCDIR=C:\QtSDK\Desktop\Qt\4.7.4\mingw\bin
+REM C:\QtSDK\mingw\bin
 
-COPY /B /Y "%SRCDIR%\mingwm10.dll" .
 COPY /B /Y "%SRCDIR%\libgcc_s_dw2-1.dll" .
+COPY /B /Y "%SRCDIR%\mingwm10.dll" .
+COPY /B /Y "%SRCDIR%\libeay32.dll" .
+COPY /B /Y "%SRCDIR%\libssl32.dll" .
+COPY /B /Y "%SRCDIR%\ssleay32.dll" .
 
 COPY /B /Y "%SRCDIR%\phonon4.dll" .
 COPY /B /Y "%SRCDIR%\QtCLucene4.dll" .
@@ -35,20 +37,18 @@ COPY /B /Y "%SRCDIR%\QtWebKit4.dll" .
 COPY /B /Y "%SRCDIR%\QtXml4.dll" .
 COPY /B /Y "%SRCDIR%\QtXmlPatterns4.dll" .
 
-SET SRCDIR=C:\Qt\2010.05\bin
+SET SRCDIR=C:\QtSDK\QtCreator\bin
 
 COPY /B /Y "%SRCDIR%\QtConcurrent.dll" .
 
-REM SET SRCDIR=C:\MinGW\bin
-SET SRCDIR=C:\Qt\2010.05\mingw\bin
+SET SRCDIR=C:\QtSDK\mingw\bin
 
-COPY /B /Y "%SRCDIR%\mingwm10.dll" .
 COPY /B /Y "%SRCDIR%\libstdc++-6.dll" .
-COPY /B /Y "%SRCDIR%\libgcc_s_dw2-1.dll" .
+
 
 CD /D "%0"\..
 
-SET SRCDIR=C:\Qt\2010.05\bin
+SET SRCDIR=C:\QtSDK\Desktop\Qt\4.7.4\mingw\plugins
 
 IF EXIST plugins (
   ECHO The plugins directory already exists.
@@ -69,10 +69,12 @@ CD qt
 IF NOT EXIST accessible      MD accessible
 IF NOT EXIST bearer          MD bearer
 IF NOT EXIST codecs          MD codecs
+IF NOT EXIST designer        MD designer
 IF NOT EXIST graphicssystems MD graphicssystems
 IF NOT EXIST iconengines     MD iconengines
 IF NOT EXIST imageformats    MD imageformats
 IF NOT EXIST phonon_backend  MD phonon_backend
+IF NOT EXIST qmltooling      MD qmltooling
 IF NOT EXIST sqldrivers      MD sqldrivers
 
 REM Don't removing, only cleaning.
@@ -80,10 +82,12 @@ REM Don't removing, only cleaning.
 DEL accessible\*.DLL
 DEL bearer\*.DLL
 DEL codecs\*.DLL
+DEL designer\*.DLL
 DEL graphicssystems\*.DLL
 DEL iconengines\*.DLL
 DEL imageformats\*.DLL
 DEL phonon_backend\*.DLL
+DEL qmltooling\*.DLL
 DEL sqldrivers\*.DLL
 
 XCOPY /E /H /Y "%SRCDIR%\accessible"     accessible
@@ -91,10 +95,6 @@ XCOPY /E /H /Y "%SRCDIR%\codecs"         codecs
 XCOPY /E /H /Y "%SRCDIR%\iconengines"    iconengines
 XCOPY /E /H /Y "%SRCDIR%\imageformats"   imageformats
 XCOPY /E /H /Y "%SRCDIR%\sqldrivers"     sqldrivers
-
-REM Copy missing or newer files. Ignore the debug files.
-
-SET SRCDIR=C:\Qt\2010.05\qt\plugins
 
 XCOPY /E /H /Y "%SRCDIR%\bearer\qgenericbearer4.dll"                bearer
 XCOPY /E /H /Y "%SRCDIR%\bearer\qnativewifibearer4.dll"             bearer

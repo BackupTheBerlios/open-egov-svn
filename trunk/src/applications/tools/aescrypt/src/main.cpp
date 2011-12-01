@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 #endif
 
   if ((arguments.count() == 1) && useGUI) {
-    OEG::Qt::Application app(argc, argv);
+    OEG::Qt::Application app(argc, argv, "aescrypt");
 
     app.setApplicationName(_("AEScrypt"));
     app.setOrganizationName(_("G.A.S.I."));

@@ -36,22 +36,40 @@
     <section>
       <title>Overview</title>
       <para>This chapter describes the steps needed to get an environment for building
-own applications with latest tools and without using prebuilt packages from this project.</para>
+own applications with latest tools and without using prebuilt packages from this project.
+The description is for working using a fully updated Microsoft Windows 7 OS. If you use
+Linux you have to select and/or compile the required applications using the packet manager
+of your distribution.</para><!-- todo: separate chapters for windows/linux -->
     </section>
     <section>
       <title>Preparation and Setup</title>
-      <para>To build everything you first need a setup with some prebuilt stuff. Applications need e.g. gettext and it's simpler to use a binary version to build the "builder" package (which needs gettext). Later you may rebuild such applications and all of their dependent packages.
-</para>
-      <para>The first setup step is the installation of Qt. Retrieve a complete development package (with MinGW and precompiled libraries) from <ulink url="http://qt.nokia.com/">qt.nokia.com</ulink>, because it is all you need to be ready for working. Then download the Open eGovernment source package and extract it to any path you want. This is your base installation path. You don't need to set an environment variable because all binaries are installed into base/bin and know their base directory path. It's possible to put the directory structure onto an USB stick.</para>
-      <para>To build applications you need a lot of standard tools and applications. Most of them only compile with patches or when other tools are available. So you have to build a nearly complete GNU toolchain.</para>
-      <para>Independent binary tools may be downloaded from their respective websites. The following tools may be installed as binaries:
+      <para>To build everything you first need a setup with some prebuilt stuff. Applications need e.g. gettext and it's simpler to use a binary version first. Later you may rebuild such required applications and all of their dependent packages using the "builder" package (which needs gettext to compile).</para>
+
+<para>The first setup step is the installation of Qt. Retrieve a complete development package (with MinGW and precompiled libraries) from <ulink url="https://qt.nokia.com/downloads">https://qt.nokia.com/downloads</ulink>, this is all you need to be ready for working. They call the complete packages SDK and you get an executable file to install everything in one step (Qt_SDK_Win_offline_v1_1_3_en.exe). When installing as adminstrator, only this account gets the Qt SDK start menu. You should copy it to your user account (without administrator rights).</para>
+
+<para>To build applications you need a lot of standard tools and applications. Most of them only compile with patches or when other tools are available. So you have to build a nearly complete GNU toolchain.</para>
+
+<para>Independent binary tools may be downloaded from their respective websites. The following tools can be installed as binaries directly from their homepages:
         <itemizedlist>
+          <listitem><para>CMake 2.8 (install exe and add to system path)</para></listitem>
+          <listitem><para>gettext (put exe and libs, headers, ... into development directory)</para></listitem>
           <listitem><para>Git</para></listitem>
+          <listitem><para>SVN</para></listitem>
           <listitem><para>Perl</para></listitem>
+          <listitem><para>Python</para></listitem>
+        </itemizedlist>
+      </para>
+
+<para>These tools are required, but available as OEG packages and my simply fetched and installed using OEG's package manager:
+        <itemizedlist>
           <listitem><para>peflags</para></listitem>
           <listitem><para>signtool</para></listitem>
         </itemizedlist>
-      </para>
+Be aware that the binary installation path differs from your OEG develpment path with your sources and self-compiled binaries. Maybe you need to copy them into your development directory.</para>
+
+<para>Now download the Open eGovernment source package and extract it to any path you want. This is your base installation path. You don't need to set an environment variable because all binaries are installed into base/bin and know their base directory path. It's possible to put the directory structure onto an USB stick.</para>
+
+<para>There are some required packages which need to be installed: opencv (requires: ..., optionally requires: ...)</para>
     </section>
   </chapter>
 

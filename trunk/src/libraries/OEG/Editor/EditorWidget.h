@@ -37,8 +37,9 @@ class EditorWidget : public QTextEdit
 
   public:
     enum EditorMode {
-      Normal,
-      XML
+      Normal,                                    // Pure text.
+      Styled,                                    // HTML+CSS, XML.
+      Binary                                     // Hex editor.
     };
 
   public:
