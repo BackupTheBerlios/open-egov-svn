@@ -20,6 +20,7 @@
 #include <OEG/Qt/Application.h>
 #include <OEG/Qt/MainWindow.h>
 #include <OEG/Qt/ToolProvider.h>
+#include <OEG/Qt/DragAndDropHandler.h>
 
 #include <QAction>
 #include <QApplication>
@@ -45,6 +46,10 @@ MainWindow::MainWindow(QWidget *parent /*=0*/, ::Qt::WindowFlags flags /*=0*/)
   resize(500, 400);
 
   m_data_storage_mode = DoNothing;
+
+  // Initialize Drag and Drop.
+  setAcceptDrops(true);
+  installEventFilter(new DragAndDropHandler(this));
 
   //createAll();
 }

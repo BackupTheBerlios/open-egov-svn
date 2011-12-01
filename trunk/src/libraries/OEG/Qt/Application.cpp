@@ -19,6 +19,7 @@
 #include <OEG/Common.h>
 #include <OEG/Qt/Application.h>
 #include <OEG/Qt/HelpHandler.h>
+#include <OEG/Qt/DBusStandardInterface.h>
 
 #include <QDesktopServices>
 #include <QDir>
@@ -28,7 +29,10 @@
 #include <QProcess>
 #include <QSystemTrayIcon>
 #include <QSettings>
+#include <QDBusConnection>
 #include <QDebug>
+
+#include <QtDBus>
 
 #include <stdlib.h>
 #include <time.h>
@@ -59,6 +63,23 @@ Application::Application(int &argc, char *argv[], const QString &base)
   QDir::setCurrent(standardDirectory(Base));               // Change into a well-known directory.
 
   QDesktopServices::setUrlHandler("help", &m_help_handler, "showHelp");
+
+  // Initialize D-Bus. The Interface is a proxy to provide selected slots for D-Bus.
+  // Maybe it is possible to export all scriptable slots of a object without proxy,
+  // but so it is ensured that only the slots which should be public are accessible.
+
+#if 0
+need to find a recent windbus first
+  if (! QDBusConnection::sessionBus().isConnected()) {
+    qWarning("Cannot connect to the D-Bus session bus.\n"
+             "Please check your system settings and try again.\n"
+             "To start it, run: 'dbus-launch --auto-syntax'\n"
+             "D-Bus support is disabled for this application.\n");
+  }
+
+  QDBusConnection::sessionBus().registerService("de.gasi.open-egov." + baseName());
+  new DBusStandardInterface(this);
+#endif
 
   m_application_flags = AF_None;
 }

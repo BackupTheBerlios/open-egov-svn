@@ -40,6 +40,7 @@ class MainWindow : public QMainWindow
     enum StandardAction {
       AboutApp,
       AboutQt,
+      //Add: see "New".
       Clear,
       ConnectToggle,
       Close,
