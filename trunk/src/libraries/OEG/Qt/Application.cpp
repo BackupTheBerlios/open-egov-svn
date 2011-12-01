@@ -29,10 +29,10 @@
 #include <QProcess>
 #include <QSystemTrayIcon>
 #include <QSettings>
-#include <QDBusConnection>
+//#include <QDBusConnection>
 #include <QDebug>
 
-#include <QtDBus>
+//#include <QtDBus>
 
 #include <stdlib.h>
 #include <time.h>

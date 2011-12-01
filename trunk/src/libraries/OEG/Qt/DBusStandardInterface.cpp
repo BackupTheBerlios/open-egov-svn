@@ -22,7 +22,7 @@
 
 #include <QMessageBox>
 #include <QStringList>
-#include <QDBusConnection>
+//#include <QDBusConnection>
 #include <QSettings>
 #include <QDebug>
 
