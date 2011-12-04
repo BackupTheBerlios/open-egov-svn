@@ -41,10 +41,21 @@ Example:
     </requires>
 
     <downloads>
-      <download type="direct" checked="2011-02-16" from="2010-06-06">
+      <download type="direct" checked="2011-12-01" from="2010-06-06">
         <url>http://ftp.gnu.org/pub/gnu/gettext/gettext-0.18.1.1.tar.gz</url>
         <hash type="SHA1"></hash>
         <hash type="MD5"></hash>
+      </download>
+      <download type="direct" checked="2011-12-01" from="2004-01-20">
+        <url>http://ftp.gnu.org/pub/gnu/gettext/gettext-runtime-0.13.1.bin.woe32.zip</url>
+        <hash type="SHA1"></hash>
+        <hash type="MD5"></hash>
+      </download>
+      <download type="direct" checked="2011-12-01" from="2004-01-20">
+        <url>http://ftp.gnu.org/pub/gnu/gettext/gettext-tools-0.13.1.bin.woe32.zip</url>
+        <hash type="SHA1"></hash>
+        <hash type="MD5"></hash>
+      </download>
     </downloads>
 
     <options>

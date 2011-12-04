@@ -18,7 +18,7 @@
   <comments>
   </comments>
 
-  <set version="1.13.1" date="2010-07-13" working="true">
+  <set version="1.14" date="2011-12-01" working="true">
     <requires>
       <app name="gcc" type="compile" />
       <app name="libiconv" version="" type="required" />
@@ -26,10 +26,21 @@
     </requires>
 
     <downloads>
-      <download type="direct" checked="2010-07-13" from="2009-06-30">
+      <download type="direct" checked="2011-12-01" from="2009-06-30">
         <url>http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.13.1.tar.gz</url>
         <hash type="SHA1"></hash>
         <hash type="MD5"></hash>
+      </download>
+      <download type="direct" checked="2011-12-01" from="2011-08-07">
+        <url>http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz</url>
+        <hash type="SHA1"></hash>
+        <hash type="MD5"></hash>
+      </download>
+      <download type="direct" checked="2011-12-01" from="2004-01-20">
+        <url>http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.9.1.bin.woe32.zip</url>
+        <hash type="SHA1"></hash>
+        <hash type="MD5"></hash>
+      </download>
     </downloads>
 
     <options>

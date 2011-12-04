@@ -20,6 +20,7 @@
 #include <OEG/Qt/Application.h>
 #include <OEG/Qt/HelpHandler.h>
 #include <OEG/Qt/DBusStandardInterface.h>
+#include <OEG/Qt/DebugMessageHandler.h>
 
 #include <QDesktopServices>
 #include <QDir>
@@ -44,6 +45,8 @@ Application::Application(int &argc, char *argv[], const QString &base)
  : QApplication(argc, argv), m_database_manager(0), m_tray_icon(0)
 {
   srand(time(0));
+
+  qInstallMsgHandler(OEG_DebugMessageHandler);
 
   setBaseName(base);                                       // Set it before any use of gettext or settings!
   installGetText();                                        // Init gettext.
