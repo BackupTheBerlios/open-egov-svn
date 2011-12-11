@@ -36,8 +36,8 @@
     <section>
       <title>Overview</title>
       <para>This chapter describes the steps needed to get an environment for building
-own applications with latest tools and without using prebuilt packages from this project.
-The description is for working using a fully updated Microsoft Windows 7 OS. If you use
+own applications with latest tools and self-compiled libraries.
+The description works with a fully updated Microsoft Windows 7 OS. If you use
 Linux you have to select and/or compile the required applications using the packet manager
 of your distribution.</para><!-- todo: separate chapters for windows/linux -->
     </section>
@@ -45,9 +45,9 @@ of your distribution.</para><!-- todo: separate chapters for windows/linux -->
       <title>Preparation and Setup</title>
       <para>To build everything you first need a setup with some prebuilt stuff. Applications need e.g. gettext and it's simpler to use a binary version first. Later you may rebuild such required applications and all of their dependent packages using the "builder" package (which needs gettext to compile).</para>
 
-<para>The first setup step is the installation of Qt. Retrieve a complete development package (with MinGW and precompiled libraries) from <ulink url="https://qt.nokia.com/downloads">https://qt.nokia.com/downloads</ulink>, this is all you need to be ready for working. They call the complete packages SDK and you get an executable file to install everything in one step (Qt_SDK_Win_offline_v1_1_3_en.exe). When installing as adminstrator, only this account gets the Qt SDK start menu. You should copy it to your user account (without administrator rights).</para>
+<para>The first setup step is the installation of Qt. Retrieve a complete development package (with MinGW and precompiled libraries) from <ulink url="https://qt.nokia.com/downloads">https://qt.nokia.com/downloads</ulink>, after adding the needed precompiled libraries this is all you need to be ready for working. First we install a complete Qt. Maybe it is better to use the offline installer. They call the complete packages SDK and you get an executable file to install everything in one step (Qt_SDK_Win_offline_v1_1_4_en.exe). Check if your startmenu contains a "Qt SDK" entry because there were installers which had problems with creating it for all users.</para>
 
-<para>To build applications you need a lot of standard tools and applications. Most of them only compile with patches or when other tools are available. So you have to build a nearly complete GNU toolchain.</para>
+<para>To build applications you need a lot of standard tools and applications. Most of them only compile with patches or when other tools are available. So you have to build a nearly complete GNU toolchain. It is planned to use the builder application which creates official binary packages and to provide them on the homepage someday.Untel then we insert some precompiled binaries and with the help of them we build everything by yourself.</para>
 
 <para>Independent binary tools may be downloaded from their respective websites. The following tools can be installed as binaries directly from their homepages:
         <itemizedlist>
@@ -60,7 +60,7 @@ of your distribution.</para><!-- todo: separate chapters for windows/linux -->
         </itemizedlist>
       </para>
 
-<para>These tools are required, but available as OEG packages and my simply fetched and installed using OEG's package manager:
+<para>These tools are required, but available as OEG packages and my simply fetched and installed using OEG's package manager or you use the OEG development installer:
         <itemizedlist>
           <listitem><para>peflags</para></listitem>
           <listitem><para>signtool</para></listitem>
