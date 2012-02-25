@@ -6,16 +6,16 @@ REM Stops all services and apps from the start script.
 
 CD /D "%0"\..\bin
 
-ECHO Stopping apps ...
+ECHO Stopping services ...
 
-ECHO MySQL
-
-
-
-ECHO D-Bus
+ECHO. D-Bus
 
 
 
-ECHO Finished.
-PAUSE
+ECHO. MySQL
+
+
+
+ECHO Finished (window closes in 10 seconds).
+ping -n 11 localhost >nul
 

@@ -4,19 +4,28 @@ REM $Id$
 
 REM Starts all services and apps needed to work with OEG applications.
 
-CD /D "%0"\..\bin
+CD /D "%0"\..
+IF EXIST "services config.bat" CALL "services config.bat"
+CD bin
 
-ECHO Starting apps ...
+ECHO Starting services ...
 
-ECHO D-Bus
+IF "%USE_DBUS%" == "YES" (
+  ECHO. D-Bus ^(R^)
 
+) ELSE (
+  ECHO. D-Bus ^(I^)
 
+)
 
+IF "%USE_MYSQL%" == "YES" (
+  ECHO. MySQL ^(R^)
 
-ECHO MySQL
+) ELSE (
+  ECHO. MySQL ^(I^)
 
+)
 
-
-ECHO Finished.
-PAUSE
+ECHO Finished (window closes in 10 seconds).
+ping -n 11 localhost >nul
 
