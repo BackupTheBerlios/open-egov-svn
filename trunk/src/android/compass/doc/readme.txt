@@ -1,3 +1,5 @@
+$Id$
+
 Compass
 
 Die Anwendung stellt einen einfachen Kompass dar. Sie erfordert

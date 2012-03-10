@@ -1,15 +1,22 @@
-2012-02-13
+$Id$
 
-* Project started.
-* Fullscreen mode added.
-* Configurable colors.
+2012-03-10  Gerrit M. Albrecht  <mail@gerrit-albrecht.de>
 
-2012-02-14
+	* Added project to SVN.
 
-* Typo in About box.
-* Description of measured value added.
 
-2012-02-15
+2012-02-15  Gerrit M. Albrecht  <mail@gerrit-albrecht.de>
 
-* Settings dialog.
+	* Settings dialog.
+
+2012-02-14  Gerrit M. Albrecht  <mail@gerrit-albrecht.de>
+
+	* Typo in About box.
+	* Description of measured value added.
+
+2012-02-13  Gerrit M. Albrecht  <mail@gerrit-albrecht.de>
+
+	* Project started.
+	* Fullscreen mode added.
+	* Configurable colors.
 
