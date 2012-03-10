@@ -1,0 +1,15 @@
+2012-02-13
+
+* Project started.
+* Fullscreen mode added.
+* Configurable colors.
+
+2012-02-14
+
+* Typo in About box.
+* Description of measured value added.
+
+2012-02-15
+
+* Settings dialog.
+

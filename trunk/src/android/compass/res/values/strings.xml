@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">I\'m a compass!</string>
+    <string name="app_name">Compass</string>
+    <string name="menu_settings">Settings &#8230;</string>
+    <string name="menu_about_app">About &#8230;</string>
+    <string name="menu_exit">Exit</string>
+    <string name="about_app_text">The compass application displays a simple compass together with the device\'s sensor values.\nThe application is part of the Open e-Government Project (www.open-egov.de) and Open Source Software (GPL).</string>
+    <string name="button_okay">Okay</string>
+    <string name="measured_angle">Measured Angle</string>
+
+</resources>
+

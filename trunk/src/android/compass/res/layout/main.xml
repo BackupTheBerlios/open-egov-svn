@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/TableLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="fill_vertical" >
+
+    <de.gasi.oeg.compass.CompassView
+        android:id="@+id/CompassView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_weight="100"
+        android:contentDescription="compass"
+        android:hapticFeedbackEnabled="true"
+        android:padding="1px" />
+
+    <TextView
+        android:id="@+id/TextView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/hello" />
+
+</TableLayout>
