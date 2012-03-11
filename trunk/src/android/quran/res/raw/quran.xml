@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<quran title="Qur'an">
+
+<!-- $Id:$ -->
+
+<!--
+http://www.cmje.org/religious-texts/quran/verses/001-qmt.php#001.001
+http://www.cmje.org/religious-texts/hadith/bukhari/
+http://en.wikipedia.org/wiki/Al-Fatiha
+http://www.mounthira.com/learning/surah/001-al-fatihah/
+http://en.wikipedia.org/wiki/Al-hamdu_lillahi_rabbil_%27alamin
+http://en.wikipedia.org/wiki/Alhamdulillah
+http://en.wikipedia.org/wiki/Names_of_God_in_the_Qur%27an
+http://www.islamicweb.com/begin/key_term.htm
+http://www.michaelhicke.de/korandruck.shtml
+http://de.wikipedia.org/wiki/Al-Fatiha
+http://www.mounthira.com/learning/surah/001-al-fatihah/
+http://www.mp3quran.net/eng/
+http://quran.com/
+http://www.quranexplorer.com/quran/
+http://www.google.de/search?q=quran&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:de:official&client=firefox-a
+http://www.google.de/search?q=vers+im+koran&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:de:official&client=firefox-a
+-->
+
+  <head>
+    <meta name="last changed" value="2012-03-01" />
+  </head>
+
+  <tags>
+    <tag name="positive">
+	</tag>
+	<tag name="holy war">
+	</tag>
+	<tag name="hijab">
+	</tag>
+	<tag name="woman">
+	</tag>
+  </tags>
+
+  <changes>
+    <change date="2012-02-29" comment="Initial version." author="Gerrit M. Albrecht" />
+  </changes>
+
+  <comments>
+    <comment id="1" author="1" />
+  </comments>
+
+  <translations>
+    <translation language="Deutsch" lc="de" author="1" />
+  </translations>
+
+  <chapters>
+    <sura number="1" verses="7" revealed="Makkah">
+      <text lang="ar" title="سورة الفاتحة" latintitle="Al Fatiha">
+        <aya number="1">بِسْمِ اللّهِ الرَّحْمـَنِ الرَّحِيم</aya>
+        <aya number="2">الْحَمْدُ للّهِ رَبِّ الْعَالَمِين</aya>
+        <aya number="3">الرَّحمـنِ الرَّحِيم</aya>
+        <aya number="4">مَـالِكِ يَوْمِ الدِّين</aya>
+        <aya number="5">إِيَّاك نَعْبُدُ وإِيَّاكَ نَسْتَعِين</aya>
+        <aya number="6">اهدِنَــــا الصِّرَاطَ المُستَقِيمَ</aya>
+        <aya number="7">صِرَاطَ الَّذِينَ أَنعَمتَ عَلَيهِمْ غَيرِ المَغضُوبِ عَلَيهِمْ وَلاَ الضَّالِّين</aya>
+      </text>
+	  <text lang="transliteration" title="Sūratul-Fātihah">
+        <aya number="1">Bismillāhi r-raḥmāni r-raḥīm</aya>
+        <aya number="2">Al ḥamdu lillāhi rabbi l-'ālamīn</aya>
+        <aya number="3">Ar raḥmāni r-raḥīm</aya>
+        <aya number="4">Māliki yawmi d-dīn</aya>
+        <aya number="5">Iyyāka na'budu wa iyyāka nasta'īn</aya>
+        <aya number="6">Ihdinā ṣ-ṣirāṭ al-mustaqīm</aya>
+        <aya number="7">Ṣirāṭ al-laḏīna an'amta 'alayhim ġayril maġḍūbi 'alayhim walāḍ ḍāllīn</aya>
+	  </text>
+	  <text lang="transliteration" title="Al-Fatiha">
+        <aya number="1">Bismillahir-Rahmanir-Raheem</aya>
+        <aya number="2">Al-Hamdu Lil-lahi Rabbil-`Alameen</aya>
+        <aya number="3">Ar-Rahmanir-Raheem</aya>
+        <aya number="4">Maliki Yawmid-Deen</aya>
+        <aya number="5">'Iyaka Na`budu Wa 'Iyaka Nasta`een</aya>
+        <aya number="6">Ihdinas-Siratal-Musta-qeem</aya>
+        <aya number="7">Siratal-Ladheena 'An`amta `Alay-him Ghayril-Maghdhoubi `Alay-him Wa La-dhalleen</aya>
+	  </text>
+      <text lang="de" title="Die Eröffnende" translator="">
+        <aya number="1">Im Namen des barmherzigen und gnädigen Gottes.</aya>
+        <aya number="2">Lob sei Gott, dem Herrn der Welten,</aya>
+        <aya number="3">dem Barmherzigen und Gnädigen,</aya>
+        <aya number="4">der am Tag des Gerichts regiert!</aya>
+        <aya number="5">Dir dienen wir, und dich bitten wir um Hilfe.</aya>
+        <aya number="6">Führe uns den geraden Weg,</aya>
+        <aya number="7">den Weg derer, denen Du Gnade erwiesen hast, nicht (den Weg) derer, die d(ein)em Zorn verfallen sind und irregehen!</aya>
+      </text>
+      <text lang="en" title="The Opener" translator="">
+        <aya number="1">In the name of Allah, the most beneficent the most merciful.</aya>
+        <aya number="2">All praise is due to Allah, Lord of the worlds.</aya>
+        <aya number="3">The most beneficent, the most merciful.</aya>
+        <aya number="4">The lord of the day of Judgement.</aya>
+        <aya number="5">Thee alone do we worship and thee alone we seek for help.</aya>
+        <aya number="6">Guide us to the right path.</aya>
+        <aya number="7">The path of those upon whom thou has bestowed favors, Not of those who thou has cursed once nor of those who have gone astray.</aya>
+      </text>
+      <text lang="en" title="The Opener" translator="1">
+
+      </text>
+	</sura>
+
+    <sura number="112" verses="4" revealed="">
+      <text lang="ar" title="سُوۡرَةُ الإخلاص" latin="Surah Al-Ikhlas" transliteration="Sūratul-">
+      </text>
+	</sura>
+
+    <sura number="113" verses="5" revealed="">
+      <text lang="ar" title="سُوۡرَةُ الفَلَق" latin="Surah Al-Falaq" transliteration="Sūratul-">
+      </text>
+	</sura>
+
+    <sura number="114" verses="6" revealed="">
+      <text lang="ar" title="سُوۡرَةُ النَّاس" latin="Surah An-Nas" transliteration="Sūratul-">
+      </text>
+	</sura>
+  </chapters>
+</quran>
