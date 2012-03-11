@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <PreferenceCategory
+     android:title="General Settings"
+     android:key="settings_general">
+
+          <CheckBoxPreference
+              android:key="full_screen"
+              android:summary="Enable or disable full screen view"
+              android:title="Show Full Screen"
+              android:defaultValue="true"
+          />
+
+          <ListPreference
+            android:key="fav_fg_color"
+            android:title="Foreground Color"
+            android:summary="Your favorite foreground color"
+            android:defaultValue="6"
+            android:entries="@array/colorKeys"
+            android:entryValues="@array/colorValues"
+          />
+
+          <ListPreference
+            android:key="fav_bg_color"
+            android:title="Background Color"
+            android:summary="Your favorite background color"
+            android:defaultValue="10"
+            android:entries="@array/colorKeys"
+            android:entryValues="@array/colorValues"
+          />
+          
+  </PreferenceCategory>
+
+  <PreferenceCategory
+          android:title="Expert settings"
+          android:key="settings_expert">
+
+          <CheckBoxPreference
+              android:key="debug_logs"
+              android:summary="Enable or disable logging debug data"
+              android:title="Enable Debug Logs"
+              android:defaultValue="true"
+          />
+
+          <CheckBoxPreference
+              android:key="exit_app"
+              android:summary="Don't just hide the window, quit on exit"
+              android:title="Exit App"
+              android:defaultValue="true"
+          />
+
+  </PreferenceCategory>
+
+</PreferenceScreen>
