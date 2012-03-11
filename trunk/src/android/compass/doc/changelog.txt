@@ -4,7 +4,6 @@ $Id$
 
 	* Added project to SVN.
 
-
 2012-02-15  Gerrit M. Albrecht  <mail@gerrit-albrecht.de>
 
 	* Settings dialog.
@@ -19,4 +18,3 @@ $Id$
 	* Project started.
 	* Fullscreen mode added.
 	* Configurable colors.
-
