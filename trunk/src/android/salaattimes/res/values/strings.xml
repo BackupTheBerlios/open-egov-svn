@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, MainActivity!</string>
+    <string name="app_name">Salaat Times</string>
+    <string name="ui_location">your location:</string>
+    <string name="ui_location_spinner_prompt">Your Location</string>
+    <string name="ui_txt_fadjr">Fadjr</string>
+    <string name="ui_txt_shuruk">Shuruk</string>
+    <string name="ui_txt_zuhr">Zuhr</string>
+    <string name="ui_txt_assr">Assr</string>
+    <string name="ui_txt_ghurub">Ghurub</string>
+    <string name="ui_txt_maghrib">Maghrib</string>
+    <string name="ui_txt_ishaa">Isha\'a</string>
+    <string name="xxx">xxx</string>
+
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">hallo</string>
+    <string name="app_name">Gebetszeiten</string>
+    <string name="menu_settings">Einstellungen &#8230;</string>
+    <string name="menu_about_app">Über &#8230;</string>
+    <string name="menu_exit">Ende</string>
+    <string name="about_app_text">Die Kompass-Anwendung zeigt einen einfachen Kompass zusammen mit den Sensordaten des Gerätes.\nDie Anwendung ist Bestandteil des Open E-Government Projekts (www.open-egov.de) und Open-Source-Software (GPL).</string>
+    <string name="button_okay">Okay</string>
+    <string name="ui_txt_ishaa">Isha\'a</string>
+    
+</resources>
+
