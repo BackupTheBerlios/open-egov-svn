@@ -63,13 +63,10 @@ public class MainActivity extends Activity {
 
  			  if (citem.hasChildNodes()) {              // sura-Tags
 	   			    NodeList sitems = citem.getChildNodes();
-	   			 s=s+"3";
 
  	    			for (int si=0; si<sitems.getLength(); si++) {
  	 	    	 		  Node sitem = sitems.item(si);  // sura-Tag
- 	 	    	 		s=s+"4";
    	 	 	   			  if (sitem.hasAttributes()) {
-   	 	 	   			s=s+"5\n";
  	 	    	 		    NamedNodeMap a = sitem.getAttributes();
  	 	    	 		    int v = Integer.valueOf(a.getNamedItem("number").getNodeValue());
  	 	    	 		 s = s + "Sura: " + v + "\n";
@@ -80,14 +77,32 @@ public class MainActivity extends Activity {
  	 	    	 		 NodeList titems = sitem.getChildNodes();
  	 	    			 for (int ti=0; ti<titems.getLength(); ti++) {
  	 	    				Node titem = titems.item(ti);
- 	 	    				if (titem == null)
+ 	 	    				if (titem == null) {
  	 	    					continue;
+ 	 	    				}
 
-//	 	 	    			s += "Latin: " + titem.getAttributes().getNamedItem("latin").getNodeValue() + "\n";
-// 	 	 	    			s += "Title: " + titem.getAttributes().getNamedItem("title").getNodeValue() + "\n";
- 	 	 	    			s += "Language: " + titem.getAttributes().getNamedItem("lang").getNodeValue() + "\n";
-// 	 	 	    			s += "Transliteration: " + titem.getAttributes().getNamedItem("transliteration").getNodeValue() + "\n";
+ 	 	    				if (titem.hasAttributes()) {
+ 	 	    				  NamedNodeMap map = titem.getAttributes();
+ 	 	    				  //if (map.getLength() > 0)
+ 	 	    				  //	s += "NNM(" + map.toString() + ")";
+ 	 	    				  //else
+ 	 	    				  //	s += "NNM==0";
+ 	 	 	    			  s += "Title: " + map.getNamedItem("title").getNodeValue() + "\n";
+ 	 	 	    			  s += "Language: " + map.getNamedItem("lang").getNodeValue() + "\n";
+ 	 	 	    			  
+ 	 	 	    			  NodeList aitems = titem.getChildNodes();
+ 	 	 	    			  for (int ai=0; ai<aitems.getLength(); ai++) {
+ 	 	 	    				Node aitem = aitems.item(ai);
+ 	 	 	    				if (aitem == null) {
+ 	 	 	    					continue;
+ 	 	 	    				}
+ 	 	 	    				
+ 	 	 	    				
+ 	 	 	    			  }
+ 	 	    				}
  	 	    			}
+
+ 	 	    		
  	 	    			    	
    	   			  }
  	    		}
@@ -95,7 +110,7 @@ public class MainActivity extends Activity {
  		    }
     	   }
  		   catch (Exception e) {
- 			 s = s + e.getLocalizedMessage() + " " + e.getStackTrace().toString();  
+ 			 s = s + "Exception: " + e.getLocalizedMessage() + " " + e.getStackTrace().toString();  
  		   }
 
 //		  doc.getDocumentElement().normalize();
