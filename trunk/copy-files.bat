@@ -7,19 +7,14 @@ REM After this step it should be possible to use the applications without
 REM a MinGW/Qt (SDK) installation. Files not copied here must not be required
 REM by an OEG application.
 REM
-REM For Qt SDK 1.1.4.
+REM For Qt SDK 1.2 (2012-02-01).
 
 CD /D "%0"\..\bin
 
-SET SRCDIR=C:\QtSDK\Desktop\Qt\4.7.4\mingw\bin
-REM C:\QtSDK\mingw\bin
+SET SRCDIR=C:\QtSDK\Desktop\Qt\4.8.0\mingw\bin
 
 COPY /B /Y "%SRCDIR%\libgcc_s_dw2-1.dll" .
 COPY /B /Y "%SRCDIR%\mingwm10.dll" .
-COPY /B /Y "%SRCDIR%\libeay32.dll" .
-COPY /B /Y "%SRCDIR%\libssl32.dll" .
-COPY /B /Y "%SRCDIR%\ssleay32.dll" .
-
 COPY /B /Y "%SRCDIR%\phonon4.dll" .
 COPY /B /Y "%SRCDIR%\QtCLucene4.dll" .
 COPY /B /Y "%SRCDIR%\QtCore4.dll" .
@@ -40,6 +35,9 @@ COPY /B /Y "%SRCDIR%\QtXmlPatterns4.dll" .
 SET SRCDIR=C:\QtSDK\QtCreator\bin
 
 COPY /B /Y "%SRCDIR%\QtConcurrent.dll" .
+COPY /B /Y "%SRCDIR%\libeay32.dll" .
+COPY /B /Y "%SRCDIR%\libssl32.dll" .
+COPY /B /Y "%SRCDIR%\ssleay32.dll" .
 
 SET SRCDIR=C:\QtSDK\mingw\bin
 
@@ -48,7 +46,7 @@ COPY /B /Y "%SRCDIR%\libstdc++-6.dll" .
 
 CD /D "%0"\..
 
-SET SRCDIR=C:\QtSDK\Desktop\Qt\4.7.4\mingw\plugins
+SET SRCDIR=C:\QtSDK\Desktop\Qt\4.8.0\mingw\plugins
 
 IF EXIST plugins (
   ECHO The plugins directory already exists.
