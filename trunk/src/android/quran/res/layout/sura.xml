@@ -8,13 +8,15 @@
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
+
+
         <Spinner
             android:id="@+id/SuraNum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
-
+
+
         <Spinner
             android:id="@+id/SuraTitle"
             android:layout_width="match_parent"
@@ -22,7 +24,8 @@
             android:layout_weight="1" />
 
     </LinearLayout>
-
+
+
     <TextView
         android:id="@+id/TextView"
         android:layout_width="fill_parent"

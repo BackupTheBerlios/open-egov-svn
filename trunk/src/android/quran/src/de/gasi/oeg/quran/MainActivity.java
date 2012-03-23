@@ -1,4 +1,4 @@
-//$Id:$
+//$Id$
 //
 //Project:  Open E-Government :: Quran
 //Author:   Gerrit M. Albrecht
@@ -6,6 +6,7 @@
 package de.gasi.oeg.quran;
 
 import java.io.InputStream;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -28,6 +29,9 @@ public class MainActivity extends Activity {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+ 
+    	List<SuraMetaData> m_sura_meta_data_list = new List<SuraMetaData>();
+ 
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main);
@@ -117,8 +121,8 @@ public class MainActivity extends Activity {
 			  //node.getNodeName();  node.getNodeValue(); node.getTextContent();
 
           view.setTypeface(Typeface.createFromAsset(getAssets(), "dejavusans.ttf"));
-          view.setText(ArabicUtilities.reshape("\u0641\u0631\u0633"));
-		  view.setText(s);
+          //view.setText(ArabicUtilities.reshape("\u0641\u0631\u0633"));  // frs
+		  view.setText(ArabicUtilities.reshape(s));
 		}
 
 		catch(Exception ex){

@@ -1,5 +1,9 @@
 $Id: changelog.txt 395 2012-03-10 22:46:50Z gerrit-albrecht $
 
+2012-03-22  Gerrit M. Albrecht  <mail@gerrit-albrecht.de>
+
+	* Two separate activities.
+
 2012-03-10  Gerrit M. Albrecht  <mail@gerrit-albrecht.de>
 
 	* Added project to SVN.
