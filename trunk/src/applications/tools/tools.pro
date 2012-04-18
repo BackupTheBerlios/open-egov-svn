@@ -1,5 +1,5 @@
 # $Id$
 
 TEMPLATE = subdirs
-SUBDIRS  = aescrypt calculator clock editor
+SUBDIRS  = aescrypt calculator clock createdatabase editor
 
