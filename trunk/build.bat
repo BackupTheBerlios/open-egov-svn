@@ -1,6 +1,6 @@
 @ECHO OFF
 
-REM $Id:$
+REM $Id$
 
 REM Look into C:\QtSDK\Desktop\Qt\4.8.1\mingw\bin\qtenv2.bat for updated data.
 REM C:\Windows\System32\cmd.exe /A /Q /K C:\QtSDK\Desktop\Qt\4.8.1\mingw\bin\qtenv2.bat
