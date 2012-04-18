@@ -1,6 +1,6 @@
 @ECHO OFF
 
-REM $Id:$
+REM $Id$
 
 CD /D %0\..
 CD
