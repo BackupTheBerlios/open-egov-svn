@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- $Id$ -->
+
+<!--
+This is a read-only database containing various ISO codes e.g. the ISO 3166
+country and ISO 639 language codes and the localized titles of language and
+country names. Then a table with domain names, which is a separate table
+because there are countries with more than one own TLD. The database content
+is not complete.
+-->
+
+<database name="iso-codes" version="1" date="2011-12-06" flags="const:true security:false privacy:false">
+  <structures>
+    <table name="countries">
+      <column name="id"        type="integer" flags="primarykey" />
+      <column name="cc_a2"     type="string"  flags="required minchars:2 maxchars:2 uppercase alpha unique" />
+      <column name="cc_a3"     type="string"  flags="required minchars:3 maxchars:3 uppercase alpha unique" />
+      <column name="cc_number" type="string"  flags="required minchars:3 maxchars:3 numeric unique" />
+      <column name="title"     type="string"  flags="required uppercase unique" />
+    </table>
+
+    <table name="country_language_combinations">
+      <column name="id"        type="integer" flags="primarykey" />
+    </table>
+
+    <table name="country_names">
+      <column name="id"        type="integer" flags="primarykey" />
+    </table>
+
+    <table name="domains">
+      <column name="id"        type="integer" flags="primarykey" />
+    </table>
+
+    <table name="languages">
+      <column name="id"        type="integer" flags="primarykey" />
+    </table>
+
+    <table name="language_names">
+      <column name="id"        type="integer" flags="primarykey" />
+    </table>
+  </structures>
+
+  <data>
+    <!-- http://userpage.chemie.fu-berlin.de/diverse/doc/ISO_3166.html -->
+    <table name="countries">
+      <row>
+        <field name="cc_a2">AX</field>
+        <field name="cc_a3">ALA</field>
+        <field name="cc_number">248</field>
+        <field name="title">AALAND ISLANDS</field>
+      </row>
+      <row>
+        <field name="cc_a2">AF</field>
+        <field name="cc_a3">AFG</field>
+        <field name="cc_number">004</field>
+        <field name="title">AFGHANISTAN</field>
+      </row>
+      <row>
+        <field name="cc_a2">AL</field>
+        <field name="cc_a3">ALB</field>
+        <field name="cc_number">008</field>
+        <field name="title">ALBANIA</field>
+      </row>
+      <row>
+        <field name="cc_a2">DZ</field>
+        <field name="cc_a3">DZA</field>
+        <field name="cc_number">012</field>
+        <field name="title">ALGERIA</field>
+      </row>
+      <row>
+        <field name="cc_a2">AS</field>
+        <field name="cc_a3">ASM</field>
+        <field name="cc_number">016</field>
+        <field name="title">AMERICAN SAMOA</field>
+      </row>
+      <row>
+        <field name="cc_a2">AD</field>
+        <field name="cc_a3">AND</field>
+        <field name="cc_number">020</field>
+        <field name="title">ANDORRA</field>
+      </row>
+    </table>
+  </data>
+</database>
+

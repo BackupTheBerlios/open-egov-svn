@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- $Id$ -->
+
+<database name="identities" version="1" date="2011-01-01" flags="const:false security:true privacy:true">
+  <structures>
+    <table name="identities">
+      <column name="id"        type="integer" flags="primarykey" />
+      <column name="name"      type="string"  flags="minchars:2 maxchars:20" />
+    </table>
+  </structures>
+
+  <data>
+    <table name="identities">
+      <row>
+        <field name="id">0</field>
+        <field name="name">testidentität</field>
+      </row>
+    </table>
+  </data>
+</database>
+

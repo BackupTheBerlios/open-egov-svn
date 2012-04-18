@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- $Id$ -->
+
+<database name="users" version="1" date="2012-01-01" flags="const:false security:true privacy:true">
+  <structures>
+    <table name="users">
+      <column name="id"        type="integer" flags="primarykey" />
+      <column name="username"  type="string"  flags="required unique minchars:2 maxchars:20 alphanumeric" />
+      <column name="password"  type="string"  flags="required minchars:3 maxchars:20" />
+      <column name="role"      type="string"  flags="" />
+      <column name="active"    type="integer" flags="required default:0" />
+    </table>
+  </structures>
+
+  <data>
+    <table name="identities">
+      <row>
+        <field name="id">0</field>
+        <field name="username">root</field>
+        <field name="password"></field>
+        <field name="role">oeg</field>
+        <field name="active">1</field>
+      </row>
+    </table>
+  </data>
+</database>
+
