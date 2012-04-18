@@ -1,21 +1,22 @@
 @ECHO OFF
 
-REM $Id$
+REM $Id: copy-files.bat 410 2012-03-22 22:29:36Z gerrit-albrecht $
 
 REM Copies the files needed for deployment into the OEG directory structure.
 REM After this step it should be possible to use the applications without
 REM a MinGW/Qt (SDK) installation. Files not copied here must not be required
 REM by an OEG application.
 REM
-REM For Qt SDK 1.2 (2012-02-01).
+REM For Qt SDK 1.2.1 released on April 11th, 2012.
 
 CD /D "%0"\..\bin
 
-SET SRCDIR=C:\QtSDK\Desktop\Qt\4.8.0\mingw\bin
+SET SRCDIR=C:\QtSDK\Desktop\Qt\4.8.1\mingw\bin
 
-COPY /B /Y "%SRCDIR%\libgcc_s_dw2-1.dll" .
-COPY /B /Y "%SRCDIR%\mingwm10.dll" .
 COPY /B /Y "%SRCDIR%\phonon4.dll" .
+COPY /B /Y "%SRCDIR%\ssleay32.dll" .
+COPY /B /Y "%SRCDIR%\libeay32.dll" .
+COPY /B /Y "%SRCDIR%\libssl32.dll" .
 COPY /B /Y "%SRCDIR%\QtCLucene4.dll" .
 COPY /B /Y "%SRCDIR%\QtCore4.dll" .
 COPY /B /Y "%SRCDIR%\QtDeclarative4.dll" .
@@ -41,12 +42,22 @@ COPY /B /Y "%SRCDIR%\ssleay32.dll" .
 
 SET SRCDIR=C:\QtSDK\mingw\bin
 
+COPY /B /Y "%SRCDIR%\libcharset-1.dll" .
+COPY /B /Y "%SRCDIR%\libexpat-1.dll" .
+COPY /B /Y "%SRCDIR%\libgcc_s_dw2-1.dll" .
+COPY /B /Y "%SRCDIR%\libgmp-3.dll" .
+COPY /B /Y "%SRCDIR%\libgmpxx-4.dll" .
+COPY /B /Y "%SRCDIR%\libgomp-1.dll" .
+COPY /B /Y "%SRCDIR%\libiconv-2.dll" .
+COPY /B /Y "%SRCDIR%\libmpfr-1.dll" .
+COPY /B /Y "%SRCDIR%\libssp-0.dll" .
 COPY /B /Y "%SRCDIR%\libstdc++-6.dll" .
+COPY /B /Y "%SRCDIR%\mingwm10.dll" .
 
 
 CD /D "%0"\..
 
-SET SRCDIR=C:\QtSDK\Desktop\Qt\4.8.0\mingw\plugins
+SET SRCDIR=C:\QtSDK\Desktop\Qt\4.8.1\mingw\plugins
 
 IF EXIST plugins (
   ECHO The plugins directory already exists.
@@ -88,17 +99,27 @@ DEL phonon_backend\*.DLL
 DEL qmltooling\*.DLL
 DEL sqldrivers\*.DLL
 
-XCOPY /E /H /Y "%SRCDIR%\accessible"     accessible
-XCOPY /E /H /Y "%SRCDIR%\codecs"         codecs
-XCOPY /E /H /Y "%SRCDIR%\iconengines"    iconengines
-XCOPY /E /H /Y "%SRCDIR%\imageformats"   imageformats
-XCOPY /E /H /Y "%SRCDIR%\sqldrivers"     sqldrivers
-
+XCOPY /E /H /Y "%SRCDIR%\accessible\qtaccessiblecompatwidgets4.dll" accessible
+XCOPY /E /H /Y "%SRCDIR%\accessible\qtaccessiblewidgets4.dll"       accessible
 XCOPY /E /H /Y "%SRCDIR%\bearer\qgenericbearer4.dll"                bearer
 XCOPY /E /H /Y "%SRCDIR%\bearer\qnativewifibearer4.dll"             bearer
+XCOPY /E /H /Y "%SRCDIR%\codecs\qcncodecs4.dll"                     codecs
+XCOPY /E /H /Y "%SRCDIR%\codecs\qjpcodecs4.dll"                     codecs
+XCOPY /E /H /Y "%SRCDIR%\codecs\qkrcodecs4.dll"                     codecs
+XCOPY /E /H /Y "%SRCDIR%\codecs\qtwcodecs4.dll"                     codecs
 XCOPY /E /H /Y "%SRCDIR%\graphicssystems\qglgraphicssystem4.dll"    graphicssystems
 XCOPY /E /H /Y "%SRCDIR%\graphicssystems\qtracegraphicssystem4.dll" graphicssystems
+XCOPY /E /H /Y "%SRCDIR%\iconengines\qsvgicon4.dll"                 iconengines
+XCOPY /E /H /Y "%SRCDIR%\imageformats\qgif4.dll"                    imageformats
+XCOPY /E /H /Y "%SRCDIR%\imageformats\qico4.dll"                    imageformats
+XCOPY /E /H /Y "%SRCDIR%\imageformats\qjpeg4.dll"                   imageformats
+XCOPY /E /H /Y "%SRCDIR%\imageformats\qmng4.dll"                    imageformats
+XCOPY /E /H /Y "%SRCDIR%\imageformats\qsvg4.dll"                    imageformats
+XCOPY /E /H /Y "%SRCDIR%\imageformats\qtga4.dll"                    imageformats
+XCOPY /E /H /Y "%SRCDIR%\imageformats\qtiff4.dll"                   imageformats
 XCOPY /E /H /Y "%SRCDIR%\phonon_backend\phonon_ds94.dll"            phonon_backend
+XCOPY /E /H /Y "%SRCDIR%\sqldrivers\qsqlite4.dll"                   sqldrivers
+XCOPY /E /H /Y "%SRCDIR%\sqldrivers\qsqlodbc4.dll"                  sqldrivers
 
 ECHO Check output for errors!
 PAUSE

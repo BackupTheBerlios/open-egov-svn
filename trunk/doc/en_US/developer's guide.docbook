@@ -11,7 +11,7 @@
       <corpauthor>Open E-Government Team</corpauthor>
     </authorgroup>
     <copyright>
-      <year>2009, 2010, 2011</year>
+      <year>2009, 2010, 2011, 2012</year>
       <holder>Gerrit M. Albrecht</holder>
     </copyright>
     <legalnotice>
@@ -43,11 +43,11 @@ of your distribution.</para><!-- todo: separate chapters for windows/linux -->
     </section>
     <section>
       <title>Preparation and Setup</title>
-      <para>To build everything you first need a setup with some prebuilt stuff. Applications need e.g. gettext and it's simpler to use a binary version first. Later you may rebuild such required applications and all of their dependent packages using the "builder" package (which needs gettext to compile).</para>
+      <para>To build everything you first need a setup with some prebuilt stuff. Applications need e.g. gettext. It's simpler to use a binary version first. Later you may rebuild such required applications and all of their dependent packages using the "builder" package (which needs gettext to compile).</para>
 
-<para>The first setup step is the installation of Qt. Retrieve a complete development package (with MinGW and precompiled libraries) from <ulink url="https://qt.nokia.com/downloads">https://qt.nokia.com/downloads</ulink>, after adding the needed precompiled libraries this is all you need to be ready for working. First we install a complete Qt. Maybe it is better to use the offline installer. They call the complete packages SDK and you get an executable file to install everything in one step (Qt_SDK_Win_offline_v1_1_4_en.exe). Check if your startmenu contains a "Qt SDK" entry because there were installers which had problems with creating it for all users.</para>
+<para>The first setup step is the installation of Qt. Retrieve a complete development package (with MinGW and precompiled libraries) from <ulink url="https://qt-project.org/downloads">https://qt-project.org/downloads</ulink>, after adding the needed precompiled libraries this is all you need to be ready for working. First we install a complete Qt. Maybe it is better to use the offline installer. They call the complete packages SDK and you get an executable file to install everything in one step (QtSdk-offline-win-x86-v1_2_1.exe). Install everything, except Maemo/MeeGo/Symbian. Simulator, documentation and examples are optional. Use the MinGW binaries and not the Visual Studio generated ones. Check if your startmenu contains a "Qt SDK" entry because there were installers which had problems with creating it for all users. You will need a minimum of 2,85 GB free harddisk space.</para>
 
-<para>To build applications you need a lot of standard tools and applications. Most of them only compile with patches or when other tools are available. So you have to build a nearly complete GNU toolchain. It is planned to use the builder application which creates official binary packages and to provide them on the homepage someday.Untel then we insert some precompiled binaries and with the help of them we build everything by yourself.</para>
+<para>To build applications you need a lot of standard tools and applications. Most of them only compile with patches or when other tools are available. So you have to build a nearly complete GNU toolchain. It is planned to use the builder application which creates official binary packages and to provide them on the homepage someday. Until then we insert some precompiled binaries and with the help of them we build everything by yourself.</para>
 
 <para>Independent binary tools may be downloaded from their respective websites. The following tools can be installed as binaries directly from their homepages:
         <itemizedlist>
@@ -57,6 +57,7 @@ of your distribution.</para><!-- todo: separate chapters for windows/linux -->
           <listitem><para>SVN</para></listitem>
           <listitem><para>Perl</para></listitem>
           <listitem><para>Python</para></listitem>
+          <listitem><para>JAVA JDK (for Android development)</para></listitem>
         </itemizedlist>
       </para>
 
@@ -64,6 +65,7 @@ of your distribution.</para><!-- todo: separate chapters for windows/linux -->
         <itemizedlist>
           <listitem><para>peflags</para></listitem>
           <listitem><para>signtool</para></listitem>
+          <listitem><para>qpdf</para></listitem>
         </itemizedlist>
 Be aware that the binary installation path differs from your OEG develpment path with your sources and self-compiled binaries. Maybe you need to copy them into your development directory.</para>
 

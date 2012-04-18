@@ -2,12 +2,12 @@
 
 REM $Id:$
 
-REM Look into C:\QtSDK\Desktop\Qt\4.7.4\mingw\bin\qtenv2.bat for updated data.
-REM C:\Windows\System32\cmd.exe /A /Q /K C:\QtSDK\Desktop\Qt\4.7.4\mingw\bin\qtenv2.bat
+REM Look into C:\QtSDK\Desktop\Qt\4.8.1\mingw\bin\qtenv2.bat for updated data.
+REM C:\Windows\System32\cmd.exe /A /Q /K C:\QtSDK\Desktop\Qt\4.8.1\mingw\bin\qtenv2.bat
 
-set QTDIR=C:\QtSDK\Desktop\Qt\4.7.4\mingw
-set PATH=C:\QtSDK\mingw\bin;%PATH%
+set QTDIR=C:\QtSDK\Desktop\Qt\4.8.1\mingw
 set PATH=%QTDIR%\bin;%PATH%;%SystemRoot%\System32
+set PATH=C:\QtSDK\mingw\bin;%PATH%
 set QMAKESPEC=win32-g++
 
 
