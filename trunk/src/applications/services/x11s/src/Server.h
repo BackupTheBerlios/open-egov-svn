@@ -22,6 +22,8 @@
 #include <QString>
 #include <QHostAddress>
 
+#include "Atoms.h"
+
 class QAction;
 class QIcon;
 class QMenu;
@@ -41,6 +43,11 @@ class Server : public QObject
     unsigned int serverPort() const;
     QHostAddress serverAddress() const;
 
+    static qint16   m_protocol_major_version;
+    static qint16   m_protocol_minor_version;
+    static QString  m_vendor;
+    static int      m_release_number;
+
     bool start();
     void reset();
     void close();
@@ -58,6 +65,7 @@ class Server : public QObject
     QTcpServer          *m_server;
     QList<Connection *>  m_connections;
     QHostAddress         m_host_adress;
+    Atoms                m_atoms;
 
     QString              m_ip_address;         // The IP address the server uses.
     unsigned int         m_server_number;      // 0 .. x, maps to port number 6000 .. 6000+x.

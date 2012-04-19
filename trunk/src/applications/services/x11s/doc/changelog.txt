@@ -1,5 +1,12 @@
 $Id$
 
+2012-04-19  Gerrit M. Albrecht  <mail (at) gerrit-albrecht.de>
+
+	* Restructured sources. Moved server code from TrayIcon class
+	  into own Server class. Minor code enhancements.
+	* Added code to read and write data.
+	* Setup code for initializing the X11 client communication.
+
 2011-02-15  Gerrit M. Albrecht  <mail (at) gerrit-albrecht.de>
 
 	* Tray icons are loaded from the data directory.

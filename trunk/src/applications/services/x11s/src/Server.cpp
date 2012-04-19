@@ -32,6 +32,11 @@
 #include "X11defines.h"
 #include "Server.h"
 
+qint16   Server::m_protocol_major_version = 11;
+qint16   Server::m_protocol_minor_version = 0;
+QString  Server::m_vendor                 = "open-egov.de X11 Server";
+int      Server::m_release_number         = 0;
+
 Server::Server(QObject *parent /*=0*/)
  : QObject(parent)
 {
