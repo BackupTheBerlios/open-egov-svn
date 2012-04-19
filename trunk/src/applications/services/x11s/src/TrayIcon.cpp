@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2004-2011 by Gerrit M. Albrecht
+// Copyright (C) 2004-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -23,23 +23,21 @@
 #include <QByteArray>
 #include <QCoreApplication>
 #include <QCloseEvent>
-#include <QHostAddress>
 #include <QIcon>
 #include <QMenu>
 #include <QMenuBar>
 #include <QMessageBox>
-#include <QTcpServer>
-#include <QTcpSocket>
 #include <QVBoxLayout>
 
-#include "Connection.h"
-#include "X11defines.h"
 #include "TrayIcon.h"
+#include "Server.h"
 
 TrayIcon::TrayIcon(QWidget *parent /*=0*/)
  : QSystemTrayIcon(parent), m_tray_icon(0)
 {
   createActions();
+
+  m_server = 0;
 
   m_tray_icon_menu = new QMenu;
   m_tray_icon_menu->addAction(m_action_help);
@@ -52,68 +50,28 @@ TrayIcon::TrayIcon(QWidget *parent /*=0*/)
   m_tray_icon_menu->addAction(m_action_exit);
   setContextMenu(m_tray_icon_menu);
 
-  updateTrayIcon();
-
   connect(this, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
           this, SLOT(onActivated(QSystemTrayIcon::ActivationReason)));
 
-  m_ip_address      = "";
-  m_server_number   = 0;
-  m_auto_exit_x11s  = true;
-  m_auto_exit_time  = 3600;  // 1 hour.
   m_hide_everything = false;
-  m_disable_bell    = true;
-
-  QHostAddress host_adress;
-  if (m_ip_address.isEmpty()) {
-    host_adress  = QHostAddress(QHostAddress::LocalHost);
-    m_ip_address = "local"; // host_adress.toString();
-  }
-  else if (m_ip_address == "any") {
-    host_adress  = QHostAddress(QHostAddress::Any);
-  }
-  else if (m_ip_address == "local") {
-    host_adress  = QHostAddress(QHostAddress::LocalHost);
-  }
-  else {
-    host_adress.setAddress(m_ip_address);
-  }
-
-  m_server = new QTcpServer(this);
-  if (! m_server->listen(host_adress, 6000 + m_server_number)) {
-    QMessageBox::critical(0, qApp->applicationName(),
-                          QString(_("Unable to start the server: %1.")).arg(m_server->errorString()));
-    QCoreApplication::quit();
-    return;
-  }
-
-  qDebug() << "Host:" << m_server->serverAddress().toString() << "Port:" << m_server->serverPort();
-
-  showMessage(qApp->applicationName(),
-              QString(_("The server is running on\n\nIP: %1\nPort: %2\n\n"))
-                     .arg(m_server->serverAddress().toString()).arg(m_server->serverPort()));
-
-  connect(m_server, SIGNAL(newConnection()),
-          this,     SLOT(onNewConnection()));
 }
 
 TrayIcon::~TrayIcon()
 {
-  while (! m_connections.isEmpty()) {
-    Connection *connection = m_connections.takeFirst();
-    if (connection) {
-      delete connection;
-    }
-  }
-
-  if (m_server) {
-    m_server->close();
-    delete m_server; m_server = 0;
-  }
-
   if (m_tray_icon) {
     delete m_tray_icon; m_tray_icon = 0;
   }
+}
+
+void TrayIcon::setServer(Server *server)
+{
+  m_server = server;
+
+  if (! m_server)
+    return;
+
+  connect(m_server, SIGNAL(clientCountChanged()),
+          this,     SLOT(updateTrayIcon()));
 }
 
 void TrayIcon::createActions()
@@ -125,7 +83,7 @@ void TrayIcon::createActions()
 
   m_action_info = new QAction(_("&Information ..."), this);
   m_action_info->setShortcut(QKeySequence(_("Ctrl+I")));
-  m_action_info->setStatusTip(_("Open a information dialog with statistical data"));
+  m_action_info->setStatusTip(_("Open a information dialog with informal/statistical data"));
   connect(m_action_info, SIGNAL(triggered()), this, SLOT(action_information()));
 
   m_action_help = new QAction(_("&Help"), this);
@@ -153,7 +111,7 @@ void TrayIcon::action_help()
 
 void TrayIcon::action_information()
 {
-  QString s = QString(_("Number of connections: %1")).arg(m_connections.count());
+  QString s = QString(_("Number of managed clients: %1")).arg(m_server->clientCount());
 
   QMessageBox::information(0, qApp->applicationName(), s, QMessageBox::Ok);
 }
@@ -191,34 +149,6 @@ void TrayIcon::onActivated(QSystemTrayIcon::ActivationReason reason)
   blockSignals(false);
 }
 
-void TrayIcon::onNewConnection()
-{
-  qDebug() << "onNewConnection(): New connection.";
-  Connection *conn = new Connection(m_server->nextPendingConnection());
-  if (conn) {
-    connect(conn, SIGNAL(disconnected(Connection *)),
-            this, SLOT(deleteConnection(Connection *)));
-
-    m_connections.append(conn);
-
-    updateTrayIcon();
-  }
-}
-
-void TrayIcon::deleteConnection(Connection *conn)
-{
-  if (! conn)
-    return;
-
-  for (int i=0; i<m_connections.size(); i++) {
-    if (m_connections.at(i) == conn) {
-      delete m_connections.takeAt(i);
-    }
-  }
-
-  updateTrayIcon();
-}
-
 void TrayIcon::updateTrayIcon()
 {
   OEG::Qt::Application *app;
@@ -230,10 +160,15 @@ void TrayIcon::updateTrayIcon()
   app = dynamic_cast<OEG::Qt::Application *>(qApp);
   dir = app->standardDirectory(OEG::Qt::Application::Data);
 
-  if (m_connections.size() > 0)
-    m_tray_icon = new QIcon(dir + "/trayicon_in_use.ico");
-  else
-    m_tray_icon = new QIcon(dir + "/trayicon_ready.ico");
+  if (m_server) {
+    if (m_server->clientCount() > 0)
+      m_tray_icon = new QIcon(dir + "/trayicon_in_use.ico");
+    else
+      m_tray_icon = new QIcon(dir + "/trayicon_ready.ico");
+  }
+  else {
+    m_tray_icon = new QIcon(dir + "/trayicon_error.ico");
+  }
 
   setIcon(*m_tray_icon);
 }

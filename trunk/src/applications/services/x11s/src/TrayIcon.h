@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2004-2011 by Gerrit M. Albrecht
+// Copyright (C) 2004-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -24,8 +24,7 @@
 class QAction;
 class QIcon;
 class QMenu;
-class QTcpServer;
-class Connection;
+class Server;
 
 class TrayIcon : public QSystemTrayIcon
 {
@@ -35,8 +34,12 @@ class TrayIcon : public QSystemTrayIcon
     TrayIcon(QWidget *parent = 0);
     virtual ~TrayIcon();
 
+    void setServer(Server *server);
+
   protected:
     void createActions();
+
+  public slots:
     void updateTrayIcon();
 
   private slots:
@@ -46,25 +49,17 @@ class TrayIcon : public QSystemTrayIcon
     void action_information();
 
     void onActivated(QSystemTrayIcon::ActivationReason reason);
-    void onNewConnection();
-    void deleteConnection(Connection *conn);
 
   protected:
-    QTcpServer          *m_server;
-    QList<Connection *>  m_connections;
-    QMenu               *m_tray_icon_menu;
-    QIcon               *m_tray_icon;
+    Server              *m_server;                         // Server object.
+    QMenu               *m_tray_icon_menu;                 // Context menu when clicked at the icon.
+    QIcon               *m_tray_icon;                      // Currently displayed tray icon.
+    bool                 m_hide_everything;                // Don't show the user interface.
+
     QAction             *m_action_exit;
     QAction             *m_action_info;
     QAction             *m_action_help;
     QAction             *m_action_about_app;
     QAction             *m_action_about_qt;
-
-    QString              m_ip_address;         // The IP address the server uses.
-    unsigned int         m_server_number;      // 0 .. x, maps to port number 6000 .. 6000+x.
-    bool                 m_auto_exit_x11s;     // If the last window closes X11S exists.
-    unsigned int         m_auto_exit_time;     // After closing last window the server waits X seconds.
-    bool                 m_hide_everything;    // For DAU work places.
-    bool                 m_disable_bell;       // Be nice.
 };
 

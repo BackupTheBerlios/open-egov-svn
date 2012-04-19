@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2004-2011 by Gerrit M. Albrecht
+// Copyright (C) 2004-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -25,6 +25,7 @@
 #include <QSystemTrayIcon>
 
 #include "TrayIcon.h"
+#include "Server.h"
 
 int main(int argc, char *argv[])
 {
@@ -49,7 +50,22 @@ int main(int argc, char *argv[])
   }
 
   TrayIcon icon;
+  Server server;
+
+  if (! server.start()) {
+    QMessageBox::critical(0, qApp->applicationName(),
+                          QString(_("Unable to start the server: %1.")).arg(server.errorString()));
+    QCoreApplication::quit();
+    return 2;
+  }
+
+  icon.setServer(&server);
+  icon.updateTrayIcon();  // Server must already run now, to display the correct icon.
   icon.show();
+
+  icon.showMessage(qApp->applicationName(),
+              QString(_("The server is running on\n\nIP: %1\nPort: %2\n\n"))
+                     .arg(server.serverAddress().toString()).arg(server.serverPort()));
 
   return app.exec();
 }

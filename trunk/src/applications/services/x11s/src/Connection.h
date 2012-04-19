@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2011 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,6 +21,7 @@
 #include <OEG/Common.h>
 
 #include <QString>
+#include <QDataStream>
 #include <QDebug>
 
 class QTcpSocket;
@@ -34,6 +35,19 @@ class Connection : public QObject
     virtual ~Connection();
 
   protected:
+    quint8  readByte();
+    quint16 readShort();
+    qint32  readInt();
+    void    readOmit(int count);
+    void    readByteOrder();
+    void    flush();
+    void    writeByte(quint8 data);
+    void    writeShort(quint16 data);
+    void    writeInt(qint32 data);
+    void    writePaddingBytes(int count);
+    void    writeReplyHeader(int argument);
+    quint8  countBits(quint32 data);
+    int     sequenceNumber();
 
   signals:
     void disconnected(Connection *);
@@ -43,6 +57,8 @@ class Connection : public QObject
     void emitDisconnected();
 
   private:
-    QTcpSocket *m_socket;
+    QTcpSocket             *m_socket;
+    QDataStream::ByteOrder  m_byte_order;
+    int                     m_sequence_number;
 };
 
