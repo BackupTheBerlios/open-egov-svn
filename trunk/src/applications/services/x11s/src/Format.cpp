@@ -20,17 +20,32 @@
 
 #include <QObject>
 
+#include "Connection.h"
 #include "Format.h"
 
 Format::Format(quint8 depth, quint8 bits_per_pixel, quint8 scan_line_pad_bits)
  : QObject(0)
 {
-  m_depth              = depth;
-  m_bits_per_pixel     = bits_per_pixel;
-  m_scan_line_pad_bits = scan_line_pad_bits;
+  m_depth              = depth;                                      // Depth in bits.
+  m_bits_per_pixel     = bits_per_pixel;                             // Bits per pixel.
+  m_scan_line_pad_bits = scan_line_pad_bits;                         // Bits to pad each scan line.
 }
 
 Format::~Format()
 {
+}
+
+void Format::write(Connection *connection)
+{
+  if (! connection)
+    return;
+
+  if (! connection->isValid())
+    return;
+
+  connection->writeByte(m_depth);                                   // Depth in bits.
+  connection->writeByte(m_bits_per_pixel);                          // Bits per pixel.
+  connection->writeByte(m_scan_line_pad_bits);                      // Bits to pad each scan line.
+  connection->writePaddingBytes(5);                                 // Unused.
 }
 

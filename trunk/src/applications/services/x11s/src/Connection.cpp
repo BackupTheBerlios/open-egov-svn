@@ -18,16 +18,23 @@
 
 #include <OEG/Common.h>
 
+#include <QByteArray>
 #include <QTcpSocket>
 #include <QSysInfo>
 
+#include "Server.h"
 #include "Connection.h"
 
-Connection::Connection(QTcpSocket *socket)
- : QObject(0), m_socket(socket)
+Connection::Connection(QTcpSocket *socket, Server *server)
+ : QObject(0), m_socket(socket), m_server(server)
 {
   if (! m_socket) {
     qDebug() << "No socket.";
+    return;
+  }
+
+  if (! m_server) {
+    qDebug() << "No server.";
     return;
   }
 
@@ -53,17 +60,55 @@ Connection::Connection(QTcpSocket *socket)
 
   int nameLength = readShort();
   int dataLength = readShort();
-  readShort();      // Unused.
+  readShort();                                             // Unused.
 
   if (nameLength > 0) {
-    readOmit(nameLength);    // Authorization protocol name.
-    readOmit(-nameLength & 3);	// Padding.
+    readOmit(nameLength);                                  // Authorization protocol name.
+    readOmit(-nameLength & 3);	                           // Padding.
   }
 
   if (dataLength > 0) {
-    readOmit(dataLength);    // Authorization protocol data.
-    readOmit(-dataLength & 3);   // Padding.
+    readOmit(dataLength);                                  // Authorization protocol data.
+    readOmit(-dataLength & 3);                             // Padding.
   }
+
+  QByteArray vendor(Server::m_vendor.toLatin1());
+  int pad = -1 * vendor.length() & 3;
+  int extra = 26 + 2 * m_server->getNumberOfPixmapFormats() + (vendor.length() + pad) / 4;
+
+ //Keyboard keyboard = m_server.getKeyboard();
+
+
+  writeByte(1);                                            // Success.
+  writeByte(0);                                            // Unused.
+  writeShort(Server::m_protocol_major_version);
+  writeShort(Server::m_protocol_minor_version);
+  writeShort(extra);                                       // Length of data.
+  writeInt(Server::m_release_number);                      // Release number.
+ //writeInt(_resourceIdBase);
+ //writeInt(_resourceIdMask);
+  writeInt(0);                                             // Motion buffer size.
+  writeShort(vendor.length());                             // Vendor length.
+  writeShort(0xffff);                                      // Max request length.
+  writeByte(1);                                            // Number of screens.
+  writeByte(m_server->getNumberOfPixmapFormats());
+  writeByte(0);                                            // Image byte order (0=LSB, 1=MSB).
+  writeByte(1);                                            // Bitmap bit order (0=LSB, 1=MSB).
+  writeByte(8);                                            // Bitmap format scanline unit.
+  writeByte(8);                                            // Bitmap format scanline pad.
+ //writeByte(keyboard->getMinimumKeycode());
+ //writeByte(keyboard->getMaximumKeycode());
+  writePaddingBytes(4);                                    // Unused.
+
+  if (vendor.length() > 0) {                               // Write padded vendor string.
+ //   writeBytes(vendor, 0, vendor.length());
+    writePaddingBytes(pad);
+  }
+
+ //m_server->writeFormats(_inputOutput);
+ //m_server->getScreen().write(_inputOutput);
+
+  flush();
 
 
 
@@ -80,6 +125,22 @@ Connection::~Connection()
     }
     delete m_socket; m_socket = 0;
   }
+}
+
+// Is client connected and the connection valid?
+
+bool Connection::isValid()
+{
+  if (! m_socket)
+    return false;
+
+  if (! m_socket->isValid())
+    return false;
+
+  if (m_socket->state() == QAbstractSocket::UnconnectedState)
+    return false;
+
+  return true;
 }
 
 void Connection::onReadyRead()
@@ -159,7 +220,7 @@ void Connection::readOmit(int count)
     readByte();
 }
 
-//
+// Parses the byte ordering information.
 
 void Connection::readByteOrder()
 {
@@ -237,7 +298,7 @@ void Connection::writeReplyHeader(int argument)
   writeShort(sequenceNumber() & 0xffff);
 }
 
-// Counts the bits of an integer.
+// Counts the bits in an integer.
 
 quint8 Connection::countBits(quint32 data)
 {
@@ -245,7 +306,7 @@ quint8 Connection::countBits(quint32 data)
 
   while (data > 0) {
     if (data & 1)
-      count ++;
+      count++;
     data >>= 1;
   }
 

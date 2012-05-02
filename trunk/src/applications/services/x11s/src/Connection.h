@@ -25,16 +25,18 @@
 #include <QDebug>
 
 class QTcpSocket;
+class Server;
 
 class Connection : public QObject
 {
   Q_OBJECT
 
   public:
-    Connection(QTcpSocket *socket);
+    Connection(QTcpSocket *socket, Server *server);
     virtual ~Connection();
 
-  protected:
+    bool    isValid();
+
     quint8  readByte();
     quint16 readShort();
     qint32  readInt();
@@ -46,6 +48,8 @@ class Connection : public QObject
     void    writeInt(qint32 data);
     void    writePaddingBytes(int count);
     void    writeReplyHeader(int argument);
+
+  protected:
     quint8  countBits(quint32 data);
     int     sequenceNumber();
 
@@ -58,6 +62,7 @@ class Connection : public QObject
 
   private:
     QTcpSocket             *m_socket;
+    Server                 *m_server;
     QDataStream::ByteOrder  m_byte_order;
     int                     m_sequence_number;
 };

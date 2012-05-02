@@ -16,26 +16,19 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
-
 #include <OEG/Common.h>
 
 #include <QObject>
-#include <QDebug>
-#include <QString>
 
-class Atom : public QObject
+#include "Connection.h"
+#include "Keyboard.h"
+
+Keyboard::Keyboard()
+ : QObject(0)
 {
-  Q_OBJECT
+}
 
-  public:
-    Atom(int id, const QString &name);
-
-    int atomID() const;
-    QString atomName() const;
-
-  private:
-    int      m_id;
-    QString  m_name;
-};
+Keyboard::~Keyboard()
+{
+}
 

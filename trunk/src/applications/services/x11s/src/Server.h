@@ -29,6 +29,7 @@ class QIcon;
 class QMenu;
 class QTcpServer;
 class Connection;
+class Format;
 
 class Server : public QObject
 {
@@ -42,6 +43,8 @@ class Server : public QObject
     unsigned int clientCount() const;
     unsigned int serverPort() const;
     QHostAddress serverAddress() const;
+    int getNumberOfPixmapFormats() const;
+    void writeFormats(Connection *connection);
 
     static qint16   m_protocol_major_version;
     static qint16   m_protocol_minor_version;
@@ -64,6 +67,7 @@ class Server : public QObject
   protected:
     QTcpServer          *m_server;
     QList<Connection *>  m_connections;
+    QList<Format *>      m_formats;
     QHostAddress         m_host_adress;
     Atoms                m_atoms;
 

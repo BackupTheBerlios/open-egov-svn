@@ -25,9 +25,9 @@
 #include "Atoms.h"
 
 Atoms::Atoms(QObject *parent /*=0*/)
- : QObject(parent)
+ : QObject(parent), m_max_atom_id(0)
 {
-  m_predefined_atoms
+  m_predefined_atom_names
     << "PRIMARY"            << "SECONDARY"          << "ARC"                << "ATOM"
     << "BITMAP"             << "CARDINAL"           << "COLORMAP"           << "CURSOR"
     << "CUT_BUFFER0"        << "CUT_BUFFER1"        << "CUT_BUFFER2"        << "CUT_BUFFER3"
@@ -45,32 +45,79 @@ Atoms::Atoms(QObject *parent /*=0*/)
     << "QUAD_WIDTH"         << "WEIGHT"             << "POINT_SIZE"         << "RESOLUTION"
     << "COPYRIGHT"          << "NOTICE"             << "FONT_NAME"          << "FAMILY_NAME"
     << "FULL_NAME"          << "CAP_HEIGHT"         << "WM_CLASS"           << "WM_TRANSIENT_FOR";
+
+  registerPredefinedAtoms();
 }
 
 Atoms::~Atoms()
 {
-  while (! m_atoms.isEmpty()) {
-    Atom *a = m_atoms.takeFirst();
-    if (a) {
-      delete a;
-    }
-  }
+  foreach(Atom* atom, m_atoms_by_id.values())
+    delete atom;
+
+  m_atoms_by_id.clear();
+  m_atoms_by_name.clear();
 }
 
 void Atoms::registerPredefinedAtoms()
 {
-  for (int i=0; i<m_predefined_atoms.count(); i++)
-    addAtom(new Atom(i + 1, m_predefined_atoms[i]));
+  for (int i=0; i<m_predefined_atom_names.count(); i++)
+    registerAtom(i + 1, m_predefined_atom_names[i]);
 }
 
 int Atoms::numberOfPredefinedAtoms() const
 {
-  return m_predefined_atoms.count();
+  return m_predefined_atom_names.count();
+}
+
+void Atoms::registerAtom(int id, const QString &name)
+{
+  Atom *atom = new Atom(id, name);
+
+  if (! atom)
+    return;
+
+  addAtom(atom);
 }
 
 void Atoms::addAtom(Atom *atom)
 {
-  if (atom)
-    m_atoms.append(atom);
+  if (! atom)
+    return;
+
+  m_atoms_by_id[atom->atomID()]     = atom;
+  m_atoms_by_name[atom->atomName()] = atom;
+
+  int i = atom->atomID();
+  if (i > m_max_atom_id)
+    m_max_atom_id = i;
+}
+
+Atom *Atoms::getAtom(int id) const
+{
+  if (! m_atoms_by_id.contains(id))
+    return 0;
+
+  return m_atoms_by_id[id];
+}
+
+Atom *Atoms::findAtom(const QString &name) const
+{
+  if (! m_atoms_by_name.contains(name))
+    return 0;
+
+  return m_atoms_by_name[name];
+}
+
+void Atoms::reset()
+{
+  if (m_atoms_by_id.count() != m_predefined_atom_names.count()) {
+    foreach(Atom* atom, m_atoms_by_id.values())
+      delete atom;
+
+    m_atoms_by_id.clear();
+    m_atoms_by_name.clear();
+
+    registerPredefinedAtoms();
+  }
 }
 

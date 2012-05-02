@@ -30,6 +30,7 @@
 
 #include "Connection.h"
 #include "X11defines.h"
+#include "Format.h"
 #include "Server.h"
 
 qint16   Server::m_protocol_major_version = 11;
@@ -60,6 +61,8 @@ Server::Server(QObject *parent /*=0*/)
   else {
     m_host_adress.setAddress(m_ip_address);
   }
+
+  m_formats.append(new Format(32, 24, 8));
 }
 
 Server::~Server()
@@ -82,6 +85,11 @@ QHostAddress Server::serverAddress() const
   return m_server->serverAddress();
 }
 
+int Server::getNumberOfPixmapFormats() const
+{
+  return m_formats.size();
+}
+
 bool Server::start()
 {
   m_server = new QTcpServer(this);
@@ -97,8 +105,12 @@ bool Server::start()
   return true;
 }
 
+// Resets the X11 server after the last client disconnects
+// with close-down mode "destroy".
+
 void Server::reset()
 {
+  m_atoms.reset();
 }
 
 void Server::close()
@@ -126,7 +138,7 @@ void Server::newConnection()
 {
   qDebug() << "XServer::newConnection(): New connection.";
 
-  Connection *conn = new Connection(m_server->nextPendingConnection());
+  Connection *conn = new Connection(m_server->nextPendingConnection(), this);
   if (conn) {
     connect(conn, SIGNAL(disconnected(Connection *)),
             this, SLOT(deleteConnection(Connection *)));
@@ -151,5 +163,13 @@ void Server::deleteConnection(Connection *conn)
       emit clientCountChanged();
     }
   }
+}
+
+// Write details of all the pixmap formats.
+
+void Server::writeFormats(Connection *connection)
+{
+  foreach (Format *format, m_formats)
+    format->write(connection);
 }
 

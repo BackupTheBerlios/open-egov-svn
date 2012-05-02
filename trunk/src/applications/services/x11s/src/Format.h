@@ -23,7 +23,7 @@
 #include <QObject>
 #include <QDebug>
 
-class QTcpSocket;
+class Connection;
 
 class Format : public QObject
 {
@@ -33,7 +33,7 @@ class Format : public QObject
     Format(quint8 depth, quint8 bits_per_pixel, quint8 scan_line_pad_bits);
     virtual ~Format();
 
-  protected:
+    void write(Connection *connection);
 
   private:
     quint8  m_depth;                              // Depth of a pixel in bits.

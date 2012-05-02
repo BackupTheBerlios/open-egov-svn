@@ -22,20 +22,18 @@
 
 #include <QObject>
 #include <QDebug>
-#include <QString>
 
-class Atom : public QObject
+class Connection;
+
+class Keyboard : public QObject
 {
   Q_OBJECT
 
   public:
-    Atom(int id, const QString &name);
-
-    int atomID() const;
-    QString atomName() const;
+    Keyboard();
+    virtual ~Keyboard();
 
   private:
-    int      m_id;
-    QString  m_name;
+    quint8  m_xx;                              // Depth of a pixel in bits.
 };
 

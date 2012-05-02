@@ -24,7 +24,7 @@
 #include <QDebug>
 #include <QString>
 #include <QStringList>
-#include <QList>
+#include <QHash>
 
 class Atom;
 
@@ -39,9 +39,20 @@ class Atoms : public QObject
     void registerPredefinedAtoms();
     int numberOfPredefinedAtoms() const;
     void addAtom(Atom *atom);
+    void reset();
+    Atom *getAtom(int id) const;
+    Atom *findAtom(const QString &name) const;
+
+    inline int nextFreeAtomId() { return ++m_max_atom_id; }
+    inline bool atomExists(int id) const { return m_atoms_by_id.contains(id); }
+
+  protected:
+    void registerAtom(int id, const QString &name);
 
   private:
-    QStringList    m_predefined_atoms;
-    QList<Atom *>  m_atoms;
+    QStringList             m_predefined_atom_names;
+    QHash<QString, Atom *>  m_atoms_by_name;
+    QHash<int,     Atom *>  m_atoms_by_id;
+    int                     m_max_atom_id;
 };
 

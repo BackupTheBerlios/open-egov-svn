@@ -22,7 +22,7 @@
 
 #include "Atom.h"
 
-Atom::Atom(int id, QString &name)
+Atom::Atom(int id, const QString &name)
  : QObject(0)
 {
   m_id   = id;
