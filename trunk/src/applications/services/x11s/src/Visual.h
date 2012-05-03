@@ -16,31 +16,49 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+#pragma once
+
 #include <OEG/Common.h>
 
 #include <QObject>
+#include <QDebug>
 
-#include "Connection.h"
-#include "Event.h"
+class Connection;
 
-Event::Event(QObject *parent/*=0*/)
- : QObject(parent)
+// Only one X visual is supported: 32-bit TrueColor.
+
+class Visual : public QObject
 {
-}
+  Q_OBJECT
 
-Event::~Event()
-{
-}
+  public:
+    enum BackingStore {
+      BS_NEVER        = 0,
+      BS_WHEN_MAPPED  = 1,
+      BS_STORE_ALWAYS = 2
+    };
 
-// Sends an event header to the client.
+    enum VisualClass {
+      VC_STATIC_GRAY  = 0,
+      VC_GRAY_SCALE   = 1,
+      VC_STATIC_COLOR = 2,
+      VC_PSEUDO_COLOR = 3,
+      VC_TRUE_COLOR   = 4,
+      VC_DIRECT_COLOR = 5
+    };
 
-void Event::writeHeader(Connection *connection, int code, int argument/*=0*/)
-{
-  if (! connection)
-    return;
+  public:
+    Visual(int id, QObject *parent=0);
+    virtual ~Visual();
 
-  connection->writeByte(code);
-  connection->writeByte(argument);
-  connection->writeShort(connection->sequenceNumber() & 0xffff);
-}
+    int id() const;
+    quint8 getBackingStoreInfo() const;
+    bool getSaveUnder() const;
+    int depth() const;
+
+    static void write(Connection *connection, int id);
+
+  private:
+    int  m_id;
+};
 

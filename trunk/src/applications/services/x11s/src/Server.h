@@ -18,6 +18,7 @@
 
 #pragma once
 
+#include <QList>
 #include <QObject>
 #include <QString>
 #include <QHostAddress>
@@ -56,6 +57,8 @@ class Server : public QObject
     void ungrabServer(Connection *connection);
     bool processingAllowed(Connection *connection);
 
+    void setAccessControl(bool enabled);
+    bool accessAllowed(int address) const;
 
     static qint16   m_protocol_major_version;
     static qint16   m_protocol_minor_version;
@@ -84,7 +87,10 @@ class Server : public QObject
     Mouse               *m_mouse;
     Screen              *m_screen;
     ColorMap            *m_color_map;
-    Connection          *m_grab_server;        // Client grabbed the server for exclusive use.
+    Connection          *m_grab_server;        // A client grabbed the server for exclusive use.
+
+    bool                 m_access_control_enabled;
+    QList<int>           m_access_control_allowed_hosts;
 
     int                  m_client_id_bits;
     int                  m_client_id_step;

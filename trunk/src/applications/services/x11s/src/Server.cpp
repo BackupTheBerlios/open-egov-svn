@@ -30,7 +30,6 @@
 
 #include "ColorMap.h"
 #include "Connection.h"
-#include "X11defines.h"
 #include "Font.h"
 #include "Format.h"
 #include "Server.h"
@@ -52,6 +51,9 @@ Server::Server(QObject *parent /*=0*/)
   m_auto_exit_time  = 3600;  // 1 hour.
   m_disable_bell    = true;
   m_access_control  = true;
+
+  m_access_control_enabled = false;
+  m_access_control_allowed_hosts.clear();
 
   m_client_id_bits = 20;
   m_client_id_step = (1 << m_client_id_bits);
@@ -200,7 +202,7 @@ qDebug() << "3";
 
 void Server::writeFormats(Connection *connection)
 {
-  foreach (Format *format, m_formats)
+  foreach(Format *format, m_formats)
     format->write(connection);
 }
 
@@ -232,5 +234,24 @@ bool Server::processingAllowed(Connection *connection)
     return true;
 
   return false;
+}
+
+// Sets access control flag. "false" means no access control,
+// then all hosts are allowed to connect.
+
+void Server::setAccessControl(bool enabled)
+{
+  m_access_control_enabled = enabled;
+}
+
+// Determines, if a client coming from an IP address is
+// allowed to connect to the server.
+
+bool Server::accessAllowed(int address) const
+{
+  if (! m_access_control_enabled)                          // No access control active.
+    return true;                                           // All clients are allowed to connect.
+
+  return m_access_control_allowed_hosts.contains(address);
 }
 
