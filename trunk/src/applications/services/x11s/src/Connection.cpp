@@ -22,12 +22,16 @@
 #include <QTcpSocket>
 #include <QSysInfo>
 
+#include "Error.h"
+#include "Event.h"
+#include "Request.h"
+
 #include "Server.h"
 #include "Keyboard.h"
 #include "Connection.h"
 
 Connection::Connection(QTcpSocket *socket, Server *server)
- : QObject(0), m_socket(socket), m_server(server)
+ : QObject(this), m_close_connection(false), m_socket(socket), m_server(server)
 {
   if (! m_socket) {
     qDebug() << "No socket.";
@@ -132,6 +136,40 @@ void Connection::init()
 
 
 
+}
+
+// Waits for client requests, parses and handles them.
+
+void Connection::loop()
+{
+  quint8  opcode;
+  quint8  argument;
+  quint16 remaining;
+
+  while (! m_close_connection) {
+    opcode    = readByte();                                 // Request's opcode.
+    argument  = readByte();                                 // Request's optional first argument.
+    remaining = readShort() * 4 - 4;                        // Request's length -> remaining bytes.
+
+    while (! m_server->processingAllowed(this))             // Wait if server was grabbed.
+      ;//sleep(50);
+
+    m_sequence_number++;
+
+    switch (opcode) {                                       // Handle the request.
+      case Request::XRQ_CREATE_WINDOW:                      // Page: 44.
+        break;
+
+      case Request::XRQ_DESTROY_WINDOW:                     // Page: 47.
+        break;
+
+      default:                                              // Opcode not implemented.
+        qDebug() << "Connection::loop(): opcode not implemented.";
+        readOmit(remaining);
+        Error::writeError(this, Error::XEC_IMPLEMENTATION, (Request::RequestOpcode) opcode);
+        break;
+    }
+  }
 }
 
 // Is client connected and the connection valid?

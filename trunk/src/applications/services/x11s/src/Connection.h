@@ -37,6 +37,7 @@ class Connection : public QObject
     virtual ~Connection();
 
     void    init();
+    void    loop();
     bool    isValid();
 
     quint8  readByte();
@@ -55,9 +56,10 @@ class Connection : public QObject
     inline void setResourceIdBase(int base) { m_resource_id_base = base; };
     inline void setResourceIdMask(int mask) { m_resource_id_mask = mask; };
 
+    int     sequenceNumber();
+
   protected:
     quint8  countBits(quint32 data);
-    int     sequenceNumber();
 
   signals:
     void disconnected(Connection *);
@@ -67,6 +69,7 @@ class Connection : public QObject
     void emitDisconnected();
 
   private:
+    bool                    m_close_connection;            // True if client is killed or server shuts down.
     int                     m_resource_id_base;            // Lowest resource ID the client can use.
     int                     m_resource_id_mask;            // Range of resource IDs the client can use.
     QTcpSocket             *m_socket;

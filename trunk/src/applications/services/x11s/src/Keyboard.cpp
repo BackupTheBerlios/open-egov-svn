@@ -24,9 +24,9 @@
 #include "Keyboard.h"
 
 Keyboard::Keyboard()
- : QObject(0)
+ : QObject(this)
 {
-  m_minimum_keycode = 0;
+  m_minimum_keycode    = 0;
   m_number_of_keycodes = 10;
 }
 

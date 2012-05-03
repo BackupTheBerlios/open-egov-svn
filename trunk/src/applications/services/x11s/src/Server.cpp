@@ -28,10 +28,14 @@
 #include <QTcpServer>
 #include <QTcpSocket>
 
+#include "ColorMap.h"
 #include "Connection.h"
 #include "X11defines.h"
+#include "Font.h"
 #include "Format.h"
 #include "Server.h"
+#include "Mouse.h"
+#include "Screen.h"
 
 qint16   Server::m_protocol_major_version = 11;
 qint16   Server::m_protocol_minor_version = 0;

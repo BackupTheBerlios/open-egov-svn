@@ -28,9 +28,13 @@ class QAction;
 class QIcon;
 class QMenu;
 class QTcpServer;
+class ColorMap;
 class Connection;
+class Font;
 class Format;
 class Keyboard;
+class Mouse;
+class Screen;
 
 class Server : public QObject
 {
@@ -73,9 +77,13 @@ class Server : public QObject
     QTcpServer          *m_server;
     QList<Connection *>  m_connections;
     QList<Format *>      m_formats;
+    QList<Font *>        m_fonts;
     QHostAddress         m_host_adress;
     Atoms                m_atoms;
     Keyboard            *m_keyboard;
+    Mouse               *m_mouse;
+    Screen              *m_screen;
+    ColorMap            *m_color_map;
     Connection          *m_grab_server;        // Client grabbed the server for exclusive use.
 
     int                  m_client_id_bits;
