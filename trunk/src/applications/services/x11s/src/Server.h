@@ -30,6 +30,7 @@ class QMenu;
 class QTcpServer;
 class Connection;
 class Format;
+class Keyboard;
 
 class Server : public QObject
 {
@@ -44,7 +45,13 @@ class Server : public QObject
     unsigned int serverPort() const;
     QHostAddress serverAddress() const;
     int getNumberOfPixmapFormats() const;
+    Keyboard *getKeyboard() const;
     void writeFormats(Connection *connection);
+
+    void grabServer(Connection *connection);
+    void ungrabServer(Connection *connection);
+    bool processingAllowed(Connection *connection);
+
 
     static qint16   m_protocol_major_version;
     static qint16   m_protocol_minor_version;
@@ -54,8 +61,6 @@ class Server : public QObject
     bool start();
     void reset();
     void close();
-
-  protected:
 
   signals:
     void clientCountChanged();
@@ -70,6 +75,12 @@ class Server : public QObject
     QList<Format *>      m_formats;
     QHostAddress         m_host_adress;
     Atoms                m_atoms;
+    Keyboard            *m_keyboard;
+    Connection          *m_grab_server;        // Client grabbed the server for exclusive use.
+
+    int                  m_client_id_bits;
+    int                  m_client_id_step;
+    int                  m_client_id_base;
 
     QString              m_ip_address;         // The IP address the server uses.
     unsigned int         m_server_number;      // 0 .. x, maps to port number 6000 .. 6000+x.

@@ -26,9 +26,28 @@
 Keyboard::Keyboard()
  : QObject(0)
 {
+  m_minimum_keycode = 0;
+  m_number_of_keycodes = 10;
 }
 
 Keyboard::~Keyboard()
 {
+}
+
+// Return the minimum keycode.
+
+int Keyboard::minimumKeycode()
+{
+  if (m_minimum_keycode < 8)
+    return 8;
+
+  return m_minimum_keycode;
+}
+
+// Return the maximum keycode.
+
+int Keyboard::maximumKeycode()
+{
+  return minimumKeycode() + m_number_of_keycodes - 1;
 }
 

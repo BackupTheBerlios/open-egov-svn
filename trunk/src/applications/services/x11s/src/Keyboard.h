@@ -33,7 +33,11 @@ class Keyboard : public QObject
     Keyboard();
     virtual ~Keyboard();
 
+    int minimumKeycode();
+    int maximumKeycode();
+
   private:
-    quint8  m_xx;                              // Depth of a pixel in bits.
+    int  m_minimum_keycode;                                // Minimum keycode.
+    int  m_number_of_keycodes;                             // Number of keycodes.
 };
 

@@ -23,6 +23,7 @@
 #include <QSysInfo>
 
 #include "Server.h"
+#include "Keyboard.h"
 #include "Connection.h"
 
 Connection::Connection(QTcpSocket *socket, Server *server)
@@ -40,7 +41,27 @@ Connection::Connection(QTcpSocket *socket, Server *server)
 
   m_byte_order      = QDataStream::BigEndian;              // Most significant byte first (the default).
   m_sequence_number = 0;
+}
 
+Connection::~Connection()
+{
+  qDebug() << "Connection::~Connection()";
+
+  if (m_socket) {
+    if (m_socket->isValid()) {
+      m_socket->disconnectFromHost();
+      qDebug() << "  disconnectFromHost()";
+      if (m_socket->state() != QAbstractSocket::UnconnectedState) {  // NEEDED?
+        qDebug() << "  Not UnconnectedState: wait for dc.";
+        m_socket->waitForDisconnected(1000);
+      }
+    }
+    //delete m_socket; m_socket = 0;
+  }
+}
+
+void Connection::init()
+{
   connect(m_socket, SIGNAL(disconnected()),
           m_socket, SLOT(deleteLater()));
   connect(m_socket, SIGNAL(disconnected()),
@@ -76,8 +97,7 @@ Connection::Connection(QTcpSocket *socket, Server *server)
   int pad = -1 * vendor.length() & 3;
   int extra = 26 + 2 * m_server->getNumberOfPixmapFormats() + (vendor.length() + pad) / 4;
 
- //Keyboard keyboard = m_server.getKeyboard();
-
+  Keyboard *keyboard = m_server->getKeyboard();
 
   writeByte(1);                                            // Success.
   writeByte(0);                                            // Unused.
@@ -85,8 +105,8 @@ Connection::Connection(QTcpSocket *socket, Server *server)
   writeShort(Server::m_protocol_minor_version);
   writeShort(extra);                                       // Length of data.
   writeInt(Server::m_release_number);                      // Release number.
- //writeInt(_resourceIdBase);
- //writeInt(_resourceIdMask);
+  writeInt(m_resource_id_base);
+  writeInt(m_resource_id_mask);
   writeInt(0);                                             // Motion buffer size.
   writeShort(vendor.length());                             // Vendor length.
   writeShort(0xffff);                                      // Max request length.
@@ -96,35 +116,22 @@ Connection::Connection(QTcpSocket *socket, Server *server)
   writeByte(1);                                            // Bitmap bit order (0=LSB, 1=MSB).
   writeByte(8);                                            // Bitmap format scanline unit.
   writeByte(8);                                            // Bitmap format scanline pad.
- //writeByte(keyboard->getMinimumKeycode());
- //writeByte(keyboard->getMaximumKeycode());
+  writeByte(keyboard->minimumKeycode());
+  writeByte(keyboard->maximumKeycode());
   writePaddingBytes(4);                                    // Unused.
 
   if (vendor.length() > 0) {                               // Write padded vendor string.
- //   writeBytes(vendor, 0, vendor.length());
+    writeBytes(vendor);
     writePaddingBytes(pad);
   }
 
- //m_server->writeFormats(_inputOutput);
- //m_server->getScreen().write(_inputOutput);
+  m_server->writeFormats(this);
+  //m_server->getScreen().write(_inputOutput);
 
   flush();
 
 
 
-}
-
-Connection::~Connection()
-{
-  if (m_socket) {
-    if (m_socket->isValid()) {
-      m_socket->disconnectFromHost();
-      if (m_socket->state() != QAbstractSocket::UnconnectedState) {
-        m_socket->waitForDisconnected(1000);
-      }
-    }
-    delete m_socket; m_socket = 0;
-  }
 }
 
 // Is client connected and the connection valid?
@@ -249,6 +256,14 @@ void Connection::writeByte(quint8 data)
 
   if (m_socket->write(&c, 1) == -1)
     qDebug() << "Connection::writeByte(quint8 data): write failed.";
+}
+
+// Write an array of bytes to the output stream.
+
+void Connection::writeBytes(const QByteArray &array)
+{
+  if (m_socket->write(array.constData(), array.size()) == -1)
+    qDebug() << "Connection::writeBytes(bytearray): write failed.";
 }
 
 // Writes a 16-bit integer to the output stream.

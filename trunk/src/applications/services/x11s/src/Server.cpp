@@ -41,12 +41,17 @@ int      Server::m_release_number         = 0;
 Server::Server(QObject *parent /*=0*/)
  : QObject(parent)
 {
-  m_ip_address      = "";
+  m_grab_server     = 0;
+  m_ip_address      = "192.168.178.23";
   m_server_number   = 0;
   m_auto_exit_x11s  = true;
   m_auto_exit_time  = 3600;  // 1 hour.
   m_disable_bell    = true;
   m_access_control  = true;
+
+  m_client_id_bits = 20;
+  m_client_id_step = (1 << m_client_id_bits);
+  m_client_id_base = m_client_id_step;
 
   if (m_ip_address.isEmpty()) {
     m_host_adress = QHostAddress(QHostAddress::LocalHost);
@@ -55,7 +60,7 @@ Server::Server(QObject *parent /*=0*/)
   else if (m_ip_address == "any") {
     m_host_adress = QHostAddress(QHostAddress::Any);
   }
-  else if (m_ip_address == "local") {
+  else if (m_ip_address == "localhost") {
     m_host_adress = QHostAddress(QHostAddress::LocalHost);
   }
   else {
@@ -67,7 +72,11 @@ Server::Server(QObject *parent /*=0*/)
 
 Server::~Server()
 {
+  qDebug() << "Server::~Server()";
+
   close();
+
+  qDebug() << "  end";
 }
 
 QString Server::errorString() const
@@ -90,6 +99,13 @@ int Server::getNumberOfPixmapFormats() const
   return m_formats.size();
 }
 
+// The X11 server's keyboard.
+
+Keyboard *Server::getKeyboard() const
+{
+  return m_keyboard;
+}
+
 bool Server::start()
 {
   m_server = new QTcpServer(this);
@@ -105,13 +121,16 @@ bool Server::start()
   return true;
 }
 
-// Resets the X11 server after the last client disconnects
-// with close-down mode "destroy".
+// Resets the X11 server after the last client
+// disconnects with close-down mode "destroy".
 
 void Server::reset()
 {
   m_atoms.reset();
 }
+
+// Terminate all connected clients and
+// stop listening on the tcp socket.
 
 void Server::close()
 {
@@ -138,31 +157,39 @@ void Server::newConnection()
 {
   qDebug() << "XServer::newConnection(): New connection.";
 
-  Connection *conn = new Connection(m_server->nextPendingConnection(), this);
-  if (conn) {
-    connect(conn, SIGNAL(disconnected(Connection *)),
-            this, SLOT(deleteConnection(Connection *)));
+  Connection *connection = new Connection(m_server->nextPendingConnection(), this);
+  if (connection) {
+    connection->setResourceIdBase(m_client_id_base);
+    connection->setResourceIdMask(m_client_id_step - 1);
+    m_client_id_base += m_client_id_step;
+ 
+    connection->init();
 
-    m_connections.append(conn);
+    connect(connection, SIGNAL(disconnected(Connection *)),
+            this,       SLOT(deleteConnection(Connection *)));
+
+    m_connections.append(connection);
 
     emit clientCountChanged();
   }
 }
 
-void Server::deleteConnection(Connection *conn)
+void Server::deleteConnection(Connection *connection)
 {
   qDebug() << "XServer::deleteConnection(): Deleting connection.";
 
-  if (! conn)
+  if (! connection)
     return;
 
   for (int i=0; i<m_connections.size(); i++) {
-    if (m_connections.at(i) == conn) {
-      delete m_connections.takeAt(i);
-
+qDebug() << "1";
+    if (m_connections.at(i) == connection) {
+      delete m_connections.takeAt(i);   // TODO: Send close signal and wait with timeout.
+qDebug() << "2";
       emit clientCountChanged();
     }
   }
+qDebug() << "3";
 }
 
 // Write details of all the pixmap formats.
@@ -171,5 +198,35 @@ void Server::writeFormats(Connection *connection)
 {
   foreach (Format *format, m_formats)
     format->write(connection);
+}
+
+// This client grabs the server for itself.
+// All other clients are disabled now.
+
+void Server::grabServer(Connection *connection)
+{
+  m_grab_server = connection;
+}
+
+// End the server grab.
+
+void Server::ungrabServer(Connection *connection)
+{
+  if (m_grab_server == connection)
+    m_grab_server = 0;
+}
+
+// Processing is allowed, if no other client has grabbed
+// the server exclusively.
+
+bool Server::processingAllowed(Connection *connection)
+{
+  if (! m_grab_server)
+    return true;
+
+  if (m_grab_server == connection)
+    return true;
+
+  return false;
 }
 

@@ -20,6 +20,7 @@
 
 #include <OEG/Common.h>
 
+#include <QByteArray>
 #include <QString>
 #include <QDataStream>
 #include <QDebug>
@@ -35,6 +36,7 @@ class Connection : public QObject
     Connection(QTcpSocket *socket, Server *server);
     virtual ~Connection();
 
+    void    init();
     bool    isValid();
 
     quint8  readByte();
@@ -44,10 +46,14 @@ class Connection : public QObject
     void    readByteOrder();
     void    flush();
     void    writeByte(quint8 data);
+    void    writeBytes(const QByteArray &array);
     void    writeShort(quint16 data);
     void    writeInt(qint32 data);
     void    writePaddingBytes(int count);
     void    writeReplyHeader(int argument);
+
+    inline void setResourceIdBase(int base) { m_resource_id_base = base; };
+    inline void setResourceIdMask(int mask) { m_resource_id_mask = mask; };
 
   protected:
     quint8  countBits(quint32 data);
@@ -61,9 +67,11 @@ class Connection : public QObject
     void emitDisconnected();
 
   private:
+    int                     m_resource_id_base;            // Lowest resource ID the client can use.
+    int                     m_resource_id_mask;            // Range of resource IDs the client can use.
     QTcpSocket             *m_socket;
     Server                 *m_server;
     QDataStream::ByteOrder  m_byte_order;
-    int                     m_sequence_number;
+    int                     m_sequence_number;             // Sequence number of the latest request from the client.
 };
 
