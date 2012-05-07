@@ -49,8 +49,8 @@ class Server : public QObject
     unsigned int clientCount() const;
     unsigned int serverPort() const;
     QHostAddress serverAddress() const;
-    int getNumberOfPixmapFormats() const;
-    Keyboard *getKeyboard() const;
+    int numberOfPixmapFormats() const;
+    Keyboard *keyboard() const;
     void writeFormats(Connection *connection);
 
     void grabServer(Connection *connection);
@@ -74,7 +74,7 @@ class Server : public QObject
 
   private slots:
     void newConnection();
-    void deleteConnection(Connection *conn);
+    void deleteConnection(Connection *connection);
 
   protected:
     QTcpServer          *m_server;

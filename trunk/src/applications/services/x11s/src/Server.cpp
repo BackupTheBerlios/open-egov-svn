@@ -21,7 +21,6 @@
 #include <QAction>
 #include <QApplication>
 #include <QByteArray>
-#include <QCoreApplication>
 #include <QCloseEvent>
 #include <QHostAddress>
 #include <QMessageBox>
@@ -41,7 +40,7 @@ qint16   Server::m_protocol_minor_version = 0;
 QString  Server::m_vendor                 = "open-egov.de X11 Server";
 int      Server::m_release_number         = 0;
 
-Server::Server(QObject *parent /*=0*/)
+Server::Server(QObject *parent/*=0*/)
  : QObject(parent)
 {
   m_grab_server     = 0;
@@ -100,14 +99,14 @@ QHostAddress Server::serverAddress() const
   return m_server->serverAddress();
 }
 
-int Server::getNumberOfPixmapFormats() const
+int Server::numberOfPixmapFormats() const
 {
   return m_formats.size();
 }
 
 // The X11 server's keyboard.
 
-Keyboard *Server::getKeyboard() const
+Keyboard *Server::keyboard() const
 {
   return m_keyboard;
 }

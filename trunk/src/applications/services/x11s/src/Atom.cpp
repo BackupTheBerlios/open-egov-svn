@@ -22,8 +22,8 @@
 
 #include "Atom.h"
 
-Atom::Atom(int id, const QString &name)
- : QObject(this)
+Atom::Atom(QObject *parent, int id, const QString &name)
+ : QObject(parent)
 {
   m_id   = id;
   m_name = name;

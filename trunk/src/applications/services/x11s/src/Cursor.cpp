@@ -23,8 +23,8 @@
 #include "Resource.h"
 #include "Cursor.h"
 
-Cursor::Cursor()
- : Resource(this)
+Cursor::Cursor(QObject *parent/*=0*/)
+ : Resource(parent)
 {
 }
 

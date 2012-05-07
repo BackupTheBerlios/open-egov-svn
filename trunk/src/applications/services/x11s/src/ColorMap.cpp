@@ -23,8 +23,8 @@
 #include "Resource.h"
 #include "ColorMap.h"
 
-ColorMap::ColorMap()
- : Resource(this)
+ColorMap::ColorMap(QObject *parent/*=0*/)
+ : Resource(parent)
 {
 }
 

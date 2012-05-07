@@ -23,8 +23,8 @@
 #include "Connection.h"
 #include "Keyboard.h"
 
-Keyboard::Keyboard()
- : QObject(this)
+Keyboard::Keyboard(QObject *parent/*=0*/)
+ : QObject(parent)
 {
   m_minimum_keycode    = 0;
   m_number_of_keycodes = 10;

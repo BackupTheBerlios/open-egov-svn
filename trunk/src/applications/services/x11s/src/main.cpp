@@ -49,8 +49,8 @@ int main(int argc, char *argv[])
     return 1;
   }
 
-  TrayIcon icon;
   Server server;
+  TrayIcon icon;
 
   if (! server.start()) {
     QMessageBox::critical(0, qApp->applicationName(),

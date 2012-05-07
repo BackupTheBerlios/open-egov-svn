@@ -24,7 +24,7 @@
 #include "Atom.h"
 #include "Atoms.h"
 
-Atoms::Atoms(QObject *parent /*=0*/)
+Atoms::Atoms(QObject *parent/*=0*/)
  : QObject(parent), m_max_atom_id(0)
 {
   m_predefined_atom_names
@@ -51,7 +51,7 @@ Atoms::Atoms(QObject *parent /*=0*/)
 
 Atoms::~Atoms()
 {
-  foreach(Atom* atom, m_atoms_by_id.values())
+  foreach(Atom *atom, m_atoms_by_id.values())
     delete atom;
 
   m_atoms_by_id.clear();
@@ -71,7 +71,7 @@ int Atoms::numberOfPredefinedAtoms() const
 
 void Atoms::registerAtom(int id, const QString &name)
 {
-  Atom *atom = new Atom(id, name);
+  Atom *atom = new Atom(this, id, name);
 
   if (! atom)
     return;

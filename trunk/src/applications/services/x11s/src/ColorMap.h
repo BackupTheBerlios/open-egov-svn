@@ -32,7 +32,7 @@ class ColorMap : public Resource
   Q_OBJECT
 
   public:
-    ColorMap();
+    ColorMap(QObject *parent/*=0*/);
     virtual ~ColorMap();
 
   private:

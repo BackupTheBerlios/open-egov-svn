@@ -32,7 +32,7 @@ class Pixmap : public Resource
   Q_OBJECT
 
   public:
-    Pixmap();
+    Pixmap(QObject *parent=0);
     virtual ~Pixmap();
 
   private:

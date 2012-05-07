@@ -23,8 +23,8 @@
 #include "Resource.h"
 #include "Pixmap.h"
 
-Pixmap::Pixmap()
- : Resource(this)
+Pixmap::Pixmap(QObject *parent/*=0*/)
+ : Resource(parent)
 {
 }
 

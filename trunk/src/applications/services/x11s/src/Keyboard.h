@@ -30,7 +30,7 @@ class Keyboard : public QObject
   Q_OBJECT
 
   public:
-    Keyboard();
+    Keyboard(QObject *parent=0);
     virtual ~Keyboard();
 
     int minimumKeycode();

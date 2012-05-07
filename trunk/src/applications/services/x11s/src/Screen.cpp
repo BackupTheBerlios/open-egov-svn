@@ -22,8 +22,8 @@
 
 #include "Screen.h"
 
-Screen::Screen()
- : QObject(this)
+Screen::Screen(QObject *parent/*=0*/)
+ : QObject(parent)
 {
 }
 

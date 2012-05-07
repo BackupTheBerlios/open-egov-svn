@@ -32,7 +32,7 @@
 #include "TrayIcon.h"
 #include "Server.h"
 
-TrayIcon::TrayIcon(QWidget *parent /*=0*/)
+TrayIcon::TrayIcon(QWidget *parent/*=0*/)
  : QSystemTrayIcon(parent), m_tray_icon(0)
 {
   createActions();
@@ -65,10 +65,12 @@ TrayIcon::~TrayIcon()
 
 void TrayIcon::setServer(Server *server)
 {
-  m_server = server;
-
-  if (! m_server)
+  if (! server) {
+    qDebug() << "TrayIcon::setServer(): server was 0.";
     return;
+  }
+
+  m_server = server;
 
   connect(m_server, SIGNAL(clientCountChanged()),
           this,     SLOT(updateTrayIcon()));

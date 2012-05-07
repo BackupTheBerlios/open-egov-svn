@@ -32,7 +32,7 @@ class Font : public Resource
   Q_OBJECT
 
   public:
-    Font();
+    Font(QObject *parent=0);
     virtual ~Font();
 
   private:

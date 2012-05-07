@@ -29,7 +29,7 @@ class Atom : public QObject
   Q_OBJECT
 
   public:
-    Atom(int id, const QString &name);
+    Atom(QObject *parent, int id, const QString &name);
 
     int atomID() const;
     QString atomName() const;

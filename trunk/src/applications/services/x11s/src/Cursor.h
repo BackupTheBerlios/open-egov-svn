@@ -32,7 +32,7 @@ class Cursor : public Resource
   Q_OBJECT
 
   public:
-    Cursor();
+    Cursor(QObject *parent=0);
     virtual ~Cursor();
 
     inline int hotspotX() const { return m_hotspot_x; }

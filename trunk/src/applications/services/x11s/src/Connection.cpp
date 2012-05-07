@@ -99,9 +99,9 @@ void Connection::init()
 
   QByteArray vendor(Server::m_vendor.toLatin1());
   int pad = -1 * vendor.length() & 3;
-  int extra = 26 + 2 * m_server->getNumberOfPixmapFormats() + (vendor.length() + pad) / 4;
+  int extra = 26 + 2 * m_server->numberOfPixmapFormats() + (vendor.length() + pad) / 4;
 
-  Keyboard *keyboard = m_server->getKeyboard();
+  Keyboard *keyboard = m_server->keyboard();
 
   writeByte(1);                                            // Success.
   writeByte(0);                                            // Unused.
@@ -115,7 +115,7 @@ void Connection::init()
   writeShort(vendor.length());                             // Vendor length.
   writeShort(0xffff);                                      // Max request length.
   writeByte(1);                                            // Number of screens.
-  writeByte(m_server->getNumberOfPixmapFormats());
+  writeByte(m_server->numberOfPixmapFormats());
   writeByte(0);                                            // Image byte order (0=LSB, 1=MSB).
   writeByte(1);                                            // Bitmap bit order (0=LSB, 1=MSB).
   writeByte(8);                                            // Bitmap format scanline unit.

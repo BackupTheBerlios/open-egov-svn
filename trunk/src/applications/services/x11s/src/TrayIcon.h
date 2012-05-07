@@ -31,7 +31,7 @@ class TrayIcon : public QSystemTrayIcon
   Q_OBJECT
 
   public:
-    TrayIcon(QWidget *parent = 0);
+    TrayIcon(QWidget *parent=0);
     virtual ~TrayIcon();
 
     void setServer(Server *server);

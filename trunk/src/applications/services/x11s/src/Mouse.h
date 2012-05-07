@@ -30,7 +30,7 @@ class Mouse : public QObject
   Q_OBJECT
 
   public:
-    Mouse();
+    Mouse(QObject *parent=0);
     virtual ~Mouse();
 
   private:

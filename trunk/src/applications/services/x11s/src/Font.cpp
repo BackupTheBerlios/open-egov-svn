@@ -23,8 +23,8 @@
 #include "Resource.h"
 #include "Font.h"
 
-Font::Font()
- : Resource(this)
+Font::Font(QObject *parent/*=0*/)
+ : Resource(0)
 {
 }
 

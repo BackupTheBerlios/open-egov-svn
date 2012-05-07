@@ -29,7 +29,7 @@ class Screen : public QObject
   Q_OBJECT
 
   public:
-    Screen();
+    Screen(QObject *parent=0);
 
   private:
 

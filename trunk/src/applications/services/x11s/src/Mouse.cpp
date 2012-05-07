@@ -23,8 +23,8 @@
 #include "Connection.h"
 #include "Mouse.h"
 
-Mouse::Mouse()
- : QObject(this)
+Mouse::Mouse(QObject *parent/*=0*/)
+ : QObject(parent)
 {
 }
 

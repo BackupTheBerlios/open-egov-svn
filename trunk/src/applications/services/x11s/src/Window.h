@@ -32,7 +32,7 @@ class Window : public Resource
   Q_OBJECT
 
   public:
-    Window();
+    Window(QObject *parent=0);
     virtual ~Window();
 
   private:

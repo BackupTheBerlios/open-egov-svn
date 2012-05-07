@@ -23,8 +23,8 @@
 #include "Resource.h"
 #include "Window.h"
 
-Window::Window()
- : Resource(this)
+Window::Window(QObject *parent/*=0*/)
+ : Resource(parent)
 {
 }
 
