@@ -81,7 +81,7 @@ Server::~Server()
 
   close();
 
-  qDebug() << "  end";
+  qDebug() << "Server::~Server(): end";
 }
 
 QString Server::errorString() const
@@ -160,7 +160,7 @@ unsigned int Server::clientCount() const
 
 void Server::newConnection()
 {
-  qDebug() << "XServer::newConnection(): New connection.";
+  qDebug() << "Server::newConnection(): New connection.";
 
   Connection *connection = new Connection(m_server->nextPendingConnection(), this);
   if (connection) {
@@ -181,20 +181,18 @@ void Server::newConnection()
 
 void Server::deleteConnection(Connection *connection)
 {
-  qDebug() << "XServer::deleteConnection(): Deleting connection.";
+  qDebug() << "Server::deleteConnection(): Deleting connection.";
 
   if (! connection)
     return;
 
   for (int i=0; i<m_connections.size(); i++) {
-qDebug() << "1";
     if (m_connections.at(i) == connection) {
       delete m_connections.takeAt(i);   // TODO: Send close signal and wait with timeout.
-qDebug() << "2";
+      qDebug() << "Server::deleteConnection(): Deleted connection.";
       emit clientCountChanged();
     }
   }
-qDebug() << "3";
 }
 
 // Write details of all the pixmap formats.

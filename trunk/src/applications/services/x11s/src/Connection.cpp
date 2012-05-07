@@ -33,6 +33,8 @@
 Connection::Connection(QTcpSocket *socket, Server *server)
  : QObject(this), m_close_connection(false), m_socket(socket), m_server(server)
 {
+  qDebug() << "Connection::Connection()";
+
   if (! m_socket) {
     qDebug() << "No socket.";
     return;
