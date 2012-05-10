@@ -5,16 +5,37 @@
 <!-- $Id$ -->
 
 <!--
+https://en.wikipedia.org/wiki/Arabic_diacritics
+http://www.arabic-keyboard.org/tashkeel/    Online Arabic Diacritic Tool
+http://arabic.tripod.com/                   Free Comprehensive Reference of Arabic Grammar
+http://arabicgenie.com/blog/2009/09/arabic-short-vowels-what-you-need-to-know-about-tashkeel-and-harakaat
+http://qamoos.sakhr.com/        Sakhr Multilingual Dictionary (uses Harakat)
+http://www.eiktub.com/          web-based Arabic Notepad that supports full vowelization (tashkiil)
+http://tashkeel.googlelabs.com/ Google Arabic Diacritic Tool \u201cTashkeel\u201d (discontinued in September 2011)
+
+https://de.wikipedia.org/wiki/Syrisches_Alphabet
+https://en.wikipedia.org/wiki/T%C4%81%CA%BE_marb%C5%AB%E1%B9%ADa
+http://www.grammatiken.de/arabische-grammatik/
+
+http://transliteration.org/quran/WebSite_CD/MixNoble/Fram2E.htm
+https://de.wikibooks.org/wiki/Religionskritik:_Islam
+http://www.al-quran.info/?x=y#&&sura=1&aya=1&trans=de-amir_zaidan&show=both,quran-uthmani&ver=2.00
+http://www.altafsir.com/Languages.asp?LanguageID=2
+http://www.altafsir.com/ViewTranslations.asp?Display=yes&SoraNo=1&Ayah=0&Language=4&LanguageID=2&TranslationBook=0
+http://www.altafsir.com/ViewTranslations.asp?Display=yes&SoraNo=1&Ayah=0&Language=2&TranslationBook=10&LanguageID=2
+http://www.altafsir.com/Quran.asp?SoraNo=1&Ayah=1&NewPage=0
+http://www.cmje.org/religious-texts/quran/
 http://www.cmje.org/religious-texts/quran/verses/001-qmt.php#001.001
 http://www.cmje.org/religious-texts/hadith/bukhari/
-http://en.wikipedia.org/wiki/Al-Fatiha
 http://www.mounthira.com/learning/surah/001-al-fatihah/
+http://en.wikipedia.org/wiki/Al-Fatiha
 http://en.wikipedia.org/wiki/Al-hamdu_lillahi_rabbil_%27alamin
 http://en.wikipedia.org/wiki/Alhamdulillah
 http://en.wikipedia.org/wiki/Names_of_God_in_the_Qur%27an
+https://de.wikipedia.org/wiki/Koran
+http://de.wikipedia.org/wiki/Al-Fatiha
 http://www.islamicweb.com/begin/key_term.htm
 http://www.michaelhicke.de/korandruck.shtml
-http://de.wikipedia.org/wiki/Al-Fatiha
 http://www.mounthira.com/learning/surah/001-al-fatihah/
 http://www.mp3quran.net/eng/
 http://quran.com/
@@ -24,22 +45,13 @@ http://www.google.de/search?q=vers+im+koran&ie=utf-8&oe=utf-8&aq=t&rls=org.mozil
 -->
 
   <head>
-    <meta name="last changed" value="2012-03-11" />
+    <meta name="last changed" value="2012-04-23" />
   </head>
-
-  <tags>
-    <tag name="positive">
-	</tag>
-	<tag name="holy war">
-	</tag>
-	<tag name="hijab">
-	</tag>
-	<tag name="woman">
-	</tag>
-  </tags>
 
   <changes>
     <change date="2012-02-29" comment="Initial version." author="Gerrit M. Albrecht" />
+    <change date="2012-03-23" comment="Some data added." author="Gerrit M. Albrecht" />
+    <change date="2012-04-23" comment="Tag concept removed, because they are mostly useless without additional comments and hints." author="Gerrit M. Albrecht" />
   </changes>
 
   <comments>
@@ -47,7 +59,7 @@ http://www.google.de/search?q=vers+im+koran&ie=utf-8&oe=utf-8&aq=t&rls=org.mozil
   </comments>
 
   <translations>
-    <translation language="Deutsch" lc="de" author="1" />
+    <translation id="1" language="Deutsch" lc="de" author="" value="" url="" license="" />
   </translations>
 
   <chapters>
@@ -98,7 +110,261 @@ http://www.google.de/search?q=vers+im+koran&ie=utf-8&oe=utf-8&aq=t&rls=org.mozil
         <aya number="7">The path of those upon whom thou has bestowed favors, Not of those who thou has cursed once nor of those who have gone astray.</aya>
       </text>
       <text lang="en" title="The Opener" translator="1">
+      </text>
+	</sura>
 
+    <sura number="2" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="3" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="4" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="5" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="6" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+
+
+
+    <sura number="89" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="90" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="91" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="92" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="93" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="94" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="95" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="96" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="97" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="98" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="99" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="100" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="101" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="102" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="103" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="104" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="105" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="106" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="107" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="108" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="109" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="110" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
+      </text>
+	</sura>
+
+    <sura number="111" verses="" revealed="">
+      <text lang="ar" title="" latin="Surah ..." transliteration="">
+      </text>
+      <text lang="de" title="" translator="">
+      </text>
+      <text lang="en" title="" translator="">
       </text>
 	</sura>
 
