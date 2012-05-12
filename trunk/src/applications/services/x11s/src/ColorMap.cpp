@@ -21,6 +21,7 @@
 #include <QObject>
 
 #include "Resource.h"
+#include "Connection.h"
 #include "ColorMap.h"
 
 ColorMap::ColorMap(QObject *parent/*=0*/)

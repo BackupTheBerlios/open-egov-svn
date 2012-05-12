@@ -21,14 +21,78 @@
 #include <QObject>
 
 #include "Resource.h"
+#include "Connection.h"
 #include "Window.h"
 
 Window::Window(QObject *parent/*=0*/)
  : Resource(parent)
 {
+  m_window = 0;
 }
 
 Window::~Window()
+{
+  if (m_window) {
+    m_window->close();
+    //TODO: delete
+  }
+}
+
+void Window::requestCreateWindow(Connection *connection)
+{
+  if (! connection) {
+    qDebug() << "Window::requestCreateWindow(): connection was zero.";
+    return;
+  }
+
+  if (! connection->isValid()) {
+    qDebug() << "Window::requestCreateWindow(): connection was not valid.";
+    return;
+  }
+
+  int x  = connection->readShort();                         // X position of the window.
+  int y  = connection->readShort();                         // Y position of the window.
+  int w  = connection->readShort();                         // Width of the window.
+  int h  = connection->readShort();                         // Height of the window.
+  int bw = connection->readShort();                         // Border width.
+  int wc = connection->readShort();                         // Window class.
+
+  connection->readInt();                                    // Visual.
+
+  bool input_only;
+  //m_window = new QWidget();
+
+
+
+
+
+
+
+
+  //connection->writeByte(0);                                          // Indicates an error.
+  //connection->writeByte(errorcode);                                  // Error code.
+  //connection->writeShort(connection->sequenceNumber() & 0xffff);     // Sequence number.
+  //connection->writeInt(id);                                          // ID of invalid resource (optional).
+  //connection->writeShort(0);                                         // Minor opcode.
+  //connection->writeByte(opcode);                                     // Major opcode.
+  //connection->writePaddingBytes(21);                                 // Unused.
+
+  //connection->flush();
+}
+
+void Window::requestChangeWindowAttribute(Connection *connection)
+{
+}
+
+void Window::requestGetWindowAttributes(Connection *connection)
+{
+}
+
+void Window::requestDestroyWindow(Connection *connection)
+{
+}
+
+void Window::requestDestroySubWindows(Connection *connection)
 {
 }
 

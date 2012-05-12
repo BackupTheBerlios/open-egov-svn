@@ -25,6 +25,7 @@
 #include "Error.h"
 #include "Event.h"
 #include "Request.h"
+#include "Window.h"
 
 #include "Server.h"
 #include "Keyboard.h"
@@ -150,19 +151,378 @@ void Connection::loop()
 
   while (! m_close_connection) {
     opcode    = readByte();                                 // Request's opcode.
-    argument  = readByte();                                 // Request's optional first argument.
+    argument  = readByte();                                 // Request's optional first argument (data).
     remaining = readShort() * 4 - 4;                        // Request's length -> remaining bytes.
 
     while (! m_server->processingAllowed(this))             // Wait if server was grabbed.
       ;//sleep(50);
 
-    m_sequence_number++;
+    m_sequence_number++;                                    // Processing next request.
 
     switch (opcode) {                                       // Handle the request.
       case Request::XRQ_CREATE_WINDOW:                      // Page: 44.
+        Window::requestCreateWindow(this);
+        break;
+
+      case Request::XRQ_CHANGE_WINDOW_ATTRIBUTE:            // Page: 
+        Window::requestChangeWindowAttribute(this);
+        break;
+
+      case Request::XRQ_GET_WINDOW_ATTRIBUTES:              // Page: 
+        Window::requestGetWindowAttributes(this);
         break;
 
       case Request::XRQ_DESTROY_WINDOW:                     // Page: 47.
+        Window::requestDestroyWindow(this);
+        break;
+
+      case Request::XRQ_DESTROY_SUBWINDOWS:                 // Page: 
+        Window::requestDestroySubWindows(this);
+        break;
+
+      case Request::XRQ_CHANGE_SAVE_SET:
+        break;
+
+      case Request::XRQ_REPARENT_WINDOW:
+        break;
+
+      case Request::XRQ_MAP_WINDOW:
+        break;
+
+      case Request::XRQ_MAP_SUBWINDOWS:
+        break;
+
+      case Request::XRQ_UNMAP_WINDOW:
+        break;
+
+      case Request::XRQ_UNMAP_SUBWINDOWS:
+        break;
+
+      case Request::XRQ_CONFIGURE_WINDOW:
+        break;
+
+      case Request::XRQ_CIRCULATE_WINDOW:
+        break;
+
+      case Request::XRQ_GET_GEOMETRY:
+        break;
+
+      case Request::XRQ_QUERY_TREE:
+        break;
+
+      case Request::XRQ_INTERN_ATOM:
+        break;
+
+      case Request::XRQ_GET_ATOM_NAME:
+        break;
+
+      case Request::XRQ_CHANGE_PROPERTY:
+        break;
+
+      case Request::XRQ_DELETE_PROPERTY:
+        break;
+
+      case Request::XRQ_GET_PROPERTY:
+        break;
+
+      case Request::XRQ_LIST_PROPERTIES:
+        break;
+
+      case Request::XRQ_SET_SELECTION_OWNER:
+        break;
+
+      case Request::XRQ_GET_SELECTION_OWNER:
+        break;
+
+      case Request::XRQ_CONVERT_SELECTION:
+        break;
+
+      case Request::XRQ_SEND_EVENT:
+        break;
+
+      case Request::XRQ_GRAB_POINTER:
+        break;
+
+      case Request::XRQ_UNGRAB_POINTER:
+        break;
+
+      case Request::XRQ_GRAB_BUTTON:
+        break;
+
+      case Request::XRQ_UNGRAB_BUTTON:
+        break;
+
+      case Request::XRQ_CHANGE_ACTIVE_POINTER_GRAB:
+        break;
+
+      case Request::XRQ_GRAB_KEYBOARD:
+        break;
+
+      case Request::XRQ_UNGRAB_KEYBOARD:
+        break;
+
+      case Request::XRQ_GRAB_KEY:
+        break;
+
+      case Request::XRQ_UNGRAB_KEY:
+        break;
+
+      case Request::XRQ_ALLOW_EVENTS:
+        break;
+
+      case Request::XRQ_GRAB_SERVER:
+        break;
+
+      case Request::XRQ_UNGRAB_SERVER:
+        break;
+
+      case Request::XRQ_QUERY_POINTER:
+        break;
+
+      case Request::XRQ_GET_MOTION_EVENTS:
+        break;
+
+      case Request::XRQ_TRANSLATE_COORDINATES:
+        break;
+
+      case Request::XRQ_WARP_POINTER:
+        break;
+
+      case Request::XRQ_SET_INPUT_FOCUS:
+        break;
+
+      case Request::XRQ_GET_INPUT_FOCUS:
+        break;
+
+      case Request::XRQ_QUERY_KEYMAP:
+        break;
+
+      case Request::XRQ_OPEN_FONT:
+        break;
+
+      case Request::XRQ_CLOSE_FONT:
+        break;
+
+      case Request::XRQ_QUERY_FONT:
+        break;
+
+      case Request::XRQ_QUERY_TEXT_EXTENTS:
+        break;
+
+      case Request::XRQ_LIST_FONTS:
+        break;
+
+      case Request::XRQ_LIST_FONTS_WITH_INFO:
+        break;
+
+      case Request::XRQ_SET_FONT_PATH:
+        break;
+
+      case Request::XRQ_GET_FONT_PATH:
+        break;
+
+      case Request::XRQ_CREATE_PIXMAP:
+        break;
+
+      case Request::XRQ_FREE_PIXMAP:
+        break;
+
+      case Request::XRQ_CREATE_GC:
+        break;
+
+      case Request::XRQ_CHANGE_GC:
+        break;
+
+      case Request::XRQ_COPY_GC:
+        break;
+
+      case Request::XRQ_SET_DASHES:
+        break;
+
+      case Request::XRQ_SET_CLIP_RECTANGLES:
+        break;
+
+      case Request::XRQ_FREE_GC:
+        break;
+
+      case Request::XRQ_CLEAR_AREA:
+        break;
+
+      case Request::XRQ_COPY_AREA:
+        break;
+
+      case Request::XRQ_COPY_PLANE:
+        break;
+
+      case Request::XRQ_POLY_POINT:
+        break;
+
+      case Request::XRQ_POLY_LINE:
+        break;
+
+      case Request::XRQ_POLY_SEGMENT:
+        break;
+
+      case Request::XRQ_POLY_RECTANGLE:
+        break;
+
+      case Request::XRQ_POLY_ARC:
+        break;
+
+      case Request::XRQ_FILL_POLY:
+        break;
+
+      case Request::XRQ_POLY_FILL_RECTANGLE:
+        break;
+
+      case Request::XRQ_POLY_FILL_ARC:
+        break;
+
+      case Request::XRQ_PUT_IMAGE:
+        break;
+
+      case Request::XRQ_GET_IMAGE:
+        break;
+
+      case Request::XRQ_POLY_TEXT_8:
+        break;
+
+      case Request::XRQ_POLY_TEXT_16:
+        break;
+
+      case Request::XRQ_IMAGE_TEXT_8:
+        break;
+
+      case Request::XRQ_IMAGE_TEXT_16:
+        break;
+
+      case Request::XRQ_CREATE_COLORMAP:
+        break;
+
+      case Request::XRQ_FREE_COLORMAP:
+        break;
+
+      case Request::XRQ_COPY_COLORMAP_AND_FREE:
+        break;
+
+      case Request::XRQ_INSTALL_COLORMAP:
+        break;
+
+      case Request::XRQ_UNINSTALL_COLORMAP:
+        break;
+
+      case Request::XRQ_LIST_INSTALLED_COLORMAPS:
+        break;
+
+      case Request::XRQ_ALLOC_COLOR:
+        break;
+
+      case Request::XRQ_ALLOC_NAMED_COLOR:
+        break;
+
+      case Request::XRQ_ALLOC_COLOR_CELLS:
+        break;
+
+      case Request::XRQ_ALLOC_COLOR_PLANES:
+        break;
+
+      case Request::XRQ_FREE_COLORS:
+        break;
+
+      case Request::XRQ_STORE_COLORS:
+        break;
+
+      case Request::XRQ_STORE_NAMED_COLOR:
+        break;
+
+      case Request::XRQ_QUERY_COLORS:
+        break;
+
+      case Request::XRQ_LOOKUP_COLOR:
+        break;
+
+      case Request::XRQ_CREATE_CURSOR:
+        break;
+
+      case Request::XRQ_CREATE_GLYPH_CURSOR:
+        break;
+
+      case Request::XRQ_FREE_CURSOR:
+        break;
+
+      case Request::XRQ_RECOLOR_CURSOR:
+        break;
+
+      case Request::XRQ_QUERY_BEST_SIZE:
+        break;
+
+      case Request::XRQ_QUERY_EXTENSION:
+        break;
+
+      case Request::XRQ_LIST_EXTENSIONS:
+        break;
+
+      case Request::XRQ_CHANGE_KEYBOARD_MAPPING:
+        break;
+
+      case Request::XRQ_GET_KEYBOARD_MAPPING:
+        break;
+
+      case Request::XRQ_CHANGE_KEYBOARD_CONTROL:
+        break;
+
+      case Request::XRQ_GET_KEYBOARD_CONTROL:
+        break;
+
+      case Request::XRQ_BELL:
+        break;
+
+      case Request::XRQ_CHANGE_POINTER_CONTROL:
+        break;
+
+      case Request::XRQ_GET_POINTER_CONTROL:
+        break;
+
+      case Request::XRQ_SET_SCREEN_SAVER:
+        break;
+
+      case Request::XRQ_GET_SCREEN_SAVER:
+        break;
+
+      case Request::XRQ_CHANGE_HOSTS:
+        break;
+
+      case Request::XRQ_LIST_HOSTS:
+        break;
+
+      case Request::XRQ_SET_ACCESS_CONTROL:
+        break;
+
+      case Request::XRQ_SET_CLOSE_DOWN_MODE:
+        break;
+
+      case Request::XRQ_KILL_CLIENT:
+        break;
+
+      case Request::XRQ_ROTATE_PROPERTIES:
+        break;
+
+      case Request::XRQ_FORCE_SCREEN_SAVER:
+        break;
+
+      case Request::XRQ_SET_POINTER_MAPPING:
+        break;
+
+      case Request::XRQ_GET_POINTER_MAPPING:
+        break;
+
+      case Request::XRQ_SET_MODIFIER_MAPPING:
+        break;
+
+      case Request::XRQ_GET_MODIFIER_MAPPING:
+        break;
+
+      case Request::XRQ_NO_OPERATION:
         break;
 
       default:                                              // Opcode not implemented.
