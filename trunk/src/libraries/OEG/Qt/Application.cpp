@@ -174,6 +174,18 @@ QString Application::homepage() const
   return m_homepage;
 }
 
+// Allows setting an icon derived from QSystemTrayIcon,
+// which should be handled/removed by the application.
+
+void Application::setSystemTrayIcon(QSystemTrayIcon *icon)
+{
+  removeSystemTrayIcon();
+
+  m_tray_icon = icon;
+
+  m_tray_icon->show();
+}
+
 void Application::addSystemTrayIcon(const QIcon &icon, QMenu *menu, const QString &title)
 {
   if (! QSystemTrayIcon::isSystemTrayAvailable()) {

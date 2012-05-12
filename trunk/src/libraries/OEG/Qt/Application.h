@@ -65,6 +65,7 @@ class Application : public QApplication
     static void runComponent(const QString &cmd);
     static void runComponent(const QString &cmd, const QStringList &arguments);
 
+    void setSystemTrayIcon(QSystemTrayIcon *icon);
     void addSystemTrayIcon(const QIcon &icon, QMenu *menu, const QString &title);
     void removeSystemTrayIcon();
 
