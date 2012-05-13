@@ -44,7 +44,7 @@ Server::Server(QObject *parent/*=0*/)
  : QObject(parent)
 {
   m_grab_server     = 0;
-  m_ip_address      = "192.168.178.23";
+  m_ip_address      = ""; //"192.168.178.23";
   m_server_number   = 0;
   m_auto_exit_x11s  = true;
   m_auto_exit_time  = 3600;  // 1 hour.
@@ -163,20 +163,23 @@ void Server::newConnection()
   qDebug() << "Server::newConnection(): New connection.";
 
   Connection *connection = new Connection(m_server->nextPendingConnection(), this);
-  if (connection) {
-    connection->setResourceIdBase(m_client_id_base);
-    connection->setResourceIdMask(m_client_id_step - 1);
-    m_client_id_base += m_client_id_step;
- 
-    connection->init();
-
-    connect(connection, SIGNAL(disconnected(Connection *)),
-            this,       SLOT(deleteConnection(Connection *)));
-
-    m_connections.append(connection);
-
-    emit clientCountChanged();
+  if (! connection) {
+    qDebug() << "Server::newConnection(): No connection.";
+    return;
   }
+
+  connection->setResourceIdBase(m_client_id_base);
+  connection->setResourceIdMask(m_client_id_step - 1);
+  m_client_id_base += m_client_id_step;
+
+  connection->init();
+
+  connect(connection, SIGNAL(disconnected(Connection *)),
+          this,       SLOT(deleteConnection(Connection *)));
+
+  m_connections.append(connection);
+
+  emit clientCountChanged();
 }
 
 void Server::deleteConnection(Connection *connection)

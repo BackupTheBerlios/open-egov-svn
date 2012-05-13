@@ -32,7 +32,7 @@
 #include "Connection.h"
 
 Connection::Connection(QTcpSocket *socket, Server *server)
- : QObject(this), m_close_connection(false), m_socket(socket), m_server(server)
+ : QObject(0), m_socket(socket), m_server(server)
 {
   qDebug() << "Connection::Connection()";
 
@@ -46,8 +46,12 @@ Connection::Connection(QTcpSocket *socket, Server *server)
     return;
   }
 
-  m_byte_order      = QDataStream::BigEndian;              // Most significant byte first (the default).
-  m_sequence_number = 0;
+  QObject::connect(socket, SIGNAL(disconnected()),
+                   socket, SLOT(deleteLater()));
+
+  m_close_connection = false;                              // Connection is initially open.
+  m_byte_order       = QDataStream::BigEndian;             // Most significant byte first (the default).
+  m_sequence_number  = 0;
 }
 
 Connection::~Connection()

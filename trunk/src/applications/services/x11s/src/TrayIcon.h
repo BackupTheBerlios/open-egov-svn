@@ -26,6 +26,8 @@ class QIcon;
 class QMenu;
 class Server;
 
+#include <OEG/Qt/Application.h>
+
 class TrayIcon : public QSystemTrayIcon
 {
   Q_OBJECT
@@ -38,6 +40,7 @@ class TrayIcon : public QSystemTrayIcon
 
   protected:
     void createActions();
+    OEG::Qt::Application *oegApp();
 
   public slots:
     void updateTrayIcon();

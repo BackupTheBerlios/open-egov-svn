@@ -59,6 +59,9 @@ TrayIcon::TrayIcon(QWidget *parent/*=0*/)
 TrayIcon::~TrayIcon()
 {
   if (m_tray_icon) {
+    //if (m_tray_icon->isVisible())
+    //  m_tray_icon->hide();
+
     delete m_tray_icon; m_tray_icon = 0;
   }
 }
@@ -101,14 +104,19 @@ void TrayIcon::createActions()
   connect(m_action_about_qt, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 }
 
+OEG::Qt::Application *TrayIcon::oegApp()
+{
+  return dynamic_cast<OEG::Qt::Application *>(qApp);
+}
+
 void TrayIcon::action_about_app()
 {
-  OEG::Qt::Application::runComponent("about-dialog");
+  OEG::Qt::Application::runComponent("about-dialog", QStringList() << oegApp()->baseName());
 }
 
 void TrayIcon::action_help()
 {
-  OEG::Qt::Application::runComponent("help-viewer", QStringList() << "index");
+  OEG::Qt::Application::runComponent("help-viewer", QStringList() << oegApp()->baseName() << "index");
 }
 
 void TrayIcon::action_information()
@@ -153,14 +161,12 @@ void TrayIcon::onActivated(QSystemTrayIcon::ActivationReason reason)
 
 void TrayIcon::updateTrayIcon()
 {
-  OEG::Qt::Application *app;
   QString dir;
 
   if (m_tray_icon)
     delete m_tray_icon;
 
-  app = dynamic_cast<OEG::Qt::Application *>(qApp);
-  dir = app->standardDirectory(OEG::Qt::Application::Data);
+  dir = oegApp()->standardDirectory(OEG::Qt::Application::Data);
 
   if (m_server) {
     if (m_server->clientCount() > 0)
