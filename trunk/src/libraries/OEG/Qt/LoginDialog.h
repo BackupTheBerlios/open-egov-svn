@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2011 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -20,6 +20,7 @@
 
 #include <OEG/Common.h>
 
+#include <QString>
 #include <QDialog>
 
 #include "ui_login.h"
@@ -31,12 +32,17 @@ class LoginDialog : public QDialog, public Ui::LoginDialog
   public:
     LoginDialog(QWidget *parent = 0);
 
+    inline QString username() const { return m_username; }
+    inline QString password() const { return m_password; }
+
   protected:
 
   private slots:
 
-
   private:
-
+    QString  m_username;
+    QString  m_password;
+    bool     m_auto_login;
+    QString  m_os_username;
 };
 

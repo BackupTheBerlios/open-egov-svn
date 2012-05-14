@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2011 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -22,8 +22,8 @@
 
 using namespace OEG::Qt;
 
-Settings::Settings()
- : QObject()
+Settings::Settings(QObject *parent /*=0*/)
+ : QObject(parent)
 {
   load();
 }

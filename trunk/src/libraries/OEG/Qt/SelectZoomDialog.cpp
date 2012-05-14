@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2011 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -30,5 +30,8 @@ SelectZoomDialog::SelectZoomDialog(QWidget *parent /*=0*/)
 {
   setupUi(this);
 
+  m_min_zoom_level     = 0;
+  m_max_zoom_level     = 500;
+  m_current_zoom_level = 100;
 }
 

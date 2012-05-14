@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2011 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -45,9 +45,9 @@ class Application : public QApplication
     enum FileType { Icon, Database, Image, Text, Plugin, Help, Unknown };
 
     enum ApplicationFlag {                       // Flags are not frozen, they are in evaluation and may change...
-      AF_Application = 0x00000001,
-      AF_Service     = 0x00000002,
-      AF_Documents   = 0x00000004,
+      AF_Application = 0x00000001,               // This is an standard application.
+      AF_Service     = 0x00000002,               // Application is a service.
+      AF_Documents   = 0x00000004,               // Applciation may store documents and provides such functions.
       AF_Database    = 0x00000008,
       AF_Network     = 0x00000010,
       AF_PeerToPeer  = 0x00000020,

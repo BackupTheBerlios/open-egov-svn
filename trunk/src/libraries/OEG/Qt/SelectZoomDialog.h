@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2011 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -31,12 +31,17 @@ class SelectZoomDialog : public QDialog, public Ui::SelectZoomDialog
   public:
     SelectZoomDialog(QWidget *parent = 0);
 
+    inline int minZoomLevel() const     { return m_min_zoom_level;     }
+    inline int maxZoomLevel() const     { return m_max_zoom_level;     }
+    inline int currentZoomLevel() const { return m_current_zoom_level; }
+
   protected:
 
   private slots:
 
-
   private:
-
+    int  m_min_zoom_level;
+    int  m_max_zoom_level;
+    int  m_current_zoom_level;
 };
 
