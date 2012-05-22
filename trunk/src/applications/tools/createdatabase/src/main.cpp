@@ -35,7 +35,6 @@
 int main(int argc, char *argv[])
 {
   QString fileName;
-  QSqlQuery query;
 
   if (argc <= 1) {
     qWarning("Create Database: No xml file given as parameter.");
@@ -64,38 +63,46 @@ int main(int argc, char *argv[])
   db.setDatabaseName(fileName);
   //db.setDatabaseName("DRIVER={Microsoft Access Driver (*.mdb)};FIL={MS Access};DBQ=myaccessfile.mdb");
   if (! db.open()) {
-    qWarning("Can't open database file.");
+    qWarning() << "Can't open database file.";
     return 0;
   }
+
+  QSqlQuery query(db);
 
   QDomDocument document("database");
   if (! document.setContent(&file)) {
+    qWarning() << "Not a valid XML document.";
     return 0;
   }
 
-  QDomElement docElem = document.documentElement();    // Get the root element.
+  QDomElement root = document.documentElement();           // Get the root element.
 
-  QString rootTag = docElem.tagName(); // == persons     // Check the root tag name.
- 
-  // We want to get the "structures"-Tag.
-  QDomNodeList nodeList = docElem.elementsByTagName("structures");
+  QString rootTag = root.tagName();                        // Check the root tag name.
+  qDebug() << "root-Tag-Name: " << rootTag;
 
+  QDomNodeList nodeList;
   QDomElement el;
+  QStringList columns;
+
+  nodeList = root.elementsByTagName("structures");         // We want to get the "structures"-Tag.
   if (nodeList.count() <= 0) {
+    qWarning() << "No structures-Tag found.";
+    return 0;
   }
   el = nodeList.at(0).toElement();
-  qDebug() << "d1: " << el.tagName();
+  qDebug() << "Using only the first Tag: " << el.tagName();
 
-  QDomNodeList table_nodes   = el.elementsByTagName("table");
-  QDomElement  table_element;
-  QString      query_string;
+  QDomNodeList table_nodes, row_nodes;
+  QDomElement  table_element, row_element;   // TODO: only one variable?
+  QString      query_string, query_string_prefix;
 
+  table_nodes = el.elementsByTagName("table");
   for(int i=0; i<table_nodes.count(); i++) {
     table_element = table_nodes.at(i).toElement();
     query_string  = "CREATE TABLE " + table_element.attribute("name") + " (";
 
     QDomNode entries = table_element.firstChild();
-    QStringList sl;
+    columns.clear();
 
     while (! entries.isNull()) {
       QDomElement data = entries.toElement();
@@ -103,33 +110,105 @@ int main(int argc, char *argv[])
       QString s_name, s_type, s_flags;
       QString s;
 
+      s = "";
       s_name  = data.attribute("name");
       s_type  = data.attribute("type");
-      s_flags = data.attribute("type");
+      s_flags = data.attribute("flags");
 
       if (s_type == "integer") {
-        s = s_name " INTEGER";
+        s = s_name + " INTEGER";
+
+        if (s_flags.contains("primarykey", Qt::CaseInsensitive)) {
+          s += " PRIMARY KEY";
+        }
+      }
+      else if (s_type == "string") {
+        s += s_name + " TEXT";
+      }
+      else {
+        qWarning() << "Unknown column type. Will use TEXT.";
+        s += s_name + " TEXT";
       }
 
-
-      // data.text();
-
-      sl << s;
+      columns << s;
       entries = entries.nextSibling();
     }
 
- query_string += sl.sss(); //
-
+    if (columns.count() > 0) {
+      query_string += columns.join(", ");                    // Join the parameters to one comma-separated string.
+    }
+    else {
+      qWarning() << "Found table with no columns.";
+    }
     query_string += ")";
+
+    qDebug() << "SQL: " << query_string;
+    query.exec(query_string);
   }
 
   // https://www.sqlite.org/lang.html
 
-  query.exec("create table xyz (id int primary key, test int, loc varchar(20))");
-  query.exec("insert into xyz values(0, 1, \"tttt\")");
+  // query.exec("create table xyz (id int primary key, test int, loc varchar(20))");
+  // query.exec("insert into xyz values(0, 1, \"tttt\")");
   // CREATE UNIQUE INDEX ggg ON table(id ASC)
+
+  nodeList = root.elementsByTagName("data");               // We want to get the "data"-Tag.
+  if (nodeList.count() <= 0) {
+    qWarning() << "No data-Tag found.";
+    return 0;
+  }
+  el = nodeList.at(0).toElement();
+  qDebug() << "Using only the first Tag: " << el.tagName();
+
+  table_nodes = el.elementsByTagName("table");
+  for(int i=0; i<table_nodes.count(); i++) {
+    table_element = table_nodes.at(i).toElement();
+    query_string_prefix = "INSERT INTO " + table_element.attribute("name") + " VALUES (";
+
+    row_nodes = table_element.elementsByTagName("row");
+    for(int j=0; j<row_nodes.count(); j++) {
+      row_element = row_nodes.at(j).toElement();
+
+      columns.clear();
+      QDomNode entries = row_element.firstChild();   // Loop through all field-Tags.
+      while (! entries.isNull()) {
+        QDomElement data = entries.toElement();
+        QString s_tag = data.tagName();
+        QString s_name;
+        QString s;
+
+        s_name = data.attribute("name");
+
+        // TODO: Look at the datatype of the current column to decide how to format the value correctly.
+
+        s = data.text().trimmed();
+        if (s.isEmpty()) {
+          s = "";
+        }
+        else if (QString::number(s.toInt()) == s) {           // Is integer, no '' needed.
+        }
+        else {
+          s = "'" + s + "'";  // TODO: escaping
+        }
+
+        columns << s;
+        entries = entries.nextSibling();
+      }
+
+      query_string = query_string_prefix;
+      if (columns.count() > 0) {
+        query_string += columns.join(", ");                    // Join the parameters to one comma-separated string.
+      }
+      else {
+        qWarning() << "Found table with no columns.";
+      }
+      query_string += ")";
+
+      qDebug() << "SQL: " << query_string;
+      query.exec(query_string);
+    }
+  }
 
   return 0;
 }
-
 
