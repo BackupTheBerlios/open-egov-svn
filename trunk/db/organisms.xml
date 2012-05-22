@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- $Id$ -->
+
+<!--
+This database contains information about all the lifeforms and their
+classifications and names.
+-->
+
+<database name="organisms" version="1" date="2012-05-22" flags="const:true security:false privacy:false">
+  <structures>
+    <table name="citations">
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="wikipedia"      type="string"  flags="" />
+      <column name="date"           type="date"    flags="" />
+      <column name="who"            type="string"  flags="" />
+    </table>
+
+    <table name="encyclopedia">
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="required" />
+      <column name="domain_id"      type="integer" flags="" />
+      <column name="name_specy"     type="string"  flags="" />
+      <column name="author_id"      type="integer" flags="" />
+    </table>
+  </structures>
+
+  <data>
+    <table name="citations">
+      <row>
+        <field name="id">1</field>
+        <field name="wikipedia">Carl von Linné</field>
+        <field name="date">1758</field>
+        <field name="who">Linnaeus</field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="wikipedia">Julius Theodor Christian Ratzeburg</field>
+        <field name="date">1837</field>
+        <field name="who">Ratzeburg</field>
+      </row>
+    </table>
+
+    <table name="encyclopedia">
+      <row>
+        <field name="id">1</field>
+        <field name="translation_id">1</field>
+        <field name="domain_id">3</field>
+        <field name="name_specy">Panthera tigris</field>
+        <field name="author_id">1</field>
+      </row>
+    </table>
+  </data>
+</database>
+
