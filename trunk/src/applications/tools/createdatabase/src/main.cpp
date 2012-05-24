@@ -35,7 +35,8 @@
 
 QString escapeString(const QString &str)
 {
-  return str.split("'").join("\\'");
+  // Doubling the ' character is for SQLite. MySQL uses \' for escaping.
+  return str.split("'").join("''");
 }
 
 int main(int argc, char *argv[])
