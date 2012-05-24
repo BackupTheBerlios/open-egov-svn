@@ -6,6 +6,7 @@ TARGETS=$(SOURCES:%.xml=%.db)
 CREATEDB=..\bin\createdatabase.exe
 
 %.db: %.xml
+	del $@
 	$(CREATEDB) $<
 
 all: $(TARGETS)
