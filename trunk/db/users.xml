@@ -4,12 +4,43 @@
 
 <database name="users" version="1" date="2012-01-01" flags="const:false security:true privacy:true">
   <structures>
-    <table name="users">
-      <column name="id"        type="integer" flags="primarykey" />
-      <column name="username"  type="string"  flags="required unique minchars:2 maxchars:20 alphanumeric" />
-      <column name="password"  type="string"  flags="required minchars:3 maxchars:20" />
-      <column name="role"      type="string"  flags="" />
-      <column name="active"    type="integer" flags="required default:0" />
+    <table name="certificates">
+      <column name="id"               type="integer" flags="primarykey" />
+      <column name="data"             type="blob"    flags="" />
+      <column name="issuer"           type="string"  flags="" />
+      <column name="serial_number"    type="numeric" flags="" />
+      <column name="subject"          type="string"  flags="" />
+      <column name="type"             type="string"  flags="" />
+      <column name="valid_from"       type="string"  flags="" />
+      <column name="valid_to"         type="string"  flags="" />
+      <column name="version"          type="numeric" flags="" />
+    </table>
+
+    <table name="fingerprints">
+      <column name="id"               type="integer" flags="primarykey" />
+    </table>
+
+    <table name="identities">
+      <column name="id"               type="integer" flags="primarykey" />
+      <column name="username"         type="string"  flags="required unique minchars:2 maxchars:20 alphanumeric" />
+      <column name="password"         type="string"  flags="required minchars:3 maxchars:50" />
+      <column name="role"             type="string"  flags="" />
+      <column name="uuid"             type="string"  flags="" />
+      <column name="people_id"        type="integer" flags="" />
+      <column name="active"           type="integer" flags="required default:0" />
+    </table>
+
+    <table name="people">
+      <column name="id"               type="integer" flags="primarykey" />
+      <column name="title"            type="string"  flags="" />
+      <column name="firstname"        type="string"  flags="" />
+      <column name="middlename"       type="string"  flags="" />
+      <column name="lastname"         type="string"  flags="" />
+      <column name="date_birthday"    type="date"    flags="" />
+      <column name="date_created"     type="date"    flags="" />
+      <column name="date_changed"     type="date"    flags="" />
+      <column name="date_last_login"  type="date"    flags="" />
+      <column name="date_last_logout" type="date"    flags="" />
     </table>
   </structures>
 
@@ -21,6 +52,14 @@
         <field name="password"></field>
         <field name="role">oeg</field>
         <field name="active">1</field>
+      </row>
+    </table>
+
+    <table name="people">
+      <row>
+        <field name="id"></field>
+        <field name="firstname">Gerrit</field>
+        <field name="lastname">Albrecht</field>
       </row>
     </table>
   </data>

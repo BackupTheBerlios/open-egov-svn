@@ -3,11 +3,11 @@
 <!-- $Id$ -->
 
 <!--
-This database contains information about all the lifeforms and their
+This database contains information about all the lifeforms, their
 classifications and names.
 -->
 
-<database name="organisms" version="1" date="2012-05-22" flags="const:true security:false privacy:false">
+<database name="organisms" version="1" date="2012-05-23" flags="const:true security:false privacy:false">
   <structures>
     <table name="citations">
       <column name="id"             type="integer" flags="primarykey" />
@@ -16,22 +16,217 @@ classifications and names.
       <column name="who"            type="string"  flags="" />
     </table>
 
+    <!-- International Code of Nomenclature for algae, fungi, and plants (ICN) -->
+
+    <table name="domains"> <!-- Domäne -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+    </table>
+
+    <table name="regnum"> <!-- * Reich, Kingdom (-ota) -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+
+    <table name="subregnum"> <!-- Unterreich (-bionta) -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+
+    <table name="divisio"> <!-- * Abteilung (division, phylum;
+                                -phyta (Pflanzen), -mycota (Pilze) -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+    <!-- Die Abteilung in der Botanik entspricht dem Stamm (Phylum) in
+         der zoologischen Systematik und wird entsprechend auch in der
+         Botanik gelegentlich als Phylum bezeichnet. -->
+
+    <table name="subdivisio"> <!-- Unterabteilung (-phytina (bei Pflanzen),
+                                   -mycotina (bei Pilzen)) -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+
+    <table name="stammgroup"> <!-- Stammgruppe -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+
+    <table name="superstamm"> <!-- Überstamm -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+
+    <table name="stamm"> <!-- Stamm -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+
+    <table name="substamm"> <!-- Unterstamm -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+
+    <table name="superclassis"> <!-- Überklasse -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+
+    <table name="reihe"> <!-- Reihe -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+
+    <table name="reihe2"> <!-- Ohne Rang -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+
+    <table name="classis"> <!-- * Klasse (-opsida (bei Pflanzen), -phyceae (bei Algen),
+                                -mycetes (bei Pilzen)) -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+
+    <table name="subclassis"> <!-- Unterklasse (-idae (bei Pflanzen),
+                                   -phycidae (bei Algen), -mycetidae (bei Pilzen),) -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+
+    <table name="superordo"> <!-- Überordnung (orders) -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+
+    <table name="ordo"> <!-- * Ordnung (-ales) -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+
+    <table name="subordo"> <!-- Unterordnung (-ineae) -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+
+    <table name="partordo"> <!-- Teilordnung -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+
+    <table name="superfamilia"> <!-- Überfamilie -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+
+    <table name="familia"> <!-- * Familie (families; -aceae) -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+
+    <table name="subfamilia"> <!-- Unterfamilie (-oideae) -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+
+    <!-- Der wiss. Name einer Tribus endet in der Botanik auf -eae, in der Zoologie auf -ini -->
+    <table name="tribus"> <!-- + Tribus (-eae) -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+
+    <table name="subtribus"> <!-- Subtribus (-inae) -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+
+    <table name="genus"> <!-- * Gattung -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+    <!-- Gattungen können in Sektionen (sectio) und Serien (series)
+         untergliedert sein. + + -->
+
+    <table name="species"> <!-- * Art -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="group"          type="integer" flags="" />
+    </table>
+    <!-- Arten können in Varietäten (varietas) und Formen (forma)
+         untergliedert sein. + + -->
+
+    <table name="subspecies"> <!-- Unterart -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+    </table>
+
     <table name="encyclopedia">
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="required" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="citation_id"    type="integer" flags="" />
+      <column name="flag_ids"       type="string"  flags="" />
       <column name="domain_id"      type="integer" flags="" />
       <column name="name_specy"     type="string"  flags="" />
-      <column name="author_id"      type="integer" flags="" />
     </table>
 
     <table name="flags">
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="flag"           type="string"  flags="required" />
+      <column name="value"          type="string"  flags="required" />
     </table>
 
     <table name="translations">
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="language"       type="integer" flags="required" />
+      <column name="language_id"    type="integer" flags="required" />
       <column name="value"          type="string"  flags="required" />
       <column name="wikipedia"      type="string"  flags="" />
       <column name="synonyms"       type="string"  flags="" />
@@ -52,22 +247,170 @@ classifications and names.
         <field name="date">1837</field>
         <field name="who">Ratzeburg</field>
       </row>
+      <row>
+        <field name="id">3</field>
+        <field name="wikipedia">Berthold Hatschek</field>
+        <field name="date">1888</field>
+        <field name="who">Hatschek</field>
+      </row>
+    </table>
+
+    <table name="domains">
+      <row>
+        <field name="id"></field>
+        <field name="value">Bacteria</field>
+      </row>
+      <row>
+        <field name="id"></field>
+        <field name="value">Archaea</field>
+      </row>
+      <row>
+        <field name="id"></field>
+        <field name="value">Eukaryota</field>
+      </row>
     </table>
 
     <table name="encyclopedia">
       <row>
         <field name="id">1</field>
         <field name="translation_id">1</field>
+        <field name="citation_id">1</field>
         <field name="domain_id">3</field>
         <field name="name_specy">Panthera tigris</field>
-        <field name="author_id">1</field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="translation_id">2</field>
+        <field name="citation_id">1</field>
+        <field name="domain_id">3</field>
+        <field name="name_specy">Panthera leo</field>
+      </row>
+      <row>
+        <field name="id">3</field>
+        <field name="translation_id">3</field>
+        <field name="citation_id">2</field>
+        <field name="domain_id">3</field>
+        <field name="name_specy">Cryphalus abietis</field>
+      </row>
+    </table>
+
+    <table name="familia">
+      <row>
+        <field name="id">2</field>
+        <field name="translation_id">7</field>
+        <field name="value">Equidae</field>
+        <field name="group"></field>
+      </row>
+    </table>
+
+    <table name="genus">
+      <row>
+        <field name="id">1</field>
+        <field name="translation_id"></field>
+        <field name="value">Fagus</field>
+        <field name="group"></field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="translation_id">6</field>
+        <field name="value">Equus</field>
+        <field name="group"></field>
+      </row>
+    </table>
+
+    <table name="species">
+      <row>
+        <field name="id">1</field>
+        <field name="translation_id">4</field>
+        <field name="value">Equus ferus</field>
+      </row>
+    </table>
+
+    <table name="subspecies">
+      <row>
+        <field name="id">1</field>
+        <field name="translation_id">5</field>
+        <field name="value">Equus ferus caballus</field>
       </row>
     </table>
 
     <table name="flags">
+      <row>
+        <field name="id">1</field>
+        <field name="value">animal</field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="value">tree</field>
+      </row>
+      <row>
+        <field name="id">3</field>
+        <field name="value">application:tree-cadaster</field>
+      </row>
+      <row>
+        <field name="id">4</field>
+        <field name="value">application:nature</field>
+      </row>
+      <row>
+        <field name="id">5</field>
+        <field name="value">application:forest-district-book</field>
+      </row>
+      <row>
+        <field name="id">6</field>
+        <field name="value">zoo</field>
+      </row>
     </table>
 
     <table name="translations">
+      <row>
+        <field name="id">1</field>
+        <field name="language_id">2</field>
+        <field name="value">Tiger</field>
+        <field name="wikipedia">Tiger</field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="language_id">2</field>
+        <field name="value">Löwe</field>
+        <field name="wikipedia">Löwe</field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">3</field>
+        <field name="language_id">2</field>
+        <field name="value">Gekörnter Fichtenborkenkäfer</field>
+        <field name="wikipedia">Gekörnter Fichtenborkenkäfer</field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">4</field>
+        <field name="language_id">2</field>
+        <field name="value">Wildpferd</field>
+        <field name="wikipedia">Wildpferd</field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">5</field>
+        <field name="language_id">2</field>
+        <field name="value">Hauspferd</field>
+        <field name="wikipedia">Hauspferd</field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">6</field>
+        <field name="language_id">2</field>
+        <field name="value">Pferde</field>
+        <field name="wikipedia">Pferde</field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">7</field>
+        <field name="language_id">2</field>
+        <field name="value">Pferde</field>
+        <field name="wikipedia">Pferde (Familie)</field>
+        <field name="synonyms"></field>
+      </row>
     </table>
   </data>
 </database>

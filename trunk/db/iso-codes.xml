@@ -13,31 +13,35 @@ is not complete.
 <database name="iso-codes" version="1" date="2011-12-06" flags="const:true security:false privacy:false">
   <structures>
     <table name="countries">
-      <column name="id"        type="integer" flags="primarykey" />
-      <column name="cc_a2"     type="string"  flags="required minchars:2 maxchars:2 uppercase alpha unique" />
-      <column name="cc_a3"     type="string"  flags="required minchars:3 maxchars:3 uppercase alpha unique" />
-      <column name="cc_number" type="string"  flags="required minchars:3 maxchars:3 numeric unique" />
-      <column name="title"     type="string"  flags="required uppercase unique" />
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="cc_a2"          type="string"  flags="required minchars:2 maxchars:2 uppercase alpha unique" />
+      <column name="cc_a3"          type="string"  flags="required minchars:3 maxchars:3 uppercase alpha unique" />
+      <column name="cc_number"      type="string"  flags="required minchars:3 maxchars:3 numeric unique" />
+      <column name="title"          type="string"  flags="required uppercase unique" />
+      <column name="translation_id" type="integer" flags="" />
     </table>
 
     <table name="country_language_combinations">
-      <column name="id"        type="integer" flags="primarykey" />
+      <column name="id"             type="integer" flags="primarykey" />
     </table>
 
-    <table name="country_names">
-      <column name="id"        type="integer" flags="primarykey" />
+    <table name="translations">
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="language_id"    type="integer" flags="required" />
     </table>
 
     <table name="domains">
-      <column name="id"        type="integer" flags="primarykey" />
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="name"           type="string"  flags="required" />
+      <column name="country_id"     type="integer" flags="required" />
     </table>
 
     <table name="languages">
-      <column name="id"        type="integer" flags="primarykey" />
-    </table>
-
-    <table name="language_names">
-      <column name="id"        type="integer" flags="primarykey" />
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="abbreviation"   type="string"  flags="required" />
+      <column name="translation_id" type="integer" flags="" />
     </table>
   </structures>
 
@@ -45,40 +49,2808 @@ is not complete.
     <!-- http://userpage.chemie.fu-berlin.de/diverse/doc/ISO_3166.html -->
     <table name="countries">
       <row>
+        <field name="id">1</field>
         <field name="cc_a2">AX</field>
         <field name="cc_a3">ALA</field>
         <field name="cc_number">248</field>
         <field name="title">AALAND ISLANDS</field>
+        <field name="translation_id">1</field>
       </row>
       <row>
+        <field name="id">2</field>
         <field name="cc_a2">AF</field>
         <field name="cc_a3">AFG</field>
         <field name="cc_number">004</field>
         <field name="title">AFGHANISTAN</field>
+        <field name="translation_id">2</field>
       </row>
       <row>
+        <field name="id">3</field>
         <field name="cc_a2">AL</field>
         <field name="cc_a3">ALB</field>
         <field name="cc_number">008</field>
         <field name="title">ALBANIA</field>
+        <field name="translation_id">3</field>
       </row>
       <row>
+        <field name="id">4</field>
         <field name="cc_a2">DZ</field>
         <field name="cc_a3">DZA</field>
         <field name="cc_number">012</field>
         <field name="title">ALGERIA</field>
+        <field name="translation_id">4</field>
       </row>
       <row>
+        <field name="id">5</field>
         <field name="cc_a2">AS</field>
         <field name="cc_a3">ASM</field>
         <field name="cc_number">016</field>
         <field name="title">AMERICAN SAMOA</field>
+        <field name="translation_id">5</field>
       </row>
       <row>
+        <field name="id">6</field>
         <field name="cc_a2">AD</field>
         <field name="cc_a3">AND</field>
         <field name="cc_number">020</field>
         <field name="title">ANDORRA</field>
+        <field name="translation_id">6</field>
+      </row>
+      <row>
+        <field name="id">7</field>
+        <field name="cc_a2">AO</field>
+        <field name="cc_a3">AGO</field>
+        <field name="cc_number">024</field>
+        <field name="title">ANGOLA</field>
+        <field name="translation_id">7</field>
+      </row>
+      <row>
+        <field name="id">8</field>
+        <field name="cc_a2">AI</field>
+        <field name="cc_a3">AIA</field>
+        <field name="cc_number">660</field>
+        <field name="title">ANGUILLA</field>
+        <field name="translation_id">8</field>
+      </row>
+      <row>
+        <field name="id">9</field>
+        <field name="cc_a2">AQ</field>
+        <field name="cc_a3">ATA</field>
+        <field name="cc_number">010</field>
+        <field name="title">ANTARCTICA</field>
+        <field name="translation_id">9</field>
+      </row>
+      <row>
+        <field name="id">10</field>
+        <field name="cc_a2">AG</field>
+        <field name="cc_a3">ATG</field>
+        <field name="cc_number">028</field>
+        <field name="title">ANTIGUA AND BARBUDA</field>
+        <field name="translation_id">10</field>
+      </row>
+      <row>
+        <field name="id">11</field>
+        <field name="cc_a2">AR</field>
+        <field name="cc_a3">ARG</field>
+        <field name="cc_number">032</field>
+        <field name="title">ARGENTINA</field>
+        <field name="translation_id">11</field>
+      </row>
+      <row>
+        <field name="id">12</field>
+        <field name="cc_a2">AM</field>
+        <field name="cc_a3">ARM</field>
+        <field name="cc_number">051</field>
+        <field name="title">ARMENIA</field>
+        <field name="translation_id">12</field>
+      </row>
+      <row>
+        <field name="id">13</field>
+        <field name="cc_a2">AW</field>
+        <field name="cc_a3">ABW</field>
+        <field name="cc_number">533</field>
+        <field name="title">ARUBA</field>
+        <field name="translation_id">13</field>
+      </row>
+      <row>
+        <field name="id">14</field>
+        <field name="cc_a2">AU</field>
+        <field name="cc_a3">AUS</field>
+        <field name="cc_number">036</field>
+        <field name="title">AUSTRALIA</field>
+        <field name="translation_id">14</field>
+      </row>
+      <row>
+        <field name="id">15</field>
+        <field name="cc_a2">AT</field>
+        <field name="cc_a3">AUT</field>
+        <field name="cc_number">040</field>
+        <field name="title">AUSTRIA</field>
+        <field name="translation_id">15</field>
+      </row>
+      <row>
+        <field name="id">16</field>
+        <field name="cc_a2">AZ</field>
+        <field name="cc_a3">AZE</field>
+        <field name="cc_number">031</field>
+        <field name="title">AZERBAIJAN</field>
+        <field name="translation_id">16</field>
+      </row>
+      <row>
+        <field name="id">17</field>
+        <field name="cc_a2">BS</field>
+        <field name="cc_a3">BHS</field>
+        <field name="cc_number">044</field>
+        <field name="title">BAHAMAS</field>
+        <field name="translation_id">17</field>
+      </row>
+      <row>
+        <field name="id">18</field>
+        <field name="cc_a2">BH</field>
+        <field name="cc_a3">BHR</field>
+        <field name="cc_number">048</field>
+        <field name="title">BAHRAIN</field>
+        <field name="translation_id">18</field>
+      </row>
+      <row>
+        <field name="id">19</field>
+        <field name="cc_a2">BD</field>
+        <field name="cc_a3">BGD</field>
+        <field name="cc_number">050</field>
+        <field name="title">BANGLADESH</field>
+        <field name="translation_id">19</field>
+      </row>
+      <row>
+        <field name="id">20</field>
+        <field name="cc_a2">BB</field>
+        <field name="cc_a3">BRB</field>
+        <field name="cc_number">052</field>
+        <field name="title">BARBADOS</field>
+        <field name="translation_id">20</field>
+      </row>
+      <row>
+        <field name="id">21</field>
+        <field name="cc_a2">BY</field>
+        <field name="cc_a3">BLR</field>
+        <field name="cc_number">112</field>
+        <field name="title">BELARUS</field>
+        <field name="translation_id">21</field>
+      </row>
+      <row>
+        <field name="id">22</field>
+        <field name="cc_a2">BE</field>
+        <field name="cc_a3">BEL</field>
+        <field name="cc_number">056</field>
+        <field name="title">BELGIUM</field>
+        <field name="translation_id">22</field>
+      </row>
+      <row>
+        <field name="id">23</field>
+        <field name="cc_a2">BZ</field>
+        <field name="cc_a3">BLZ</field>
+        <field name="cc_number">084</field>
+        <field name="title">BELIZE</field>
+        <field name="translation_id">23</field>
+      </row>
+      <row>
+        <field name="id">24</field>
+        <field name="cc_a2">BJ</field>
+        <field name="cc_a3">BEN</field>
+        <field name="cc_number">204</field>
+        <field name="title">BENIN</field>
+        <field name="translation_id">24</field>
+      </row>
+      <row>
+        <field name="id">25</field>
+        <field name="cc_a2">BM</field>
+        <field name="cc_a3">BMU</field>
+        <field name="cc_number">060</field>
+        <field name="title">BERMUDA</field>
+        <field name="translation_id">25</field>
+      </row>
+      <row>
+        <field name="id">26</field>
+        <field name="cc_a2">BT</field>
+        <field name="cc_a3">BTN</field>
+        <field name="cc_number">064</field>
+        <field name="title">BHUTAN</field>
+        <field name="translation_id">26</field>
+      </row>
+      <row>
+        <field name="id">27</field>
+        <field name="cc_a2">BO</field>
+        <field name="cc_a3">BOL</field>
+        <field name="cc_number">068</field>
+        <field name="title">BOLIVIA</field>
+        <field name="translation_id">27</field>
+      </row>
+      <row>
+        <field name="id">28</field>
+        <field name="cc_a2">BA</field>
+        <field name="cc_a3">BIH</field>
+        <field name="cc_number">070</field>
+        <field name="title">BOSNIA AND HERZEGOWINA</field>
+        <field name="translation_id">28</field>
+      </row>
+      <row>
+        <field name="id">29</field>
+        <field name="cc_a2">BW</field>
+        <field name="cc_a3">BWA</field>
+        <field name="cc_number">072</field>
+        <field name="title">BOTSWANA</field>
+        <field name="translation_id">29</field>
+      </row>
+      <row>
+        <field name="id">30</field>
+        <field name="cc_a2">BV</field>
+        <field name="cc_a3">BVT</field>
+        <field name="cc_number">074</field>
+        <field name="title">BOUVET ISLAND</field>
+        <field name="translation_id">30</field>
+      </row>
+      <row>
+        <field name="id">31</field>
+        <field name="cc_a2">BR</field>
+        <field name="cc_a3">BRA</field>
+        <field name="cc_number">076</field>
+        <field name="title">BRAZIL</field>
+        <field name="translation_id">31</field>
+      </row>
+      <row>
+        <field name="id">32</field>
+        <field name="cc_a2">IO</field>
+        <field name="cc_a3">IOT</field>
+        <field name="cc_number">086</field>
+        <field name="title">BRITISH INDIAN OCEAN TERRITORY</field>
+        <field name="translation_id">32</field>
+      </row>
+      <row>
+        <field name="id">33</field>
+        <field name="cc_a2">BN</field>
+        <field name="cc_a3">BRN</field>
+        <field name="cc_number">096</field>
+        <field name="title">BRUNEI DARUSSALAM</field>
+        <field name="translation_id">33</field>
+      </row>
+      <row>
+        <field name="id">34</field>
+        <field name="cc_a2">BG</field>
+        <field name="cc_a3">BGR</field>
+        <field name="cc_number">100</field>
+        <field name="title">BULGARIA</field>
+        <field name="translation_id">34</field>
+      </row>
+      <row>
+        <field name="id">35</field>
+        <field name="cc_a2">BF</field>
+        <field name="cc_a3">BFA</field>
+        <field name="cc_number">854</field>
+        <field name="title">BURKINA FASO</field>
+        <field name="translation_id">35</field>
+      </row>
+      <row>
+        <field name="id">36</field>
+        <field name="cc_a2">BI</field>
+        <field name="cc_a3">BDI</field>
+        <field name="cc_number">108</field>
+        <field name="title">BURUNDI</field>
+        <field name="translation_id">36</field>
+      </row>
+      <row>
+        <field name="id">37</field>
+        <field name="cc_a2">KH</field>
+        <field name="cc_a3">KHM</field>
+        <field name="cc_number">116</field>
+        <field name="title">CAMBODIA</field>
+        <field name="translation_id">37</field>
+      </row>
+      <row>
+        <field name="id">38</field>
+        <field name="cc_a2">CM</field>
+        <field name="cc_a3">CMR</field>
+        <field name="cc_number">120</field>
+        <field name="title">CAMEROON</field>
+        <field name="translation_id">38</field>
+      </row>
+      <row>
+        <field name="id">39</field>
+        <field name="cc_a2">CA</field>
+        <field name="cc_a3">CAN</field>
+        <field name="cc_number">124</field>
+        <field name="title">CANADA</field>
+        <field name="translation_id">39</field>
+      </row>
+      <row>
+        <field name="id">40</field>
+        <field name="cc_a2">CV</field>
+        <field name="cc_a3">CPV</field>
+        <field name="cc_number">132</field>
+        <field name="title">CAPE VERDE</field>
+        <field name="translation_id">40</field>
+      </row>
+      <row>
+        <field name="id">41</field>
+        <field name="cc_a2">KY</field>
+        <field name="cc_a3">CYM</field>
+        <field name="cc_number">136</field>
+        <field name="title">CAYMAN ISLANDS</field>
+        <field name="translation_id">41</field>
+      </row>
+      <row>
+        <field name="id">42</field>
+        <field name="cc_a2">CF</field>
+        <field name="cc_a3">CAF</field>
+        <field name="cc_number">140</field>
+        <field name="title">CENTRAL AFRICAN REPUBLIC</field>
+        <field name="translation_id">42</field>
+      </row>
+      <row>
+        <field name="id">43</field>
+        <field name="cc_a2">TD</field>
+        <field name="cc_a3">TCD</field>
+        <field name="cc_number">148</field>
+        <field name="title">CHAD</field>
+        <field name="translation_id">43</field>
+      </row>
+      <row>
+        <field name="id">44</field>
+        <field name="cc_a2">CL</field>
+        <field name="cc_a3">CHL</field>
+        <field name="cc_number">152</field>
+        <field name="title">CHILE</field>
+        <field name="translation_id">44</field>
+      </row>
+      <row>
+        <field name="id">45</field>
+        <field name="cc_a2">CN</field>
+        <field name="cc_a3">CHN</field>
+        <field name="cc_number">156</field>
+        <field name="title">CHINA</field>
+        <field name="translation_id">45</field>
+      </row>
+      <row>
+        <field name="id">46</field>
+        <field name="cc_a2">CX</field>
+        <field name="cc_a3">CXR</field>
+        <field name="cc_number">162</field>
+        <field name="title">CHRISTMAS ISLAND</field>
+        <field name="translation_id">46</field>
+      </row>
+      <row>
+        <field name="id">47</field>
+        <field name="cc_a2">CC</field>
+        <field name="cc_a3">CCK</field>
+        <field name="cc_number">166</field>
+        <field name="title">COCOS (KEELING) ISLANDS</field>
+        <field name="translation_id">47</field>
+      </row>
+      <row>
+        <field name="id">48</field>
+        <field name="cc_a2">CO</field>
+        <field name="cc_a3">COL</field>
+        <field name="cc_number">170</field>
+        <field name="title">COLOMBIA</field>
+        <field name="translation_id">48</field>
+      </row>
+      <row>
+        <field name="id">49</field>
+        <field name="cc_a2">KM</field>
+        <field name="cc_a3">COM</field>
+        <field name="cc_number">174</field>
+        <field name="title">COMOROS</field>
+        <field name="translation_id">49</field>
+      </row>
+      <row>
+        <field name="id">50</field>
+        <field name="cc_a2">CD</field>
+        <field name="cc_a3">COD</field>
+        <field name="cc_number">180</field>
+        <field name="title">CONGO, Democratic Republic of (was Zaire)</field>
+        <field name="translation_id">50</field>
+      </row>
+      <row>
+        <field name="id">51</field>
+        <field name="cc_a2">CG</field>
+        <field name="cc_a3">COG</field>
+        <field name="cc_number">178</field>
+        <field name="title">CONGO, Republic of</field>
+        <field name="translation_id">51</field>
+      </row>
+      <row>
+        <field name="id">52</field>
+        <field name="cc_a2">CK</field>
+        <field name="cc_a3">COK</field>
+        <field name="cc_number">184</field>
+        <field name="title">COOK ISLANDS</field>
+        <field name="translation_id">52</field>
+      </row>
+      <row>
+        <field name="id">53</field>
+        <field name="cc_a2">CR</field>
+        <field name="cc_a3">CRI</field>
+        <field name="cc_number">188</field>
+        <field name="title">COSTA RICA</field>
+        <field name="translation_id">53</field>
+      </row>
+      <row>
+        <field name="id">54</field>
+        <field name="cc_a2">CI</field>
+        <field name="cc_a3">CIV</field>
+        <field name="cc_number">384</field>
+        <field name="title">COTE D'IVOIRE</field>
+        <field name="translation_id">54</field>
+      </row>
+      <row>
+        <field name="id">55</field>
+        <field name="cc_a2">HR</field>
+        <field name="cc_a3">HRV</field>
+        <field name="cc_number">191</field>
+        <field name="title">CROATIA (local name: Hrvatska)</field>
+        <field name="translation_id">55</field>
+      </row>
+      <row>
+        <field name="id">56</field>
+        <field name="cc_a2">CU</field>
+        <field name="cc_a3">CUB</field>
+        <field name="cc_number">192</field>
+        <field name="title">CUBA</field>
+        <field name="translation_id">56</field>
+      </row>
+      <row>
+        <field name="id">57</field>
+        <field name="cc_a2">CY</field>
+        <field name="cc_a3">CYP</field>
+        <field name="cc_number">196</field>
+        <field name="title">CYPRUS</field>
+        <field name="translation_id">57</field>
+      </row>
+      <row>
+        <field name="id">58</field>
+        <field name="cc_a2">CZ</field>
+        <field name="cc_a3">CZE</field>
+        <field name="cc_number">203</field>
+        <field name="title">CZECH REPUBLIC</field>
+        <field name="translation_id">58</field>
+      </row>
+      <row>
+        <field name="id">59</field>
+        <field name="cc_a2">DK</field>
+        <field name="cc_a3">DNK</field>
+        <field name="cc_number">208</field>
+        <field name="title">DENMARK</field>
+        <field name="translation_id">59</field>
+      </row>
+      <row>
+        <field name="id">60</field>
+        <field name="cc_a2">DJ</field>
+        <field name="cc_a3">DJI</field>
+        <field name="cc_number">262</field>
+        <field name="title">DJIBOUTI</field>
+        <field name="translation_id">60</field>
+      </row>
+      <row>
+        <field name="id">61</field>
+        <field name="cc_a2">DM</field>
+        <field name="cc_a3">DMA</field>
+        <field name="cc_number">212</field>
+        <field name="title">DOMINICA</field>
+        <field name="translation_id">61</field>
+      </row>
+      <row>
+        <field name="id">62</field>
+        <field name="cc_a2">DO</field>
+        <field name="cc_a3">DOM</field>
+        <field name="cc_number">214</field>
+        <field name="title">DOMINICAN REPUBLIC</field>
+        <field name="translation_id">62</field>
+      </row>
+      <row>
+        <field name="id">63</field>
+        <field name="cc_a2">EC</field>
+        <field name="cc_a3">ECU</field>
+        <field name="cc_number">218</field>
+        <field name="title">ECUADOR</field>
+        <field name="translation_id">63</field>
+      </row>
+      <row>
+        <field name="id">64</field>
+        <field name="cc_a2">EG</field>
+        <field name="cc_a3">EGY</field>
+        <field name="cc_number">818</field>
+        <field name="title">EGYPT</field>
+        <field name="translation_id">64</field>
+      </row>
+      <row>
+        <field name="id">65</field>
+        <field name="cc_a2">SV</field>
+        <field name="cc_a3">SLV</field>
+        <field name="cc_number">222</field>
+        <field name="title">EL SALVADOR</field>
+        <field name="translation_id">65</field>
+      </row>
+      <row>
+        <field name="id">66</field>
+        <field name="cc_a2">GQ</field>
+        <field name="cc_a3">GNQ</field>
+        <field name="cc_number">226</field>
+        <field name="title">EQUATORIAL GUINEA</field>
+        <field name="translation_id">66</field>
+      </row>
+      <row>
+        <field name="id">67</field>
+        <field name="cc_a2">ER</field>
+        <field name="cc_a3">ERI</field>
+        <field name="cc_number">232</field>
+        <field name="title">ERITREA</field>
+        <field name="translation_id">67</field>
+      </row>
+      <row>
+        <field name="id">68</field>
+        <field name="cc_a2">EE</field>
+        <field name="cc_a3">EST</field>
+        <field name="cc_number">233</field>
+        <field name="title">ESTONIA</field>
+        <field name="translation_id">68</field>
+      </row>
+      <row>
+        <field name="id">69</field>
+        <field name="cc_a2">ET</field>
+        <field name="cc_a3">ETH</field>
+        <field name="cc_number">231</field>
+        <field name="title">ETHIOPIA</field>
+        <field name="translation_id">69</field>
+      </row>
+      <row>
+        <field name="id">70</field>
+        <field name="cc_a2">FK</field>
+        <field name="cc_a3">FLK</field>
+        <field name="cc_number">238</field>
+        <field name="title">FALKLAND ISLANDS (MALVINAS)</field>
+        <field name="translation_id">70</field>
+      </row>
+      <row>
+        <field name="id">71</field>
+        <field name="cc_a2">FO</field>
+        <field name="cc_a3">FRO</field>
+        <field name="cc_number">234</field>
+        <field name="title">FAROE ISLANDS</field>
+        <field name="translation_id">71</field>
+      </row>
+      <row>
+        <field name="id">72</field>
+        <field name="cc_a2">FJ</field>
+        <field name="cc_a3">FJI</field>
+        <field name="cc_number">242</field>
+        <field name="title">FIJI</field>
+        <field name="translation_id">72</field>
+      </row>
+      <row>
+        <field name="id">73</field>
+        <field name="cc_a2">FI</field>
+        <field name="cc_a3">FIN</field>
+        <field name="cc_number">246</field>
+        <field name="title">FINLAND</field>
+        <field name="translation_id">73</field>
+      </row>
+      <row>
+        <field name="id">74</field>
+        <field name="cc_a2">FR</field>
+        <field name="cc_a3">FRA</field>
+        <field name="cc_number">250</field>
+        <field name="title">FRANCE</field>
+        <field name="translation_id">74</field>
+      </row>
+      <row>
+        <field name="id">75</field>
+        <field name="cc_a2">GF</field>
+        <field name="cc_a3">GUF</field>
+        <field name="cc_number">254</field>
+        <field name="title">FRENCH GUIANA</field>
+        <field name="translation_id">75</field>
+      </row>
+      <row>
+        <field name="id">76</field>
+        <field name="cc_a2">PF</field>
+        <field name="cc_a3">PYF</field>
+        <field name="cc_number">258</field>
+        <field name="title">FRENCH POLYNESIA</field>
+        <field name="translation_id">76</field>
+      </row>
+      <row>
+        <field name="id">77</field>
+        <field name="cc_a2">TF</field>
+        <field name="cc_a3">ATF</field>
+        <field name="cc_number">260</field>
+        <field name="title">FRENCH SOUTHERN TERRITORIES</field>
+        <field name="translation_id">77</field>
+      </row>
+      <row>
+        <field name="id">78</field>
+        <field name="cc_a2">GA</field>
+        <field name="cc_a3">GAB</field>
+        <field name="cc_number">266</field>
+        <field name="title">GABON</field>
+        <field name="translation_id">78</field>
+      </row>
+      <row>
+        <field name="id">79</field>
+        <field name="cc_a2">GM</field>
+        <field name="cc_a3">GMB</field>
+        <field name="cc_number">270</field>
+        <field name="title">GAMBIA</field>
+        <field name="translation_id">79</field>
+      </row>
+      <row>
+        <field name="id">80</field>
+        <field name="cc_a2">GE</field>
+        <field name="cc_a3">GEO</field>
+        <field name="cc_number">268</field>
+        <field name="title">GEORGIA</field>
+        <field name="translation_id">80</field>
+      </row>
+      <row>
+        <field name="id">81</field>
+        <field name="cc_a2">DE</field>
+        <field name="cc_a3">DEU</field>
+        <field name="cc_number">276</field>
+        <field name="title">GERMANY</field>
+        <field name="translation_id">81</field>
+      </row>
+      <row>
+        <field name="id">82</field>
+        <field name="cc_a2">GH</field>
+        <field name="cc_a3">GHA</field>
+        <field name="cc_number">288</field>
+        <field name="title">GHANA</field>
+        <field name="translation_id">82</field>
+      </row>
+      <row>
+        <field name="id">83</field>
+        <field name="cc_a2">GI</field>
+        <field name="cc_a3">GIB</field>
+        <field name="cc_number">292</field>
+        <field name="title">GIBRALTAR</field>
+        <field name="translation_id">83</field>
+      </row>
+      <row>
+        <field name="id">84</field>
+        <field name="cc_a2">GR</field>
+        <field name="cc_a3">GRC</field>
+        <field name="cc_number">300</field>
+        <field name="title">GREECE</field>
+        <field name="translation_id">84</field>
+      </row>
+      <row>
+        <field name="id">85</field>
+        <field name="cc_a2">GL</field>
+        <field name="cc_a3">GRL</field>
+        <field name="cc_number">304</field>
+        <field name="title">GREENLAND</field>
+        <field name="translation_id">85</field>
+      </row>
+      <row>
+        <field name="id">86</field>
+        <field name="cc_a2">GD</field>
+        <field name="cc_a3">GRD</field>
+        <field name="cc_number">308</field>
+        <field name="title">GRENADA</field>
+        <field name="translation_id">86</field>
+      </row>
+      <row>
+        <field name="id">87</field>
+        <field name="cc_a2">GP</field>
+        <field name="cc_a3">GLP</field>
+        <field name="cc_number">312</field>
+        <field name="title">GUADELOUPE</field>
+        <field name="translation_id">87</field>
+      </row>
+      <row>
+        <field name="id">88</field>
+        <field name="cc_a2">GU</field>
+        <field name="cc_a3">GUM</field>
+        <field name="cc_number">316</field>
+        <field name="title">GUAM</field>
+        <field name="translation_id">88</field>
+      </row>
+      <row>
+        <field name="id">89</field>
+        <field name="cc_a2">GT</field>
+        <field name="cc_a3">GTM</field>
+        <field name="cc_number">320</field>
+        <field name="title">GUATEMALA</field>
+        <field name="translation_id">89</field>
+      </row>
+      <row>
+        <field name="id">90</field>
+        <field name="cc_a2">GN</field>
+        <field name="cc_a3">GIN</field>
+        <field name="cc_number">324</field>
+        <field name="title">GUINEA</field>
+        <field name="translation_id">90</field>
+      </row>
+      <row>
+        <field name="id">91</field>
+        <field name="cc_a2">GW</field>
+        <field name="cc_a3">GNB</field>
+        <field name="cc_number">624</field>
+        <field name="title">GUINEA-BISSAU</field>
+        <field name="translation_id">91</field>
+      </row>
+      <row>
+        <field name="id">92</field>
+        <field name="cc_a2">GY</field>
+        <field name="cc_a3">GUY</field>
+        <field name="cc_number">328</field>
+        <field name="title">GUYANA</field>
+        <field name="translation_id">92</field>
+      </row>
+      <row>
+        <field name="id">93</field>
+        <field name="cc_a2">HT</field>
+        <field name="cc_a3">HTI</field>
+        <field name="cc_number">332</field>
+        <field name="title">HAITI</field>
+        <field name="translation_id">93</field>
+      </row>
+      <row>
+        <field name="id">94</field>
+        <field name="cc_a2">HM</field>
+        <field name="cc_a3">HMD</field>
+        <field name="cc_number">334</field>
+        <field name="title">HEARD AND MC DONALD ISLANDS</field>
+        <field name="translation_id">94</field>
+      </row>
+      <row>
+        <field name="id">95</field>
+        <field name="cc_a2">HN</field>
+        <field name="cc_a3">HND</field>
+        <field name="cc_number">340</field>
+        <field name="title">HONDURAS</field>
+        <field name="translation_id">95</field>
+      </row>
+      <row>
+        <field name="id">96</field>
+        <field name="cc_a2">HK</field>
+        <field name="cc_a3">HKG</field>
+        <field name="cc_number">344</field>
+        <field name="title">HONG KONG</field>
+        <field name="translation_id">96</field>
+      </row>
+      <row>
+        <field name="id">97</field>
+        <field name="cc_a2">HU</field>
+        <field name="cc_a3">HUN</field>
+        <field name="cc_number">348</field>
+        <field name="title">HUNGARY</field>
+        <field name="translation_id">97</field>
+      </row>
+      <row>
+        <field name="id">98</field>
+        <field name="cc_a2">IS</field>
+        <field name="cc_a3">ISL</field>
+        <field name="cc_number">352</field>
+        <field name="title">ICELAND</field>
+        <field name="translation_id">98</field>
+      </row>
+      <row>
+        <field name="id">99</field>
+        <field name="cc_a2">IN</field>
+        <field name="cc_a3">IND</field>
+        <field name="cc_number">356</field>
+        <field name="title">INDIA</field>
+        <field name="translation_id">99</field>
+      </row>
+      <row>
+        <field name="id">100</field>
+        <field name="cc_a2">ID</field>
+        <field name="cc_a3">IDN</field>
+        <field name="cc_number">360</field>
+        <field name="title">INDONESIA</field>
+        <field name="translation_id">100</field>
+      </row>
+      <row>
+        <field name="id">101</field>
+        <field name="cc_a2">IR</field>
+        <field name="cc_a3">IRN</field>
+        <field name="cc_number">364</field>
+        <field name="title">IRAN (ISLAMIC REPUBLIC OF)</field>
+        <field name="translation_id">101</field>
+      </row>
+      <row>
+        <field name="id">102</field>
+        <field name="cc_a2">IQ</field>
+        <field name="cc_a3">IRQ</field>
+        <field name="cc_number">368</field>
+        <field name="title">IRAQ</field>
+        <field name="translation_id">102</field>
+      </row>
+      <row>
+        <field name="id">103</field>
+        <field name="cc_a2">IE</field>
+        <field name="cc_a3">IRL</field>
+        <field name="cc_number">372</field>
+        <field name="title">IRELAND</field>
+        <field name="translation_id">103</field>
+      </row>
+      <row>
+        <field name="id">104</field>
+        <field name="cc_a2">IL</field>
+        <field name="cc_a3">ISR</field>
+        <field name="cc_number">376</field>
+        <field name="title">ISRAEL</field>
+        <field name="translation_id">104</field>
+      </row>
+      <row>
+        <field name="id">105</field>
+        <field name="cc_a2">IT</field>
+        <field name="cc_a3">ITA</field>
+        <field name="cc_number">380</field>
+        <field name="title">ITALY</field>
+        <field name="translation_id">105</field>
+      </row>
+      <row>
+        <field name="id">106</field>
+        <field name="cc_a2">JM</field>
+        <field name="cc_a3">JAM</field>
+        <field name="cc_number">388</field>
+        <field name="title">JAMAICA</field>
+        <field name="translation_id">106</field>
+      </row>
+      <row>
+        <field name="id">107</field>
+        <field name="cc_a2">JP</field>
+        <field name="cc_a3">JPN</field>
+        <field name="cc_number">392</field>
+        <field name="title">JAPAN</field>
+        <field name="translation_id">107</field>
+      </row>
+      <row>
+        <field name="id">108</field>
+        <field name="cc_a2">JO</field>
+        <field name="cc_a3">JOR</field>
+        <field name="cc_number">400</field>
+        <field name="title">JORDAN</field>
+        <field name="translation_id">108</field>
+      </row>
+      <row>
+        <field name="id">109</field>
+        <field name="cc_a2">KZ</field>
+        <field name="cc_a3">KAZ</field>
+        <field name="cc_number">398</field>
+        <field name="title">KAZAKHSTAN</field>
+        <field name="translation_id">109</field>
+      </row>
+      <row>
+        <field name="id">110</field>
+        <field name="cc_a2">KE</field>
+        <field name="cc_a3">KEN</field>
+        <field name="cc_number">404</field>
+        <field name="title">KENYA</field>
+        <field name="translation_id">110</field>
+      </row>
+      <row>
+        <field name="id">111</field>
+        <field name="cc_a2">KI</field>
+        <field name="cc_a3">KIR</field>
+        <field name="cc_number">296</field>
+        <field name="title">KIRIBATI</field>
+        <field name="translation_id">111</field>
+      </row>
+      <row>
+        <field name="id">112</field>
+        <field name="cc_a2">KP</field>
+        <field name="cc_a3">PRK</field>
+        <field name="cc_number">408</field>
+        <field name="title">KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF</field>
+        <field name="translation_id">112</field>
+      </row>
+      <row>
+        <field name="id">113</field>
+        <field name="cc_a2">KR</field>
+        <field name="cc_a3">KOR</field>
+        <field name="cc_number">410</field>
+        <field name="title">KOREA, REPUBLIC OF</field>
+        <field name="translation_id">113</field>
+      </row>
+      <row>
+        <field name="id">114</field>
+        <field name="cc_a2">KW</field>
+        <field name="cc_a3">KWT</field>
+        <field name="cc_number">414</field>
+        <field name="title">KUWAIT</field>
+        <field name="translation_id">114</field>
+      </row>
+      <row>
+        <field name="id">115</field>
+        <field name="cc_a2">KG</field>
+        <field name="cc_a3">KGZ</field>
+        <field name="cc_number">417</field>
+        <field name="title">KYRGYZSTAN</field>
+        <field name="translation_id">115</field>
+      </row>
+      <row>
+        <field name="id">116</field>
+        <field name="cc_a2">LA</field>
+        <field name="cc_a3">LAO</field>
+        <field name="cc_number">418</field>
+        <field name="title">LAO PEOPLE'S DEMOCRATIC REPUBLIC</field>
+        <field name="translation_id">116</field>
+      </row>
+      <row>
+        <field name="id">117</field>
+        <field name="cc_a2">LV</field>
+        <field name="cc_a3">LVA</field>
+        <field name="cc_number">428</field>
+        <field name="title">LATVIA</field>
+        <field name="translation_id">117</field>
+      </row>
+      <row>
+        <field name="id">118</field>
+        <field name="cc_a2">LB</field>
+        <field name="cc_a3">LBN</field>
+        <field name="cc_number">422</field>
+        <field name="title">LEBANON</field>
+        <field name="translation_id">118</field>
+      </row>
+      <row>
+        <field name="id">119</field>
+        <field name="cc_a2">LS</field>
+        <field name="cc_a3">LSO</field>
+        <field name="cc_number">426</field>
+        <field name="title">LESOTHO</field>
+        <field name="translation_id">119</field>
+      </row>
+      <row>
+        <field name="id">120</field>
+        <field name="cc_a2">LR</field>
+        <field name="cc_a3">LBR</field>
+        <field name="cc_number">430</field>
+        <field name="title">LIBERIA</field>
+        <field name="translation_id">120</field>
+      </row>
+      <row>
+        <field name="id">121</field>
+        <field name="cc_a2">LY</field>
+        <field name="cc_a3">LBY</field>
+        <field name="cc_number">434</field>
+        <field name="title">LIBYAN ARAB JAMAHIRIYA</field>
+        <field name="translation_id">121</field>
+      </row>
+      <row>
+        <field name="id">122</field>
+        <field name="cc_a2">LI</field>
+        <field name="cc_a3">LIE</field>
+        <field name="cc_number">438</field>
+        <field name="title">LIECHTENSTEIN</field>
+        <field name="translation_id">122</field>
+      </row>
+      <row>
+        <field name="id">123</field>
+        <field name="cc_a2">LT</field>
+        <field name="cc_a3">LTU</field>
+        <field name="cc_number">440</field>
+        <field name="title">LITHUANIA</field>
+        <field name="translation_id">123</field>
+      </row>
+      <row>
+        <field name="id">124</field>
+        <field name="cc_a2">LU</field>
+        <field name="cc_a3">LUX</field>
+        <field name="cc_number">442</field>
+        <field name="title">LUXEMBOURG</field>
+        <field name="translation_id">124</field>
+      </row>
+      <row>
+        <field name="id">125</field>
+        <field name="cc_a2">MO</field>
+        <field name="cc_a3">MAC</field>
+        <field name="cc_number">446</field>
+        <field name="title">MACAU</field>
+        <field name="translation_id">125</field>
+      </row>
+      <row>
+        <field name="id">126</field>
+        <field name="cc_a2">MK</field>
+        <field name="cc_a3">MKD</field>
+        <field name="cc_number">807</field>
+        <field name="title">MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF</field>
+        <field name="translation_id">126</field>
+      </row>
+      <row>
+        <field name="id">127</field>
+        <field name="cc_a2">MG</field>
+        <field name="cc_a3">MDG</field>
+        <field name="cc_number">450</field>
+        <field name="title">MADAGASCAR</field>
+        <field name="translation_id">127</field>
+      </row>
+      <row>
+        <field name="id">128</field>
+        <field name="cc_a2">MW</field>
+        <field name="cc_a3">MWI</field>
+        <field name="cc_number">454</field>
+        <field name="title">MALAWI</field>
+        <field name="translation_id">128</field>
+      </row>
+      <row>
+        <field name="id">129</field>
+        <field name="cc_a2">MY</field>
+        <field name="cc_a3">MYS</field>
+        <field name="cc_number">458</field>
+        <field name="title">MALAYSIA</field>
+        <field name="translation_id">129</field>
+      </row>
+      <row>
+        <field name="id">130</field>
+        <field name="cc_a2">MV</field>
+        <field name="cc_a3">MDV</field>
+        <field name="cc_number">462</field>
+        <field name="title">MALDIVES</field>
+        <field name="translation_id">130</field>
+      </row>
+      <row>
+        <field name="id">131</field>
+        <field name="cc_a2">ML</field>
+        <field name="cc_a3">MLI</field>
+        <field name="cc_number">466</field>
+        <field name="title">MALI</field>
+        <field name="translation_id">131</field>
+      </row>
+      <row>
+        <field name="id">132</field>
+        <field name="cc_a2">MT</field>
+        <field name="cc_a3">MLT</field>
+        <field name="cc_number">470</field>
+        <field name="title">MALTA</field>
+        <field name="translation_id">132</field>
+      </row>
+      <row>
+        <field name="id">133</field>
+        <field name="cc_a2">MH</field>
+        <field name="cc_a3">MHL</field>
+        <field name="cc_number">584</field>
+        <field name="title">MARSHALL ISLANDS</field>
+        <field name="translation_id">133</field>
+      </row>
+      <row>
+        <field name="id">134</field>
+        <field name="cc_a2">MQ</field>
+        <field name="cc_a3">MTQ</field>
+        <field name="cc_number">474</field>
+        <field name="title">MARTINIQUE</field>
+        <field name="translation_id">134</field>
+      </row>
+      <row>
+        <field name="id">135</field>
+        <field name="cc_a2">MR</field>
+        <field name="cc_a3">MRT</field>
+        <field name="cc_number">478</field>
+        <field name="title">MAURITANIA</field>
+        <field name="translation_id">135</field>
+      </row>
+      <row>
+        <field name="id">136</field>
+        <field name="cc_a2">MU</field>
+        <field name="cc_a3">MUS</field>
+        <field name="cc_number">480</field>
+        <field name="title">MAURITIUS</field>
+        <field name="translation_id">136</field>
+      </row>
+      <row>
+        <field name="id">137</field>
+        <field name="cc_a2">YT</field>
+        <field name="cc_a3">MYT</field>
+        <field name="cc_number">175</field>
+        <field name="title">MAYOTTE</field>
+        <field name="translation_id">137</field>
+      </row>
+      <row>
+        <field name="id">138</field>
+        <field name="cc_a2">MX</field>
+        <field name="cc_a3">MEX</field>
+        <field name="cc_number">484</field>
+        <field name="title">MEXICO</field>
+        <field name="translation_id">138</field>
+      </row>
+      <row>
+        <field name="id">139</field>
+        <field name="cc_a2">FM</field>
+        <field name="cc_a3">FSM</field>
+        <field name="cc_number">583</field>
+        <field name="title">MICRONESIA, FEDERATED STATES OF</field>
+        <field name="translation_id">139</field>
+      </row>
+      <row>
+        <field name="id">140</field>
+        <field name="cc_a2">MD</field>
+        <field name="cc_a3">MDA</field>
+        <field name="cc_number">498</field>
+        <field name="title">MOLDOVA, REPUBLIC OF</field>
+        <field name="translation_id">140</field>
+      </row>
+      <row>
+        <field name="id">141</field>
+        <field name="cc_a2">MC</field>
+        <field name="cc_a3">MCO</field>
+        <field name="cc_number">492</field>
+        <field name="title">MONACO</field>
+        <field name="translation_id">141</field>
+      </row>
+      <row>
+        <field name="id">142</field>
+        <field name="cc_a2">MN</field>
+        <field name="cc_a3">MNG</field>
+        <field name="cc_number">496</field>
+        <field name="title">MONGOLIA</field>
+        <field name="translation_id">142</field>
+      </row>
+      <row>
+        <field name="id">143</field>
+        <field name="cc_a2">MS</field>
+        <field name="cc_a3">MSR</field>
+        <field name="cc_number">500</field>
+        <field name="title">MONTSERRAT</field>
+        <field name="translation_id">143</field>
+      </row>
+      <row>
+        <field name="id">144</field>
+        <field name="cc_a2">MA</field>
+        <field name="cc_a3">MAR</field>
+        <field name="cc_number">504</field>
+        <field name="title">MOROCCO</field>
+        <field name="translation_id">144</field>
+      </row>
+      <row>
+        <field name="id">145</field>
+        <field name="cc_a2">MZ</field>
+        <field name="cc_a3">MOZ</field>
+        <field name="cc_number">508</field>
+        <field name="title">MOZAMBIQUE</field>
+        <field name="translation_id">145</field>
+      </row>
+      <row>
+        <field name="id">146</field>
+        <field name="cc_a2">MM</field>
+        <field name="cc_a3">MMR</field>
+        <field name="cc_number">104</field>
+        <field name="title">MYANMAR</field>
+        <field name="translation_id">146</field>
+      </row>
+      <row>
+        <field name="id">147</field>
+        <field name="cc_a2">NA</field>
+        <field name="cc_a3">NAM</field>
+        <field name="cc_number">516</field>
+        <field name="title">NAMIBIA</field>
+        <field name="translation_id">147</field>
+      </row>
+      <row>
+        <field name="id">148</field>
+        <field name="cc_a2">NR</field>
+        <field name="cc_a3">NRU</field>
+        <field name="cc_number">520</field>
+        <field name="title">NAURU</field>
+        <field name="translation_id">148</field>
+      </row>
+      <row>
+        <field name="id">149</field>
+        <field name="cc_a2">NP</field>
+        <field name="cc_a3">NPL</field>
+        <field name="cc_number">524</field>
+        <field name="title">NEPAL</field>
+        <field name="translation_id">149</field>
+      </row>
+      <row>
+        <field name="id">150</field>
+        <field name="cc_a2">NL</field>
+        <field name="cc_a3">NLD</field>
+        <field name="cc_number">528</field>
+        <field name="title">NETHERLANDS</field>
+        <field name="translation_id">150</field>
+      </row>
+      <row>
+        <field name="id">151</field>
+        <field name="cc_a2">AN</field>
+        <field name="cc_a3">ANT</field>
+        <field name="cc_number">530</field>
+        <field name="title">NETHERLANDS ANTILLES</field>
+        <field name="translation_id">151</field>
+      </row>
+      <row>
+        <field name="id">152</field>
+        <field name="cc_a2">NC</field>
+        <field name="cc_a3">NCL</field>
+        <field name="cc_number">540</field>
+        <field name="title">NEW CALEDONIA</field>
+        <field name="translation_id">152</field>
+      </row>
+      <row>
+        <field name="id">153</field>
+        <field name="cc_a2">NZ</field>
+        <field name="cc_a3">NZL</field>
+        <field name="cc_number">554</field>
+        <field name="title">NEW ZEALAND</field>
+        <field name="translation_id">153</field>
+      </row>
+      <row>
+        <field name="id">154</field>
+        <field name="cc_a2">NI</field>
+        <field name="cc_a3">NIC</field>
+        <field name="cc_number">558</field>
+        <field name="title">NICARAGUA</field>
+        <field name="translation_id">154</field>
+      </row>
+      <row>
+        <field name="id">155</field>
+        <field name="cc_a2">NE</field>
+        <field name="cc_a3">NER</field>
+        <field name="cc_number">562</field>
+        <field name="title">NIGER</field>
+        <field name="translation_id">155</field>
+      </row>
+      <row>
+        <field name="id">156</field>
+        <field name="cc_a2">NG</field>
+        <field name="cc_a3">NGA</field>
+        <field name="cc_number">566</field>
+        <field name="title">NIGERIA</field>
+        <field name="translation_id">156</field>
+      </row>
+      <row>
+        <field name="id">157</field>
+        <field name="cc_a2">NU</field>
+        <field name="cc_a3">NIU</field>
+        <field name="cc_number">570</field>
+        <field name="title">NIUE</field>
+        <field name="translation_id">157</field>
+      </row>
+      <row>
+        <field name="id">158</field>
+        <field name="cc_a2">NF</field>
+        <field name="cc_a3">NFK</field>
+        <field name="cc_number">574</field>
+        <field name="title">NORFOLK ISLAND</field>
+        <field name="translation_id">158</field>
+      </row>
+      <row>
+        <field name="id">159</field>
+        <field name="cc_a2">MP</field>
+        <field name="cc_a3">MNP</field>
+        <field name="cc_number">580</field>
+        <field name="title">NORTHERN MARIANA ISLANDS</field>
+        <field name="translation_id">159</field>
+      </row>
+      <row>
+        <field name="id">160</field>
+        <field name="cc_a2">NO</field>
+        <field name="cc_a3">NOR</field>
+        <field name="cc_number">578</field>
+        <field name="title">NORWAY</field>
+        <field name="translation_id">160</field>
+      </row>
+      <row>
+        <field name="id">161</field>
+        <field name="cc_a2">OM</field>
+        <field name="cc_a3">OMN</field>
+        <field name="cc_number">512</field>
+        <field name="title">OMAN</field>
+        <field name="translation_id">161</field>
+      </row>
+      <row>
+        <field name="id">162</field>
+        <field name="cc_a2">PK</field>
+        <field name="cc_a3">PAK</field>
+        <field name="cc_number">586</field>
+        <field name="title">PAKISTAN</field>
+        <field name="translation_id">162</field>
+      </row>
+      <row>
+        <field name="id">163</field>
+        <field name="cc_a2">PW</field>
+        <field name="cc_a3">PLW</field>
+        <field name="cc_number">585</field>
+        <field name="title">PALAU</field>
+        <field name="translation_id">163</field>
+      </row>
+      <row>
+        <field name="id">164</field>
+        <field name="cc_a2">PS</field>
+        <field name="cc_a3">PSE</field>
+        <field name="cc_number">275</field>
+        <field name="title">PALESTINIAN TERRITORY, Occupied</field>
+        <field name="translation_id">164</field>
+      </row>
+      <row>
+        <field name="id">165</field>
+        <field name="cc_a2">PA</field>
+        <field name="cc_a3">PAN</field>
+        <field name="cc_number">591</field>
+        <field name="title">PANAMA</field>
+        <field name="translation_id">165</field>
+      </row>
+      <row>
+        <field name="id">166</field>
+        <field name="cc_a2">PG</field>
+        <field name="cc_a3">PNG</field>
+        <field name="cc_number">598</field>
+        <field name="title">PAPUA NEW GUINEA</field>
+        <field name="translation_id">166</field>
+      </row>
+      <row>
+        <field name="id">167</field>
+        <field name="cc_a2">PY</field>
+        <field name="cc_a3">PRY</field>
+        <field name="cc_number">600</field>
+        <field name="title">PARAGUAY</field>
+        <field name="translation_id">167</field>
+      </row>
+      <row>
+        <field name="id">168</field>
+        <field name="cc_a2">PE</field>
+        <field name="cc_a3">PER</field>
+        <field name="cc_number">604</field>
+        <field name="title">PERU</field>
+        <field name="translation_id">168</field>
+      </row>
+      <row>
+        <field name="id">169</field>
+        <field name="cc_a2">PH</field>
+        <field name="cc_a3">PHL</field>
+        <field name="cc_number">608</field>
+        <field name="title">PHILIPPINES</field>
+        <field name="translation_id">169</field>
+      </row>
+      <row>
+        <field name="id">170</field>
+        <field name="cc_a2">PN</field>
+        <field name="cc_a3">PCN</field>
+        <field name="cc_number">612</field>
+        <field name="title">PITCAIRN</field>
+        <field name="translation_id">170</field>
+      </row>
+      <row>
+        <field name="id">171</field>
+        <field name="cc_a2">PL</field>
+        <field name="cc_a3">POL</field>
+        <field name="cc_number">616</field>
+        <field name="title">POLAND</field>
+        <field name="translation_id">171</field>
+      </row>
+      <row>
+        <field name="id">172</field>
+        <field name="cc_a2">PT</field>
+        <field name="cc_a3">PRT</field>
+        <field name="cc_number">620</field>
+        <field name="title">PORTUGAL</field>
+        <field name="translation_id">172</field>
+      </row>
+      <row>
+        <field name="id">173</field>
+        <field name="cc_a2">PR</field>
+        <field name="cc_a3">PRI</field>
+        <field name="cc_number">630</field>
+        <field name="title">PUERTO RICO</field>
+        <field name="translation_id">173</field>
+      </row>
+      <row>
+        <field name="id">174</field>
+        <field name="cc_a2">QA</field>
+        <field name="cc_a3">QAT</field>
+        <field name="cc_number">634</field>
+        <field name="title">QATAR</field>
+        <field name="translation_id">174</field>
+      </row>
+      <row>
+        <field name="id">175</field>
+        <field name="cc_a2">RE</field>
+        <field name="cc_a3">REU</field>
+        <field name="cc_number">638</field>
+        <field name="title">REUNION</field>
+        <field name="translation_id">175</field>
+      </row>
+      <row>
+        <field name="id">176</field>
+        <field name="cc_a2">RO</field>
+        <field name="cc_a3">ROU</field>
+        <field name="cc_number">642</field>
+        <field name="title">ROMANIA</field>
+        <field name="translation_id">176</field>
+      </row>
+      <row>
+        <field name="id">177</field>
+        <field name="cc_a2">RU</field>
+        <field name="cc_a3">RUS</field>
+        <field name="cc_number">643</field>
+        <field name="title">RUSSIAN FEDERATION</field>
+        <field name="translation_id">177</field>
+      </row>
+      <row>
+        <field name="id">178</field>
+        <field name="cc_a2">RW</field>
+        <field name="cc_a3">RWA</field>
+        <field name="cc_number">646</field>
+        <field name="title">RWANDA</field>
+        <field name="translation_id">178</field>
+      </row>
+      <row>
+        <field name="id">179</field>
+        <field name="cc_a2">SH</field>
+        <field name="cc_a3">SHN</field>
+        <field name="cc_number">654</field>
+        <field name="title">SAINT HELENA</field>
+        <field name="translation_id">179</field>
+      </row>
+      <row>
+        <field name="id">180</field>
+        <field name="cc_a2">KN</field>
+        <field name="cc_a3">KNA</field>
+        <field name="cc_number">659</field>
+        <field name="title">SAINT KITTS AND NEVIS</field>
+        <field name="translation_id">180</field>
+      </row>
+      <row>
+        <field name="id">181</field>
+        <field name="cc_a2">LC</field>
+        <field name="cc_a3">LCA</field>
+        <field name="cc_number">662</field>
+        <field name="title">SAINT LUCIA</field>
+        <field name="translation_id">181</field>
+      </row>
+      <row>
+        <field name="id">182</field>
+        <field name="cc_a2">PM</field>
+        <field name="cc_a3">SPM</field>
+        <field name="cc_number">666</field>
+        <field name="title">SAINT PIERRE AND MIQUELON</field>
+        <field name="translation_id">182</field>
+      </row>
+      <row>
+        <field name="id">183</field>
+        <field name="cc_a2">VC</field>
+        <field name="cc_a3">VCT</field>
+        <field name="cc_number">670</field>
+        <field name="title">SAINT VINCENT AND THE GRENADINES</field>
+        <field name="translation_id">183</field>
+      </row>
+      <row>
+        <field name="id">184</field>
+        <field name="cc_a2">WS</field>
+        <field name="cc_a3">WSM</field>
+        <field name="cc_number">882</field>
+        <field name="title">SAMOA</field>
+        <field name="translation_id">184</field>
+      </row>
+      <row>
+        <field name="id">185</field>
+        <field name="cc_a2">SM</field>
+        <field name="cc_a3">SMR</field>
+        <field name="cc_number">674</field>
+        <field name="title">SAN MARINO</field>
+        <field name="translation_id">185</field>
+      </row>
+      <row>
+        <field name="id">186</field>
+        <field name="cc_a2">ST</field>
+        <field name="cc_a3">STP</field>
+        <field name="cc_number">678</field>
+        <field name="title">SAO TOME AND PRINCIPE</field>
+        <field name="translation_id">186</field>
+      </row>
+      <row>
+        <field name="id">187</field>
+        <field name="cc_a2">SA</field>
+        <field name="cc_a3">SAU</field>
+        <field name="cc_number">682</field>
+        <field name="title">SAUDI ARABIA</field>
+        <field name="translation_id">187</field>
+      </row>
+      <row>
+        <field name="id">188</field>
+        <field name="cc_a2">SN</field>
+        <field name="cc_a3">SEN</field>
+        <field name="cc_number">686</field>
+        <field name="title">SENEGAL</field>
+        <field name="translation_id">188</field>
+      </row>
+      <row>
+        <field name="id">189</field>
+        <field name="cc_a2">CS</field>
+        <field name="cc_a3">SCG</field>
+        <field name="cc_number">891</field>
+        <field name="title">SERBIA AND MONTENEGRO</field>
+        <field name="translation_id">189</field>
+      </row>
+      <row>
+        <field name="id">190</field>
+        <field name="cc_a2">SC</field>
+        <field name="cc_a3">SYC</field>
+        <field name="cc_number">690</field>
+        <field name="title">SEYCHELLES</field>
+        <field name="translation_id">190</field>
+      </row>
+      <row>
+        <field name="id">191</field>
+        <field name="cc_a2">SL</field>
+        <field name="cc_a3">SLE</field>
+        <field name="cc_number">694</field>
+        <field name="title">SIERRA LEONE</field>
+        <field name="translation_id">191</field>
+      </row>
+      <row>
+        <field name="id">192</field>
+        <field name="cc_a2">SG</field>
+        <field name="cc_a3">SGP</field>
+        <field name="cc_number">702</field>
+        <field name="title">SINGAPORE</field>
+        <field name="translation_id">192</field>
+      </row>
+      <row>
+        <field name="id">193</field>
+        <field name="cc_a2">SK</field>
+        <field name="cc_a3">SVK</field>
+        <field name="cc_number">703</field>
+        <field name="title">SLOVAKIA</field>
+        <field name="translation_id">193</field>
+      </row>
+      <row>
+        <field name="id">194</field>
+        <field name="cc_a2">SI</field>
+        <field name="cc_a3">SVN</field>
+        <field name="cc_number">705</field>
+        <field name="title">SLOVENIA</field>
+        <field name="translation_id">194</field>
+      </row>
+      <row>
+        <field name="id">195</field>
+        <field name="cc_a2">SB</field>
+        <field name="cc_a3">SLB</field>
+        <field name="cc_number">090</field>
+        <field name="title">SOLOMON ISLANDS</field>
+        <field name="translation_id">195</field>
+      </row>
+      <row>
+        <field name="id">196</field>
+        <field name="cc_a2">SO</field>
+        <field name="cc_a3">SOM</field>
+        <field name="cc_number">706</field>
+        <field name="title">SOMALIA</field>
+        <field name="translation_id">196</field>
+      </row>
+      <row>
+        <field name="id">197</field>
+        <field name="cc_a2">ZA</field>
+        <field name="cc_a3">ZAF</field>
+        <field name="cc_number">710</field>
+        <field name="title">SOUTH AFRICA</field>
+        <field name="translation_id">197</field>
+      </row>
+      <row>
+        <field name="id">198</field>
+        <field name="cc_a2">GS</field>
+        <field name="cc_a3">SGS</field>
+        <field name="cc_number">239</field>
+        <field name="title">SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS</field>
+        <field name="translation_id">198</field>
+      </row>
+      <row>
+        <field name="id">199</field>
+        <field name="cc_a2">ES</field>
+        <field name="cc_a3">ESP</field>
+        <field name="cc_number">724</field>
+        <field name="title">SPAIN</field>
+        <field name="translation_id">199</field>
+      </row>
+      <row>
+        <field name="id">200</field>
+        <field name="cc_a2">LK</field>
+        <field name="cc_a3">LKA</field>
+        <field name="cc_number">144</field>
+        <field name="title">SRI LANKA</field>
+        <field name="translation_id">200</field>
+      </row>
+      <row>
+        <field name="id">201</field>
+        <field name="cc_a2">SD</field>
+        <field name="cc_a3">SDN</field>
+        <field name="cc_number">736</field>
+        <field name="title">SUDAN</field>
+        <field name="translation_id">201</field>
+      </row>
+      <row>
+        <field name="id">202</field>
+        <field name="cc_a2">SR</field>
+        <field name="cc_a3">SUR</field>
+        <field name="cc_number">740</field>
+        <field name="title">SURINAME</field>
+        <field name="translation_id">202</field>
+      </row>
+      <row>
+        <field name="id">203</field>
+        <field name="cc_a2">SJ</field>
+        <field name="cc_a3">SJM</field>
+        <field name="cc_number">744</field>
+        <field name="title">SVALBARD AND JAN MAYEN ISLANDS</field>
+        <field name="translation_id">203</field>
+      </row>
+      <row>
+        <field name="id">204</field>
+        <field name="cc_a2">SZ</field>
+        <field name="cc_a3">SWZ</field>
+        <field name="cc_number">748</field>
+        <field name="title">SWAZILAND</field>
+        <field name="translation_id">204</field>
+      </row>
+      <row>
+        <field name="id">205</field>
+        <field name="cc_a2">SE</field>
+        <field name="cc_a3">SWE</field>
+        <field name="cc_number">752</field>
+        <field name="title">SWEDEN</field>
+        <field name="translation_id">205</field>
+      </row>
+      <row>
+        <field name="id">206</field>
+        <field name="cc_a2">CH</field>
+        <field name="cc_a3">CHE</field>
+        <field name="cc_number">756</field>
+        <field name="title">SWITZERLAND</field>
+        <field name="translation_id">206</field>
+      </row>
+      <row>
+        <field name="id">207</field>
+        <field name="cc_a2">SY</field>
+        <field name="cc_a3">SYR</field>
+        <field name="cc_number">760</field>
+        <field name="title">SYRIAN ARAB REPUBLIC</field>
+        <field name="translation_id">207</field>
+      </row>
+      <row>
+        <field name="id">208</field>
+        <field name="cc_a2">TW</field>
+        <field name="cc_a3">TWN</field>
+        <field name="cc_number">158</field>
+        <field name="title">TAIWAN</field>
+        <field name="translation_id">208</field>
+      </row>
+      <row>
+        <field name="id">209</field>
+        <field name="cc_a2">TJ</field>
+        <field name="cc_a3">TJK</field>
+        <field name="cc_number">762</field>
+        <field name="title">TAJIKISTAN</field>
+        <field name="translation_id">209</field>
+      </row>
+      <row>
+        <field name="id">210</field>
+        <field name="cc_a2">TZ</field>
+        <field name="cc_a3">TZA</field>
+        <field name="cc_number">834</field>
+        <field name="title">TANZANIA, UNITED REPUBLIC OF</field>
+        <field name="translation_id">210</field>
+      </row>
+      <row>
+        <field name="id">211</field>
+        <field name="cc_a2">TH</field>
+        <field name="cc_a3">THA</field>
+        <field name="cc_number">764</field>
+        <field name="title">THAILAND</field>
+        <field name="translation_id">211</field>
+      </row>
+      <row>
+        <field name="id">212</field>
+        <field name="cc_a2">TL</field>
+        <field name="cc_a3">TLS</field>
+        <field name="cc_number">626</field>
+        <field name="title">TIMOR-LESTE</field>
+        <field name="translation_id">212</field>
+      </row>
+      <row>
+        <field name="id">213</field>
+        <field name="cc_a2">TG</field>
+        <field name="cc_a3">TGO</field>
+        <field name="cc_number">768</field>
+        <field name="title">TOGO</field>
+        <field name="translation_id">213</field>
+      </row>
+      <row>
+        <field name="id">214</field>
+        <field name="cc_a2">TK</field>
+        <field name="cc_a3">TKL</field>
+        <field name="cc_number">772</field>
+        <field name="title">TOKELAU</field>
+        <field name="translation_id">214</field>
+      </row>
+      <row>
+        <field name="id">215</field>
+        <field name="cc_a2">TO</field>
+        <field name="cc_a3">TON</field>
+        <field name="cc_number">776</field>
+        <field name="title">TONGA</field>
+        <field name="translation_id">215</field>
+      </row>
+      <row>
+        <field name="id">216</field>
+        <field name="cc_a2">TT</field>
+        <field name="cc_a3">TTO</field>
+        <field name="cc_number">780</field>
+        <field name="title">TRINIDAD AND TOBAGO</field>
+        <field name="translation_id">216</field>
+      </row>
+      <row>
+        <field name="id">217</field>
+        <field name="cc_a2">TN</field>
+        <field name="cc_a3">TUN</field>
+        <field name="cc_number">788</field>
+        <field name="title">TUNISIA</field>
+        <field name="translation_id">217</field>
+      </row>
+      <row>
+        <field name="id">218</field>
+        <field name="cc_a2">TR</field>
+        <field name="cc_a3">TUR</field>
+        <field name="cc_number">792</field>
+        <field name="title">TURKEY</field>
+        <field name="translation_id">218</field>
+      </row>
+      <row>
+        <field name="id">219</field>
+        <field name="cc_a2">TM</field>
+        <field name="cc_a3">TKM</field>
+        <field name="cc_number">795</field>
+        <field name="title">TURKMENISTAN</field>
+        <field name="translation_id">219</field>
+      </row>
+      <row>
+        <field name="id">220</field>
+        <field name="cc_a2">TC</field>
+        <field name="cc_a3">TCA</field>
+        <field name="cc_number">796</field>
+        <field name="title">TURKS AND CAICOS ISLANDS</field>
+        <field name="translation_id">220</field>
+      </row>
+      <row>
+        <field name="id">221</field>
+        <field name="cc_a2">TV</field>
+        <field name="cc_a3">TUV</field>
+        <field name="cc_number">798</field>
+        <field name="title">TUVALU</field>
+        <field name="translation_id">221</field>
+      </row>
+      <row>
+        <field name="id">222</field>
+        <field name="cc_a2">UG</field>
+        <field name="cc_a3">UGA</field>
+        <field name="cc_number">800</field>
+        <field name="title">UGANDA</field>
+        <field name="translation_id">222</field>
+      </row>
+      <row>
+        <field name="id">223</field>
+        <field name="cc_a2">UA</field>
+        <field name="cc_a3">UKR</field>
+        <field name="cc_number">804</field>
+        <field name="title">UKRAINE</field>
+        <field name="translation_id">223</field>
+      </row>
+      <row>
+        <field name="id">224</field>
+        <field name="cc_a2">AE</field>
+        <field name="cc_a3">ARE</field>
+        <field name="cc_number">784</field>
+        <field name="title">UNITED ARAB EMIRATES</field>
+        <field name="translation_id">224</field>
+      </row>
+      <row>
+        <field name="id">225</field>
+        <field name="cc_a2">GB</field>
+        <field name="cc_a3">GBR</field>
+        <field name="cc_number">826</field>
+        <field name="title">UNITED KINGDOM</field>
+        <field name="translation_id">225</field>
+      </row>
+      <row>
+        <field name="id">226</field>
+        <field name="cc_a2">US</field>
+        <field name="cc_a3">USA</field>
+        <field name="cc_number">840</field>
+        <field name="title">UNITED STATES</field>
+        <field name="translation_id">226</field>
+      </row>
+      <row>
+        <field name="id">227</field>
+        <field name="cc_a2">UM</field>
+        <field name="cc_a3">UMI</field>
+        <field name="cc_number">581</field>
+        <field name="title">UNITED STATES MINOR OUTLYING ISLANDS</field>
+        <field name="translation_id">227</field>
+      </row>
+      <row>
+        <field name="id">228</field>
+        <field name="cc_a2">UY</field>
+        <field name="cc_a3">URY</field>
+        <field name="cc_number">858</field>
+        <field name="title">URUGUAY</field>
+        <field name="translation_id">228</field>
+      </row>
+      <row>
+        <field name="id">229</field>
+        <field name="cc_a2">UZ</field>
+        <field name="cc_a3">UZB</field>
+        <field name="cc_number">860</field>
+        <field name="title">UZBEKISTAN</field>
+        <field name="translation_id">229</field>
+      </row>
+      <row>
+        <field name="id">230</field>
+        <field name="cc_a2">VU</field>
+        <field name="cc_a3">VUT</field>
+        <field name="cc_number">548</field>
+        <field name="title">VANUATU</field>
+        <field name="translation_id">230</field>
+      </row>
+      <row>
+        <field name="id">231</field>
+        <field name="cc_a2">VA</field>
+        <field name="cc_a3">VAT</field>
+        <field name="cc_number">336</field>
+        <field name="title">VATICAN CITY STATE (HOLY SEE)</field>
+        <field name="translation_id">231</field>
+      </row>
+      <row>
+        <field name="id">232</field>
+        <field name="cc_a2">VE</field>
+        <field name="cc_a3">VEN</field>
+        <field name="cc_number">862</field>
+        <field name="title">VENEZUELA</field>
+        <field name="translation_id">232</field>
+      </row>
+      <row>
+        <field name="id">233</field>
+        <field name="cc_a2">VN</field>
+        <field name="cc_a3">VNM</field>
+        <field name="cc_number">704</field>
+        <field name="title">VIET NAM</field>
+        <field name="translation_id">233</field>
+      </row>
+      <row>
+        <field name="id">234</field>
+        <field name="cc_a2">VG</field>
+        <field name="cc_a3">VGB</field>
+        <field name="cc_number">092</field>
+        <field name="title">VIRGIN ISLANDS (BRITISH)</field>
+        <field name="translation_id">234</field>
+      </row>
+      <row>
+        <field name="id">235</field>
+        <field name="cc_a2">VI</field>
+        <field name="cc_a3">VIR</field>
+        <field name="cc_number">850</field>
+        <field name="title">VIRGIN ISLANDS (U.S.)</field>
+        <field name="translation_id">235</field>
+      </row>
+      <row>
+        <field name="id">236</field>
+        <field name="cc_a2">WF</field>
+        <field name="cc_a3">WLF</field>
+        <field name="cc_number">876</field>
+        <field name="title">WALLIS AND FUTUNA ISLANDS</field>
+        <field name="translation_id">236</field>
+      </row>
+      <row>
+        <field name="id">237</field>
+        <field name="cc_a2">EH</field>
+        <field name="cc_a3">ESH</field>
+        <field name="cc_number">732</field>
+        <field name="title">WESTERN SAHARA</field>
+        <field name="translation_id">237</field>
+      </row>
+      <row>
+        <field name="id">238</field>
+        <field name="cc_a2">YE</field>
+        <field name="cc_a3">YEM</field>
+        <field name="cc_number">887</field>
+        <field name="title">YEMEN</field>
+        <field name="translation_id">238</field>
+      </row>
+      <row>
+        <field name="id">239</field>
+        <field name="cc_a2">ZM</field>
+        <field name="cc_a3">ZMB</field>
+        <field name="cc_number">894</field>
+        <field name="title">ZAMBIA</field>
+        <field name="translation_id">239</field>
+      </row>
+      <row>
+        <field name="id">240</field>
+        <field name="cc_a2">ZW</field>
+        <field name="cc_a3">ZWE</field>
+        <field name="cc_number">716</field>
+        <field name="title">ZIMBABWE</field>
+        <field name="translation_id">240</field>
+      </row>
+    </table>
+
+    <table name="country_language_combinations">
+      <row>
+        <field name="id">1</field>
+      </row>
+    </table>
+
+    <table name="translations">
+      <row>
+        <field name="id">1</field>
+        <field name="value">Åland</field>
+        <field name="language_id"></field>
+      </row>
+      <row>
+        <field name="id">239</field>
+        <field name="value">Sambia</field>
+        <field name="language_id"></field>
+      </row>
+      <row>
+        <field name="id">240</field>
+        <field name="value">Simbabwe</field>
+        <field name="language_id"></field>
+      </row>
+
+      <row>
+        <field name="id">241</field>
+        <field name="value">Afar</field>
+        <field name="language_id"></field>
+      </row>
+      <row>
+        <field name="id">242</field>
+        <field name="value">Abchasische Sprache</field>
+        <field name="language_id"></field>
+      </row>
+      <row>
+        <field name="id">243</field>
+        <field name="value">Afrikaans</field>
+        <field name="language_id"></field>
+      </row>
+      <row>
+        <field name="id">244</field>
+        <field name="value">Amharische Sprache</field>
+        <field name="language_id"></field>
+      </row>
+      <row>
+        <field name="id">245</field>
+        <field name="value">Arabische Sprache</field>
+        <field name="language_id"></field>
+      </row>
+      <row>
+        <field name="id">246</field>
+        <field name="value">Assamesische Sprache</field>
+        <field name="language_id"></field>
+      </row>
+    </table>
+
+    <table name="domains">
+      <row>
+        <field name="id">1</field>
+        <field name="name"></field>
+        <field name="country_id"></field>
+      </row>
+    </table>
+
+    <!-- Technical contents of ISO 639:1988 (E/F) "Code for the representation of names of languages". -->
+
+    <table name="languages">
+      <row>
+        <field name="id">1</field>
+        <field name="value">Afar</field>
+        <field name="abbreviation">aa</field>
+        <field name="translation_id">241</field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="value">Abkhazian</field>
+        <field name="abbreviation">ab</field>
+        <field name="translation_id">242</field>
+      </row>
+      <row>
+        <field name="id">3</field>
+        <field name="value">Afrikaans</field>
+        <field name="abbreviation">af</field>
+        <field name="translation_id">243</field>
+      </row>
+      <row>
+        <field name="id">4</field>
+        <field name="value">Amharic</field>
+        <field name="abbreviation">am</field>
+        <field name="translation_id">244</field>
+      </row>
+      <row>
+        <field name="id">5</field>
+        <field name="value">Arabic</field>
+        <field name="abbreviation">ar</field>
+        <field name="translation_id">245</field>
+      </row>
+      <row>
+        <field name="id">6</field>
+        <field name="value">Assamese</field>
+        <field name="abbreviation">as</field>
+        <field name="translation_id">246</field>
+      </row>
+      <row>
+        <field name="id">7</field>
+        <field name="value">Aymara</field>
+        <field name="abbreviation">ay</field>
+        <field name="translation_id">247</field>
+      </row>
+      <row>
+        <field name="id">8</field>
+        <field name="value">Azerbaijani</field>
+        <field name="abbreviation">az</field>
+        <field name="translation_id">248</field>
+      </row>
+      <row>
+        <field name="id">9</field>
+        <field name="value">Bashkir</field>
+        <field name="abbreviation">ba</field>
+        <field name="translation_id">249</field>
+      </row>
+      <row>
+        <field name="id">10</field>
+        <field name="value">Byelorussian</field>
+        <field name="abbreviation">be</field>
+        <field name="translation_id">250</field>
+      </row>
+      <row>
+        <field name="id">11</field>
+        <field name="value">Bulgarian</field>
+        <field name="abbreviation">bg</field>
+        <field name="translation_id">251</field>
+      </row>
+      <row>
+        <field name="id">12</field>
+        <field name="value">Bihari</field>
+        <field name="abbreviation">bh</field>
+        <field name="translation_id">252</field>
+      </row>
+      <row>
+        <field name="id">13</field>
+        <field name="value">Bislama</field>
+        <field name="abbreviation">bi</field>
+        <field name="translation_id">253</field>
+      </row>
+      <row>
+        <field name="id">14</field>
+        <field name="value">Bengali; Bangla</field>
+        <field name="abbreviation">bn</field>
+        <field name="translation_id">254</field>
+      </row>
+      <row>
+        <field name="id">15</field>
+        <field name="value">Tibetan</field>
+        <field name="abbreviation">bo</field>
+        <field name="translation_id">255</field>
+      </row>
+      <row>
+        <field name="id">16</field>
+        <field name="value">Breton</field>
+        <field name="abbreviation">br</field>
+        <field name="translation_id">256</field>
+      </row>
+      <row>
+        <field name="id">17</field>
+        <field name="value">Catalan</field>
+        <field name="abbreviation">ca</field>
+        <field name="translation_id">257</field>
+      </row>
+      <row>
+        <field name="id">18</field>
+        <field name="value">Corsican</field>
+        <field name="abbreviation">co</field>
+        <field name="translation_id">258</field>
+      </row>
+      <row>
+        <field name="id">19</field>
+        <field name="value">Czech</field>
+        <field name="abbreviation">cs</field>
+        <field name="translation_id">259</field>
+      </row>
+      <row>
+        <field name="id">20</field>
+        <field name="value">Welsh</field>
+        <field name="abbreviation">cy</field>
+        <field name="translation_id">260</field>
+      </row>
+      <row>
+        <field name="id">21</field>
+        <field name="value">Danish</field>
+        <field name="abbreviation">da</field>
+        <field name="translation_id">261</field>
+      </row>
+      <row>
+        <field name="id">22</field>
+        <field name="value">German</field>
+        <field name="abbreviation">de</field>
+        <field name="translation_id">262</field>
+      </row>
+      <row>
+        <field name="id">23</field>
+        <field name="value">Bhutani</field>
+        <field name="abbreviation">dz</field>
+        <field name="translation_id">263</field>
+      </row>
+      <row>
+        <field name="id">24</field>
+        <field name="value">Greek</field>
+        <field name="abbreviation">el</field>
+        <field name="translation_id">264</field>
+      </row>
+      <row>
+        <field name="id">25</field>
+        <field name="value">English</field>
+        <field name="abbreviation">en</field>
+        <field name="translation_id">265</field>
+      </row>
+      <row>
+        <field name="id">26</field>
+        <field name="value">Esperanto</field>
+        <field name="abbreviation">eo</field>
+        <field name="translation_id">266</field>
+      </row>
+      <row>
+        <field name="id">27</field>
+        <field name="value">Spanish</field>
+        <field name="abbreviation">es</field>
+        <field name="translation_id">267</field>
+      </row>
+      <row>
+        <field name="id">28</field>
+        <field name="value">Estonian</field>
+        <field name="abbreviation">et</field>
+        <field name="translation_id">268</field>
+      </row>
+      <row>
+        <field name="id">29</field>
+        <field name="value">Basque</field>
+        <field name="abbreviation">eu</field>
+        <field name="translation_id">269</field>
+      </row>
+      <row>
+        <field name="id">30</field>
+        <field name="value">Persian</field>
+        <field name="abbreviation">fa</field>
+        <field name="translation_id">270</field>
+      </row>
+      <row>
+        <field name="id">31</field>
+        <field name="value">Finnish</field>
+        <field name="abbreviation">fi</field>
+        <field name="translation_id">271</field>
+      </row>
+      <row>
+        <field name="id">32</field>
+        <field name="value">Fiji</field>
+        <field name="abbreviation">fj</field>
+        <field name="translation_id">272</field>
+      </row>
+      <row>
+        <field name="id">33</field>
+        <field name="value">Faeroese</field>
+        <field name="abbreviation">fo</field>
+        <field name="translation_id">273</field>
+      </row>
+      <row>
+        <field name="id">34</field>
+        <field name="value">French</field>
+        <field name="abbreviation">fr</field>
+        <field name="translation_id">274</field>
+      </row>
+      <row>
+        <field name="id">35</field>
+        <field name="value">Frisian</field>
+        <field name="abbreviation">fy</field>
+        <field name="translation_id">275</field>
+      </row>
+      <row>
+        <field name="id">36</field>
+        <field name="value">Irish</field>
+        <field name="abbreviation">ga</field>
+        <field name="translation_id">276</field>
+      </row>
+      <row>
+        <field name="id">37</field>
+        <field name="value">Scots Gaelic</field>
+        <field name="abbreviation">gd</field>
+        <field name="translation_id">277</field>
+      </row>
+      <row>
+        <field name="id">38</field>
+        <field name="value">Galician</field>
+        <field name="abbreviation">gl</field>
+        <field name="translation_id">278</field>
+      </row>
+      <row>
+        <field name="id">39</field>
+        <field name="value">Guarani</field>
+        <field name="abbreviation">gn</field>
+        <field name="translation_id">279</field>
+      </row>
+      <row>
+        <field name="id">40</field>
+        <field name="value">Gujarati</field>
+        <field name="abbreviation">gu</field>
+        <field name="translation_id">280</field>
+      </row>
+      <row>
+        <field name="id">41</field>
+        <field name="value">Hausa</field>
+        <field name="abbreviation">ha</field>
+        <field name="translation_id">281</field>
+      </row>
+      <row>
+        <field name="id">42</field>
+        <field name="value">Hindi</field>
+        <field name="abbreviation">hi</field>
+        <field name="translation_id">282</field>
+      </row>
+      <row>
+        <field name="id">43</field>
+        <field name="value">Croatian</field>
+        <field name="abbreviation">hr</field>
+        <field name="translation_id">283</field>
+      </row>
+      <row>
+        <field name="id">44</field>
+        <field name="value">Hungarian</field>
+        <field name="abbreviation">hu</field>
+        <field name="translation_id">284</field>
+      </row>
+      <row>
+        <field name="id">45</field>
+        <field name="value">Armenian</field>
+        <field name="abbreviation">hy</field>
+        <field name="translation_id">285</field>
+      </row>
+      <row>
+        <field name="id">46</field>
+        <field name="value">Interlingua</field>
+        <field name="abbreviation">ia</field>
+        <field name="translation_id">286</field>
+      </row>
+      <row>
+        <field name="id">47</field>
+        <field name="value">Interlingue</field>
+        <field name="abbreviation">ie</field>
+        <field name="translation_id">287</field>
+      </row>
+      <row>
+        <field name="id">48</field>
+        <field name="value">Inupiak</field>
+        <field name="abbreviation">ik</field>
+        <field name="translation_id">288</field>
+      </row>
+      <row>
+        <field name="id">49</field>
+        <field name="value">Indonesian</field>
+        <field name="abbreviation">in</field>
+        <field name="translation_id">289</field>
+      </row>
+      <row>
+        <field name="id">50</field>
+        <field name="value">Icelandic</field>
+        <field name="abbreviation">is</field>
+        <field name="translation_id">290</field>
+      </row>
+      <row>
+        <field name="id">51</field>
+        <field name="value">Italian</field>
+        <field name="abbreviation">it</field>
+        <field name="translation_id">291</field>
+      </row>
+      <row>
+        <field name="id">52</field>
+        <field name="value">Hebrew</field>
+        <field name="abbreviation">iw</field>
+        <field name="translation_id">292</field>
+      </row>
+      <row>
+        <field name="id">53</field>
+        <field name="value">Japanese</field>
+        <field name="abbreviation">jp</field>
+        <field name="translation_id">293</field>
+      </row>
+      <row>
+        <field name="id">54</field>
+        <field name="value">Yiddish</field>
+        <field name="abbreviation">ji</field>
+        <field name="translation_id">294</field>
+      </row>
+      <row>
+        <field name="id">55</field>
+        <field name="value">Javanese</field>
+        <field name="abbreviation">jw</field>
+        <field name="translation_id">295</field>
+      </row>
+      <row>
+        <field name="id">56</field>
+        <field name="value">Georgian</field>
+        <field name="abbreviation">ka</field>
+        <field name="translation_id">296</field>
+      </row>
+      <row>
+        <field name="id">57</field>
+        <field name="value">Kazakh</field>
+        <field name="abbreviation">kk</field>
+        <field name="translation_id">297</field>
+      </row>
+      <row>
+        <field name="id">58</field>
+        <field name="value">Greenlandic</field>
+        <field name="abbreviation">kl</field>
+        <field name="translation_id">298</field>
+      </row>
+      <row>
+        <field name="id">59</field>
+        <field name="value">Cambodian</field>
+        <field name="abbreviation">km</field>
+        <field name="translation_id">299</field>
+      </row>
+      <row>
+        <field name="id">60</field>
+        <field name="value">Kannada</field>
+        <field name="abbreviation">kn</field>
+        <field name="translation_id">300</field>
+      </row>
+      <row>
+        <field name="id">61</field>
+        <field name="value">Korean</field>
+        <field name="abbreviation">ko</field>
+        <field name="translation_id">301</field>
+      </row>
+      <row>
+        <field name="id">62</field>
+        <field name="value">Kashmiri</field>
+        <field name="abbreviation">ks</field>
+        <field name="translation_id">302</field>
+      </row>
+      <row>
+        <field name="id">63</field>
+        <field name="value">Kurdish</field>
+        <field name="abbreviation">ku</field>
+        <field name="translation_id">303</field>
+      </row>
+      <row>
+        <field name="id">64</field>
+        <field name="value">Kirghiz</field>
+        <field name="abbreviation">ky</field>
+        <field name="translation_id">304</field>
+      </row>
+      <row>
+        <field name="id">65</field>
+        <field name="value">Latin</field>
+        <field name="abbreviation">la</field>
+        <field name="translation_id">305</field>
+      </row>
+      <row>
+        <field name="id">66</field>
+        <field name="value">Lingala</field>
+        <field name="abbreviation">ln</field>
+        <field name="translation_id">306</field>
+      </row>
+      <row>
+        <field name="id">67</field>
+        <field name="value">Laothian</field>
+        <field name="abbreviation">lo</field>
+        <field name="translation_id">307</field>
+      </row>
+      <row>
+        <field name="id">68</field>
+        <field name="value">Lithuanian</field>
+        <field name="abbreviation">lt</field>
+        <field name="translation_id">308</field>
+      </row>
+      <row>
+        <field name="id">69</field>
+        <field name="value">Latvian, Lettish</field>
+        <field name="abbreviation">lv</field>
+        <field name="translation_id">309</field>
+      </row>
+      <row>
+        <field name="id">70</field>
+        <field name="value">Malagasy</field>
+        <field name="abbreviation">mg</field>
+        <field name="translation_id">310</field>
+      </row>
+      <row>
+        <field name="id">71</field>
+        <field name="value">Maori</field>
+        <field name="abbreviation">mi</field>
+        <field name="translation_id">311</field>
+      </row>
+      <row>
+        <field name="id">72</field>
+        <field name="value">Macedonian</field>
+        <field name="abbreviation">mk</field>
+        <field name="translation_id">312</field>
+      </row>
+      <row>
+        <field name="id">73</field>
+        <field name="value">Malayalam</field>
+        <field name="abbreviation">ml</field>
+        <field name="translation_id">313</field>
+      </row>
+      <row>
+        <field name="id">74</field>
+        <field name="value">Mongolian</field>
+        <field name="abbreviation">mn</field>
+        <field name="translation_id">314</field>
+      </row>
+      <row>
+        <field name="id">75</field>
+        <field name="value">Moldavian</field>
+        <field name="abbreviation">mo</field>
+        <field name="translation_id">315</field>
+      </row>
+      <row>
+        <field name="id">76</field>
+        <field name="value">Marathi</field>
+        <field name="abbreviation">mr</field>
+        <field name="translation_id">316</field>
+      </row>
+      <row>
+        <field name="id">77</field>
+        <field name="value">Malay</field>
+        <field name="abbreviation">ms</field>
+        <field name="translation_id">317</field>
+      </row>
+      <row>
+        <field name="id">78</field>
+        <field name="value">Maltese</field>
+        <field name="abbreviation">mt</field>
+        <field name="translation_id">318</field>
+      </row>
+      <row>
+        <field name="id">79</field>
+        <field name="value">Burmese</field>
+        <field name="abbreviation">my</field>
+        <field name="translation_id">319</field>
+      </row>
+      <row>
+        <field name="id">80</field>
+        <field name="value">Nauru</field>
+        <field name="abbreviation">na</field>
+        <field name="translation_id">320</field>
+      </row>
+      <row>
+        <field name="id">81</field>
+        <field name="value">Nepali</field>
+        <field name="abbreviation">ne</field>
+        <field name="translation_id">321</field>
+      </row>
+      <row>
+        <field name="id">82</field>
+        <field name="value">Dutch</field>
+        <field name="abbreviation">nl</field>
+        <field name="translation_id">322</field>
+      </row>
+      <row>
+        <field name="id">83</field>
+        <field name="value">Norwegian</field>
+        <field name="abbreviation">no</field>
+        <field name="translation_id">323</field>
+      </row>
+      <row>
+        <field name="id">84</field>
+        <field name="value">Occitan</field>
+        <field name="abbreviation">oc</field>
+        <field name="translation_id">324</field>
+      </row>
+      <row>
+        <field name="id">85</field>
+        <field name="value">(Afan) Oromo</field>
+        <field name="abbreviation">om</field>
+        <field name="translation_id">325</field>
+      </row>
+      <row>
+        <field name="id">86</field>
+        <field name="value">Oriya</field>
+        <field name="abbreviation">or</field>
+        <field name="translation_id">326</field>
+      </row>
+      <row>
+        <field name="id">87</field>
+        <field name="value">Punjabi</field>
+        <field name="abbreviation">pa</field>
+        <field name="translation_id">327</field>
+      </row>
+      <row>
+        <field name="id">88</field>
+        <field name="value">Polish</field>
+        <field name="abbreviation">pl</field>
+        <field name="translation_id">328</field>
+      </row>
+      <row>
+        <field name="id">89</field>
+        <field name="value">Pashto, Pushto</field>
+        <field name="abbreviation">ps</field>
+        <field name="translation_id">329</field>
+      </row>
+      <row>
+        <field name="id">90</field>
+        <field name="value">Portuguese</field>
+        <field name="abbreviation">pt</field>
+        <field name="translation_id">330</field>
+      </row>
+      <row>
+        <field name="id">91</field>
+        <field name="value">Quechua</field>
+        <field name="abbreviation">qu</field>
+        <field name="translation_id">331</field>
+      </row>
+      <row>
+        <field name="id">92</field>
+        <field name="value">Rhaeto-Romance</field>
+        <field name="abbreviation">rm</field>
+        <field name="translation_id">332</field>
+      </row>
+      <row>
+        <field name="id">93</field>
+        <field name="value">Kirundi</field>
+        <field name="abbreviation">rn</field>
+        <field name="translation_id">333</field>
+      </row>
+      <row>
+        <field name="id">94</field>
+        <field name="value">Romanian</field>
+        <field name="abbreviation">ro</field>
+        <field name="translation_id">334</field>
+      </row>
+      <row>
+        <field name="id">95</field>
+        <field name="value">Russian</field>
+        <field name="abbreviation">ru</field>
+        <field name="translation_id">335</field>
+      </row>
+      <row>
+        <field name="id">96</field>
+        <field name="value">Kinyarwanda</field>
+        <field name="abbreviation">rw</field>
+        <field name="translation_id">336</field>
+      </row>
+      <row>
+        <field name="id">97</field>
+        <field name="value">Sanskrit</field>
+        <field name="abbreviation">sa</field>
+        <field name="translation_id">337</field>
+      </row>
+      <row>
+        <field name="id">98</field>
+        <field name="value">Sindhi</field>
+        <field name="abbreviation">sd</field>
+        <field name="translation_id">338</field>
+      </row>
+      <row>
+        <field name="id">99</field>
+        <field name="value">Sangro</field>
+        <field name="abbreviation">sg</field>
+        <field name="translation_id">339</field>
+      </row>
+      <row>
+        <field name="id">100</field>
+        <field name="value">Serbo-Croatian</field>
+        <field name="abbreviation">sh</field>
+        <field name="translation_id">340</field>
+      </row>
+      <row>
+        <field name="id">101</field>
+        <field name="value">Singhalese</field>
+        <field name="abbreviation">si</field>
+        <field name="translation_id">341</field>
+      </row>
+      <row>
+        <field name="id">102</field>
+        <field name="value">Slovak</field>
+        <field name="abbreviation">sk</field>
+        <field name="translation_id">342</field>
+      </row>
+      <row>
+        <field name="id">103</field>
+        <field name="value">Slovenian</field>
+        <field name="abbreviation">sl</field>
+        <field name="translation_id">343</field>
+      </row>
+      <row>
+        <field name="id">104</field>
+        <field name="value">Samoan</field>
+        <field name="abbreviation">sm</field>
+        <field name="translation_id">344</field>
+      </row>
+      <row>
+        <field name="id">105</field>
+        <field name="value">Shona</field>
+        <field name="abbreviation">sn</field>
+        <field name="translation_id">345</field>
+      </row>
+      <row>
+        <field name="id">106</field>
+        <field name="value">Somali</field>
+        <field name="abbreviation">so</field>
+        <field name="translation_id">346</field>
+      </row>
+      <row>
+        <field name="id">107</field>
+        <field name="value">Albanian</field>
+        <field name="abbreviation">sq</field>
+        <field name="translation_id">347</field>
+      </row>
+      <row>
+        <field name="id">108</field>
+        <field name="value">Serbian</field>
+        <field name="abbreviation">sr</field>
+        <field name="translation_id">348</field>
+      </row>
+      <row>
+        <field name="id">109</field>
+        <field name="value">Siswati</field>
+        <field name="abbreviation">ss</field>
+        <field name="translation_id">349</field>
+      </row>
+      <row>
+        <field name="id">110</field>
+        <field name="value">Sesotho</field>
+        <field name="abbreviation">st</field>
+        <field name="translation_id">350</field>
+      </row>
+      <row>
+        <field name="id">111</field>
+        <field name="value">Sundanese</field>
+        <field name="abbreviation">su</field>
+        <field name="translation_id">351</field>
+      </row>
+      <row>
+        <field name="id">112</field>
+        <field name="value">Swedish</field>
+        <field name="abbreviation">sv</field>
+        <field name="translation_id">352</field>
+      </row>
+      <row>
+        <field name="id">113</field>
+        <field name="value">Swahili</field>
+        <field name="abbreviation">sw</field>
+        <field name="translation_id">353</field>
+      </row>
+      <row>
+        <field name="id">114</field>
+        <field name="value">Tamil</field>
+        <field name="abbreviation">ta</field>
+        <field name="translation_id">354</field>
+      </row>
+      <row>
+        <field name="id">115</field>
+        <field name="value">Tegulu</field>
+        <field name="abbreviation">te</field>
+        <field name="translation_id">355</field>
+      </row>
+      <row>
+        <field name="id">116</field>
+        <field name="value">Tajik</field>
+        <field name="abbreviation">tg</field>
+        <field name="translation_id">356</field>
+      </row>
+      <row>
+        <field name="id">117</field>
+        <field name="value">Thai</field>
+        <field name="abbreviation">th</field>
+        <field name="translation_id">357</field>
+      </row>
+      <row>
+        <field name="id">118</field>
+        <field name="value">Tigrinya</field>
+        <field name="abbreviation">ti</field>
+        <field name="translation_id">358</field>
+      </row>
+      <row>
+        <field name="id">119</field>
+        <field name="value">Turkmen</field>
+        <field name="abbreviation">tk</field>
+        <field name="translation_id">359</field>
+      </row>
+      <row>
+        <field name="id">120</field>
+        <field name="value">Tagalog</field>
+        <field name="abbreviation">tl</field>
+        <field name="translation_id">360</field>
+      </row>
+      <row>
+        <field name="id">121</field>
+        <field name="value">Setswana</field>
+        <field name="abbreviation">tn</field>
+        <field name="translation_id">361</field>
+      </row>
+      <row>
+        <field name="id">122</field>
+        <field name="value">Tonga</field>
+        <field name="abbreviation">to</field>
+        <field name="translation_id">362</field>
+      </row>
+      <row>
+        <field name="id">123</field>
+        <field name="value">Turkish</field>
+        <field name="abbreviation">tr</field>
+        <field name="translation_id">363</field>
+      </row>
+      <row>
+        <field name="id">124</field>
+        <field name="value">Tsonga</field>
+        <field name="abbreviation">ts</field>
+        <field name="translation_id">364</field>
+      </row>
+      <row>
+        <field name="id">125</field>
+        <field name="value">Tatar</field>
+        <field name="abbreviation">tt</field>
+        <field name="translation_id">365</field>
+      </row>
+      <row>
+        <field name="id">126</field>
+        <field name="value">Twi</field>
+        <field name="abbreviation">tw</field>
+        <field name="translation_id">366</field>
+      </row>
+      <row>
+        <field name="id">127</field>
+        <field name="value">Ukrainian</field>
+        <field name="abbreviation">uk</field>
+        <field name="translation_id">367</field>
+      </row>
+      <row>
+        <field name="id">128</field>
+        <field name="value">Urdu</field>
+        <field name="abbreviation">ur</field>
+        <field name="translation_id">368</field>
+      </row>
+      <row>
+        <field name="id">129</field>
+        <field name="value">Uzbek</field>
+        <field name="abbreviation">uz</field>
+        <field name="translation_id">369</field>
+      </row>
+      <row>
+        <field name="id">130</field>
+        <field name="value">Vietnamese</field>
+        <field name="abbreviation">vi</field>
+        <field name="translation_id">370</field>
+      </row>
+      <row>
+        <field name="id">131</field>
+        <field name="value">Volapuk</field>
+        <field name="abbreviation">vo</field>
+        <field name="translation_id">371</field>
+      </row>
+      <row>
+        <field name="id">132</field>
+        <field name="value">Wolof</field>
+        <field name="abbreviation">wo</field>
+        <field name="translation_id">372</field>
+      </row>
+      <row>
+        <field name="id">133</field>
+        <field name="value">Wolof</field>
+        <field name="abbreviation">xh</field>
+        <field name="translation_id">373</field>
+      </row>
+      <row>
+        <field name="id">134</field>
+        <field name="value">Yoruba</field>
+        <field name="abbreviation">yo</field>
+        <field name="translation_id">374</field>
+      </row>
+      <row>
+        <field name="id">135</field>
+        <field name="value">Chinese</field>
+        <field name="abbreviation">zh</field>
+        <field name="translation_id">375</field>
+      </row>
+      <row>
+        <field name="id">136</field>
+        <field name="value">Zulu</field>
+        <field name="abbreviation">zu</field>
+        <field name="translation_id">376</field>
       </row>
     </table>
   </data>

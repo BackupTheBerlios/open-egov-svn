@@ -13,7 +13,7 @@
   <data>
     <table name="identities">
       <row>
-        <field name="id">0</field>
+        <field name="id">1</field>
         <field name="name">testidentität</field>
       </row>
     </table>
