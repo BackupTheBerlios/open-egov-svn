@@ -23,6 +23,7 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QStringList>
+#include <QHash>
 
 #include <QDomDocument>
 #include <QDomImplementation>
@@ -31,6 +32,11 @@
 
 #include <QSqlDatabase>
 #include <QSqlQuery>
+
+QString escapeString(const QString &str)
+{
+  return str.split("'").join("\\'");
+}
 
 int main(int argc, char *argv[])
 {
@@ -67,8 +73,6 @@ int main(int argc, char *argv[])
     return 0;
   }
 
-  QSqlQuery query(db);
-
   QDomDocument document("database");
   if (! document.setContent(&file)) {
     qWarning() << "Not a valid XML document.";
@@ -76,34 +80,40 @@ int main(int argc, char *argv[])
   }
 
   QDomElement root = document.documentElement();           // Get the root element.
-
   QString rootTag = root.tagName();                        // Check the root tag name.
   qDebug() << "root-Tag-Name: " << rootTag;
 
-  QDomNodeList nodeList;
+  QSqlQuery query(db);
+
+  QDomNodeList nodes;
   QDomElement el;
   QStringList columns;
 
-  nodeList = root.elementsByTagName("structures");         // We want to get the "structures"-Tag.
-  if (nodeList.count() <= 0) {
+  nodes = root.elementsByTagName("structures");            // We want to get the "structures"-Tag.
+  if (nodes.count() <= 0) {
     qWarning() << "No structures-Tag found.";
     return 0;
   }
-  el = nodeList.at(0).toElement();
-  qDebug() << "Using only the first Tag: " << el.tagName();
+  el = nodes.at(0).toElement();
+  //qDebug() << "Using only the first Tag: " << el.tagName();
 
   QDomNodeList table_nodes, row_nodes;
-  QDomElement  table_element, row_element;   // TODO: only one variable?
+  QDomElement  element;
+  QDomNode     entries;
   QString      query_string, query_string_prefix;
+  QString      table_name;
+
+  QHash<QString, QString> column_datatypes;                // column_datatypes[tablename.tablecolumn] = "datatype"
 
   table_nodes = el.elementsByTagName("table");
   for(int i=0; i<table_nodes.count(); i++) {
-    table_element = table_nodes.at(i).toElement();
-    query_string  = "CREATE TABLE " + table_element.attribute("name") + " (";
+    element = table_nodes.at(i).toElement();
+    table_name = element.attribute("name");
+    query_string  = "CREATE TABLE " + table_name + " (";
 
-    QDomNode entries = table_element.firstChild();
     columns.clear();
 
+    entries = element.firstChild();
     while (! entries.isNull()) {
       QDomElement data = entries.toElement();
       QString s_tag = data.tagName();
@@ -111,19 +121,28 @@ int main(int argc, char *argv[])
       QString s;
 
       s = "";
-      s_name  = data.attribute("name");
-      s_type  = data.attribute("type");
-      s_flags = data.attribute("flags");
+      s_name  = data.attribute("name");                    // Column name.
+      s_type  = data.attribute("type");                    // Column datatype as text string.
+      s_flags = data.attribute("flags");                   // Flags for the column.
+
+      column_datatypes[table_name + "." + s_name] = s_type; // Store datatype, so we can later use it again.
 
       if (s_type == "integer") {
         s = s_name + " INTEGER";
 
         if (s_flags.contains("primarykey", Qt::CaseInsensitive)) {
           s += " PRIMARY KEY";
+          column_datatypes[table_name + "." + s_name] = "integer primary key";
         }
       }
       else if (s_type == "string") {
         s += s_name + " TEXT";
+      }
+      else if (s_type == "date") {
+        s += s_name + " TEXT";
+      }
+      else if (s_type == "numeric") {
+        s += s_name + " NUMERIC";
       }
       else {
         qWarning() << "Unknown column type. Will use TEXT.";
@@ -152,25 +171,27 @@ int main(int argc, char *argv[])
   // query.exec("insert into xyz values(0, 1, \"tttt\")");
   // CREATE UNIQUE INDEX ggg ON table(id ASC)
 
-  nodeList = root.elementsByTagName("data");               // We want to get the "data"-Tag.
-  if (nodeList.count() <= 0) {
+  nodes = root.elementsByTagName("data");                  // Get the "data"-tag.
+  if (nodes.count() <= 0) {
     qWarning() << "No data-Tag found.";
     return 0;
   }
-  el = nodeList.at(0).toElement();
-  qDebug() << "Using only the first Tag: " << el.tagName();
+  el = nodes.at(0).toElement();
+  //qDebug() << "Using only the first Tag: " << el.tagName();
 
   table_nodes = el.elementsByTagName("table");
   for(int i=0; i<table_nodes.count(); i++) {
-    table_element = table_nodes.at(i).toElement();
-    query_string_prefix = "INSERT INTO " + table_element.attribute("name") + " VALUES (";
+    element = table_nodes.at(i).toElement();
+    table_name = element.attribute("name");
+    query_string_prefix = "INSERT INTO " + table_name + " VALUES (";
 
-    row_nodes = table_element.elementsByTagName("row");
+    row_nodes = element.elementsByTagName("row");
     for(int j=0; j<row_nodes.count(); j++) {
-      row_element = row_nodes.at(j).toElement();
+      element = row_nodes.at(j).toElement();               // row element.
 
       columns.clear();
-      QDomNode entries = row_element.firstChild();   // Loop through all field-Tags.
+
+      entries = element.firstChild();                      // Loop through all "field"-tags.
       while (! entries.isNull()) {
         QDomElement data = entries.toElement();
         QString s_tag = data.tagName();
@@ -179,16 +200,22 @@ int main(int argc, char *argv[])
 
         s_name = data.attribute("name");
 
-        // TODO: Look at the datatype of the current column to decide how to format the value correctly.
+        s = data.text().trimmed();                         // Get the tag contents.
 
-        s = data.text().trimmed();
-        if (s.isEmpty()) {
-          s = "";
+        if (s.isEmpty() && (column_datatypes[table_name + "." + s_name] == "string")) {
+          s = "''";
         }
-        else if (QString::number(s.toInt()) == s) {           // Is integer, no '' needed.
+        else if (s.isEmpty()) {
+          s = "NULL";
         }
-        else {
-          s = "'" + s + "'";  // TODO: escaping
+        else if (column_datatypes[table_name + "." + s_name] == "integer primary key") {
+          s = "NULL";
+        }
+        else if (column_datatypes[table_name + "." + s_name] == "string") {
+          s = "'" + escapeString(s) + "'";
+        }
+        else if (column_datatypes[table_name + "." + s_name] == "date") {
+          s = "'" + escapeString(s) + "'";
         }
 
         columns << s;
