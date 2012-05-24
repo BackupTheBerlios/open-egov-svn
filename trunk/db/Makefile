@@ -10,3 +10,5 @@ CREATEDB=..\bin\createdatabase.exe
 
 all: $(TARGETS)
 
+clean:
+	del $(TARGETS)
