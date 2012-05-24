@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- $Id$ -->
+
+<database name="dictionary" version="1" date="2012-05-23" flags="const:true security:false privacy:false">
+  <structures>
+    <table name="abbreviations">
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="full_text_id"   type="integer" flags="required" />
+      <column name="short_text_id"  type="integer" flags="required" />
+      <column name="language_id"    type="integer" flags="required" />
+    </table>
+
+    <table name="wordtypes">
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="required" />
+    </table>
+
+    <table name="translations">
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="language_id"    type="integer" flags="required" />
+      <column name="value"          type="string"  flags="required" />
+    </table>
+
+    <table name="words">
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="language_id"    type="integer" flags="required" />
+      <column name="wordtype_id"    type="integer" flags="" />
+      <column name="value"          type="string"  flags="required" />
+    </table>
+  </structures>
+
+  <data>
+    <table name="words">
+      <row>
+        <field name="id">0</field>
+        <field name="language_id">0</field>
+        <field name="wordtype_id">0</field>
+        <field name="value">0</field>
+      </row>
+    </table>
+  </data>
+</database>
+

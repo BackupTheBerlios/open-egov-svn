@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- $Id$ -->
+
+<database name="products" version="1" date="2012-05-23" flags="const:true security:false privacy:false">
+  <structures>
+    <table name="manufacturers">
+      <column name="id"              type="integer" flags="primarykey" />
+      <column name="name"            type="string"  flags="required" />
+    </table>
+
+    <table name="products">
+      <column name="id"              type="integer" flags="primarykey" />
+      <column name="name"            type="string"  flags="required" />
+      <column name="manufacturer_id" type="integer" flags="" />
+    </table>
+
+    <table name="shops">
+      <column name="id"              type="integer" flags="primarykey" />
+      <column name="name"            type="string"  flags="required" />
+      <column name="website"         type="string"  flags="" />
+      <column name="location_id"     type="integer" flags="" />
+      <column name="place_id"        type="integer" flags="" />
+    </table>
+
+    <table name="prices">
+      <column name="id"              type="integer" flags="primarykey" />
+      <column name="date"            type="date"    flags="required" />
+      <column name="price"           type="numeric" flags="required" />
+      <column name="product_id"      type="integer" flags="required" />
+      <column name="shop_id"         type="integer" flags="required" />
+      <column name="quantity"        type="string"  flags="" />
+      <column name="in_stock"        type="integer" flags="" />
+    </table>
+  </structures>
+
+  <data>
+    <table name="prices">
+      <row>
+        <field name="id">0</field>
+        <field name="date">2012-05-23</field>
+        <field name="price">1.99</field>
+        <field name="product_id">1</field>
+        <field name="shop_id">1</field>
+        <field name="quantity">1</field>
+        <field name="in_stock"></field>
+      </row>
+    </table>
+
+    <table name="products">
+      <row>
+        <field name="id">0</field>
+        <field name="name">Test-Produkt</field>
+        <field name="manufacturer_id"></field>
+      </row>
+    </table>
+
+    <table name="shops">
+      <row>
+        <field name="id">0</field>
+        <field name="name">Test-Shop</field>
+      </row>
+    </table>
+  </data>
+</database>
+
