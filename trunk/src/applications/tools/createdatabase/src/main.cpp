@@ -110,9 +110,14 @@ int main(int argc, char *argv[])
   for(int i=0; i<table_nodes.count(); i++) {
     element = table_nodes.at(i).toElement();
     table_name = element.attribute("name");
+
+    query_string = "DROP TABLE IF EXISTS " + table_name;
+    qDebug() << "SQL: " << query_string;
+    query.exec(query_string);
+
     query_string  = "CREATE TABLE " + table_name + " (";
 
-    columns.clear();
+    columns.clear();                                       // We now fill this with the columns list for CREATE TABLE.
 
     entries = element.firstChild();
     while (! entries.isNull()) {
