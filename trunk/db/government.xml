@@ -7,20 +7,30 @@ This database contains static governmental data of different
 countries which is needed and shared by OEG applications.
 -->
 
-<database name="government" version="1" date="2012-05-24" flags="const:true security:false privacy:false">
+<database name="government" version="1" date="2012-05-25" flags="const:true security:false privacy:false">
   <structures>
-    <table name="federal-state-types">
+    <table name="federal_state_types">
       <column name="id"             type="integer" flags="primarykey" />
       <column name="name"           type="string"  flags="required" />
       <column name="translation_id" type="integer" flags="" />
     </table>
-    <table name="federal-states">
+    <table name="federal_states">
       <column name="id"             type="integer" flags="primarykey" />
       <column name="name"           type="string"  flags="required" />
       <column name="fstype"         type="integer" flags="" />
       <column name="abbreviation"   type="string"  flags="" />
       <column name="country_id"     type="integer" flags="required" />
       <column name="translation_id" type="integer" flags="" />
+    </table>
+    <table name="political_parties">
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="name"           type="string"  flags="required" />
+      <column name="abbreviation"   type="string"  flags="required" />
+      <column name="country_id"     type="integer" flags="required" />
+      <column name="translation_id" type="integer" flags="" />
+      <column name="date_begin"     type="integer" flags="" />
+      <column name="date_end"       type="integer" flags="" />
+      <column name="homepage"       type="string"  flags="" />
     </table>
     <table name="translations">
       <column name="id"             type="integer" flags="primarykey" />
@@ -30,7 +40,7 @@ countries which is needed and shared by OEG applications.
   </structures>
 
   <data>
-    <table name="federal-state-types">
+    <table name="federal_state_types">
       <row>
         <field name="id">1</field>
         <field name="name">Land</field>
@@ -53,13 +63,13 @@ countries which is needed and shared by OEG applications.
       </row>
     </table>
 
-    <table name="federal-states">
+    <table name="federal_states">
       <row>
         <field name="id">1</field>
         <field name="name">Brandenburg</field>
         <field name="fstype">1</field>
         <field name="abbreviation">BB</field>
-        <field name="country_id"></field>
+        <field name="country_id">81</field>
         <field name="translation_id">1</field>
       </row>
       <row>
@@ -67,7 +77,7 @@ countries which is needed and shared by OEG applications.
         <field name="name">Berlin</field>
         <field name="fstype">1</field>
         <field name="abbreviation">BE</field>
-        <field name="country_id"></field>
+        <field name="country_id">81</field>
         <field name="translation_id">2</field>
       </row>
       <row>
@@ -75,7 +85,7 @@ countries which is needed and shared by OEG applications.
         <field name="name">Baden-Württemberg</field>
         <field name="fstype">1</field>
         <field name="abbreviation">BW</field>
-        <field name="country_id"></field>
+        <field name="country_id">81</field>
         <field name="translation_id">3</field>
       </row>
       <row>
@@ -83,7 +93,7 @@ countries which is needed and shared by OEG applications.
         <field name="name">Bayern</field>
         <field name="fstype">2</field>
         <field name="abbreviation">BY</field>
-        <field name="country_id"></field>
+        <field name="country_id">81</field>
         <field name="translation_id">4</field>
       </row>
       <row>
@@ -91,7 +101,7 @@ countries which is needed and shared by OEG applications.
         <field name="name">Bremen</field>
         <field name="fstype">3</field>
         <field name="abbreviation">HB</field>
-        <field name="country_id"></field>
+        <field name="country_id">81</field>
         <field name="translation_id">5</field>
       </row>
       <row>
@@ -99,7 +109,7 @@ countries which is needed and shared by OEG applications.
         <field name="name">Hessen</field>
         <field name="fstype">1</field>
         <field name="abbreviation">HE</field>
-        <field name="country_id"></field>
+        <field name="country_id">81</field>
         <field name="translation_id">6</field>
       </row>
       <row>
@@ -107,7 +117,7 @@ countries which is needed and shared by OEG applications.
         <field name="name">Hamburg</field>
         <field name="fstype">4</field>
         <field name="abbreviation">HH</field>
-        <field name="country_id"></field>
+        <field name="country_id">81</field>
         <field name="translation_id">7</field>
       </row>
       <row>
@@ -115,7 +125,7 @@ countries which is needed and shared by OEG applications.
         <field name="name">Mecklenburg-Vorpommern</field>
         <field name="fstype">1</field>
         <field name="abbreviation">MV</field>
-        <field name="country_id"></field>
+        <field name="country_id">81</field>
         <field name="translation_id">8</field>
       </row>
       <row>
@@ -123,7 +133,7 @@ countries which is needed and shared by OEG applications.
         <field name="name">Niedersachsen</field>
         <field name="fstype">1</field>
         <field name="abbreviation">NI</field>
-        <field name="country_id"></field>
+        <field name="country_id">81</field>
         <field name="translation_id">9</field>
       </row>
       <row>
@@ -131,7 +141,7 @@ countries which is needed and shared by OEG applications.
         <field name="name">Nordrhein-Westfalen</field>
         <field name="fstype">1</field>
         <field name="abbreviation">NW</field>
-        <field name="country_id"></field>
+        <field name="country_id">81</field>
         <field name="translation_id">10</field>
       </row>
       <row>
@@ -139,7 +149,7 @@ countries which is needed and shared by OEG applications.
         <field name="name">Rheinland-Pfalz</field>
         <field name="fstype">1</field>
         <field name="abbreviation">RP</field>
-        <field name="country_id"></field>
+        <field name="country_id">81</field>
         <field name="translation_id">11</field>
       </row>
       <row>
@@ -147,7 +157,7 @@ countries which is needed and shared by OEG applications.
         <field name="name">Schleswig-Holstein</field>
         <field name="fstype">1</field>
         <field name="abbreviation">SH</field>
-        <field name="country_id"></field>
+        <field name="country_id">81</field>
         <field name="translation_id">12</field>
       </row>
       <row>
@@ -155,7 +165,7 @@ countries which is needed and shared by OEG applications.
         <field name="name">Saarland</field>
         <field name="fstype"></field> <!-- nichts -->
         <field name="abbreviation">SL</field>
-        <field name="country_id"></field>
+        <field name="country_id">81</field>
         <field name="translation_id">13</field>
       </row>
       <row>
@@ -163,7 +173,7 @@ countries which is needed and shared by OEG applications.
         <field name="name">Sachsen</field>
         <field name="fstype">2</field>
         <field name="abbreviation">SN</field>
-        <field name="country_id"></field>
+        <field name="country_id">81</field>
         <field name="translation_id">14</field>
       </row>
       <row>
@@ -171,7 +181,7 @@ countries which is needed and shared by OEG applications.
         <field name="name">Sachsen-Anhalt</field>
         <field name="fstype">1</field>
         <field name="abbreviation">ST</field>
-        <field name="country_id"></field>
+        <field name="country_id">81</field>
         <field name="translation_id">15</field>
       </row>
       <row>
@@ -179,8 +189,111 @@ countries which is needed and shared by OEG applications.
         <field name="name">Thüringen</field>
         <field name="fstype">2</field>
         <field name="abbreviation">TH</field>
-        <field name="country_id"></field>
+        <field name="country_id">81</field>
         <field name="translation_id">16</field>
+      </row>
+    </table>
+
+    <table name="political_parties">
+      <row>
+        <field name="id">1</field>
+        <field name="name">Christlich Demokratische Union Deutschlands</field>
+        <field name="abbreviation">CDU</field>
+        <field name="country_id"></field>
+        <field name="translation_id">21</field>
+        <field name="date_begin">1945-06-26</field>
+        <field name="date_end"></field>
+        <field name="homepage">http://www.cdu.de/</field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="name">Sozialdemokratische Partei Deutschlands</field>
+        <field name="abbreviation">SPD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">22</field>
+        <field name="date_begin">1875-05-27</field>
+        <field name="date_end"></field>
+        <field name="homepage">http://www.spd.de/</field>
+      </row>
+      <row>
+        <field name="id">3</field>
+        <field name="name">Bündnis 90/Die Grünen</field>
+        <field name="abbreviation">Grüne</field>
+        <field name="country_id"></field>
+        <field name="translation_id">23</field>
+        <field name="date_begin">1993-05-14</field>
+        <field name="date_end"></field>
+        <field name="homepage">http://www.gruene.de/</field>
+      </row>
+      <row>
+        <field name="id">4</field>
+        <field name="name">Freie Demokratische Partei</field>
+        <field name="abbreviation">FDP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">24</field>
+        <field name="date_begin">1948-12-12</field>
+        <field name="date_end"></field>
+        <field name="homepage">http://www.fdp.de/</field>
+      </row>
+      <row>
+        <field name="id">5</field>
+        <field name="name">Die Linke</field>
+        <field name="abbreviation">Linke</field>
+        <field name="country_id"></field>
+        <field name="translation_id">25</field>
+        <field name="date_begin">2007-06-16</field>
+        <field name="date_end"></field>
+        <field name="homepage">http://www.die-linke.de/</field>
+      </row>
+      <row>
+        <field name="id">6</field>
+        <field name="name">Partei des Demokratischen Sozialismus</field>
+        <field name="abbreviation">PDS</field>
+        <field name="country_id"></field>
+        <field name="translation_id">26</field>
+        <field name="date_begin">1990-02-04</field>
+        <field name="date_end">2007-06-16</field>
+        <field name="homepage">http://archiv2007.sozialisten.de/</field>
+      </row>
+      <row>
+        <field name="id">7</field>
+        <field name="name">Piratenpartei Deutschland</field>
+        <field name="abbreviation">PIRATEN</field>
+        <field name="country_id"></field>
+        <field name="translation_id">27</field>
+        <field name="date_begin">2006-09-10</field>
+        <field name="date_end"></field>
+        <field name="homepage">http://www.piratenpartei.de/</field>
+      </row>
+      <row>
+        <field name="id">8</field>
+        <field name="name">Nationaldemokratische Partei Deutschlands</field>
+        <field name="abbreviation">NPD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">28</field>
+        <field name="date_begin">1964-11-28</field>
+        <field name="date_end"></field>
+        <field name="homepage">http://www.npd.de/</field>
+      </row>
+      <row>
+        <field name="id">9</field>
+        <field name="name">Christlich-Soziale Union in Bayern</field>
+        <field name="abbreviation">CSU</field>
+        <field name="country_id"></field>
+        <field name="translation_id">29</field>
+        <field name="date_begin">1945-10-13</field>
+        <field name="date_end"></field>
+        <field name="homepage">http://www.csu.de/</field>
+      </row>
+      <row>
+        <field name="id">10</field>
+        <field name="name">Arbeit &amp; soziale Gerechtigkeit - Die Wahlalternative</field>
+        <field name="abbreviation">WASG</field>
+        <field name="country_id"></field>
+        <field name="translation_id">30</field>
+        <field name="date_begin"></field>
+        <field name="date_end"></field>
+        <field name="homepage"></field>
       </row>
     </table>
 
@@ -283,6 +396,56 @@ countries which is needed and shared by OEG applications.
       <row>
         <field name="id">20</field>
         <field name="value">Free and Hanseatic City of</field>
+        <field name="language_id"></field>
+      </row>
+      <row>
+        <field name="id">21</field>
+        <field name="value">Christian Democratic Union of Germany</field>
+        <field name="language_id"></field>
+      </row>
+      <row>
+        <field name="id">22</field>
+        <field name="value">Social Democratic Party</field>
+        <field name="language_id"></field>
+      </row>
+      <row>
+        <field name="id">23</field>
+        <field name="value">Alliance '90/The Greens</field>
+        <field name="language_id"></field>
+      </row>
+      <row>
+        <field name="id">24</field>
+        <field name="value">Free Democratic Party</field>
+        <field name="language_id"></field>
+      </row>
+      <row>
+        <field name="id">25</field>
+        <field name="value">The Left</field>
+        <field name="language_id"></field>
+      </row>
+      <row>
+        <field name="id">26</field>
+        <field name="value">The Party of Democratic Socialism</field>
+        <field name="language_id"></field>
+      </row>
+      <row>
+        <field name="id">27</field>
+        <field name="value">Pirate Party Germany</field>
+        <field name="language_id"></field>
+      </row>
+      <row>
+        <field name="id">28</field>
+        <field name="value">National Democratic Party of Germany</field>
+        <field name="language_id"></field>
+      </row>
+      <row>
+        <field name="id">29</field>
+        <field name="value">Christian Social Union of Bavaria</field>
+        <field name="language_id"></field>
+      </row>
+      <row>
+        <field name="id">30</field>
+        <field name="value">Labour and Social Justice - The Electoral Alternative</field>
         <field name="language_id"></field>
       </row>
     </table>

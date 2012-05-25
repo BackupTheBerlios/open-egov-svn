@@ -23,6 +23,8 @@ is not complete.
 
     <table name="country_language_combinations">
       <column name="id"             type="integer" flags="primarykey" />
+      <column name="country_id"     type="integer" flags="required" />
+      <column name="language_id"    type="integer" flags="required" />
     </table>
 
     <table name="translations">
@@ -2851,6 +2853,34 @@ is not complete.
         <field name="value">Zulu</field>
         <field name="abbreviation">zu</field>
         <field name="translation_id">376</field>
+      </row>
+    </table>
+
+    <table name="country_language_combinations">
+      <row>
+        <field name="id">1</field>
+        <field name="country_id">81</field>  <!-- DE -->
+        <field name="language_id">22</field> <!-- de -->
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="country_id">225</field> <!-- GB -->
+        <field name="language_id">25</field> <!-- en -->
+      </row>
+      <row>
+        <field name="id">3</field>
+        <field name="country_id">226</field> <!-- US -->
+        <field name="language_id">25</field> <!-- en -->
+      </row>
+      <row>
+        <field name="id">4</field>
+        <field name="country_id">144</field> <!-- MA -->
+        <field name="language_id">5</field>  <!-- ar -->
+      </row>
+      <row>
+        <field name="id">5</field>
+        <field name="country_id">177</field> <!-- RU -->
+        <field name="language_id">95</field> <!-- ru -->
       </row>
     </table>
   </data>

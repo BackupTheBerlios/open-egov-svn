@@ -11,7 +11,7 @@
       <column name="language_id"    type="integer" flags="required" />
     </table>
 
-    <table name="wordtypes">
+    <table name="word_types">
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="required" />
     </table>
@@ -25,17 +25,41 @@
     <table name="words">
       <column name="id"             type="integer" flags="primarykey" />
       <column name="language_id"    type="integer" flags="required" />
-      <column name="wordtype_id"    type="integer" flags="" />
+      <column name="word_type_id"   type="integer" flags="" />
       <column name="value"          type="string"  flags="required" />
     </table>
   </structures>
 
   <data>
+    <table name="abbreviations">
+      <row>
+        <field name="id">1</field>
+        <field name="full_text_id">1</field>
+        <field name="short_text_id">1</field>
+        <field name="language_id">1</field>
+      </row>
+    </table>
+
+    <table name="translations">
+      <row>
+        <field name="id">1</field>
+        <field name="language_id">1</field>
+        <field name="value">test</field>
+      </row>
+    </table>
+
+    <table name="word_types">
+      <row>
+        <field name="id">1</field>
+        <field name="translation_id">1</field>
+      </row>
+    </table>
+
     <table name="words">
       <row>
         <field name="id">1</field>
         <field name="language_id">1</field>
-        <field name="wordtype_id">1</field>
+        <field name="word_type_id">1</field>
         <field name="value">Test</field>
       </row>
     </table>
