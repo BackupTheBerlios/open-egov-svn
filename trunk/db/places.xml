@@ -2,12 +2,12 @@
 
 <!-- $Id$ -->
 
-<database name="places" version="1" date="2012-05-23" flags="const:true security:false privacy:false">
+<database name="places" version="1" date="2012-05-28" flags="const:true security:false privacy:false">
   <structures>
     <table name="places">
       <column name="id"               type="integer" flags="primarykey" />
-      <column name="country_id"       type="integer" flags="" />
-      <column name="federal_state_id" type="integer" flags="" />
+      <column name="country_id"       type="integer" flags="references:iso-codes.countries(id)" />
+      <column name="federal_state_id" type="integer" flags="references:government.federal_states(id)" />
       <column name="latitude"         type="numeric" flags="" />
       <column name="longitude"        type="numeric" flags="" />
       <column name="timezone"         type="string"  flags="" />
@@ -19,8 +19,8 @@
     <table name="places">
       <row>
         <field name="id">1</field>
-        <field name="country_id">0</field>
-        <field name="federal_state_id">0</field>
+        <field name="country_id">81</field>
+        <field name="federal_state_id">15</field>
         <field name="latitude">52.1667</field>
         <field name="longitude">11.6667</field>
         <field name="timezone">GMT+1</field>
