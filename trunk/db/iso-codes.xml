@@ -8,9 +8,29 @@ country and ISO 639 language codes and the localized titles of language and
 country names. Then a table with domain names, which is a separate table
 because there are countries with more than one own TLD. The database content
 is not complete.
+
+http://www.loc.gov/standards/iso639-2/langcodes.html
+http://www.iso.org/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/list-en1.html
+http://www.iso.org/iso/country_codes/iso_3166_code_lists.htm
+http://www.iso.org/iso/list-en1-semic-3.txt
+http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm
+
+http://www.i18nguy.com/unicode/language-identifiers.html  RFC 3066
+http://www.iana.org/assignments/language-tags/language-tags.xml
+http://tools.ietf.org/html/rfc4647
+http://tools.ietf.org/html/rfc3066
+http://tools.ietf.org/html/rfc4646
+http://www.iana.org/assignments/language-subtag-registry
+http://www.i18nguy.com/unicode/language-identifiers.html
+http://www.unicode.org/iso15924/codelists.html
+
+http://www.mcanerin.com/en/articles/meta-language.asp
+http://www.mcanerin.com/en/articles/ccTLD.asp
+http://www.mcanerin.com/en/articles/gTLD.asp
+
 -->
 
-<database name="iso-codes" version="1" date="2011-12-06" flags="const:true security:false privacy:false">
+<database name="iso-codes" version="1" date="2012-05-28" flags="const:true security:false privacy:false">
   <structures>
     <table name="countries">
       <column name="id"             type="integer" flags="primarykey" />
@@ -18,32 +38,32 @@ is not complete.
       <column name="cc_a3"          type="string"  flags="required minchars:3 maxchars:3 uppercase alpha unique" />
       <column name="cc_number"      type="string"  flags="required minchars:3 maxchars:3 numeric unique" />
       <column name="title"          type="string"  flags="required uppercase unique" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
     </table>
 
-    <table name="country_language_combinations">
+    <table name="locales">          <!-- country and language codes, maybe later more -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="country_id"     type="integer" flags="required" />
-      <column name="language_id"    type="integer" flags="required" />
+      <column name="country_id"     type="integer" flags="required references:countries(id)" />
+      <column name="language_id"    type="integer" flags="required references:languages(id)" />
     </table>
 
     <table name="translations">
-      <column name="id"             type="integer" flags="primarykey" />
+      <column name="id"             type="integer" flags="index" />
       <column name="value"          type="string"  flags="required" />
-      <column name="language_id"    type="integer" flags="required" />
+      <column name="language_id"    type="integer" flags="required references:languages(id)" /> <!-- TODO: use locales! -->
     </table>
 
-    <table name="domains">
+    <table name="top_level_domains">
       <column name="id"             type="integer" flags="primarykey" />
       <column name="name"           type="string"  flags="required" />
-      <column name="country_id"     type="integer" flags="required" />
+      <column name="country_id"     type="integer" flags="required references:countries(id)" />
     </table>
 
     <table name="languages">
       <column name="id"             type="integer" flags="primarykey" />
       <column name="value"          type="string"  flags="required" />
       <column name="abbreviation"   type="string"  flags="required" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
     </table>
   </structures>
 
@@ -1972,66 +1992,82 @@ is not complete.
       </row>
     </table>
 
-    <table name="country_language_combinations">
-      <row>
-        <field name="id">1</field>
-      </row>
-    </table>
-
     <table name="translations">
       <row>
         <field name="id">1</field>
         <field name="value">Åland</field>
-        <field name="language_id"></field>
+        <field name="language_id">22</field>
+      </row>
+      <row>
+        <field name="id">81</field>
+        <field name="value">Deutschland</field>
+        <field name="language_id">22</field>
+      </row>
+      <row>
+        <field name="id">144</field>
+        <field name="value">Marokko</field>
+        <field name="language_id">22</field>
       </row>
       <row>
         <field name="id">239</field>
         <field name="value">Sambia</field>
-        <field name="language_id"></field>
+        <field name="language_id">22</field>
       </row>
       <row>
         <field name="id">240</field>
         <field name="value">Simbabwe</field>
-        <field name="language_id"></field>
+        <field name="language_id">22</field>
       </row>
 
       <row>
         <field name="id">241</field>
         <field name="value">Afar</field>
-        <field name="language_id"></field>
+        <field name="language_id">22</field>
       </row>
       <row>
         <field name="id">242</field>
         <field name="value">Abchasische Sprache</field>
-        <field name="language_id"></field>
+        <field name="language_id">22</field>
       </row>
       <row>
         <field name="id">243</field>
         <field name="value">Afrikaans</field>
-        <field name="language_id"></field>
+        <field name="language_id">22</field>
       </row>
       <row>
         <field name="id">244</field>
         <field name="value">Amharische Sprache</field>
-        <field name="language_id"></field>
+        <field name="language_id">22</field>
       </row>
       <row>
         <field name="id">245</field>
         <field name="value">Arabische Sprache</field>
-        <field name="language_id"></field>
+        <field name="language_id">22</field>
       </row>
       <row>
         <field name="id">246</field>
         <field name="value">Assamesische Sprache</field>
-        <field name="language_id"></field>
+        <field name="language_id">22</field>
       </row>
+
+      <row>
+        <field name="id">262</field>
+        <field name="value">Deutsche Sprache</field>
+        <field name="language_id">22</field>
+      </row>
+
     </table>
 
-    <table name="domains">
+    <table name="top_level_domains">
       <row>
         <field name="id">1</field>
-        <field name="name"></field>
-        <field name="country_id"></field>
+        <field name="name">de</field>
+        <field name="country_id">81</field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="name">ma</field>
+        <field name="country_id">144</field>
       </row>
     </table>
 
@@ -2856,31 +2892,56 @@ is not complete.
       </row>
     </table>
 
-    <table name="country_language_combinations">
+    <table name="country_language_codes">
       <row>
         <field name="id">1</field>
-        <field name="country_id">81</field>  <!-- DE -->
+        <field name="country_id">NULL</field>
         <field name="language_id">22</field> <!-- de -->
       </row>
       <row>
         <field name="id">2</field>
-        <field name="country_id">225</field> <!-- GB -->
+        <field name="country_id">NULL</field>
         <field name="language_id">25</field> <!-- en -->
       </row>
       <row>
         <field name="id">3</field>
+        <field name="country_id">NULL</field>
+        <field name="language_id">5</field>  <!-- ar -->
+      </row>
+      <row>
+        <field name="id">4</field>
+        <field name="country_id">NULL</field>
+        <field name="language_id">95</field> <!-- ru -->
+      </row>
+      <row>
+        <field name="id">5</field>
+        <field name="country_id">81</field>  <!-- DE -->
+        <field name="language_id">22</field> <!-- de -->
+      </row>
+      <row>
+        <field name="id">6</field>
+        <field name="country_id">225</field> <!-- GB -->
+        <field name="language_id">25</field> <!-- en -->
+      </row>
+      <row>
+        <field name="id">7</field>
         <field name="country_id">226</field> <!-- US -->
         <field name="language_id">25</field> <!-- en -->
       </row>
       <row>
-        <field name="id">4</field>
+        <field name="id">8</field>           <!-- terms only used in maroccan arabic -->
         <field name="country_id">144</field> <!-- MA -->
         <field name="language_id">5</field>  <!-- ar -->
       </row>
       <row>
-        <field name="id">5</field>
+        <field name="id">9</field>
         <field name="country_id">177</field> <!-- RU -->
         <field name="language_id">95</field> <!-- ru -->
+      </row>
+      <row>
+        <field name="id">10</field>          <!-- used for "darija" -->
+        <field name="country_id">144</field> <!-- MA -->
+        <field name="language_id">5</field>  <!-- ar -->
       </row>
     </table>
   </data>

@@ -9,45 +9,86 @@ too. Please do not insert identities of people. Only people you know and
 which really do exist. One row for one real person.
 -->
 
-<database name="people" version="1" date="2012-04-17" flags="const:false security:true privacy:true">
+<database name="people" version="1" date="2012-05-28" flags="const:false security:true privacy:true">
   <structures>
     <table name="people">
-      <column name="id"         type="integer" flags="primarykey" />
-      <column name="title"      type="string"  flags="optional minchars:0 maxchars:20 unique utf8" />
-      <column name="firstname"  type="string"  flags="optional minchars:0 maxchars:20 unique utf8" />
-      <column name="middlename" type="string"  flags="optional minchars:0 maxchars:20 unique utf8" />
-      <column name="lastname"   type="string"  flags="optional minchars:0 maxchars:20 unique utf8" />
-      <column name="birthday"   type="date"    flags="optional" />
-      <column name="uuid"       type="string"  flags="unique optional:false generate" />
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="title"          type="string"  flags="optional minchars:0 maxchars:20 unique utf8" />
+      <column name="firstname"      type="string"  flags="optional minchars:0 maxchars:20 unique utf8" />
+      <column name="middlename"     type="string"  flags="optional minchars:0 maxchars:20 unique utf8" />
+      <column name="lastname"       type="string"  flags="optional minchars:0 maxchars:20 unique utf8" />
+      <column name="birthday"       type="date"    flags="optional" />
+      <column name="uuid"           type="string"  flags="unique optional:false generate" />
     </table>
 
-    <table name="webpages">
-      <column name="id"         type="integer" flags="primarykey" />
+    <table name="field_types">
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="value"          type="string"  flags="" /> <!-- not needed -->
+      <column name="translation_id" type="string"  flags="" />
     </table>
 
-    <table name="emails">
-      <column name="id"         type="integer" flags="primarykey" />
-    </table>
-
-    <table name="phones">
-      <column name="id"         type="integer" flags="primarykey" />
+    <table name="fields">
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="people_id"      type="integer" flags="references:people(id)" />
+      <column name="field_type_id"  type="integer" flags="references:field_types(id)" />
+      <column name="value"          type="string"  flags="" />
+      <column name="title"          type="string"  flags="" />
     </table>
 
     <table name="addresses">
-      <column name="id"         type="integer" flags="primarykey" />
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="people_id"      type="integer" flags="references:people(id)" />
+      <column name="city_code"      type="string"  flags="" />
+      <column name="city"           type="string"  flags="" />
+      <column name="street"         type="string"  flags="" />
+      <column name="house_number"   type="string"  flags="" />
+      <column name="title"          type="string"  flags="" />
+    </table>
+
+    <table name="translations">
+      <column name="id"             type="integer" flags="index" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="language_id"    type="integer" flags="required" />
     </table>
   </structures>
 
   <data>
     <table name="people">
       <row>
-        <field name="id">0</field>
+        <field name="id">1</field>
         <field name="title"></field>
         <field name="firstname">vorname</field>
         <field name="middlename"></field>
         <field name="lastname">nachname</field>
         <field name="birthday">1977-12-24</field>
         <field name="uuid">1234567890</field>
+      </row>
+    </table>
+
+    <table name="field_types">
+      <row>
+        <field name="id">1</field>
+        <field name="value">webpage</field>
+        <field name="translation_id"></field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="value">email</field>
+        <field name="translation_id"></field>
+      </row>
+      <row>
+        <field name="id">3</field>
+        <field name="value">phone</field>
+        <field name="translation_id"></field>
+      </row>
+    </table>
+
+    <table name="fields">
+      <row>
+        <field name="id">1</field>
+        <field name="people_id">1</field>
+        <field name="field_type_id">1</field>
+        <field name="value">http://www.example.com/</field>
       </row>
     </table>
   </data>

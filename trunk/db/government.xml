@@ -12,22 +12,22 @@ countries which is needed and shared by OEG applications.
     <table name="federal_state_types">
       <column name="id"             type="integer" flags="primarykey" />
       <column name="name"           type="string"  flags="required" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
     </table>
     <table name="federal_states">
       <column name="id"             type="integer" flags="primarykey" />
       <column name="name"           type="string"  flags="required" />
-      <column name="fstype"         type="integer" flags="" />
+      <column name="fstype"         type="integer" flags="references:federal_state_types(id)" />
       <column name="abbreviation"   type="string"  flags="" />
-      <column name="country_id"     type="integer" flags="required" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="country_id"     type="integer" flags="required references:iso-codes.countries(id)" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
     </table>
     <table name="political_parties">
       <column name="id"             type="integer" flags="primarykey" />
       <column name="name"           type="string"  flags="required" />
       <column name="abbreviation"   type="string"  flags="required" />
       <column name="country_id"     type="integer" flags="required" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="date_begin"     type="integer" flags="" />
       <column name="date_end"       type="integer" flags="" />
       <column name="homepage"       type="string"  flags="" />
@@ -35,7 +35,7 @@ countries which is needed and shared by OEG applications.
     <table name="translations">
       <column name="id"             type="integer" flags="primarykey" />
       <column name="value"          type="string"  flags="required" />
-      <column name="language_id"    type="string"  flags="required" />
+      <column name="language_id"    type="string"  flags="required references:iso-codes.country_language_codes(id)" />
     </table>
   </structures>
 
