@@ -1,0 +1,1761 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- $Id$ -->
+
+<!--
+Currency database.
+
+http://simap.europa.eu/codes-and-nomenclatures/currencies/index_de.htm
+-->
+
+<database name="currencies" version="1" date="2012-05-28" flags="const:true security:false privacy:false">
+  <structures>
+    <table name="currency_codes">
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="code"           type="string"  flags="required" />
+      <column name="country_id"     type="integer" flags="references:iso-codes.countries(id)" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
+    </table>
+
+    <table name="translations">
+      <column name="id"             type="integer" flags="index" />
+      <column name="value"          type="string"  flags="required" />
+      <column name="locale_id"      type="integer" flags="required references:iso-codes.locales(id)" />
+    </table>
+  </structures>
+
+  <data>
+    <table name="currencies">
+      <row>
+        <field name="id">1</field>
+        <field name="code">ECU</field>
+        <field name="country_id"></field>
+        <field name="translation_id">1</field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="code">EUR</field>
+        <field name="country_ids"></field>
+        <field name="translation_id">2</field>
+      </row>
+      <row>
+        <field name="id">3</field>
+        <field name="code">ATS</field>
+        <field name="country_id"></field>
+        <field name="translation_id">3</field>
+      </row>
+      <row>
+        <field name="id">4</field>
+        <field name="code">BEF</field>
+        <field name="country_id"></field>
+        <field name="translation_id">4</field>
+      </row>
+      <row>
+        <field name="id">5</field>
+        <field name="code">DEM</field>
+        <field name="country_id"></field>
+        <field name="translation_id">5</field>
+      </row>
+      <row>
+        <field name="id">6</field>
+        <field name="code">DKK</field>
+        <field name="country_id"></field>
+        <field name="translation_id">6</field>
+      </row>
+      <row>
+        <field name="id">7</field>
+        <field name="code">ESP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">7</field>
+      </row>
+      <row>
+        <field name="id">8</field>
+        <field name="code">FIM</field>
+        <field name="country_id"></field>
+        <field name="translation_id">8</field>
+      </row>
+      <row>
+        <field name="id">9</field>
+        <field name="code">FRF</field>
+        <field name="country_id"></field>
+        <field name="translation_id">9</field>
+      </row>
+      <row>
+        <field name="id">10</field>
+        <field name="code">GBP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">10</field>
+      </row>
+      <row>
+        <field name="id">11</field>
+        <field name="code">GRD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">11</field>
+      </row>
+      <row>
+        <field name="id">12</field>
+        <field name="code">IEP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">12</field>
+      </row>
+      <row>
+        <field name="id">13</field>
+        <field name="code">ITL</field>
+        <field name="country_id"></field>
+        <field name="translation_id">13</field>
+      </row>
+      <row>
+        <field name="id">14</field>
+        <field name="code">LUF</field>
+        <field name="country_id"></field>
+        <field name="translation_id">14</field>
+      </row>
+      <row>
+        <field name="id">15</field>
+        <field name="code">NLG</field>
+        <field name="country_id"></field>
+        <field name="translation_id">15</field>
+      </row>
+      <row>
+        <field name="id">16</field>
+        <field name="code">PTE</field>
+        <field name="country_id"></field>
+        <field name="translation_id">16</field>
+      </row>
+      <row>
+        <field name="id">17</field>
+        <field name="code">SEK</field>
+        <field name="country_id"></field>
+        <field name="translation_id">17</field>
+      </row>
+      <row>
+        <field name="id">18</field>
+        <field name="code">ADP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">18</field>
+      </row>
+      <row>
+        <field name="id">19</field>
+        <field name="code">AED</field>
+        <field name="country_id"></field>
+        <field name="translation_id">19</field>
+      </row>
+      <row>
+        <field name="id">20</field>
+        <field name="code">AFA</field>
+        <field name="country_id"></field>
+        <field name="translation_id">20</field>
+      </row>
+      <row>
+        <field name="id">21</field>
+        <field name="code">ALL</field>
+        <field name="country_id"></field>
+        <field name="translation_id">21</field>
+      </row>
+      <row>
+        <field name="id">22</field>
+        <field name="code">ANG</field>
+        <field name="country_id"></field>
+        <field name="translation_id">22</field>
+      </row>
+      <row>
+        <field name="id">23</field>
+        <field name="code">AOK</field>
+        <field name="country_id"></field>
+        <field name="translation_id">23</field>
+      </row>
+      <row>
+        <field name="id">24</field>
+        <field name="code">ARA</field>
+        <field name="country_id"></field>
+        <field name="translation_id">24</field>
+      </row>
+      <row>
+        <field name="id">25</field>
+        <field name="code">AUD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">25</field>
+      </row>
+      <row>
+        <field name="id">26</field>
+        <field name="code">AWG</field>
+        <field name="country_id"></field>
+        <field name="translation_id">26</field>
+      </row>
+      <row>
+        <field name="id">27</field>
+        <field name="code">BBD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">27</field>
+      </row>
+      <row>
+        <field name="id">28</field>
+        <field name="code">BDT</field>
+        <field name="country_id"></field>
+        <field name="translation_id">28</field>
+      </row>
+      <row>
+        <field name="id">29</field>
+        <field name="code">BGL</field>
+        <field name="country_id"></field>
+        <field name="translation_id">29</field>
+      </row>
+      <row>
+        <field name="id">30</field>
+        <field name="code">BHD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">30</field>
+      </row>
+      <row>
+        <field name="id">31</field>
+        <field name="code">BIF</field>
+        <field name="country_id"></field>
+        <field name="translation_id">31</field>
+      </row>
+      <row>
+        <field name="id">32</field>
+        <field name="code">BMD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">32</field>
+      </row>
+      <row>
+        <field name="id">33</field>
+        <field name="code">BND</field>
+        <field name="country_id"></field>
+        <field name="translation_id">33</field>
+      </row>
+      <row>
+        <field name="id">34</field>
+        <field name="code">BOB</field>
+        <field name="country_id"></field>
+        <field name="translation_id">34</field>
+      </row>
+      <row>
+        <field name="id">35</field>
+        <field name="code">BRC</field>
+        <field name="country_id"></field>
+        <field name="translation_id">35</field>
+      </row>
+      <row>
+        <field name="id">36</field>
+        <field name="code">BSD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">36</field>
+      </row>
+      <row>
+        <field name="id">37</field>
+        <field name="code">BTN</field>
+        <field name="country_id"></field>
+        <field name="translation_id">37</field>
+      </row>
+      <row>
+        <field name="id">38</field>
+        <field name="code">BUK</field>
+        <field name="country_id"></field>
+        <field name="translation_id">38</field>
+      </row>
+      <row>
+        <field name="id">39</field>
+        <field name="code">BWP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">39</field>
+      </row>
+      <row>
+        <field name="id">40</field>
+        <field name="code">BZD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">40</field>
+      </row>
+      <row>
+        <field name="id">41</field>
+        <field name="code">CAD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">41</field>
+      </row>
+      <row>
+        <field name="id">42</field>
+        <field name="code">CHF</field>
+        <field name="country_id"></field>
+        <field name="translation_id">42</field>
+      </row>
+      <row>
+        <field name="id">43</field>
+        <field name="code">CLF</field>
+        <field name="country_id"></field>
+        <field name="translation_id">43</field>
+      </row>
+      <row>
+        <field name="id">44</field>
+        <field name="code">CLP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">44</field>
+      </row>
+      <row>
+        <field name="id">45</field>
+        <field name="code">CNY</field>
+        <field name="country_id"></field>
+        <field name="translation_id">45</field>
+      </row>
+      <row>
+        <field name="id">46</field>
+        <field name="code">COP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">46</field>
+      </row>
+      <row>
+        <field name="id">47</field>
+        <field name="code">CRC</field>
+        <field name="country_id"></field>
+        <field name="translation_id">47</field>
+      </row>
+      <row>
+        <field name="id">48</field>
+        <field name="code">CSK</field>
+        <field name="country_id"></field>
+        <field name="translation_id">48</field>
+      </row>
+      <row>
+        <field name="id">49</field>
+        <field name="code">CUP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">49</field>
+      </row>
+      <row>
+        <field name="id">50</field>
+        <field name="code">CVE</field>
+        <field name="country_id"></field>
+        <field name="translation_id">50</field>
+      </row>
+      <row>
+        <field name="id">51</field>
+        <field name="code">CYP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">51</field>
+      </row>
+      <row>
+        <field name="id">52</field>
+        <field name="code">DDM</field>
+        <field name="country_id"></field>
+        <field name="translation_id">52</field>
+      </row>
+      <row>
+        <field name="id">53</field>
+        <field name="code">DJF</field>
+        <field name="country_id"></field>
+        <field name="translation_id">53</field>
+      </row>
+      <row>
+        <field name="id">54</field>
+        <field name="code">DOP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">54</field>
+      </row>
+      <row>
+        <field name="id">55</field>
+        <field name="code">DZD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">55</field>
+      </row>
+      <row>
+        <field name="id">56</field>
+        <field name="code">ECS</field>
+        <field name="country_id"></field>
+        <field name="translation_id">56</field>
+      </row>
+      <row>
+        <field name="id">57</field>
+        <field name="code">EGP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">57</field>
+      </row>
+      <row>
+        <field name="id">58</field>
+        <field name="code">ETB</field>
+        <field name="country_id"></field>
+        <field name="translation_id">58</field>
+      </row>
+      <row>
+        <field name="id">59</field>
+        <field name="code">FJD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">59</field>
+      </row>
+      <row>
+        <field name="id">60</field>
+        <field name="code">FKP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">60</field>
+      </row>
+      <row>
+        <field name="id">61</field>
+        <field name="code">GHC</field>
+        <field name="country_id"></field>
+        <field name="translation_id">61</field>
+      </row>
+      <row>
+        <field name="id">62</field>
+        <field name="code">GIP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">62</field>
+      </row>
+      <row>
+        <field name="id">63</field>
+        <field name="code">GMD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">63</field>
+      </row>
+      <row>
+        <field name="id">64</field>
+        <field name="code">GNF</field>
+        <field name="country_id"></field>
+        <field name="translation_id">64</field>
+      </row>
+      <row>
+        <field name="id">65</field>
+        <field name="code">GTQ</field>
+        <field name="country_id"></field>
+        <field name="translation_id">65</field>
+      </row>
+      <row>
+        <field name="id">66</field>
+        <field name="code">GWP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">66</field>
+      </row>
+      <row>
+        <field name="id">67</field>
+        <field name="code">GYD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">67</field>
+      </row>
+      <row>
+        <field name="id">68</field>
+        <field name="code">HKD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">68</field>
+      </row>
+      <row>
+        <field name="id">69</field>
+        <field name="code">HNL</field>
+        <field name="country_id"></field>
+        <field name="translation_id">69</field>
+      </row>
+      <row>
+        <field name="id">70</field>
+        <field name="code">HTG</field>
+        <field name="country_id"></field>
+        <field name="translation_id">70</field>
+      </row>
+      <row>
+        <field name="id">71</field>
+        <field name="code">HUF</field>
+        <field name="country_id"></field>
+        <field name="translation_id">71</field>
+      </row>
+      <row>
+        <field name="id">72</field>
+        <field name="code">IDR</field>
+        <field name="country_id"></field>
+        <field name="translation_id">72</field>
+      </row>
+      <row>
+        <field name="id">73</field>
+        <field name="code">ILS</field>
+        <field name="country_id"></field>
+        <field name="translation_id">73</field>
+      </row>
+      <row>
+        <field name="id">74</field>
+        <field name="code">INR</field>
+        <field name="country_id"></field>
+        <field name="translation_id">74</field>
+      </row>
+      <row>
+        <field name="id">75</field>
+        <field name="code">IQD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">75</field>
+      </row>
+      <row>
+        <field name="id">76</field>
+        <field name="code">IRR</field>
+        <field name="country_id"></field>
+        <field name="translation_id">76</field>
+      </row>
+      <row>
+        <field name="id">77</field>
+        <field name="code">ISK</field>
+        <field name="country_id"></field>
+        <field name="translation_id">77</field>
+      </row>
+      <row>
+        <field name="id">78</field>
+        <field name="code">JMD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">78</field>
+      </row>
+      <row>
+        <field name="id">79</field>
+        <field name="code">JOD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">79</field>
+      </row>
+      <row>
+        <field name="id">80</field>
+        <field name="code">JPY</field>
+        <field name="country_id"></field>
+        <field name="translation_id">80</field>
+      </row>
+      <row>
+        <field name="id">81</field>
+        <field name="code">KES</field>
+        <field name="country_id"></field>
+        <field name="translation_id">81</field>
+      </row>
+      <row>
+        <field name="id">82</field>
+        <field name="code">KHR</field>
+        <field name="country_id"></field>
+        <field name="translation_id">82</field>
+      </row>
+      <row>
+        <field name="id">83</field>
+        <field name="code">KMF</field>
+        <field name="country_id"></field>
+        <field name="translation_id">83</field>
+      </row>
+      <row>
+        <field name="id">84</field>
+        <field name="code">KPW</field>
+        <field name="country_id"></field>
+        <field name="translation_id">84</field>
+      </row>
+      <row>
+        <field name="id">85</field>
+        <field name="code">KRW</field>
+        <field name="country_id"></field>
+        <field name="translation_id">85</field>
+      </row>
+      <row>
+        <field name="id">86</field>
+        <field name="code">KWD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">86</field>
+      </row>
+      <row>
+        <field name="id">87</field>
+        <field name="code">KYD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">87</field>
+      </row>
+      <row>
+        <field name="id">88</field>
+        <field name="code">LAK</field>
+        <field name="country_id"></field>
+        <field name="translation_id">88</field>
+      </row>
+      <row>
+        <field name="id">89</field>
+        <field name="code">LBP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">89</field>
+      </row>
+      <row>
+        <field name="id">90</field>
+        <field name="code">LKR</field>
+        <field name="country_id"></field>
+        <field name="translation_id">90</field>
+      </row>
+      <row>
+        <field name="id">91</field>
+        <field name="code">LRD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">91</field>
+      </row>
+      <row>
+        <field name="id">92</field>
+        <field name="code">LSL</field>
+        <field name="country_id"></field>
+        <field name="translation_id">92</field>
+      </row>
+      <row>
+        <field name="id">93</field>
+        <field name="code">LYD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">93</field>
+      </row>
+      <row>
+        <field name="id">94</field>
+        <field name="code">MAD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">94</field>
+      </row>
+      <row>
+        <field name="id">95</field>
+        <field name="code">MGF</field>
+        <field name="country_id"></field>
+        <field name="translation_id">95</field>
+      </row>
+      <row>
+        <field name="id">96</field>
+        <field name="code">MNT</field>
+        <field name="country_id"></field>
+        <field name="translation_id">96</field>
+      </row>
+      <row>
+        <field name="id">97</field>
+        <field name="code">MOP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">97</field>
+      </row>
+      <row>
+        <field name="id">98</field>
+        <field name="code">MRO</field>
+        <field name="country_id"></field>
+        <field name="translation_id">98</field>
+      </row>
+      <row>
+        <field name="id">99</field>
+        <field name="code">MTL</field>
+        <field name="country_id"></field>
+        <field name="translation_id">99</field>
+      </row>
+      <row>
+        <field name="id">100</field>
+        <field name="code">MUR</field>
+        <field name="country_id"></field>
+        <field name="translation_id">100</field>
+      </row>
+      <row>
+        <field name="id">101</field>
+        <field name="code">MVR</field>
+        <field name="country_id"></field>
+        <field name="translation_id">101</field>
+      </row>
+      <row>
+        <field name="id">102</field>
+        <field name="code">MWK</field>
+        <field name="country_id"></field>
+        <field name="translation_id">102</field>
+      </row>
+      <row>
+        <field name="id">103</field>
+        <field name="code">MXP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">103</field>
+      </row>
+      <row>
+        <field name="id">104</field>
+        <field name="code">MYR</field>
+        <field name="country_id"></field>
+        <field name="translation_id">104</field>
+      </row>
+      <row>
+        <field name="id">105</field>
+        <field name="code">MZM</field>
+        <field name="country_id"></field>
+        <field name="translation_id">105</field>
+      </row>
+      <row>
+        <field name="id">106</field>
+        <field name="code">NGN</field>
+        <field name="country_id"></field>
+        <field name="translation_id">106</field>
+      </row>
+      <row>
+        <field name="id">107</field>
+        <field name="code">NIC</field>
+        <field name="country_id"></field>
+        <field name="translation_id">107</field>
+      </row>
+      <row>
+        <field name="id">108</field>
+        <field name="code">NOK</field>
+        <field name="country_id"></field>
+        <field name="translation_id">108</field>
+      </row>
+      <row>
+        <field name="id">109</field>
+        <field name="code">NPR</field>
+        <field name="country_id"></field>
+        <field name="translation_id">109</field>
+      </row>
+      <row>
+        <field name="id">110</field>
+        <field name="code">NZD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">110</field>
+      </row>
+      <row>
+        <field name="id">111</field>
+        <field name="code">OMR</field>
+        <field name="country_id"></field>
+        <field name="translation_id">111</field>
+      </row>
+      <row>
+        <field name="id">112</field>
+        <field name="code">PAB</field>
+        <field name="country_id"></field>
+        <field name="translation_id">112</field>
+      </row>
+      <row>
+        <field name="id">113</field>
+        <field name="code">PEI</field>
+        <field name="country_id"></field>
+        <field name="translation_id">113</field>
+      </row>
+      <row>
+        <field name="id">114</field>
+        <field name="code">PGK</field>
+        <field name="country_id"></field>
+        <field name="translation_id">114</field>
+      </row>
+      <row>
+        <field name="id">115</field>
+        <field name="code">PHP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">115</field>
+      </row>
+      <row>
+        <field name="id">116</field>
+        <field name="code">PKR</field>
+        <field name="country_id"></field>
+        <field name="translation_id">116</field>
+      </row>
+      <row>
+        <field name="id">117</field>
+        <field name="code">PLZ</field>
+        <field name="country_id"></field>
+        <field name="translation_id">117</field>
+      </row>
+      <row>
+        <field name="id">118</field>
+        <field name="code">PYG</field>
+        <field name="country_id"></field>
+        <field name="translation_id">118</field>
+      </row>
+      <row>
+        <field name="id">119</field>
+        <field name="code">QAR</field>
+        <field name="country_id"></field>
+        <field name="translation_id">119</field>
+      </row>
+      <row>
+        <field name="id">120</field>
+        <field name="code">ROL</field>
+        <field name="country_id"></field>
+        <field name="translation_id">120</field>
+      </row>
+      <row>
+        <field name="id">121</field>
+        <field name="code">RWF</field>
+        <field name="country_id"></field>
+        <field name="translation_id">121</field>
+      </row>
+      <row>
+        <field name="id">122</field>
+        <field name="code">SAR</field>
+        <field name="country_id"></field>
+        <field name="translation_id">122</field>
+      </row>
+      <row>
+        <field name="id">123</field>
+        <field name="code">SBD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">123</field>
+      </row>
+      <row>
+        <field name="id">124</field>
+        <field name="code">SCR</field>
+        <field name="country_id"></field>
+        <field name="translation_id">124</field>
+      </row>
+      <row>
+        <field name="id">125</field>
+        <field name="code">SDP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">125</field>
+      </row>
+      <row>
+        <field name="id">126</field>
+        <field name="code">SGD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">126</field>
+      </row>
+      <row>
+        <field name="id">127</field>
+        <field name="code">SHP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">127</field>
+      </row>
+      <row>
+        <field name="id">128</field>
+        <field name="code">SLL</field>
+        <field name="country_id"></field>
+        <field name="translation_id">128</field>
+      </row>
+      <row>
+        <field name="id">129</field>
+        <field name="code">SOS</field>
+        <field name="country_id"></field>
+        <field name="translation_id">129</field>
+      </row>
+      <row>
+        <field name="id">130</field>
+        <field name="code">SRG</field>
+        <field name="country_id"></field>
+        <field name="translation_id">130</field>
+      </row>
+      <row>
+        <field name="id">131</field>
+        <field name="code">STD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">131</field>
+      </row>
+      <row>
+        <field name="id">132</field>
+        <field name="code">SUR</field>
+        <field name="country_id"></field>
+        <field name="translation_id">132</field>
+      </row>
+      <row>
+        <field name="id">133</field>
+        <field name="code">SVC</field>
+        <field name="country_id"></field>
+        <field name="translation_id">133</field>
+      </row>
+      <row>
+        <field name="id">134</field>
+        <field name="code">SYP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">134</field>
+      </row>
+      <row>
+        <field name="id">135</field>
+        <field name="code">SZL</field>
+        <field name="country_id"></field>
+        <field name="translation_id">135</field>
+      </row>
+      <row>
+        <field name="id">136</field>
+        <field name="code">THB</field>
+        <field name="country_id"></field>
+        <field name="translation_id">136</field>
+      </row>
+      <row>
+        <field name="id">137</field>
+        <field name="code">TND</field>
+        <field name="country_id"></field>
+        <field name="translation_id">137</field>
+      </row>
+      <row>
+        <field name="id">138</field>
+        <field name="code">TOP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">138</field>
+      </row>
+      <row>
+        <field name="id">139</field>
+        <field name="code">TPE</field>
+        <field name="country_id"></field>
+        <field name="translation_id">139</field>
+      </row>
+      <row>
+        <field name="id">140</field>
+        <field name="code">TRL</field>
+        <field name="country_id"></field>
+        <field name="translation_id">140</field>
+      </row>
+      <row>
+        <field name="id">141</field>
+        <field name="code">TTD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">141</field>
+      </row>
+      <row>
+        <field name="id">142</field>
+        <field name="code">TWD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">142</field>
+      </row>
+      <row>
+        <field name="id">143</field>
+        <field name="code">TZS</field>
+        <field name="country_id"></field>
+        <field name="translation_id">143</field>
+      </row>
+      <row>
+        <field name="id">144</field>
+        <field name="code">UGS</field>
+        <field name="country_id"></field>
+        <field name="translation_id">144</field>
+      </row>
+      <row>
+        <field name="id">145</field>
+        <field name="code">USD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">145</field>
+      </row>
+      <row>
+        <field name="id">146</field>
+        <field name="code">UYP</field>
+        <field name="country_id"></field>
+        <field name="translation_id">146</field>
+      </row>
+      <row>
+        <field name="id">147</field>
+        <field name="code">VEB</field>
+        <field name="country_id"></field>
+        <field name="translation_id">147</field>
+      </row>
+      <row>
+        <field name="id">148</field>
+        <field name="code">VND</field>
+        <field name="country_id"></field>
+        <field name="translation_id">148</field>
+      </row>
+      <row>
+        <field name="id">149</field>
+        <field name="code">VUV</field>
+        <field name="country_id"></field>
+        <field name="translation_id">149</field>
+      </row>
+      <row>
+        <field name="id">150</field>
+        <field name="code">WST</field>
+        <field name="country_id"></field>
+        <field name="translation_id">150</field>
+      </row>
+      <row>
+        <field name="id">151</field>
+        <field name="code">YDD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">151</field>
+      </row>
+      <row>
+        <field name="id">152</field>
+        <field name="code">YER</field>
+        <field name="country_id"></field>
+        <field name="translation_id">152</field>
+      </row>
+      <row>
+        <field name="id">153</field>
+        <field name="code">YUD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">153</field>
+      </row>
+      <row>
+        <field name="id">154</field>
+        <field name="code">ZAR</field>
+        <field name="country_id"></field>
+        <field name="translation_id">154</field>
+      </row>
+      <row>
+        <field name="id">155</field>
+        <field name="code">ZMK</field>
+        <field name="country_id"></field>
+        <field name="translation_id">155</field>
+      </row>
+      <row>
+        <field name="id">156</field>
+        <field name="code">ZRZ</field>
+        <field name="country_id"></field>
+        <field name="translation_id">156</field>
+      </row>
+      <row>
+        <field name="id">157</field>
+        <field name="code">ZWD</field>
+        <field name="country_id"></field>
+        <field name="translation_id">157</field>
+      </row>
+    </table>
+
+    <table name="translations">
+      <row>
+        <field name="id">1</field>
+        <field name="value">Ecu (European currency unit)</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="value">Euro</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">3</field>
+        <field name="value">Austrian Schilling</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">4</field>
+        <field name="value">Belgian Franc</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">5</field>
+        <field name="value">Deutsche Mark</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">6</field>
+        <field name="value">Danish Krone</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">7</field>
+        <field name="value">Spanish Peseta</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">8</field>
+        <field name="value">Finnish Markka</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">9</field>
+        <field name="value">French Franc</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">10</field>
+        <field name="value">British Pound</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">11</field>
+        <field name="value">Greek Drachma</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">12</field>
+        <field name="value">Irish Punt</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">13</field>
+        <field name="value">Italian Lira</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">14</field>
+        <field name="value">Luxembourg Franc</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">15</field>
+        <field name="value">Dutch Guilder</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">16</field>
+        <field name="value">Portuguese Escudo</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">17</field>
+        <field name="value">Swedish Krona</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">18</field>
+        <field name="value">Andorran Peseta</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">19</field>
+        <field name="value">United Arab Emirates Dirham</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">20</field>
+        <field name="value">Afghanistan Afghani</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">21</field>
+        <field name="value">Albanian Lek</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">22</field>
+        <field name="value">Netherlands Antillian Guilder</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">23</field>
+        <field name="value">Angolan Kwanza</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">24</field>
+        <field name="value">Argentinian Austral</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">25</field>
+        <field name="value">Australian Dollar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">26</field>
+        <field name="value">Aruban Florin</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">27</field>
+        <field name="value">Barbados Dollar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">28</field>
+        <field name="value">Bangladeshi Taka</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">29</field>
+        <field name="value">Bulgarian Lev</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">30</field>
+        <field name="value">Bahraini Dinar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">31</field>
+        <field name="value">Burundi Franc</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">32</field>
+        <field name="value">Bermudian Dollar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">33</field>
+        <field name="value">Brunei Dollar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">34</field>
+        <field name="value">Bolivian Boliviano</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">35</field>
+        <field name="value">Brazilian Cruzeiro</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">36</field>
+        <field name="value">Bahamian Dollar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">37</field>
+        <field name="value">Bhutan Ngultrum</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">38</field>
+        <field name="value">Burma Kyat</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">39</field>
+        <field name="value">Botswanian Pula</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">40</field>
+        <field name="value">Belize Dollar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">41</field>
+        <field name="value">Canadian Dollar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">42</field>
+        <field name="value">Swiss Franc</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">43</field>
+        <field name="value">Chilean Unidades de Fomento</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">44</field>
+        <field name="value">Chilean Peso</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">45</field>
+        <field name="value">Yuan (Chinese) Renminbi</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">46</field>
+        <field name="value">Colombian Peso</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">47</field>
+        <field name="value">Costa Rican Colon</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">48</field>
+        <field name="value">Czech Koruna</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">49</field>
+        <field name="value">Cuban Peso</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">50</field>
+        <field name="value">Cape Verde Escudo</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">51</field>
+        <field name="value">Cyprus Pound</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">52</field>
+        <field name="value">East German Mark (DDR)</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">53</field>
+        <field name="value">Djibouti Franc</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">54</field>
+        <field name="value">Dominican Peso</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">55</field>
+        <field name="value">Algerian Dinar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">56</field>
+        <field name="value">Ecuador Sucre</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">57</field>
+        <field name="value">Egyptian Pound</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">58</field>
+        <field name="value">Ethiopian Birr</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">59</field>
+        <field name="value">Fiji Dollar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">60</field>
+        <field name="value">Falkland Islands Pound</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">61</field>
+        <field name="value">Ghanaian Cedi</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">62</field>
+        <field name="value">Gibraltar Pound</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">63</field>
+        <field name="value">Gambian Dalasi</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">64</field>
+        <field name="value">Guinea Franc</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">65</field>
+        <field name="value">Guatemalan Quetzal</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">66</field>
+        <field name="value">Guinea-Bissau Peso</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">67</field>
+        <field name="value">Guyanan Dollar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">68</field>
+        <field name="value">Hong Kong Dollar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">69</field>
+        <field name="value">Honduran Lempira</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">70</field>
+        <field name="value">Haitian Gourde</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">71</field>
+        <field name="value">Hungarian Forint</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">72</field>
+        <field name="value">Indonesian Rupiah</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">73</field>
+        <field name="value">Israeli Shekel</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">74</field>
+        <field name="value">Indian Rupee</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">75</field>
+        <field name="value">Iraqi Dinar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">76</field>
+        <field name="value">Iranian Rial</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">77</field>
+        <field name="value">Iceland Krona</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">78</field>
+        <field name="value">Jamaican Dollar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">79</field>
+        <field name="value">Jordanian Dinar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">80</field>
+        <field name="value">Japanese Yen</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">81</field>
+        <field name="value">Kenyan Schilling</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">82</field>
+        <field name="value">Kampuchean (Cambodian) Riel</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">83</field>
+        <field name="value">Comoros Franc</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">84</field>
+        <field name="value">North Korean Won</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">85</field>
+        <field name="value">(South) Korean Won</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">86</field>
+        <field name="value">Kuwaiti Dinar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">87</field>
+        <field name="value">Cayman Islands Dollar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">88</field>
+        <field name="value">Lao Kip</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">89</field>
+        <field name="value">Lebanese Pound</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">90</field>
+        <field name="value">Sri Lanka Rupee</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">91</field>
+        <field name="value">Liberian Dollar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">92</field>
+        <field name="value">Lesotho Loti</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">93</field>
+        <field name="value">Libyan Dinar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">94</field>
+        <field name="value">Moroccan Dirham</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">95</field>
+        <field name="value">Malagasy Franc</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">96</field>
+        <field name="value">Mongolian Tugrik</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">97</field>
+        <field name="value">Macau Pataca</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">98</field>
+        <field name="value">Mauritanian Ouguiya</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">99</field>
+        <field name="value">Maltese Lira</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">100</field>
+        <field name="value">Mauritius Rupee</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">101</field>
+        <field name="value">Maldive Rufiyaa</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">102</field>
+        <field name="value">Malawi Kwacha</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">103</field>
+        <field name="value">Mexican Peso</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">104</field>
+        <field name="value">Malaysian Ringgit</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">105</field>
+        <field name="value">Mozambique Metical</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">106</field>
+        <field name="value">Nigerian Naira</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">107</field>
+        <field name="value">Nicaraguan Cordoba</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">108</field>
+        <field name="value">Norwegian Kroner</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">109</field>
+        <field name="value">Nepalese Rupee</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">110</field>
+        <field name="value">New Zealand Dollar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">111</field>
+        <field name="value">Omani Rial</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">112</field>
+        <field name="value">Panamanian Balboa</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">113</field>
+        <field name="value">Peruvian Inti</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">114</field>
+        <field name="value">Papua New Guinea Kina</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">115</field>
+        <field name="value">Philippine Peso</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">116</field>
+        <field name="value">Pakistan Rupee</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">117</field>
+        <field name="value">Polish Zloty</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">118</field>
+        <field name="value">Paraguay Guarani</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">119</field>
+        <field name="value">Qatari Rial</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">120</field>
+        <field name="value">Romanian Leu</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">121</field>
+        <field name="value">Rwanda Franc</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">122</field>
+        <field name="value">Saudi Arabian Riyal</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">123</field>
+        <field name="value">Solomon Islands Dollar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">124</field>
+        <field name="value">Seychelles Rupee</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">125</field>
+        <field name="value">Sudanese Pound</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">126</field>
+        <field name="value">Singapore Dollar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">127</field>
+        <field name="value">St. Helena Pound</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">128</field>
+        <field name="value">Sierra Leone Leone</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">129</field>
+        <field name="value">Somali Schilling</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">130</field>
+        <field name="value">Suriname Guilder</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">131</field>
+        <field name="value">Sao Tome and Principe Dobra</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">132</field>
+        <field name="value">USSR Rouble</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">133</field>
+        <field name="value">El Salvador Colon</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">134</field>
+        <field name="value">Syrian Pound</field> <!-- corrected -->
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">135</field>
+        <field name="value">Swaziland Lilangeni</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">136</field>
+        <field name="value">Thai Bhat</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">137</field>
+        <field name="value">Tunisian Dinar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">138</field>
+        <field name="value">Tongan Pa'anga</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">139</field>
+        <field name="value">East Timor Escudo</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">140</field>
+        <field name="value">Turkish Lira</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">141</field>
+        <field name="value">Trinidad and Tobago Dollar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">142</field>
+        <field name="value">Taiwan Dollar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">143</field>
+        <field name="value">Tanzanian Schilling</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">144</field>
+        <field name="value">Uganda Shilling</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">145</field>
+        <field name="value">US Dollar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">146</field>
+        <field name="value">Uruguayan Peso</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">147</field>
+        <field name="value">Venezualan Bolivar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">148</field>
+        <field name="value">Vietnamese Dong</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">149</field>
+        <field name="value">Vanuatu Vatu</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">150</field>
+        <field name="value">Samoan Tala</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">151</field>
+        <field name="value">Democratic Yemeni Dinar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">152</field>
+        <field name="value">Yemeni Rial</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">153</field>
+        <field name="value">New Yugoslavia Dinar</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">154</field>
+        <field name="value">South African Rand</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">155</field>
+        <field name="value">Zambian Kwacha</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">156</field>
+        <field name="value">Zaire Zaire</field>
+        <field name="locale_id"></field>
+      </row>
+      <row>
+        <field name="id">157</field>
+        <field name="value">Zimbabwe Dollar</field>
+        <field name="locale_id"></field>
+      </row>
+    </table>
+  </data>
+</database>
