@@ -30,7 +30,7 @@ http://www.mcanerin.com/en/articles/gTLD.asp
 
 -->
 
-<database name="iso-codes" version="1" date="2012-05-28" flags="const:true security:false privacy:false">
+<database name="iso-codes" version="1" date="2012-05-29" flags="const:true security:false privacy:false">
   <structures>
     <table name="countries">
       <column name="id"             type="integer" flags="primarykey" />
@@ -41,7 +41,7 @@ http://www.mcanerin.com/en/articles/gTLD.asp
       <column name="translation_id" type="integer" flags="references:translations(id)" />
     </table>
 
-    <table name="locales">          <!-- country and language codes, maybe later more -->
+    <table name="locales">          <!-- country and language codes, maybe later more (decimal point, time zones) -->
       <column name="id"             type="integer" flags="primarykey" />
       <column name="country_id"     type="integer" flags="required references:countries(id)" />
       <column name="language_id"    type="integer" flags="required references:languages(id)" />
@@ -50,7 +50,7 @@ http://www.mcanerin.com/en/articles/gTLD.asp
     <table name="translations">
       <column name="id"             type="integer" flags="index" />
       <column name="value"          type="string"  flags="required" />
-      <column name="language_id"    type="integer" flags="required references:languages(id)" /> <!-- TODO: use locales! -->
+      <column name="locale_id"      type="integer" flags="required references:locales(id)" />
     </table>
 
     <table name="top_level_domains">
@@ -1575,7 +1575,7 @@ http://www.mcanerin.com/en/articles/gTLD.asp
         <field name="translation_id">188</field>
       </row>
       <row>
-        <field name="id">189</field>
+        <field name="id">189</field> <!-- RS + ME -->
         <field name="cc_a2">CS</field>
         <field name="cc_a3">SCG</field>
         <field name="cc_number">891</field>
@@ -1996,64 +1996,1239 @@ http://www.mcanerin.com/en/articles/gTLD.asp
       <row>
         <field name="id">1</field>
         <field name="value">Åland</field>
-        <field name="language_id">22</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="value">Afghanistan</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">3</field>
+        <field name="value">Albanien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">4</field>
+        <field name="value">Algerien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">5</field>
+        <field name="value">Amerikanisch-Samoa</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">6</field>
+        <field name="value">Andorra</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">7</field>
+        <field name="value">Angola</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">8</field>
+        <field name="value">Anguilla</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">9</field>
+        <field name="value">Antarktis</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">10</field>
+        <field name="value">Antigua und Barbuda</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">11</field>
+        <field name="value">Argentinien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">12</field>
+        <field name="value">Armenien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">13</field>
+        <field name="value">Aruba</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">14</field>
+        <field name="value">Australien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">15</field>
+        <field name="value">Österreich</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">16</field>
+        <field name="value">Aserbaidschan</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">17</field>
+        <field name="value">Bahamas</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">18</field>
+        <field name="value">Bahrain</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">19</field>
+        <field name="value">Bangladesch</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">20</field>
+        <field name="value">Barbados</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">21</field>
+        <field name="value">Weißrussland</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">22</field>
+        <field name="value">Belgien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">23</field>
+        <field name="value">Belize</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">24</field>
+        <field name="value">Benin</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">25</field>
+        <field name="value">Bermuda</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">26</field>
+        <field name="value">Bhutan</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">27</field>
+        <field name="value">Bolivien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">28</field>
+        <field name="value">Bosnien und Herzegowina</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">29</field> <!-- amtl. dt. Schreibweise: Botsuana -->
+        <field name="value">Botswana</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">30</field>
+        <field name="value">Bouvetinsel</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">31</field>
+        <field name="value">Brasilien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">32</field>
+        <field name="value">Britisches Territorium im Indischen Ozean</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">33</field>
+        <field name="value">Brunei Darussalam</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">34</field>
+        <field name="value">Bulgarien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">35</field>
+        <field name="value">Burkina Faso</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">36</field>
+        <field name="value">Burundi</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">37</field>
+        <field name="value">Kambodscha</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">38</field>
+        <field name="value">Kamerun</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">39</field>
+        <field name="value">Kanada</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">40</field>
+        <field name="value">Kap Verde</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">41</field>
+        <field name="value">Kaiman-Inseln</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">42</field>
+        <field name="value">Zentralafrikanische Republik</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">43</field>
+        <field name="value">Tschad</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">44</field>
+        <field name="value">Chile</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">45</field>
+        <field name="value">China</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">46</field>
+        <field name="value">Weihnachtsinsel</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">47</field>
+        <field name="value">Kokosinseln (Keelinginseln)</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">48</field>
+        <field name="value">Kolumbien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">49</field>
+        <field name="value">Komoren</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">50</field>
+        <field name="value">Demokratische Republik Kongo</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">51</field>
+        <field name="value">Kongo (Republik Kongo)</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">52</field>
+        <field name="value">Cookinseln</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">53</field>
+        <field name="value">Costa Rica</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">54</field>
+        <field name="value">Côte d'Ivoire</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">55</field>
+        <field name="value">Kroatien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">56</field>
+        <field name="value">Kuba</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">57</field>
+        <field name="value">Zypern</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">58</field>
+        <field name="value">Tschechische Republik</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">59</field>
+        <field name="value">Dänemark</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">60</field>
+        <field name="value">Dschibuti</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">61</field>
+        <field name="value">Dominica</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">62</field>
+        <field name="value">Dominikanische Republik</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">63</field>
+        <field name="value">Ecuador</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">64</field>
+        <field name="value">Ägypten</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">65</field>
+        <field name="value">El Salvador</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">66</field>
+        <field name="value">Äquatorialguinea</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">67</field>
+        <field name="value">Eritrea</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">68</field>
+        <field name="value">Estland</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">69</field>
+        <field name="value">Äthiopien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">70</field>
+        <field name="value">Falklandinseln (Malwinen)</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">71</field> <!-- ugs: auch Färöer-Inseln -->
+        <field name="value">Färöer</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">72</field>
+        <field name="value">Fidschi</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">73</field>
+        <field name="value">Finnland</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">74</field>
+        <field name="value">Frankreich</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">75</field>
+        <field name="value">Französisch-Guayana</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">76</field>
+        <field name="value">Französisch-Polynesien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">77</field>
+        <field name="value">Französische Gebiete im südlichen Indischen Ozean</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">78</field>
+        <field name="value">Gabun</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">79</field>
+        <field name="value">Gambia</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">80</field>
+        <field name="value">Georgien</field>
+        <field name="locale_id">1</field>
       </row>
       <row>
         <field name="id">81</field>
         <field name="value">Deutschland</field>
-        <field name="language_id">22</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">82</field>
+        <field name="value">Ghana</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">83</field>
+        <field name="value">Gibraltar</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">84</field>
+        <field name="value">Griechenland</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">85</field>
+        <field name="value">Grönland</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">86</field>
+        <field name="value">Grenada</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">87</field>
+        <field name="value">Guadeloupe</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">88</field>
+        <field name="value">Guam</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">89</field>
+        <field name="value">Guatemala</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">90</field>
+        <field name="value">Guinea</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">91</field>
+        <field name="value">Guinea-Bissau</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">92</field>
+        <field name="value">Guyana</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">93</field>
+        <field name="value">Haiti</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">94</field>
+        <field name="value">Heard und McDonaldinseln</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">95</field>
+        <field name="value">Honduras</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">96</field>
+        <field name="value">Hongkong</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">97</field>
+        <field name="value">Ungarn</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">98</field>
+        <field name="value">Island</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">99</field>
+        <field name="value">Indien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">100</field>
+        <field name="value">Indonesien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">101</field>
+        <field name="value">Islamische Republik Iran</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">102</field>
+        <field name="value">Irak</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">103</field>
+        <field name="value">Irland</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">104</field>
+        <field name="value">Israel</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">105</field>
+        <field name="value">Italien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">106</field>
+        <field name="value">Jamaika</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">107</field>
+        <field name="value">Japan</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">108</field>
+        <field name="value">Jordanien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">109</field>
+        <field name="value">Kasachstan</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">110</field>
+        <field name="value">Kenia</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">111</field>
+        <field name="value">Kiribati</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">112</field>
+        <field name="value">Republik Korea</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">113</field>
+        <field name="value">Demokratische Volksrepublik Korea</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">114</field>
+        <field name="value">Kuwait</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">115</field>
+        <field name="value">Kirgisistan</field> <!-- Kirgisische Republik, Kirgisien -->
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">116</field>
+        <field name="value">Demokratische Volksrepublik Laos</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">117</field>
+        <field name="value">Lettland</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">118</field>
+        <field name="value">Libanon</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">119</field>
+        <field name="value">Lesotho</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">120</field>
+        <field name="value">Liberia</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">121</field>
+        <field name="value">Sozialistische Libysch-Arabische Volks-Dschamahirija</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">122</field>
+        <field name="value">Liechtenstein</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">123</field>
+        <field name="value">Litauen</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">124</field>
+        <field name="value">Luxemburg</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">125</field>
+        <field name="value">Macau</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">126</field>
+        <field name="value">Ehemalige jugoslawische Republik Mazedonien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">127</field>
+        <field name="value">Madagaskar</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">128</field>
+        <field name="value">Malawi</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">129</field>
+        <field name="value">Malaysia</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">130</field>
+        <field name="value">Malediven</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">131</field>
+        <field name="value">Mali</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">132</field>
+        <field name="value">Malta</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">133</field>
+        <field name="value">Marshallinseln</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">134</field>
+        <field name="value">Martinique</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">135</field>
+        <field name="value">Mauretanien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">136</field>
+        <field name="value">Mauritius</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">137</field>
+        <field name="value">Mayotte</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">138</field>
+        <field name="value">Mexiko</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">139</field>
+        <field name="value">Föderierte Staaten von Mikronesien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">140</field>
+        <field name="value">Republik Moldau</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">141</field>
+        <field name="value">Monaco</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">142</field>
+        <field name="value">Mongolei</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">143</field>
+        <field name="value">Montserrat</field>
+        <field name="locale_id">1</field>
       </row>
       <row>
         <field name="id">144</field>
         <field name="value">Marokko</field>
-        <field name="language_id">22</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">145</field>
+        <field name="value">Mosambik</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">146</field>
+        <field name="value">Myanmar</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">147</field>
+        <field name="value">Namibia</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">148</field>
+        <field name="value">Nauru</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">149</field>
+        <field name="value">Nepal</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">150</field>
+        <field name="value">Niederlande</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">151</field>
+        <field name="value">Niederländische Antillen</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">152</field>
+        <field name="value">Neukaledonien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">153</field>
+        <field name="value">Neuseeland</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">154</field>
+        <field name="value">Nicaragua</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">155</field>
+        <field name="value">Niger</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">156</field>
+        <field name="value">Nigeria</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">157</field>
+        <field name="value">Niue</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">158</field>
+        <field name="value">Norfolkinsel</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">159</field>
+        <field name="value">Nördliche Marianen</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">160</field>
+        <field name="value">Norwegen</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">161</field>
+        <field name="value">Oman</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">162</field>
+        <field name="value">Pakistan</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">163</field>
+        <field name="value">Palau</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">164</field>
+        <field name="value">Besetzte Palästinensische Gebiete</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">165</field>
+        <field name="value">Panama</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">166</field>
+        <field name="value">Papua-Neuguinea</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">167</field>
+        <field name="value">Paraguay</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">168</field>
+        <field name="value">Peru</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">169</field>
+        <field name="value">Philippinen</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">170</field>
+        <field name="value">Pitcairn</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">171</field>
+        <field name="value">Polen</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">172</field>
+        <field name="value">Portugal</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">173</field>
+        <field name="value">Puerto Rico</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">174</field>
+        <field name="value">Katar</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">175</field>
+        <field name="value">Réunion</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">176</field>
+        <field name="value">Rumänien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">177</field>
+        <field name="value">Russische Föderation</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">178</field>
+        <field name="value">Ruanda</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">179</field>
+        <field name="value">St. Helena</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">180</field>
+        <field name="value">St. Kitts und Nevis</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">181</field>
+        <field name="value">St. Lucia</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">182</field>
+        <field name="value">Saint-Pierre und Miquelon</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">183</field>
+        <field name="value">St. Vincent und die Grenadinen</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">184</field>
+        <field name="value">Samoa</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">185</field>
+        <field name="value">San Marino</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">186</field>
+        <field name="value">São Tomé und Príncipe</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">187</field>
+        <field name="value">Saudi-Arabien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">188</field>
+        <field name="value">Senegal</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">189</field> <!-- TODO -->
+        <field name="value">Serbien und Montenegro</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">190</field>
+        <field name="value">Seychellen</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">191</field>
+        <field name="value">Sierra Leone</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">192</field>
+        <field name="value">Singapur</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">193</field>
+        <field name="value">Slowakei</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">194</field>
+        <field name="value">Slowenien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">195</field>
+        <field name="value">Salomonen</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">196</field>
+        <field name="value">Somalia</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">197</field>
+        <field name="value">Südafrika</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">198</field>
+        <field name="value">Südgeorgien und Südliche Sandwichinseln</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">199</field>
+        <field name="value">Spanien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">200</field>
+        <field name="value">Sri Lanka</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">201</field>
+        <field name="value">Sudan</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">202</field>
+        <field name="value">Suriname</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">203</field>
+        <field name="value">Svalbard und Jan Mayen</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">204</field>
+        <field name="value">Swasiland</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">205</field>
+        <field name="value">Schweden</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">206</field>
+        <field name="value">Schweiz</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">207</field>
+        <field name="value">Arabische Republik Syrien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">208</field>
+        <field name="value">Taiwan</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">209</field>
+        <field name="value">Tadschikistan</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">210</field>
+        <field name="value">Vereinigte Republik Tansania</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">211</field>
+        <field name="value">Thailand</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">212</field>
+        <field name="value">Timor-Leste</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">213</field>
+        <field name="value">Togo</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">214</field>
+        <field name="value">Tokelau</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">215</field>
+        <field name="value">Tonga</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">216</field>
+        <field name="value">Trinidad und Tobago</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">217</field>
+        <field name="value">Tunesien</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">218</field>
+        <field name="value">Türkei</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">219</field>
+        <field name="value">Turkmenistan</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">220</field>
+        <field name="value">Turks- und Caicosinseln</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">221</field>
+        <field name="value">Tuvalu</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">222</field>
+        <field name="value">Uganda</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">223</field>
+        <field name="value">Ukraine</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">224</field>
+        <field name="value">Vereinigte Arabische Emirate</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">225</field>
+        <field name="value">Vereinigtes Königreich</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">226</field>
+        <field name="value">Vereinigte Staaten</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">227</field>
+        <field name="value">Kleinere Amerikanische Überseeinseln</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">228</field>
+        <field name="value">Uruguay</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">229</field>
+        <field name="value">Usbekistan</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">230</field>
+        <field name="value">Vanuatu</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">231</field>
+        <field name="value">Heiliger Stuhl (Staat Vatikanstadt)</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">232</field>
+        <field name="value">Venezuela</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">233</field>
+        <field name="value">Vietnam</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">234</field>
+        <field name="value">Britische Jungferninseln</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">235</field>
+        <field name="value">Amerikanische Jungferninseln</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">236</field>
+        <field name="value">Wallis und Futuna</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">237</field>
+        <field name="value">Westsahara</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">238</field>
+        <field name="value">Jemen</field>
+        <field name="locale_id">1</field>
       </row>
       <row>
         <field name="id">239</field>
         <field name="value">Sambia</field>
-        <field name="language_id">22</field>
+        <field name="locale_id">1</field>
       </row>
       <row>
         <field name="id">240</field>
         <field name="value">Simbabwe</field>
-        <field name="language_id">22</field>
+        <field name="locale_id">1</field>
       </row>
 
       <row>
         <field name="id">241</field>
         <field name="value">Afar</field>
-        <field name="language_id">22</field>
+        <field name="locale_id">1</field>
       </row>
       <row>
         <field name="id">242</field>
         <field name="value">Abchasische Sprache</field>
-        <field name="language_id">22</field>
+        <field name="locale_id">1</field>
       </row>
       <row>
         <field name="id">243</field>
         <field name="value">Afrikaans</field>
-        <field name="language_id">22</field>
+        <field name="locale_id">1</field>
       </row>
       <row>
         <field name="id">244</field>
         <field name="value">Amharische Sprache</field>
-        <field name="language_id">22</field>
+        <field name="locale_id">1</field>
       </row>
       <row>
         <field name="id">245</field>
         <field name="value">Arabische Sprache</field>
-        <field name="language_id">22</field>
+        <field name="locale_id">1</field>
       </row>
       <row>
         <field name="id">246</field>
         <field name="value">Assamesische Sprache</field>
-        <field name="language_id">22</field>
+        <field name="locale_id">1</field>
       </row>
 
       <row>
         <field name="id">262</field>
         <field name="value">Deutsche Sprache</field>
-        <field name="language_id">22</field>
+        <field name="locale_id">1</field>
       </row>
 
     </table>
@@ -2892,7 +4067,7 @@ http://www.mcanerin.com/en/articles/gTLD.asp
       </row>
     </table>
 
-    <table name="country_language_codes">
+    <table name="locales">
       <row>
         <field name="id">1</field>
         <field name="country_id">NULL</field>
@@ -2929,17 +4104,17 @@ http://www.mcanerin.com/en/articles/gTLD.asp
         <field name="language_id">25</field> <!-- en -->
       </row>
       <row>
-        <field name="id">8</field>           <!-- terms only used in maroccan arabic -->
-        <field name="country_id">144</field> <!-- MA -->
-        <field name="language_id">5</field>  <!-- ar -->
-      </row>
-      <row>
-        <field name="id">9</field>
+        <field name="id">8</field>
         <field name="country_id">177</field> <!-- RU -->
         <field name="language_id">95</field> <!-- ru -->
       </row>
       <row>
-        <field name="id">10</field>          <!-- used for "darija" -->
+        <field name="id">9</field>           <!-- maroccan arabic -->
+        <field name="country_id">144</field> <!-- MA -->
+        <field name="language_id">5</field>  <!-- ar -->
+      </row>
+      <row>
+        <field name="id">10</field>          <!-- maroccan "darija" -->
         <field name="country_id">144</field> <!-- MA -->
         <field name="language_id">5</field>  <!-- ar -->
       </row>

@@ -9,7 +9,7 @@ too. Please do not insert identities of people. Only people you know and
 which really do exist. One row for one real person.
 -->
 
-<database name="people" version="1" date="2012-05-28" flags="const:false security:true privacy:true">
+<database name="people" version="1" date="2012-05-29" flags="const:false security:true privacy:true">
   <structures>
     <table name="people">
       <column name="id"             type="integer" flags="primarykey" />
@@ -48,7 +48,7 @@ which really do exist. One row for one real person.
     <table name="translations">
       <column name="id"             type="integer" flags="index" />
       <column name="value"          type="string"  flags="required" />
-      <column name="language_id"    type="integer" flags="required" />
+      <column name="locale_id"      type="integer" flags="required references:iso-codes.locales(id)" />
     </table>
   </structures>
 
@@ -69,17 +69,17 @@ which really do exist. One row for one real person.
       <row>
         <field name="id">1</field>
         <field name="value">webpage</field>
-        <field name="translation_id"></field>
+        <field name="translation_id">1</field>
       </row>
       <row>
         <field name="id">2</field>
         <field name="value">email</field>
-        <field name="translation_id"></field>
+        <field name="translation_id">2</field>
       </row>
       <row>
         <field name="id">3</field>
         <field name="value">phone</field>
-        <field name="translation_id"></field>
+        <field name="translation_id">3</field>
       </row>
     </table>
 
@@ -89,6 +89,39 @@ which really do exist. One row for one real person.
         <field name="people_id">1</field>
         <field name="field_type_id">1</field>
         <field name="value">http://www.example.com/</field>
+      </row>
+    </table>
+
+    <table name="translations">
+      <row>
+        <field name="id">1</field>
+        <field name="value">Webseite</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">1</field>
+        <field name="value">Web page</field>
+        <field name="locale_id">2</field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="value">E-Mail</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="value">E-mail</field>
+        <field name="locale_id">2</field>
+      </row>
+      <row>
+        <field name="id">3</field>
+        <field name="value">Telefon</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">3</field>
+        <field name="value">Phone</field>
+        <field name="locale_id">2</field>
       </row>
     </table>
   </data>

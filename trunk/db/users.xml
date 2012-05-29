@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<database name="users" version="1" date="2012-01-01" flags="const:false security:true privacy:true">
+<database name="users" version="1" date="2012-05-29" flags="const:false security:true privacy:true">
   <structures>
     <table name="certificates">
       <column name="id"               type="integer" flags="primarykey" />
@@ -47,7 +47,7 @@
   <data>
     <table name="identities">
       <row>
-        <field name="id">0</field>
+        <field name="id">1</field>
         <field name="username">root</field>
         <field name="password"></field>
         <field name="role">oeg</field>
@@ -57,7 +57,7 @@
 
     <table name="people">
       <row>
-        <field name="id"></field>
+        <field name="id">1</field>
         <field name="firstname">Gerrit</field>
         <field name="lastname">Albrecht</field>
       </row>

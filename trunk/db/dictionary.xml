@@ -17,9 +17,9 @@
     </table>
 
     <table name="translations">
-      <column name="id"             type="integer" flags="index" /> <!-- multiple translations with same id -->
+      <column name="id"             type="integer" flags="index" /> <!-- there are multiple translations with same id -->
       <column name="value"          type="string"  flags="required" />
-      <column name="language_id"    type="integer" flags="required references:languages(id)" /> <!-- TODO: use locales! -->
+      <column name="locale_id"      type="integer" flags="required references:iso-codes.locales(id)" />
     </table>
 
     <table name="words">
@@ -43,86 +43,138 @@
     <table name="translations">
       <row>
         <field name="id">1</field>
-        <field name="language_id">1</field>
         <field name="value">Substantiv</field>
+        <field name="locale_id">1</field>
       </row>
       <row>
         <field name="id">1</field>
-        <field name="language_id">2</field>
         <field name="value">noun</field>
+        <field name="locale_id">2</field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="value">Verb</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="value">verb</field>
+        <field name="locale_id">2</field>
+      </row>
+      <row>
+        <field name="id">3</field>
+        <field name="value">Pronomen</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">3</field>
+        <field name="value">pronoun</field>
+        <field name="locale_id">2</field>
+      </row>
+      <row>
+        <field name="id">4</field>
+        <field name="value">Artikel</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">4</field>
+        <field name="value">article</field>
+        <field name="locale_id">2</field>
+      </row>
+      <row>                                                <!-- https://de.wikipedia.org/wiki/Partikel_%28Grammatik%29 -->
+        <field name="id">5</field>
+        <field name="value">Partikel</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>                                                <!-- https://en.wikipedia.org/wiki/Grammatical_particle -->
+        <field name="id">5</field>
+        <field name="value">particle</field>
+        <field name="locale_id">2</field>
       </row>
     </table>
 
     <table name="word_types">
-      <row>                                      <!-- nouns -->
+      <row>                                                <!-- noun -->
         <field name="id">1</field>
         <field name="translation_id">1</field>
       </row>
-      <row>                                      <!-- verbs -->
+      <row>                                                <!-- verb -->
         <field name="id">2</field>
-        <field name="translation_id">1</field>
+        <field name="translation_id">2</field>
+      </row>
+      <row>                                                <!-- pronoun -->
+        <field name="id">3</field>
+        <field name="translation_id">3</field>
+      </row>
+      <row>                                                <!-- article -->
+        <field name="id">4</field>
+        <field name="translation_id">4</field>
+      </row>
+      <row>                                                <!-- particle -->
+        <field name="id">5</field>
+        <field name="translation_id">5</field>
       </row>
     </table>
 
     <table name="words">
       <row>
         <field name="id">1</field>
-        <field name="language_id">1</field>
-        <field name="word_type_id"></field>
+        <field name="locale_id">1</field>
+        <field name="word_type_id">1</field>
         <field name="value">Katze</field>
       </row>
       <row>
         <field name="id">2</field>
-        <field name="language_id">1</field>
-        <field name="word_type_id"></field>
+        <field name="locale_id">1</field>
+        <field name="word_type_id">1</field>
         <field name="value">Hase</field>
       </row>
       <row>
         <field name="id">3</field>
-        <field name="language_id">1</field>
-        <field name="word_type_id"></field>
+        <field name="locale_id">1</field>
+        <field name="word_type_id">1</field>
         <field name="value">Hund</field>
       </row>
       <row>
         <field name="id">4</field>
-        <field name="language_id">1</field>
-        <field name="word_type_id"></field>
+        <field name="locale_id">1</field>
+        <field name="word_type_id">1</field>
         <field name="value">Blume</field>
       </row>
       <row>
         <field name="id">5</field>
-        <field name="language_id">1</field>
-        <field name="word_type_id"></field>
+        <field name="locale_id">1</field>
+        <field name="word_type_id">1</field>
         <field name="value">Haus</field>
       </row>
       <row>
         <field name="id">6</field>
-        <field name="language_id">2</field>
-        <field name="word_type_id"></field>
+        <field name="locale_id">2</field>
+        <field name="word_type_id">1</field>
         <field name="value">cat</field>
       </row>
       <row>
         <field name="id">7</field>
-        <field name="language_id">2</field>
-        <field name="word_type_id"></field>
+        <field name="locale_id">2</field>
+        <field name="word_type_id">1</field>
         <field name="value">rabbit</field>
       </row>
       <row>
         <field name="id">8</field>
-        <field name="language_id">2</field>
-        <field name="word_type_id"></field>
+        <field name="locale_id">2</field>
+        <field name="word_type_id">1</field>
         <field name="value">dog</field>
       </row>
       <row>
         <field name="id">9</field>
-        <field name="language_id">2</field>
-        <field name="word_type_id"></field>
+        <field name="locale_id">2</field>
+        <field name="word_type_id">1</field>
         <field name="value">flower</field>
       </row>
       <row>
         <field name="id">10</field>
-        <field name="language_id">2</field>
-        <field name="word_type_id"></field>
+        <field name="locale_id">2</field>
+        <field name="word_type_id">1</field>
         <field name="value">house</field>
       </row>
     </table>

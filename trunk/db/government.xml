@@ -7,7 +7,7 @@ This database contains static governmental data of different
 countries which is needed and shared by OEG applications.
 -->
 
-<database name="government" version="1" date="2012-05-25" flags="const:true security:false privacy:false">
+<database name="government" version="1" date="2012-05-29" flags="const:true security:false privacy:false">
   <structures>
     <table name="federal_state_types">
       <column name="id"             type="integer" flags="primarykey" />
@@ -35,7 +35,7 @@ countries which is needed and shared by OEG applications.
     <table name="translations">
       <column name="id"             type="integer" flags="primarykey" />
       <column name="value"          type="string"  flags="required" />
-      <column name="language_id"    type="string"  flags="required references:iso-codes.country_language_codes(id)" />
+      <column name="locale_id"      type="string"  flags="required references:iso-codes.locales(id)" />
     </table>
   </structures>
 
@@ -292,7 +292,7 @@ countries which is needed and shared by OEG applications.
         <field name="country_id"></field>
         <field name="translation_id">30</field>
         <field name="date_begin"></field>
-        <field name="date_end"></field>
+        <field name="date_end">2007-06-16</field>
         <field name="homepage"></field>
       </row>
     </table>
@@ -301,152 +301,152 @@ countries which is needed and shared by OEG applications.
       <row>
         <field name="id">1</field>
         <field name="value">Brandenburg</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">2</field>
         <field name="value">Berlin</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">3</field>
         <field name="value">Baden-Württemberg</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">4</field>
         <field name="value">Bavaria</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">5</field>
         <field name="value">Bremen</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">6</field>
         <field name="value">Hesse</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">7</field>
         <field name="value">Hamburg</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">8</field>
         <field name="value">Mecklenburg-Vorpommern</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">9</field>
         <field name="value">Lower Saxony</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">10</field>
         <field name="value">North Rhine-Westphalia</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">11</field>
         <field name="value">Rhineland-Palatinate</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">12</field>
         <field name="value">Schleswig-Holstein</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">13</field>
         <field name="value">Saarland</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">14</field>
         <field name="value">Saxony</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">15</field>
         <field name="value">Saxony-Anhalt</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">16</field>
         <field name="value">Thuringia</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">17</field>
         <field name="value">Land</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">18</field>
         <field name="value">Free State of</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">19</field>
         <field name="value">Free Hanseatic City of</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">20</field>
         <field name="value">Free and Hanseatic City of</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">21</field>
         <field name="value">Christian Democratic Union of Germany</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">22</field>
         <field name="value">Social Democratic Party</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">23</field>
         <field name="value">Alliance '90/The Greens</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">24</field>
         <field name="value">Free Democratic Party</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">25</field>
         <field name="value">The Left</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">26</field>
         <field name="value">The Party of Democratic Socialism</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">27</field>
         <field name="value">Pirate Party Germany</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">28</field>
         <field name="value">National Democratic Party of Germany</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">29</field>
         <field name="value">Christian Social Union of Bavaria</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">30</field>
         <field name="value">Labour and Social Justice - The Electoral Alternative</field>
-        <field name="language_id"></field>
+        <field name="locale_id">2</field>
       </row>
     </table>
   </data>

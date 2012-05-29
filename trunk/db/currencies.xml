@@ -8,7 +8,7 @@ Currency database.
 http://simap.europa.eu/codes-and-nomenclatures/currencies/index_de.htm
 -->
 
-<database name="currencies" version="1" date="2012-05-28" flags="const:true security:false privacy:false">
+<database name="currencies" version="1" date="2012-05-29" flags="const:true security:false privacy:false">
   <structures>
     <table name="currency_codes">
       <column name="id"             type="integer" flags="primarykey" />
@@ -35,7 +35,7 @@ http://simap.europa.eu/codes-and-nomenclatures/currencies/index_de.htm
       <row>
         <field name="id">2</field>
         <field name="code">EUR</field>
-        <field name="country_ids"></field>
+        <field name="country_id"></field>
         <field name="translation_id">2</field>
       </row>
       <row>

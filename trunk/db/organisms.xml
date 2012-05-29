@@ -7,7 +7,7 @@ This database contains information about all the lifeforms, their
 classifications and names.
 -->
 
-<database name="organisms" version="1" date="2012-05-23" flags="const:true security:false privacy:false">
+<database name="organisms" version="1" date="2012-05-29" flags="const:true security:false privacy:false">
   <structures>
     <table name="citations">
       <column name="id"             type="integer" flags="primarykey" />
@@ -20,20 +20,20 @@ classifications and names.
 
     <table name="domains"> <!-- Domäne -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
     </table>
 
     <table name="regnum"> <!-- * Reich, Kingdom (-ota) -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
 
     <table name="subregnum"> <!-- Unterreich (-bionta) -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
@@ -41,7 +41,7 @@ classifications and names.
     <table name="divisio"> <!-- * Abteilung (division, phylum;
                                 -phyta (Pflanzen), -mycota (Pilze) -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
@@ -52,56 +52,56 @@ classifications and names.
     <table name="subdivisio"> <!-- Unterabteilung (-phytina (bei Pflanzen),
                                    -mycotina (bei Pilzen)) -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
 
     <table name="stammgroup"> <!-- Stammgruppe -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
 
     <table name="superstamm"> <!-- Überstamm -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
 
     <table name="stamm"> <!-- Stamm -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
 
     <table name="substamm"> <!-- Unterstamm -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
 
     <table name="superclassis"> <!-- Überklasse -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
 
     <table name="reihe"> <!-- Reihe -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
 
     <table name="reihe2"> <!-- Ohne Rang -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
@@ -109,7 +109,7 @@ classifications and names.
     <table name="classis"> <!-- * Klasse (-opsida (bei Pflanzen), -phyceae (bei Algen),
                                 -mycetes (bei Pilzen)) -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
@@ -117,56 +117,56 @@ classifications and names.
     <table name="subclassis"> <!-- Unterklasse (-idae (bei Pflanzen),
                                    -phycidae (bei Algen), -mycetidae (bei Pilzen),) -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
 
     <table name="superordo"> <!-- Überordnung (orders) -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
 
     <table name="ordo"> <!-- * Ordnung (-ales) -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
 
     <table name="subordo"> <!-- Unterordnung (-ineae) -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
 
     <table name="partordo"> <!-- Teilordnung -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
 
     <table name="superfamilia"> <!-- Überfamilie -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
 
     <table name="familia"> <!-- * Familie (families; -aceae) -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
 
     <table name="subfamilia"> <!-- Unterfamilie (-oideae) -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
@@ -174,7 +174,7 @@ classifications and names.
     <!-- Der wiss. Name einer Tribus endet in der Botanik auf -eae, in der Zoologie auf -ini -->
     <table name="tribus"> <!-- + Tribus (-eae) -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
@@ -188,7 +188,7 @@ classifications and names.
 
     <table name="genus"> <!-- * Gattung -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
@@ -197,7 +197,7 @@ classifications and names.
 
     <table name="species"> <!-- * Art -->
       <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
       <column name="group"          type="integer" flags="" />
     </table>
@@ -205,31 +205,42 @@ classifications and names.
          untergliedert sein. + + -->
 
     <table name="subspecies"> <!-- Unterart -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
-      <column name="value"          type="string"  flags="required" />
+      <column name="id"              type="integer" flags="primarykey" />
+      <column name="translation_id"  type="integer" flags="references:translations(id)" />
+      <column name="value"           type="string"  flags="required" />
     </table>
 
     <table name="encyclopedia">
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
-      <column name="citation_id"    type="integer" flags="" />
-      <column name="flag_ids"       type="string"  flags="" />
-      <column name="domain_id"      type="integer" flags="" />
-      <column name="name_specy"     type="string"  flags="" />
+      <column name="id"              type="integer" flags="primarykey" />
+      <column name="translation_id"  type="integer" flags="references:translations(id)" />
+      <column name="citation_id"     type="integer" flags="references:citations(id)" />
+      <column name="flag_ids"        type="string"  flags="" />
+
+      <column name="domain_id"       type="integer" flags="references:domains(id)" />
+
+      <column name="superfamilia_id" type="integer" flags="references:superfamilia(id)" />
+      <column name="familia_id"      type="integer" flags="references:familia(id)" />
+      <column name="subfamilia_id"   type="integer" flags="references:subfamilia(id)" />
+      <column name="tribus_id"       type="integer" flags="references:tribus(id)" />
+      <column name="subtribus_id"    type="integer" flags="references:subtribus(id)" />
+      <column name="genus_id"        type="integer" flags="references:genus(id)" />
+      <column name="specy_id"        type="integer" flags="references:species(id)" />
+      <column name="subspecy_id"     type="integer" flags="references:subspecies(id)" />
+
+      <column name="name_specy"      type="string"  flags="" />
     </table>
 
     <table name="flags">
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="value"          type="string"  flags="required" />
+      <column name="id"              type="integer" flags="primarykey" />
+      <column name="value"           type="string"  flags="required" />
     </table>
 
     <table name="translations">
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="language_id"    type="integer" flags="required" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="wikipedia"      type="string"  flags="" />
-      <column name="synonyms"       type="string"  flags="" />
+      <column name="id"              type="integer" flags="primarykey" />
+      <column name="locale_id"       type="integer" flags="required references:iso-codes.locales(id)" />
+      <column name="value"           type="string"  flags="required" />
+      <column name="wikipedia"       type="string"  flags="" />
+      <column name="synonyms"        type="string"  flags="" />
     </table>
   </structures>
 
@@ -257,15 +268,15 @@ classifications and names.
 
     <table name="domains">
       <row>
-        <field name="id"></field>
+        <field name="id">1</field>
         <field name="value">Bacteria</field>
       </row>
       <row>
-        <field name="id"></field>
+        <field name="id">2</field>
         <field name="value">Archaea</field>
       </row>
       <row>
-        <field name="id"></field>
+        <field name="id">3</field>
         <field name="value">Eukaryota</field>
       </row>
     </table>

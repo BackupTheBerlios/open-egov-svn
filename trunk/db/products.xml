@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<database name="products" version="1" date="2012-05-23" flags="const:true security:false privacy:false">
+<database name="products" version="1" date="2012-05-29" flags="const:true security:false privacy:false">
   <structures>
     <table name="manufacturers">
       <column name="id"              type="integer" flags="primarykey" />
@@ -37,7 +37,7 @@
   <data>
     <table name="prices">
       <row>
-        <field name="id">0</field>
+        <field name="id">1</field>
         <field name="date">2012-05-23</field>
         <field name="price">1.99</field>
         <field name="product_id">1</field>
@@ -49,7 +49,7 @@
 
     <table name="products">
       <row>
-        <field name="id">0</field>
+        <field name="id">1</field>
         <field name="name">Test-Produkt</field>
         <field name="manufacturer_id"></field>
       </row>
@@ -57,8 +57,11 @@
 
     <table name="shops">
       <row>
-        <field name="id">0</field>
-        <field name="name">Test-Shop</field>
+        <field name="id">1</field>
+        <field name="name">SATURN Magdeburg (ALLEE-CENTER)</field>
+        <field name="website">http://www.saturn.de/</field>
+        <field name="location_id"></field>
+        <field name="place_id"></field>
       </row>
     </table>
   </data>
