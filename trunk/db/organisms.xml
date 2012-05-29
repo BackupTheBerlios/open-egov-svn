@@ -28,14 +28,14 @@ classifications and names.
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" /> <!-- not "group" -->
     </table>
 
     <table name="subregnum"> <!-- Unterreich (-bionta) -->
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
 
     <table name="divisio"> <!-- * Abteilung (division, phylum;
@@ -43,7 +43,7 @@ classifications and names.
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
     <!-- Die Abteilung in der Botanik entspricht dem Stamm (Phylum) in
          der zoologischen Systematik und wird entsprechend auch in der
@@ -54,56 +54,56 @@ classifications and names.
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
 
     <table name="stammgroup"> <!-- Stammgruppe -->
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
 
     <table name="superstamm"> <!-- Überstamm -->
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
 
     <table name="stamm"> <!-- Stamm -->
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
 
     <table name="substamm"> <!-- Unterstamm -->
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
 
     <table name="superclassis"> <!-- Überklasse -->
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
 
     <table name="reihe"> <!-- Reihe -->
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
 
     <table name="reihe2"> <!-- Ohne Rang -->
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
 
     <table name="classis"> <!-- * Klasse (-opsida (bei Pflanzen), -phyceae (bei Algen),
@@ -111,7 +111,7 @@ classifications and names.
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
 
     <table name="subclassis"> <!-- Unterklasse (-idae (bei Pflanzen),
@@ -119,56 +119,56 @@ classifications and names.
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
 
     <table name="superordo"> <!-- Überordnung (orders) -->
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
 
     <table name="ordo"> <!-- * Ordnung (-ales) -->
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
 
     <table name="subordo"> <!-- Unterordnung (-ineae) -->
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
 
     <table name="partordo"> <!-- Teilordnung -->
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
 
     <table name="superfamilia"> <!-- Überfamilie -->
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
 
     <table name="familia"> <!-- * Familie (families; -aceae) -->
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
 
     <table name="subfamilia"> <!-- Unterfamilie (-oideae) -->
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
 
     <!-- Der wiss. Name einer Tribus endet in der Botanik auf -eae, in der Zoologie auf -ini -->
@@ -176,21 +176,21 @@ classifications and names.
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
 
     <table name="subtribus"> <!-- Subtribus (-inae) -->
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
 
     <table name="genus"> <!-- * Gattung -->
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
     <!-- Gattungen können in Sektionen (sectio) und Serien (series)
          untergliedert sein. + + -->
@@ -199,7 +199,7 @@ classifications and names.
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="references:translations(id)" />
       <column name="value"          type="string"  flags="required" />
-      <column name="group"          type="integer" flags="" />
+      <column name="grp"            type="integer" flags="" />
     </table>
     <!-- Arten können in Varietäten (varietas) und Formen (forma)
          untergliedert sein. + + -->
@@ -218,6 +218,18 @@ classifications and names.
 
       <column name="domain_id"       type="integer" flags="references:domains(id)" />
 
+      <column name="superstamm_id"   type="integer" flags="references:superstamm(id)" />
+      <column name="stamm_id"        type="integer" flags="references:stamm(id)" />
+      <column name="substamm_id"     type="integer" flags="references:substamm(id)" />
+      <column name="superclassis_id" type="integer" flags="references:superclassis(id)" />
+      <column name="reihe_id"        type="integer" flags="references:reihe(id)" />
+      <column name="reihe2_id"       type="integer" flags="references:reihe2(id)" />
+      <column name="classis_id"      type="integer" flags="references:classis(id)" />
+      <column name="subclassis_id"   type="integer" flags="references:subclassis(id)" />
+      <column name="superordo_id"    type="integer" flags="references:superordo(id)" />
+      <column name="ordo_id"         type="integer" flags="references:ordo(id)" />
+      <column name="subordo_id"      type="integer" flags="references:subordo(id)" />
+      <column name="partordo_id"     type="integer" flags="references:partordo(id)" />
       <column name="superfamilia_id" type="integer" flags="references:superfamilia(id)" />
       <column name="familia_id"      type="integer" flags="references:familia(id)" />
       <column name="subfamilia_id"   type="integer" flags="references:subfamilia(id)" />
@@ -269,14 +281,17 @@ classifications and names.
     <table name="domains">
       <row>
         <field name="id">1</field>
+        <field name="translation_id">0</field>
         <field name="value">Bacteria</field>
       </row>
       <row>
         <field name="id">2</field>
+        <field name="translation_id">0</field>
         <field name="value">Archaea</field>
       </row>
       <row>
         <field name="id">3</field>
+        <field name="translation_id">0</field>
         <field name="value">Eukaryota</field>
       </row>
     </table>
@@ -310,7 +325,7 @@ classifications and names.
         <field name="id">2</field>
         <field name="translation_id">7</field>
         <field name="value">Equidae</field>
-        <field name="group"></field>
+        <field name="grp"></field>
       </row>
     </table>
 
@@ -319,13 +334,13 @@ classifications and names.
         <field name="id">1</field>
         <field name="translation_id"></field>
         <field name="value">Fagus</field>
-        <field name="group"></field>
+        <field name="grp"></field>
       </row>
       <row>
         <field name="id">2</field>
         <field name="translation_id">6</field>
         <field name="value">Equus</field>
-        <field name="group"></field>
+        <field name="grp"></field>
       </row>
     </table>
 

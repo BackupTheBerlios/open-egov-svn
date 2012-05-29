@@ -89,6 +89,7 @@ which really do exist. One row for one real person.
         <field name="people_id">1</field>
         <field name="field_type_id">1</field>
         <field name="value">http://www.example.com/</field>
+        <field name="title">title</field>
       </row>
     </table>
 
