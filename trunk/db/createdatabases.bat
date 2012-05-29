@@ -5,17 +5,17 @@ REM $Id$
 CD /D %0\..
 CD
 
-..\bin\createdatabase.exe currencies.xml
-..\bin\createdatabase.exe dictionary.xml
-..\bin\createdatabase.exe government.xml
-..\bin\createdatabase.exe identities.xml
-..\bin\createdatabase.exe iso-codes.xml
-..\bin\createdatabase.exe nuts.xml
-..\bin\createdatabase.exe organisms.xml
-..\bin\createdatabase.exe people.xml
-..\bin\createdatabase.exe places.xml
-..\bin\createdatabase.exe products.xml
-..\bin\createdatabase.exe users.xml
+..\bin\createdatabase.exe --verbose currencies.xml
+..\bin\createdatabase.exe --verbose dictionary.xml
+..\bin\createdatabase.exe --verbose government.xml
+..\bin\createdatabase.exe --verbose identities.xml
+..\bin\createdatabase.exe --verbose iso-codes.xml
+..\bin\createdatabase.exe --verbose nuts.xml
+..\bin\createdatabase.exe --verbose organisms.xml
+..\bin\createdatabase.exe --verbose people.xml
+..\bin\createdatabase.exe --verbose places.xml
+..\bin\createdatabase.exe --verbose products.xml
+..\bin\createdatabase.exe --verbose users.xml
 
 PAUSE
 

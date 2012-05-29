@@ -10,7 +10,7 @@ http://simap.europa.eu/codes-and-nomenclatures/currencies/index_de.htm
 
 <database name="currencies" version="1" date="2012-05-29" flags="const:true security:false privacy:false">
   <structures>
-    <table name="currency_codes">
+    <table name="currencies">
       <column name="id"             type="integer" flags="primarykey" />
       <column name="code"           type="string"  flags="required" />
       <column name="country_id"     type="integer" flags="references:iso-codes.countries(id)" />
@@ -974,352 +974,352 @@ http://simap.europa.eu/codes-and-nomenclatures/currencies/index_de.htm
       <row>
         <field name="id">1</field>
         <field name="value">Ecu (European currency unit)</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">2</field>
         <field name="value">Euro</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">3</field>
         <field name="value">Austrian Schilling</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">4</field>
         <field name="value">Belgian Franc</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">5</field>
         <field name="value">Deutsche Mark</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">6</field>
         <field name="value">Danish Krone</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">7</field>
         <field name="value">Spanish Peseta</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">8</field>
         <field name="value">Finnish Markka</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">9</field>
         <field name="value">French Franc</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">10</field>
         <field name="value">British Pound</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">11</field>
         <field name="value">Greek Drachma</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">12</field>
         <field name="value">Irish Punt</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">13</field>
         <field name="value">Italian Lira</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">14</field>
         <field name="value">Luxembourg Franc</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">15</field>
         <field name="value">Dutch Guilder</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">16</field>
         <field name="value">Portuguese Escudo</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">17</field>
         <field name="value">Swedish Krona</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">18</field>
         <field name="value">Andorran Peseta</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">19</field>
         <field name="value">United Arab Emirates Dirham</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">20</field>
         <field name="value">Afghanistan Afghani</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">21</field>
         <field name="value">Albanian Lek</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">22</field>
         <field name="value">Netherlands Antillian Guilder</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">23</field>
         <field name="value">Angolan Kwanza</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">24</field>
         <field name="value">Argentinian Austral</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">25</field>
         <field name="value">Australian Dollar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">26</field>
         <field name="value">Aruban Florin</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">27</field>
         <field name="value">Barbados Dollar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">28</field>
         <field name="value">Bangladeshi Taka</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">29</field>
         <field name="value">Bulgarian Lev</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">30</field>
         <field name="value">Bahraini Dinar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">31</field>
         <field name="value">Burundi Franc</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">32</field>
         <field name="value">Bermudian Dollar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">33</field>
         <field name="value">Brunei Dollar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">34</field>
         <field name="value">Bolivian Boliviano</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">35</field>
         <field name="value">Brazilian Cruzeiro</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">36</field>
         <field name="value">Bahamian Dollar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">37</field>
         <field name="value">Bhutan Ngultrum</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">38</field>
         <field name="value">Burma Kyat</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">39</field>
         <field name="value">Botswanian Pula</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">40</field>
         <field name="value">Belize Dollar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">41</field>
         <field name="value">Canadian Dollar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">42</field>
         <field name="value">Swiss Franc</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">43</field>
         <field name="value">Chilean Unidades de Fomento</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">44</field>
         <field name="value">Chilean Peso</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">45</field>
         <field name="value">Yuan (Chinese) Renminbi</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">46</field>
         <field name="value">Colombian Peso</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">47</field>
         <field name="value">Costa Rican Colon</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">48</field>
         <field name="value">Czech Koruna</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">49</field>
         <field name="value">Cuban Peso</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">50</field>
         <field name="value">Cape Verde Escudo</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">51</field>
         <field name="value">Cyprus Pound</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">52</field>
         <field name="value">East German Mark (DDR)</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">53</field>
         <field name="value">Djibouti Franc</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">54</field>
         <field name="value">Dominican Peso</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">55</field>
         <field name="value">Algerian Dinar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">56</field>
         <field name="value">Ecuador Sucre</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">57</field>
         <field name="value">Egyptian Pound</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">58</field>
         <field name="value">Ethiopian Birr</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">59</field>
         <field name="value">Fiji Dollar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">60</field>
         <field name="value">Falkland Islands Pound</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">61</field>
         <field name="value">Ghanaian Cedi</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">62</field>
         <field name="value">Gibraltar Pound</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">63</field>
         <field name="value">Gambian Dalasi</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">64</field>
         <field name="value">Guinea Franc</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">65</field>
         <field name="value">Guatemalan Quetzal</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">66</field>
         <field name="value">Guinea-Bissau Peso</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">67</field>
         <field name="value">Guyanan Dollar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">68</field>
         <field name="value">Hong Kong Dollar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">69</field>
         <field name="value">Honduran Lempira</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">70</field>
         <field name="value">Haitian Gourde</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">71</field>
@@ -1329,432 +1329,437 @@ http://simap.europa.eu/codes-and-nomenclatures/currencies/index_de.htm
       <row>
         <field name="id">72</field>
         <field name="value">Indonesian Rupiah</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">73</field>
         <field name="value">Israeli Shekel</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">74</field>
         <field name="value">Indian Rupee</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">75</field>
         <field name="value">Iraqi Dinar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">76</field>
         <field name="value">Iranian Rial</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">77</field>
         <field name="value">Iceland Krona</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">78</field>
         <field name="value">Jamaican Dollar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">79</field>
         <field name="value">Jordanian Dinar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">80</field>
         <field name="value">Japanese Yen</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">81</field>
         <field name="value">Kenyan Schilling</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">82</field>
         <field name="value">Kampuchean (Cambodian) Riel</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">83</field>
         <field name="value">Comoros Franc</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">84</field>
         <field name="value">North Korean Won</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">85</field>
         <field name="value">(South) Korean Won</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">86</field>
         <field name="value">Kuwaiti Dinar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">87</field>
         <field name="value">Cayman Islands Dollar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">88</field>
         <field name="value">Lao Kip</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">89</field>
         <field name="value">Lebanese Pound</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">90</field>
         <field name="value">Sri Lanka Rupee</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">91</field>
         <field name="value">Liberian Dollar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">92</field>
         <field name="value">Lesotho Loti</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">93</field>
         <field name="value">Libyan Dinar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
+      </row>
+      <row>
+        <field name="id">94</field>
+        <field name="value">Morokkanischer Dirham</field>
+        <field name="locale_id">1</field>
       </row>
       <row>
         <field name="id">94</field>
         <field name="value">Moroccan Dirham</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">95</field>
         <field name="value">Malagasy Franc</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">96</field>
         <field name="value">Mongolian Tugrik</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">97</field>
         <field name="value">Macau Pataca</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">98</field>
         <field name="value">Mauritanian Ouguiya</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">99</field>
         <field name="value">Maltese Lira</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">100</field>
         <field name="value">Mauritius Rupee</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">101</field>
         <field name="value">Maldive Rufiyaa</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">102</field>
         <field name="value">Malawi Kwacha</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">103</field>
         <field name="value">Mexican Peso</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">104</field>
         <field name="value">Malaysian Ringgit</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">105</field>
         <field name="value">Mozambique Metical</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">106</field>
         <field name="value">Nigerian Naira</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">107</field>
         <field name="value">Nicaraguan Cordoba</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">108</field>
         <field name="value">Norwegian Kroner</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">109</field>
         <field name="value">Nepalese Rupee</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">110</field>
         <field name="value">New Zealand Dollar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">111</field>
         <field name="value">Omani Rial</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">112</field>
         <field name="value">Panamanian Balboa</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">113</field>
         <field name="value">Peruvian Inti</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">114</field>
         <field name="value">Papua New Guinea Kina</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">115</field>
         <field name="value">Philippine Peso</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">116</field>
         <field name="value">Pakistan Rupee</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">117</field>
         <field name="value">Polish Zloty</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">118</field>
         <field name="value">Paraguay Guarani</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">119</field>
         <field name="value">Qatari Rial</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">120</field>
         <field name="value">Romanian Leu</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">121</field>
         <field name="value">Rwanda Franc</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">122</field>
         <field name="value">Saudi Arabian Riyal</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">123</field>
         <field name="value">Solomon Islands Dollar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">124</field>
         <field name="value">Seychelles Rupee</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">125</field>
         <field name="value">Sudanese Pound</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">126</field>
         <field name="value">Singapore Dollar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">127</field>
         <field name="value">St. Helena Pound</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">128</field>
         <field name="value">Sierra Leone Leone</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">129</field>
         <field name="value">Somali Schilling</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">130</field>
         <field name="value">Suriname Guilder</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">131</field>
         <field name="value">Sao Tome and Principe Dobra</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">132</field>
         <field name="value">USSR Rouble</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">133</field>
         <field name="value">El Salvador Colon</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">134</field>
         <field name="value">Syrian Pound</field> <!-- corrected -->
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">135</field>
         <field name="value">Swaziland Lilangeni</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">136</field>
         <field name="value">Thai Bhat</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">137</field>
         <field name="value">Tunisian Dinar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">138</field>
         <field name="value">Tongan Pa'anga</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">139</field>
         <field name="value">East Timor Escudo</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">140</field>
         <field name="value">Turkish Lira</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">141</field>
         <field name="value">Trinidad and Tobago Dollar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">142</field>
         <field name="value">Taiwan Dollar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">143</field>
         <field name="value">Tanzanian Schilling</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">144</field>
         <field name="value">Uganda Shilling</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">145</field>
         <field name="value">US Dollar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">146</field>
         <field name="value">Uruguayan Peso</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">147</field>
         <field name="value">Venezualan Bolivar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">148</field>
         <field name="value">Vietnamese Dong</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">149</field>
         <field name="value">Vanuatu Vatu</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">150</field>
         <field name="value">Samoan Tala</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">151</field>
         <field name="value">Democratic Yemeni Dinar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">152</field>
         <field name="value">Yemeni Rial</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">153</field>
         <field name="value">New Yugoslavia Dinar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">154</field>
         <field name="value">South African Rand</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">155</field>
         <field name="value">Zambian Kwacha</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">156</field>
         <field name="value">Zaire Zaire</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
       <row>
         <field name="id">157</field>
         <field name="value">Zimbabwe Dollar</field>
-        <field name="locale_id"></field>
+        <field name="locale_id">2</field>
       </row>
     </table>
   </data>

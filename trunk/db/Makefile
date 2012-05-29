@@ -7,7 +7,7 @@ CREATEDB=..\bin\createdatabase.exe
 
 %.db: %.xml
 	del $@
-	$(CREATEDB) $<
+	$(CREATEDB) --verbose $<
 
 all: $(TARGETS)
 
