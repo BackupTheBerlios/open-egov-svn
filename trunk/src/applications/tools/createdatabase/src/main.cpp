@@ -41,30 +41,56 @@ QString escapeString(const QString &str)
 
 int main(int argc, char *argv[])
 {
-  QString fileName;
+  OEG::Qt::Application app(argc, argv, "createdatabase");
+  QDir::setCurrent("db");
+
+  QStringList args     = QCoreApplication::arguments();
+  QString     fileName = "";
+  bool        showSQL  = 0;
+  bool        verbose  = 0;
+  int         target   = 1;     // 1: SQLite, 2: MySQL, (later maybe 3: Oracle).
+
+  foreach (const QString &arg, args) {
+    if (arg.contains("--showSQL",  Qt::CaseInsensitive)) {
+      showSQL = true;
+    }
+    else if (arg.contains("--verbose",  Qt::CaseInsensitive)) {
+      verbose = true;
+    }
+    else if (arg.contains("--target",  Qt::CaseInsensitive)) {
+      target = 2;
+    }
+  }
 
   if (argc <= 1) {
     qWarning("Create Database: No xml file given as parameter.");
+    qWarning("Parameters: --showSQL --verbose --target <XML file>");
 
     fileName = QFileDialog::getOpenFileName(0, "Create Database", QDir::currentPath(), _("XML Files (*.xml)"));
     if (fileName.isEmpty())
       return 0;
   }
   else {
-    fileName = argv[1];
+    fileName = args.last();
   }
-
-  OEG::Qt::Application app(argc, argv, "createdatabase");
-  QDir::setCurrent("db");
 
   QFile file(fileName);
   if (! file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    qWarning("File not open.");
     return 0;
+  }
+
+  if (verbose) {
+    qDebug() << "Parameters:";
+    qDebug() << "  showSQL"  << showSQL;
+    qDebug() << "  target"   << target;
+    qDebug() << "  fileName" << fileName;
   }
 
   QFileInfo fi(fileName);
   fileName = fi.completeBaseName() + ".db";
-  qWarning("Creating database: " + fileName.toAscii());
+  if (verbose)
+    qWarning("Creating database: " + fileName.toAscii());
 
   QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
   db.setDatabaseName(fileName);
@@ -82,7 +108,8 @@ int main(int argc, char *argv[])
 
   QDomElement root = document.documentElement();           // Get the root element.
   QString rootTag = root.tagName();                        // Check the root tag name.
-  qDebug() << "root-Tag-Name: " << rootTag;
+  if (! rootTag.contains("database"))
+    qDebug() << "root-Tag-Name: " << rootTag;
 
   QSqlQuery query(db);
 
@@ -104,6 +131,20 @@ int main(int argc, char *argv[])
   QString      query_string, query_string_prefix;
   QString      table_name;
 
+  query_string = "PRAGMA foreign_keys = ON;";
+  if (showSQL)
+    qWarning() << "SQL: " << query_string;
+  if (! query.exec(query_string))
+    qWarning() << "Query failed: " << query_string;
+
+  query_string = "PRAGMA foreign_keys;";
+  if (showSQL)
+    qWarning() << "SQL: " << query_string;
+  if (! query.exec(query_string))
+    qWarning() << "Query failed: " << query_string;
+  query.next();
+  qWarning() << "PRAGMA foreign_keys:" << query.value(0).toString();
+
   QHash<QString, QString> column_datatypes;                // column_datatypes[tablename.tablecolumn] = "datatype"
 
   table_nodes = el.elementsByTagName("table");
@@ -112,8 +153,17 @@ int main(int argc, char *argv[])
     table_name = element.attribute("name");
 
     query_string = "DROP TABLE IF EXISTS " + table_name;
-    qDebug() << "SQL: " << query_string;
-    query.exec(query_string);
+    if (showSQL)
+      qWarning() << "SQL: " << query_string;
+    if (! query.exec(query_string))
+      qWarning() << "Query failed: " << query_string;
+
+    //query.prepare("DROP TABLE IF EXISTS :tablename");
+    //query.bindValue(":tablename", table_name);
+    //if (! query.exec())
+    //  qWarning() << "Query failed: " << query.lastQuery();
+    //if (showSQL)
+    //  qWarning() << "SQL: " << query.lastQuery();
 
     query_string  = "CREATE TABLE " + table_name + " (";
 
@@ -126,36 +176,43 @@ int main(int argc, char *argv[])
       QString s_name, s_type, s_flags;
       QString s;
 
-      s = "";
-      s_name  = data.attribute("name");                    // Column name.
-      s_type  = data.attribute("type");                    // Column datatype as text string.
-      s_flags = data.attribute("flags");                   // Flags for the column.
+      if (s_tag == "column") {
+        s = "";
+        s_name  = data.attribute("name");                  // Column name.
+        s_type  = data.attribute("type");                  // Column datatype as text string.
+        s_flags = data.attribute("flags");                 // Flags for the column.
 
-      column_datatypes[table_name + "." + s_name] = s_type; // Store datatype, so we can later use it again.
+        column_datatypes[table_name + "." + s_name] = s_type; // Store datatype, so we can later use it again.
 
-      if (s_type == "integer") {
-        s = s_name + " INTEGER";
+        if (s_type == "integer") {
+          s = s_name + " INTEGER";
 
-        if (s_flags.contains("primarykey", Qt::CaseInsensitive)) {
-          s += " PRIMARY KEY";
-          column_datatypes[table_name + "." + s_name] = "integer primary key";
+          if (s_flags.contains("primarykey", Qt::CaseInsensitive)) {
+            s += " PRIMARY KEY";
+            column_datatypes[table_name + "." + s_name] = "integer primary key";
+          }
         }
-      }
-      else if (s_type == "string") {
-        s += s_name + " TEXT";
-      }
-      else if (s_type == "date") {
-        s += s_name + " TEXT";
-      }
-      else if (s_type == "numeric") {
-        s += s_name + " NUMERIC";
+        else if (s_type == "string") {
+          s += s_name + " TEXT";
+        }
+        else if (s_type == "date") {
+          s += s_name + " TEXT";
+        }
+        else if (s_type == "numeric") {
+          s += s_name + " NUMERIC";
+        }
+        else {
+          qWarning() << "Unknown column type. Will use TEXT.";
+          s += s_name + " TEXT";
+        }
+
+        columns << s;
       }
       else {
-        qWarning() << "Unknown column type. Will use TEXT.";
-        s += s_name + " TEXT";
+        // Else "<!-- -->" (s_tag == "") would add an empty column to the query!
+        qDebug() << "Unknown or empty TAG (not column):" << s_tag << "(ignored).";
       }
 
-      columns << s;
       entries = entries.nextSibling();
     }
 
@@ -167,8 +224,10 @@ int main(int argc, char *argv[])
     }
     query_string += ")";
 
-    qDebug() << "SQL: " << query_string;
-    query.exec(query_string);
+    if (showSQL)
+      qWarning() << "SQL: " << query_string;
+    if (! query.exec(query_string))
+      qWarning() << "Query failed: " << query_string;
   }
 
   // https://www.sqlite.org/lang.html
@@ -205,26 +264,32 @@ int main(int argc, char *argv[])
         QString s;
 
         s_name = data.attribute("name");
+        if (s_tag == "field") {
+          s = data.text().trimmed();                       // Get the tag contents.
 
-        s = data.text().trimmed();                         // Get the tag contents.
+          if (s.isEmpty() && (column_datatypes[table_name + "." + s_name] == "string")) {
+            s = "''";
+          }
+          else if (s.isEmpty()) {
+            s = "NULL";
+          }
+          else if (column_datatypes[table_name + "." + s_name] == "integer primary key") {
+            s = "NULL";
+          }
+          else if (column_datatypes[table_name + "." + s_name] == "string") {
+            s = "'" + escapeString(s) + "'";
+          }
+          else if (column_datatypes[table_name + "." + s_name] == "date") {
+            s = "'" + escapeString(s) + "'";
+          }
 
-        if (s.isEmpty() && (column_datatypes[table_name + "." + s_name] == "string")) {
-          s = "''";
+          columns << s;
         }
-        else if (s.isEmpty()) {
-          s = "NULL";
-        }
-        else if (column_datatypes[table_name + "." + s_name] == "integer primary key") {
-          s = "NULL";
-        }
-        else if (column_datatypes[table_name + "." + s_name] == "string") {
-          s = "'" + escapeString(s) + "'";
-        }
-        else if (column_datatypes[table_name + "." + s_name] == "date") {
-          s = "'" + escapeString(s) + "'";
+        else {
+          // Else "<!-- -->" (s_tag == "") would add an empty column to the query!
+          qDebug() << "Unknown or empty TAG (not field):" << s_tag << "(ignored).";
         }
 
-        columns << s;
         entries = entries.nextSibling();
       }
 
@@ -237,8 +302,10 @@ int main(int argc, char *argv[])
       }
       query_string += ")";
 
-      qDebug() << "SQL: " << query_string;
-      query.exec(query_string);
+      if (showSQL)
+        qWarning() << "SQL: " << query_string;
+      if (! query.exec(query_string))
+        qWarning() << "Query failed: " << query_string;
     }
   }
 
