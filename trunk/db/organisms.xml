@@ -301,21 +301,84 @@ classifications and names.
         <field name="id">1</field>
         <field name="translation_id">1</field>
         <field name="citation_id">1</field>
+        <field name="flag_ids"></field>
         <field name="domain_id">3</field>
+        <field name="superstamm_id"></field>
+        <field name="stamm_id"></field>
+        <field name="substamm_id"></field>
+        <field name="superclassis_id"></field>
+        <field name="reihe_id"></field>
+        <field name="reihe2_id"></field>
+        <field name="classis_id"></field>
+        <field name="subclassis_id"></field>
+        <field name="superordo_id"></field>
+        <field name="ordo_id"></field>
+        <field name="subordo_id"></field>
+        <field name="partordo_id"></field>
+        <field name="superfamilia_id"></field>
+        <field name="familia_id"></field>
+        <field name="subfamilia_id"></field>
+        <field name="tribus_id"></field>
+        <field name="subtribus_id"></field>
+        <field name="genus_id"></field>
+        <field name="specy_id"></field>
+        <field name="subspecy_id"></field>
         <field name="name_specy">Panthera tigris</field>
       </row>
       <row>
         <field name="id">2</field>
         <field name="translation_id">2</field>
         <field name="citation_id">1</field>
+        <field name="flag_ids"></field>
         <field name="domain_id">3</field>
+        <field name="superstamm_id"></field>
+        <field name="stamm_id"></field>
+        <field name="substamm_id"></field>
+        <field name="superclassis_id"></field>
+        <field name="reihe_id"></field>
+        <field name="reihe2_id"></field>
+        <field name="classis_id"></field>
+        <field name="subclassis_id"></field>
+        <field name="superordo_id"></field>
+        <field name="ordo_id"></field>
+        <field name="subordo_id"></field>
+        <field name="partordo_id"></field>
+        <field name="superfamilia_id"></field>
+        <field name="familia_id"></field>
+        <field name="subfamilia_id"></field>
+        <field name="tribus_id"></field>
+        <field name="subtribus_id"></field>
+        <field name="genus_id"></field>
+        <field name="specy_id"></field>
+        <field name="subspecy_id"></field>
         <field name="name_specy">Panthera leo</field>
       </row>
       <row>
         <field name="id">3</field>
         <field name="translation_id">3</field>
         <field name="citation_id">2</field>
+        <field name="flag_ids"></field>
         <field name="domain_id">3</field>
+        <field name="superstamm_id"></field>
+        <field name="stamm_id"></field>
+        <field name="substamm_id"></field>
+        <field name="superclassis_id"></field>
+        <field name="reihe_id"></field>
+        <field name="reihe2_id"></field>
+        <field name="classis_id"></field>
+        <field name="subclassis_id"></field>
+        <field name="superordo_id"></field>
+        <field name="ordo_id"></field>
+        <field name="subordo_id"></field>
+        <field name="partordo_id"></field>
+        <field name="superfamilia_id"></field>
+        <field name="familia_id"></field>
+        <field name="subfamilia_id"></field>
+        <field name="tribus_id"></field>
+        <field name="subtribus_id"></field>
+        <field name="genus_id"></field>
+        <field name="specy_id"></field>
+        <field name="subspecy_id"></field>
         <field name="name_specy">Cryphalus abietis</field>
       </row>
     </table>
@@ -349,6 +412,7 @@ classifications and names.
         <field name="id">1</field>
         <field name="translation_id">4</field>
         <field name="value">Equus ferus</field>
+        <field name="grp"></field>
       </row>
     </table>
 
