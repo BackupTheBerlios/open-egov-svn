@@ -3,260 +3,512 @@
 <!-- $Id$ -->
 
 <!--
-This database contains information about all the lifeforms, their
-classifications and names.
+This database contains information about all the lifeforms,
+their classifications and names.
 -->
 
-<database name="organisms" version="1" date="2012-05-29" flags="const:true security:false privacy:false">
+<database name="organisms" version="1" date="2012-05-31" flags="const:true security:false privacy:false">
   <structures>
+    <table name="flags">
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+    </table>
+
+    <table name="categories">
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="" />
+      <column name="suffixum"           type="string"  flags="" />
+      <column name="abbreviation"       type="string"  flags="" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
+    </table>
+
     <table name="citations">
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="wikipedia"      type="string"  flags="" />
-      <column name="date"           type="date"    flags="" />
-      <column name="who"            type="string"  flags="" />
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="wikipedia"          type="string"  flags="" />
+      <column name="date"               type="date"    flags="" />
+      <column name="who"                type="string"  flags="" />
     </table>
 
     <!-- International Code of Nomenclature for algae, fungi, and plants (ICN) -->
 
-    <table name="domains"> <!-- Domäne -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
+    <table name="domain"> <!-- Domäne -->
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
-    <table name="regnum"> <!-- * Reich, Kingdom (-ota) -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" /> <!-- not "group" -->
+    <table name="regnum"> <!-- * Reich, Kingdom (*) -->
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="references:domain(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
-    <table name="subregnum"> <!-- Unterreich (-bionta) -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+    <table name="subregnum"> <!-- Unterreich -->
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
-    <table name="divisio"> <!-- * Abteilung (division, phylum;
-                                -phyta (Pflanzen), -mycota (Pilze) -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+    <table name="divisio"> <!-- * Abteilung (division, phylum) (*) -->
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
     <!-- Die Abteilung in der Botanik entspricht dem Stamm (Phylum) in
          der zoologischen Systematik und wird entsprechend auch in der
-         Botanik gelegentlich als Phylum bezeichnet. -->
+         Botanik gelegentlich als Phylum bezeichnet. Stamm und Abteilung sind
+         dennoch verschiedene Tabellen, weil die Abteilung in der Zoologie
+         tlw. auch eine separate Ebene zwischen Stamm und Reich ist. -->
 
-    <table name="subdivisio"> <!-- Unterabteilung (-phytina (bei Pflanzen),
-                                   -mycotina (bei Pilzen)) -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+    <table name="subdivisio"> <!-- Unterabteilung -->
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
-    <table name="stammgroup"> <!-- Stammgruppe -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+    <table name="stammgroup"> <!-- Stammgruppe, superphylum; TODO: verzichtbar? identisch mit superstamm? immer? -->
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
     <table name="superstamm"> <!-- Überstamm -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
     <table name="stamm"> <!-- Stamm -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
     <table name="substamm"> <!-- Unterstamm -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
     <table name="superclassis"> <!-- Überklasse -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
-    <table name="reihe"> <!-- Reihe -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+    <table name="reihe"> <!-- Reihe; Reihen sind jetzt Ordnungen; TODO: wird noch benötigt? -->
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
     <table name="reihe2"> <!-- Ohne Rang -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
-    <table name="classis"> <!-- * Klasse (-opsida (bei Pflanzen), -phyceae (bei Algen),
-                                -mycetes (bei Pilzen)) -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+    <table name="classis"> <!-- * Klasse (*) -->
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
-    <table name="subclassis"> <!-- Unterklasse (-idae (bei Pflanzen),
-                                   -phycidae (bei Algen), -mycetidae (bei Pilzen),) -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+    <table name="subclassis"> <!-- Unterklasse -->
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
-    <table name="superordo"> <!-- Überordnung (orders) -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+    <table name="superordo"> <!-- Überordnung (orders) [*] -->
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
-    <table name="ordo"> <!-- * Ordnung (-ales) -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+    <table name="ordo"> <!-- * Ordnung (*) -->
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
-    <table name="subordo"> <!-- Unterordnung (-ineae) -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+    <table name="subordo"> <!-- Unterordnung (-ineae) [*] -->
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
     <table name="partordo"> <!-- Teilordnung -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
     <table name="superfamilia"> <!-- Überfamilie -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
-    <table name="familia"> <!-- * Familie (families; -aceae) -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+    <table name="familia"> <!-- * Familie (families) (*) -->
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
-    <table name="subfamilia"> <!-- Unterfamilie (-oideae) -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+    <table name="subfamilia"> <!-- Unterfamilie -->
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
-    <!-- Der wiss. Name einer Tribus endet in der Botanik auf -eae, in der Zoologie auf -ini -->
-    <table name="tribus"> <!-- + Tribus (-eae) -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+    <table name="tribus"> <!-- + Tribus -->
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
-    <table name="subtribus"> <!-- Subtribus (-inae) -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+    <table name="subtribus"> <!-- Subtribus -->
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="" />
     </table>
 
-    <table name="genus"> <!-- * Gattung -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+    <table name="genus"> <!-- * Gattung (*) -->
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
     <!-- Gattungen können in Sektionen (sectio) und Serien (series)
          untergliedert sein. + + -->
 
-    <table name="species"> <!-- * Art -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="references:translations(id)" />
-      <column name="value"          type="string"  flags="required" />
-      <column name="grp"            type="integer" flags="" />
+    <table name="nothogenus"> <!-- Hybride -->
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="genus_id"           type="integer" flags="required references:genus(id)" />
+    </table>
+
+    <table name="species"> <!-- * Art (*) -->
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
     <!-- Arten können in Varietäten (varietas) und Formen (forma)
          untergliedert sein. + + -->
 
+    <table name="nothospecies"> <!-- Hybride -->
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="species_id"         type="integer" flags="required references:species(id)" />
+    </table>
+
     <table name="subspecies"> <!-- Unterart -->
-      <column name="id"              type="integer" flags="primarykey" />
-      <column name="translation_id"  type="integer" flags="references:translations(id)" />
-      <column name="value"           type="string"  flags="required" />
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
-    <table name="encyclopedia">
-      <column name="id"              type="integer" flags="primarykey" />
-      <column name="translation_id"  type="integer" flags="references:translations(id)" />
-      <column name="citation_id"     type="integer" flags="references:citations(id)" />
-      <column name="flag_ids"        type="string"  flags="" />
-
-      <column name="domain_id"       type="integer" flags="references:domains(id)" />
-
-      <column name="superstamm_id"   type="integer" flags="references:superstamm(id)" />
-      <column name="stamm_id"        type="integer" flags="references:stamm(id)" />
-      <column name="substamm_id"     type="integer" flags="references:substamm(id)" />
-      <column name="superclassis_id" type="integer" flags="references:superclassis(id)" />
-      <column name="reihe_id"        type="integer" flags="references:reihe(id)" />
-      <column name="reihe2_id"       type="integer" flags="references:reihe2(id)" />
-      <column name="classis_id"      type="integer" flags="references:classis(id)" />
-      <column name="subclassis_id"   type="integer" flags="references:subclassis(id)" />
-      <column name="superordo_id"    type="integer" flags="references:superordo(id)" />
-      <column name="ordo_id"         type="integer" flags="references:ordo(id)" />
-      <column name="subordo_id"      type="integer" flags="references:subordo(id)" />
-      <column name="partordo_id"     type="integer" flags="references:partordo(id)" />
-      <column name="superfamilia_id" type="integer" flags="references:superfamilia(id)" />
-      <column name="familia_id"      type="integer" flags="references:familia(id)" />
-      <column name="subfamilia_id"   type="integer" flags="references:subfamilia(id)" />
-      <column name="tribus_id"       type="integer" flags="references:tribus(id)" />
-      <column name="subtribus_id"    type="integer" flags="references:subtribus(id)" />
-      <column name="genus_id"        type="integer" flags="references:genus(id)" />
-      <column name="specy_id"        type="integer" flags="references:species(id)" />
-      <column name="subspecy_id"     type="integer" flags="references:subspecies(id)" />
-
-      <column name="name_specy"      type="string"  flags="" />
-    </table>
-
-    <table name="flags">
-      <column name="id"              type="integer" flags="primarykey" />
-      <column name="value"           type="string"  flags="required" />
+    <table name="encyclopedia">  <!-- TODO: löschen, was nicht gebraucht wird -->
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="citation_id"        type="integer" flags="references:citations(id)" />
+      <column name="flag_ids"           type="string"  flags="" />
+      <column name="domain_id"          type="integer" flags="references:domain(id)" />
+      <column name="regnum_id"          type="integer" flags="references:regnum(id)" />
+      <column name="subregnum_id"       type="integer" flags="references:subregnum(id)" />
+      <column name="divisio_id"         type="integer" flags="references:divisio(id)" />
+      <column name="stammgroup_id"      type="integer" flags="references:stammgroup(id)" />
+      <column name="superstamm_id"      type="integer" flags="references:superstamm(id)" />
+      <column name="stamm_id"           type="integer" flags="references:stamm(id)" />
+      <column name="substamm_id"        type="integer" flags="references:substamm(id)" />
+      <column name="superclassis_id"    type="integer" flags="references:superclassis(id)" />
+      <column name="reihe_id"           type="integer" flags="references:reihe(id)" />
+      <column name="reihe2_id"          type="integer" flags="references:reihe2(id)" />
+      <column name="classis_id"         type="integer" flags="references:classis(id)" />
+      <column name="subclassis_id"      type="integer" flags="references:subclassis(id)" />
+      <column name="superordo_id"       type="integer" flags="references:superordo(id)" />
+      <column name="ordo_id"            type="integer" flags="references:ordo(id)" />
+      <column name="subordo_id"         type="integer" flags="references:subordo(id)" />
+      <column name="partordo_id"        type="integer" flags="references:partordo(id)" />
+      <column name="superfamilia_id"    type="integer" flags="references:superfamilia(id)" />
+      <column name="familia_id"         type="integer" flags="references:familia(id)" />
+      <column name="subfamilia_id"      type="integer" flags="references:subfamilia(id)" />
+      <column name="tribus_id"          type="integer" flags="references:tribus(id)" />
+      <column name="subtribus_id"       type="integer" flags="references:subtribus(id)" />
+      <column name="genus_id"           type="integer" flags="references:genus(id)" />
+      <column name="species_id"         type="integer" flags="references:species(id)" />
+      <column name="subspecies_id"      type="integer" flags="references:subspecies(id)" />
+      <column name="scientific_name"    type="string"  flags="" />
+      <column name="parent_id"          type="integer" flags="" />
+      <column name="parent_category_id" type="integer" flags="references:categories(id)" />
+      <column name="translation_id"     type="integer" flags="references:translations(id)" />
     </table>
 
     <table name="translations">
-      <column name="id"              type="integer" flags="primarykey" />
-      <column name="locale_id"       type="integer" flags="required references:iso-codes.locales(id)" />
-      <column name="value"           type="string"  flags="required" />
-      <column name="wikipedia"       type="string"  flags="" />
-      <column name="synonyms"        type="string"  flags="" />
+      <column name="id"                 type="integer" flags="primarykey" />
+      <column name="locale_id"          type="integer" flags="required references:iso-codes.locales(id)" />
+      <column name="value"              type="string"  flags="required" />
+      <column name="wikipedia"          type="string"  flags="" />
+      <column name="synonyms"           type="string"  flags="" />
     </table>
   </structures>
 
   <data>
+    <table name="flags">
+      <row>
+        <field name="id">1</field>
+        <field name="value">application:tree-cadaster</field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="value">application:nature</field>
+      </row>
+      <row>
+        <field name="id">3</field>
+        <field name="value">application:forest-district-book</field>
+      </row>
+      <row>
+        <field name="id">4</field>
+        <field name="value">application:herbarium</field>
+      </row>
+      <row>
+        <field name="id">5</field>
+        <field name="value">animal</field>
+      </row>
+      <row>
+        <field name="id">6</field>
+        <field name="value">tree</field>
+      </row>
+      <row>
+        <field name="id">7</field>
+        <field name="value">zoo</field>
+      </row>
+    </table>
+
+    <table name="categories">
+      <row>
+        <field name="id">1</field>
+        <field name="value">regnum</field>
+        <field name="suffixum">-ota</field>
+        <field name="abbreviation"></field>
+        <field name="translation_id">12</field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="value">subregnum</field>
+        <field name="suffixum">-bionta</field>
+        <field name="abbreviation"></field>
+        <field name="translation_id">13</field>
+      </row>
+      <row>
+        <field name="id">3</field>
+        <field name="value">divisio</field>
+        <field name="suffixum">-phyta (Pflanzen), -mycota (Pilzen)</field>
+        <field name="abbreviation"></field>
+        <field name="translation_id">14</field>
+      </row>
+      <row>
+        <field name="id">4</field>
+        <field name="value">subdivisio</field>
+        <field name="suffixum">-phytina (Pflanzen), -mycotina (Pilzen)</field>
+        <field name="abbreviation"></field>
+        <field name="translation_id">15</field>
+      </row>
+      <row>
+        <field name="id">5</field>
+        <field name="value">stammgroup</field>
+        <field name="suffixum"></field>
+        <field name="abbreviation"></field>
+        <field name="translation_id">16</field>
+      </row>
+      <row>
+        <field name="id">6</field>
+        <field name="value">superstamm</field>
+        <field name="suffixum"></field>
+        <field name="abbreviation"></field>
+        <field name="translation_id">17</field>
+      </row>
+      <row>
+        <field name="id">7</field>
+        <field name="value">stamm</field>
+        <field name="suffixum"></field>
+        <field name="abbreviation"></field>
+        <field name="translation_id">18</field>
+      </row>
+      <row>
+        <field name="id">8</field>
+        <field name="value">substamm</field>
+        <field name="suffixum"></field>
+        <field name="abbreviation"></field>
+        <field name="translation_id">19</field>
+      </row>
+      <row>
+        <field name="id">9</field>
+        <field name="value">superclassis</field>
+        <field name="suffixum"></field>
+        <field name="abbreviation"></field>
+        <field name="translation_id">20</field>
+      </row>
+      <row>
+        <field name="id">10</field>
+        <field name="value">reihe</field>
+        <field name="suffixum"></field>
+        <field name="abbreviation"></field>
+        <field name="translation_id">21</field>
+      </row>
+      <row>
+        <field name="id">11</field>
+        <field name="value">reihe2</field>
+        <field name="suffixum"></field>
+        <field name="abbreviation"></field>
+        <field name="translation_id">22</field>
+      </row>
+      <row>
+        <field name="id">12</field>
+        <field name="value">classis</field>
+        <field name="suffixum">-opsida (Pflanzen), -phyceae (Algen), -mycetes (Pilze)</field>
+        <field name="abbreviation">cl.</field>
+        <field name="translation_id">23</field>
+      </row>
+      <row>
+        <field name="id">13</field>
+        <field name="value">subclassis</field>
+        <field name="suffixum">-idae (Pflanzen), -phycidae (Algen), -mycetidae (Pilze)</field>
+        <field name="abbreviation">subcl.</field>
+        <field name="translation_id">24</field>
+      </row>
+      <row>
+        <field name="id">14</field>
+        <field name="value">superordo</field>
+        <field name="suffixum"></field>
+        <field name="abbreviation"></field>
+        <field name="translation_id">25</field>
+      </row>
+      <row>
+        <field name="id">15</field>
+        <field name="value">ordo</field>
+        <field name="suffixum">-ales (bot.), -ida (zool.)</field>
+        <field name="abbreviation">ord.</field>
+        <field name="translation_id">26</field>
+      </row>
+      <row>
+        <field name="id">16</field>
+        <field name="value">subordo</field>
+        <field name="suffixum">-ineae (bot.), -ina (zool.)</field>
+        <field name="abbreviation">subord.</field>
+        <field name="translation_id">27</field>
+      </row>
+      <row>
+        <field name="id">17</field>
+        <field name="value">partordo</field>
+        <field name="suffixum"></field>
+        <field name="abbreviation"></field>
+        <field name="translation_id">28</field>
+      </row>
+      <row>
+        <field name="id">18</field>
+        <field name="value">superfamilia</field>
+        <field name="suffixum"></field>
+        <field name="abbreviation"></field>
+        <field name="translation_id">29</field>
+      </row>
+      <row>
+        <field name="id">19</field>
+        <field name="value">familia</field>
+        <field name="suffixum">-aceae</field>
+        <field name="abbreviation">fam.</field>
+        <field name="translation_id">30</field>
+      </row>
+      <row>
+        <field name="id">20</field>
+        <field name="value">subfamilia</field>
+        <field name="suffixum">-oideae</field>
+        <field name="abbreviation">subfam.</field>
+        <field name="translation_id">31</field>
+      </row>
+      <row>
+        <field name="id">21</field>
+        <field name="value">tribus</field>
+        <field name="suffixum">-eae (bot.), -ini (zool.)</field>
+        <field name="abbreviation">tr.</field>
+        <field name="translation_id">32</field>
+      </row>
+      <row>
+        <field name="id">22</field>
+        <field name="value">subtribus</field>
+        <field name="suffixum">-inae</field>
+        <field name="abbreviation">subtr.</field>
+        <field name="translation_id">33</field>
+      </row>
+      <row>
+        <field name="id">23</field>
+        <field name="value">genus</field>
+        <field name="suffixum"></field>
+        <field name="abbreviation">gen.</field>
+        <field name="translation_id">34</field>
+      </row>
+      <row>
+        <field name="id">24</field>
+        <field name="value">species</field>
+        <field name="suffixum"></field>
+        <field name="abbreviation">sp.</field> <!-- auch spec., Mehrzahl: spp. -->
+        <field name="translation_id">35</field>
+      </row>
+      <row>
+        <field name="id">25</field>
+        <field name="value">subspecies</field>
+        <field name="suffixum"></field>
+        <field name="abbreviation">subsp.</field> <!-- früher ssp. -->
+        <field name="translation_id">36</field>
+      </row>
+    </table>
+
     <table name="citations">
       <row>
         <field name="id">1</field>
@@ -278,229 +530,616 @@ classifications and names.
       </row>
     </table>
 
-    <table name="domains">
+    <table name="domains"> <!-- Domänen -->
       <row>
-        <field name="id">1</field>
-        <field name="translation_id">0</field>
+        <field name="id">1</field>                         <!-- in Phyla (Stämme) unterteilt -->
         <field name="value">Bacteria</field>
+        <field name="translation_id">9</field>
       </row>
       <row>
-        <field name="id">2</field>
-        <field name="translation_id">0</field>
+        <field name="id">2</field>                         <!-- in Phyla (Stämme) unterteilt -->
         <field name="value">Archaea</field>
+        <field name="translation_id">10</field>
       </row>
       <row>
-        <field name="id">3</field>
-        <field name="translation_id">0</field>
+        <field name="id">3</field>                         <!-- in Reiche unterteilt -->
         <field name="value">Eukaryota</field>
+        <field name="translation_id">11</field>
       </row>
     </table>
 
-    <table name="encyclopedia">
+    <table name="regnum"> <!-- Reich, Kingdom -->
       <row>
-        <field name="id">1</field>
-        <field name="translation_id">1</field>
-        <field name="citation_id">1</field>
-        <field name="flag_ids"></field>
-        <field name="domain_id">3</field>
-        <field name="superstamm_id"></field>
-        <field name="stamm_id"></field>
-        <field name="substamm_id"></field>
-        <field name="superclassis_id"></field>
-        <field name="reihe_id"></field>
-        <field name="reihe2_id"></field>
-        <field name="classis_id"></field>
-        <field name="subclassis_id"></field>
-        <field name="superordo_id"></field>
-        <field name="ordo_id"></field>
-        <field name="subordo_id"></field>
-        <field name="partordo_id"></field>
-        <field name="superfamilia_id"></field>
-        <field name="familia_id"></field>
-        <field name="subfamilia_id"></field>
-        <field name="tribus_id"></field>
-        <field name="subtribus_id"></field>
-        <field name="genus_id"></field>
-        <field name="specy_id"></field>
-        <field name="subspecy_id"></field>
-        <field name="name_specy">Panthera tigris</field>
-      </row>
-      <row>
-        <field name="id">2</field>
-        <field name="translation_id">2</field>
-        <field name="citation_id">1</field>
-        <field name="flag_ids"></field>
-        <field name="domain_id">3</field>
-        <field name="superstamm_id"></field>
-        <field name="stamm_id"></field>
-        <field name="substamm_id"></field>
-        <field name="superclassis_id"></field>
-        <field name="reihe_id"></field>
-        <field name="reihe2_id"></field>
-        <field name="classis_id"></field>
-        <field name="subclassis_id"></field>
-        <field name="superordo_id"></field>
-        <field name="ordo_id"></field>
-        <field name="subordo_id"></field>
-        <field name="partordo_id"></field>
-        <field name="superfamilia_id"></field>
-        <field name="familia_id"></field>
-        <field name="subfamilia_id"></field>
-        <field name="tribus_id"></field>
-        <field name="subtribus_id"></field>
-        <field name="genus_id"></field>
-        <field name="specy_id"></field>
-        <field name="subspecy_id"></field>
-        <field name="name_specy">Panthera leo</field>
-      </row>
-      <row>
-        <field name="id">3</field>
-        <field name="translation_id">3</field>
-        <field name="citation_id">2</field>
-        <field name="flag_ids"></field>
-        <field name="domain_id">3</field>
-        <field name="superstamm_id"></field>
-        <field name="stamm_id"></field>
-        <field name="substamm_id"></field>
-        <field name="superclassis_id"></field>
-        <field name="reihe_id"></field>
-        <field name="reihe2_id"></field>
-        <field name="classis_id"></field>
-        <field name="subclassis_id"></field>
-        <field name="superordo_id"></field>
-        <field name="ordo_id"></field>
-        <field name="subordo_id"></field>
-        <field name="partordo_id"></field>
-        <field name="superfamilia_id"></field>
-        <field name="familia_id"></field>
-        <field name="subfamilia_id"></field>
-        <field name="tribus_id"></field>
-        <field name="subtribus_id"></field>
-        <field name="genus_id"></field>
-        <field name="specy_id"></field>
-        <field name="subspecy_id"></field>
-        <field name="name_specy">Cryphalus abietis</field>
+        <field name="id"></field>
+        <field name="value"></field>
+        <field name="parent_id"></field>
+        <field name="translation_id"></field>
       </row>
     </table>
+
+    <table name="subregnum"> <!-- Unterreich -->
+      <row>
+        <field name="id"></field>
+        <field name="value"></field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id"></field>
+      </row>
+    </table>
+
+    <table name="divisio"> <!-- Abteilung -->
+      <row>
+        <field name="id"></field>
+        <field name="value"></field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id"></field>
+      </row>
+    </table>
+
+    <table name="subdivisio"> <!-- Unterabteilung -->
+      <row>
+        <field name="id"></field>
+        <field name="value"></field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id"></field>
+      </row>
+    </table>
+
+    <table name="stammgroup"> <!-- Stammgruppe -->
+      <row>
+        <field name="id"></field>
+        <field name="value"></field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id"></field>
+      </row>
+    </table>
+
+    <table name="superstamm"> <!-- Überstamm -->
+      <row>
+        <field name="id"></field>
+        <field name="value"></field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id"></field>
+      </row>
+    </table>
+
+    <table name="stamm"> <!-- Stamm -->
+      <row>
+        <field name="id"></field>
+        <field name="value"></field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id"></field>
+      </row>
+    </table>
+
+    <table name="substamm"> <!-- Unterstamm -->
+      <row>
+        <field name="id"></field>
+        <field name="value"></field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id"></field>
+      </row>
+    </table>
+
+    <table name="superclassis"> <!-- Überklasse -->
+      <row>
+        <field name="id"></field>
+        <field name="value"></field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id"></field>
+      </row>
+    </table>
+
+    <table name="reihe"> <!-- Reihe; Reihen sind jetzt Ordnungen; TODO: wird noch benötigt? -->
+      <row>
+        <field name="id"></field>
+        <field name="value"></field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id"></field>
+      </row>
+    </table>
+
+    <table name="reihe2"> <!-- Ohne Rang -->
+      <row>
+        <field name="id"></field>
+        <field name="value"></field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id"></field>
+      </row>
+    </table>
+
+    <table name="classis"> <!-- Klasse -->
+      <row>
+        <field name="id"></field>
+        <field name="value"></field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id"></field>
+      </row>
+    </table>
+
+    <table name="subclassis"> <!-- Unterklasse -->
+      <row>
+        <field name="id"></field>
+        <field name="value"></field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id"></field>
+      </row>
+    </table>
+
+    <table name="superordo"> <!-- Überordnung -->
+      <row>
+        <field name="id">1</field>
+        <field name="value">Laurasiatheria</field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id"></field>
+      </row>
+    </table>
+
+    <table name="ordo"> <!-- Ordnung -->
+      <row>
+        <field name="id">1</field>
+        <field name="value">Carnivora</field>
+        <field name="parent_id">1</field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id">8</field>
+      </row>
+    </table>
+
+    <table name="subordo"> <!-- Unterordnung -->
+      <row>
+        <field name="id"></field>
+        <field name="value"></field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id"></field>
+      </row>
+    </table>
+
+    <table name="partordo"> <!-- Teilordnung -->
+      <row>
+        <field name="id"></field>
+        <field name="value"></field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id"></field>
+      </row>
+    </table>
+
+
+
+
 
     <table name="familia">
       <row>
         <field name="id">2</field>
-        <field name="translation_id">7</field>
         <field name="value">Equidae</field>
-        <field name="grp"></field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id">7</field>
       </row>
     </table>
 
     <table name="genus">
       <row>
         <field name="id">1</field>
-        <field name="translation_id"></field>
         <field name="value">Fagus</field>
-        <field name="grp"></field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id"></field>
       </row>
       <row>
         <field name="id">2</field>
-        <field name="translation_id">6</field>
         <field name="value">Equus</field>
-        <field name="grp"></field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id">6</field>
       </row>
     </table>
 
     <table name="species">
       <row>
         <field name="id">1</field>
-        <field name="translation_id">4</field>
         <field name="value">Equus ferus</field>
-        <field name="grp"></field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id">4</field>
       </row>
     </table>
 
-    <table name="subspecies">
+    <table name="nothospecies"> <!-- Hybride -->
       <row>
         <field name="id">1</field>
-        <field name="translation_id">5</field>
+        <field name="species_id"></field>
+      </row>
+    </table>
+
+    <table name="subspecies"> <!-- Unterart -->
+      <row>
+        <field name="id">1</field>
         <field name="value">Equus ferus caballus</field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id">5</field>
       </row>
     </table>
 
-    <table name="flags">
+    <table name="encyclopedia">
       <row>
         <field name="id">1</field>
-        <field name="value">animal</field>
+        <field name="citation_id">1</field>
+        <field name="flag_ids"></field>
+        <field name="domain_id">3</field>
+        <field name="regnum_id"></field>
+        <field name="subregnum_id"></field>
+        <field name="divisio_id"></field>
+        <field name="stammgroup_id"></field>
+        <field name="superstamm_id"></field>
+        <field name="stamm_id"></field>
+        <field name="substamm_id"></field>
+        <field name="superclassis_id"></field>
+        <field name="reihe_id"></field>
+        <field name="reihe2_id"></field>
+        <field name="classis_id"></field>
+        <field name="subclassis_id"></field>
+        <field name="superordo_id"></field>
+        <field name="ordo_id"></field>
+        <field name="subordo_id"></field>
+        <field name="partordo_id"></field>
+        <field name="superfamilia_id"></field>
+        <field name="familia_id"></field>
+        <field name="subfamilia_id"></field>
+        <field name="tribus_id"></field>
+        <field name="subtribus_id"></field>
+        <field name="genus_id"></field>
+        <field name="species_id"></field>
+        <field name="subspecies_id"></field>
+        <field name="scientific_name">Panthera tigris</field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id">1</field>
       </row>
       <row>
         <field name="id">2</field>
-        <field name="value">tree</field>
+        <field name="citation_id">1</field>
+        <field name="flag_ids"></field>
+        <field name="domain_id">3</field>
+        <field name="superstamm_id"></field>
+        <field name="stamm_id"></field>
+        <field name="substamm_id"></field>
+        <field name="superclassis_id"></field>
+        <field name="reihe_id"></field>
+        <field name="reihe2_id"></field>
+        <field name="classis_id"></field>
+        <field name="subclassis_id"></field>
+        <field name="superordo_id"></field>
+        <field name="ordo_id"></field>
+        <field name="subordo_id"></field>
+        <field name="partordo_id"></field>
+        <field name="superfamilia_id"></field>
+        <field name="familia_id"></field>
+        <field name="subfamilia_id"></field>
+        <field name="tribus_id"></field>
+        <field name="subtribus_id"></field>
+        <field name="genus_id"></field>
+        <field name="species_id"></field>
+        <field name="subspecies_id"></field>
+        <field name="scientific_name">Panthera leo</field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id">2</field>
       </row>
       <row>
         <field name="id">3</field>
-        <field name="value">application:tree-cadaster</field>
-      </row>
-      <row>
-        <field name="id">4</field>
-        <field name="value">application:nature</field>
-      </row>
-      <row>
-        <field name="id">5</field>
-        <field name="value">application:forest-district-book</field>
-      </row>
-      <row>
-        <field name="id">6</field>
-        <field name="value">zoo</field>
+        <field name="citation_id">2</field>
+        <field name="flag_ids"></field>
+        <field name="domain_id">3</field>
+        <field name="regnum_id"></field>
+        <field name="subregnum_id"></field>
+        <field name="divisio_id"></field>
+        <field name="stammgroup_id"></field>
+        <field name="superstamm_id"></field>
+        <field name="stamm_id"></field>
+        <field name="substamm_id"></field>
+        <field name="superclassis_id"></field>
+        <field name="reihe_id"></field>
+        <field name="reihe2_id"></field>
+        <field name="classis_id"></field>
+        <field name="subclassis_id"></field>
+        <field name="superordo_id"></field>
+        <field name="ordo_id"></field>
+        <field name="subordo_id"></field>
+        <field name="partordo_id"></field>
+        <field name="superfamilia_id"></field>
+        <field name="familia_id"></field>
+        <field name="subfamilia_id"></field>
+        <field name="tribus_id"></field>
+        <field name="subtribus_id"></field>
+        <field name="genus_id"></field>
+        <field name="species_id"></field>
+        <field name="subspecies_id"></field>
+        <field name="scientific_name">Cryphalus abietis</field>
+        <field name="parent_id"></field>
+        <field name="parent_category_id"></field>
+        <field name="translation_id">3</field>
       </row>
     </table>
 
     <table name="translations">
       <row>
         <field name="id">1</field>
-        <field name="language_id">2</field>
+        <field name="locale_id">1</field>
         <field name="value">Tiger</field>
         <field name="wikipedia">Tiger</field>
         <field name="synonyms"></field>
       </row>
       <row>
         <field name="id">2</field>
-        <field name="language_id">2</field>
+        <field name="locale_id">1</field>
         <field name="value">Löwe</field>
         <field name="wikipedia">Löwe</field>
         <field name="synonyms"></field>
       </row>
       <row>
         <field name="id">3</field>
-        <field name="language_id">2</field>
+        <field name="locale_id">1</field>
         <field name="value">Gekörnter Fichtenborkenkäfer</field>
         <field name="wikipedia">Gekörnter Fichtenborkenkäfer</field>
         <field name="synonyms"></field>
       </row>
       <row>
         <field name="id">4</field>
-        <field name="language_id">2</field>
+        <field name="locale_id">1</field>
         <field name="value">Wildpferd</field>
         <field name="wikipedia">Wildpferd</field>
         <field name="synonyms"></field>
       </row>
       <row>
         <field name="id">5</field>
-        <field name="language_id">2</field>
+        <field name="locale_id">1</field>
         <field name="value">Hauspferd</field>
         <field name="wikipedia">Hauspferd</field>
         <field name="synonyms"></field>
       </row>
       <row>
         <field name="id">6</field>
-        <field name="language_id">2</field>
+        <field name="locale_id">1</field>
         <field name="value">Pferde</field>
         <field name="wikipedia">Pferde</field>
         <field name="synonyms"></field>
       </row>
       <row>
         <field name="id">7</field>
-        <field name="language_id">2</field>
+        <field name="locale_id">1</field>
         <field name="value">Pferde</field>
         <field name="wikipedia">Pferde (Familie)</field>
         <field name="synonyms"></field>
       </row>
+      <row>
+        <field name="id">8</field>
+        <field name="locale_id">1</field>
+        <field name="value">Raubtiere</field>
+        <field name="wikipedia">Raubtiere</field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">9</field>
+        <field name="locale_id">1</field>
+        <field name="value">Bakterien</field>
+        <field name="wikipedia">Bakterien</field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">10</field>
+        <field name="locale_id">1</field>
+        <field name="value">Archaeen</field>
+        <field name="wikipedia">Archaeen</field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">11</field>
+        <field name="locale_id">1</field>
+        <field name="value">Eukaryoten</field>
+        <field name="wikipedia">Eukaryoten</field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">12</field>
+        <field name="locale_id">1</field>
+        <field name="value">Reich</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">13</field>
+        <field name="locale_id">1</field>
+        <field name="value">Unterreich</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">14</field>
+        <field name="locale_id">1</field>
+        <field name="value">Abteilung</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">15</field>
+        <field name="locale_id">1</field>
+        <field name="value">Unterabteilung</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">16</field>
+        <field name="locale_id">1</field>
+        <field name="value">Stammgruppe</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">17</field>
+        <field name="locale_id">1</field>
+        <field name="value">Überstamm</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">18</field>
+        <field name="locale_id">1</field>
+        <field name="value">Stamm</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">19</field>
+        <field name="locale_id">1</field>
+        <field name="value">Unterstamm</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">20</field>
+        <field name="locale_id">1</field>
+        <field name="value">Überklasse</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">21</field>
+        <field name="locale_id">1</field>
+        <field name="value">Reihe</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">22</field>
+        <field name="locale_id">1</field>
+        <field name="value">Ohne Rang</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">23</field>
+        <field name="locale_id">1</field>
+        <field name="value">Klasse</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">24</field>
+        <field name="locale_id">1</field>
+        <field name="value">Unterklasse</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">25</field>
+        <field name="locale_id">1</field>
+        <field name="value">Überordnung</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">26</field>
+        <field name="locale_id">1</field>
+        <field name="value">Ordnung</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">27</field>
+        <field name="locale_id">1</field>
+        <field name="value">Unterordnung</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">28</field>
+        <field name="locale_id">1</field>
+        <field name="value">Teilordnung</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">29</field>
+        <field name="locale_id">1</field>
+        <field name="value">Überfamilie</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">30</field>
+        <field name="locale_id">1</field>
+        <field name="value">Familie</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">31</field>
+        <field name="locale_id">1</field>
+        <field name="value">Unterfamilie</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">32</field>
+        <field name="locale_id">1</field>
+        <field name="value">Tribus</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">33</field>
+        <field name="locale_id">1</field>
+        <field name="value">Subtribus</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">34</field>
+        <field name="locale_id">1</field>
+        <field name="value">Gattung</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">35</field>
+        <field name="locale_id">1</field>
+        <field name="value">Art</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+      <row>
+        <field name="id">36</field>
+        <field name="locale_id">1</field>
+        <field name="value">Unterart</field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+
+
+<!--
+      <row>
+        <field name="id"></field>
+        <field name="locale_id">1</field>
+        <field name="value"></field>
+        <field name="wikipedia"></field>
+        <field name="synonyms"></field>
+      </row>
+-->
     </table>
   </data>
 </database>
