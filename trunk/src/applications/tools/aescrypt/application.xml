@@ -5,12 +5,12 @@
 <application base="aescrypt" category="tools">
   <strings>
     <group lang="en_US">
-      <string name="title">aescrypt</string>
+      <string name="title">AESCrypt</string>
       <string name="description">Small tool which is able to crypt and decrypt files with AES.</string>
     </group>
 
     <group lang="de_DE">
-      <string name="title">aescrypt</string>
+      <string name="title">AESCrypt</string>
       <string name="description">Kleines Werkzeug, welches Dateien mittels AES ver- und entschlüsselt.</string>
     </group>
   </strings>
