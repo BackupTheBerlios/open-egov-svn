@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -23,6 +23,8 @@
 #include <QString>
 #include <QWidget>
 #include <QList>
+
+#include "PluginInterface.h"
 
 class QTabWidget;
 class QTextEdit;
@@ -46,14 +48,19 @@ class MainWindow : public OEG::Qt::MainWindow
     virtual void createToolBars();
     virtual void createToolProvider() {};
 
+  private:
+    void loadPlugins();
+
   protected:
-    QTabWidget           *m_tabs;
-    QWidget              *m_tab_project;
-    QWidget              *m_tab_part_list;
-    SchematicsView       *m_tab_schematics;
-    QWidget              *m_tab_pcb_layout;
-    QWidget              *m_tab_simulation;
-    QTextEdit            *m_tab_notes;
-    SchematicsScene      *m_schematics_scene;
+    QTabWidget               *m_tabs;
+    QWidget                  *m_tab_project;
+    QWidget                  *m_tab_part_list;
+    SchematicsView           *m_tab_schematics;
+    QWidget                  *m_tab_pcb_layout;
+    QWidget                  *m_tab_simulation;
+    QTextEdit                *m_tab_notes;
+    SchematicsScene          *m_schematics_scene;
+
+    QList<PluginInterface *>  m_plugins;
 };
 

@@ -1,4 +1,4 @@
-// $Id: MainWindow.cpp 356 2010-12-21 09:47:43Z gerrit-albrecht $
+// $Id$
 //
 // Open eGovernment
 // Copyright (C) 2005-2012 by Gerrit M. Albrecht
@@ -16,16 +16,34 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <QApplication>
+#pragma once
 
-#include "SchematicsScene.h"
+#include <QtPlugin>
 
-SchematicsScene::SchematicsScene(QWidget *parent /*=0*/)
- : QGraphicsScene(parent)
+#include <QWidget>
+#include <QString>
+#include <QGraphicsItem>
+
+class PluginInterface
 {
-}
+  public:
+    virtual ~PluginInterface() {}
 
-SchematicsScene::~SchematicsScene()
-{
-}
+    virtual QString pluginName() const = 0;
+    virtual QString pluginTitle() const = 0;
+    virtual QString pluginApplicationName() const = 0;
+    virtual QString pluginApplicationTitle() const = 0;
+    virtual unsigned int pluginVersion() const = 0;
+    virtual QString pluginDate() const = 0;
+
+    virtual QWidget *pluginGUI(QWidget *parent = 0) = 0;
+
+    virtual void pluginStart() = 0;
+    virtual void pluginStop() = 0;
+
+  protected:
+
+};
+
+Q_DECLARE_INTERFACE(PluginInterface, "de.open-egov.Plugin.ePerky.PluginInterface/1.0");
 

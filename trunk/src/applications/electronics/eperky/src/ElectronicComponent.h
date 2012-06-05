@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -52,7 +52,7 @@ class ElectronicComponent : public QObject
   public:
     ElectronicComponent(QObject *parent = 0);
 
-  public:                           // TODO: Change and fix this class, if everything works.
+  public:                    // TODO: Change and fix this class, if everything works.
     QString         m_name;
     long long int   m_type;
     QList<QString>  m_electrical_connections;

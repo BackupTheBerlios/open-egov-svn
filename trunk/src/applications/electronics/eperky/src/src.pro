@@ -4,9 +4,9 @@ TARGET    = eperky
 SOURCES   = *.cpp
 HEADERS   = *.h
 FORMS     = 
-QT       += xml network
+QT       += xml network opengl
 PACKAGES  = QT GETTEXT
-#CONFIG   += console
+CONFIG   += console
 
 include(../../../common.pri)
 

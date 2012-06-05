@@ -1,7 +1,7 @@
 // $Id: MainWindow.h 356 2010-12-21 09:47:43Z gerrit-albrecht $
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@
 #include <QWidget>
 
 class QGraphicsView;
+class QGraphicsScene;
 
 class SchematicsView : public QFrame
 {
@@ -35,5 +36,6 @@ class SchematicsView : public QFrame
 
   protected:
     QGraphicsView  *m_graphics_view;
+    QGraphicsScene *m_graphics_scene;
 };
 

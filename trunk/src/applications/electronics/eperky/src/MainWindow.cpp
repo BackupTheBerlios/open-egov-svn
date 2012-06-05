@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -16,6 +16,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+#include <OEG/Qt/Application.h>
 #include <OEG/Qt/ToolProvider.h>
 
 #include <QApplication>
@@ -27,6 +28,9 @@
 #include <QTextEdit>
 #include <QAction>
 #include <QIcon>
+#include <QDir>
+#include <QPluginLoader>
+#include <QString>
 
 #include <QGraphicsView>
 
@@ -60,9 +64,11 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
   m_tabs->addTab(m_tab_pcb_layout, _("PCB &Layout"));
   m_tabs->addTab(m_tab_simulation, _("Si&mulation"));
   m_tabs->addTab(m_tab_notes,      _("&Notes"));
-  m_tabs->setCurrentIndex(0);                              // better use prefs.
+  m_tabs->setCurrentIndex(0);                              // Better use prefs.
 
   setCentralWidget(m_tabs);
+
+  loadPlugins();
 }
 
 MainWindow::~MainWindow()
@@ -101,5 +107,51 @@ void MainWindow::createToolBars()
 
 void MainWindow::createDockWidgets()
 {
+}
+
+void MainWindow::loadPlugins()
+{
+  QDir pluginsDir(qApp->applicationDirPath(), "*.dll;*.so");  // Ignore .a files.
+
+  if (pluginsDir.dirName().toLower() == "bin")
+    pluginsDir.cdUp();
+  pluginsDir.cd("plugins/eperky");
+
+  qDebug() << "Loading Plugins from: " << pluginsDir.absolutePath();
+
+  PluginInterface *interface;
+  QObject *plugin;
+  QWidget *gui;
+
+  foreach (QString fileName, pluginsDir.entryList(QDir::Files)) {
+    QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
+    plugin = pluginLoader.instance();
+    if (plugin) {
+      interface = qobject_cast<PluginInterface *>(plugin);
+      if (interface) {
+        QString base = dynamic_cast<OEG::Qt::Application *>(qApp)->baseName();
+
+        if (interface->pluginApplicationName() != base) {
+          qWarning() << "Application basenames from plugin and application do not match:";
+          qWarning() << " plugin file name:" << fileName;
+          qDebug() << " application base name:" << base;
+          qDebug() << " plugin application name:" << interface->pluginApplicationName();
+        }
+        else {
+          m_plugins.append(interface);
+
+          //gui = interface->pluginGUI(this);
+          //if (gui) {
+          //  gui->show();
+          //}
+        }
+      }
+    }
+    else {
+      qDebug() << "Plugin not found: " << fileName;
+    }
+  }
+
+  qDebug() << "Plugins found: " << m_plugins.count();
 }
 
