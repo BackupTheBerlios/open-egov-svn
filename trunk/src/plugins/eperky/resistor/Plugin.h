@@ -40,10 +40,8 @@ class Plugin : public QObject, public PluginInterface
     unsigned int pluginVersion() const;
     QString pluginDate() const;
 
-    virtual QWidget *pluginGUI(QWidget *parent = 0);
-
-    void pluginStart();
-    void pluginStop();
+    virtual QWidget *createGUI(QWidget *parent = 0);
+    virtual QGraphicsItem *createGraphicsItem(QGraphicsItem *parent = 0);
 
   private:
     QWidget *m_gui;

@@ -23,6 +23,7 @@
 
 #include "Plugin.h"
 #include "Widget.h"
+#include "GraphicsItem.h"
 
 QString Plugin::pluginName() const
 {
@@ -54,19 +55,20 @@ QString Plugin::pluginDate() const
   return "2012-06-06";
 }
 
-QWidget *Plugin::pluginGUI(QWidget *parent /*=0*/)
+QWidget *Plugin::createGUI(QWidget *parent /*=0*/)
 {
   m_gui = new Widget(parent);
 
   return m_gui;
 }
 
-void Plugin::pluginStart()
+QGraphicsItem *Plugin::createGraphicsItem(QGraphicsItem *parent /*=0*/)
 {
-}
+  GraphicsItem *item = new GraphicsItem(parent);
 
-void Plugin::pluginStop()
-{
+  qDebug() << "createGraphicsItem()";
+
+  return item;
 }
 
 Q_EXPORT_PLUGIN2(oegEperkyPlugin, Plugin);
