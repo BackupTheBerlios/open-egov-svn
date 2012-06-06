@@ -16,20 +16,53 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <OEG/Qt/Application.h>
+#include <QString>
 
-#include "MainWindow.h"
+#include <QDebug>
 
-int main(int argc, char *argv[])
+#include "FilePlanEntry.h"
+
+FilePlanEntry::FilePlanEntry()
+ : QObject()
 {
-  OEG::Qt::Application app(argc, argv, "suchfuxx");
+  setObjectName("FilePlanEntry");
 
-  app.setApplicationName(_("SuchFuxx"), "0.1");
-  app.setApplicationBuildData(__DATE__, __TIME__);
+  m_title   = "";
+  m_ref_no  = "";
+  m_comment = "";
+}
 
-  MainWindow win;
-  win.show();
+FilePlanEntry::~FilePlanEntry()
+{
+}
 
-  return app.exec();
+void FilePlanEntry::setTitle(const QString &title)
+{
+  m_title = title;
+}
+
+QString FilePlanEntry::title() const
+{
+  return m_title;
+}
+
+void FilePlanEntry::setRefNo(const QString &ref_no)
+{
+  m_ref_no = ref_no;
+}
+
+QString FilePlanEntry::refNo() const
+{
+  return m_ref_no;
+}
+
+void FilePlanEntry::setComment(const QString &comment)
+{
+  m_comment = comment;
+}
+
+QString FilePlanEntry::comment() const
+{
+  return m_comment;
 }
 
