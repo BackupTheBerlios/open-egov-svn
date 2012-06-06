@@ -37,6 +37,10 @@
 
 #include "SchematicsScene.h"
 #include "SchematicsTab.h"
+#include "SimulationTab.h"
+#include "ProjectTab.h"
+#include "PartListTab.h"
+#include "PCBTab.h"
 #include "MainWindow.h"
 
 MainWindow::MainWindow(QWidget *parent /*=0*/)
@@ -50,11 +54,11 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
   if (! m_tabs)
     return;
 
-  m_tab_project    = new QWidget(this);
-  m_tab_part_list  = new QWidget(this);
+  m_tab_project    = new ProjectTab(this);
+  m_tab_part_list  = new PartListTab(this);
   m_tab_schematics = new SchematicsTab(this);
-  m_tab_pcb_layout = new QWidget(this);
-  m_tab_simulation = new QWidget(this);
+  m_tab_pcb_layout = new PCBTab(this);
+  m_tab_simulation = new SimulationTab(this);
   m_tab_notes      = new QTextEdit(this);
 
   m_tabs->addTab(m_tab_project,    _("&Project"));
@@ -86,7 +90,21 @@ void MainWindow::createActions()
 void MainWindow::createMenus()
 {
   QMenu *fileMenu = menuBar()->addMenu(_("&File"));
+  fileMenu->addAction(standardAction(New));
+  fileMenu->addAction(standardAction(Open));
+  fileMenu->addAction(standardAction(Save));
+  fileMenu->addAction(standardAction(SaveAs));
+  fileMenu->addSeparator();
   fileMenu->addAction(standardAction(Exit));
+
+  QMenu *editMenu = menuBar()->addMenu(_("&Edit"));
+  editMenu->addAction(standardAction(Undo));
+  editMenu->addAction(standardAction(Redo));
+  editMenu->addSeparator();
+  editMenu->addAction(standardAction(Cut));
+  editMenu->addAction(standardAction(Copy));
+  editMenu->addAction(standardAction(Paste));
+  editMenu->addAction(standardAction(Delete));
 
   addHelpMenu();
 }
@@ -97,7 +115,30 @@ void MainWindow::createToolBars()
   QToolBar *toolbar;
 
   toolbar = addToolBar(_("File"));
+  toolbar->addAction(standardAction(New));
+  toolbar->addAction(standardAction(Open));
+  toolbar->addAction(standardAction(Save));
+  toolbar->addAction(standardAction(SaveAs));
+  toolbar->addSeparator();
+  toolbar->addAction(standardAction(Undo));
+  toolbar->addAction(standardAction(Redo));
+  toolbar->addSeparator();
+  toolbar->addAction(standardAction(Cut));
+  toolbar->addAction(standardAction(Copy));
+  toolbar->addAction(standardAction(Paste));
+  toolbar->addAction(standardAction(Delete));
+  toolbar->addSeparator();
+  toolbar->addAction(standardAction(Preferences));
+  toolbar->addSeparator();
   toolbar->addAction(standardAction(Exit));
+
+  toolbar = addToolBar(_("Schematics"));
+  toolbar->addAction("Rotate CW");
+  toolbar->addAction("Rotate CCW");
+  toolbar->addSeparator();
+  toolbar->addAction(standardAction(ZoomIn));
+  toolbar->addAction(standardAction(ZoomNormal));
+  toolbar->addAction(standardAction(ZoomOut));
 }
 
 void MainWindow::createDockWidgets()

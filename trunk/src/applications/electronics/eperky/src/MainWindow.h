@@ -31,6 +31,10 @@ class QTextEdit;
 
 class SchematicsScene;
 class SchematicsTab;
+class SimulationTab;
+class ProjectTab;
+class PartListTab;
+class PCBTab;
 
 class OEG::Qt::ToolProvider;
 
@@ -53,11 +57,11 @@ class MainWindow : public OEG::Qt::MainWindow
 
   protected:
     QTabWidget               *m_tabs;
-    QWidget                  *m_tab_project;
-    QWidget                  *m_tab_part_list;
+    ProjectTab               *m_tab_project;
+    PartListTab              *m_tab_part_list;
     SchematicsTab            *m_tab_schematics;
-    QWidget                  *m_tab_pcb_layout;
-    QWidget                  *m_tab_simulation;
+    PCBTab                   *m_tab_pcb_layout;
+    SimulationTab            *m_tab_simulation;
     QTextEdit                *m_tab_notes;
 
     QList<PluginInterface *>  m_plugins;
