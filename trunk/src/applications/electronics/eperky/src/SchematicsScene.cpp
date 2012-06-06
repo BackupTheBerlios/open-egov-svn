@@ -20,9 +20,10 @@
 
 #include "SchematicsScene.h"
 
-SchematicsScene::SchematicsScene(QWidget *parent /*=0*/)
+SchematicsScene::SchematicsScene(QObject *parent /*=0*/)
  : QGraphicsScene(parent)
 {
+  setBackgroundBrush(Qt::yellow);
 }
 
 SchematicsScene::~SchematicsScene()

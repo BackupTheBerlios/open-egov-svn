@@ -1,4 +1,4 @@
-// $Id: MainWindow.h 356 2010-12-21 09:47:43Z gerrit-albrecht $
+// $Id$
 //
 // Open eGovernment
 // Copyright (C) 2005-2012 by Gerrit M. Albrecht
@@ -19,23 +19,26 @@
 #pragma once
 
 #include <QFrame>
-
 #include <QString>
-#include <QWidget>
 
+class QWidget;
 class QGraphicsView;
-class QGraphicsScene;
 
-class SchematicsView : public QFrame
+class SchematicsScene;
+
+class SchematicsTab : public QFrame
 {
   Q_OBJECT
 
   public:
-    SchematicsView(QWidget *parent = 0);
-    virtual ~SchematicsView();
+    SchematicsTab(QWidget *parent = 0);
+    virtual ~SchematicsTab();
+
+    inline SchematicsScene *scene() const { return m_scene; }
+    inline QGraphicsView   *view()  const { return m_view;  }
 
   protected:
-    QGraphicsView  *m_graphics_view;
-    QGraphicsScene *m_graphics_scene;
+    SchematicsScene *m_scene;
+    QGraphicsView   *m_view;
 };
 

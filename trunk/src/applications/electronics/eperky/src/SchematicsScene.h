@@ -21,14 +21,14 @@
 #include <QGraphicsScene>
 
 #include <QString>
-#include <QWidget>
+#include <QObject>
 
 class SchematicsScene : public QGraphicsScene
 {
   Q_OBJECT
 
   public:
-    SchematicsScene(QWidget *parent = 0);
+    SchematicsScene(QObject *parent = 0);
     virtual ~SchematicsScene();
 
   protected:

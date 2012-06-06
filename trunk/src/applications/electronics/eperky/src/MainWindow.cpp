@@ -33,9 +33,10 @@
 #include <QString>
 
 #include <QGraphicsView>
+#include <QGraphicsItem>
 
 #include "SchematicsScene.h"
-#include "SchematicsView.h"
+#include "SchematicsTab.h"
 #include "MainWindow.h"
 
 MainWindow::MainWindow(QWidget *parent /*=0*/)
@@ -45,15 +46,13 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
 
   createAll();
 
-  m_schematics_scene = new SchematicsScene;
-
   m_tabs = new QTabWidget(this);
   if (! m_tabs)
     return;
 
   m_tab_project    = new QWidget(this);
   m_tab_part_list  = new QWidget(this);
-  m_tab_schematics = new SchematicsView(this);
+  m_tab_schematics = new SchematicsTab(this);
   m_tab_pcb_layout = new QWidget(this);
   m_tab_simulation = new QWidget(this);
   m_tab_notes      = new QTextEdit(this);
@@ -73,10 +72,6 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
 
 MainWindow::~MainWindow()
 {
-  if (m_schematics_scene) {
-    delete m_schematics_scene; m_schematics_scene = 0;
-  }
-
   if (m_tabs) {
     delete m_tabs; m_tabs = 0;
   }
@@ -121,7 +116,6 @@ void MainWindow::loadPlugins()
 
   PluginInterface *interface;
   QObject *plugin;
-  QWidget *gui;
 
   foreach (QString fileName, pluginsDir.entryList(QDir::Files)) {
     QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
@@ -140,7 +134,15 @@ void MainWindow::loadPlugins()
         else {
           m_plugins.append(interface);
 
-          //gui = interface->pluginGUI(this);
+          QGraphicsItem *item = interface->createGraphicsItem();
+          m_tab_schematics->scene()->addItem(item);
+          item->setPos(10, 10);
+          item->show();
+          item->setFocus();
+
+          m_tab_schematics->scene()->addText("1234567--------")->setPos(10, 100);
+
+          //gui = interface->createGUI(this);
           //if (gui) {
           //  gui->show();
           //}

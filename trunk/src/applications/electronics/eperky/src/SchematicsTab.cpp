@@ -1,4 +1,4 @@
-// $Id: MainWindow.cpp 356 2010-12-21 09:47:43Z gerrit-albrecht $
+// $Id$
 //
 // Open eGovernment
 // Copyright (C) 2005-2012 by Gerrit M. Albrecht
@@ -17,44 +17,46 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <QApplication>
-
 #include <QHBoxLayout>
 #include <QGraphicsView>
-#include <QGraphicsScene>
 #include <QGraphicsRectItem>
 
-#include "SchematicsView.h"
+#include "SchematicsScene.h"
+#include "SchematicsTab.h"
 
-SchematicsView::SchematicsView(QWidget *parent /*=0*/)
+SchematicsTab::SchematicsTab(QWidget *parent /*=0*/)
  : QFrame(parent)
 {
   //setFrameStyle(Sunken | StyledPanel);
 
-  m_graphics_view = new QGraphicsView(this);
-  m_graphics_view->setRenderHint(QPainter::Antialiasing, false);
-  //m_graphics_view->setRenderHint(QPainter::Antialiasing);
-  m_graphics_view->setCacheMode(QGraphicsView::CacheBackground);
-  m_graphics_view->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
-  //m_graphics_view->setViewportUpdateMode(QGraphicsView::SmartViewportUpdate);
-  m_graphics_view->setDragMode(QGraphicsView::ScrollHandDrag);
-  //m_graphics_view->setDragMode(QGraphicsView::RubberBandDrag);
-  m_graphics_view->setOptimizationFlags(QGraphicsView::DontSavePainterState);
-  m_graphics_view->setBackgroundBrush(Qt::white);
+  m_view = new QGraphicsView(this);
+  m_view->setRenderHint(QPainter::Antialiasing, false);
+  //m_view->setRenderHint(QPainter::Antialiasing);
+  //m_view->setCacheMode(QGraphicsView::CacheBackground);
+  //Index
+  //m_view->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+  m_view->setViewportUpdateMode(QGraphicsView::SmartViewportUpdate);
+  m_view->setDragMode(QGraphicsView::ScrollHandDrag);
+  //m_view->setDragMode(QGraphicsView::RubberBandDrag);
+  m_view->setOptimizationFlags(QGraphicsView::DontSavePainterState);
+
+  //m_view->setBackgroundBrush(Qt::white); // instead of scene background
 
   // If you have a QTabBar with a QFrame as tab containing a layout with a QGraphicsView
   // you need this to remove an appearing margin (about 4px) inside of QFrame. This also
   // removes the 1px black border of the QFrame. The same result has:
-  // m_graphics_view->setStyleSheet( "QGraphicsView { border-style: none; }" );
-  m_graphics_view->setFrameShape(QFrame::NoFrame);
+  // m_view->setStyleSheet( "QGraphicsView { border-style: none; }" );
+  m_view->setFrameShape(QFrame::NoFrame);
 
-  m_graphics_scene = new QGraphicsScene(0, 0, 400, 400, m_graphics_view);
-  m_graphics_scene->setBackgroundBrush(Qt::yellow);
-  m_graphics_view->setScene(m_graphics_scene);
+  m_scene = new SchematicsScene(m_view);
+  m_scene->setSceneRect(0, 0, 400, 400);
+  m_view->setScene(m_scene);
 
   QGraphicsRectItem *r = new QGraphicsRectItem(80, 80, 100, 100);
-  m_graphics_scene->addItem(r);
-  m_graphics_scene->addText("Test");
-  m_graphics_view->show();
+  m_scene->addItem(r);
+  m_scene->addText("Test");
+
+  m_view->show();
 
 
 
@@ -68,14 +70,18 @@ SchematicsView::SchematicsView(QWidget *parent /*=0*/)
 
   QHBoxLayout *layout = new QHBoxLayout;
   layout->setContentsMargins(0, 0, 0, 0);        // Else there would be a 5px margin around the graphics view.
-  layout->addWidget(m_graphics_view);
+  layout->addWidget(m_view);
   setLayout(layout);
 }
 
-SchematicsView::~SchematicsView()
+SchematicsTab::~SchematicsTab()
 {
-  if (m_graphics_view) {
-    delete m_graphics_view; m_graphics_view = 0;
+  if (m_scene) {
+    delete m_scene; m_scene = 0;
+  }
+
+  if (m_view) {
+    delete m_view; m_view = 0;
   }
 }
 

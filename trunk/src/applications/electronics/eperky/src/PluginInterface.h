@@ -19,10 +19,11 @@
 #pragma once
 
 #include <QtPlugin>
-
-#include <QWidget>
 #include <QString>
-#include <QGraphicsItem>
+
+class GraphicsItem;
+class QGraphicsItem;
+class QWidget;
 
 class PluginInterface
 {
@@ -36,10 +37,8 @@ class PluginInterface
     virtual unsigned int pluginVersion() const = 0;
     virtual QString pluginDate() const = 0;
 
-    virtual QWidget *pluginGUI(QWidget *parent = 0) = 0;
-
-    virtual void pluginStart() = 0;
-    virtual void pluginStop() = 0;
+    virtual QWidget       *createGUI(QWidget *parent = 0) = 0;
+    virtual QGraphicsItem *createGraphicsItem(QGraphicsItem *parent = 0) = 0;
 
   protected:
 
