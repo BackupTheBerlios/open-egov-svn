@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -20,11 +20,9 @@
 
 #include <QObject>
 
-QT_BEGIN_NAMESPACE
 class QByteArray;
 class QString;
 class QFile;
-QT_END_NAMESPACE
 
 class DirectoryEntry : public QObject
 {
@@ -33,7 +31,7 @@ class DirectoryEntry : public QObject
   public:
     DirectoryEntry(QObject *parent = 0);
 
-  public:                           // TODO: Change and fix this class, if everything works.
+  public:                              // TODO: public; change and fix this class, if everything works.
     int           m_id;
     QByteArray    m_name;
     long long int m_type;

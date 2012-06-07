@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -18,36 +18,28 @@
 
 #pragma once
 
-#include <OEG/Common.h>
+#include <OEG/Qt/MainWindow.h>
 
-#include <QColor>
-#include <QWidget>
+#include <QString.h>
+#include <QWidget.h>
+#include <QList.h>
 
-#include "SplitterHandleWidget.h"
+class OEG::Qt::ToolProvider;
 
-class QPaintEvent;
-
-class SHPointBar : public SplitterHandleWidget
+class MainWindow : public OEG::Qt::MainWindow
 {
   Q_OBJECT
 
   public:
-    SHPointBar(QWidget *parent = 0);
+    MainWindow(QWidget *parent = 0);
 
-    void setCurrentValue(int value);
-    int currentValue();
-
-    void setRange(int min, int max);
-    int minValue();
-    int maxValue();
-
-  protected:
-    virtual void paintEvent(QPaintEvent *event);
+    virtual void createActions();
+    virtual void createDockWidgets();
+    virtual void createMenus();
+    virtual void createToolBars();
+    virtual void createToolProvider() {};
 
   protected:
-    int     m_current_value;
-    int     m_min_value;
-    int     m_max_value;
-    QColor  m_color;
+
 };
 

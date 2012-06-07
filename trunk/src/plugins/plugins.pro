@@ -1,5 +1,5 @@
 # $Id$
 
 TEMPLATE = subdirs
-SUBDIRS  = blood-glucose-meters desktop eltharion eperky
+SUBDIRS  = blood-glucose-meters desktop editor eltharion eperky file-viewer msg-viewer mudmania
 

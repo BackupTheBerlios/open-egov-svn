@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2011 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -19,12 +19,13 @@
 #pragma once
 
 #include <OEG/Qt/MainWindow.h>
+#include <OEG/Qt/TabWidget.h>
 
 #include <QList>
 #include <QString>
 #include <QWidget>
 
-class OEG::Qt::ToolProvider;
+class PluginInterface;
 
 class MainWindow : public OEG::Qt::MainWindow
 {
@@ -32,6 +33,7 @@ class MainWindow : public OEG::Qt::MainWindow
 
   public:
     MainWindow(QWidget *parent = 0);
+    virtual ~MainWindow();
 
     virtual void createActions();
     virtual void createDockWidgets();
@@ -39,7 +41,17 @@ class MainWindow : public OEG::Qt::MainWindow
     virtual void createToolBars();
     virtual void createToolProvider() {};
 
-  protected:
+  public slots:
+    void standardActionClose();
+    void standardActionOpen();
+    void standardActionNew();
+    void standardActionPrint();
 
+  private:
+    void loadPlugins();
+
+  protected:
+    OEG::Qt::TabWidget       *m_tabs;
+    QList<PluginInterface *>  m_plugins;
 };
 

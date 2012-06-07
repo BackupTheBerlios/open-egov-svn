@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open-eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -29,8 +29,8 @@
 #include <QPaintEvent>
 #include <QProgressBar>
 
-#include "SHPointBar.h"
-#include "SHLabel.h"
+#include "SplitterHandlePointBar.h"
+#include "SplitterHandleLabel.h"
 #include "SplitterHandle.h"
 
 SplitterHandle::SplitterHandle(Qt::Orientation orientation, QSplitter *parent)
@@ -57,14 +57,14 @@ void SplitterHandle::setText(const QString &text)
 
 void SplitterHandle::addLabel(const QString &name)
 {
-  SHLabel *label = new SHLabel(this);
+  SplitterHandleLabel *label = new SplitterHandleLabel(this);
 
   m_widgets.append(label);
 }
 
 void SplitterHandle::addPointBar(const QString &name)
 {
-  SHPointBar *bar = new SHPointBar(this);
+  SplitterHandlePointBar *bar = new SplitterHandlePointBar(this);
 
   m_widgets.append(bar);
 }

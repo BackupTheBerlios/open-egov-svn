@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -57,7 +57,7 @@ BEGIN
       VALUE "ProductName",      "Open eGovernment: Laws and Regulations.\0"
       VALUE "Comments",         "Homepage: www.open-egov.de\0"
       VALUE "CompanyName",      "gasi.de\0"
-      VALUE "LegalCopyright",   "Copyright (C) 2004-2010 GASI.\0"
+      VALUE "LegalCopyright",   "Copyright (C) 2004-2012 GASI.\0"
       VALUE "LegalTrademarks",  "Open eGovernment.\0"
       VALUE "FileVersion",      VER_FILEVERSION_STR
       VALUE "ProductVersion",   VER_PRODUCTVERSION_STR

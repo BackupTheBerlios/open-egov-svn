@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2011 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,21 +21,33 @@
 #include <OEG/Common.h>
 
 #include <QColor>
-#include <QLabel>
+#include <QWidget>
 
 #include "SplitterHandleWidget.h"
 
-class SHLabel : public SplitterHandleWidget
+class QPaintEvent;
+
+class SplitterHandlePointBar : public SplitterHandleWidget
 {
   Q_OBJECT
 
   public:
-    SHLabel(QWidget *parent = 0);
+    SplitterHandlePointBar(QWidget *parent = 0);
 
-    void setText(const QString &text);
-    QString text();
+    void setCurrentValue(int value);
+    int currentValue();
+
+    void setRange(int min, int max);
+    int minValue();
+    int maxValue();
 
   protected:
-    QLabel m_label;
+    virtual void paintEvent(QPaintEvent *event);
+
+  protected:
+    int     m_current_value;
+    int     m_min_value;
+    int     m_max_value;
+    QColor  m_color;
 };
 

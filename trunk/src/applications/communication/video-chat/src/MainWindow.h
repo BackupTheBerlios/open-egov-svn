@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2011 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -16,29 +16,30 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <OEG/Common.h>
+#pragma once
 
-#include <QApplication>
-#include <QColor>
-#include <QLabel>
-#include <QLatin1String>
-#include <QPen>
-#include <QString>
+#include <OEG/Qt/MainWindow.h>
 
-#include "SHLabel.h"
+#include <QString.h>
+#include <QWidget.h>
+#include <QList.h>
 
-SHLabel::SHLabel(QWidget *parent /*=0*/)
- : SplitterHandleWidget(parent)
+class OEG::Qt::ToolProvider;
+
+class MainWindow : public OEG::Qt::MainWindow
 {
-}
+  Q_OBJECT
 
-void SHLabel::setText(const QString &text)
-{
-  m_label.setText(text);
-}
+  public:
+    MainWindow(QWidget *parent = 0);
 
-QString SHLabel::text()
-{
-  return m_label.text();
-}
+    virtual void createActions();
+    virtual void createDockWidgets();
+    virtual void createMenus();
+    virtual void createToolBars();
+    virtual void createToolProvider() {};
+
+  protected:
+
+};
 

@@ -2,16 +2,16 @@
 
 <!-- $Id$ -->
 
-<application base="application-connector" category="tools">
+<application base="clock" category="tools">
   <strings>
     <group lang="en_US">
-      <string name="title">Application Connector</string>
-      <string name="description">Ermöglicht die Kommunikation zwischen OEG-Anwendungen.</string>
+      <string name="title">Clock</string>
+      <string name="description">Displays current date and time.</string>
     </group>
 
     <group lang="de_DE">
-      <string name="title">Application Connector</string>
-      <string name="description">Enables the communication between OEG applications.</string>
+      <string name="title">Uhr</string>
+      <string name="description">Zeigt aktuelles Datum und Zeit.</string>
     </group>
   </strings>
 

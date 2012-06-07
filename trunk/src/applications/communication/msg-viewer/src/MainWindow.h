@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -26,12 +26,10 @@
 #include <QList>
 #include <QString>
 
-QT_BEGIN_NAMESPACE
 class QAction;
 class QMenu;
 class QTextEdit;
 class QAuthenticator;
-QT_END_NAMESPACE
 
 class DirectoryEntry;
 
@@ -61,7 +59,7 @@ class MainWindow : public OEG::Qt::MainWindow
     QTextEdit               *m_text;                       // Displays the E-Mail nicely.
     QFile                    m_file;                       // File object which belongs to the filename.
     QList<DirectoryEntry *>  m_dirs;                       // A list with directories provided by the MSG file.
-    QString                  m_current_list;               // ?
+    QString                  m_current_list;               // 
     QMenu                   *m_menu_file;                  // GUI element.
     QToolBar                *m_toolbar_file;               // GUI element.
     QAction                 *m_action_get_new_list;        // TODO.

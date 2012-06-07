@@ -18,22 +18,24 @@
 
 #pragma once
 
-#include <OEG/Qt/MainWindow.h>
+#include <OEG/Common.h>
 
-#include <QString>
-#include <QWidget>
+#include <QColor>
+#include <QLabel>
 
-class MainWindow : public OEG::Qt::MainWindow
+#include "SplitterHandleWidget.h"
+
+class SplitterHandleLabel : public SplitterHandleWidget
 {
   Q_OBJECT
 
   public:
-    MainWindow(QWidget *parent = 0);
+    SplitterHandleLabel(QWidget *parent = 0);
 
-    virtual void createMenus();
-    virtual void createToolBars();
+    void setText(const QString &text);
+    QString text();
 
   protected:
-
+    QLabel m_label;
 };
 

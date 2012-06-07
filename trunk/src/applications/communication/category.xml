@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<category base="office">
+<category base="communication">
   <strings lang="en_US">
     <string name="title">Communication</string>
     <string name="description">Active and passive applications for communication and support tools.</string>

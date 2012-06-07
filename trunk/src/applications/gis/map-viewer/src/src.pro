@@ -6,7 +6,7 @@ HEADERS   = *.h
 FORMS     = 
 QT       += sql network
 PACKAGES  = QT GETTEXT GIS
-#CONFIG   += console
+CONFIG   += console
 
 include(../../../common.pri)
 

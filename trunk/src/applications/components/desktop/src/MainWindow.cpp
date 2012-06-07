@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -73,7 +73,7 @@ void MainWindow::loadPlugins()
     pluginsDir.cdUp();
   pluginsDir.cd("plugins/desktop");
 
-  DesktopPluginInterface *pluginInterface;
+  PluginInterface *pluginInterface;
   QObject *plugin;
   QWidget *gui;
 
@@ -81,7 +81,7 @@ void MainWindow::loadPlugins()
     QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
     plugin = pluginLoader.instance();
     if (plugin) {
-      pluginInterface = qobject_cast<DesktopPluginInterface *>(plugin);
+      pluginInterface = qobject_cast<PluginInterface *>(plugin);
       if (pluginInterface) {
         m_plugins.append(pluginInterface);
 

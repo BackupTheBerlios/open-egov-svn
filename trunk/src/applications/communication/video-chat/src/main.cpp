@@ -16,24 +16,20 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
+#include <OEG/Qt/Application.h>
 
-#include <OEG/Qt/MainWindow.h>
+#include "MainWindow.h"
 
-#include <QString>
-#include <QWidget>
-
-class MainWindow : public OEG::Qt::MainWindow
+int main(int argc, char *argv[])
 {
-  Q_OBJECT
+  OEG::Qt::Application app(argc, argv, "video-chat");
 
-  public:
-    MainWindow(QWidget *parent = 0);
+  app.setApplicationName(_("Video Chat"), "0.1");
+  app.setApplicationBuildData(__DATE__, __TIME__);
 
-    virtual void createMenus();
-    virtual void createToolBars();
+  MainWindow win;
+  win.show();
 
-  protected:
-
-};
+  return app.exec();
+}
 

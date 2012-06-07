@@ -18,22 +18,28 @@
 
 #pragma once
 
-#include <OEG/Qt/MainWindow.h>
-
+#include <QtPlugin>
 #include <QString>
-#include <QWidget>
 
-class MainWindow : public OEG::Qt::MainWindow
+class QWidget;
+
+class PluginInterface
 {
-  Q_OBJECT
-
   public:
-    MainWindow(QWidget *parent = 0);
+    virtual ~PluginInterface() {}
 
-    virtual void createMenus();
-    virtual void createToolBars();
+    virtual QString pluginName() const = 0;
+    virtual QString pluginTitle() const = 0;
+    virtual QString pluginApplicationName() const = 0;
+    virtual QString pluginApplicationTitle() const = 0;
+    virtual unsigned int pluginVersion() const = 0;
+    virtual QString pluginDate() const = 0;
+
+    virtual QWidget       *createGUI(QWidget *parent = 0) = 0;
 
   protected:
 
 };
+
+Q_DECLARE_INTERFACE(PluginInterface, "de.open-egov.Plugin.Editor.PluginInterface/1.0");
 

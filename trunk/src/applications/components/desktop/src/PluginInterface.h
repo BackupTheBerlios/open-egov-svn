@@ -20,10 +20,10 @@
 
 #include <QWidget>
 
-class DesktopPluginInterface
+class PluginInterface
 {
   public:
-    virtual ~DesktopPluginInterface() {}
+    virtual ~PluginInterface() {}
 
     QString name() const;
 
@@ -33,5 +33,5 @@ class DesktopPluginInterface
     void stopPlugin();
 };
 
-Q_DECLARE_INTERFACE(DesktopPluginInterface, "de.open-egov.Plugin.Desktop.Interface/1.0");
+Q_DECLARE_INTERFACE(PluginInterface, "de.open-egov.Plugin.Desktop.Interface/1.0");
 

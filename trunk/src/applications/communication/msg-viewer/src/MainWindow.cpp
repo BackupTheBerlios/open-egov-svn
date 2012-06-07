@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -313,7 +313,7 @@ void MainWindow::parseMessageFile(const QString &fileName)
 
   ssat = "";                                     // We now have the MSAT hence we can now build the SAT from this.
   for (y=0; y<a_msat.count(); y++) {                       // For y=0 To (MyArrayLen(a_msat,1)-1)
-qWarning() << "ssat: " << y << sector_size << a_msat.at(y);
+    qWarning() << "ssat: " << y << sector_size << a_msat.at(y);
     ssat += sectorReader(sector_size, a_msat.at(y));
   }
 

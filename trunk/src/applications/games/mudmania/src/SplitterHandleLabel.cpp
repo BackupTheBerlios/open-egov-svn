@@ -16,24 +16,29 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
+#include <OEG/Common.h>
 
-#include <OEG/Qt/MainWindow.h>
-
+#include <QApplication>
+#include <QColor>
+#include <QLabel>
+#include <QLatin1String>
+#include <QPen>
 #include <QString>
-#include <QWidget>
 
-class MainWindow : public OEG::Qt::MainWindow
+#include "SplitterHandleLabel.h"
+
+SplitterHandleLabel::SplitterHandleLabel(QWidget *parent /*=0*/)
+ : SplitterHandleWidget(parent)
 {
-  Q_OBJECT
+}
 
-  public:
-    MainWindow(QWidget *parent = 0);
+void SplitterHandleLabel::setText(const QString &text)
+{
+  m_label.setText(text);
+}
 
-    virtual void createMenus();
-    virtual void createToolBars();
-
-  protected:
-
-};
+QString SplitterHandleLabel::text()
+{
+  return m_label.text();
+}
 

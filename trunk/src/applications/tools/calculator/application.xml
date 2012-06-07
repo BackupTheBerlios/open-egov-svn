@@ -2,16 +2,16 @@
 
 <!-- $Id$ -->
 
-<application base="application-connector" category="tools">
+<application base="calculator" category="tools">
   <strings>
     <group lang="en_US">
-      <string name="title">Application Connector</string>
-      <string name="description">Ermöglicht die Kommunikation zwischen OEG-Anwendungen.</string>
+      <string name="title">Calculator</string>
+      <string name="description">Calculates mathematical expressions and formulas.</string>
     </group>
 
     <group lang="de_DE">
-      <string name="title">Application Connector</string>
-      <string name="description">Enables the communication between OEG applications.</string>
+      <string name="title">Taschenrechner</string>
+      <string name="description">Berechnet mathematische Ausdrücke und Formeln.</string>
     </group>
   </strings>
 

@@ -147,11 +147,12 @@ void MainWindow::createDockWidgets()
 
 void MainWindow::loadPlugins()
 {
+  QString baseName = dynamic_cast<OEG::Qt::Application *>(qApp)->baseName();
   QDir pluginsDir(qApp->applicationDirPath(), "*.dll;*.so");  // Ignore .a files.
 
   if (pluginsDir.dirName().toLower() == "bin")
     pluginsDir.cdUp();
-  pluginsDir.cd("plugins/eperky");
+  pluginsDir.cd("plugins/" + baseName);
 
   qDebug() << "Loading Plugins from: " << pluginsDir.absolutePath();
 
@@ -164,12 +165,10 @@ void MainWindow::loadPlugins()
     if (plugin) {
       interface = qobject_cast<PluginInterface *>(plugin);
       if (interface) {
-        QString base = dynamic_cast<OEG::Qt::Application *>(qApp)->baseName();
-
-        if (interface->pluginApplicationName() != base) {
-          qWarning() << "Application basenames from plugin and application do not match:";
+        if (interface->pluginApplicationName() != baseName) {
+          qWarning() << "Application base names from plugin and application do not match:";
           qWarning() << " plugin file name:" << fileName;
-          qDebug() << " application base name:" << base;
+          qDebug() << " application base name:" << baseName;
           qDebug() << " plugin application name:" << interface->pluginApplicationName();
         }
         else {
@@ -195,6 +194,6 @@ void MainWindow::loadPlugins()
     }
   }
 
-  qDebug() << "Plugins found: " << m_plugins.count();
+  qDebug() << "Number of Plugins found: " << m_plugins.count();
 }
 

@@ -51,10 +51,10 @@ BEGIN
   BEGIN
     BLOCK "040904E4"
     BEGIN
-      VALUE "InternalName",     "desktop.exe\0"
-      VALUE "OriginalFilename", "desktop.exe\0"
-      VALUE "FileDescription",  "Open eGovernment: Desktop.\0"
-      VALUE "ProductName",      "Open eGovernment: Desktop.\0"
+      VALUE "InternalName",     "video-chat.exe\0"
+      VALUE "OriginalFilename", "video-chat.exe\0"
+      VALUE "FileDescription",  "Open eGovernment: Video Chat.\0"
+      VALUE "ProductName",      "Open eGovernment: Video Chat.\0"
       VALUE "Comments",         "Homepage: www.open-egov.de\0"
       VALUE "CompanyName",      "gasi.de\0"
       VALUE "LegalCopyright",   "Copyright (C) 2004-2012 GASI.\0"

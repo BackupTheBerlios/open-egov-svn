@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2011 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -38,6 +38,8 @@ class MainWindow : public OEG::Qt::MainWindow
     virtual void createMenus();
     virtual void createToolBars();
     virtual void createToolProvider() {};
+
+    void sendBugReport();
 
   protected:
     QString  m_bug_report;

@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -26,9 +26,9 @@
 #include <QPaintEvent>
 #include <QPen>
 
-#include "SHPointBar.h"
+#include "SplitterHandlePointBar.h"
 
-SHPointBar::SHPointBar(QWidget *parent /*=0*/)
+SplitterHandlePointBar::SplitterHandlePointBar(QWidget *parent /*=0*/)
  : SplitterHandleWidget(parent)
 {
   m_current_value = 0;
@@ -38,33 +38,33 @@ SHPointBar::SHPointBar(QWidget *parent /*=0*/)
   setAutoFillBackground(true);
 }
 
-void SHPointBar::setCurrentValue(int value)
+void SplitterHandlePointBar::setCurrentValue(int value)
 {
   m_current_value = value;
 }
 
-int SHPointBar::currentValue()
+int SplitterHandlePointBar::currentValue()
 {
   return m_current_value;
 }
 
-void SHPointBar::setRange(int min, int max)
+void SplitterHandlePointBar::setRange(int min, int max)
 {
   m_min_value = min;
   m_max_value = max;
 }
 
-int SHPointBar::minValue()
+int SplitterHandlePointBar::minValue()
 {
   return m_min_value;
 }
 
-int SHPointBar::maxValue()
+int SplitterHandlePointBar::maxValue()
 {
   return m_max_value;
 }
 
-void SHPointBar::paintEvent(QPaintEvent *event)
+void SplitterHandlePointBar::paintEvent(QPaintEvent *event)
 {
   //QWidget::paintEvent();
 
@@ -80,6 +80,6 @@ void SHPointBar::paintEvent(QPaintEvent *event)
 
   //painter.setPen(Qt::blue);
   //painter.setFont(QFont("Arial", 30));
-  //painter.drawText(rect(), Qt::AlignCenter, "Qt");
+  //painter.drawText(rect(), Qt::AlignCenter, "test");
 }
 

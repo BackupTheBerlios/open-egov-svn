@@ -2,16 +2,16 @@
 
 <!-- $Id$ -->
 
-<application base="application-connector" category="tools">
+<application base="createdatabase" category="tools">
   <strings>
     <group lang="en_US">
-      <string name="title">Application Connector</string>
-      <string name="description">Ermöglicht die Kommunikation zwischen OEG-Anwendungen.</string>
+      <string name="title">Create Database</string>
+      <string name="description">Creates databases via SQL queries out of a XML description.</string>
     </group>
 
     <group lang="de_DE">
-      <string name="title">Application Connector</string>
-      <string name="description">Enables the communication between OEG applications.</string>
+      <string name="title">Create Database</string>
+      <string name="description">Erstellt Datenbanken mittels SQL-Anfragen aus einer XML-Datei.</string>
     </group>
   </strings>
 
