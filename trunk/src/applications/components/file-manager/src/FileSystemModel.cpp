@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2011 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@ QVariant FileSystemModel::data(const QModelIndex &index, int role /*=Qt::Display
 {
   //Q_UNUSED(role)
 
-  if(! index.isValid())
+  if (! index.isValid())
     return QVariant();
 
   //QString xxx = list_data.at(index.row());
