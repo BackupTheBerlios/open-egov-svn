@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2011 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
   // screeensaver which should be started.
 
   QString oegPath;
-  oegPath = settings.value("OEG-Directory", QLatin1String("I:\\Projekte\\open-egov")).toString();
+  oegPath = settings.value("OEG-Directory", QLatin1String("I:\\Projekte\\berlios\\open-egov")).toString();
   if (oegPath.length() <= 0)
     return 0;
 
