@@ -24,6 +24,8 @@
 #include <QTabWidget>
 #include <QDebug>
 
+class QKeyEvent;
+class QMouseEvent;
 class QToolButton;
 
 namespace OEG { namespace Qt {
@@ -41,10 +43,20 @@ class TabWidget : public QTabWidget
   public slots:
     void closeTab();
 
+  signals:
+    void mousePressed();
+    void keyPressed();
+    void mousePressedAtTabBar();
+    void tabClicked(int index);
+
   protected:
     virtual void tabInserted(int index);
     virtual void tabRemoved(int index);
     virtual void tabLayoutChanged();
+    virtual void mousePressEvent(QMouseEvent *event);
+    virtual void keyPressEvent(QKeyEvent *event);
+
+    bool eventFilter(QObject *object, QEvent *event);
 
   private:
     QToolButton *m_close_tab_button;

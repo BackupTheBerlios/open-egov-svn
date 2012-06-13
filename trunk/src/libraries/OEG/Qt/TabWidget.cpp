@@ -24,6 +24,7 @@
 #include <QStyleOption>
 #include <QColor>
 #include <QPainter>
+#include <QMouseEvent>
 
 using namespace OEG::Qt;
 using namespace Qt;
@@ -32,6 +33,8 @@ TabWidget::TabWidget(QWidget *parent /*=0*/)
  : QTabWidget(parent)
 {
   m_close_tab_button = 0;
+
+  tabBar()->installEventFilter(this);
 }
 
 TabWidget::~TabWidget()
@@ -100,5 +103,43 @@ void TabWidget::tabRemoved(int index)
   QTabWidget::tabRemoved(index);
 
   tabLayoutChanged();
+}
+
+void TabWidget::mousePressEvent(QMouseEvent *event)
+{
+  emit mousePressed();
+
+  int clickedItem = -1;
+  for (int i=0; i<tabBar()->count(); i++) {
+    if (tabBar()->tabRect(i).contains(event->pos())) {
+      clickedItem = i;
+      break;
+    }
+  }
+  if (clickedItem > -1)
+    emit tabClicked(clickedItem);
+
+  qDebug() << "TabWidget::mousePressEvent" << clickedItem;
+
+  QTabWidget::mousePressEvent(event);
+}
+
+void TabWidget::keyPressEvent(QKeyEvent *event)
+{
+  emit keyPressed();
+
+  QTabWidget::keyPressEvent(event);
+}
+
+bool TabWidget::eventFilter(QObject *object, QEvent *event)
+{
+  if (object == tabBar() && event->type() == QEvent::MouseButtonPress) {
+    QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
+    //removeTab(tabBar()->tabAt(mouseEvent->pos()));
+    emit mousePressedAtTabBar();
+    //return true;
+  }
+
+  return QTabWidget::eventFilter(object, event);
 }
 
