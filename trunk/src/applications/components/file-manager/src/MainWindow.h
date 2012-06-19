@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2011 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -19,7 +19,6 @@
 #pragma once
 
 #include <OEG/Qt/MainWindow.h>
-#include <OEG/Qt/TabWidget.h>
 
 #include <QMainWindow>
 #include <QModelIndex>
@@ -31,10 +30,14 @@ class QDockWidget;
 class QMenuBar;
 class QTabWidget;
 class QTreeView;
+class QFileSystemModel;
+class QSplitter;
+class QListView;
 
 class ButtonsDockWidget;
 class FileSystemModel;
 class FolderView;
+class FolderManager;
 
 class MainWindow : public OEG::Qt::MainWindow
 {
@@ -53,7 +56,6 @@ class MainWindow : public OEG::Qt::MainWindow
     FolderView *currentFolderView();
 
   protected:
-    void runCommand(const QString &name);
     void removeColumnsFromTree();
 
   protected slots:
@@ -62,16 +64,21 @@ class MainWindow : public OEG::Qt::MainWindow
     void treeCollapsed(const QModelIndex &index);
     void treeExpanded(const QModelIndex &index);
     void updateFileSystemViews();
-    void directoryLoaded(const QString &path);
+    void viewDirectoryLoaded(const QString &path);
 
     void tabCurrentChanged(int index);
     void tabCloseRequested(int index);
 
+    void newTabWithPath();
+
   private:
-    OEG::Qt::TabWidget  *m_tabs;
+    QDockWidget         *m_dock_my_dirs;
+    QListView           *m_dock_my_dirs_view;
     QDockWidget         *m_dock_tree;
     QTreeView           *m_dock_tree_view;
     ButtonsDockWidget   *m_dock_buttons;
     QDockWidget         *m_dock_preview;
+    QFileSystemModel    *m_dock_model;
+    FolderManager       *m_folder_manager;
 };
 

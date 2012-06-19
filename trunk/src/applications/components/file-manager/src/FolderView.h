@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2011 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -20,27 +20,44 @@
 
 #include <QString>
 #include <QList>
+#include <QProcess>
 #include <QTableView>
 
 class QAbstractItemModel;
-class FileSystemModel;
+class QFileSystemModel;
+class FolderManager;
 
 class FolderView : public QTableView
 {
   Q_OBJECT
 
   public:
-    FolderView(QWidget *parent = 0, const QString &path = "");
+    FolderView(QWidget *parent = 0);
     virtual ~FolderView();
 
+    void setPath(const QString &path = "");
+
     virtual void setModel(QAbstractItemModel *model);
-    FileSystemModel *fileSystemModel();
+    QFileSystemModel *fileSystemModel();
 
     QString tabTitleForFolder();
     void navigateToPath(const QString &path);
 
+    void activateView(const bool activate = true);
+
+    void launchProcess(const QString &path);
+    void processError(QProcess::ProcessError errorcode);
+    void handleDoubleClickedFile(const QString &path);
+
+    void setFolderManager(FolderManager *fm);
+    FolderManager *folderManager() const;
+
   protected slots:
     void doubleClicked(const QModelIndex &index);
     void resizeToContents();
+
+  protected:
+    QProcess       m_process;
+    FolderManager *m_folder_manager;
 };
 
