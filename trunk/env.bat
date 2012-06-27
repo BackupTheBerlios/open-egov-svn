@@ -5,8 +5,8 @@ REM $Id$
 IF NOT EXIST E:\temp\NUL GOTO NO_E_DRIVE
 
 ECHO TEMP=E:\temp
-Set TEMP=E:\temp
-Set TMP=E:\temp
+SET TEMP=E:\temp
+SET TMP=E:\temp
 
 :NO_E_DRIVE
 
