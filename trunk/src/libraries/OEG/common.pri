@@ -1,12 +1,20 @@
 # $Id$
 
 TEMPLATE  = lib
-CONFIG   += qt warn_on release
+CONFIG   += qt warn_on
 QT       += core
 #dbus
 DESTDIR   = ../../../../bin
 QMAKE_LFLAGS += -enable-stdcall-fixup -Wl,-enable-auto-import -Wl,-enable-runtime-pseudo-reloc
 #CONFIG += qdbus
+
+exists(../../config.pri) {
+  #message("File config.pri found and included!")
+  include(../../config.pri)
+}
+else {
+  message("No config.pri found!")
+}
 
 # $$OUT_PWD contains the directory of our .pro file with slashes
 # like: C:/Test/123. Windows dislikes such paths. We could use

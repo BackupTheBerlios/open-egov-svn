@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -78,27 +78,27 @@ MainWindow::~MainWindow()
 
 void MainWindow::createActions()
 {
-  QAction *a;
+  QAction *action;
 
   OEG::Qt::MainWindow::createActions();
 
-  a = standardAction(ZoomIn);
-  if (a) {
+  action = standardAction(ZoomIn);
+  if (action) {
     
-    connect(a, SIGNAL(triggered()), this, SLOT(action_zoom_in()));
+    connect(action, SIGNAL(triggered()), this, SLOT(action_zoom_in()));
   }
 
 #if 0
-  a = new QAction("xyz", this);
-  if (! a)
+  action = new QAction("xyz", this);
+  if (! action)
     return 0;
 
-  a->setObjectName(baseName);
+  action->setObjectName(baseName);
   if (baseName.length() > 0)
-    a->setIcon(QIcon(baseName));
-  a->setShortcut(keySequence);
-  a->setToolTip(info);
-  a->setStatusTip(info);
+    action->setIcon(QIcon(baseName));
+  action->setShortcut(keySequence);
+  action->setToolTip(info);
+  action->setStatusTip(info);
 #endif
 }
 

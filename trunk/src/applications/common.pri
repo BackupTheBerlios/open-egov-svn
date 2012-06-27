@@ -14,11 +14,35 @@ else {
 }
 
 TEMPLATE     = app
-CONFIG      += qt warn_on release -debug
+CONFIG      += qt warn_on
 QT          += core gui xml
 DESTDIR      = $${PRO_OUT_PATH}$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}bin
 INCLUDEPATH += ..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}libraries
 QMAKE_LFLAGS += -enable-stdcall-fixup -Wl,-enable-auto-import -Wl,-enable-runtime-pseudo-reloc
+
+exists(../config.pri) {
+  #message("File config.pri found and included!")
+  include(../config.pri)
+}
+else {
+  message("No config.pri found!")
+}
+
+debug {
+  TARGET = $${TARGET}.debug
+  message("TARGET is: $${TARGET}")
+}
+
+exists($$(TEMP)) {
+  OBJECTS_DIR=$$(TEMP)$${DIR_SEPARATOR}open-egovernment$${DIR_SEPARATOR}$${TARGET}$${DIR_SEPARATOR}
+  MOC_DIR=$$(TEMP)$${DIR_SEPARATOR}open-egovernment$${DIR_SEPARATOR}$${TARGET}$${DIR_SEPARATOR}
+  #message("TEMP folder is: $$(TEMP)")
+  #message("OBJ folder is: $${OBJECTS_DIR}")
+}
+else {
+  message("No TEMP environment variable found: TEMP=$$(TEMP)")
+}
+
 
 win32 {
   QMAKE_POST_LINK += strip --strip-unneeded \"$${DESTDIR}$${DIR_SEPARATOR}$${TARGET}.exe\"

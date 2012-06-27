@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -28,6 +28,8 @@ class QAction;
 class QMouseEvent;
 class QPaintEvent;
 
+class Tile;
+
 namespace OEG { namespace GIS {
 
 class MapWidget : public QWidget
@@ -35,7 +37,20 @@ class MapWidget : public QWidget
   Q_OBJECT
 
   public:
+    enum MapFeature {
+      SingleImage      =  1,
+      Moveable         =  2,
+      ZoomWidgets      =  4,
+      MoveWidgets      =  8,
+      MapScale         = 16,
+      Overview         = 32,
+      LoadingIndicator = 64
+    };
+    Q_DECLARE_FLAGS(MapFeatures, MapFeature)
+    //typedef QFlags<MapFeature> MapFeatures;
+
     enum MapEngine {
+      Images,                                    // Use images with map data.
       OpenStreetMap,                             // Download from OpenStreetMap.
       Google,                                    // Download from Google Maps.
       Yahoo,                                     // Download from Yahoo.
@@ -62,7 +77,11 @@ class MapWidget : public QWidget
     ~MapWidget();
 
     void setZoom(int zoom);
+    int zoom() const;
+
     void setArea(double left, double top, double right, double bottom);
+
+    void setImage(const QString &fileName, double left, double top, double right, double bottom, const bool singleImage = true);
 
   protected:
     void paintEvent(QPaintEvent *event);
@@ -78,13 +97,17 @@ class MapWidget : public QWidget
     LeftMouseMode  m_lmb_mode;
     RenderMode     m_render_mode;
 
+    MapFeatures    m_features;
     bool           m_valid_area;
-    int            m_zoom;
+    int            m_zoom;             // A value between -10000..0..+10000.
     double         m_area_left;        // Longitude of the left (westernmost) side of the bounding box.
     double         m_area_top;         // Latitude of the top (northernmost) side of the bounding box.
     double         m_area_right;       // Longitude of the right (easternmost) side of the bounding box.
     double         m_area_bottom;      // Latitude of the bottom (southernmost) side of the bounding box.
+    QList<Tile *>  m_tiles;
 };
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(MapWidget::MapFeatures)
 
 }}
 
