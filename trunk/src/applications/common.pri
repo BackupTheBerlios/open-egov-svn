@@ -28,27 +28,39 @@ else {
   message("No config.pri found!")
 }
 
+MYDEBUGSUFFIX=""
+
 debug {
-  TARGET = $${TARGET}.debug
+  MYDEBUGSUFFIX=.debug
+  TARGET = $${TARGET}$${MYDEBUGSUFFIX}
   message("TARGET is: $${TARGET}")
 }
 
 exists($$(TEMP)) {
-  OBJECTS_DIR=$$(TEMP)$${DIR_SEPARATOR}open-egovernment$${DIR_SEPARATOR}$${TARGET}$${DIR_SEPARATOR}
-  MOC_DIR=$$(TEMP)$${DIR_SEPARATOR}open-egovernment$${DIR_SEPARATOR}$${TARGET}$${DIR_SEPARATOR}
+  MYTEMPDIR=$$(TEMP)$${DIR_SEPARATOR}open-egovernment$${DIR_SEPARATOR}
+  OBJECTS_DIR=$${MYTEMPDIR}$${TARGET}$${DIR_SEPARATOR}
+  MOC_DIR=$${MYTEMPDIR}$${TARGET}$${DIR_SEPARATOR}
   #message("TEMP folder is: $$(TEMP)")
   #message("OBJ folder is: $${OBJECTS_DIR}")
 }
 else {
+  MYTEMPDIR=""
   message("No TEMP environment variable found: TEMP=$$(TEMP)")
 }
 
-
 win32 {
-  QMAKE_POST_LINK += strip --strip-unneeded \"$${DESTDIR}$${DIR_SEPARATOR}$${TARGET}.exe\"
+  debug {
+    QMAKE_POST_LINK += echo "debug: not stripped."
+  }
+  else {
+    #QMAKE_POST_LINK += strip --strip-unneeded \"$${DESTDIR}$${DIR_SEPARATOR}$${TARGET}.exe\"
+    QMAKE_POST_LINK += strip --strip-unneeded -o \"$${MYTEMPDIR}$${TARGET}.stripped\" \"$${DESTDIR}$${DIR_SEPARATOR}$${TARGET}.exe\" && MOVE /Y \"$${MYTEMPDIR}$${TARGET}.stripped\" \"$${DESTDIR}$${DIR_SEPARATOR}$${TARGET}.exe\"
+  }
+
   exists("$${DESTDIR}$${DIR_SEPARATOR}peflags.exe") {
-    #QMAKE_POST_LINK += && $${DESTDIR}$${DIR_SEPARATOR}peflags.exe --dynamicbase=true --nxcompat=true $${DESTDIR}$${DIR_SEPARATOR}$$replace(TARGET, " ", "\ ").exe
-    QMAKE_POST_LINK += && cd $${DESTDIR} && peflags.exe --dynamicbase=true --nxcompat=true \"$${TARGET}.exe\"
+    QMAKE_POST_LINK += "&&"
+    #$${DESTDIR}$${DIR_SEPARATOR}$$replace(TARGET, " ", "\ ").exe
+    QMAKE_POST_LINK += cd $${DESTDIR} && peflags.exe --dynamicbase=true --nxcompat=true \"$${TARGET}.exe\"
   }
   else {
     message("No peflags.exe found.")
@@ -65,39 +77,38 @@ isEmpty(PACKAGES) {
 LIBSLINE = -L..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}bin
 contains(PACKAGES, QT) {
   message(Adding support for OEG-Qt ...)
-  LIBSLINE += -loegQt1
-  PRE_TARGETDEPS += $${DESTDIR}/liboegQt1.a
-  #PRE_TARGETDEPS += $${DESTDIR}/oegQt1.$${DLLEXTENSION}
+  LIBSLINE += -loegQt$${MYDEBUGSUFFIX}1
+  PRE_TARGETDEPS += $${DESTDIR}/liboegQt$${MYDEBUGSUFFIX}1.a
 }
 contains(PACKAGES, CRYPT) {
   message(Adding support for OEG-Crypt ...)
-  LIBSLINE += -loegCrypt1
-  PRE_TARGETDEPS += $${DESTDIR}/liboegCrypt1.a
+  LIBSLINE += -loegCrypt$${MYDEBUGSUFFIX}1
+  PRE_TARGETDEPS += $${DESTDIR}/liboegCrypt$${MYDEBUGSUFFIX}1.a
 }
 contains(PACKAGES, GIS) {
   message(Adding support for OEG-GIS ...)
-  LIBSLINE += -loegGIS1
-  PRE_TARGETDEPS += $${DESTDIR}/liboegGIS1.a
+  LIBSLINE += -loegGIS$${MYDEBUGSUFFIX}1
+  PRE_TARGETDEPS += $${DESTDIR}/liboegGIS$${MYDEBUGSUFFIX}1.a
 }
 contains(PACKAGES, MATH) {
   message(Adding support for OEG-Math ...)
-  LIBSLINE += -loegMath1
-  PRE_TARGETDEPS += $${DESTDIR}/liboegMath1.a
+  LIBSLINE += -loegMath$${MYDEBUGSUFFIX}1
+  PRE_TARGETDEPS += $${DESTDIR}/liboegMath$${MYDEBUGSUFFIX}1.a
 }
 contains(PACKAGES, MAIL) {
   message(Adding support for OEG-Mail ...)
-  LIBSLINE += -loegMail1
-  PRE_TARGETDEPS += $${DESTDIR}/liboegMail1.a
+  LIBSLINE += -loegMail$${MYDEBUGSUFFIX}1
+  PRE_TARGETDEPS += $${DESTDIR}/liboegMail$${MYDEBUGSUFFIX}1.a
 }
 contains(PACKAGES, PAGES) {
   message(Adding support for OEG-Pages ...)
-  LIBSLINE += -loegPages1
-  PRE_TARGETDEPS += $${DESTDIR}/liboegPages1.a
+  LIBSLINE += -loegPages$${MYDEBUGSUFFIX}1
+  PRE_TARGETDEPS += $${DESTDIR}/liboegPages$${MYDEBUGSUFFIX}1.a
 }
 contains(PACKAGES, 3D) {
   message(Adding support for OEG-3D ...)
-  LIBSLINE += -loeg3D1
-  PRE_TARGETDEPS += $${DESTDIR}/liboeg3D1.a
+  LIBSLINE += -loeg3D$${MYDEBUGSUFFIX}1
+  PRE_TARGETDEPS += $${DESTDIR}/liboeg3D$${MYDEBUGSUFFIX}1.a
 }
 LIBS += $$LIBSLINE
 
