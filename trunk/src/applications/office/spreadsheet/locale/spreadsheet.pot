@@ -1,0 +1,274 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Gerrit M. Albrecht
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: mail@gerrit-albrecht.de\n"
+"POT-Creation-Date: 2007-04-02 08:20+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+#
+# File: ../src/CellTable.cpp, line: 32
+msgid "xy"
+msgstr ""
+#
+#. =0
+# File: ../src/FunctionsDock.cpp, line: 29
+# File: ../src/MainWindow.cpp, line: 323
+# File: ../src/PropertiesDock.cpp, line: 29
+msgid "Properties"
+msgstr ""
+#
+# File: ../src/FunctionsDock.cpp, line: 42
+# File: ../src/PropertiesDock.cpp, line: 46
+msgid "Name"
+msgstr ""
+#
+# File: ../src/FunctionsDock.cpp, line: 42
+# File: ../src/PropertiesDock.cpp, line: 46
+msgid "Value"
+msgstr ""
+#
+# File: ../src/Main.cpp, line: 15
+# File: ../src/MainWindow.cpp, line: 70
+# File: ../src/MainWindow.cpp, line: 117
+msgid "Spreadsheet"
+msgstr ""
+#
+# File: ../src/Main.cpp, line: 16
+msgid "0.01"
+msgstr ""
+#
+# File: ../src/Main.cpp, line: 18
+msgid "http://www.gasi.de/products/spreadsheet/"
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 42
+msgid "Close current tab."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 70
+msgid ""
+"Cannot read file %1:\n"
+"%2."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 117
+msgid ""
+"Cannot write file %1:\n"
+"%2."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 247
+msgid "Tabelle"
+msgstr ""
+#
+#. connect(m_action_file_load, SIGNAL(triggered()), this, SLOT(action_file_load()));
+#. connect(m_action_file_save, SIGNAL(triggered()), this, SLOT(action_file_save()));
+# File: ../src/MainWindow.cpp, line: 289
+msgid "Properties ..."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 290
+msgid "Edit document properties."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 293
+# File: ../src/MainWindow.cpp, line: 439
+msgid "Edit"
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 294
+msgid "Toggle edit toolbar."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 298
+# File: ../src/MainWindow.cpp, line: 447
+msgid "Format"
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 299
+msgid "Toggle format toolbar."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 303
+# File: ../src/MainWindow.cpp, line: 449
+msgid "Widgets"
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 304
+msgid "Toggle widgets toolbar."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 308
+# File: ../src/MainWindow.cpp, line: 427
+msgid "File"
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 309
+msgid "Toggle file toolbar."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 313
+msgid "StatusBar"
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 314
+msgid "Toggle statusbar."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 318
+msgid "Functions"
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 319
+msgid "Toggle functions dock."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 324
+msgid "Toggle properties dock."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 328
+msgid "&Full Screen"
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 329
+msgid "Ctrl+F"
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 330
+msgid "Toggle full screen mode."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 333
+msgid "Zoom Level ..."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 334
+msgid "Edit zoom level."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 338
+msgid "Security ..."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 339
+msgid "Open the security options dialog."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 342
+msgid "Document ..."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 343
+msgid "Open the document options dialog."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 346
+msgid "Common ..."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 347
+msgid "Open the common options dialog."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 350
+msgid "View ..."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 351
+msgid "Open the view options dialog."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 355
+msgid "Rows ..."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 356
+msgid "Insert rows."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 359
+msgid "Columns ..."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 360
+msgid "Insert columns."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 363
+msgid "Table"
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 364
+msgid "Insert table."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 367
+msgid "Diagram"
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 368
+msgid "Insert diagram."
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 374
+msgid "&File"
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 386
+msgid "&Edit"
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 394
+msgid "&View"
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 396
+msgid "ToolBars"
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 401
+msgid "Docks"
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 405
+msgid "&Options"
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 411
+msgid "&Insert"
+msgstr ""
+#
+# File: ../src/MainWindow.cpp, line: 420
+msgid "&Help"
+msgstr ""
+#
+# File: ../src/PropertiesDock.cpp, line: 56
+msgid "Text Color:"
+msgstr ""
+#
+# File: ../src/PropertiesDock.cpp, line: 62
+msgid "Background Color:"
+msgstr ""
+#
+# File: ../src/PropertiesDock.cpp, line: 68
+msgid "Font Name:"
+msgstr ""
+#
+# File: ../src/PropertiesDock.cpp, line: 74
+msgid "Font Size:"
+msgstr ""
+#
+# File: ../src/PropertiesDock.cpp, line: 80
+msgid "Margins:"
+msgstr ""

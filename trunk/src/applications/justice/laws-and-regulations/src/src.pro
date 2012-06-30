@@ -1,6 +1,6 @@
 # $Id$
 
-TARGET    = "laws-and-regulations"
+TARGET    = laws-and-regulations
 SOURCES   = *.cpp
 HEADERS   = *.h
 FORMS     = 

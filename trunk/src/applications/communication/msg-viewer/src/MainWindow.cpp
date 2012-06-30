@@ -187,7 +187,7 @@ long long int MainWindow::vbNumber(const QByteArray &s)
 
 // Reads a number of characters from a particular sector in a file.
 // Arguments: sect_size  The size of the sectors to be read
-//            sid        The particluar sector to be read
+//            sid        The particular sector to be read
 
 QByteArray MainWindow::sectorReader(int sect_size, int sid)
 {
