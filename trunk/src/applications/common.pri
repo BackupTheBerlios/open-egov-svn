@@ -28,18 +28,23 @@ else {
   message("No config.pri found!")
 }
 
-MYDEBUGSUFFIX=""
-
 debug {
-  MYDEBUGSUFFIX=.debug
-  TARGET = $${TARGET}$${MYDEBUGSUFFIX}
-  message("TARGET is: $${TARGET}")
+  MYTARGETSUFFIX=.debug
+  TARGETDIR=$${TARGET}$${MYTARGETSUFFIX}
+  TARGET=$${TARGET}$${MYTARGETSUFFIX}
+  #message("TARGET is: $${TARGET}")
+}
+else:release {
+  MYTARGETSUFFIX=""
+  TARGETDIR="$${TARGET}.release"
+  TARGET=$${TARGET}
+  #message("TARGET is: $${TARGET}")
 }
 
 exists($$(TEMP)) {
   MYTEMPDIR=$$(TEMP)$${DIR_SEPARATOR}open-egovernment$${DIR_SEPARATOR}
-  OBJECTS_DIR=$${MYTEMPDIR}$${TARGET}$${DIR_SEPARATOR}
-  MOC_DIR=$${MYTEMPDIR}$${TARGET}$${DIR_SEPARATOR}
+  OBJECTS_DIR=$${MYTEMPDIR}$${TARGETDIR}$${DIR_SEPARATOR}
+  MOC_DIR=$${MYTEMPDIR}$${TARGETDIR}$${DIR_SEPARATOR}
   #message("TEMP folder is: $$(TEMP)")
   #message("OBJ folder is: $${OBJECTS_DIR}")
 }
@@ -77,38 +82,38 @@ isEmpty(PACKAGES) {
 LIBSLINE = -L..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}bin
 contains(PACKAGES, QT) {
   message(Adding support for OEG-Qt ...)
-  LIBSLINE += -loegQt$${MYDEBUGSUFFIX}1
-  PRE_TARGETDEPS += $${DESTDIR}/liboegQt$${MYDEBUGSUFFIX}1.a
+  LIBSLINE += -loegQt$${MYTARGETSUFFIX}1
+  PRE_TARGETDEPS += $${DESTDIR}/liboegQt$${MYTARGETSUFFIX}1.a
 }
 contains(PACKAGES, CRYPT) {
   message(Adding support for OEG-Crypt ...)
-  LIBSLINE += -loegCrypt$${MYDEBUGSUFFIX}1
-  PRE_TARGETDEPS += $${DESTDIR}/liboegCrypt$${MYDEBUGSUFFIX}1.a
+  LIBSLINE += -loegCrypt$${MYTARGETSUFFIX}1
+  PRE_TARGETDEPS += $${DESTDIR}/liboegCrypt$${MYTARGETSUFFIX}1.a
 }
 contains(PACKAGES, GIS) {
   message(Adding support for OEG-GIS ...)
-  LIBSLINE += -loegGIS$${MYDEBUGSUFFIX}1
-  PRE_TARGETDEPS += $${DESTDIR}/liboegGIS$${MYDEBUGSUFFIX}1.a
+  LIBSLINE += -loegGIS$${MYTARGETSUFFIX}1
+  PRE_TARGETDEPS += $${DESTDIR}/liboegGIS$${MYTARGETSUFFIX}1.a
 }
 contains(PACKAGES, MATH) {
   message(Adding support for OEG-Math ...)
-  LIBSLINE += -loegMath$${MYDEBUGSUFFIX}1
-  PRE_TARGETDEPS += $${DESTDIR}/liboegMath$${MYDEBUGSUFFIX}1.a
+  LIBSLINE += -loegMath$${MYTARGETSUFFIX}1
+  PRE_TARGETDEPS += $${DESTDIR}/liboegMath$${MYTARGETSUFFIX}1.a
 }
 contains(PACKAGES, MAIL) {
   message(Adding support for OEG-Mail ...)
-  LIBSLINE += -loegMail$${MYDEBUGSUFFIX}1
-  PRE_TARGETDEPS += $${DESTDIR}/liboegMail$${MYDEBUGSUFFIX}1.a
+  LIBSLINE += -loegMail$${MYTARGETSUFFIX}1
+  PRE_TARGETDEPS += $${DESTDIR}/liboegMail$${MYTARGETSUFFIX}1.a
 }
 contains(PACKAGES, PAGES) {
   message(Adding support for OEG-Pages ...)
-  LIBSLINE += -loegPages$${MYDEBUGSUFFIX}1
-  PRE_TARGETDEPS += $${DESTDIR}/liboegPages$${MYDEBUGSUFFIX}1.a
+  LIBSLINE += -loegPages$${MYTARGETSUFFIX}1
+  PRE_TARGETDEPS += $${DESTDIR}/liboegPages$${MYTARGETSUFFIX}1.a
 }
 contains(PACKAGES, 3D) {
   message(Adding support for OEG-3D ...)
-  LIBSLINE += -loeg3D$${MYDEBUGSUFFIX}1
-  PRE_TARGETDEPS += $${DESTDIR}/liboeg3D$${MYDEBUGSUFFIX}1.a
+  LIBSLINE += -loeg3D$${MYTARGETSUFFIX}1
+  PRE_TARGETDEPS += $${DESTDIR}/liboeg3D$${MYTARGETSUFFIX}1.a
 }
 LIBS += $$LIBSLINE
 

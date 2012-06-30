@@ -17,17 +17,27 @@ else {
 }
 
 debug {
-  TARGET = $${TARGET}.debug
+  MYTARGETSUFFIX=.debug
+  TARGETDIR=$${TARGET}$${MYTARGETSUFFIX}
+  TARGET=$${TARGET}$${MYTARGETSUFFIX}
+  #message("TARGET is: $${TARGET}")
+}
+else:release {
+  MYTARGETSUFFIX=""
+  TARGETDIR="$${TARGET}.release"
+  TARGET=$${TARGET}
   #message("TARGET is: $${TARGET}")
 }
 
 exists($$(TEMP)) {
-  OBJECTS_DIR=$$(TEMP)$${DIR_SEPARATOR}open-egovernment$${DIR_SEPARATOR}$${TARGET}$${DIR_SEPARATOR}
-  MOC_DIR=$$(TEMP)$${DIR_SEPARATOR}open-egovernment$${DIR_SEPARATOR}$${TARGET}$${DIR_SEPARATOR}
+  MYTEMPDIR=$$(TEMP)$${DIR_SEPARATOR}open-egovernment$${DIR_SEPARATOR}
+  OBJECTS_DIR=$${MYTEMPDIR}$${TARGETDIR}$${DIR_SEPARATOR}
+  MOC_DIR=$${MYTEMPDIR}$${TARGETDIR}$${DIR_SEPARATOR}
   #message("TEMP folder is: $$(TEMP)")
   #message("OBJ folder is: $${OBJECTS_DIR}")
 }
 else {
+  MYTEMPDIR=""
   message("No TEMP environment variable found: TEMP=$$(TEMP)")
 }
 

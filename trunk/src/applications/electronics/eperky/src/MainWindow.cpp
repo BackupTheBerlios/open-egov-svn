@@ -104,6 +104,7 @@ void MainWindow::createMenus()
   editMenu->addAction(standardAction(Cut));
   editMenu->addAction(standardAction(Copy));
   editMenu->addAction(standardAction(Paste));
+  editMenu->addSeparator();
   editMenu->addAction(standardAction(Delete));
 
   addHelpMenu();
