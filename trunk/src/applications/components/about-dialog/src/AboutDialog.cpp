@@ -1,7 +1,7 @@
 // $Id: Application.cpp,v 1.30 2007/05/30 18:40:31 gerrit Exp $
 //
 // Open eGovernment
-// Copyright (C) 2005-2011 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -86,7 +86,7 @@ void AboutDialog::setInformationText()
            "implemented with a higher priority, ... Thats all.");
   str += "</p>";
 
-  QString homepage = "test"; //dynamic_cast<Application *>(qApp)->homepage();
+  QString homepage = "http://www.open-egov.de/projects/" + dynamic_cast<OEG::Qt::Application *>(qApp)->baseName() + "/";
 
   if (homepage.length() > 0) {
     str += "<p>";

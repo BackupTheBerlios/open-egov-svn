@@ -1,7 +1,7 @@
 // $Id: MainWindow.h 223 2010-08-03 22:02:14Z gerrit-albrecht $
 //
 // Open eGovernment
-// Copyright (C) 2005-2011 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -42,6 +42,8 @@ class AboutDialog : public QDialog, public Ui::AboutDialog
     void openUrl(const QUrl &link);
 
   private:
-
+    QString   m_base_name;
+    QString   m_application_name;
+    QString   m_authors;
 };
 
