@@ -18,6 +18,7 @@
 
 #include <OEG/Common.h>
 #include <OEG/Qt/Application.h>
+#include <OEG/Qt/Connector.h>
 #include <OEG/Qt/HelpHandler.h>
 #include <OEG/Qt/DBusStandardInterface.h>
 #include <OEG/Qt/DebugMessageHandler.h>
@@ -89,6 +90,8 @@ need to find a recent windbus first
 
 Application::~Application()
 {
+  m_connector.stop();
+
   if (m_database_manager) {
     delete m_database_manager; m_database_manager = 0;
   }

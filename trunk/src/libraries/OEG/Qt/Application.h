@@ -19,6 +19,7 @@
 #pragma once
 
 #include <OEG/Common.h>
+#include <OEG/Qt/Connector.h>
 #include <OEG/Qt/DatabaseManager.h>
 #include <OEG/Qt/HelpHandler.h>
 #include <OEG/Qt/Settings.h>
@@ -92,6 +93,7 @@ class Application : public QApplication
     void installGetText();
 
   protected:
+    Connector          m_connector;
     DatabaseManager   *m_database_manager;
     QSystemTrayIcon   *m_tray_icon;
     ApplicationFlags   m_application_flags;
