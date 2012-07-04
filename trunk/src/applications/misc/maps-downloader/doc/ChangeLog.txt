@@ -1,0 +1,6 @@
+$Id$
+
+2012-07-03  Gerrit M. Albrecht  <mail (at) gerrit-albrecht.de>
+
+	* First draft version.
+
