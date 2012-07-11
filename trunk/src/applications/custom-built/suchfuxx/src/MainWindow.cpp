@@ -34,6 +34,7 @@
 #include <QTabWidget>
 #include <QTableWidget>
 #include <QTableWidgetItem>
+#include <QTextStream>
 #include <QTreeView>
 #include <QTreeWidgetItem>
 #include <QTimer>
@@ -64,10 +65,10 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
   m_tabs->setMinimumSize(200, 100);
   setCentralWidget(m_tabs);
 
-  QWidget *tab_fileplan  = new QWidget();
-  QWidget *tab_search    = new QWidget();
-  QWidget *tab_phonebook = new QWidget();
-  QTableWidget *fileplan = new QTableWidget();
+  m_tab_fileplan  = new QWidget();
+  m_tab_search    = new QWidget();
+  m_tab_phonebook = new QWidget();
+  m_fileplan      = new QTableWidget();
   QStringList list;
   QBrush fpiBrushNormal(Qt::NoBrush);
   QBrush fpiBrushHeader(Qt::cyan);
@@ -78,11 +79,13 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
   QString line;
   FilePlanEntry *entry;
 
-  fileplan->setRowCount(0);
-  fileplan->setColumnCount(3);
-  fileplan->setHorizontalHeaderItem(0, new QTableWidgetItem("Aktenzeichen"));
-  fileplan->setHorizontalHeaderItem(1, new QTableWidgetItem("Titel"));
-  fileplan->setHorizontalHeaderItem(2, new QTableWidgetItem("Kommentar"));
+  m_fileplan->setRowCount(0);
+  m_fileplan->setColumnCount(3);
+  m_fileplan->setHorizontalHeaderItem(0, new QTableWidgetItem("Aktenzeichen"));
+  m_fileplan->setHorizontalHeaderItem(1, new QTableWidgetItem("Titel"));
+  m_fileplan->setHorizontalHeaderItem(2, new QTableWidgetItem("Kommentar"));
+  m_fileplan->verticalHeader()->hide();
+  m_fileplan->setSelectionBehavior(QAbstractItemView::SelectRows);
 
   QDir dir(dynamic_cast<OEG::Qt::Application *>(qApp)->standardDirectory(OEG::Qt::Application::Data));
   qDebug() << dir.canonicalPath() + "/fileplan.txt";
@@ -97,11 +100,18 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
     return;
   }
 
+  QTextStream stream(&file);
+  stream.setCodec("UTF-8");
+
   m_fileplan_list.clear();
-  while (! file.atEnd()) {
-    line = file.readLine().trimmed();
+  while (! stream.atEnd()) {
+    line = stream.readLine().trimmed();
 
     if (line.length() == 0)
+      continue;
+
+    if (line.startsWith("Einzelfall:") ||
+        line.startsWith("Einzelfälle:"))
       continue;
 
     list = line.split("\t");
@@ -109,15 +119,16 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
     entry = new FilePlanEntry();
     if (entry) {
       int i = list.size();
-      entry->setRefNo((i > 0) ? list.at(0) : "");
-      entry->setTitle((i > 1) ? list.at(1) : "");
-      entry->setComment((i > 2) ? list.at(2) : "");
+      entry->setRefNo((i > 0) ? list.at(0).simplified() : "");
+      entry->setTitle((i > 1) ? list.at(1).simplified() : "");
+      entry->setComment((i > 2) ? list.at(2).simplified() : "");
 
       m_fileplan_list.append(entry);
     }
   }
+  file.close();
 
-  fileplan->setRowCount(m_fileplan_list.size());
+  m_fileplan->setRowCount(m_fileplan_list.size());
 
   for (int i=0; i<m_fileplan_list.size(); i++) {
     entry = m_fileplan_list.at(i);
@@ -129,30 +140,31 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
     //table_item->setBackground();
     table_item->setFont(fpiFontNormal);
     table_item->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled);
-    fileplan->setItem(i, 0, table_item);
+    m_fileplan->setItem(i, 0, table_item);
 
     table_item = new QTableWidgetItem();
     table_item->setText(entry->title());
-    fileplan->setItem(i, 1, table_item);
+    m_fileplan->setItem(i, 1, table_item);
 
     table_item = new QTableWidgetItem();
     table_item->setText(entry->comment());
-    fileplan->setItem(i, 2, table_item);
+    //table_item->setBackground(Qt::cyan);
+    m_fileplan->setItem(i, 2, table_item);
   }
 
-  table_item->setTextAlignment(Qt::AlignVCenter | Qt::AlignLeft);
+  //table_item->setTextAlignment(Qt::AlignVCenter | Qt::AlignLeft);
   //http://doc.trolltech.com/latest/qtablewidgetitem.html
 
-  m_tabs->addTab(tab_fileplan,  "Aktenplan");
-  m_tabs->addTab(tab_search,    "Stichwortsuche");
-  m_tabs->addTab(tab_phonebook, "Telefonbuch");
+  m_tabs->addTab(m_tab_fileplan,  _("Aktenplan"));
+  m_tabs->addTab(m_tab_search,    _("Stichwortsuche"));
+  m_tabs->addTab(m_tab_phonebook, _("Telefonbuch"));
 
   QGridLayout *layout;
 
   layout = new QGridLayout();
   layout->setContentsMargins(0, 0, 0, 0);
-  layout->addWidget(fileplan, 0, 0);
-  tab_fileplan->setLayout(layout);
+  layout->addWidget(m_fileplan, 0, 0);
+  m_tab_fileplan->setLayout(layout);
 
   layout = new QGridLayout();
   layout->setContentsMargins(0, 0, 0, 0);
@@ -160,18 +172,12 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
   layout->addWidget(new QLabel("2222"), 0, 1);
   layout->addWidget(new QLabel("3333"), 1, 0);
   layout->addWidget(new QLabel("4444"), 1, 1);
-  tab_search->setLayout(layout);
+  m_tab_search->setLayout(layout);
 
   layout = new QGridLayout();
   layout->setContentsMargins(0, 0, 0, 0);
   layout->addWidget(new QWidget(), 0, 0);
-  tab_phonebook->setLayout(layout);
-
-  //FolderView *view;
-  //view = new FolderView(0, QDir::currentPath());
-  //m_tabs->addTab(view, view->tabTitleForFolder());
-  //connect(view, SIGNAL(currentChanged(const QModelIndex &, const QModelIndex &)),
-  //        this, SLOT(currentChanged(const QModelIndex &, const QModelIndex &)));
+  m_tab_phonebook->setLayout(layout);
 
 #if 0
   QToolBox *m_toolbox = new QToolBox(m_dock_tree);
@@ -202,10 +208,42 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
 #endif
 
   m_tabs->setCurrentIndex(0);
+
+  //m_fileplan->resizeColumnsToContents();
+
+  connect(m_fileplan, SIGNAL(itemSelectionChanged()),
+          this,       SLOT(updateStatusBar()));
+
+  QHeaderView *hh = m_fileplan->horizontalHeader();
+  hh->setResizeMode(0, QHeaderView::Interactive);
+  hh->setResizeMode(1, QHeaderView::Interactive);
+  hh->setResizeMode(2, QHeaderView::Interactive);
+  hh->resizeSection(0, 60);
+  hh->setStretchLastSection(true);
+  //m_fileplan->setGridStyle(Qt::DotLine); // Qt::NoPen Qt::SolidLine
+
+  QFontMetrics fm(m_fileplan->font());
+  //int sectionLength = fm.width(s);
+
+
+
+  m_sb_pos = new QLabel();
+  m_sb_pos->setText("    ");
+  m_sb_pos->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+  m_sb_pos->setAlignment(Qt::AlignBottom | Qt::AlignRight);
+  statusBar()->addPermanentWidget(m_sb_pos);
 }
 
 MainWindow::~MainWindow()
 {
+}
+
+void MainWindow::updateStatusBar()
+{
+  QString s(_("Row: %1/%2"));
+  s = s.arg(QString::number(m_fileplan->currentRow() + 1),
+            QString::number(m_fileplan->rowCount()));
+  m_sb_pos->setText(s);
 }
 
 void MainWindow::createActions()

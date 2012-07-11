@@ -26,6 +26,8 @@ class QDockWidget;
 class QMenuBar;
 class QTabWidget;
 class QTreeView;
+class QTableWidget;
+class QLabel;
 
 class FilePlanEntry;
 
@@ -46,10 +48,16 @@ class MainWindow : public OEG::Qt::MainWindow
   public slots:
     void loadFile();
     void saveFile();
+    void updateStatusBar();
 
   private:
     QTabWidget             *m_tabs;
     QDockWidget            *m_dock_favorites;
     QList<FilePlanEntry *>  m_fileplan_list;
+    QTableWidget           *m_fileplan;
+    QWidget                *m_tab_fileplan;
+    QWidget                *m_tab_search;
+    QWidget                *m_tab_phonebook;
+    QLabel                 *m_sb_pos;
 };
 
