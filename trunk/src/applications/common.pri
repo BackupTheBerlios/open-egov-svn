@@ -86,6 +86,8 @@ contains(PACKAGES, QT) {
   message(Adding support for OEG-Qt ...)
   LIBSLINE += -loegQt$${MYTARGETSUFFIX}1
   PRE_TARGETDEPS += $${DESTDIR}/liboegQt$${MYTARGETSUFFIX}1.a
+
+  QT += network
 }
 contains(PACKAGES, CRYPT) {
   message(Adding support for OEG-Crypt ...)
