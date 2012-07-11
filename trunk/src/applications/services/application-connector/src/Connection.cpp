@@ -99,9 +99,9 @@ void Connection::onReadyRead()
   }
   qDebug() << "onReadyRead(): " << m_socket->bytesAvailable();
 
-  //QByteArray data = m_socket->readAll();
-  //m_socket->write(data);
-  //qDebug() << data;
+QByteArray data = m_socket->readAll();
+m_socket->write(data);
+qDebug() << data;
 }
 
 void Connection::emitDisconnected()
