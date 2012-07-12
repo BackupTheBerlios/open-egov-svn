@@ -28,8 +28,10 @@
 #include <QStringList>
 #include <QCryptographicHash>
 
-#include "CRC32.h"
 #include "Adler32.h"
+#include "CRC32.h"
+#include "SHA1.h"
+#include "MD5.h"
 
 int main(int argc, char *argv[])
 {
@@ -69,7 +71,7 @@ int main(int argc, char *argv[])
   }
 
   inputFileName  = QFileInfo(inputFileName).absoluteFilePath();
-  qDebug() << "File: " << inputFileName;
+  qDebug() << "File:" << inputFileName;
 
   QFile file(inputFileName);
   QByteArray result, input;
@@ -94,6 +96,8 @@ int main(int argc, char *argv[])
 
   qDebug() << "Adler-32" << Adler32::calcHash(input);
   qDebug() << "CRC32" << CRC32::calcHash(input);
+  qDebug() << "SHA-1" << SHA1::calcHash(input);
+  qDebug() << "MD5" << MD5::calcHash(input);
 
   return 0;
 }

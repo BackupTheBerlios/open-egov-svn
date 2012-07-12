@@ -40,31 +40,31 @@ HashAlgorithm::~HashAlgorithm()
 {
 }
 
-QString HashAlgorithm::hash(const QString &fileName)
+void HashAlgorithm::hash(const QString &fileName)
 {
   QString inputFileName = QFileInfo(fileName).absoluteFilePath();
-  qDebug() << "File: " << inputFileName;
+  qDebug() << "File:" << inputFileName;
 
   QFile file(inputFileName);
 
-  return hash(file);
+  hash(file);
 }
 
-QString HashAlgorithm::hash(QFile &file)
+void HashAlgorithm::hash(QFile &file)
 {
   QByteArray input;
   int size;
 
   if (! file.open(QIODevice::ReadOnly)) {
     qDebug() << "File not found.";
-    return "";
+    return;
   }
 
   size = file.size();
   input = file.readAll();  // TODO: read chunks and progress them with indicator.
   file.close();
 
-  return hash(input);
+  hash(input);
 }
 
 void HashAlgorithm::initialize()

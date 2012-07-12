@@ -26,13 +26,13 @@
 
 #include "HashAlgorithm.h"
 
-class CRC32 : public HashAlgorithm, public HashAlgorithmStaticMethods<CRC32>
+class SHA1 : public HashAlgorithm, public HashAlgorithmStaticMethods<SHA1>
 {
   Q_OBJECT
 
   public:
-    CRC32();
-    ~CRC32();
+    SHA1();
+    ~SHA1();
 
     virtual void initialize();
     virtual void finalize();
@@ -40,10 +40,17 @@ class CRC32 : public HashAlgorithm, public HashAlgorithmStaticMethods<CRC32>
     void hash(const QByteArray &data);
 
   protected:
-    //inline static CRC32 *createObject() { return new CRC32(); }
+    void padMessage();
+    void processMessageBlock();
 
   protected:
-    static const quint32 m_crc32_tab[];
-    quint32              m_crc32;
+    quint32  m_intermediate_hash[5];
+    quint32  m_length_low;
+    quint32  m_length_high;
+    quint16  m_message_block_index;                        // Original datatype: int_least16_t.
+    quint8   m_message_block[64];                          // or: quint32 block[16]?
+    bool     m_computed;
+    bool     m_corrupted;
+    quint8   m_final_digest[20];
 };
 

@@ -53,7 +53,7 @@ void Adler32::finalize()
   m_result = QString("%1").arg(m_value, 0, 16);
 }
 
-QString Adler32::hash(const QByteArray &data)
+void Adler32::hash(const QByteArray &data)
 {
   const int MODULO_PRIME_NUMBER = 65521;                   // Largest prime number less than 65536.
 
@@ -61,19 +61,5 @@ QString Adler32::hash(const QByteArray &data)
     m_a = (m_a + data[i]) % MODULO_PRIME_NUMBER;
     m_b = (m_b + m_a)     % MODULO_PRIME_NUMBER;
   }
-
-  return result();
-}
-
-QString Adler32::calcHash(const QByteArray &data)
-{
-  Adler32 *ha = new Adler32();
-  if (! ha)
-    return "";
-  qDebug() << "name" << ha->metaObject()->className();
-  ha->hash(data);
-  QString result = ha->result();
-  delete ha;
-  return result;
 }
 

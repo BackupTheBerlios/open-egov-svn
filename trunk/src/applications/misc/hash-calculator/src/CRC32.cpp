@@ -120,23 +120,10 @@ void CRC32::finalize()
   m_result = QString("%1").arg(~m_crc32, 0, 16);
 }
 
-QString CRC32::hash(const QByteArray &data)
+void CRC32::hash(const QByteArray &data)
 {
   for (int i=0; i<data.length(); i++) {
     m_crc32 = (m_crc32 >> 8) ^ m_crc32_tab[data[i] ^ (m_crc32 & 0xff)];
   }
-
-  return result();
-}
-
-QString CRC32::calcHash(const QByteArray &data)
-{
-  CRC32 *ha = new CRC32();
-  if (! ha)
-    return "";
-  ha->hash(data);
-  QString result = ha->result();
-  delete ha;
-  return result;
 }
 

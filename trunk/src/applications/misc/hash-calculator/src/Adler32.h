@@ -32,7 +32,7 @@
 // The Adler-32 algorithm is much faster than the CRC32 algorithm yet
 // still provides an extremely low probability of undetected errors.
 
-class Adler32 : public HashAlgorithm
+class Adler32 : public HashAlgorithm, public HashAlgorithmStaticMethods<Adler32>
 {
   Q_OBJECT
 
@@ -43,9 +43,10 @@ class Adler32 : public HashAlgorithm
     virtual void initialize();
     virtual void finalize();
 
-    QString hash(const QByteArray &data);
+    void hash(const QByteArray &data);
 
-    static QString calcHash(const QByteArray &data);
+  protected:
+    //inline static Adler32 *createObject() { return new Adler32(); }
 
   protected:
     quint32  m_a;
