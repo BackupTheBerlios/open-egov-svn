@@ -31,7 +31,9 @@
 #include "Adler32.h"
 #include "CRC32.h"
 #include "SHA1.h"
+#include "SHA2.h"
 #include "MD5.h"
+#include "Tiger.h"
 
 int main(int argc, char *argv[])
 {
@@ -97,7 +99,10 @@ int main(int argc, char *argv[])
   qDebug() << "Adler-32" << Adler32::calcHash(input);
   qDebug() << "CRC32" << CRC32::calcHash(input);
   qDebug() << "SHA-1" << SHA1::calcHash(input);
+  qDebug() << "SHA-256" << SHA256::calcHash(input);
+  qDebug() << "SHA-512" << SHA512::calcHash(input);
   qDebug() << "MD5" << MD5::calcHash(input);
+  qDebug() << "Tiger" << Tiger::calcHash(input);
 
   return 0;
 }
