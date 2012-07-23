@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- $Id$ -->
+
+<filetypes>
+  <translations>
+    <translation number="1" localeid="1" value="Bilddatei" />
+    <translation number="2" localeid="1" value="MIME-Type" />
+    <translation number="3" localeid="1" value="kompilierte Java-Klassendateien (Bytecode)" />
+  </translations>
+
+  <datatypes>
+    <datatype number="1">image</datatype>
+    <datatype number="2">document</datatype>
+  </datatypes>
+
+  <searchpatterns>
+    <searchpattern filetypeid="1">0:0xff 0xd8 0xff 0xe0; 6:0x4a 0x46 0x49 0x46 0x00</searchpattern> <!-- JPEG/JFIF -->
+    <searchpattern filetypeid="2">0:0x89 0x50 0x4e 0x47 0x0d 0x0a 0x1a 0x0a</searchpattern> <!-- PNG -->
+    <searchpattern filetypeid="3">0:0x25 0x50 0x44 0x46</searchpattern> <!-- PDF- -->
+    <searchpattern filetypeid="4">0:0x47 0x49 0x46 0x38 0x37 0x61</searchpattern> <!-- GIF87a -->
+    <searchpattern filetypeid="4">0:0x47 0x49 0x46 0x38 0x39 0x61</searchpattern> <!-- GIF89a -->
+    <searchpattern filetypeid="5">0:0xca 0xfe 0xba 0xbe</searchpattern> <!-- JAVA class -->
+    <searchpattern filetypeid="6"></searchpattern>
+  </searchpatterns>
+
+  <data>
+    <filetype>
+      <field name="id">1</field>
+      <field name="type">1</field>
+      <field name="name">JPEG File Interchange Format (JFIF)</field>
+      <field name="extensions">jpg jpeg jfif jpe</field>
+      <field name="mime-type">image/jpeg</field>
+      <field name="wikipedia">JPEG File Interchange Format</field>
+      <field name="creator">Eric Hamilton</field>
+      <field name="organization">Joint Photographic Experts Group</field>
+      <field name="website">http://www.jpeg.org/</field>
+      <field name="comments">File format: https://de.wikipedia.org/wiki/JPEG_File_Interchange_Format
+Specification: http://www.jpeg.org/public/jfif.pdf</field>
+    </filetype>
+
+    <filetype>
+      <field name="id">2</field>
+      <field name="type">1</field>
+      <field name="name">Portable Network Graphics (PNG)</field>
+      <field name="extensions">png</field>
+      <field name="mime-type">image/png</field>
+      <field name="wikipedia">Portable Network Graphics</field>
+      <field name="creator">Thomas Boutell, Tom Lane</field>
+      <field name="organization">PNG Development Group</field>
+      <field name="website">http://www.libpng.org/pub/png/</field>
+      <field name="comments">https://tools.ietf.org/html/rfc2083</field>
+    </filetype>
+
+    <filetype>
+      <field name="id">3</field>
+      <field name="type">2</field>
+      <field name="name">Portable Document Format (PDF)</field>
+      <field name="extensions">pdf</field>
+      <field name="mime-type">application/pdf</field>
+      <field name="wikipedia">Portable Document Format</field>
+      <field name="creator"></field>
+      <field name="organization">Adobe Systems</field>
+      <field name="website"></field>
+      <field name="comments">http://www.adobe.com/devnet/pdf/pdf_reference.html</field>
+    </filetype>
+
+    <filetype>
+      <field name="id">4</field>
+      <field name="type">1</field>
+      <field name="name">Graphics Interchange Format</field>
+      <field name="extensions">gif</field>
+      <field name="mime-type">image/gif</field>
+      <field name="wikipedia">Graphics Interchange Format</field>
+      <field name="creator"></field>
+      <field name="organization"></field>
+      <field name="website"></field>
+      <field name="comments"></field>
+    </filetype>
+
+    <filetype>
+      <field name="id">5</field>
+      <field name="type"></field>
+      <field name="name">JAVA compiled bytecode</field>
+      <field name="extensions">class</field>
+      <field name="mime-type"></field>
+      <field name="wikipedia"></field>
+      <field name="creator"></field>
+      <field name="organization"></field>
+      <field name="website"></field>
+      <field name="comments"></field>
+    </filetype>
+
+    <filetype>
+      <field name="id">6</field>
+      <field name="type"></field>
+      <field name="name"></field>
+      <field name="extensions"></field>
+      <field name="mime-type"></field>
+      <field name="wikipedia"></field>
+      <field name="creator"></field>
+      <field name="organization"></field>
+      <field name="website"></field>
+      <field name="comments"></field>
+    </filetype>
+  </data>
+</filetypes>
+
