@@ -103,6 +103,7 @@ int main(int argc, char *argv[])
   qDebug() << "SHA-512" << SHA512::calcHash(input);
   qDebug() << "MD5" << MD5::calcHash(input);
   qDebug() << "Tiger" << Tiger::calcHash(input);
+  qDebug() << "Tiger2" << Tiger2::calcHash(input);
 
   return 0;
 }

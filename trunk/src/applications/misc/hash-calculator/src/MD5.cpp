@@ -196,7 +196,7 @@ void MD5::decode(quint32 *output, unsigned char *input, unsigned int len)
   unsigned int i, j;
 
   for (i=0, j=0; j<len; i++, j+=4)
-    output[i] = ((quint32)input[j]) |
+    output[i] = (((quint32)input[j+0]) <<  0) |
                 (((quint32)input[j+1]) <<  8) |
                 (((quint32)input[j+2]) << 16) |
                 (((quint32)input[j+3]) << 24);
@@ -295,30 +295,30 @@ void MD5::transform(quint32 state[4], unsigned char block[64])
 }
 
 // MD5 block update operation. Continues an MD5 message-digest
-// operation, processing another message block, and updating the
-// context.
+// operation, processing another message block, and updating
+// the context.
 
-void MD5::update(unsigned char *input, unsigned int inputLen)   /* input block, length of input block */
+void MD5::update(unsigned char *inputBlock, unsigned int inputLength)
 {
-  unsigned int i, index, partLen;
+  unsigned int i, index, partLength;
 
-  index = (m_count[0] >> 3) & 0x3f;       // Compute number of bytes mod 64.
+  index = (m_count[0] >> 3) & 0x3f;                        // Compute number of bytes mod 64.
 
   // Update number of bits.
-  if ((m_count[0] += ((quint32)inputLen << 3)) < ((quint32)inputLen << 3))
+  if ((m_count[0] += ((quint32)inputLength << 3)) < ((quint32)inputLength << 3))
     m_count[1]++;
-  m_count[1] += ((quint32)inputLen >> 29);
+  m_count[1] += ((quint32)inputLength >> 29);
 
-  partLen = 64 - index;
+  partLength = 64 - index;
 
   // Transform as many times as possible.
 
-  if (inputLen >= partLen) {
-    memcpy((unsigned char *)&m_buffer[index], (unsigned char *)input, partLen);
+  if (inputLength >= partLength) {
+    memcpy((unsigned char *)&m_buffer[index], inputBlock, partLength);
     transform(m_state, m_buffer);
 
-    for (i = partLen; i + 63 < inputLen; i += 64)
-      transform(m_state, &input[i]);
+    for (i = partLength; i + 63 < inputLength; i += 64)
+      transform(m_state, &inputBlock[i]);
 
     index = 0;
   }
@@ -326,6 +326,6 @@ void MD5::update(unsigned char *input, unsigned int inputLen)   /* input block, 
     i = 0;
 
   // Buffer remaining input.
-  memcpy((unsigned char *)&m_buffer[index], (unsigned char *)&input[i], inputLen-i);
+  memcpy((unsigned char *)&m_buffer[index], &inputBlock[i], inputLength-i);
 }
 

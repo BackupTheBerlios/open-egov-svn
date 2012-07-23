@@ -64,6 +64,8 @@ class HashAlgorithm : public QObject
     QString result();
     QString hashAlgorithmName() const;
 
+    bool isLittleEndian();
+
   protected:
     bool    m_finalized;
     quint32 m_value;

@@ -93,3 +93,13 @@ QString HashAlgorithm::hashAlgorithmName() const
   return m_hash_algorithm_name;
 }
 
+bool HashAlgorithm::isLittleEndian()
+{
+  uint8_t SwapTest[2] = { 1, 0 };
+
+  if (*(short *) SwapTest == 1)
+    return true;
+
+  return false;
+}
+

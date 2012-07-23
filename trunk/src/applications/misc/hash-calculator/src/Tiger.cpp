@@ -45,7 +45,7 @@
 
 #include "Tiger.h"
 
-quint64 Tiger::m_table_1[256] = {
+quint64 TigerBase::m_table_1[256] = {
     0x02AAB17CF7E90C5ELL   /*    0 */,    0xAC424B03E243A8ECLL   /*    1 */,
     0x72CD5BE30DD5FCD3LL   /*    2 */,    0x6D019B93F6F97F3ALL   /*    3 */,
     0xCD9978FFD21F9193LL   /*    4 */,    0x7573A1C9708029E2LL   /*    5 */,
@@ -176,7 +176,7 @@ quint64 Tiger::m_table_1[256] = {
     0xA6300F170BDC4820LL   /*  254 */,    0xEBC18760ED78A77ALL   /*  255 */
 };
 
-quint64 Tiger::m_table_2[256] = {
+quint64 TigerBase::m_table_2[256] = {
     0xE6A6BE5A05A12138LL   /*  256 */,    0xB5A122A5B4F87C98LL   /*  257 */,
     0x563C6089140B6990LL   /*  258 */,    0x4C46CB2E391F5DD5LL   /*  259 */,
     0xD932ADDBC9B79434LL   /*  260 */,    0x08EA70E42015AFF5LL   /*  261 */,
@@ -307,7 +307,7 @@ quint64 Tiger::m_table_2[256] = {
     0xD62A2EABC0977179LL   /*  510 */,    0x22FAC097AA8D5C0ELL   /*  511 */
 };
 
-quint64 Tiger::m_table_3[256] = {
+quint64 TigerBase::m_table_3[256] = {
     0xF49FCC2FF1DAF39BLL   /*  512 */,    0x487FD5C66FF29281LL   /*  513 */,
     0xE8A30667FCDCA83FLL   /*  514 */,    0x2C9B4BE3D2FCCE63LL   /*  515 */,
     0xDA3FF74B93FBBBC2LL   /*  516 */,    0x2FA165D2FE70BA66LL   /*  517 */,
@@ -438,7 +438,7 @@ quint64 Tiger::m_table_3[256] = {
     0xD3DC3BEF265B0F70LL   /*  766 */,    0x6D0E60F5C3578A9ELL   /*  767 */
 };
 
-quint64 Tiger::m_table_4[256] = {
+quint64 TigerBase::m_table_4[256] = {
     0x5B0E608526323C55LL   /*  768 */,    0x1A46C1A9FA1B59F5LL   /*  769 */,
     0xA9E245A17C4C8FFALL   /*  770 */,    0x65CA5159DB2955D7LL   /*  771 */,
     0x05DB0A76CE35AFC2LL   /*  772 */,    0x81EAC77EA9113D45LL   /*  773 */,
@@ -570,72 +570,81 @@ quint64 Tiger::m_table_4[256] = {
 };
 
 
-Tiger::Tiger()
+TigerBase::TigerBase()
  : HashAlgorithm()
 {
-  m_hash_algorithm_name = "Tiger";
-
-  initialize(); // HashAlgorithm() ruft zwar initialize() auf, aber nur das Eigene!
 }
 
-Tiger::~Tiger()
-{
-}
-
-void Tiger::initialize()
+void TigerBase::initialize()
 {
   HashAlgorithm::initialize();
 
+  m_buffer.clear();
   m_length = 0;
 
-  m_a = 0x0123456789ABCDEFULL;  // Tiger.cpp:591: warning: integer constant is too large for 'long' type
+  m_a = 0x0123456789ABCDEFULL;
   m_b = 0xFEDCBA9876543210ULL;
   m_c = 0xF096A5B4C3B2E187ULL;
 }
 
-// Tiger finalization. Ends an Tiger message-digest operation, writing
-// the message digest and zeroizing the context.
+// Tiger finalization. Ends an Tiger message-digest operation,
+// writing the message digest and zeroizing the context.
 
-void Tiger::finalize()
+void TigerBase::finalize()
 {
   HashAlgorithm::finalize();
 
-  m_result = "";                                           // 192 Bit or 24 Bytes as 48 hex chars.
-
-  m_result += QString("%1").arg((quint32)(m_a >> 32),         8, 16, QLatin1Char('0'));
-  m_result += QString("%1").arg((quint32)(m_a && 0xffffffff), 8, 16, QLatin1Char('0'));
-  m_result += QString("%1").arg((quint32)(m_b >> 32),         8, 16, QLatin1Char('0'));
-  m_result += QString("%1").arg((quint32)(m_b && 0xffffffff), 8, 16, QLatin1Char('0'));
-  m_result += QString("%1").arg((quint32)(m_c >> 32),         8, 16, QLatin1Char('0'));
-  m_result += QString("%1").arg((quint32)(m_c && 0xffffffff), 8, 16, QLatin1Char('0'));
-
-  for (int i=0; i<64; i++)                                 // Message may be sensitive, clear buffer.
-    m_buffer[i] = 0;
-
-  m_a = m_b = m_c = 0;
 }
 
 // This method accepts an array of octets as the next portion
 // of the message.
 
-void Tiger::hash(const QByteArray &data)
+void TigerBase::hash(const QByteArray &data)
 {
-  unsigned int length = data.length();
+  if (data.length() <= 0)                                  // ???
+    return;
 
-  if (length <= 0)
-    return; // Okay.
+  m_buffer += data;                                        // Add to bytes<64 from the last round.
 
+  while (true) {
+    QByteArray ba = m_buffer.left(64);                     // Grab block with 64 bytes.
 
-  update((unsigned char *)data.data(), length);
+    if (ba.length() == 64) {                               // We got 64 bytes.
+      m_buffer.remove(0, 64);                              // Remove them beginning at position 0.
+      compressBlock(ba);
+      m_length += 64 * 8;                                  // Add 512.
+    }
+    else {                                                 // m_buffer is used again in next round.
+      return;
+    }
+  }
 }
 
-void Tiger::update(unsigned char *input, unsigned int inputLen)
+void TigerBase::compressBlock(const QByteArray &block)
 {
-}
+  //qDebug() << "little endian:" << isLittleEndian();
 
+  int count = 0;
+  for (int i=0; i<8; i++) {
+    //m_block[i] = (((quint64)(block[i*8+7] & 0xff)) << 56) |          // Little endian.
+    //             (((quint64)(block[i*8+6] & 0xff)) << 48) |
+    //             (((quint64)(block[i*8+5] & 0xff)) << 40) |
+    //             (((quint64)(block[i*8+4] & 0xff)) << 32) |
+    //             (((quint64)(block[i*8+3] & 0xff)) << 24) |
+    //             (((quint64)(block[i*8+2] & 0xff)) << 16) |
+    //             (((quint64)(block[i*8+1] & 0xff)) <<  8) |
+    //             (((quint64)(block[i*8+0] & 0xff)) <<  0);
+    m_block[i] = ((quint64)(block[count+0] & 0xff) <<  0) |          // Little endian.
+                 ((quint64)(block[count+1] & 0xff) <<  8) |          //  m_block[0..7] == x0, ..., x7
+                 ((quint64)(block[count+2] & 0xff) << 16) |
+                 ((quint64)(block[count+3] & 0xff) << 24) |
+                 ((quint64)(block[count+4] & 0xff) << 32) |
+                 ((quint64)(block[count+5] & 0xff) << 40) |
+                 ((quint64)(block[count+6] & 0xff) << 48) |
+                 ((quint64)(block[count+7] & 0xff) << 56);
+    count += 8;
+  }
 
-void Tiger::compressBlock()
-{
   quint64 a = m_a;                                         // "save_abc"
   quint64 b = m_b;
   quint64 c = m_c;
@@ -647,11 +656,11 @@ void Tiger::compressBlock()
   pass(&b, &c, &a, 9);
 
   m_a ^= a;                                                // "feedforward"
-  m_b -= b;
+  m_b -= b;  // or  m_b = b - m_b ???
   m_c += c;
 }
 
-void Tiger::round(quint64 *a, quint64 *b, quint64 *c, quint64 x, quint64 mul)
+void TigerBase::round(quint64 *a, quint64 *b, quint64 *c, quint64 x, quint64 mul)
 {
   *c ^= x;
 
@@ -668,7 +677,7 @@ void Tiger::round(quint64 *a, quint64 *b, quint64 *c, quint64 x, quint64 mul)
   *b *= mul;
 }
 
-void Tiger::pass(quint64 *a, quint64 *b, quint64 *c, quint64 mul)
+void TigerBase::pass(quint64 *a, quint64 *b, quint64 *c, quint64 mul)
 {
   round(a, b, c, m_block[0], mul);
   round(b, c, a, m_block[1], mul);
@@ -680,7 +689,7 @@ void Tiger::pass(quint64 *a, quint64 *b, quint64 *c, quint64 mul)
   round(b, c, a, m_block[7], mul);
 }
 
-void Tiger::keySchedule()
+void TigerBase::keySchedule()
 {
   m_block[0] -= m_block[7] ^ 0xA5A5A5A5A5A5A5A5ULL;
   m_block[1] ^= m_block[0];
@@ -698,5 +707,244 @@ void Tiger::keySchedule()
   m_block[5] ^= m_block[4];
   m_block[6] += m_block[5];
   m_block[7] -= m_block[6] ^ 0x0123456789ABCDEFULL;
+}
+
+
+Tiger::Tiger()
+ : TigerBase()
+{
+  m_hash_algorithm_name = "Tiger";
+
+  initialize(); // HashAlgorithm() ruft zwar initialize() auf, aber nur das Eigene!
+}
+
+// Tiger finalization. Ends an Tiger message-digest operation,
+// writing the message digest and zeroizing the context.
+
+void Tiger::finalize()
+{
+  TigerBase::finalize();
+
+  int len = m_buffer.length();
+
+#if 0
+  m_length += len * 8;
+
+  m_buffer[len++] = 0x01;
+
+  if (len > 56) {
+    while (len < 64)
+      m_buffer[len++] = 0;
+
+    compressBlock(m_buffer);
+    len = 0;
+  }
+
+  while (len < 56)
+    m_buffer[len++] = 0;
+
+
+  m_buffer[56] = m_length << 3; //todo
+
+//STORE64L(m_length, m_buffer + 56);
+//
+//(m_buffer + 56)[7] = (UWORD8)(((m_length)>>56)&255);
+//(m_buffer + 56)[6] = (UWORD8)(((m_length)>>48)&255);
+//(m_buffer + 56)[5] = (UWORD8)(((m_length)>>40)&255);
+//(m_buffer + 56)[4] = (UWORD8)(((m_length)>>32)&255);
+//(m_buffer + 56)[3] = (UWORD8)(((m_length)>>24)&255);
+//(m_buffer + 56)[2] = (UWORD8)(((m_length)>>16)&255);
+//(m_buffer + 56)[1] = (UWORD8)(((m_length)>>8)&255);
+//(m_buffer + 56)[0] = (UWORD8)((m_length)&255);
+
+
+  compressBlock(m_buffer);
+#else
+
+  static const int BLOCK_SIZE = 64;
+
+  int n = (int)(len % BLOCK_SIZE);
+  int padding = (n < 56) ? (56 - n) : (120 - n);
+  QByteArray ba;
+  ba.resize(padding + 8);
+
+  // padding is always binary 1 followed by binary 0s
+  ba[0] = (quint8) 0x80;    // 128 = 10000000 - only Tiger2 !!!
+
+  quint64 bits = len << 3;   // save number of bits, casting the long to an array of 8 bytes
+  ba[padding++] = (quint8)(bits >>  0);
+  ba[padding++] = (quint8)(bits >>  8);
+  ba[padding++] = (quint8)(bits >> 16);
+  ba[padding++] = (quint8)(bits >> 24);
+  ba[padding++] = (quint8)(bits >> 32);
+  ba[padding++] = (quint8)(bits >> 40);
+  ba[padding++] = (quint8)(bits >> 48);
+  ba[padding  ] = (quint8)(bits >> 56);
+
+#endif
+
+  m_result = "";                                           // 192(128,160) Bits / 24 Bytes as 48 hex chars.
+
+  //m_result += QString("%1").arg((quint32)(m_a >> 32),        8, 16, QLatin1Char('0'));
+  //m_result += QString("%1").arg((quint32)(m_a & 0xffffffff), 8, 16, QLatin1Char('0'));
+  //m_result += QString("%1").arg((quint32)(m_b >> 32),        8, 16, QLatin1Char('0'));
+  //m_result += QString("%1").arg((quint32)(m_b & 0xffffffff), 8, 16, QLatin1Char('0'));
+  //m_result += QString("%1").arg((quint32)(m_c >> 32),        8, 16, QLatin1Char('0'));
+  //m_result += QString("%1").arg((quint32)(m_c & 0xffffffff), 8, 16, QLatin1Char('0'));
+  //m_result += " ";
+
+  const QLatin1Char zero('0');
+
+  m_result += QString("%1").arg((m_a >>  0) & 0xff, 2, 16, zero); // & 0xff == (quint8)-cast
+  m_result += QString("%1").arg((m_a >>  8) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_a >> 16) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_a >> 24) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_a >> 32) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_a >> 40) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_a >> 48) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_a >> 56) & 0xff, 2, 16, zero);
+
+  m_result += QString("%1").arg((m_b >>  0) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_b >>  8) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_b >> 16) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_b >> 24) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_b >> 32) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_b >> 40) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_b >> 48) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_b >> 56) & 0xff, 2, 16, zero);
+
+  m_result += QString("%1").arg((m_c >>  0) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_c >>  8) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_c >> 16) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_c >> 24) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_c >> 32) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_c >> 40) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_c >> 48) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_c >> 56) & 0xff, 2, 16, zero);
+
+  //for (int i=0; i<64; i++)                                 // Message may be sensitive, clear buffer.
+  //  m_buffer[i] = 0;
+
+  m_a = m_b = m_c = 0;
+}
+
+
+Tiger2::Tiger2()
+ : TigerBase()
+{
+  m_hash_algorithm_name = "Tiger2";
+
+  initialize();
+}
+
+// Tiger finalization. Ends an Tiger message-digest operation,
+// writing the message digest and zeroizing the context.
+
+void Tiger2::finalize()
+{
+  TigerBase::finalize();
+
+
+  int len = m_buffer.length();
+
+#if 0
+  m_length += len * 8;
+
+  m_buffer[len++] = 0x01;
+
+  if (len > 56) {
+    while (len < 64)
+      m_buffer[len++] = 0;
+
+    compressBlock(m_buffer);
+    len = 0;
+  }
+
+  while (len < 56)
+    m_buffer[len++] = 0;
+
+
+  m_buffer[56] = m_length << 3; //todo
+
+//STORE64L(m_length, m_buffer + 56);
+//
+//(m_buffer + 56)[7] = (UWORD8)(((m_length)>>56)&255);
+//(m_buffer + 56)[6] = (UWORD8)(((m_length)>>48)&255);
+//(m_buffer + 56)[5] = (UWORD8)(((m_length)>>40)&255);
+//(m_buffer + 56)[4] = (UWORD8)(((m_length)>>32)&255);
+//(m_buffer + 56)[3] = (UWORD8)(((m_length)>>24)&255);
+//(m_buffer + 56)[2] = (UWORD8)(((m_length)>>16)&255);
+//(m_buffer + 56)[1] = (UWORD8)(((m_length)>>8)&255);
+//(m_buffer + 56)[0] = (UWORD8)((m_length)&255);
+
+
+  compressBlock(m_buffer);
+#else
+
+  static const int BLOCK_SIZE = 64;
+
+  int n = (int)(len % BLOCK_SIZE);
+  int padding = (n < 56) ? (56 - n) : (120 - n);
+  QByteArray ba;
+  ba.resize(padding + 8);
+
+  // padding is always binary 1 followed by binary 0s
+  ba[0] = (quint8) 0x80;    // 128 = 10000000 - only Tiger2 !!!
+
+  quint64 bits = len << 3;   // save number of bits, casting the long to an array of 8 bytes
+  ba[padding++] = (quint8)(bits >>  0);
+  ba[padding++] = (quint8)(bits >>  8);
+  ba[padding++] = (quint8)(bits >> 16);
+  ba[padding++] = (quint8)(bits >> 24);
+  ba[padding++] = (quint8)(bits >> 32);
+  ba[padding++] = (quint8)(bits >> 40);
+  ba[padding++] = (quint8)(bits >> 48);
+  ba[padding  ] = (quint8)(bits >> 56);
+
+#endif
+
+  m_result = "";                                           // 192(128,160) Bits / 24 Bytes as 48 hex chars.
+
+  //m_result += QString("%1").arg((quint32)(m_a >> 32),        8, 16, QLatin1Char('0'));
+  //m_result += QString("%1").arg((quint32)(m_a & 0xffffffff), 8, 16, QLatin1Char('0'));
+  //m_result += QString("%1").arg((quint32)(m_b >> 32),        8, 16, QLatin1Char('0'));
+  //m_result += QString("%1").arg((quint32)(m_b & 0xffffffff), 8, 16, QLatin1Char('0'));
+  //m_result += QString("%1").arg((quint32)(m_c >> 32),        8, 16, QLatin1Char('0'));
+  //m_result += QString("%1").arg((quint32)(m_c & 0xffffffff), 8, 16, QLatin1Char('0'));
+  //m_result += " ";
+
+  const QLatin1Char zero('0');
+
+  m_result += QString("%1").arg((m_a >>  0) & 0xff, 2, 16, zero); // & 0xff == (quint8)-cast
+  m_result += QString("%1").arg((m_a >>  8) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_a >> 16) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_a >> 24) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_a >> 32) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_a >> 40) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_a >> 48) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_a >> 56) & 0xff, 2, 16, zero);
+
+  m_result += QString("%1").arg((m_b >>  0) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_b >>  8) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_b >> 16) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_b >> 24) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_b >> 32) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_b >> 40) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_b >> 48) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_b >> 56) & 0xff, 2, 16, zero);
+
+  m_result += QString("%1").arg((m_c >>  0) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_c >>  8) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_c >> 16) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_c >> 24) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_c >> 32) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_c >> 40) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_c >> 48) & 0xff, 2, 16, zero);
+  m_result += QString("%1").arg((m_c >> 56) & 0xff, 2, 16, zero);
+
+  //for (int i=0; i<64; i++)                                 // Message may be sensitive, clear buffer.
+  //  m_buffer[i] = 0;
+
+  m_a = m_b = m_c = 0;
 }
 

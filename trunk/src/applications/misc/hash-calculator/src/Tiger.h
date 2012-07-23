@@ -47,13 +47,12 @@
 
 #include "HashAlgorithm.h"
 
-class Tiger : public HashAlgorithm, public HashAlgorithmStaticMethods<Tiger>
+class TigerBase : public HashAlgorithm
 {
   Q_OBJECT
 
   public:
-    Tiger();
-    ~Tiger();
+    TigerBase();
 
     virtual void initialize();
     virtual void finalize();
@@ -63,20 +62,41 @@ class Tiger : public HashAlgorithm, public HashAlgorithmStaticMethods<Tiger>
   protected:
     void update(unsigned char *input, unsigned int inputLen);
 
-    void compressBlock();
+    void compressBlock(const QByteArray &block);
     void round(quint64 *a, quint64 *b, quint64 *c, quint64 x, quint64 mul);
     void pass(quint64 *a, quint64 *b, quint64 *c, quint64 mul);
     void keySchedule();
 
   protected:
     quint64        m_a, m_b, m_c;                          // State.
+
     quint64        m_length;
-    quint64        m_block[8];
-    quint8         m_buffer[64];                           // Input buffer.
+    quint64        m_block[8];                             // Work area for the algorithm.
+    QByteArray     m_buffer;                               // Input buffer.
 
     static quint64 m_table_1[256];
     static quint64 m_table_2[256];
     static quint64 m_table_3[256];
     static quint64 m_table_4[256];
+};
+
+class Tiger : public TigerBase, public HashAlgorithmStaticMethods<Tiger>
+{
+  Q_OBJECT
+
+  public:
+    Tiger();
+
+    virtual void finalize();
+};
+
+class Tiger2 : public TigerBase, public HashAlgorithmStaticMethods<Tiger2>
+{
+  Q_OBJECT
+
+  public:
+    Tiger2();
+
+    virtual void finalize();
 };
 
