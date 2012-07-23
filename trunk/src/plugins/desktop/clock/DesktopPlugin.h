@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2012 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -23,12 +23,12 @@
 #include <QWidget>
 #include <QString>
 
-#include "DesktopPluginInterface.h"
+#include "PluginInterface.h"
 
-class DesktopPlugin : public QObject, DesktopPluginInterface
+class DesktopPlugin : public QObject, PluginInterface
 {
   Q_OBJECT
-  Q_INTERFACES(DesktopPluginInterface)
+  Q_INTERFACES(PluginInterface)
 
   public:
     virtual ~DesktopPlugin() {}
