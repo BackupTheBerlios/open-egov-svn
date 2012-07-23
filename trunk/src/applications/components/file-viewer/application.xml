@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<application category="components" base="file-viewer">
+  <strings>
+    <group lang="en_US">
+      <string name="title">File Viewer</string>
+      <string name="description">The File Viewer displays the content of files.</string>
+    </group>
+
+    <group lang="de_DE">
+      <string name="title">Dateianzeiger</string>
+      <string name="description">Der Dateianzeiger zeigt den Inhalt von Dateien an.</string>
+    </group>
+  </strings>
+
+  <properties>
+    <property name="dbus" value="false" />
+    <property name="embed" value="false" />
+    <property name="stable" value="true" />
+    <property name="database" value="false" />
+  </properties>
+
+  <setup>
+    <requires>base</requires>
+  </setup>
+
+  <features>
+    <todos>
+    </todos>
+    <changes>
+    </changes>
+  </features>
+
+  <datastructure>
+    <table name="">
+      
+    </table>
+  </datastructure>
+
+  <databases>
+  </databases>
+</application>
