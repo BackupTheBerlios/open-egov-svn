@@ -2,7 +2,7 @@
 
 TARGET       = oegMail
 VERSION      = 1.0.0.0
-QT          += 
+QT          += gui
 PACKAGES     = GETTEXT
 
 RC_FILE      = resources.rc

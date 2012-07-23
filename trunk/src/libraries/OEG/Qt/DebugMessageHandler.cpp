@@ -19,6 +19,8 @@
 #include <QApplication>
 #include <QTextStream>
 #include <QDateTime>
+#include <QtDebug>
+#include <QFile>
 
 #include <OEG/Qt/Application.h>
 #include <OEG/Qt/DebugMessageHandler.h>
@@ -38,22 +40,42 @@ using namespace OEG::Qt;
 // application aborts immediately. To restore the message handler,
 // call qInstallMsgHandler(0).
 
-void OEG_DebugMessageHandler(QtMsgType type, const char *msg)
+void OEG_DebugMessageHandler(QtMsgType type, const char *message)
 {
+  QString text = "";
+
   switch (type) {
     case QtDebugMsg:
-      fprintf(stderr, "Debug: %s\n", msg);
+      text = "Debug";
       break;
     case QtWarningMsg:
-      fprintf(stderr, "Warning: %s\n", msg);
+      text = "Warning";
       break;
     case QtCriticalMsg:
-      fprintf(stderr, "Critical: %s\n", msg);
+      text = "Critical:";
       break;
     case QtFatalMsg:
-      fprintf(stderr, "Fatal: %s\n", msg);
-      abort();
-    default: ;
+      text = "Fatal";
+      break;
   }
+  text += QString(": %s").arg(message);
+
+  if (true) { // send to debug window.
+  }
+
+  if (false) { // log into a file.
+    QFile file("oeg.log");
+    file.open(QIODevice::WriteOnly | QIODevice::Append);
+    QTextStream ts(&file);
+    ts << text << endl;
+  }
+
+  if (true) {  // console output.
+    text += "\n";
+    fprintf(stderr, text.toLocal8Bit().constData());
+  }
+
+  if (type == QtFatalMsg)
+    abort();
 }
 

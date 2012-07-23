@@ -3,6 +3,8 @@
 TEMPLATE  = lib
 CONFIG   += qt warn_on
 QT       += core
+# Added  network because libs including e.g. OEG/Qt/Application.h need this for the Connector.h
+# Wanna remove this, but need an elegant solution first.
 #dbus
 DESTDIR   = ../../../../bin
 QMAKE_LFLAGS += -enable-stdcall-fixup -Wl,-enable-auto-import -Wl,-enable-runtime-pseudo-reloc

@@ -18,11 +18,11 @@
 
 #include <QDialog>
 
-#include <OEG/Qt/Application.h>
+//#include <OEG/Qt/Application.h>
 
 #include "MailEditorDialog.h"
 
-using namespace OEG::Qt;
+//using namespace OEG::Qt;
 using namespace Qt;
 
 MailEditorDialog::MailEditorDialog(QWidget *parent /*=0*/)
