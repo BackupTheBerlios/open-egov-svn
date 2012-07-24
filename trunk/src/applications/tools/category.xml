@@ -4,13 +4,13 @@
 
 <category base="tools">
   <strings lang="en_US">
-    <string name="title">Tools</string>
-    <string name="description">Toolbox with some small tools.</string>
+    <string name="title">Miscellaneous Tools</string>
+    <string name="description">Toolbox with some small tools and uncategorized applications from all areas.</string>
   </strings>
 
   <strings lang="de_DE">
-    <string name="title">Werkzeuge</string>
-    <string name="description">Werkzeugkiste mit einigen kleinen Werkzeugen.</string>
+    <string name="title">Verschiedene Werkzeuge</string>
+    <string name="description">Werkzeugkiste mit einigen kleinen Werkzeugen und unkategorisierte Anwendungen aus allen Bereichen.</string>
   </strings>
 </application>
 
