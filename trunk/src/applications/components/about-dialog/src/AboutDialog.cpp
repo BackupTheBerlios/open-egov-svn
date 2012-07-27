@@ -31,7 +31,7 @@ AboutDialog::AboutDialog(QWidget *parent /*=0*/)
 {
   setupUi(this);
 
-  QStringList arguments = QCoreApplication::arguments();
+  QStringList arguments = OEG::Qt::Application::arguments();
   if (arguments.count() > 1) {                                       // Called from CLI with parameters.
     QString s = arguments.join("");
     QMessageBox::information(0, s, arguments.at(1));
