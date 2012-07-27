@@ -31,10 +31,7 @@
 #include <QProcess>
 #include <QSystemTrayIcon>
 #include <QSettings>
-//#include <QDBusConnection>
 #include <QDebug>
-
-//#include <QtDBus>
 
 #include <stdlib.h>
 #include <time.h>
@@ -43,7 +40,7 @@ using namespace OEG::Qt;
 using namespace Qt;
 
 Application::Application(int &argc, char *argv[], const QString &base)
- : QApplication(argc, argv), m_database_manager(0), m_tray_icon(0)
+ : QApplication(argc, argv), m_database_manager(0), m_tray_icon(0), m_connector(0)
 {
   srand(time(0));
 
@@ -85,12 +82,20 @@ need to find a recent windbus first
   new DBusStandardInterface(this);
 #endif
 
+  m_connector = new OEG::Qt::Connector(this);
+
+  m_connector->connectToServer();
+
   m_application_flags = AF_None;
 }
 
 Application::~Application()
 {
-  m_connector.stop();
+  if (m_connector) {
+    m_connector->disconnectFromServer();
+
+    delete m_connector; m_connector = 0;
+  }
 
   if (m_database_manager) {
     delete m_database_manager; m_database_manager = 0;

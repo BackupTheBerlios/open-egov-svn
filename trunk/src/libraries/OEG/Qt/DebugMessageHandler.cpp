@@ -52,19 +52,21 @@ void OEG_DebugMessageHandler(QtMsgType type, const char *message)
       text = "Warning";
       break;
     case QtCriticalMsg:
-      text = "Critical:";
+      text = "Critical";
       break;
     case QtFatalMsg:
       text = "Fatal";
       break;
   }
-  text += QString(": %s").arg(message);
+
+  text += ": ";
+  text.append(message);                                    // not: QString("%s").arg(message);
 
   if (true) { // send to debug window.
   }
 
   if (false) { // log into a file.
-    QFile file("oeg.log");
+    QFile file("oeg-debug.log");
     file.open(QIODevice::WriteOnly | QIODevice::Append);
     QTextStream ts(&file);
     ts << text << endl;
