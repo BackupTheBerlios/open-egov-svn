@@ -12,6 +12,7 @@
   <datatypes>
     <datatype number="1">image</datatype>
     <datatype number="2">document</datatype>
+    <datatype number="3">database</datatype>
   </datatypes>
 
   <searchpatterns>
@@ -21,7 +22,7 @@
     <searchpattern filetypeid="4">0:0x47 0x49 0x46 0x38 0x37 0x61</searchpattern> <!-- GIF87a -->
     <searchpattern filetypeid="4">0:0x47 0x49 0x46 0x38 0x39 0x61</searchpattern> <!-- GIF89a -->
     <searchpattern filetypeid="5">0:0xca 0xfe 0xba 0xbe</searchpattern> <!-- JAVA class -->
-    <searchpattern filetypeid="6"></searchpattern>
+    <searchpattern filetypeid="6">0:"SQLite format 3"</searchpattern>
   </searchpatterns>
 
   <data>
@@ -93,14 +94,14 @@ Specification: http://www.jpeg.org/public/jfif.pdf</field>
 
     <filetype>
       <field name="id">6</field>
-      <field name="type"></field>
-      <field name="name"></field>
-      <field name="extensions"></field>
-      <field name="mime-type"></field>
-      <field name="wikipedia"></field>
+      <field name="type">3</field>
+      <field name="name">SQLite database</field>
+      <field name="extensions">db sqlite</field>
+      <field name="mime-type">application/x-sqlite3</field>
+      <field name="wikipedia">SQLite</field>
       <field name="creator"></field>
       <field name="organization"></field>
-      <field name="website"></field>
+      <field name="website">http://www.sqlite.org/</field>
       <field name="comments"></field>
     </filetype>
   </data>
