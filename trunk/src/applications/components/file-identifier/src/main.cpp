@@ -20,16 +20,25 @@
 #include <OEG/Qt/Application.h>
 
 #include <QDebug>
+#include <QFile>
 #include <QFileInfo>
+#include <QHash>
 #include <QSettings>
 #include <QString>
 #include <QStringList>
 
+#include <QDomDocument>
+#include <QDomImplementation>
+#include <QDomNodeList>
+#include <QDomElement>
+
 int main(int argc, char *argv[])
 {
-  QCoreApplication app_core(argc, argv);
+  QCoreApplication app(argc, argv);
   QStringList arguments = QCoreApplication::arguments();
   QString programName = arguments.at(0);
+
+ QDir::setCurrent("data/file-identifier");
 
   if (arguments.count() == 1) {
     qWarning() << "No args given.";
@@ -80,6 +89,40 @@ int main(int argc, char *argv[])
 
   qDebug() << "File: " << fileName;
 
+  // Read data/file-identifier/filetypes.xml.
+
+  QFile file(fileName);
+  if (! file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    qWarning("File not open.");
+    return 0;
+  }
+
+  QDomDocument document("filetypes");
+  if (! document.setContent(&file)) {
+    qWarning() << "Not a valid XML document.";
+    return 0;
+  }
+
+  QDomElement root = document.documentElement();           // Get the root element.
+  QString rootTag = root.tagName();                        // Check the root tag name.
+  if (! rootTag.contains("filetypes"))
+    qDebug() << "root-Tag-Name: " << rootTag;
+
+  QDomNodeList nodes;
+  QDomElement el;
+  QStringList searchpatterns;
+
+  nodes = root.elementsByTagName("searchpatterns");        // We want to get the "searchpatterns"-Tag.
+  if (nodes.count() <= 0) {
+    qWarning() << "No searchpatterns-Tag found.";
+    return -3;
+  }
+  el = nodes.at(0).toElement();
+  qDebug() << "Using only the first Tag:" << el.tagName();
+
+  QDomNodeList table_nodes, row_nodes;
+  QDomElement  element;
+  QDomNode     entries;
 
 
   return 0;
