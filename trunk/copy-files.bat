@@ -8,15 +8,16 @@ REM a MinGW/Qt (SDK) installation. Files not copied here must not be required
 REM by an OEG application.
 REM
 REM For Qt SDK 1.2.1 released on April 11th, 2012.
+REM Together with Qt 4.8.4 RC1 from October 2012.
 
 CD /D "%0"\..\bin
 
-SET SRCDIR=C:\QtSDK\Desktop\Qt\4.8.1\mingw\bin
+REM SET SRCDIR=C:\QtSDK\Desktop\Qt\4.8.1\mingw\bin
+SET SRCDIR=C:\Qt\4.8.4\bin
 
+COPY /B /Y "%SRCDIR%\libgcc_s_dw2-1.dll" .
+COPY /B /Y "%SRCDIR%\mingwm10.dll" .
 COPY /B /Y "%SRCDIR%\phonon4.dll" .
-COPY /B /Y "%SRCDIR%\ssleay32.dll" .
-COPY /B /Y "%SRCDIR%\libeay32.dll" .
-COPY /B /Y "%SRCDIR%\libssl32.dll" .
 COPY /B /Y "%SRCDIR%\QtCLucene4.dll" .
 COPY /B /Y "%SRCDIR%\QtCore4.dll" .
 COPY /B /Y "%SRCDIR%\QtDeclarative4.dll" .
@@ -57,7 +58,8 @@ COPY /B /Y "%SRCDIR%\mingwm10.dll" .
 
 CD /D "%0"\..
 
-SET SRCDIR=C:\QtSDK\Desktop\Qt\4.8.1\mingw\plugins
+REM SET SRCDIR=C:\QtSDK\Desktop\Qt\4.8.1\mingw\plugins
+SET SRCDIR=C:\Qt\4.8.4\plugins
 
 IF EXIST plugins (
   ECHO The plugins directory already exists.
@@ -75,6 +77,8 @@ IF EXIST qt (
 )
 CD qt
 
+REM Create directories, if missing.
+
 IF NOT EXIST accessible      MD accessible
 IF NOT EXIST bearer          MD bearer
 IF NOT EXIST codecs          MD codecs
@@ -86,7 +90,7 @@ IF NOT EXIST phonon_backend  MD phonon_backend
 IF NOT EXIST qmltooling      MD qmltooling
 IF NOT EXIST sqldrivers      MD sqldrivers
 
-REM Don't removing, only cleaning.
+REM Will not remove the directories, only cleaning them.
 
 DEL accessible\*.DLL
 DEL bearer\*.DLL
