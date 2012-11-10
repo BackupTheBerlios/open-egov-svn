@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<settings>
+  <workdir>/open-egovernment</workdir>
+
+  <packers>
+    <packer format="7z"  command="/c/Programme/7-Zip/7z.exe a -mx9 -t7z -ms -mmt -w.. ../NAME-VERSION.7z ." />
+    <packer format="zip" command="/c/Programme/7-Zip/7z.exe a -tzip -w.. ../NAME-VERSION.zip ." />
+  </packers>
+
+  <environment>
+PKG_CONFIG_PATH="/mingw/lib/pkgconfig"
+CVS_RSH=ssh
+CFLAGS="-pipe -O2 -mms-bitfields -march=i686"
+export CFLAGS PKG_CONFIG_PATH CVS_RSH
+  </environment>
+
+  <readme>
+This package belongs to the Open eGovernment project.
+
+Name: NAME VERSION
+License: LICENSE
+
+Date:
+> date
+
+CFLAGS:
+> echo $CFLAGS
+
+-pipe -O2 -mms-bitfields -march=i686
+
+configure:
+
+
+gcc --version
+> gcc --version
+
+gcc.exe (GCC) 4.7.2
+Copyright (C) 2012 Free Software Foundation, Inc.
+Dies ist freie Software; die Kopierbedingungen stehen in den Quellen. Es
+gibt KEINE Garantie; auch nicht für MARKTGÄNGIGKEIT oder FÜR SPEZIELLE ZWECKE.
+
+gcc -v
+> gcc -v >& xxx.txt
+
+Es werden eingebaute Spezifikationen verwendet.
+COLLECT_GCC=e:\mingw\bin\gcc.exe
+COLLECT_LTO_WRAPPER=e:/mingw/bin/../libexec/gcc/mingw32/4.7.2/lto-wrapper.exe
+Ziel: mingw32
+Konfiguriert mit: ../gcc-4.7.2/configure --enable-languages=c,c++,ada,fortran,objc,obj-c++ --disable-sjlj-exceptions --with-dwarf2 --enable-shared --enable-libgomp --disable-win32-registry --enable-libstdcxx-debug --disable-build-poststage1-with-cxx --enable-version-specific-runtime-libs --build=mingw32 --prefix=/mingw
+Thread-Modell: win32
+gcc-Version 4.7.2 (GCC) 
+  </readme>
+</settings>
+

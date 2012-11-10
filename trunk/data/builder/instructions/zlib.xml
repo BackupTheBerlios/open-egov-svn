@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="zlib">
+  <meta>
+    <homepage>http://zlib.net/</homepage>
+    <download>http://zlib.net/</download>
+    <descriptions>
+      <description lang="en" type="short">Compression Library</description>
+      <description lang="en" type="long">zlib is a free, general-purpose, legally unencumbered, lossless data-compression library for use on virtually any computer hardware and operating system.</description>
+      <description lang="de" type="short">Komprimierungs-Bibliothek</description>
+      <description lang="de" type="long">zlib ist eine freie, allgemeine Zwecke, juristisch unverbundene, verlustfreie Komprimierungs-Bibliothek für den Einsatz auf nahezu jeder Computer-Hardware und jedem Betriebssystem.</description>
+    </descriptions>
+    <keywords>zlib, gzip, zip</keywords>
+  </meta>
+
+  <comments>
+    <comment date="" author=""></comment>
+  </comments>
+
+  <set version="1.2.7" date="2012-05-02" working="true">
+    <license></license>
+
+    <requires>
+      <app name="gcc"      version="" type="compile" />
+      <app name="libiconv" version="" type="required" />
+      <app name="xxx"      version="" type="recommended" />
+    </requires>
+
+    <downloads>
+      <download type="direct" mirror="true" checked="2012-11-07">
+        <url>http://zlib.net/zlib-1.2.7.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+      </download>
+    </downloads>
+
+    <options>
+export INCLUDE_PATH=/open-egovernment/include
+export LIBRARY_PATH=/open-egovernment/lib
+export BINARY_PATH=/open-egovernment/bin
+    </options>
+
+    <patch>
+    </patch>
+
+    <compile>
+# configure hatte keine Lust zum Arbeiten und verwies auf das Makefile.gcc
+# es gibt noch mehr Optionen (64 Bit, ...)
+make -fwin32/Makefile.gcc SHARED_MODE=1
+    </compile>
+
+    <install>
+make install -fwin32/Makefile.gcc SHARED_MODE=1
+    </install>
+  </set>
+</pack>
+
