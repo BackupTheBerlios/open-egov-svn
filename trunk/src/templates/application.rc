@@ -16,10 +16,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+// Automatically generated file. Do not edit manually!
+// See application.xml in parent directory (project tag).
+
 #if defined(UNDER_CE)
-#  include <winbase.h>
+#include <winbase.h>
 #else
-#  include <winver.h>
+#include <winver.h>
 #endif
 
 #pragma code_page(1252)
@@ -29,8 +32,8 @@
 #define VER_FILEVERSION             $$APPLICATION-VERSION-CSV$$
 #define VER_FILEVERSION_STR         "$$APPLICATION-VERSION$$\0"
 
-#define VER_PRODUCTVERSION          1,0,0,0
-#define VER_PRODUCTVERSION_STR      "1.0.0.0\0"
+#define VER_PRODUCTVERSION          $$APPLICATION-VERSION-CSV$$
+#define VER_PRODUCTVERSION_STR      "$$APPLICATION-VERSION$$\0"
 
 #ifdef _DEBUG
 #define VER_DEBUG VS_FF_DEBUG
@@ -55,7 +58,7 @@ FILESUBTYPE     VFT2_UNKNOWN            // 0x0
 BEGIN
   BLOCK "StringFileInfo"
   BEGIN
-    BLOCK "040904E4"
+    BLOCK "040904E4"                    // see VarFileInfo
     BEGIN
       VALUE "InternalName",     "$$APPLICATION-BINARY$$.exe\0"
       VALUE "OriginalFilename", "$$APPLICATION-BINARY$$.exe\0"
@@ -67,8 +70,14 @@ BEGIN
       VALUE "LegalTrademarks",  "Open eGovernment.\0"
       VALUE "FileVersion",      VER_FILEVERSION_STR
       VALUE "ProductVersion",   VER_PRODUCTVERSION_STR
-#ifdef SNAPSHOT_BUILD
+#ifdef VER_SNAPSHOT_BUILD
       VALUE "SpecialBuild",     "Snapshot development release"
+#endif
+#if VER_PRIVATE_BUILD
+//      VALUE "PrivateBuild",     "Built by ", szName, "\0"
+#endif
+#ifdef VER_OLE_SELF_REGISTER
+      VALUE "OleSelfRegister",  "\0"
 #endif
     END
   END
