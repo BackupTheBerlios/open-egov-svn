@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- $Id$ -->
+
+<database name="filetypes" version="1" date="2012-08-08" flags="const:false security:true privacy:false">
+  <structures>
+    <table name="datatypes">
+      <column name="id"               type="integer" flags="primarykey" />
+      <column name="value"            type="string"  flags="required minchars:2" />
+    </table>
+
+    <table name="translations">
+      <column name="id"               type="integer" flags="index" /> <!-- there are multiple translations with same id -->
+      <column name="value"            type="string"  flags="required" />
+      <column name="locale_id"        type="integer" flags="required references:iso-codes.locales(id)" />
+    </table>
+
+    <table name="filetypes">
+      <column name="id"               type="integer" flags="primarykey" />
+      <column name="type"             type="integer" flags="" />
+      <column name="name"             type="string"  flags="required" />
+      <column name="extensions"       type="string"  flags="" />
+      <column name="mime-type"        type="string"  flags="" />
+      <column name="wikipedia"        type="string"  flags="" />
+      <column name="creator"          type="string"  flags="" />
+      <column name="organization"     type="string"  flags="" />
+      <column name="website"          type="string"  flags="" />
+      <column name="comments"         type="string"  flags="" />
+      <column name="searchpattern"    type="string"  flags="required minchars:2" />
+    </table>
+  </structures>
+
+  <data>
+    <table name="datatypes">
+      <row>
+        <field name="id">1</field>
+        <field name="value">image</field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="value">document</field>
+      </row>
+      <row>
+        <field name="id">3</field>
+        <field name="value">database</field>
+      </row>
+    </table>
+
+    <table name="translations">
+      <row>
+        <field name="id">1</field>
+        <field name="value">Bilddatei</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="value">Dokument</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">3</field>
+        <field name="value">Datenbank</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">4</field>
+        <field name="value">MIME-Type</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">5</field>
+        <field name="value">kompilierte Java-Klassendateien (Bytecode)</field>
+        <field name="locale_id">1</field>
+      </row>
+    </table>
+  
+    <table name="filetypes">
+      <row>
+        <field name="id">1</field>
+        <field name="type">1</field>
+        <field name="name">JPEG File Interchange Format (JFIF)</field>
+        <field name="extensions">jpg jpeg jfif jpe</field>
+        <field name="mime-type">image/jpeg</field>
+        <field name="wikipedia">JPEG File Interchange Format</field>
+        <field name="creator">Eric Hamilton</field>
+        <field name="organization">Joint Photographic Experts Group</field>
+        <field name="website">http://www.jpeg.org/</field>
+        <field name="comments">File format: https://de.wikipedia.org/wiki/JPEG_File_Interchange_Format
+Specification: http://www.jpeg.org/public/jfif.pdf</field>
+        <field name="searchpattern">0:0xff 0xd8 0xff 0xe0 AND 6:0x4a 0x46 0x49 0x46 0x00</field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="type">1</field>
+        <field name="name">Portable Network Graphics (PNG)</field>
+        <field name="extensions">png</field>
+        <field name="mime-type">image/png</field>
+        <field name="wikipedia">Portable Network Graphics</field>
+        <field name="creator">Thomas Boutell, Tom Lane</field>
+        <field name="organization">PNG Development Group</field>
+        <field name="website">http://www.libpng.org/pub/png/</field>
+        <field name="comments">https://tools.ietf.org/html/rfc2083</field>
+        <field name="searchpattern">0:0x89 0x50 0x4e 0x47 0x0d 0x0a 0x1a 0x0a</field>
+      </row>
+      <row>
+        <field name="id">3</field>
+        <field name="type">2</field>
+        <field name="name">Portable Document Format (PDF)</field>
+        <field name="extensions">pdf</field>
+        <field name="mime-type">application/pdf</field>
+        <field name="wikipedia">Portable Document Format</field>
+        <field name="creator"></field>
+        <field name="organization">Adobe Systems</field>
+        <field name="website"></field>
+        <field name="comments">http://www.adobe.com/devnet/pdf/pdf_reference.html</field>
+        <field name="searchpattern">0:0x25 0x50 0x44 0x46</field>
+      </row>
+      <row>
+        <field name="id">4</field>
+        <field name="type">1</field>
+        <field name="name">Graphics Interchange Format</field>
+        <field name="extensions">gif</field>
+        <field name="mime-type">image/gif</field>
+        <field name="wikipedia">Graphics Interchange Format</field>
+        <field name="creator"></field>
+        <field name="organization"></field>
+        <field name="website"></field>
+        <field name="comments"></field>
+        <field name="searchpattern">0:0x47 0x49 0x46 0x38 0x37 0x61 OR 0:0x47 0x49 0x46 0x38 0x39 0x61</field> <!-- GIF87a | GIF89a -->
+      </row>
+      <row>
+        <field name="id">5</field>
+        <field name="type"></field>
+        <field name="name">JAVA compiled bytecode</field>
+        <field name="extensions">class</field>
+        <field name="mime-type">application/java-byte-code application/java application/x-java-class application/x-java-vm application/x-java.vm application/x-java-bean application/x-jinit-bean application/x-jinit-applet application/x-java application/octet-stream</field>
+        <field name="wikipedia"></field>
+        <field name="creator"></field>
+        <field name="organization"></field>
+        <field name="website"></field>
+        <field name="comments"></field>
+        <field name="searchpattern">0:0xca 0xfe 0xba 0xbe</field>
+      </row>
+      <row>
+        <field name="id">6</field>
+        <field name="type">3</field>
+        <field name="name">SQLite database</field>
+        <field name="extensions">db sqlite</field>
+        <field name="mime-type">application/x-sqlite3</field>
+        <field name="wikipedia">SQLite</field>
+        <field name="creator"></field>
+        <field name="organization"></field>
+        <field name="website">http://www.sqlite.org/</field>
+        <field name="comments"></field>
+        <field name="searchpattern">0:"SQLite format 3"</field>
+      </row>
+    </table>
+  </data>
+</database>
+
