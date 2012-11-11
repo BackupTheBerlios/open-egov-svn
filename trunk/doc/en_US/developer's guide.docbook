@@ -164,17 +164,19 @@ BASE kann hierbei für "/" oder auch für ein Verzeichnis an einer beliebigen St
     </section>
     <section>
       <title>Packs</title>
-      <para>Every package, OEG is able to use, can be found in the subdirectory "packs".
+      <para>Every package, OEG is able to use, can be found in the directory "/data/builder".
 A pack is a package which contains download and build instructions, patches,
 dependencies and other information used to compile a package and integrate
 it into the OEG directory structure.</para>
-      <para>The directory packs/archives contains binary archives which can be installed
-without compiling them yourself. The packs/instructions contains files needed
-to build a pack from zero. This directory needs to get recursively updated
+      <para>The subdirectory "archives" contains binary archives which can be installed
+without compiling them yourself. The "instructions" directory contains XML files needed
+to build a pack from zero. This directory needs to get updated
 every time you want to install something new in order to always use the latest
-sources and instructions. The directory packs/downloads contains distributed
-source codes downloaded from the homepages of the packs. It is not complete and contains only
-rare files or files extracted from a repository.</para>
+sources and instructions. The directory "downloads" contains the provided
+source codes downloaded from the homepages of the applications. It should contain
+every source which is downloadable there, so even when an application disappears
+it should build fine using sources from this directory. Additionally it contains rare,
+single files or files extracted from repositories.</para>
     </section>
   </chapter>
 
@@ -198,7 +200,9 @@ rare files or files extracted from a repository.</para>
 
     <section>
       <title>Compilation</title>
-      <para>To compile a project, "qmake" and "mingw32-make" is all you have to type. The binary is placed into OEG's bin directory and my be started with the command "mingw32-make run" or by double-click at its icon.</para>
+      <para>To compile a project, "qmake" and "mingw32-make" is all you have to type.
+      The binary is placed into OEG's bin directory and may be started with the command
+      "mingw32-make run" or by double-click at its icon.</para>
     </section>
 
     <section>
@@ -219,40 +223,31 @@ rare files or files extracted from a repository.</para>
       <title>Old Include Files</title>
       <para>The compilation of standard applications should always run successfully because no non-functional software should be checked in into the repository. If nevertheless you experience any difficulties, it is often due to third party software. While compiling you may see such warnings:</para>
       <screen><![CDATA[# In file included from c:\Qt\2010.04\qt\include/QtCore/qglobal.h:1,
-                 from c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/q
-namespace.h:45,
+                 from c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/qnamespace.h:45,
                  from c:\Qt\2010.04\qt\include/QtCore/qnamespace.h:1,
-                 from c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/kernel/q
-objectdefs.h:45,
+                 from c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/kernel/qobjectdefs.h:45,
                  from c:\Qt\2010.04\qt\include/QtCore/qobjectdefs.h:1,
-                 from c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/kernel/q
-object.h:47,
+                 from c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/kernel/qobject.h:47,
                  from c:\Qt\2010.04\qt\include/QtCore/qobject.h:1,
-                 from c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/kernel/q
-coreapplication.h:45,
+                 from c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/kernel/qcoreapplication.h:45,
                  from c:\Qt\2010.04\qt\include/QtCore/qcoreapplication.h:1,
-                 from c:\Qt\2010.04\qt\include\QtGui/../../src/gui/kernel/qappli
-cation.h:45,
+                 from c:\Qt\2010.04\qt\include\QtGui/../../src/gui/kernel/qapplication.h:45,
                  from c:\Qt\2010.04\qt\include\QtGui/qapplication.h:1,
                  from c:\Qt\2010.04\qt\include\QtGui/QApplication:1,
                  from ..\..\..\..\libraries/OEG/Qt/Application.h:7,
                  from MainWindow.cpp:3:
-c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/qglobal.h:1594: warning
-: 'libintl_printf' is an unrecognized format function type
-c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/qglobal.h:1600: warning
-: 'libintl_printf' is an unrecognized format function type
-c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/qglobal.h:1608: warning
-: 'libintl_printf' is an unrecognized format function type
-c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/qglobal.h:1613: warning
-: 'libintl_printf' is an unrecognized format function type]]></screen>
-      <para>These indicate, that the include files of gettext are out of date. Install current libiconv and gettext packages to get rid of the message.</para>
+c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/qglobal.h:1594: warning: 'libintl_printf' is an unrecognized format function type
+c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/qglobal.h:1600: warning: 'libintl_printf' is an unrecognized format function type
+c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/qglobal.h:1608: warning: 'libintl_printf' is an unrecognized format function type
+c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/qglobal.h:1613: warning: 'libintl_printf' is an unrecognized format function type]]></screen>
+      <para>These indicate, that the include files of gettext are out of date. Install current libiconv and gettext packages to get rid of such a message.</para>
     </section>
 
     <section>
       <title>Unused Variables</title>
-      <para>If you see a warning about unused variables and want to get rid of it, you may disable them globally or (better) mark the variable as unused. E. g. if you open your MainWindow this warning may appear.</para>
-      <code><![CDATA[MainWindow *mw __attribute__ ((__unused__)) = new MainWindow();]]></code>
-      <para>A simpler solution (only in this case) is it, to place the call of the show() method after the definition.</para>
+      <para>If you see a warning about unused variables and want to get rid of it, you may disable them globally or (better) mark the variable as unused. E. g. if you open (and automatically show) a Window this warning may appear:</para>
+      <code><![CDATA[Window *win __attribute__ ((__unused__)) = new Window();]]></code>
+      <para>A simpler solution (only in this case) is it, to place the call of the show() method after the definition of the variable.</para>
     </section>
 
     <section>
@@ -268,6 +263,21 @@ c:\Qt\2010.04\qt\include/QtCore/../../src/corelib/global/qglobal.h:1613: warning
       where the compiler is unable to resolve the datatype HANDLE (is it ::HANDLE or Qt::HANDLE?). Don't try to
       mark the variables with ::, better is, to remove the "using namespace Qt;" line from the top of the file.
       It is only there to allow the use of Qt constants without a "Qt::" prefix.</para>
+    </section>
+
+    <section>
+      <title>Missing includes</title>
+      <para>This error occurs (occured hopefully), if you used in your application an OEG/Qt/XY include file and forgot to add QT += network into the src.pro file. Because OEG/Qt/Application contains network code and links against QtNetwork dll, it is neccessary to link the same dll into the application.</para>
+
+      <screen><![CDATA[# In file included from ..\..\..\..\libraries/OEG/Qt/Application.h:22,
+                 from main.cpp:19:
+..\..\..\..\libraries/OEG/Qt/Connector.h:27:22: error: QTcpSocket: No such file or directory
+In file included from ..\..\..\..\libraries/OEG/Qt/Application.h:22,
+                 from main.cpp:19:
+..\..\..\..\libraries/OEG/Qt/Connector.h:56: error: 'QAbstractSocket' has not been declared
+..\..\..\..\libraries/OEG/Qt/Connector.h:56: error: expected ',' or '...' before 'error'
+In file included from main.cpp:21:
+mingw32-make: *** [e:/temp/open-egovernment/aescrypt-gui.release/main.o] Error 1]]></screen>
     </section>
   </chapter>
 
