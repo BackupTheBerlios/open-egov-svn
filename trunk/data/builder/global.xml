@@ -4,6 +4,8 @@
 
 <settings>
   <workdir>/open-egovernment</workdir>
+  <prefix>/open-egovernment</prefix>
+  <shell>/bin/bash</shell>
 
   <packers>
     <packer format="7z"  command="/c/Programme/7-Zip/7z.exe a -mx9 -t7z -ms -mmt -w.. ../NAME-VERSION.7z ." />
@@ -11,20 +13,24 @@
   </packers>
 
   <environment>
-PKG_CONFIG_PATH="/mingw/lib/pkgconfig"
-CVS_RSH=ssh
-CFLAGS="-pipe -O2 -mms-bitfields -march=i686"
-export CFLAGS PKG_CONFIG_PATH CVS_RSH
+export PREFIX=/open-egovernment
+export PKG_CONFIG_PATH="/mingw/lib/pkgconfig"
+export CVS_RSH=ssh
+export CFLAGS="-pipe -Wall -O2 -mms-bitfields -march=i686 -I${PREFIX}/include"
+export LDFLAGS="-L${PREFIX}/lib"
+export PATH="${PREFIX}/bin:${PATH}"
   </environment>
 
   <readme>
 This package belongs to the Open eGovernment project.
 
-Name: NAME VERSION
+Name: NAME
+Version: VERSION
+Date: DATE
 License: LICENSE
-
-Date:
-> date
+Requires: REQUIRES
+Plattform: PLATTFORM
+Website: WEBSITE
 
 CFLAGS:
 > echo $CFLAGS
