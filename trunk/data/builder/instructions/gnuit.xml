@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="gnuit" license="">
+  <meta>
+    <homepage>http://www.gnu.org/software/gnuit/</homepage>
+    <download>ftp://ftp.gnu.org/gnu/gnuit/</download>
+    <descriptions>
+      <description lang="en" type="short">GNU Interactive Tools</description>
+      <description lang="en" type="long">GNU Interactive Tools provides an extensible file system browser, an ASCII/hexadecimal file viewer, a process viewer/killer and other related utilities and shell scripts. GIT can be used to increase the speed and efficiency of copying and moving files and directories, invoking editors, compressing and uncompressing files, creating and expanding archives, compiling programs, sending mail and more. GIT uses standard ANSI color sequences, if they are available.</description>
+      <description lang="de" type="short">GNU Interactive Tools</description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>gnu, gnuit</keywords>
+  </meta>
+
+  <comments>
+    <comment date="" author=""></comment>
+  </comments>
+
+  <set version="4.9.5" date="" working="true">
+    <requires>
+      <app name="" version="" type="required" />
+    </requires>
+
+    <downloads>
+      <download file="gnuit-4.9.5.tar.gz">
+        <url type="direct" checked="2012-11-11">ftp://ftp.gnu.org/gnu/gnuit/gnuit-4.9.5.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <options>
+    </options>
+
+    <patch>
+    </patch>
+
+    <compile>
+./configure --prefix=${PREFIX} --with-terminfo
+make
+make install
+    </compile>
+
+    <install>
+    </install>
+  </set>
+</pack>
+

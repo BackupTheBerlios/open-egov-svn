@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="subversion" license="">
+  <meta>
+    <homepage>http://subversion.apache.org/</homepage>
+    <download>http://subversion.apache.org/download/</download>
+    <descriptions>
+      <description lang="en" type="short">Subversion</description>
+      <description lang="en" type="long">Subversion is an open source version control system.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>subversion, svn</keywords>
+  </meta>
+
+  <comments>
+    <comment date="" author=""></comment>
+  </comments>
+
+  <set version="" date="" working="false">
+    <requires>
+      <app name="" version="" type="required" />
+    </requires>
+
+    <downloads>
+      <download file="subversion-1.7.7.tar.bz2">
+        <url type="direct" checked="2012-11-11">http://mirror.serversupportforum.de/apache/subversion/subversion-1.7.7.tar.bz2</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1">c9fc0c5992eda36ba9affd93a15929e25958a951</hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <options>
+    </options>
+
+    <patch>
+    </patch>
+
+    <compile>
+./configure --prefix=/mingw
+make
+make install
+    </compile>
+
+    <install>
+    </install>
+  </set>
+</pack>
+

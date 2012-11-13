@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="ncurses" license="">
+  <meta>
+    <homepage>http://www.gnu.org/software/ncurses/</homepage>
+    <download>http://ftp.gnu.org/pub/gnu/ncurses/</download>
+    <descriptions>
+      <description lang="en" type="short">New curses emulation library</description>
+      <description lang="en" type="long">The Ncurses library is a free software emulation of curses in System V Release 4.0, and more. It uses Terminfo format, supports pads and color and multiple highlights and forms characters and function-key mapping, and has all the other SYSV-curses enhancements over BSD Curses. The distribution includes the library and support utilities, including a terminfo compiler tic, a decompiler infocmp, clear, tput, tset, and a termcap conversion tool captoinfo.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>gnu, linux, ncurses, curses, terminfo</keywords>
+  </meta>
+
+  <comments>
+    <comment date="" author=""></comment>
+  </comments>
+
+  <set version="5.9" date="2011-04-04" working="true">
+    <requires>
+      <app name="" version="" type="required" />
+    </requires>
+
+    <downloads>
+      <download file="ncurses-5.9.tar.gz">
+        <url type="direct" checked="2012-11-11">http://ftp.gnu.org/pub/gnu/ncurses/ncurses-5.9.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <options>
+    </options>
+
+    <patch>
+    </patch>
+
+    <compile>
+./configure --prefix=${PREFIX}
+make
+make install
+    </compile>
+
+    <install>
+    </install>
+  </set>
+</pack>
+

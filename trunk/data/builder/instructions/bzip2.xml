@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="bzip2" license="BSD-style license">
+  <meta>
+    <homepage>http://www.bzip.org/</homepage>
+    <download>http://www.bzip.org/downloads.html</download>
+    <descriptions>
+      <description lang="en" type="short"></description>
+      <description lang="en" type="long">bzip2 is a freely available, patent free (see below), high-quality data compressor. It typically compresses files to within 10% to 15% of the best available techniques (the PPM family of statistical compressors), whilst being around twice as fast at compression and six times faster at decompression.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>bzip2</keywords>
+  </meta>
+
+  <comments>
+    <comment date="" author=""></comment>
+  </comments>
+
+  <set version="1.0.6" date="2010-09-20" working="false">
+    <requires>
+      <app name="" version="" type="required" />
+    </requires>
+
+    <downloads>
+      <download file="bzip2-1.0.6.tar.gz">
+        <url type="direct" checked="2012-11-12">http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size>782.025</size>
+      </download>
+    </downloads>
+
+    <options>
+    </options>
+
+    <patch>
+    </patch>
+
+    <compile>
+./configure --prefix=${PREFIX}
+make
+make install
+    </compile>
+
+    <install>
+    </install>
+  </set>
+</pack>
+

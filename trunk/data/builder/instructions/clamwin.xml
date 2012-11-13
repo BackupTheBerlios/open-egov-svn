@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="clamwin" license="GPL">
+  <meta>
+    <homepage>http://www.clamwin.com/</homepage>
+    <homepage>http://sourceforge.net/projects/clamwin/</homepage>
+    <download>http://sourceforge.net/projects/clamwin/files/clamwin/0.97.6/</download>
+    <!-- git clone git://git.code.sf.net/p/clamwin/code clamwin-code -->
+    <descriptions>
+      <description lang="en" type="short">GUI to Clam Antivirus</description>
+      <description lang="en" type="long">ClamWin is a Free Antivirus program for Microsoft Windows and Windows Server. ClamWin provides Graphical User Interface to Clam Antivirus scanning engine. It allows to select and scan a folder or file, configure settings and update virus databases. It also includes a Windows Taskbar tray icon. ClamWin also features a context menu handler for Windows Explorer which installs Scan into the right-click explorer menu for files and folders.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>antivirus, clamwin, clamav</keywords>
+  </meta>
+
+  <comments>
+    <comment date="" author="">Setup using the provided binaries until it compiles using the builder!</comment>
+  </comments>
+
+  <set version="0.97.6" date="2012-10-06" working="false">
+    <requires>
+      <app name="clamav" version="0.97.6" type="optional" />
+    </requires>
+
+    <downloads>
+      <download file="clamwin-0.97.6-setup.exe">
+        <url type="sourceforge" checked="2012-11-12">http://sourceforge.net/projects/clamwin/files/clamwin/0.97.6/clamwin-0.97.6-setup.exe/download</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <options>
+    </options>
+
+    <patch>
+    </patch>
+
+    <compile>
+    </compile>
+
+    <install>
+    </install>
+  </set>
+</pack>
+

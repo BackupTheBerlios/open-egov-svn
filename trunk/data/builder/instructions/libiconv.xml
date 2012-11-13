@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<pack name="libiconv">
+<pack name="libiconv" license="">
   <meta>
     <homepage>http://www.gnu.org/software/libiconv/</homepage>
     <download>http://ftp.gnu.org/pub/gnu/libiconv/</download>
@@ -18,7 +18,7 @@
   <comments>
   </comments>
 
-  <set version="1.14" date="2011-12-01" working="true">
+  <set version="1.14" date="2011-08-07" working="true">
     <requires>
       <app name="gcc" type="compile" />
       <app name="libiconv" version="" type="required" />
@@ -26,15 +26,14 @@
     </requires>
 
     <downloads>
-      <download type="direct" checked="2012-11-07" from="2009-06-30">
-        <url>http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.13.1.tar.gz</url>
-        <hash type="SHA1"></hash>
+      <download file="libiconv-1.14.tar.gz">
+        <url type="direct" checked="2012-11-07">http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz</url>
+        <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
-      </download>
-      <download type="direct" mirror="true" checked="2012-11-07" from="2011-08-07">
-        <url>http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz</url>
         <hash type="SHA1"></hash>
-        <hash type="MD5"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
       </download>
     </downloads>
 
@@ -45,7 +44,7 @@
     </patch>
 
     <compile>
-./configure --prefix=/mingw
+./configure --prefix=${PREFIX}
 make
 make install
     </compile>

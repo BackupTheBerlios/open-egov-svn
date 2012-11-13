@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="tack" license="GPL">
+  <meta>
+    <homepage></homepage>
+    <download></download>
+    <descriptions>
+      <description lang="en" type="short">Creates terminal descriptions</description>
+      <description lang="en" type="long">The 'tack' program is a diagnostic that is designed to create and verify the correctness of terminfo's. This program can be used to create new terminal descriptions that are not included in the standard release. Although 'tack' has been distributed with ncurses, it is not an integral part of ncurses. It may be removed from the release without limiting the usefulness of ncurses on those terminals described in the terminfo data base.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>tack, terminal, ncurses</keywords>
+  </meta>
+
+  <comments>
+    <comment date="" author=""></comment>
+  </comments>
+
+  <set version="1.06" date="2008-11-08" working="true">
+    <requires>
+      <app name="" version="" type="required" />
+    </requires>
+
+    <downloads>
+      <download file="tack-1.06.tar.gz">
+        <url type="direct" checked="2012-11-11">http://ftp.gnu.org/pub/gnu/ncurses/tack-1.06.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <options>
+    </options>
+
+    <patch>
+    </patch>
+
+    <compile>
+./configure --prefix=/mingw
+make
+make install
+    </compile>
+
+    <install>
+    </install>
+  </set>
+</pack>
+

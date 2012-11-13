@@ -2,38 +2,37 @@
 
 <!-- $Id$ -->
 
-<pack name="termcap">
+<pack name="termcap" license="">
   <meta>
     <homepage>http://www.gnu.org/software/termutils/manual/termcap-1.3/termcap.html</homepage>
-    <download>ftp://ftp.gnu.org/gnu/termcap/</download>
+    <download>http://ftp.gnu.org/gnu/termcap/</download>
     <descriptions>
       <description lang="en" type="short">Terminal data base and DLL</description>
       <description lang="en" type="long">Termcap is a library and data base that enables programs to use display terminals in a terminal-independent manner.</description>
       <description lang="de" type="short">Terminal-Datenbank und DLL</description>
       <description lang="de" type="long">Termcap ist eine Bibliothek und Datenbank, die es Programmen ermöglicht, Display-Terminals in einer Terminal-unabhängigen Weise zu nutzen.</description>
     </descriptions>
-    <keywords>terminal</keywords>
+    <keywords>terminal, termcap</keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="1.3.1" date="2002-03-13" working="true">
-    <license></license>
-
     <requires>
       <app name="gcc" type="compile" />
       <app name="" version="" type="recommended" />
     </requires>
 
     <downloads>
-      <download type="direct" mirror="true" checked="2012-11-07">
-        <url>ftp://ftp.gnu.org/gnu/termcap/termcap-1.3.1.tar.gz</url>
+      <download file="termcap-1.3.1.tar.gz">
+        <url type="direct" checked="2012-11-07">http://ftp.gnu.org/gnu/termcap/termcap-1.3.1.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
+        <size>439.416</size>
       </download>
     </downloads>
 

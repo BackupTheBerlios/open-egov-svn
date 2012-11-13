@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<pack name="termutils">
+<pack name="termutils" license="">
   <meta>
     <homepage>http://www.gnu.org/software/termutils/manual/termutils-2.0/html_mono/tput.html</homepage>
     <download>ftp://ftp.gnu.org/gnu/termutils/</download>
@@ -12,28 +12,27 @@
       <description lang="de" type="short">Terminal-Steuerprogramme</description>
       <description lang="de" type="long">Portierbare Terminal-Steuerung von Skripten.</description>
     </descriptions>
-    <keywords>terminal, tput, tabs</keywords>
+    <keywords>terminal, tput, tabs, termutils</keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="2.0" date="1995-12-01" working="true">
-    <license></license>
-
     <requires>
       <app name="gcc" type="compile" />
       <app name="" version="" type="recommended" />
     </requires>
 
     <downloads>
-      <download type="direct" oegmirror="true" checked="2012-11-07" from="">
-        <url>ftp://ftp.gnu.org/gnu/termutils/termutils-2.0.tar.gz</url>
+      <download file="termutils-2.0.tar.gz">
+        <url type="direct" checked="2012-11-11">http://ftp.gnu.org/gnu/termutils/termutils-2.0.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
+        <size>117.915</size>
       </download>
     </downloads>
 

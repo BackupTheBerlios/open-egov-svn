@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="readline" license="GPL 3">
+  <meta>
+    <homepage>http://www.gnu.org/software/readline/</homepage>
+    <homepage>http://cnswww.cns.cwru.edu/php/chet/readline/rltop.html</homepage>
+    <download>ftp://ftp.cwru.edu/pub/bash/</download>
+    <download>ftp://ftp.cwru.edu/pub/bash/readline-6.2-patches/</download>
+    <!-- http://ftp.gnu.org/gnu/bash/ old until v5.1 -->
+    <descriptions>
+      <description lang="en" type="short">The GNU Readline Library</description>
+      <description lang="en" type="long"> The GNU Readline library provides a set of functions for use by applications that allow users to edit command lines as they are typed in. Both Emacs and vi editing modes are available. The Readline library includes additional functions to maintain a list of previously-entered command lines, to recall and perhaps reedit those lines, and perform csh-like history expansion on previous commands. The history facilites are also placed into a separate library, the History library, as part of the build process. The History library may be used without Readline in applications which desire its capabilities.</description>
+      <description lang="de" type="short">The GNU Readline Library</description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>gnu, readline</keywords>
+  </meta>
+
+  <comments>
+    <comment date="" author=""></comment>
+  </comments>
+
+  <set version="6.2" date="2005-12-08" working="true">
+    <requires>
+      <app name="" version="" type="required" />
+    </requires>
+
+    <downloads>
+      <download file="readline-6.2.tar.gz">
+        <url type="direct" checked="2012-11-13">ftp://ftp.cwru.edu/pub/bash/readline-6.2.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size>2.030.276</size>
+      </download>
+    </downloads>
+
+    <options>
+    </options>
+
+    <patch>
+    </patch>
+
+    <compile>
+./configure --prefix=${PREFIX}
+make
+make install
+    </compile>
+
+    <install>
+    </install>
+  </set>
+
+  <set version="5.1" date="2005-12-08" working="true">
+    <requires>
+      <app name="" version="" type="required" />
+    </requires>
+
+    <downloads>
+      <download file="readline-5.1.tar.gz">
+        <url type="direct" checked="2012-11-13">http://ftp.gnu.org/gnu/bash/readline-5.1.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size>2.030.276</size>
+      </download>
+    </downloads>
+
+    <options>
+    </options>
+
+    <patch>
+    </patch>
+
+    <compile>
+./configure --prefix=${PREFIX}
+make
+make install
+    </compile>
+
+    <install>
+    </install>
+  </set>
+</pack>
+

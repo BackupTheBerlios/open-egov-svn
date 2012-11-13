@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<pack name="gettext">
+<pack name="gettext" license="">
   <meta>
     <homepage>http://www.gnu.org/software/gettext/</homepage>
     <download>http://ftp.gnu.org/pub/gnu/gettext/</download>
@@ -33,7 +33,7 @@ Example:
 </comment>
   </comments>
 
-  <set version="0.18.1.1" date="2010-07-13" working="true">
+  <set version="0.18.1.1" date="2010-06-06" working="true">
     <requires>
       <app name="gcc"      version="" type="compile" />
       <app name="libiconv" version="" type="required" />
@@ -41,13 +41,14 @@ Example:
     </requires>
 
     <downloads>
-      <download type="direct" oegmirror="true" checked="2012-11-07" from="2010-06-06">
-        <url>http://ftp.gnu.org/pub/gnu/gettext/gettext-0.18.1.1.tar.gz</url>
+      <download file="gettext-0.18.1.1.tar.gz">
+        <url type="direct" checked="2012-11-07">http://ftp.gnu.org/pub/gnu/gettext/gettext-0.18.1.1.tar.gz</url>
         <hash type="CRC32">2D4DB147</hash>
         <hash type="MD5">3DD55B952826D2B32F51308F2F91AA89</hash>
         <hash type="SHA1">5009DEB02F67FC3C59C8CE6B82408D1D35D4E38F</hash>
         <hash type="SHA512">1735599307A2D12BE609ECFE1141815A11AF144C6B94301F6C7101242E0B628251A3613D1D70DF099EC07423BEFEAF10DFB53B8176F710C7E158C4FC63EA8747</hash>
         <hash type="RIPEMD256">87D55E484104C98A93341566F02EA98A870126E9149595000892E1FC704E75CA</hash>
+        <size>15139737</size>
       </download>
     </downloads>
 
@@ -58,7 +59,7 @@ Example:
     </patch>
 
     <compile>
-./configure --prefix=/mingw
+./configure --prefix=${PREFIX}
 make
 make install
     </compile>

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="recode" license="">
+  <meta>
+    <homepage>http://www.gnu.org/software/recode/</homepage>
+    <homepage>http://recode.progiciels-bpi.ca/index.html</homepage>
+    <download></download>
+    <descriptions>
+      <description lang="en" type="short">Recode program and library</description>
+      <description lang="en" type="long">The Recode library converts files between character sets and usages. It recognises or produces over 200 different character sets (or about 300 if combined with an iconv library) and transliterates files between almost any pair. When exact transliteration are not possible, it gets rid of offending characters or falls back on approximations. The recode program is a handy front-end to the library.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>recode</keywords>
+  </meta>
+
+  <comments>
+    <comment date="" author=""></comment>
+  </comments>
+
+  <set version="" date="2012-11-11" working="true">
+    <requires>
+      <app name="autoconf" version="2.12+"     installafter="m4"   type="optional" />
+      <app name="automake" version="1.9+"      installafter="perl" type="optional" />
+      <app name="flex"     version="2.5.4a"    type="optional" /> <!-- after changing .l files -->
+      <app name="gettext"  version="0.16+"     type="required" />
+      <app name="help2man" version="1.020"     installafter="perl" type="optional" />
+      <app name="libtool"  version="1.3.4"     type="optional" />
+      <app name="libiconv" version=""          type="recommended" /> <!-- or GNU libc with libiconv -->
+      <app name="m4"       version="1.4n+"     type="optional" />
+      <app name="make"     version="3.81+"     type="optional" />
+      <app name="perl"     version="5.005.03+" type="optional" />
+      <app name="python"   version="2.2+"      type="optional" /> <!-- after changing .l files, remake merged.c -->
+      <app name="tar"      version="1.12+"     type="optional" />
+      <app name="wget"     version="1.10.2+"   type="optional" />
+    </requires>
+
+    <downloads>
+      <download file="Recode-master 2012-11-13.zip">
+        <url type="direct" checked="2012-11-13">https://github.com/pinard/Recode/</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size>1.823.598</size>
+      </download>
+    </downloads>
+
+    <options>
+    </options>
+
+    <patch>
+    </patch>
+
+    <compile>
+./configure --prefix=${PREFIX} –with-gnu-ld
+make
+make install
+    </compile>
+
+    <install>
+    </install>
+  </set>
+</pack>
+

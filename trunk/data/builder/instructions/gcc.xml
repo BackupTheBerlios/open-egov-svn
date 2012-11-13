@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="gcc" license="">
+  <meta>
+    <homepage>http://gcc.gnu.org/</homepage>
+    <download>http://ftp.gnu.org/pub/gnu/gcc/</download>
+    <descriptions>
+      <description lang="en" type="short">GNU Compiler Collection.</description>
+      <description lang="en" type="long"></description>
+      <description lang="de" type="short">GNU Compiler Collection.</description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>gnu, gcc, c++, compiler</keywords>
+  </meta>
+
+  <comments>
+    <comment date="" author="">http://gcc.gnu.org/install/prerequisites.html
+ftp://ftp.mpi-sb.mpg.de/pub/gnu/mirror/gcc.gnu.org/pub/gcc/releases/gcc-4.7.1/gcc-4.7.1.tar.bz2
+http://ftp.mpi-sb.mpg.de/pub/gnu/mirror/gcc.gnu.org/pub/gcc/releases/gcc-4.7.2/gcc-4.7.2.tar.bz2
+http://gcc.gnu.org/mirrors.html</comment>
+  </comments>
+
+  <set version="4.7.2" date="2012-09-20" working="true">
+    <requires>
+      <app name="" version="" type="required" />
+    </requires>
+
+    <downloads>
+      <download file="gcc-4.7.2.tar.bz2">
+        <url type="direct" checked="2012-11-12">http://ftp.gnu.org/pub/gnu/gcc/gcc-4.7.2/gcc-4.7.2.tar.bz2</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size>82884636</size>
+      </download>
+    </downloads>
+
+    <options>
+    </options>
+
+    <patch>
+    </patch>
+
+    <compile>
+./configure --prefix=${PREFIX}
+make
+make install
+    </compile>
+
+    <install>
+    </install>
+  </set>
+</pack>
+

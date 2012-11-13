@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="boost" license="Boost license">
+  <meta>
+    <homepage>http://www.boost.org/</homepage>
+    <download>http://sourceforge.net/projects/boost/files/boost/</download>
+    <descriptions>
+      <description lang="en" type="short">Boost C++ Libraries</description>
+      <description lang="en" type="long">Boost provides free peer-reviewed portable C++ source libraries. We emphasize libraries that work well with the C++ Standard Library. Boost libraries are intended to be widely useful, and usable across a broad spectrum of applications. The Boost license encourages both commercial and non-commercial use.</description>
+      <description lang="de" type="short">Boost C++ Libraries</description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>boost</keywords>
+  </meta>
+
+  <comments>
+    <comment date="" author=""></comment>
+  </comments>
+
+  <set version="1.52.0" date="2012-11-05" working="false">
+    <requires>
+      <app name="" version="" type="required" />
+    </requires>
+
+    <downloads>
+      <download file="boost_1_52_0.7z">
+        <url type="sourceforge" checked="2012-11-13">http://sourceforge.net/projects/boost/files/boost/1.52.0/boost_1_52_0.7z/download</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size>50.252.885</size>
+      </download>
+    </downloads>
+
+    <options>
+    </options>
+
+    <patch>
+    </patch>
+
+    <compile>
+./configure --prefix=${PREFIX}
+make
+make install
+    </compile>
+
+    <install>
+    </install>
+  </set>
+</pack>
+

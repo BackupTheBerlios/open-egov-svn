@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="pth" license="">
+  <meta>
+    <homepage>http://www.gnu.org/software/pth/</homepage>
+    <download>ftp://ftp.gnu.org/gnu/pth/</download>
+    <!-- http://ftp.gnu.org/pub/gnu/pth/ -->
+    <descriptions>
+      <description lang="en" type="short">GNU Portable Threads</description>
+      <description lang="en" type="long">Pth is a very portable POSIX/ANSI-C based library for Unix platforms which provides non-preemptive priority-based scheduling for multiple threads of execution ("multithreading") inside server applications. All threads run in the same address space of the server application, but each thread has it's own individual program-counter, run-time stack, signal mask and errno variable.</description>
+      <description lang="de" type="short">GNU Portable Threads</description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>gnu, pth</keywords>
+  </meta>
+
+  <comments>
+    <comment date="" author=""></comment>
+  </comments>
+
+  <set version="2.0.7" date="2006-06-08" working="false">
+    <requires>
+      <app name="gcc"      version="" type="compile" />
+      <app name="libiconv" version="" type="required" />
+      <app name="xxx"      version="" type="recommended" />
+    </requires>
+
+    <downloads>
+      <download file="pth-2.0.7.tar.gz">
+        <url type="direct" checked="2012-11-08">http://ftp.gnu.org/pub/gnu/pth/pth-2.0.7.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <options>
+    </options>
+
+    <patch>
+    </patch>
+
+    <compile>
+./configure --prefix=${PREFIX}
+make
+make install
+    </compile>
+
+    <install>
+    </install>
+  </set>
+</pack>
+

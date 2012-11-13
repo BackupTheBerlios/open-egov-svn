@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<pack name="zlib">
+<pack name="zlib" license="OSI OSS, GPL compatible"> <!-- http://de.wikipedia.org/wiki/Zlib-Lizenz -->
   <meta>
     <homepage>http://zlib.net/</homepage>
     <download>http://zlib.net/</download>
@@ -20,8 +20,6 @@
   </comments>
 
   <set version="1.2.7" date="2012-05-02" working="true">
-    <license></license>
-
     <requires>
       <app name="gcc"      version="" type="compile" />
       <app name="libiconv" version="" type="required" />
@@ -29,13 +27,14 @@
     </requires>
 
     <downloads>
-      <download type="direct" mirror="true" checked="2012-11-07">
-        <url>http://zlib.net/zlib-1.2.7.tar.gz</url>
+      <download file="zlib-1.2.7.tar.gz">
+        <url type="direct" checked="2012-11-07">http://zlib.net/zlib-1.2.7.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
+        <size></size>
       </download>
     </downloads>
 
