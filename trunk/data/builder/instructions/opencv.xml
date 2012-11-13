@@ -2,37 +2,37 @@
 
 <!-- $Id$ -->
 
-<pack name="git" license="GPLv2">
+<pack name="opencv" license="BSD license">
   <meta>
-    <homepage>http://git-scm.com/</homepage>
-    <download>https://github.com/git/git</download><!-- http://git-scm.com/downloads -->
+    <homepage>http://opencv.org/</homepage>
+    <download>http://sourceforge.net/projects/opencvlibrary/files/opencv-win/</download>
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long"></description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>git</keywords>
+    <keywords>opencv</keywords>
   </meta>
 
   <comments>
     <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="2012-11-13" working="false">
+  <set version="2.4.3" date="2012-11-02" working="false">
     <requires>
       <app name="" version="" type="required" />
     </requires>
 
     <downloads>
-      <download file="git-master 2012-11-13.zip">
-        <url type="direct" checked="2012-11-13"></url>
+      <download file="OpenCV-2.4.3.exe">
+        <url type="sourceforge" checked="2012-11-13">http://sourceforge.net/projects/opencvlibrary/files/opencv-win/2.4.3/OpenCV-2.4.3.exe/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>263.702.108</size>
       </download>
     </downloads>
 

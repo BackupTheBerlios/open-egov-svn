@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="sed" license="">
+  <meta>
+    <homepage>http://www.gnu.org/software/sed/sed.html</homepage>
+    <download>http://ftp.gnu.org/gnu/sed/</download>
+    <descriptions>
+      <description lang="en" type="short"></description>
+      <description lang="en" type="long">Sed (streams editor) isn't really a true text editor or text processor. Instead, it is used to filter text, i.e., it takes text input and performs some operation (or set of operations) on it and outputs the modified text. Sed is typically used for extracting part of a file using pattern matching or substituting multiple occurrences of a string within a file.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>sed</keywords>
+  </meta>
+
+  <comments>
+    <comment date="" author=""></comment>
+  </comments>
+
+  <set version="4.2.1" date="2009-06-27" working="false">
+    <requires>
+      <app name="libiconv" version="" type="required" />
+      <app name="libintl"  version="" type="required" />
+      <app name="glibc"    version="" type="required" /><!-- for regex -->
+    </requires>
+
+    <downloads>
+      <download file="sed-4.2.1.tar.bz2">
+        <url type="direct" checked="2012-11-13">http://ftp.gnu.org/gnu/sed/sed-4.2.1.tar.bz2</url>
+        <!-- http://sourceforge.net/projects/gnuwin32/files//sed/4.2.1/sed-4.2.1-src.zip/download -->
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size>899.091</size>
+      </download>
+    </downloads>
+
+    <options>
+    </options>
+
+    <patch>
+    </patch>
+
+    <compile>
+./configure --prefix=${PREFIX}
+make
+make install
+    </compile>
+
+    <install>
+    </install>
+  </set>
+</pack>
+

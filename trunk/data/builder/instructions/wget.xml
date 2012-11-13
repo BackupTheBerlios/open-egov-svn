@@ -19,7 +19,7 @@
     <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="2012-08-05" working="true">
+  <set version="1.14" date="2012-08-05" working="true">
     <requires>
       <app name="" version="" type="required" />
     </requires>
@@ -32,7 +32,7 @@
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>1.584.060</size>
       </download>
     </downloads>
 
