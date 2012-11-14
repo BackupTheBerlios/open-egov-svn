@@ -45,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
   setObjectName("MainWindow");
   setWindowIcon(QIcon("icon.png"));
   setWindowTitle(_("File Viewer"));
-return;
+
   setCentralWidget(new QWidget(this));
 
   createAll();
