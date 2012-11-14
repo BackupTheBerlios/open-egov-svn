@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<application category="tools" base="createsources">
+  <project>
+    <data name="application-binary" value="createsources" />
+    <data name="application-name" value="Create Sources" />
+    <data name="application-version" value="1.0.0.0" />
+    <data name="generate-pro" value="true" />
+    <data name="generate-main" value="false" />
+    <data name="generate-rc" value="true" />
+    <data name="pro-qt" value="xml" />
+    <data name="pro-packages" value="QT GETTEXT" />
+    <data name="pro-config" value="console" />
+    <data name="mainwindow-class" value="" />
+  </project>
+
+  <strings>
+    <group lang="en_US">
+      <string name="title">Create Sources</string>
+      <string name="description">Creates application source code out of a XML description.</string>
+    </group>
+
+    <group lang="de_DE">
+      <string name="title">Create Sources</string>
+      <string name="description">Erstellt Anwendungs-Quelltexte aus einer XML-Datei.</string>
+    </group>
+  </strings>
+
+  <properties>
+    <property name="dbus" value="false" />
+    <property name="embed" value="false" />
+    <property name="stable" value="false" />
+    <property name="database" value="false" />
+  </properties>
+
+  <setup>
+    <requires>base</requires>
+  </setup>
+
+  <features>
+    <todos>
+    </todos>
+    <changes>
+    </changes>
+  </features>
+
+  <datastructure>
+    <table name="">
+      
+    </table>
+  </datastructure>
+
+  <databases>
+  </databases>
+</application>
+

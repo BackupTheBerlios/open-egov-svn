@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<application base="createdatabase" category="tools">
+<application category="tools" base="createdatabase">
   <strings>
     <group lang="en_US">
       <string name="title">Create Database</string>
