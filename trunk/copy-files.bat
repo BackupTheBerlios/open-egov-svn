@@ -8,7 +8,7 @@ REM a MinGW/Qt (SDK) installation. Files not copied here must not be required
 REM by an OEG application.
 REM
 REM For Qt SDK 1.2.1 released on April 11th, 2012.
-REM Together with Qt 4.8.4 RC1 from October 2012.
+REM Together with Qt 4.8.4 RC1 from October 2012 or RC2 from November 2012.
 
 CD /D "%0"\..\bin
 

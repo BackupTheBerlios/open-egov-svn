@@ -38,6 +38,8 @@ SET QTDIR=C:\Qt\4.8.4
 
 SET PATH=%QTDIR%\bin;%PATH%
 SET PATH=%PATH%;C:\QtSDK\mingw\bin
+REM SET PATH=%PATH%;D:\mingw\msys\1.0\open-egovernment\bin
+REM SET PATH=%PATH%;D:\mingw\bin
 SET PATH=%PATH%;%SystemRoot%\System32
 SET QMAKESPEC=win32-g++
 
