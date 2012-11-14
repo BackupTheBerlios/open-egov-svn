@@ -3,6 +3,18 @@
 <!-- $Id$ -->
 
 <application category="components" base="about-dialog">
+  <project>
+    <data name="application-binary"  value="about-dialog" />
+    <data name="application-name"    value="About Dialog" />
+    <data name="application-version" value="1.0.0.0" />
+    <data name="generate-pro"        value="true" />
+    <data name="generate-main"       value="true" />
+    <data name="generate-rc"         value="true" />
+    <data name="pro-qt"              value="xml network" />
+    <data name="pro-packages"        value="QT GETTEXT" />
+    <data name="mainwindow-class"    value="AboutDialog" />
+  </project>
+
   <head>
     <text name="title"       stringnumber="1" />
     <text name="description" stringnumber="2" />
@@ -32,18 +44,6 @@
       <string number="12">Zeige den Über-Dialog zentriert auf dem Bildschirm.</string>
     </group>
   </dictionary>
-
-  <project>
-    <data name="application-binary" value="about-dialog" />
-    <data name="application-name" value="About Dialog" />
-    <data name="application-version" value="1.0.0.0" />
-    <data name="generate-pro" value="true" />
-    <data name="generate-main" value="true" />
-    <data name="generate-rc" value="true" />
-    <data name="pro-qt" value="xml network" />
-    <data name="pro-packages" value="QT GETTEXT" />
-    <data name="mainwindow-class" value="AboutDialog" />
-  </project>
 
   <comments>
   </comments>
