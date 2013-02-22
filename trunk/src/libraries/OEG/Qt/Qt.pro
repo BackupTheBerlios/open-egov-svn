@@ -2,7 +2,7 @@
 
 TARGET       = oegQt
 VERSION      = 1.0.0.0
-QT          += gui network
+QT          += gui network widgets printsupport
 PACKAGES     = GETTEXT
 
 RC_FILE      = resources.rc
