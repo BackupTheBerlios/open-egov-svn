@@ -7,7 +7,7 @@ QT       += core
 # Wanna remove this, but need an elegant solution first.
 #dbus
 DESTDIR   = ../../../../bin
-QMAKE_LFLAGS += -enable-stdcall-fixup -Wl,-enable-auto-import -Wl,-enable-runtime-pseudo-reloc
+QMAKE_LFLAGS += -Wl,-enable-stdcall-fixup -Wl,-enable-auto-import -Wl,-enable-runtime-pseudo-reloc
 #CONFIG += qdbus
 
 exists(../../config.pri) {
