@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
 <!-- $Id$ -->
-<!-- Compiles fine with WiX 3.5 -->
+<!-- Compiles fine with WiX 3.7 -->
 
 <Include>
   <Property Id="ARPCOMMENTS" Value="This is Free Software" />
