@@ -1,13 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
 <!-- $Id$ -->
-<!-- Compiles fine with WiX 3.5 -->
+<!-- Compiles fine with WiX 3.7 -->
 
 <Include xmlns='http://schemas.microsoft.com/wix/2006/wi'>
   <!-- Versioning. These values have to be changed for upgrades. It's not enough to just include newer files. -->
   <?define MajorVersion="0" ?>  <!-- Maximum value: 255 -->
   <?define MinorVersion="1" ?>
   <?define BuildVersion="0" ?>
-  <?define Revision="0" ?>      <!-- Revision is NOT used by WiX in the upgrade procedure -->
 </Include>
 
