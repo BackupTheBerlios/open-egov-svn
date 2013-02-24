@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
 <!-- $Id$ -->
-<!-- Compiles fine with WiX 3.5 -->
+<!-- Compiles fine with WiX 3.7 -->
 
 <Include xmlns='http://schemas.microsoft.com/wix/2006/wi'>
   <?include $(sys.CURRENTDIR)Version.wxi ?>
+  <?include $(sys.CURRENTDIR)Revision.wxi ?>
 
   <!-- Full version number to display -->
   <?define VersionNumber="$(var.MajorVersion).$(var.MinorVersion).$(var.BuildVersion).$(var.Revision)" ?>
