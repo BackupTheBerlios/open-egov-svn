@@ -19,7 +19,7 @@
 
     <Package Id="*"
       Description="!(loc.FullProductName) $(var.VersionNumber)"
-      Comments="This installer database contains the main package needed for every Open E-Government Application."
+      Comments="This installer database contains the main package needed for every Open E-Government application."
       Manufacturer="!(loc.ManufacturerName)"
       InstallerVersion="200"
       AdminImage="no"
@@ -49,8 +49,8 @@
     <?include ControlPanel.wxi ?>
 
     <WixVariable Id="WixUILicenseRtf" Value="$(var.License)" /> <!-- license.en.rtf -->
-    <WixVariable Id="WixUIBannerBmp" Value="banner.bmp" />
-    <WixVariable Id="WixUIDialogBmp" Value="dialog.bmp" />
+    <WixVariable Id="WixUIBannerBmp" Value="banner.jpg" />
+    <WixVariable Id="WixUIDialogBmp" Value="dialog.jpg" />
     <!-- WixVariable Id="WixUIExclamationIco" Value="path\exclamation.ico" />
     <WixVariable Id="WixUIInfoIco" Value="path\information.ico" />
     <WixVariable Id="WixUINewIco" Value="path\new.ico" />
@@ -213,7 +213,7 @@
                 </Component>
               </Directory>
 
-              <Directory Id="dir.plu.qt.pla" Name="playlistformats">
+              <Directory Id="dir.plu.qt.ply" Name="playlistformats">
                 <Component Id="BasePluginsQtPlaylistFormatsComponent" Guid="{0B5B2851-33F2-430E-95F1-F1C96A05959F}" KeyPath="yes">
                   <CreateFolder />
                   <File Source="$(var.BasePath)\plugins\qt\playlistformats\qtmultimedia_m3u.dll" DefaultLanguage="1033" Checksum="yes" />
@@ -291,7 +291,7 @@
 
         <!-- RegistryValue whichs serves as KeyPath (MSI requirement) -->
         <!-- Why the registry entry is needed: http://wix.mindcapers.com/wiki/ICE38 -->
-        <RegistryValue Root="HKCU" Key="SOFTWARE\GASI\Open eGovernment"
+        <RegistryValue Root="HKCU" Key="SOFTWARE\GASI\Open E-Government"
           Name="installed" Type="integer" Value="1" KeyPath="yes" />
 
         <!-- shortcuts -->
@@ -301,7 +301,7 @@
           Arguments="/x [ProductCode]"
           Directory="ProgramMenuProductExtrasFolder"
           Description="Uninstalls OEG Base" />
-        <Shortcut Id="WebShortcut" Name="Homepage" Description="Jump to the OEG website" Target="[HomePageURL]" />
+        <Shortcut Id="WebShortcut" Name="Homepage" Description="Open the OEG website" Target="[HomePageURL]" />
 
         <!-- Icon="" IconIndex="0" -->
         <!-- Target="[#BinAboutDialog.exe]" - causes warning, different components -->
@@ -331,30 +331,42 @@
       Display="expand" AllowAdvertise='no' Absent='disallow' InstallDefault='local'
       TypicalDefault='install' Level="2" ConfigurableDirectory="INSTALLDIR">
       <Feature Id='Binaries' Title='Binaries' Description='Required binary applications and libraries.' Level='4'
-       AllowAdvertise='no' Absent='disallow' InstallDefault='local' TypicalDefault='install' Display="expand">
+       AllowAdvertise='no' Absent='disallow' InstallDefault='local' TypicalDefault='install' Display='expand'>
         <ComponentRef Id='BaseComponent' />
         <ComponentRef Id='BaseBinComponent' />
         <!-- ComponentRef Id='HelperLibrary' -->
-        <ComponentRef Id="StartMenuComponent" />               <!-- Tell WiX to install the shortcuts -->
+        <ComponentRef Id='StartMenuComponent' />               <!-- Tell WiX to install the shortcuts -->
       </Feature>
 
       <Feature Id='Documentation' Title='Documentation' Description='The instruction manuals.'
         AllowAdvertise='no' InstallDefault='local' TypicalDefault='install' Level='500' Absent='allow'>
         <ComponentRef Id='BaseComponent' />
-        <ComponentRef Id="BasePluginsComponent" />
-        <ComponentRef Id="BasePluginsAccessibleComponent" />
+        <ComponentRef Id='BasePluginsComponent' />
+        <ComponentRef Id='BasePluginsQtAccessibleComponent' />
       </Feature>
 
       <Feature Id='OptionalBinaries' Title='Optional'
         Description='Optional binary files not required for a standard setup.'
         AllowAdvertise='no' InstallDefault='local' TypicalDefault='install' Absent='allow' Level='1000'>
         <ComponentRef Id='BaseComponent' />
-        <ComponentRef Id="BasePluginsComponent" />
-        <ComponentRef Id="BasePluginsAccessibleComponent" />
-        <ComponentRef Id="BasePluginsCodecsComponent" />
-        <ComponentRef Id="BasePluginsIconEnginesComponent" />
-        <ComponentRef Id="BasePluginsImageFormatsComponent" />
-        <ComponentRef Id="BasePluginsSqlDriversComponent" />
+        <ComponentRef Id='BasePluginsComponent' />
+        <ComponentRef Id='BasePluginsQtComponent' />
+        <ComponentRef Id='BasePluginsQtAccessibleComponent' />
+        <ComponentRef Id='BasePluginsQtBearerComponent' />
+        <ComponentRef Id='BasePluginsQtCodecsComponent' />
+        <ComponentRef Id='BasePluginsQtDesignerComponent' />
+        <ComponentRef Id='BasePluginsQtGraphicsSystemsComponent' />
+        <ComponentRef Id='BasePluginsQtIconEnginesComponent' />
+        <ComponentRef Id='BasePluginsQtImageFormatsComponent' />
+        <ComponentRef Id='BasePluginsQtMediaServiceComponent' />
+        <ComponentRef Id='BasePluginsQtPhononBackendComponent' />
+        <ComponentRef Id='BasePluginsQtPlatformsComponent' />
+        <ComponentRef Id='BasePluginsQtPlaylistFormatsComponent' />
+        <ComponentRef Id='BasePluginsQtPrintSupportComponent' />
+        <ComponentRef Id='BasePluginsQtQmlToolingComponent' />
+        <ComponentRef Id='BasePluginsQtSqlDriversComponent' />
+        <ComponentRef Id='BasePluginsQtStylesComponent' />
+        <ComponentRef Id='BasePluginsQtWebKitComponent' />
       </Feature>
     </Feature>
 

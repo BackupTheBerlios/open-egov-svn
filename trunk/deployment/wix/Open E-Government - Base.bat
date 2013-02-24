@@ -12,6 +12,8 @@ REM Test the installer with: msiexec /i product.msi
 
 CD /D "%0"\..
 
+CALL Revision.bat
+
 SET PATH=%PATH%;C:\Program Files (x86)\WiX Toolset v3.7\bin;C:\Programme\Windows Installer XML v3.5\bin
 SET CAPARA=-nologo -pedantic
 SET LIPARA=-nologo -pedantic -sw1101 -ext WixUIExtension 
