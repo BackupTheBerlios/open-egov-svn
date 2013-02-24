@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
 <!-- $Id$ -->
-<!-- Compiles fine with WiX 3.5 -->
+<!-- Compiles fine with WiX 3.7 -->
 
 <?define BasePath = "..\.." ?>
 <?define LocalePath = "$(var.BasePath)\locale" ?>
@@ -70,8 +70,9 @@
 
           <Directory Id="dir1" Name="bin">
             <!-- This GUID is checked for in other applications! -->
-            <Component Id="BaseBinComponent" Guid="{4A217218-90BB-11DF-A10C-5774DFD72085}">
+            <Component Id="BaseBinComponent" Guid="{4A217218-90BB-11DF-A10C-5774DFD72085}" KeyPath="yes">
               <CreateFolder />
+<!--
               <File Id="BinAboutDialog.exe" Source="$(var.BasePath)\bin\about-dialog.exe" />
               <File Source="$(var.BasePath)\bin\builder.exe" />
               <File Source="$(var.BasePath)\bin\bug-reporter.exe" />
@@ -81,8 +82,36 @@
               <File Source="$(var.BasePath)\bin\help-viewer.exe" />
               <File Source="$(var.BasePath)\bin\process-list.exe" />
               <File Source="$(var.BasePath)\bin\settings.exe" />
-
-              <File Source="$(var.BasePath)\bin\libgcc_s_dw2-1.dll" />
+-->
+              <File Source="$(var.BasePath)\bin\D3DCompiler_43.dll" />
+              <File Source="$(var.BasePath)\bin\icudt49.dll" />
+              <File Source="$(var.BasePath)\bin\icuin49.dll" />
+              <File Source="$(var.BasePath)\bin\icuuc49.dll" />
+              <File Source="$(var.BasePath)\bin\libEGL.dll" />
+              <File Source="$(var.BasePath)\bin\libgcc_s_sjlj-1.dll" />
+              <File Source="$(var.BasePath)\bin\libGLESv2.dll" />
+              <File Source="$(var.BasePath)\bin\libstdc++-6.dll" />
+              <File Source="$(var.BasePath)\bin\libwinpthread-1.dll" />
+              <File Source="$(var.BasePath)\bin\Qt5Concurrent.dll"        DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\Qt5Core.dll"              DefaultLanguage="1033" Checksum="yes" Vital="yes" />
+              <File Source="$(var.BasePath)\bin\Qt5Gui.dll"               DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\Qt5Help.dll"              DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\Qt5Multimedia.dll"        DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\Qt5MultimediaWidgets.dll" DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\Qt5Network.dll"           DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\Qt5OpenGL.dll"            DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\Qt5PrintSupport.dll"      DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\Qt5Script.dll"            DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\Qt5ScriptTools.dll"       DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\Qt5Sql.dll"               DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\Qt5Svg.dll"               DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\Qt5V8.dll"                DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\Qt5WebKit.dll"            DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\Qt5WebKitWidgets.dll"     DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\Qt5Widgets.dll"           DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\Qt5Xml.dll"               DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\Qt5XmlPatterns.dll"       DefaultLanguage="1033" Checksum="yes" />
+<!--
               <File Source="$(var.BasePath)\bin\libiconv-2.dll" />
               <File Source="$(var.BasePath)\bin\libintl-8.dll" />
               <File Source="$(var.BasePath)\bin\libstdc++-6.dll" />
@@ -90,65 +119,143 @@
               <File Source="$(var.BasePath)\bin\oegCrypt1.dll" />
               <File Source="$(var.BasePath)\bin\oegMath1.dll" />
               <File Source="$(var.BasePath)\bin\oegQt1.dll" />
-              <File Source="$(var.BasePath)\bin\phonon4.dll" DefaultLanguage="1033" Checksum="yes" />
-              <File Source="$(var.BasePath)\bin\QtConcurrent.dll" />
-              <File Source="$(var.BasePath)\bin\QtCore4.dll" Vital="yes" DefaultLanguage="1033" Checksum="yes" />
-              <File Source="$(var.BasePath)\bin\QtGui4.dll" DefaultLanguage="1033" Checksum="yes" />
-              <File Source="$(var.BasePath)\bin\QtHelp4.dll" DefaultLanguage="1033" Checksum="yes" />
-              <File Source="$(var.BasePath)\bin\QtMultimedia4.dll" DefaultLanguage="1033" Checksum="yes" />
-              <File Source="$(var.BasePath)\bin\QtNetwork4.dll" DefaultLanguage="1033" Checksum="yes" />
-              <File Source="$(var.BasePath)\bin\QtOpenGL4.dll" DefaultLanguage="1033" Checksum="yes" />
-              <File Source="$(var.BasePath)\bin\QtScript4.dll" DefaultLanguage="1033" Checksum="yes" />
-              <File Source="$(var.BasePath)\bin\QtScriptTools4.dll" DefaultLanguage="1033" Checksum="yes" />
-              <File Source="$(var.BasePath)\bin\QtSql4.dll" DefaultLanguage="1033" Checksum="yes" />
-              <File Source="$(var.BasePath)\bin\QtSvg4.dll" DefaultLanguage="1033" Checksum="yes" />
-              <File Source="$(var.BasePath)\bin\QtWebKit4.dll" DefaultLanguage="1033" Checksum="yes" />
-              <File Source="$(var.BasePath)\bin\QtXml4.dll" DefaultLanguage="1033" Checksum="yes" />
-              <File Source="$(var.BasePath)\bin\QtXmlPatterns4.dll" DefaultLanguage="1033" Checksum="yes" />
+              <File Source="$(var.BasePath)\bin\phonon4.dll"              DefaultLanguage="1033" Checksum="yes" />
+-->
             </Component>
           </Directory>
 
-          <Directory Id="dir2" Name="plugins">
+          <Directory Id="dir.plu" Name="plugins">
             <Component Id="BasePluginsComponent" Guid="{D78E7348-90BC-11DF-AA7E-F775DFD72085}" KeyPath="yes">
               <CreateFolder />
             </Component>
 
-            <Directory Id="dir3" Name="accessible">
-              <Component Id="BasePluginsAccessibleComponent" Guid="{F7C22360-90BE-11DF-9BF0-9B78DFD72085}" KeyPath="yes">
+            <Directory Id="dir.plu.qt" Name="qt">
+              <Component Id="BasePluginsQtComponent" Guid="{489E5C05-40BD-4304-886E-FD87F15E0066}" KeyPath="yes">
                 <CreateFolder />
               </Component>
-            </Directory>
 
-            <Directory Id="dir4" Name="codecs">
-              <Component Id="BasePluginsCodecsComponent" Guid="{26A6345A-90BF-11DF-9801-E178DFD72085}" KeyPath="yes">
-                <CreateFolder />
-              </Component>
-            </Directory>
+              <Directory Id="dir.plu.qt.acc" Name="accessible">
+                <Component Id="BasePluginsQtAccessibleComponent" Guid="{F7C22360-90BE-11DF-9BF0-9B78DFD72085}" KeyPath="yes">
+                  <CreateFolder />
+                  <File Source="$(var.BasePath)\plugins\qt\accessible\qtaccessiblequick.dll" DefaultLanguage="1033" Checksum="yes" />
+                  <File Source="$(var.BasePath)\plugins\qt\accessible\qtaccessiblewidgets.dll" DefaultLanguage="1033" Checksum="yes" />
+                </Component>
+              </Directory>
 
-            <Directory Id="dir5" Name="iconengines">
-              <Component Id="BasePluginsIconEnginesComponent" Guid="{B05A9D3C-90BD-11DF-8E07-3477DFD72085}" KeyPath="yes">
-                <CreateFolder />
-                <File Source="$(var.BasePath)\plugins\qt\iconengines\qsvgicon4.dll" DefaultLanguage="1033" Checksum="yes" />
-              </Component>
-            </Directory>
+              <Directory Id="dir.plu.qt.bea" Name="bearer">
+                <Component Id="BasePluginsQtBearerComponent" Guid="{14BF98E7-A325-484A-9481-F9FE8FD7930A}" KeyPath="yes">
+                  <CreateFolder />
+                  <File Source="$(var.BasePath)\plugins\qt\bearer\qgenericbearer.dll" DefaultLanguage="1033" Checksum="yes" />
+                  <File Source="$(var.BasePath)\plugins\qt\bearer\qnativewifibearer.dll" DefaultLanguage="1033" Checksum="yes" />
+                </Component>
+              </Directory>
 
-            <Directory Id="dir6" Name="imageformats">
-              <Component Id="BasePluginsImageFormatsComponent" Guid="{65C54694-90BF-11DF-AD9D-0E79DFD72085}" KeyPath="yes">
-                <CreateFolder />
-                <File Source="$(var.BasePath)\plugins\qt\imageformats\qgif4.dll"  DefaultLanguage="1033" Checksum="yes" />
-                <File Source="$(var.BasePath)\plugins\qt\imageformats\qjpeg4.dll" DefaultLanguage="1033" Checksum="yes" />
-                <File Source="$(var.BasePath)\plugins\qt\imageformats\qmng4.dll"  DefaultLanguage="1033" Checksum="yes" />
-                <File Source="$(var.BasePath)\plugins\qt\imageformats\qsvg4.dll"  DefaultLanguage="1033" Checksum="yes" />
-                <File Source="$(var.BasePath)\plugins\qt\imageformats\qtiff4.dll" DefaultLanguage="1033" Checksum="yes" />
-              </Component>
-            </Directory>
+              <Directory Id="dir.plu.qt.cod" Name="codecs">
+                <Component Id="BasePluginsQtCodecsComponent" Guid="{26A6345A-90BF-11DF-9801-E178DFD72085}" KeyPath="yes">
+                  <CreateFolder />
+                </Component>
+              </Directory>
 
-            <Directory Id="dir7" Name="sqldrivers">
-              <Component Id="BasePluginsSqlDriversComponent" Guid="{6C0BF11A-90BF-11DF-9333-1579DFD72085}" KeyPath="yes">
-                <CreateFolder />
-                <File Source="$(var.BasePath)\plugins\qt\sqldrivers\qsqlite4.dll" DefaultLanguage="1033" Checksum="yes" />
-              </Component>
-            </Directory>
+              <Directory Id="dir.plu.qt.des" Name="designer">
+                <Component Id="BasePluginsQtDesignerComponent" Guid="{8CE06654-6741-4C4F-BD65-7A079F9AC03D}" KeyPath="yes">
+                  <CreateFolder />
+                  <File Source="$(var.BasePath)\plugins\qt\designer\qdeclarativeview.dll" DefaultLanguage="1033" Checksum="yes" />
+                  <File Source="$(var.BasePath)\plugins\qt\designer\qwebview.dll" DefaultLanguage="1033" Checksum="yes" />
+                </Component>
+              </Directory>
+
+              <Directory Id="dir.plu.qt.gra" Name="graphicssystems">
+                <Component Id="BasePluginsQtGraphicsSystemsComponent" Guid="{170F9824-31C3-45E5-91DD-E646BFFD41A5}" KeyPath="yes">
+                  <CreateFolder />
+                </Component>
+              </Directory>
+
+              <Directory Id="dir.plu.qt.ico" Name="iconengines">
+                <Component Id="BasePluginsQtIconEnginesComponent" Guid="{B05A9D3C-90BD-11DF-8E07-3477DFD72085}" KeyPath="yes">
+                  <CreateFolder />
+                  <File Source="$(var.BasePath)\plugins\qt\iconengines\qsvgicon.dll" DefaultLanguage="1033" Checksum="yes" />
+                </Component>
+              </Directory>
+
+              <Directory Id="dir.plu.qt.ima" Name="imageformats">
+                <Component Id="BasePluginsQtImageFormatsComponent" Guid="{65C54694-90BF-11DF-AD9D-0E79DFD72085}" KeyPath="yes">
+                  <CreateFolder />
+                  <File Source="$(var.BasePath)\plugins\qt\imageformats\qgif.dll"  DefaultLanguage="1033" Checksum="yes" />
+                  <File Source="$(var.BasePath)\plugins\qt\imageformats\qico.dll"  DefaultLanguage="1033" Checksum="yes" />
+                  <File Source="$(var.BasePath)\plugins\qt\imageformats\qjpeg.dll" DefaultLanguage="1033" Checksum="yes" />
+                  <File Source="$(var.BasePath)\plugins\qt\imageformats\qmng.dll"  DefaultLanguage="1033" Checksum="yes" />
+                  <File Source="$(var.BasePath)\plugins\qt\imageformats\qsvg.dll"  DefaultLanguage="1033" Checksum="yes" />
+                  <File Source="$(var.BasePath)\plugins\qt\imageformats\qtga.dll"  DefaultLanguage="1033" Checksum="yes" />
+                  <File Source="$(var.BasePath)\plugins\qt\imageformats\qtiff.dll" DefaultLanguage="1033" Checksum="yes" />
+                  <File Source="$(var.BasePath)\plugins\qt\imageformats\qwbmp.dll" DefaultLanguage="1033" Checksum="yes" />
+                </Component>
+              </Directory>
+
+              <Directory Id="dir.plu.qt.med" Name="mediaservice">
+                <Component Id="BasePluginsQtMediaServiceComponent" Guid="{6C279EDE-CF82-49E3-B7C2-1D98BC2FCE08}" KeyPath="yes">
+                  <CreateFolder />
+                  <File Source="$(var.BasePath)\plugins\qt\mediaservice\dsengine.dll"            DefaultLanguage="1033" Checksum="yes" />
+                  <File Source="$(var.BasePath)\plugins\qt\mediaservice\qtmedia_audioengine.dll" DefaultLanguage="1033" Checksum="yes" />
+                </Component>
+              </Directory>
+
+              <Directory Id="dir.plu.qt.pho" Name="phonon_backend">
+                <Component Id="BasePluginsQtPhononBackendComponent" Guid="{DA30D5D3-6730-4FFB-A173-78681999A8F9}" KeyPath="yes">
+                  <CreateFolder />
+                </Component>
+              </Directory>
+
+              <Directory Id="dir.plu.qt.pla" Name="platforms">
+                <Component Id="BasePluginsQtPlatformsComponent" Guid="{E4FC6127-AE9C-4F37-8170-AD47263710F5}" KeyPath="yes">
+                  <CreateFolder />
+                  <File Source="$(var.BasePath)\plugins\qt\platforms\qminimal.dll" DefaultLanguage="1033" Checksum="yes" />
+                  <File Source="$(var.BasePath)\plugins\qt\platforms\qwindows.dll" DefaultLanguage="1033" Checksum="yes" />
+                </Component>
+              </Directory>
+
+              <Directory Id="dir.plu.qt.pla" Name="playlistformats">
+                <Component Id="BasePluginsQtPlaylistFormatsComponent" Guid="{0B5B2851-33F2-430E-95F1-F1C96A05959F}" KeyPath="yes">
+                  <CreateFolder />
+                  <File Source="$(var.BasePath)\plugins\qt\playlistformats\qtmultimedia_m3u.dll" DefaultLanguage="1033" Checksum="yes" />
+                </Component>
+              </Directory>
+
+              <Directory Id="dir.plu.qt.pri" Name="printsupport">
+                <Component Id="BasePluginsQtPrintSupportComponent" Guid="{AFA08EF1-9340-4CAB-8CE8-050D418CA5A3}" KeyPath="yes">
+                  <CreateFolder />
+                  <File Source="$(var.BasePath)\plugins\qt\printsupport\windowsprintersupport.dll" DefaultLanguage="1033" Checksum="yes" />
+                </Component>
+              </Directory>
+
+              <Directory Id="dir.plu.qt.qml" Name="qmltooling">
+                <Component Id="BasePluginsQtQmlToolingComponent" Guid="{51087AF6-C53E-40DB-81A5-458B732C6F23}" KeyPath="yes">
+                  <CreateFolder />
+                  <File Source="$(var.BasePath)\plugins\qt\qmltooling\qmldbg_inspector.dll"         DefaultLanguage="1033" Checksum="yes" />
+                  <File Source="$(var.BasePath)\plugins\qt\qmltooling\qmldbg_qtquick2.dll"          DefaultLanguage="1033" Checksum="yes" />
+                  <File Source="$(var.BasePath)\plugins\qt\qmltooling\qmldbg_tcp.dll"               DefaultLanguage="1033" Checksum="yes" />
+                  <File Source="$(var.BasePath)\plugins\qt\qmltooling\qmldbg_tcp_qtdeclarative.dll" DefaultLanguage="1033" Checksum="yes" />
+                </Component>
+              </Directory>
+
+              <Directory Id="dir.plu.qt.sql" Name="sqldrivers">
+                <Component Id="BasePluginsQtSqlDriversComponent" Guid="{6C0BF11A-90BF-11DF-9333-1579DFD72085}" KeyPath="yes">
+                  <CreateFolder />
+                  <File Source="$(var.BasePath)\plugins\qt\sqldrivers\qsqlite.dll" DefaultLanguage="1033" Checksum="yes" />
+                </Component>
+              </Directory>
+
+              <Directory Id="dir.plu.qt.sty" Name="styles">
+                <Component Id="BasePluginsQtStylesComponent" Guid="{889D04C6-54C1-4B6B-B9D0-0FCC9C7D7B32}" KeyPath="yes">
+                  <CreateFolder />
+                </Component>
+              </Directory>
+
+              <Directory Id="dir.plu.qt.web" Name="webkit">
+                <Component Id="BasePluginsQtWebKitComponent" Guid="{FC8CB5CB-86A1-4622-96B6-52A04521C087}" KeyPath="yes">
+                  <CreateFolder />
+                </Component>
+              </Directory>
+            </Directory><!-- end of qt dir -->
           </Directory><!-- end of plugins dir -->
         </Directory><!-- end of oeg main dir -->
       </Directory><!-- end of programm files dir -->
