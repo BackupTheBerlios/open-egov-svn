@@ -22,9 +22,11 @@ IF NOT EXIST bin64 (
   MD bin64
 )
 
+DEL "bin/*.a"
 DEL "bin/*.exe"
 DEL "bin/*.dll"
 
+DEL "bin64/*.a"
 DEL "bin64/*.exe"
 DEL "bin64/*.dll"
 
@@ -97,6 +99,22 @@ IF EXIST plugins\qt\qmltooling        DEL plugins\qt\qmltooling\*.DLL
 IF EXIST plugins\qt\sqldrivers        DEL plugins\qt\sqldrivers\*.DLL
 IF EXIST plugins\qt\webkit            DEL plugins\qt\webkit\*.DLL
 
+IF EXIST plugins\qt\codecs            DEL plugins\qt\codecs\*.A
+IF EXIST plugins\qt\graphicssystems   DEL plugins\qt\graphicssystems\*.A
+IF EXIST plugins\qt\phonon_backend    DEL plugins\qt\phonon_backend\*.A
+IF EXIST plugins\qt\accessible        DEL plugins\qt\accessible\*.A
+IF EXIST plugins\qt\bearer            DEL plugins\qt\bearer\*.A
+IF EXIST plugins\qt\designer          DEL plugins\qt\designer\*.A
+IF EXIST plugins\qt\iconengines       DEL plugins\qt\iconengines\*.A
+IF EXIST plugins\qt\imageformats      DEL plugins\qt\imageformats\*.A
+IF EXIST plugins\qt\mediaservice      DEL plugins\qt\mediaservice\*.A
+IF EXIST plugins\qt\platforms         DEL plugins\qt\platforms\*.A
+IF EXIST plugins\qt\playlistformats   DEL plugins\qt\playlistformats\*.A
+IF EXIST plugins\qt\printsupport      DEL plugins\qt\printsupport\*.A
+IF EXIST plugins\qt\qmltooling        DEL plugins\qt\qmltooling\*.A
+IF EXIST plugins\qt\sqldrivers        DEL plugins\qt\sqldrivers\*.A
+IF EXIST plugins\qt\webkit            DEL plugins\qt\webkit\*.A
+
 IF EXIST plugins64\qt\codecs          DEL plugins64\qt\codecs\*.DLL
 IF EXIST plugins64\qt\graphicssystems DEL plugins64\qt\graphicssystems\*.DLL
 IF EXIST plugins64\qt\phonon_backend  DEL plugins64\qt\phonon_backend\*.DLL
@@ -112,6 +130,22 @@ IF EXIST plugins64\qt\printsupport    DEL plugins64\qt\printsupport\*.DLL
 IF EXIST plugins64\qt\qmltooling      DEL plugins64\qt\qmltooling\*.DLL
 IF EXIST plugins64\qt\sqldrivers      DEL plugins64\qt\sqldrivers\*.DLL
 IF EXIST plugins64\qt\webkit          DEL plugins64\qt\webkit\*.DLL
+
+IF EXIST plugins64\qt\codecs          DEL plugins64\qt\codecs\*.A
+IF EXIST plugins64\qt\graphicssystems DEL plugins64\qt\graphicssystems\*.A
+IF EXIST plugins64\qt\phonon_backend  DEL plugins64\qt\phonon_backend\*.A
+IF EXIST plugins64\qt\accessible      DEL plugins64\qt\accessible\*.A
+IF EXIST plugins64\qt\bearer          DEL plugins64\qt\bearer\*.A
+IF EXIST plugins64\qt\designer        DEL plugins64\qt\designer\*.A
+IF EXIST plugins64\qt\iconengines     DEL plugins64\qt\iconengines\*.A
+IF EXIST plugins64\qt\imageformats    DEL plugins64\qt\imageformats\*.A
+IF EXIST plugins64\qt\mediaservice    DEL plugins64\qt\mediaservice\*.A
+IF EXIST plugins64\qt\platforms       DEL plugins64\qt\platforms\*.A
+IF EXIST plugins64\qt\playlistformats DEL plugins64\qt\playlistformats\*.A
+IF EXIST plugins64\qt\printsupport    DEL plugins64\qt\printsupport\*.A
+IF EXIST plugins64\qt\qmltooling      DEL plugins64\qt\qmltooling\*.A
+IF EXIST plugins64\qt\sqldrivers      DEL plugins64\qt\sqldrivers\*.A
+IF EXIST plugins64\qt\webkit          DEL plugins64\qt\webkit\*.A
 
 ECHO Check output for errors!
 PAUSE
