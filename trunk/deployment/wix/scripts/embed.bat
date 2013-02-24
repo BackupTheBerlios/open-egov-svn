@@ -6,7 +6,7 @@ SET filename=%1
 SET langname=%2
 SET langcode=%3
 
-SET PATH=%PATH%;C:\Program Files\Microsoft SDKs\Windows\v7.0\Bin\
+SET PATH=%PATH%;C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin;C:\Program Files\Microsoft SDKs\Windows\v7.0\Bin\
 
 COPY %filename%_en.msi %filename%_%langname%.msi
 
