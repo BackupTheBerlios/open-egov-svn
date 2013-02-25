@@ -1,6 +1,6 @@
 $Id$
 
-Open eGovernment is a free and open source eGovernment suite.
+Open E-Government is a free and open source E-Government suite.
 
 Please visit the homepage www.open-egov.de for information
 about the aims, the applications and much more.

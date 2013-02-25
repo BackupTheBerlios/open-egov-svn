@@ -10,7 +10,7 @@ REM required by an OEG application.
 CD /D "%0"\..
 
 REM Here you have to set the source paths from where you want to copy the files.
-REM All copy goes to the bin/lib/plugins respective bin64/lib64/plugins64 directories.
+REM All copies go into the bin/lib/plugins respective bin64/lib64/plugins64 directories.
 
 SET CLEANDIRS=NO
 SET COPYQT5DIR=YES
@@ -85,7 +85,7 @@ REM COPY /B /Y "%SRCDIR%\Qt5Test.dll"               "%DSTDIR%"
   SET DSTDIR=plugins
   ECHO Copying to "plugins"
 
-  REM Copy all plugin files, without debug files.
+  REM Copy all plugin files, without debug files or static libraries.
 
   XCOPY /E /H /Y "%SRCDIR%\accessible\qtaccessiblequick.dll"        "plugins\qt\accessible"
   XCOPY /E /H /Y "%SRCDIR%\accessible\qtaccessiblewidgets.dll"      "plugins\qt\accessible"
