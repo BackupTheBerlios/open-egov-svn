@@ -27,12 +27,12 @@ DEL de-de.wixpdb en-us.wixpdb
 
 torch.exe -p -t language en-us.msi de-de.msi -out de-de.mst
 COPY en-us.msi new.msi
-cscript.exe scripts\WiSubStg.vbs new.msi de-de.mst 1031
-cscript.exe scripts\WiLangId.vbs new.msi Package 1033,1031
+cscript.exe //NoLogo scripts\WiSubStg.vbs new.msi de-de.mst 1031
+cscript.exe //NoLogo scripts\WiLangId.vbs new.msi Package 1033,1031
 
-MOVE new.msi "Open E-Government - Base.msi"
+MOVE new.msi "..\msi\Open E-Government - Base.msi"
 
-DEL de-de.mst de-de.msi en-us.msi
+DEL de-de.mst de-de.msi en-us.msi "Open E-Government - Base.wixobj"
 
 ECHO Finished. Check output for errors.
 PAUSE
