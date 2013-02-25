@@ -1,6 +1,9 @@
 @ECHO OFF
 
-REM $Id:$
+REM $Id$
+
+REM This batch creates the XML file "revision.wxi" which contains
+REM only the current revision number.
 
 CD /D "%0"\..
 

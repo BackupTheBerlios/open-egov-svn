@@ -8,6 +8,10 @@ COPY base.msi installers/base-en.msi
 
 CALL embed.bat base de 1031
 
+REM http://msdn.microsoft.com/de-de/library/windows/desktop/aa369771%28v=vs.85%29.aspx
+REM http://wix.tramontana.co.hu/tutorial/user-interface/do-you-speak-english
+
+REM CALL embed.bat base ar 1025
 REM CALL embed.bat base da 1030
 REM CALL embed.bat base es 1034
 REM CALL embed.bat base fi 1035
