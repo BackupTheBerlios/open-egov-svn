@@ -43,6 +43,11 @@ if not exist "C:\WinDDK\7600.16385.1\bin\amd64\signtool.exe" goto sign_skip_7
 goto sign_end
 
 :sign_skip_7
+if not exist "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\signtool.exe" goto sign_skip_8
+"C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\signtool.exe" sign "%1"
+goto sign_end
+
+:sign_skip_8
 if not exist "C:\WinDDK\7600.16385.1\bin\x86\signtool.exe" goto sign_end
 "C:\WinDDK\7600.16385.1\bin\x86\signtool.exe" sign "%1"
 
