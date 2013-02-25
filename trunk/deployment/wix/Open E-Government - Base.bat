@@ -16,7 +16,7 @@ CALL Revision.bat
 
 SET PATH=%PATH%;C:\Program Files (x86)\WiX Toolset v3.7\bin;C:\Programme\Windows Installer XML v3.5\bin
 SET CAPARA=-nologo -pedantic
-SET LIPARA=-nologo -pedantic -sw1101 -ext WixUIExtension 
+SET LIPARA=-nologo -pedantic -sw1101 -sw1102 -ext WixUIExtension 
 
 candle %CAPARA% -dCodepage=1252 -dLicense=license.en.rtf "Open E-Government - Base.wxs"
 light %LIPARA% -cultures:en-us -loc strings\en-us.wxl -out en-us.msi "Open E-Government - Base.wixobj"

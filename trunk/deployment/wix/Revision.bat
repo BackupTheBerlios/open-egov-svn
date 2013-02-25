@@ -8,6 +8,8 @@ SET SVNCMD="c:\Program Files\TortoiseSVN\bin\svn.exe"
 SET SVNVERCMD="c:\Program Files\TortoiseSVN\bin\svnversion.exe"
 SET OEGREPO="https://gerrit-albrecht@svn.berlios.de/svnroot/repos/open-egov/trunk/"
 
+ECHO Please update the local sources to ensure all files have the latest revision!
+
 REM --xml --incremental -R
 REM %SVNCMD% info %OEGREPO% -r HEAD --non-interactive
 
@@ -19,6 +21,8 @@ REM We only use the HEAD revision number without additional flags.
 REM Don't use svn.exe, because it needs the -R flag and a lot of time.
 
 FOR /f "delims=SM" %%a IN ('%%SVNVERCMD%% ..\..') DO @SET REVISION=%%a
+
+REM The current revision has to be only a single number, not a range ("123:456").
 
 ECHO Current revision: %REVISION%
 

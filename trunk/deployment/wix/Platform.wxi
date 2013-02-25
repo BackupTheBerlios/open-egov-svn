@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- $Id$ -->
-<!-- Compiles fine with WiX 3.7 -->
 
 <Include xmlns='http://schemas.microsoft.com/wix/2006/wi'>
 
