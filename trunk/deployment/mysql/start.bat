@@ -4,7 +4,7 @@ REM $Id$
 
 CD /D "%0"\..
 
-ECHO Starting MySQL server with Open eGovernment configuration.
+ECHO Starting MySQL server with Open E-Government configuration.
 ECHO Stop with Ctrl+C.
 
 REM COPY my.ini C:\MySQL\my.ini

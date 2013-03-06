@@ -4,7 +4,7 @@ REM $Id$
 
 CD /D "%0"\..
 
-ECHO Dumping databases of the Open eGovernment MySQL server.
+ECHO Dumping databases of the Open E-Government MySQL server.
 
 DEL databases.sql
 
