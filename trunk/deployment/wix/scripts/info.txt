@@ -44,8 +44,8 @@ Check if everything works:
 
 Links:
 
-Microsoft Windows SDK for Windows 7 and .NET Framework 3.5 SP1 (ISO)
-http://www.microsoft.com/downloads/en/details.aspx?FamilyID=71DEB800-C591-4F97-A900-BEA146E4FAE1
+Microsoft Windows SDK for Windows 7 and .NET Framework 4 (ISO)
+http://www.microsoft.com/en-us/download/details.aspx?id=8442
 
 Windows Installer Scripting Examples
 http://msdn.microsoft.com/en-us/library/aa372865%28VS.85%29.aspx?FamilyID
