@@ -91,6 +91,7 @@ REM COPY /B /Y "%SRCDIR%\Qt5Test.dll"               "%DSTDIR%"
   XCOPY /E /H /Y "%SRCDIR%\accessible\qtaccessiblewidgets.dll"      "plugins\qt\accessible"
   XCOPY /E /H /Y "%SRCDIR%\bearer\qgenericbearer.dll"               "plugins\qt\bearer"
   XCOPY /E /H /Y "%SRCDIR%\bearer\qnativewifibearer.dll"            "plugins\qt\bearer"
+  XCOPY /E /H /Y "%SRCDIR%\designer\qaxwidget.dll"                  "plugins\qt\designer"
   XCOPY /E /H /Y "%SRCDIR%\designer\qdeclarativeview.dll"           "plugins\qt\designer"
   XCOPY /E /H /Y "%SRCDIR%\designer\qwebview.dll"                   "plugins\qt\designer"
   XCOPY /E /H /Y "%SRCDIR%\iconengines\qsvgicon.dll"                "plugins\qt\iconengines"
@@ -113,6 +114,7 @@ REM COPY /B /Y "%SRCDIR%\Qt5Test.dll"               "%DSTDIR%"
   XCOPY /E /H /Y "%SRCDIR%\qmltooling\qmldbg_tcp.dll"               "plugins\qt\qmltooling"
   XCOPY /E /H /Y "%SRCDIR%\qmltooling\qmldbg_tcp_qtdeclarative.dll" "plugins\qt\qmltooling"
   XCOPY /E /H /Y "%SRCDIR%\sqldrivers\qsqlite.dll"                  "plugins\qt\sqldrivers"
+  XCOPY /E /H /Y "%SRCDIR%\sqldrivers\qsqlodbc.dll"                 "plugins\qt\sqldrivers"
 :NO_COPYQT5DIR
 
 IF "%COPYQT5MINGW32DIRS%" == "YES" (
