@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<bloodglucosemeter>
+  <meta>
+    <manufacturer>Abbott</manufacturer>
+    <homepage>http://www.abbottdiabetescare.com/</homepage>
+    <variant device="1">
+      <title></title>
+      <picture></picture>
+      <price></price>
+      <date></date>
+    </variant>
+  </meta>
+
+  <protocol device="1" driver="serial" params="8n1" localized="de_DE">
+  </protocol>
+</bloodglucosemeter>
+

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<bloodglucosemeter>
+  <meta>
+    <manufacturer>Bayer</manufacturer>
+    <homepage>http://www.bayerdiabetes.de/produkte/contourlink/eigenschaften/</homepage>
+    <variant device="1">
+      <title>CONTOUR LINK</title>
+      <picture></picture>
+      <price></price>
+      <date></date>
+    </variant>
+  </meta>
+
+  <protocol device="1" driver="serial" params="8n1" localized="de_DE">
+  </protocol>
+</bloodglucosemeter>
+

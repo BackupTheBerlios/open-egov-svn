@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<bloodglucosemeter>
+  <meta>
+    <manufacturer>MiniMed</manufacturer>
+    <homepage>http://www.minimed.com/</homepage>
+    <variant device="1">
+      <title>MiniMed Paradigm Veo</title>
+      <picture></picture>
+      <price></price>
+      <date>2010-07-13</date>
+    </variant>
+  </meta>
+
+  <protocol device="1" driver="serial" params="8n1" localized="de_DE">
+  </protocol>
+</bloodglucosemeter>
+
