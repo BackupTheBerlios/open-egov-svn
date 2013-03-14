@@ -22,7 +22,7 @@
     <searchpattern filetypeid="4">0:0x47 0x49 0x46 0x38 0x37 0x61</searchpattern> <!-- GIF87a -->
     <searchpattern filetypeid="4">0:0x47 0x49 0x46 0x38 0x39 0x61</searchpattern> <!-- GIF89a -->
     <searchpattern filetypeid="5">0:0xca 0xfe 0xba 0xbe</searchpattern> <!-- JAVA class -->
-    <searchpattern filetypeid="6">0:"SQLite format 3"</searchpattern>
+    <searchpattern filetypeid="6">0:"SQLite format 3"</searchpattern> <!-- SQLite -->
   </searchpatterns>
 
   <data>
@@ -84,7 +84,7 @@ Specification: http://www.jpeg.org/public/jfif.pdf</field>
       <field name="type"></field>
       <field name="name">JAVA compiled bytecode</field>
       <field name="extensions">class</field>
-      <field name="mime-type"></field>
+      <field name="mime-type">application/java-byte-code application/java application/x-java-class application/x-java-vm application/x-java.vm application/x-java-bean application/x-jinit-bean application/x-jinit-applet application/x-java application/octet-stream</field>
       <field name="wikipedia"></field>
       <field name="creator"></field>
       <field name="organization"></field>
