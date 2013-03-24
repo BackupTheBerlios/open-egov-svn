@@ -1,7 +1,7 @@
 // $Id$
 //
-// Open eGovernment
-// Copyright (C) 2005-2012 by Gerrit M. Albrecht
+// Open E-Government
+// Copyright (C) 2005-2013 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -22,7 +22,7 @@
 
 #include <QDebug>
 
-void OEG_DebugMessageHandler(QtMsgType type, const char *msg);
+void OEG_DebugMessageHandler(QtMsgType type, const QMessageLogContext &, const QString &message);
 
 namespace OEG { namespace Qt {
 

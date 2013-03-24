@@ -1,7 +1,7 @@
 // $Id$
 //
-// Open eGovernment
-// Copyright (C) 2005-2012 by Gerrit M. Albrecht
+// Open E-Government
+// Copyright (C) 2005-2013 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -122,8 +122,8 @@ void Connector::send(ConnectorMessage *message)
     return;
   }
 
-  QTextCodec *codec = QTextCodec::codecForName("UTF_8");
-  QTextCodec::setCodecForCStrings(codec);
+  //QTextCodec *codec = QTextCodec::codecForName("UTF_8");
+  //QTextCodec::setCodecForCStrings(codec);
 
   QTextStream out(m_socket);
 
@@ -244,6 +244,18 @@ void Connector::onError(QAbstractSocket::SocketError error)
       break;
     case QAbstractSocket::UnknownSocketError:
       qDebug() << "An unidentified error occurred.";
+      break;
+    case QAbstractSocket::OperationError:
+      qDebug() << "OperationError.";
+      break;
+    case QAbstractSocket::SslInternalError:
+      qDebug() << "SslInternalError.";
+      break;
+    case QAbstractSocket::SslInvalidUserDataError:
+      qDebug() << "SslInvalidUserDataError.";
+      break;
+    case QAbstractSocket::TemporaryError:
+      qDebug() << "TemporaryError.";
       break;
   }
 

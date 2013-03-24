@@ -1,7 +1,7 @@
 // $Id$
 //
-// Open eGovernment
-// Copyright (C) 2005-2012 by Gerrit M. Albrecht
+// Open E-Government
+// Copyright (C) 2005-2013 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -44,7 +44,7 @@ Application::Application(int &argc, char *argv[], const QString &base)
 {
   srand(time(0));
 
-  qInstallMsgHandler(OEG_DebugMessageHandler);
+  qInstallMessageHandler(OEG_DebugMessageHandler);
 
   setBaseName(base);                                       // Set it before any use of gettext or settings!
   installGetText();                                        // Init gettext.
@@ -109,7 +109,7 @@ void Application::installGetText()
   //setlocale(LC_ALL, "de_DE");
   setlocale(LC_ALL, QLocale::system().name().toLatin1().constData());
 
-  QByteArray a = baseName().toAscii();
+  QByteArray a = baseName().toLatin1();
   bindtextdomain(a.constData(), "locale");
   textdomain(a.constData());
 }
