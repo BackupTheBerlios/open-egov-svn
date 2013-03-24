@@ -2,7 +2,7 @@
 
 TARGET       = oegEditor
 VERSION      = 1.0.0.0
-QT          += network xml
+QT          += gui network xml widgets
 PACKAGES     = GETTEXT
 
 RC_FILE      = resources.rc
@@ -10,7 +10,7 @@ DEFINES     +=
 INCLUDEPATH += ../..
 LIBS        +=
 
-FORMS       +=
+FORMS       += 
 HEADERS     += *.h
 SOURCES     += *.cpp
 
