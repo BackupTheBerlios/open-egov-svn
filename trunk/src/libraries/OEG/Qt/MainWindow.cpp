@@ -1,7 +1,7 @@
 // $Id$
 //
-// Open eGovernment
-// Copyright (C) 2005-2012 by Gerrit M. Albrecht
+// Open E-Government
+// Copyright (C) 2005-2013 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -21,6 +21,8 @@
 #include <OEG/Qt/MainWindow.h>
 #include <OEG/Qt/ToolProvider.h>
 #include <OEG/Qt/DragAndDropHandler.h>
+
+#include <QtPrintSupport>
 
 #include <QAction>
 #include <QApplication>
