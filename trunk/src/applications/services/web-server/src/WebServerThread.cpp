@@ -16,18 +16,31 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
+#include <OEG/Common.h>
 
-#define MODULE_INFO(txt) static const char oeg_ident[] =  \
-  "   Open eGovernment (www.open-egov.de), " txt "   "; \
-  const char *oeg_ident_x = oeg_ident;
+#include <QtNetwork>
 
-#ifdef USE_GETTEXT
+#include "WebServerThread.h"
+#include "WebServerInstance.h"
+#include "WebServer.h"
 
-#include <libintl.h>
-#include <locale.h>
+WebServerThread::WebServerThread(int socketDescriptor, WebServer *parent)
+ : QThread(parent), m_socket_descriptor(socketDescriptor), m_server(parent)
+{
+  m_server->m_sessions_lock.lockForRead();   // Check sessions.
+  //m_server->m_sessions
+  m_server->m_sessions_lock.unlock();
 
-#define _(text) gettext(text)
+}
 
-#endif
+void WebServerThread::run()
+{
+  qDebug() << "WebServerThread::run() BEGIN";
+
+  WebServerInstance server(m_socket_descriptor, m_server);  // TODO
+
+  server.run();
+
+  qDebug() << "WebServerThread::run() END";
+}
 

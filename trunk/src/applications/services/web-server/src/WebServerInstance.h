@@ -21,21 +21,46 @@
 #include <OEG/Common.h>
 
 #include <QObject>
-#include <QDebug>
-#include <QString>
+#include <QTcpSocket>
+#include <QByteArray>
+#include <QTimer>
 
-class Atom : public QObject
+#include "RequestData.h"
+
+class WebServer;
+
+class WebServerInstance : public QObject
 {
   Q_OBJECT
 
   public:
-    Atom(QObject *parent, int id, const QString &name);
+    WebServerInstance(int socketDescriptor, WebServer *server);
 
-    int atomID() const;
-    QString atomName() const;
+    void run();
+    void handleRequest();
+
+  protected slots:
+    void closeConnection();
+
+  protected:
+    void parseRequest();
+
+  private slots:
+    void readPartialRequest();
+    void sendResponse();
+    void errorMessage(QAbstractSocket::SocketError socketError);
+
+  signals:
+    void error(QTcpSocket::SocketError socketError);
+    void readRequestFinished();
 
   private:
-    int      m_id;
-    QString  m_name;
+    int          m_socket_descriptor;
+    WebServer   *m_server;
+    QTcpSocket  *m_socket;
+    QByteArray   m_array;
+    RequestData  m_request;
+    bool         m_request_finished;
+    QTimer      *m_disconnect_timer;
 };
 

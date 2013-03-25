@@ -16,18 +16,22 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
+#include <OEG/Common.h>
 
-#define MODULE_INFO(txt) static const char oeg_ident[] =  \
-  "   Open eGovernment (www.open-egov.de), " txt "   "; \
-  const char *oeg_ident_x = oeg_ident;
+#include <QtCore>
+#include <QtNetwork>
 
-#ifdef USE_GETTEXT
+#include "Session.h"
 
-#include <libintl.h>
-#include <locale.h>
+Session::Session(QObject *parent)
+ : QObject(parent)
+{
+  m_time_started = QDateTime::currentDateTime();
+  m_session_id = "123456";
+}
 
-#define _(text) gettext(text)
-
-#endif
+void Session::refresh()
+{
+  m_time_refresh = QDateTime::currentDateTime();
+}
 

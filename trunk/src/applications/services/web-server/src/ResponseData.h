@@ -18,16 +18,36 @@
 
 #pragma once
 
-#define MODULE_INFO(txt) static const char oeg_ident[] =  \
-  "   Open eGovernment (www.open-egov.de), " txt "   "; \
-  const char *oeg_ident_x = oeg_ident;
+#include <OEG/Common.h>
 
-#ifdef USE_GETTEXT
+#include <QObject>
+#include <QDateTime>
+#include <QString>
+#include <QStringList>
+#include <QDateTime>
 
-#include <libintl.h>
-#include <locale.h>
+class ResponseData : public QObject
+{
+  Q_OBJECT
 
-#define _(text) gettext(text)
+  public:
+    ResponseData(QObject *parent = 0, const QString &protocol = "HTTP/1.x", const unsigned int statusCode = 200);
 
-#endif
+    QString data() const;
+    void addLine(const QString &line);
+
+    void setContentType(const QString &ct);
+    void setContentLength(const unsigned int l);
+    void setLastModified(const QDateTime &dt);
+
+  protected:
+    QString date() const;
+    QString server() const;
+
+  private:
+    static QString timeStamp(const QDateTime &dt);
+
+  private:
+    QStringList  m_data;
+};
 

@@ -16,18 +16,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
+#include <OEG/Common.h>
 
-#define MODULE_INFO(txt) static const char oeg_ident[] =  \
-  "   Open eGovernment (www.open-egov.de), " txt "   "; \
-  const char *oeg_ident_x = oeg_ident;
+#include <QtCore>
 
-#ifdef USE_GETTEXT
+#include "LogDaten.h"
 
-#include <libintl.h>
-#include <locale.h>
-
-#define _(text) gettext(text)
-
-#endif
+LogDaten::LogDaten(QObject *parent)
+ : QObject(parent)
+{
+}
 

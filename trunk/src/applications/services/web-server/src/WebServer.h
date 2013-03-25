@@ -18,16 +18,31 @@
 
 #pragma once
 
-#define MODULE_INFO(txt) static const char oeg_ident[] =  \
-  "   Open eGovernment (www.open-egov.de), " txt "   "; \
-  const char *oeg_ident_x = oeg_ident;
+#include <OEG/Common.h>
 
-#ifdef USE_GETTEXT
+#include <QString>
+#include <QList>
+#include <QStringList>
+#include <QTcpServer>
+#include <QReadWriteLock>
 
-#include <libintl.h>
-#include <locale.h>
+class Session;
 
-#define _(text) gettext(text)
+class WebServer : public QTcpServer
+{
+  Q_OBJECT
 
-#endif
+  public:
+    WebServer(QObject *parent = 0);
+
+  protected:
+    void incomingConnection(int socketDescriptor);
+
+  public:
+    QReadWriteLock   m_sessions_lock;
+
+  private:
+    QString          m_hostname;
+    QList<Session *> m_sessions;
+};
 
