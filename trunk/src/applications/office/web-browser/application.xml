@@ -10,8 +10,8 @@
     </group>
 
     <group lang="de_DE">
-      <string name="title">Web-Browser</string>
-      <string name="description">Anwendung, um das WWW zu erkunden.</string>
+      <string name="title">Webbrowser</string>
+      <string name="description">Anwendung zum Erkunden des World Wide Webs.</string>
     </group>
   </strings>
 
