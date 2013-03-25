@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!DOCTYPE document SYSTEM "http://www.open-egov.de/dtd/1.0/oeg-act.dtd">
+
+<document>
+  <properties>
+    <element name="version"       value="$Id$" />
+    <element name="type"          value="act" />                                    <!-- type of document/Dokumenttyp: Gesetz -->
+    <element name="local.type"    value="Landesnorm Sachsen-Anhalt" />
+    <element name="title"         value="Schiedsstellen- und Schlichtungsgesetz" /> <!-- name -->
+    <element name="short"         value="SchStG" />                                 <!-- abbreviation / Amtliche Abkürzung -->
+    <element name="reference"     value="" />
+    <element name="level"         value="federal state" />
+    <element name="scope"         value="DE-ST" />
+    <element name="languages"     value="de" />
+    <element name="date of issue" value="2001-06-22" />                             <!-- Ausfertigungsdatum -->
+    <element name="from"          value="2001-07-01" />                             <!-- valid from / Gültig ab -->
+    <element name="to"            value="" />                                       <!-- valid to / Gültig bis, nothing if in force -->
+    <element name="last-check"    value="2013-03-14" />                             <!-- last checked for changes -->
+    <element name="last-edit"     value="2013-03-18" />
+    <element name="editors"       value="" />
+  </properties>
+
+  <texts>
+    <text no="1" from="2001-07-01" outofforce="yes" lang="de" status="missing" dateofissue="2001-06-22" title="Schiedsstellen- und Schlichtungsgesetz" short="SchStG" published="GVBl. LSA 2001, S. 214" changesummary="">
+	</text>
+
+    <text no="2" from="2002-01-01?" outofforce="yes" lang="de" status="missing" dateofissue="2001-12-07" published="GVBl. LSA S. 540, 548" changesummary="§§ 24, 34 a, 41 und 50 geändert durch Art. 62">
+	</text>
+
+    <text no="3" from="2004-01-04?" outofforce="yes" lang="de" status="missing" dateofissue="2004-03-26" published="GVBl. LSA S. 234, 235" changesummary="§ 17 geändert durch Art. 11">
+	</text>
+
+    <text no="4" from="2005-12-15?" outofforce="yes" lang="de" status="missing" dateofissue="2005-12-08" published="GVBl. LSA S. 726" changesummary="§ 34 a geändert durch Art. 3">
+	</text>
+
+    <text no="5" from="2008-02-21?" outofforce="yes" lang="de" status="missing" dateofissue="2008-02-14" published="GVBl. LSA S. 58" changesummary="§ 51 geändert durch Art. 6">
+	</text>
+
+    <text no="6" from="2008-12-10?" outofforce="yes" lang="de" status="missing" dateofissue="2008-12-02" published="GVBl. LSA S. 400" changesummary="mehrfach geändert">
+	</text>
+
+    <text no="7" from="2010-01-23?" outofforce="yes" lang="de" status="missing" dateofissue="2009-12-15" published="GVBl. LSA S. 648, 681" changesummary="§§ 11 und 12 geändert durch Art. 2 Abs. 33">
+	</text>
+
+    <text no="8" from="2010-02-01?" outofforce="yes" lang="de" status="missing" dateofissue="2010-01-15" published="GVBl. LSA S. 8" changesummary="mehrfach geändert durch Art. 6">
+	</text>
+
+    <text no="9" from="2010-04-21" outofforce="no" lang="de" status="complete" dateofissue="2010-04-13" published="GVBl. LSA S. 192, 193" changesummary="§ 34a geändert durch Art. 7">
+      <div level="1" description="Erster Abschnitt" title="Die Schiedsstelle">
+        <section no="1" title="">
+		  <paragraph value="1">Zur Durchführung des Schlichtungsverfahrens über streitige Rechtsangelegenheiten richtet jede Gemeinde eine oder mehrere Schiedsstellen ein und unterhält sie. Innerhalb eines Amtsgerichtsbezirkes können Gemeinden mit anderen Gemeinden eine gemeinsame Schiedsstelle einrichten. Der Bezirk einer Schiedsstelle soll in der Regel nicht mehr als 20000 Einwohner umfassen. Die Schiedsstelle führt in ihrer Bezeichnung einen Zusatz, der auf die Gemeinde, die Verbandsgemeinde, die Verwaltungsgemeinschaft oder auf den Schiedsstellenbezirk hinweist.</paragraph>
+		  <paragraph value="2">Die Gemeinden erfüllen die ihnen nach diesem Gesetz obliegenden Aufgaben im eigenen Wirkungskreis.</paragraph>
+	    </section>
+        <section no="2" title="">
+          <paragraph value="1">Die Aufgaben der Schiedsstellen werden in der Regel von einer Schiedsfrau oder einem Schiedsmann (Schiedsperson) wahrgenommen. Die Schiedsperson ist ehrenamtlich tätig.</paragraph>
+          <paragraph value="2">Die Schiedsstelle kann abweichend von <link>Absatz 1</link> mit einer oder einem Vorsitzenden und bis zu zwei weiteren Schiedspersonen besetzt werden.</paragraph>
+        </section>
+        <section no="3" title="">
+          <paragraph value="1">Die Schiedsperson muss nach ihrer Persönlichkeit und ihren Fähigkeiten für das Amt geeignet sein. Sie soll ihre Wohnung im Schiedsstellenbezirk haben.</paragraph>
+          <paragraph value="2">In das Amt soll nicht berufen werden, wer bei Beginn der Amtsperiode noch nicht das 25. Lebensjahr vollendet hat.</paragraph>
+          <paragraph value="3">Als Schiedsperson ist ausgeschlossen,<list type="number" prefix="" postfix="."><item value="1">wer infolge Richterspruchs die Fähigkeit zur Bekleidung öffentlicher Ämter nicht besitzt oder wegen einer vorsätzlichen Tat zu einer Freiheitsstrafe von mehr als sechs Monaten verurteilt worden ist,</item><item value="2">wer wegen einer Tat angeklagt ist, die den Verlust der Fähigkeit zur Bekleidung öffentlicher Ämter zur Folge haben kann,</item><item value="3">wer in Vermögensverfall geraten ist.</item></list></paragraph>
+          <paragraph value="4">Die Gemeinde und die Leitung des Amtsgerichtes (<link>§ 5 Abs. 1</link>) können personenbezogene Daten der zu wählenden oder zu bestätigenden Personen erheben, soweit dies nach den <link value="§ 3 Abs. 1 bis 3 SchStG">Absätzen 1 bis 3</link> erforderlich ist.</paragraph>
+        </section>
+        <section no="4" title="">
+          <paragraph value="1">Die Schiedsperson wird für eine Amtszeit von fünf Jahren gewählt.</paragraph>
+          <paragraph value="2">Das Amt der Schiedsperson endet vorzeitig, wenn die Schiedsstelle aufgelöst wird.</paragraph>
+        </section>
+        <section no="5" title="">
+          <paragraph value="1">Die gewählte Schiedsperson bedarf der Bestätigung durch die Direktorin oder den Direktor oder die Präsidentin oder den Präsidenten des Amtsgerichtes (Leitung des Amtsgerichtes), in dessen Bezirk die Schiedsstelle ihren Sitz hat.</paragraph>
+          <paragraph value="2">Die Leitung des Amtsgerichtes prüft, ob bei der Wahl der Schiedsperson die gesetzlichen Voraussetzungen gemäß <link>§ 3 Abs. 1 Satz 1</link> und <link value="§ 3 Abs. 3">Abs. 3</link> beachtet worden sind.</paragraph>
+          <paragraph value="3">Die Bestätigung der Schiedsperson ist der gewählten Person und der Gemeinde, Verbandsgemeinde oder dem gemeinsamen Verwaltungsamt schriftlich mitzuteilen.</paragraph>
+          <paragraph value="4">Die Entscheidung, durch die die Bestätigung einer Schiedsperson versagt wird, ist zu begründen und der gewählten Person sowie der Gemeinde, Verbandsgemeinde oder dem gemeinsamen Verwaltungsamt schriftlich mitzuteilen.</paragraph>
+        </section>
+        <section no="6" title="">
+          <paragraph value="1">Die Schiedsperson wird von der Leitung des Amtsgerichtes in ihr Amt berufen und verpflichtet, ihre Aufgaben gewissenhaft und unparteiisch zu erfüllen.</paragraph>
+          <paragraph value="2">Die Amtszeit der Schiedsperson beginnt mit der Berufung in das Amt. Bis zu ihrem Amtsantritt bleibt die bisherige Schiedsperson tätig.</paragraph>
+        </section>
+        <section no="7" title="">
+          <paragraph value="1">Die Berufung zur Schiedsperson kann eine gewählte Person ablehnen, die<list type="number" prefix="" postfix="."><item value="1">das 62. Lebensjahr vollendet hat,</item><item value="2">infolge Krankheit auf voraussichtlich längere Zeit gehindert ist, das Amt auszuüben,</item><item value="3">aus beruflichen Gründen häufig oder länger von ihrer Wohnung im Sinne von <link>§ 3 Abs. 1 Satz 2</link> abwesend ist,</item><item value="4">aus sonstigen wichtigen Gründen das Amt nicht ausüben kann.</item></list></paragraph>
+          <paragraph value="2"><link>Absatz 1 Nr. 2 bis 4</link> gilt entsprechend für die Niederlegung des Amtes.</paragraph>
+          <paragraph value="3">Über die Befugnis zur Ablehnung oder Niederlegung des Amtes entscheidet die Leitung des Amtsgerichtes.</paragraph>
+        </section>
+        <section no="8" title="">
+          <paragraph value="1">Die Schiedsperson ist ihres Amtes zu entheben, wenn die Voraussetzungen für ihre Wahl nach <link>§ 3 Abs. 1</link> nicht mehr vorliegen oder nachträglich Umstände im Sinne des <link>§ 3 Abs. 1 Satz 1</link> oder <link value="§ 3 Abs. 3">Abs. 3</link> bekannt werden, die ihrer Wahl entgegengestanden hätten. Sie kann ferner aus wichtigem Grund ihres Amtes enthoben werden. Ein wichtiger Grund liegt insbesondere vor, wenn die Schiedsperson<list type="number" prefix="" postfix="."><item value="1">ihre Pflichten gröblich verletzt hat,</item><item value="2">sich als unwürdig erwiesen hat,</item><item value="3">ihr Amt nicht mehr ordnungsgemäß ausüben kann.</item></list></paragraph>
+          <paragraph value="2">Über die Amtsenthebung entscheidet auf Antrag der Leitung des Amtsgerichtes nach Anhörung der Schiedsperson und der zuständigen Gemeinde, der zuständigen Verbandsgemeinde oder des zuständigen gemeinsamen Verwaltungsamtes die Präsidentin oder der Präsident des Landgerichtes.</paragraph>
+        </section>
+        <section no="9" title="">
+          <paragraph value="1">Die Tätigkeit der Schiedsperson im Schlichtungsverfahren wird von der Leitung des Amtsgerichtes, insbesondere hinsichtlich ihrer fach- und zeitgerechten Durchführung, beaufsichtigt. Sie trifft die erforderlichen Maßnahmen, um die Schiedsperson zu ordnungsgemäßer und unverzögerter Führung ihrer Amtstätigkeit anzuhalten. Sie kann Weisungen erteilen. Sie bearbeitet Beschwerden über die Schiedsperson.</paragraph>
+        </section>
+        <section no="10" title="">
+          <paragraph value="1">Die Schiedsperson führt ein Protokollbuch und ein Kassenbuch sowie eine Sammlung der Kostenrechnungen. Abgeschlossene Bücher sind spätestens nach Ablauf eines Monats bei der Leitung des Amtsgerichtes einzureichen. Die Leitung des Amtsgerichts bringt in den Büchern einen Abschlussvermerk an.</paragraph>
+          <paragraph value="2">Für das Schriftgut der Schiedsstellen gilt das Gesetz zur Aufbewahrung von Schriftgut der Justiz im Land Sachsen-Anhalt entsprechend. Die Aufbewahrungsfrist beginnt für Protokoll- und Kassenbücher mit dem Ende des Jahres des Abschlussvermerks.</paragraph>
+        </section>
+        <section no="11" title="">
+          <paragraph value="1">Die Schiedsperson hat, auch nach Beendigung ihrer Amtstätigkeit, über ihre Verhandlungen und die Verhältnisse der Parteien, soweit sie ihr amtlich bekanntgeworden sind, Verschwiegenheit zu wahren.</paragraph>
+          <paragraph value="2">Über Angelegenheiten, über die Verschwiegenheit zu wahren ist, darf die Schiedsperson nur mit Genehmigung der Leitung des Amtsgerichtes aussagen. <link>§ 37 Abs. 4 Satz 1 und 3</link> und <link value="§ 37 Abs. 5">Abs. 5</link> des Beamtenstatusgesetzes gilt entsprechend. Die Genehmigung soll erteilt werden, wenn die Parteien des Schlichtungsverfahrens zustimmen.</paragraph>
+        </section>
+        <section no="11 a" title="">
+          <paragraph value="1">Ist eine Schiedsperson vorübergehend oder dauernd verhindert, das Amt auszuüben, so beauftragt die Leitung des Amtsgerichts innerhalb des Amtsgerichtsbezirkes eine Schiedsperson eines benachbarten Schiedsstellenbezirkes, das Amt einstweilen wahrzunehmen.</paragraph>
+          <paragraph value="2">Ist die Schiedsstelle mit mehreren Schiedspersonen besetzt, so regeln diese die Vertretung untereinander.</paragraph>
+        </section>
+        <section no="11 b" title="">
+          <paragraph value="1" title="">Ist die Schiedsstelle mit mehreren Schiedspersonen besetzt (<link>§ 2 Abs. 2</link>), so nimmt der Vorsitzende die außerhalb der Verhandlung anfallenden Aufgaben wahr.</paragraph>
+        </section>
+        <section no="12" title="">
+          <paragraph value="1">Die Sachkosten der Schiedsstelle trägt die Gemeinde.</paragraph>
+          <paragraph value="2">Zu den Kosten gehört auch der Ersatz von Sachschäden der Schiedspersonen, die durch einen Unfall bei Ausübung ihres Amtes eingetreten sind, soweit die Schiedsperson diesen nicht vorsätzlich oder grob fährlässig verursacht hat und von Dritten keinen Ersatz zu erlangen vermag.</paragraph>
+          <paragraph value="3">Für Amtspflichtverletzungen der Schiedsperson im Rahmen des Schlichtungsverfahrens haftet das Land. Der Rückgriff gegen die Schiedsperson ist nur unter den Voraussetzungen, nach denen gegen einen Beamten gemäß <link>§ 48 des Beamtenstatusgesetzes</link> Rückgriff genommen werden kann, zulässig.</paragraph>
+          <paragraph value="4">Bilden mehrere Gemeinden eine gemeinsame Schiedsstelle oder werden gemeindefreie Gebiete dem Bezirk einer Schiedsstelle angeschlossen, so werden die Sachkosten der Schiedsstelle nach Maßgabe der Einwohnerzahl geteilt.</paragraph>
+        </section>
+      </div>
+      <div level="1" description="Zweiter Abschnitt" title="Das Schlichtungsverfahren in bürgerlichen Rechtsstreitigkeiten">
+      </div>
+      <div level="2" description="Unterabschnitt 1" title="Freiwillige außergerichtliche Streitschlichtung">
+        <section no="13" title="">
+          <paragraph value="1" title="">In bürgerlichen Rechtsstreitigkeiten wird das Schlichtungsverfahren über vermögensrechtliche Ansprüche sowie über nichtvermögensrechtliche Streitigkeiten wegen Verletzungen der persönlichen Ehre durchgeführt. Das Schlichtungsverfahren findet nicht statt<edit value="Punkt gelöscht" /><list type="number" prefix="" postfix="."><item value="1">in bürgerlichen Rechtsstreitigkeiten, die in die sachliche Zuständigkeit der Familien- und Arbeitsgerichtsbarkeit fallen.</item><item value="2">in Streitigkeiten wegen Verletzung der persönlichen Ehre, die in Presse und Rundfunk begangen worden sind, und</item><item value="3">in Rechtsstreitigkeiten an denen Behörden oder Organe des Bundes, der Länder oder der Gemeinden sowie Körperschaften, Anstalten oder Stiftungen des öffentlichen Rechts beteiligt sind.</item></list></paragraph>
+        </section>
+        <section no="14" title="">
+          <paragraph value="1">Das Schlichtungsverfahren ist darauf gerichtet, den Rechtsstreit im Wege des Vergleiches beizulegen. Es wird aufgrund eines Antrages einer der am Rechtsstreit beteiligten Personen durchgeführt.</paragraph>
+          <paragraph value="2">Ist die Schiedsstelle mit mehreren Schiedspersonen besetzt, wird die Verhandlung in der Regel von einer Schiedsperson geführt, es sei denn, der Vorsitzende hält eine Besetzung mit mehreren Schiedspersonen im Interesse der gütlichen Beilegung des Rechtsstreits für geboten.</paragraph>
+        </section>
+        <section no="15" title="">
+          <paragraph value="1">Zuständig ist die Schiedsstelle, in deren Bezirk der Antragsgegner oder die Antragsgegnerin wohnen.</paragraph>
+          <paragraph value="2">Die Parteien können nach dem Entstehen der Streitigkeit schriftlich oder zu Protokoll der Schiedsstelle eines anderen Bezirks vereinbaren, daß das Schlichtungsverfahren vor dieser Schiedsstelle stattfindet.</paragraph>
+        </section>
+        <section no="16" title="">
+          <paragraph value="1" title="">Das Schlichtungsverfahren wird in deutscher Sprache geführt. Mit Zustimmung der Parteien kann die Verhandlung in einer anderen Sprache geführt werden, wenn die beteiligten Personen alle dieser Sprache mächtig sind.</paragraph>
+        </section>
+        <section no="17" title="">
+          <paragraph value="1" title="">Die Schiedsperson ist von der Ausübung ihres Amtes kraft Gesetz ausgeschlossen:<list type="number" prefix="" postfix="."><item value="1">in Angelegenheiten, in denen sie selbst Partei ist oder bei denen sie zu einer Partei in dem Verhältnis einer Mitberechtigten, Mitverpflichteten oder Regresspflichtigen steht;</item><item value="2">in Angelegenheiten ihres Ehegatten oder früherer Ehegatten, ihres Eingetragenen Lebenspartners oder früheren Eingetragenen Lebenspartners;</item><item value="3">in Angelegenheiten einer Person, die mit ihr in gerader Linie verwandt oder verschwägert, in der Seitenlinie bis zum dritten Grade verwandt oder bis zum zweiten Grade verschwägert ist oder war;</item><item value="4">in Angelegenheiten, in welchen sie als Prozessbevollmächtigte oder Beistand einer Partei bestellt ist oder war;</item><item value="5">in Angelegenheiten einer Person, bei der sie gegen Entgelt beschäftigt oder bei der sie als Mitglied des Vorstandes, des Aufsichtsrates oder eines gleichartigen Organs tätig ist oder war.</item></list></paragraph>
+        </section>
+        <section no="18" title="">
+          <paragraph value="1">Die Schiedsstelle wird nicht oder nicht weiter tätig, wenn<list type="number" prefix="" postfix="."><item value="1">die zu protokollierende Vereinbarung nur in notarieller Form gültig ist;</item><item value="2">die Parteien auch nach Unterbrechung oder Vertagung der Schlichtungsverhandlung ihre Identität nicht nachweisen;</item><item value="3">Bedenken gegen die Geschäftsfähigkeit oder Verfügungsfähigkeit der Parteien oder gegen die Legitimation ihrer Vertreter bestehen.</item></list></paragraph>
+          <paragraph value="2">Die Schiedsstelle soll nicht tätig werden, wenn<list type="number" prefix="" postfix="."><item value="1">der Rechtsstreit bei Gericht anhängig ist;</item><item value="2">der Rechtsstreit bei einer von berufstätigen Körperschaften oder vergleichbaren Organisationen eingerichteten Schieds-, Schlichtungs- oder Einigungsstellen anhängig ist.</item></list></paragraph>
+        </section>
+        <section no="19" title="">
+          <paragraph value="1" title="">Die Schiedsstelle kann den Antrag auf Einleitung eines Schlichtungsverfahrens ablehnen, wenn<list type="number" prefix="" postfix="."><item value="1">die streitige Angelegenheit sachlich oder rechtlich schwierig zu beurteilen ist;</item><item value="2">wegen der Person eines Verfahrensbeteiligten eine besonders schwierige Verfahrensgestaltung zu erwarten ist;</item><item value="3">der Antrag erkennbar ohne Einigungsabsicht oder sonst offensichtlich missbräuchlich gestellt ist.</item></list></paragraph>
+        </section>
+        <section no="19 a" title=""><edit value="19a changed to 19 a" />
+          <paragraph value="1">Die Entscheidungen der Schiedsstelle nach <link>§ 18</link> und <link>§ 19</link> ergehen durch Beschluss, der mit schriftlichen Gründen zu versehen ist. Der Beschluss ist unanfechtbar.</paragraph>
+        </section>
+        <section no="20" title="">
+          <paragraph value="1" title="">Zu einer amtlichen Tätigkeit außerhalb des Bezirks der Schiedsstelle ist die Schiedsperson nur befugt, wenn die Amtsräume außerhalb des Bezirks der Schiedsstelle liegen oder der Augenschein eingenommen werden soll.</paragraph>
+        </section>
+        <section no="21" title="">
+          <paragraph value="1">Die Schiedsstelle leitet das Schlichtungsverfahren auf Antrag einer Partei ein. Der Antrag kann zurückgenommen werden, nach Beginn der Schlichtungsverhandlung jedoch nur, wenn der Antragsgegner oder die Antragsgegnerin nicht widerspricht.</paragraph>
+          <paragraph value="2">Endet das Schlichtungsverfahren nicht mit einem Vergleich (<link>§ 31</link>), so bedarf ein erneuter Antrag in derselben Sache der schriftlichen Zustimmung des Antragsgegners oder der Antragsgegnerin. Die Zustimmung ist bei der Antragstellung vorzulegen.</paragraph>
+        </section>
+        <section no="22" title="">
+          <paragraph value="1" title="">Der Antrag auf Durchführung des Schlichtungsverfahrens sowie dessen Rücknahme sind bei der Schiedsstelle schriftlich einzureichen oder mündlich zu Protokoll zu erklären. Er muss Namen, Vornamen und Anschrift der Parteien, eine allgemeine Angabe des Streitgegenstandes sowie des Begehrens und die Unterschrift der antragstellenden Partei und der oder des Bevollmächtigten enthalten.</paragraph>
+        </section>
+        <section no="23" title="">
+          <paragraph value="1">Die Schiedsperson hat umgehend Ort und Zeit der Schlichtungsverhandlung zu bestimmen.</paragraph>
+          <paragraph value="2">Zwischen der Zustellung der Ladung und dem Tag der Schlichtungsverhandlung muss eine Frist von mindestens zwei Wochen liegen (Ladungsfrist). Die Ladungsfrist kann auf eine Woche verkürzt werden, wenn der Antragsteller oder die Antragstellerin glaubhaft macht, daß die Angelegenheit dringlich ist. Eine weitere Verkürzung der Ladungsfrist setzt die Zustimmung beider Parteien voraus.</paragraph>
+          <paragraph value="3">Die Schiedsperson händigt die Ladung den Parteien persönlich gegen Empfangsbekenntnis aus oder lässt sie durch ein nach <link>§ 33 Abs. 1 des Postgesetzes</link> beliehenes Unternehmen (Post) zustellen. Der Antragsgegner oder die Antragsgegnerin erhält mit der Ladung eine Abschrift des Antrags. Zugleich werden die Parteien auf die Pflicht, persönlich zur Schlichtungsverhandlung zu erscheinen und auf die Folgen hingewiesen, die eine Verletzung dieser Pflicht haben kann. Hat eine Partei einen gesetzlichen Vertreter, so ist diesem die Ladung zuzustellen.</paragraph>
+          <paragraph value="4">Eine Partei kann ihr Ausbleiben in dem anberaumten Termin wegen Krankheit, beruflicher Verhinderung, Ortsabwesenheit oder wegen sonstiger wichtiger Gründe entschuldigen. Sie hat ihr Nichterscheinen der Schiedsstelle unverzüglich anzuzeigen und dabei die Entschuldigungsgründe glaubhaft zu machen. Hebt die Schiedsstelle den Termin nicht auf, so hat sie das der Partei mitzuteilen.</paragraph>
+        </section>
+        <section no="24" title="">
+          <paragraph value="1">Die Parteien haben in dem anberaumten Termin persönlich zu erscheinen.</paragraph>
+          <paragraph value="2">Erscheint eine Partei unentschuldigt nicht zu dem Termin, setzt die Schiedsstelle durch Bescheid ein Ordnungsgeld bis zu 75 Euro fest und bestimmt einen neuen Termin. Für diesen Termin gilt <link>§ 23 Abs. 2 bis 4</link> entsprechend.</paragraph>
+          <paragraph value="3">Der Bescheid ist dem Betroffenen mit einer Belehrung über die Anfechtung nach den <link>Absätzen 4 und 5</link> zuzustellen.</paragraph>
+          <paragraph value="4">In dem Fortsetzungstermin kann der Betroffene den Antrag stellen, die Festsetzung des Ordnungsgeldes ganz oder teilweise aufzuheben. Er hat hierzu die Tatsachen darzulegen und glaubhaft zu machen, mit denen er seine Abwesenheit in der ersten Schlichtungsverhandlung entschuldigt (<link>§ 23 Abs. 4</link>) oder sich gegen die Höhe des Ordnungsgeldes wendet. Die Schiedsstelle stellt neben einer kurzen Begründung zu Protokoll fest, ob sie den Bescheid aufhebt oder das Ordnungsgeld herabsetzt.</paragraph>
+          <paragraph value="5">Hat die Schiedsstelle dem Antrag nach <link>Absatz 4 Satz 1</link> nicht entsprochen, kann der Betroffene die Entscheidung bei dem Amtsgericht, in dessen Bezirk die Schiedsstelle ihren Sitz hat, anfechten. Die Anfechtung ist binnen zwei Wochen nach dem Fortsetzungstermin schriftlich oder zu Protokoll der Geschäftsstelle des Amtsgerichts zu erklären. <link>Absatz 4 Satz 2</link> gilt entsprechend.</paragraph>
+          <paragraph value="6">Das Amtsgericht entscheidet über die Anfechtung der Entscheidung der Schiedsstelle ohne mündliche Verhandlung durch Beschluss, der zu begründen ist. Der Beschluss ist unanfechtbar. Für das Verfahren vor dem Amtsgericht werden Kosten nicht erhoben. Auslagen der Parteien werden nicht erstattet.</paragraph>
+          <paragraph value="7">Ist die Partei im Fortsetzungstermin erneut säumig, bestimmt die Schiedsstelle, soweit die andere Partei zustimmt, einen neuen Termin. Anderenfalls vermerkt sie die Beendigung des Schlichtungsverfahrens.</paragraph>
+        </section>
+        <section no="25" title="">
+          <paragraph value="1">War der Betroffene ohne Verschulden gehindert, die Frist nach <link>§ 24 Abs. 5 Satz 2</link> einzuhalten, so ist ihm auf Antrag Wiedereinsetzung in den vorigen Stand zu gewähren.</paragraph>
+          <paragraph value="2">Der Wiedereinsetzungsantrag ist mit der Anfechtungserklärung innerhalb einer Woche nach Wegfall des Hindernisses bei dem Amtsgericht schriftlich einzureichen. Der Betroffene kann ihn auch zu Protokoll der Geschäftsstelle des Amtsgerichts oder zu Protokoll der Schiedsstelle erklären, die den Bescheid erlassen hat. Die Tatsachen zur Begründung des Antrags sind bei der Antragstellung glaubhaft zu machen. Wird der Wiedereinsetzungsantrag zu Protokoll der Schiedsstelle erklärt, so wird er dem Amtsgericht zugeleitet.</paragraph>
+          <paragraph value="3">Über den Antrag entscheidet das Amtsgericht ohne mündliche Verhandlung durch Beschluss, der zu begründen ist. Der Beschluss ist unanfechtbar.</paragraph>
+          <paragraph value="4">Für das Verfahren werden Kosten nicht erhoben. Auslagen der Parteien werden nicht erstattet.</paragraph>
+        </section>
+        <section no="26" title="">
+          <paragraph value="1" title="">Für die Berechnung der Fristen gilt <link>§ 222 der Zivilprozeßordnung</link>.</paragraph>
+        </section>
+        <section no="27" title="">
+          <paragraph value="1" title="">Die Verhandlung vor der Schiedsstelle ist mündlich und nicht öffentlich. Sie ist möglichst ohne Unterbrechung zu Ende zu führen; ein Termin zur Fortsetzung der Verhandlung ist sofort zu bestimmen.</paragraph>
+        </section>
+        <section no="28" title="">
+          <paragraph value="1" title="">Die Vertretung natürlicher Personen durch Bevollmächtigte in der Schlichtungsverhandlung ist nicht zulässig. Eltern als gesetzliche Vertreter eines Kindes können einander mit einer schriftlichen Vollmacht vertreten.</paragraph>
+        </section>
+        <section no="29" title="">
+          <paragraph value="1" title="">Jede Partei kann vor der Schiedsstelle mit einem Beistand erscheinen. In der Schlichtungsverhandlung darf ein Beistand nur zurückgewiesen werden, wenn er durch sein Verhalten die Verhandlung nachhaltig stört und dadurch die Einigungsbemühungen wesentlich erschwert. Nicht zurückgewiesen werden dürfen Rechtsanwälte und Beistände von Personen, die nicht lesen oder schreiben können, die die deutsche Sprache nicht beherrschen oder die blind, taub oder stumm sind.</paragraph>
+        </section>
+        <section no="30" title="">
+          <paragraph value="1">Zeugen und Sachverständige, die freiwillig erschienen sind, können gehört werden. Mit Zustimmung und in Anwesenheit der Parteien kann auch der Augenschein genommen werden. Vorgelegte Urkunden können berücksichtigt werden.</paragraph>
+          <paragraph value="2">Zur Beeidigung von Zeugen und Sachverständigen, zur eidlichen Parteivernehmung sowie zur Entgegennahme von eidesstattlichen Versicherungen ist die Schiedsperson nicht befugt.</paragraph>
+        </section>
+        <section no="31" title="">
+          <paragraph value="1">Kommt ein Vergleich zustande, so ist er zu Protokoll zu nehmen.</paragraph>
+          <paragraph value="2">Das Protokoll hat zu enthalten:<list type="number" prefix="" postfix="."><item value="1">den Ort und die Zeit der Verhandlung,</item><item value="2">die Namen und Vornamen der erschienenen Parteien, gesetzlichen Vertreter, Bevollmächtigten und Beistände sowie die Angabe, wie diese sich ausgewiesen haben,</item><item value="3">eine gedrängte Beschreibung des Streitgegenstandes,</item><item value="4">den Vergleich der Parteien.</item></list></paragraph>
+          <paragraph value="3">Kommt ein Vergleich nicht zustande, so ist hierüber ein kurzer Vermerk aufzunehmen.</paragraph>
+        </section>
+        <section no="32" title="">
+          <paragraph value="1">Das Protokoll ist den Parteien vorzulesen oder zur Durchsicht vorzulegen und von ihnen zu genehmigen. Dies ist in dem Protokoll zu vermerken.</paragraph>
+          <paragraph value="2">Das Protokoll ist von den Schiedspersonen und den Parteien eigenhändig zu unterschreiben. Nach Vollzug der Unterschriften wird ein Vergleich wirksam.</paragraph>
+          <paragraph value="3">Erklärt eine Partei, daß sie nicht schreiben könne, so muss die Schiedsperson das Handzeichen der schreibunkundigen Person durch einen besonderen Vermerk beglaubigen.</paragraph>
+        </section>
+        <section no="33" title="">
+          <paragraph value="1">Die Parteien oder deren Rechtsnachfolger erhalten auf Verlangen Abschriften oder Ausfertigungen des Protokolls.</paragraph>
+          <paragraph value="2">Die Ausfertigung besteht aus der mit dem Ausfertigungsvermerk versehenen Abschrift des Protokolls. Der Ausfertigungsvermerk muss Angaben über den Ort und die Zeit der Ausfertigung sowie die Personen enthalten, für die die Ausfertigung erteilt wird, von der Schiedsperson unterschrieben und mit einem Dienstsiegel versehen werden.</paragraph>
+          <paragraph value="3">Die Ausfertigung wird von der Schiedsstelle erteilt, die die Urschrift des Protokolls verwahrt. Die Schiedsperson hat vor Aushändigung der Ausfertigung auf der Urschrift des Protokolls zu vermerken, wann und für wen die Ausfertigung erteilt worden ist.</paragraph>
+          <paragraph value="4">Befindet sich das Protokoll in der Verwahrung des Amtsgerichts, so wird die Ausfertigung von dem Urkundsbeamten der Geschäftsstelle erteilt.</paragraph>
+        </section>
+        <section no="34" title="">
+          <paragraph value="1">Aus dem vor einer Schiedsstelle geschlossenen Vergleich findet die Zwangsvollstreckung statt.</paragraph>
+          <paragraph value="2">Die Vorschriften der Zivilprozessordnung über die Zwangsvollstreckung aus Vergleichen, die vor einer durch die Landesjustizverwaltung eingereichten oder anerkannten Gütestelle abgeschlossen sind, finden entsprechende Anwendung. Die Vollstreckungsklausel auf der Ausfertigung erteilt das Amtsgericht, in dessen Bereich die Schiedsstelle ihren Sitz hat.</paragraph>
+          <paragraph value="3">Auf der Urschrift des Protokolls ist zu vermerken, wann und von wem sowie für und gegen wen die Vollstreckungsklausel erteilt worden ist. Das Amtsgericht benachrichtigt die Schiedsstelle von der Erteilung der Vollstreckungsklausel, wenn es das Protokoll nicht verwahrt. Im Falle der Benachrichtigung hat die Schiedsperson die Erteilung der Vollstreckungsklausel auf der Urschrift des Protokolls zu vermerken.</paragraph>
+        </section>
+      </div>
+      <div level="2" description="Unterabschnitt 2" title="Obligatorische außergerichtliche Streitschlichtung">
+        <section no="34 a" title="">
+          <paragraph value="1">In folgenden bürgerlichen Rechtsstreitigkeiten ist die Erhebung der Klage erst zulässig, nachdem die Parteien einen Versuch unternommen haben, die Streitigkeiten vor einer in <link>§ 34 b</link> genannten Stelle gütlich beizulegen:<list type="number" prefix="" postfix="."><item value="1"><em>(aufgehoben)</em></item><item value="2">in Streitigkeiten aus dem Nachbarrecht wegen<list type="lower-letter" prefix="" postfix=")"><item value="a">Einwirkungen auf das Nachbargrundstück nach <link>§ 906 des Bürgerlichen Gesetzbuches</link>,</item><item value="b">Überwuchses nach <link>§ 910 des Bürgerlichen Gesetzbuches</link>,</item><item value="c">Hinüberfalls von Früchten nach <link>§ 911 des Bürgerlichen Gesetzbuches</link>,</item><item value="d">eines Grenzbaums nach <link>§ 923 des Bürgerlichen Gesetzbuches</link>,</item><item value="e">der im <link>Nachbarschaftsgesetz des Landes Sachsen-Anhalt</link> geregelten privaten Nachbarrechte, sofern es sich nicht um Einwirkungen von einem gewerblichen Betrieb handelt,</item></list></item><item value="3">in Streitigkeiten über Ansprüche wegen Verletzungen der persönlichen Ehre, die nicht in Presse oder Rundfunk begangen worden sind.</item></list></paragraph>
+          <paragraph value="2">(2) Absatz 1 findet keine Anwendung auf<list type="number" prefix="" postfix="."><item value="1">Klagen nach den <link>§§ 323, 323a, 324, 328 der Zivilprozessordnung</link>, Widerklagen und Klagen, die binnen einer gesetzlichen oder gerichtlich angeordneten Frist zu erheben sind,</item><item value="2">Streitigkeiten in Familiensachen,</item><item value="3">Wiederaufnahmeverfahren,</item><item value="4">Ansprüche, die im Urkunden- oder Wechselprozess geltend gemacht werden,</item><item value="5">die Durchführung des streitigen Verfahrens, wenn ein Anspruch im Mahnverfahren geltend gemacht worden ist,</item><item value="6">Klagen wegen vollstreckungsrechtlicher Maßnahmen, insbesondere nach dem <link>Achten Buch der Zivilprozessordnung</link>,</item><item value="7">Adhäsionsverfahren nach den <link>§§ 403 bis 406 c der Strafprozessordnung</link>,</item><item value="8">Klagen, für die nach anderen Vorschriften ein obligatorisches Vorverfahren angeordnet ist,</item><item value="9">Streitigkeiten, an denen Behörden oder Organe des Bundes, eines Landes, der Gemeinden und Kreise sowie der Körperschaften, Anstalten oder Stiftungen des öffentlichen Rechts beteiligt sind.</item></list></paragraph>
+          <paragraph value="3">(3) Ein Einigungsversuch nach <link>Absatz 1</link> ist nur erforderlich, wenn alle Parteien ihren Wohnsitz, ihren Sitz oder ihre Niederlassung in Sachsen-Anhalt haben.</paragraph>
+          <paragraph value="4">(4) Die nach landesrechtlichen Vorschriften bestehenden Ausschlussfristen für die Erhebung der Klage werden durch den Eingang eines Antrags nach <link>§ 34 d Abs. 1</link> bei den in <link>§ 34 b</link> genannten Stellen unterbrochen.</paragraph>
+        </section>
+        <section no="34 b" title="">
+          <paragraph value="1">(1) Zur obligatorischen außergerichtlichen Streitschlichtung sind die Schiedsstellen nach <link>§ 1</link> sowie Schlichtungsstellen berufen, die jede Notarin und jeder Notar sowie diejenige Rechtsanwältin und derjenige Rechtsanwalt, die oder der in die Liste nach <link>§ 34 c Abs. 2</link> eingetragen ist, errichtet.</paragraph>
+          <paragraph value="2">(2) Die Streitschlichtung obliegt der örtlich zuständigen Schlichtungsstelle, sofern nicht die Parteien die Zuständigkeit einer anderen Schieds- oder Schlichtungsstelle schriftlich vereinbart haben. Örtlich zuständig ist diejenige Schieds- oder Schlichtungsstelle, in deren Bezirk die antragsgegnerische Partei wohnt oder ihren Sitz oder eine Niederlassung hat. Der Bezirk der Schlichtungsstelle wird durch den Bezirk des Amtsgerichts, in dem sich die Geschäftsstelle oder die Kanzlei der Schlichtungsperson befindet, bestimmt. Unter mehreren örtlich zuständigen Stellen trifft die antragstellende Partei die Wahl.</paragraph>
+          <paragraph value="3">(3) Die Stellen, die nach <link>Absatz 1</link> tätig werden, sind Gütestelle im Sinne von <link>§ 794 Abs. 1 Nr. 1 der Zivilprozessordnung</link>.</paragraph>
+          <paragraph value="4">(4) <link>§ 10 Abs. 1 Satz 1</link>, <link>Abs. 2</link>, die §§ <link value="§ 11">11</link>, <link value="§ 17">17</link> und <link value="§ 18 Abs. 1">18 Abs. 1</link> finden entsprechende Anwendung, soweit in <link>§ 34c</link> nichts Abweichendes geregelt ist. Die Schlichtungsperson bringt in den Büchern einen Abschlussvermerk an.</paragraph>
+        </section>
+        <section no="34 c" title="">
+          <paragraph value="1">(1) Jede Notarin und jeder Notar des Landes errichtet am Amtssitz eine Schlichtungsstelle. Sie können die Durchführung des Schlichtungsverfahrens auch den bei ihnen in der Ausbildung befindlichen Notarassessorinnen und Notarassessoren zur selbständigen Erledigung übertragen.</paragraph>
+          <paragraph value="2">(2) Die Rechtsanwaltskammer des Landes Sachsen-Anhalt erstellt eine Liste ihrer Mitglieder, die bereit sind, als Schlichtungspersonen tätig zu werden. Die Liste wird jeweils zum 31. Dezember mit Wirkung für das Folgejahr aufgestellt und vom für die Justizverwaltung zuständigen Ministerium im Ministerialblatt für das Land Sachsen-Anhalt veröffentlicht. Die auf den Listen aufgeführten Schlichtungspersonen dürfen ein Tätigwerden nicht ohne ausreichenden Grund verweigern.</paragraph>
+          <paragraph value="3">(3) Die als Schlichtungspersonen tätigen Notarinnen, Notare, Rechtsanwältinnen und Rechtsanwälte sowie die Notarassessorinnen und Notarassessoren haben ihre Aufgaben gewissenhaft und unparteiisch zu erfüllen. Sie beachten bei der Ausübung des Schlichteramtes ihre allgemeinen standes- und berufsrechtlichen Pflichten. Wer als Schlichter tätig war, kann in derselben Sache keine der Parteien im gerichtlichen Verfahren vertreten.</paragraph>
+          <paragraph value="4">(4) Die Aufsicht über die Notarinnen und Notare als Schlichtungspersonen üben die in § 92 der Bundesnotarordnung bezeichneten Behörden aus; die Aufsicht über die Rechtsanwältinnen und Rechtsanwälte als Schlichtungspersonen obliegt den für die Entscheidung über die Zulassung zur Rechtsanwaltschaft nach <link>§ 6 der Bundesrechtsanwaltsordnung</link> zuständigen Stellen. Die Aufsichtsbehörde kann die hierfür erforderlichen Verwaltungsanordnungen treffen. Die Aufsichtsbehörden haben darauf zu achten, dass die Schlichter den ihnen nach diesem Gesetz obliegenden Verpflichtungen nachkommen. Sie können jederzeit Auskunft über die Geschäftsführung in diesen Angelegenheiten verlangen. Sie entscheiden über die Frage der Erteilung einer Aussagegenehmigung. Für die Notarinnen und Notare gelten im Übrigen die <link>§§ 93 bis 110 a der Bundesnotarordnung</link> und für die Rechtsanwältinnen und Rechtsanwälte die <link>§§ 113 bis 161 a der Bundesrechtsanwaltsordnung</link> entsprechend.</paragraph>
+        </section>
+        <section no="34 d" title="">
+          <paragraph value="1">Das Schlichtungsverfahren ist darauf gerichtet, den Rechtsstreit im Wege des Vergleichs beizulegen. Es wird auf Antrag einer Partei eingeleitet. <link>§ 22</link> findet entsprechende Anwendung.</paragraph>
+          <paragraph value="2">Soweit ein von der antragstellenden Partei zu zahlender Vorschuss (<link>§ 48 Abs. 2</link> und <link value="§ 48 Abs. 3">3</link>) nicht innerhalb der hierfür bestimmten Frist geleistet wird, gilt der Antrag als zurückgenommen. Auf die Folge ist mit Bestimmung der Frist hinzuweisen.</paragraph>
+          <paragraph value="3">Die Schlichtungspersonen können die Parteien an eine dazu bereite andere Schlichtungsperson verweisen, wenn das beantragte Schlichtungsverfahren voraussichtlich nicht binnen einer Frist von drei Monaten durchgeführt werden kann.</paragraph>
+          <paragraph value="4">Schiedspersonen (<link>§ 2</link>) können die Parteien an eine in <link>§ 34c Abs. 1</link> und <link value="§ 34c Abs. 2">2</link> genannte und dazu bereite Schlichtungsperson verweisen, wenn der Fall rechtlich oder tatsächlich schwierig ist. Für die Verweisung werden Kosten nicht erhoben. Nach Beginn der Schlichtungsverhandlung ist eine Verweisung nur mit Zustimmung der antragstellenden Partei zulässig. Der Beschluss ist unanfechtbar.</paragraph>
+          <paragraph value="5">Die Schlichtungspersonen können in Streitigkeiten aus dem Nachbarrecht den Antrag auf Einleitung eines Schlichtungsverfahrens ablehnen, wenn der Schwerpunkt im öffentlichen Recht liegt.</paragraph>
+        </section>
+        <section no="34 e" title="">
+          <paragraph value="1">Die Schlichtungsperson hat umgehend Ort und Zeit der Schlichtungsverhandlung zu bestimmen. <link>§ 23 Abs. 2 bis 4</link> findet entsprechende Anwendung.</paragraph>
+          <paragraph value="2">Die Parteien haben in dem anberaumten Termin persönlich zu erscheinen. Dies gilt nicht im Fall der gesetzlichen Vertretung oder des <link>§ 51 Abs. 3 der Zivilprozessordnung</link> sowie dann, wenn die Parteien einen Vertreter entsenden, der zur Aufklärung des Sachverhalts in der Lage und zu einem Vergleichsabschluss ausdrücklich ermächtigt ist, und die Schlichtungsperson dem Fernbleiben der Partei vor der Schlichtungsverhandlung zugestimmt hat. <link>§ 28 Satz 2</link> und <link>§ 29</link> sind entsprechend anzuwenden.</paragraph>
+          <paragraph value="3">Bleibt die antragstellende Partei im Termin aus, ohne ihr Ausbleiben vor dem Termin oder innerhalb von zwei Wochen nach dem Termin genügend zu entschuldigen, gilt der Antrag als zurückgenommen. Eine Bescheinigung über die Erfolglosigkeit des Einigungsversuchs (<link>§ 34 h</link>) wird nicht erteilt. <link>§ 25</link> gilt entsprechend.</paragraph>
+          <paragraph value="4">Erscheint die antragsgegnerische Partei nicht zu dem Termin, gelten <link>§ 24 Abs. 2 bis 7</link>, <link>§ 25</link> entsprechend.</paragraph>
+        </section>
+        <section no="34 f" title="">
+          <paragraph value="1">Die Schlichtungsverhandlung findet in der Regel mündlich und nicht öffentlich statt. Sie soll möglichst ohne Unterbrechung zu Ende geführt werden; ein Termin zur Fortsetzung der Verhandlung ist sofort zu bestimmen. In geeigneten Fällen sieht die Schlichtungsperson nach Anhörung der Parteien von einem Termin ab und verfährt schriftlich. Beweise sind nur entsprechend <link>§ 30</link> zu erheben. Im Übrigen wird der Gang des Verfahrens von der Schlichtungsperson nach freiem Ermessen bestimmt.</paragraph>
+          <paragraph value="2">Über die Schlichtungsverhandlung ist ein Protokoll in deutscher Sprache aufzunehmen. Das Protokoll enthält:<list type="number" prefix="" postfix="."><item value="1">den Ort und die Zeit der Verhandlung,</item><item value="2">den Namen der Schlichtungsperson nebst der Angabe, ob es sich um eine Schiedsperson, eine Notarin oder einen Notar, eine Notarassessorin oder einen Notarassessor, eine Rechtsanwältin oder einen Rechtsanwalt handelt,</item><item value="3">die Namen und Anschriften der erschienen Parteien, gesetzlichen Vertreterinnen und Vertreter, Bevollmächtigten, Beistände, Dolmetscherinnen und Dolmetscher sowie die Angabe, wie sich diese legitimiert haben,</item><item value="4">eine gedrängte Beschreibung des Streitgegenstandes,</item><item value="5">die wesentlichen Vorgänge der Verhandlung.</item></list></paragraph>
+          <paragraph value="3">Kommt ein Vergleich zustande, so ist sein Wortlaut zu Protokoll zu nehmen. <link>§ 32</link> findet entsprechende Anwendung.</paragraph>
+          <paragraph value="4">Die Parteien oder deren Rechtsnachfolgerinnen oder Rechtsnachfolger erhalten auf Verlangen Abschriften oder Ausfertigungen des Protokolls. <link>§ 33</link> findet entsprechende Anwendung. Der Ausfertigungsvermerk einer Schlichtungsstelle nach <link>§ 34 c Abs. 2</link> ist anstelle eines Dienstsiegels mit einem anwaltlichen Stempel zu versehen.</paragraph>
+        </section>
+        <section no="34 g" title="">
+          <paragraph value="1">Aus dem in der Schlichtungsverhandlung geschlossenen Vergleich findet die Zwangsvollstreckung statt. § 34 Abs. 2 Satz 1 gilt entsprechend.</paragraph>
+          <paragraph value="2">Die Vollstreckungsklausel auf einem vor einer Schlichtungsstelle geschlossenen Vergleich erteilt im Falle des <link>§ 34 c Abs. 1</link> die Notarin oder der Notar, ansonsten das Amtsgericht. <link>§ 34 Abs. 2 Satz 2</link> und <link value="§ 34 Abs. 3">Abs. 3</link> gilt entsprechend.</paragraph>
+        </section>
+        <section no="34 h" title="">
+          <paragraph value="1">Bleibt der Einigungsversuch erfolglos, ist der antragstellenden Partei hierüber unverzüglich eine Bescheinigung auszustellen (Erfolglosigkeitsbescheinigung).</paragraph>
+          <paragraph value="2">Die Bescheinigung hat die Namen und die Anschriften der Parteien, eine Angabe des Streitgegenstands, Beginn und Ende des Verfahrens sowie Ort und Zeit der Ausstellung zu enthalten. Im Falle der Erteilung einer Bescheinigung nach <link>§ 15 a Abs. 1 Satz 3</link> des Gesetzes, betreffend die Einführung der Zivilprozessordnung ist dies gesondert zu vermerken.</paragraph>
+          <paragraph value="3">Das Scheitern eines Einigungsversuchs vor einer anderen Gütestelle im Sinne von <link>§ 15 a Abs. 3</link> des Gesetzes, betreffend die Einführung der Zivilprozessordnung ist durch eine Bescheinigung der jeweiligen Gütestelle nachzuweisen, die den Anforderungen des <link>Absatzes 2</link> entspricht.</paragraph>
+          <paragraph value="4">Eine Bescheinigung ist auch auszustellen, sofern die Schlichtungsperson den Anwendungsbereich nach <link>§ 34 a</link> für nicht eröffnet oder einen Fall des <link>§ 34 d Abs. 5</link> als gegeben erachtet.</paragraph>
+        </section>
+        <section no="34 i" title="">
+          <paragraph value="1">Jede Partei trägt ihre eigenen Kosten. Eine Erstattung der Kosten der Parteien findet nicht statt. Die Parteien können eine hiervon abweichende Vereinbarung treffen.</paragraph>
+          <paragraph value="2">Haben die Parteien einen Vergleich geschlossen, ohne dass darin eine Vereinbarung über die Kostentragung enthalten ist, gelten die Kosten als gegeneinander aufgehoben.</paragraph>
+        </section>
+      </div>
+      <div level="1" description="Dritter Abschnitt" title="Das Schlichtungsverfahren in Strafsachen">
+        <div level="2" description="" title="Das Sühneverfahren vor Erhebung der Privatklage">
+          <section no="35" title="">
+            <paragraph value="1">Die Schiedsstelle nach <link>§ 1</link> ist die Vergleichsbehörde im Sinne des <link>§ 380 Abs. 1 Strafprozessordnung</link>. Sie ist zuständig für die dort genannten Vergehen.</paragraph>
+            <paragraph value="2">Der Sühneversuch wird im Rahmen eines Schlichtungsverfahrens durchgeführt. Für dieses Verfahren gelten die Vorschriften des <link value="Zweiter Abschnitt">2. Abschnitts</link>, soweit in den <link>§§ 36 bis 39</link> keine abweichenden Bestimmungen getroffen sind.</paragraph>
+          </section>
+          <section no="36" title="">
+            <paragraph value="1">Das im Falle der Erhebung der Privatklage zuständige Gericht kann auf Antrag gestatten, daß von dem Sühneversuch abgesehen wird, wenn die antragstellende Partei von der Gemeinde, in der die Verhandlung stattfinden müsste, soweit entfernt wohnt, dass ihr nach den Umständen des Falles nicht zugemutet werden kann, zu der Verhandlung zu erscheinen. Das Gericht kann stattdessen den Antragsteller oder die Antragstellerin ermächtigen, sich in der Schlichtungsverhandlung vertreten zu lassen; der Vertreter legt der Schiedsstelle einen gerichtlichen Beschluss sowie eine schriftliche Vollmacht vor.</paragraph>
+            <paragraph value="2">Die Parteien können die Entscheidung des Gerichts mit der sofortigen Beschwerde nach den Vorschriften der Strafprozessordnung anfechten.</paragraph>
+          </section>
+          <section no="37" title="">
+            <paragraph value="1" title="">Die Schiedsstelle darf den Sühneversuch nur ablehnen, wenn die Parteien auch nach Unterbrechung oder Vertagung der Schlichtungsverhandlung ihre Identität nicht nachweisen.</paragraph>
+          </section>
+          <section no="38" title="">
+            <paragraph value="1" title="">Hat der Antragsgegner oder die Antragsgegnerin einen gesetzlichen Vertreter, so stellt die Schiedsstelle auch diesem die Terminnachricht zu. Der Vertreter ist als Beistand zur Schlichtungsverhandlung zugelassen.</paragraph>
+          </section>
+          <section no="39" title="">
+            <paragraph value="1">Auf Antrag bescheinigt die Schiedsperson die Erfolglosigkeit des Sühneversuchs zum Zwecke der Einreichung der Klage (<link>§ 380 Abs. 1 Satz 2 der Strafprozessordnung</link>), wenn<list type="number" prefix="" postfix="."><item value="1">in der Schlichtungsverhandlung eine Einigung nicht zustande gekommen ist oder</item><item value="2">allein der Antragsgegner oder die Antragsgegnerin dem Schlichtungstermin unentschuldigt ferngeblieben ist oder sich vor dem Schluss der Schlichtungsverhandlung unentschuldigt entfernt hat; wohnen die Parteien in demselben Schiedsstellenbezirk, in dem die Schlichtungsverhandlung stattzufinden hat, so trifft diese Wirkung erst dann ein, wenn die beschuldigte Partei auch in einem zweiten Termin ausbleibt.</item></list>Wurde im Falle des <link value="§ 39 Satz 1 Nr. 2">Satzes 1 Nr. 2</link> gegen den Antragsgegner ein Ordnungsgeld verhängt, so wird die Bescheinigung erst ausgestellt, wenn die Frist zur Anfechtung des Bescheids über das Ordnungsgeld abgelaufen ist und der Bescheid nicht angefochten worden ist, oder die Anfechtung erfolglos geblieben ist.</paragraph>
+            <paragraph value="2">Die Bescheinigung ist von der Schiedsperson zu unterschreiben und mit einem Dienstsiegel zu versehen. Sie hat die Straftat und den Zeitpunkt ihrer Begehung, das Datum der Antragstellung sowie Ort und Datum der Ausstellung zu enthalten.</paragraph>
+          </section>
+        </div>
+      </div>
+      <div level="1" description="Vierter Abschnitt" title="Die Anerkennung weiterer Gütestellen">
+        <section no="40" title="">
+          <paragraph value="1">Als Gütestelle im Sinne von <link>§ 794 Abs. 1 Nr. 1 der Zivilprozessordnung</link> können Personen oder Vereinigungen auf Antrag anerkannt werden, wenn sie<list type="number" prefix="" postfix="."><item value="1">die Gewähr für eine von den Parteien unabhängige und objektive Schlichtung bieten,</item><item value="2">die Schlichtung als dauerhafte Aufgabe betreiben,</item><item value="3">nach einer für die Parteien jederzeit zugänglichen Verfahrensordnung vorgehen, die vorsehen muss, dass<list type="lower-letter" prefix="" postfix=")"><item value="a">die Schlichtungstätigkeit nicht ausgeübt wird, wenn ein in <link>§ 17</link> genannter Ausschlussgrund vorliegt und</item><item value="b">die am Schlichtungsverfahren beteiligten Parteien Gelegenheit erhalten, selbst oder durch von ihnen beauftragte Personen Tatsachen und Rechtsansichten vorzubringen und sich zum Vortrag der jeweils anderen Partei zu äußern.</item></list></item></list></paragraph>
+          <paragraph value="2">Natürliche Personen müssen nach ihrer Persönlichkeit und ihren Fähigkeiten für das Amt geeignet sein. <link>§ 3 Abs. 2 und 3</link> findet Anwendung.</paragraph>
+          <paragraph value="3">Juristische Personen, die gewährleisten, dass<list type="number" prefix="" postfix="."><item value="1">die von ihnen bestellten Schlichtungspersonen die Voraussetzungen des <link value="§ 40 Abs. 2">Absatzes 2</link> erfüllen und</item><item value="2">sie im Rahmen ihrer Schlichtungstätigkeit unabhängig und an Weisungen nicht gebunden sind,</item></list>können als Gütestellen anerkannt werden.</paragraph>
+        </section>
+        <section no="41" title="">
+          <paragraph value="1">Soweit die Gütestelle nicht von einer öffentlich-rechtlichen Körperschaft oder Anstalt des öffentlichen Rechts getragen wird, muss eine Haftpflichtversicherung für Vermögensschäden bestehen und die Versicherung während der Dauer der Anerkennung als Gütestelle aufrechterhalten bleiben. Die Versicherung muss bei einem im Inland zum Geschäftsbetrieb befugten Versicherungsunternehmen zu den nach Maßgabe des Versicherungsaufsichtsgesetzes eingereichten Allgemeinen Versicherungsbedingungen genommen werden und sich auch auf solche Vermögensschäden erstrecken, für die die Gütestelle nach <link value="§ 278 BGB">§ 278</link> oder <link value="§ 831 BGB">§ 831</link> des <link value="BGB">Bürgerlichen Gesetzbuches</link> einzustehen hat.</paragraph>
+          <paragraph value="2">Der Versicherungsvertrag hat Versicherungsschutz für jede einzelne Pflichtverletzung zu gewähren, die gesetzliche Haftpflichtansprüche privatrechtlichen Inhalts gegen die Gütestelle zur Folge haben könnte.</paragraph>
+          <paragraph value="3">Die Mindestversicherungssumme beträgt 250 000 Euro für jeden Versicherungsfall. Die Leistungen des Versicherten für alle innerhalb eines Versicherungsjahres verursachten Schäden können auf den vierfachen Betrag der Mindestversicherungssumme begrenzt werden.</paragraph>
+          <paragraph value="4">Die Vereinbarung eines Selbstbehalts bis zu 1 v. H. der Mindestversicherungssumme ist zulässig.</paragraph>
+          <paragraph value="5">Im Versicherungsvertrag ist der Versicherer zu verpflichten, der für die Anerkennung als Gütestelle zuständigen Stelle den Beginn und die Beendigung oder Kündigung des Versicherungsvertrages sowie jede Änderung des Versicherungsvertrages, die den vorgeschriebenen Versicherungsschutz beeinträchtigt, unverzüglich mitzuteilen. Ihr sind auch die Umstände im Sinne des <link value="§ 117 Abs. 2 Versicherungsvertragsgesetz">§ 117 Abs. 2</link> des <link value="Gesetz über den Versicherungsvertrag">Gesetzes über den Versicherungsvertrag</link> anzuzeigen.</paragraph>
+        </section>
+        <section no="42" title="">
+          <paragraph value="1">Die Gütestelle hat durch die Führung von Handakten einen geordneten Überblick über die von ihr entfaltete Tätigkeit zu ermöglichen. In den Akten muss insbesondere enthalten sein:<list type="number" prefix="" postfix="."><item value="1">die Namen und Anschriften der Parteien,</item><item value="2">die Angabe des Streitgegenstands,</item><item value="3">der Zeitpunkt der Einreichung des Güteantrags bei der Gütestelle, weiterer Verfahrenshandlungen der Parteien und der Gütestelle sowie der Beendigung des Güteverfahrens,</item><item value="4">im Falle des Abschlusses eines Vergleichs zwischen den Parteien dessen genauer Wortlaut.</item></list></paragraph>
+          <paragraph value="2">Die Gütestelle hat die Akten für die Dauer von fünf Jahren nach Beendigung des Verfahrens aufzubewahren. Wurde ein Vergleich geschlossen, beträgt die Aufbewahrungsfrist 30 Jahre.</paragraph>
+          <paragraph value="3">Innerhalb des in <link value="§ 42 Abs. 2">Absatz 2</link> genannten Zeitraums können die Parteien von der Gütestelle gegen Erstattung der hierdurch entstehenden Kosten beglaubigte Ablichtungen der Handakten und Ausfertigungen geschlossener Vergleiche verlangen.</paragraph>
+        </section>
+        <section no="43" title="">
+          <paragraph value="1">Die Anerkennung als Gütestelle ist mit Wirkung für die Zukunft zurückzunehmen, wenn Tatsachen nachträglich bekannt werden, bei deren Kenntnis die Zulassung hätte versagt werden müssen.</paragraph>
+          <paragraph value="2">Die Anerkennung als Gütestelle ist zu widerrufen, wenn<list type="number" prefix="" postfix="."><item value="1">ihre Tätigkeit nicht mehr den Anforderungen des <link>§ 40 Abs. 1</link> entspricht,</item><item value="2">die persönlichen Voraussetzungen für die Anerkennung nach <link>§ 40 Abs. 2 und 3</link> nicht mehr erfüllt sind,</item><item value="3">die erforderliche Haftpflichtversicherung nach <link>§ 41</link> nicht mehr besteht,</item><item value="4">die Gütestelle auf die Rechte aus ihrer Anerkennung gegenüber der für die Anerkennung zuständigen Stelle schriftlich verzichtet hat.</item></list></paragraph>
+        </section>
+        <section no="44" title="">
+          <paragraph value="1">Zuständig für die Anerkennung als Gütestelle sowie die Rücknahme und den Widerruf der Anerkennung ist das für die Justizverwaltung zuständige Ministerium, das diese Befugnisse auf nachgeordnete Behörden übertragen kann.</paragraph>
+          <paragraph value="2">Änderungen der für die Anerkennung in den <link>§§ 40 bis 42</link> maßgeblichen Umstände sind der nach <link value="§ 44 Abs. 1">Absatz 1</link> zuständigen Stelle unverzüglich mitzuteilen. Diese kann jederzeit Auskunft über die Geschäftsführung verlangen und anordnen, dass ihr die Handakten (<link>§ 42</link>) in regelmäßigen Abständen vorgelegt werden.</paragraph>
+          <paragraph value="3">Das für Justizverwaltung zuständige Ministerium oder die von ihm bestimmte Behörde führt ein öffentlich zugängliches Verzeichnis der anerkannten Gütestellen mit dem Namen der Personen oder der Vereinigung, ihrer Anschrift, ihrer Telefonnummer und ihrer Internetadresse.</paragraph>
+        </section>
+        <section no="45" title="">
+          <paragraph value="1" title="">Über die Rechtmäßigkeit von Anordnungen, Verfügungen oder sonstigen Maßnahmen nach diesem Gesetz entscheiden auf Antrag die ordentlichen Gerichte. Für das Verfahren gelten die Vorschriften der <link value="§§ 23 bis 30 GVGEG">§§ 23 bis 30</link> des <link value="Einführungsgesetz zum Gerichtsverfassungsgesetz">Einführungsgesetzes zum Gerichtsverfassungsgesetz</link>.</paragraph>
+        </section>
+      </div>
+      <div level="1" description="Fünfter Abschnitt" title="Kosten">
+        <section no="46" title="">
+          <paragraph value="1">Die Schiedsstelle erhebt für ihre Tätigkeit Kosten (Gebühren und Auslagen) nur nach diesem Gesetz.</paragraph>
+          <paragraph value="2">Dies gilt auch für die Notarinnen, Notare, Rechtsanwältinnen und Rechtsanwälte, soweit sie nach <link>§ 34 b Abs. 1 und 2</link> tätig werden. Sie haben Anspruch auf Ersatz der auf ihre Kosten entfallenden Umsatzsteuer, sofern diese nicht nach <link value="§ 19 Abs. 1 UStG">§ 19 Abs. 1</link> des <link>Umsatzsteuergesetzes</link> unerhoben bleibt.</paragraph>
+        </section>
+        <section no="47" title="">
+          <paragraph value="1">Zur Zahlung der Kosten ist derjenige verpflichtet, der die Tätigkeit der Schiedsstelle oder der sonstigen Schlichtungsperson veranlasst hat. Dies ist auch der Fall, wenn der Antrag zurückgenommen wird oder als zurückgenommen gilt.</paragraph>
+          <paragraph value="2">Kostenschuldner ist ferner<list type="number" prefix="" postfix="."><item value="1">derjenige, der die Kostenschuld durch eine vor der Schiedsstelle oder der sonstigen Schlichtungsperson abgegebene Erklärung oder in einem Vergleich übernommen hat,</item><item value="2">derjenige, der für die Kostenschuld eines anderen kraft Gesetzes haftet,</item><item value="3">hinsichtlich der Dokumentenpauschale derjenige, der die Erteilung von Ausfertigungen oder Abschriften beantragt hat.</item></list></paragraph>
+          <paragraph value="3">Mehrere Kostenschuldner haften als Gesamtschuldner. Die Haftung des Kostenschuldners nach <link>Absatz 2 Nrn. 1 und 3</link> geht der Haftung des Kostenschuldners nach <link>Absatz 1</link> vor.</paragraph>
+        </section>
+        <section no="48" title="">
+          <paragraph value="1">Gebühren werden mit der Beendigung des gebührenpflichtigen Geschäfts, Auslagen mit ihrem Entstehen fällig.</paragraph>
+          <paragraph value="2">Die Schiedsstelle oder sonstige Schlichtungsperson soll ihre Tätigkeit grundsätzlich von der vorherigen Zahlung der voraussichtlich entstehenden Gebühren und Auslagen abhängig machen.</paragraph>
+          <paragraph value="3"><em>(aufgehoben)</em></paragraph>
+          <paragraph value="4">Dem Kostenschuldner zu erteilende Bescheinigungen, Ausfertigungen und Abschriften sowie Urkunden, die der Kostenschuldner eingereicht hat, kann die Schiedsstelle oder sonstige Schlichtungsperson zurückhalten, bis die in der Angelegenheit entstandenen Kosten gezahlt sind.</paragraph>
+          <paragraph value="5">Die Verjährung der Kostenforderung richtet sich nach <link value="§ 9 VwKostG LSA">§ 9</link> des <link value="Verwaltungskostengesetz des Landes Sachsen-Anhalt">Verwaltungskostengesetzes des Landes Sachsen-Anhalt</link>.</paragraph>
+        </section>
+        <section no="49" title="">
+          <paragraph value="1">Die Kosten und Ordnungsgelder werden aufgrund einer von der Schiedsperson oder der sonstigen Schlichtungsperson unterschriebenen und dem Kostenschuldner mitgeteilten Kostenrechnung eingefordert.</paragraph>
+          <paragraph value="2">Zahlt der Kostenschuldner die Kostenrechnung einer Schieds- oder Schlichtungsperson nicht oder nicht vollständig innerhalb der Zahlungsfrist, werden die Kosten und Ordnungsgelder auf Antrag der Schieds- oder Schlichtungsperson nach dem Verwaltungsvollstreckungsgesetz des Landes Sachsen-Anhalt vollstreckt.</paragraph>
+        </section>
+        <section no="50" title="">
+          <paragraph value="1">Für das Schlichtungsverfahren wird eine Gebühr von 25 Euro erhoben; kommt ein Vergleich zustande, so beträgt die Gebühr 50 Euro.</paragraph>
+          <paragraph value="2">Unter Berücksichtigung der Verhältnisse des Kostenschuldners und des Umfangs und der Schwierigkeit des Falles kann die Gebühr auf höchstens 75 Euro erhöht werden.</paragraph>
+          <paragraph value="3">Sind auf der Seite einer Partei oder beider Parteien mehrere Personen am Schlichtungsverfahren beteiligt oder ist die antragstellende Partei zugleich Antragsgegnerin, so wird die Gebühr nur einmal erhoben.</paragraph>
+        </section>
+        <section no="51" title="">
+          <paragraph value="1">Die Schiedsstelle oder die sonstige Schlichtungsperson erhebt<list type="number" prefix="" postfix="."><item value="1">eine Dokumentenpauschale für die Aufnahme von Anträgen, für Mitteilungen an die Parteien sowie für Ausfertigungen und Abschriften von Protokollen und Bescheinigungen; die Höhe der Dokumentenpauschale bestimmt sich nach <link>§ 136 Abs. 2 der Kostenordnung</link>;</item><item value="2">die bei der Durchführung einer Amtshandlung entstehenden notwendigen Auslagen in tatsächlicher Höhe.</item></list></paragraph>
+          <paragraph value="2">Die Vergütung eines hinzugezogenen Dolmetschers zählt zu den baren Auslagen. Vor Hinzuziehung eines Dolmetschers hat die Schiedsstelle oder die sonstige Schlichtungsperson grundsätzlich einen die voraussichtlichen Kosten deckenden Vorschuss einzufordern. Wer die Kosten der Inanspruchnahme eines Dolmetschers zu tragen hat, bestimmt sich nach <link>§ 47</link> dieses Gesetzes. Die Höhe der Vergütung richtet sich nach dem <link>Justizvergütungs- und -entschädigungsgesetz</link>. Die Vergütung ist auf Antrag der Schiedsstelle oder der sonstigen Schlichtungsperson oder des Dolmetschers von dem Amtsgericht, in dessen Bezirk die Schiedsstelle oder die sonstige Schlichtungsperson ihren Sitz hat, durch richterlichen Beschluss festzusetzen; <link>§ 4 Abs. 3 bis 9</link> und <link>§ 4 a des Justizvergütungs- und -entschädigungsgesetzes</link> sind auf das Festsetzungsverfahren entsprechend anzuwenden.</paragraph>
+        </section>
+        <section no="52" title="">
+          <paragraph value="1">Die Schiedsstelle oder die sonstige Schlichtungsperson kann ausnahmsweise, wenn das mit Rücksicht auf die wirtschaftlichen Verhältnisse des Zahlungspflichtigen oder sonst aus Billigkeitsgründen geboten erscheint, die Gebühren ermäßigen oder von ihrer Erhebung ganz oder teilweise absehen. Aus denselben Gründen kann von der Erhebung von Auslagen, mit Ausnahme der in <link>§ 51 Abs. 2</link> genannten abgesehen werden.</paragraph>
+          <paragraph value="2">Den Ausfall der Dokumentenpauschale trägt die Schiedsstelle, während notwendige bare Auslagen von der Gemeinde als Sachkosten der Schiedsstelle zu tragen sind.</paragraph>
+          <paragraph value="3">Wird der Kostenschuldner nach Absatz 1 von den Gebühren und Auslagen ganz oder teilweise befreit, haftet den nach <link>§ 34 b Abs. 1 und 2</link> tätigen Schlichtungspersonen die Landeskasse für den Ausfall.</paragraph>
+        </section>
+        <section no="53" title="">
+          <paragraph value="1" title="">Über Einwendungen des Kostenschuldners gegen die Kostenrechnung oder gegen Maßnahmen nach <link>§ 48 Abs. 2 und 4</link> entscheidet das Amtsgericht, in dessen Bezirk die Schiedsstelle oder die sonstige Schlichtungsperson ihren Sitz hat, durch richterlichen Beschluss. Der Beschluss ist unanfechtbar. Kosten werden nicht erhoben. Auslagen der Parteien werden nicht erstattet.</paragraph>
+        </section>
+        <section no="54" title="">
+          <paragraph value="1">Die von der Schiedsstelle erhobenen Gebühren stehen zu gleichen Teilen der Schiedstelle und der Gemeinde zu.</paragraph>
+          <paragraph value="2">Die von der Schiedsstelle nach <link>§ 51 Abs. 1 Nr. 1</link> erhobene Pauschale erhält die Schiedsstelle.<edit value="Leerzeichen vor Satzendezeichen entfernt." /></paragraph>
+          <paragraph value="3">Die von der Schiedsstelle und der Schlichtungsstelle (<link>§ 34 b</link><edit value="Leerzeichen in Wort 34b eingefügt." />) erhobenen Ordnungsgelder stehen der Gemeinde zu.</paragraph>
+          <paragraph value="4">Den Notarinnen, Notaren, Rechtsanwältinnen und Rechtsanwälten, die nach <link>§ 34 b Abs. 1 und 2</link> tätig werden, stehen die von ihnen nach diesem Gesetz erhobenen Kosten zu.</paragraph>
+        </section>
+      </div>
+      <div level="1" description="Sechster Abschnitt" title="Übergangs- und Schlussvorschriften">
+        <section no="55" title="">
+          <paragraph value=""><em>(aufgehoben)</em></paragraph>
+        </section>
+        <section no="56" title="">
+          <paragraph value="">Durch <link>§ 3 Abs. 4</link>, <link>§ 10 Abs. 2</link>, <link>§ 34b Abs. 4</link>, <link>§ 42 Abs. 2</link> und <link>§ 44 Abs. 3</link> wird das Grundrecht auf Schutz personenbezogener Daten im Sinne des <link>Artikels 2 Abs. 1</link> in Verbindung mit <link>Artikel 1 Abs. 1</link> des <link target="DE:Grundgesetz:today">Grundgesetzes</link> und des <link>Artikels 6 Abs. 1 Satz 1</link> der <link>Verfassung des Landes Sachsen-Anhalt</link> eingeschränkt.</paragraph>
+        </section>
+        <section no="57" title="">
+          <paragraph value="">Aus zum Zeitpunkt des Inkrafttretens dieses Gesetzes für vollstreckbar erklärten Entscheidungen gesellschaftlicher Gerichte findet die Zwangsvollstreckung statt.</paragraph>
+        </section>
+        <section no="58" title="">
+          <paragraph value=""><em>(In-Kraft-Treten)</em></paragraph>
+        </section>
+      </div>
+    </text>
+  </texts>
+</document>
+

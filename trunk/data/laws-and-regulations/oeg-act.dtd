@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Open E-Government Document Type Definition: act
+
+  Diese DTD definiert den Aufbau des XML-Formats zur Veröffentlichung
+  der aktuellen Bundesgesetze und Rechtsverordnungen unter www.open-egov.de
+
+  $Id$
+-->
+
+<!ENTITY oegname "Open E-Government">
+<!ENTITY oegwww "http://www.open-egov.de/">
+
+<!ELEMENT document (properties+, texts+)>
+
+<!ELEMENT properties (element*)>
+
+<!ELEMENT element EMPTY>
+<!ATTLIST element
+  name CDATA #REQUIRED
+  value CDATA #REQUIRED
+>
+
+<!ELEMENT texts (text*)>
+
+<!ELEMENT text (#PCDATA | section* | div*)>
+<!ATTLIST text
+  no CDATA #REQUIRED
+  from CDATA #REQUIRED
+  to CDATA #IMPLIED
+  outofforce (yes | no) "no"
+  lang (de | en) #REQUIRED
+  status (complete | partial | missing | scan | file | other) #REQUIRED
+>
+
+<!ELEMENT div (#PCDATA | section* | div*)>
+<!ATTLIST div
+  level CDATA #REQUIRED
+  description CDATA #REQUIRED
+  title CDATA #IMPLIED
+>
+
+<!ELEMENT section (#PCDATA | paragraph* | comment)*>
+<!ATTLIST section
+  no CDATA #REQUIRED
+  title CDATA #IMPLIED
+>
+
+<!ELEMENT paragraph (#PCDATA | link | em | break | list | comment)*>
+<!ATTLIST paragraph
+  no CDATA #REQUIRED
+  value CDATA ""
+  title CDATA #IMPLIED
+>
+
+<!ELEMENT link (#PCDATA)*>
+<!ATTLIST link
+  value CDATA #IMPLIED
+>
+
+<!ELEMENT list (item)+>
+<!ATTLIST list
+  type (number | lower-letter) "number"
+  prefix CDATA #IMPLIED ""
+  postfix CDATA #IMPLIED ""
+>
+
+<!ELEMENT item (#PCDATA)+>
+<!ATTLIST item
+  value CDATA #IMPLIED
+>
+
+<!ELEMENT image EMPTY>
+<!ATTLIST image
+  src CDATA #REQUIRED
+  title CDATA #IMPLIED
+  alt CDATA #IMPLIED
+  width CDATA #IMPLIED
+  height CDATA #IMPLIED
+>
+
+<!ELEMENT file EMPTY>
+<!ATTLIST file
+  src CDATA #REQUIRED
+  title CDATA #IMPLIED
+  preview CDATA #IMPLIED
+  type CDATA #IMPLIED
+>
+
+<!-- TODO: edit, em -->
+
