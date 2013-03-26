@@ -1,7 +1,7 @@
 // $Id$
 //
-// Open eGovernment
-// Copyright (C) 2005-2011 by Gerrit M. Albrecht
+// Open E-Government
+// Copyright (C) 2005-2013 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -18,11 +18,11 @@
 
 #include <QDialog>
 
-//#include <OEG/Qt/Application.h>
+#include <OEG/Qt/Application.h>
 
 #include "MailEditorDialog.h"
 
-//using namespace OEG::Qt;
+using namespace OEG::Mail;
 using namespace Qt;
 
 MailEditorDialog::MailEditorDialog(QWidget *parent /*=0*/)

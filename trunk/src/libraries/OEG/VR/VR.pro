@@ -2,7 +2,7 @@
 
 TARGET       = oegVR
 VERSION      = 1.0.0.0
-QT          += gui opengl
+QT          += gui widgets opengl
 PACKAGES     = GETTEXT
 
 RC_FILE      = resources.rc

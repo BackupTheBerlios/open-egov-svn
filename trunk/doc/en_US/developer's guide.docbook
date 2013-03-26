@@ -6,7 +6,7 @@
           "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd">
 <book>
   <bookinfo>
-    <title>Open eGovernment Developer's Guide</title>
+    <title>Open E-Government Developer's Guide</title>
     <authorgroup>
       <corpauthor>Open E-Government Team</corpauthor>
     </authorgroup>
@@ -69,7 +69,7 @@ of your distribution.</para><!-- todo: separate chapters for windows/linux -->
         </itemizedlist>
 Be aware that the binary installation path differs from your OEG develpment path with your sources and self-compiled binaries. Maybe you need to copy them into your development directory.</para>
 
-<para>Now download the Open eGovernment source package and extract it to any path you want. This is your base installation path. You don't need to set an environment variable because all binaries are installed into base/bin and know their base directory path. It's possible to put the directory structure onto an USB stick.</para>
+<para>Now download the Open E-Government source package and extract it to any path you want. This is your base installation path. You don't need to set an environment variable because all binaries are installed into base/bin and know their base directory path. It's possible to put the directory structure onto an USB stick.</para>
 
 <para>There are some required packages which need to be installed: opencv (requires: ..., optionally requires: ...)</para>
     </section>

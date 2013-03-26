@@ -4,7 +4,7 @@ TARGET    = about-dialog
 SOURCES   = *.cpp
 HEADERS   = *.h
 FORMS     = forms/*.ui
-QT       += xml network
+QT       += xml network widgets
 PACKAGES  = QT GETTEXT
 
 include(../../../common.pri)

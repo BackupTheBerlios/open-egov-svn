@@ -19,7 +19,7 @@
 #pragma once
 
 #define MODULE_INFO(txt) static const char oeg_ident[] =  \
-  "   Open eGovernment (www.open-egov.de), " txt "   "; \
+  "   Open E-Government (www.open-egov.de), " txt "   "; \
   const char *oeg_ident_x = oeg_ident;
 
 #ifdef USE_GETTEXT

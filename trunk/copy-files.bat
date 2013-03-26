@@ -36,7 +36,7 @@ IF NOT EXIST plugins64 (
 IF NOT "%COPYQT5DIR%" == "YES" GOTO NO_COPYQT5DIR
   ECHO Copying original files from Qt5 setup directory...
   ECHO Script tested with this Qt setup file:
-  ECHO qt-windows-opensource-5.0.2-mingw47_32-x86-offline-2013-02-23-433.exe
+  ECHO qt-windows-opensource-5.0.2-mingw47_32-x86-offline-2013-03-26-466.exe
   SET SRCDIR=C:\Qt\Qt5.0.2\5.0.2\mingw47_32\bin
   SET DSTDIR=bin
   ECHO Copying to "bin"

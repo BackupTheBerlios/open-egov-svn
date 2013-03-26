@@ -1,7 +1,7 @@
 // $Id$
 //
-// Open eGovernment
-// Copyright (C) 2005-2012 by Gerrit M. Albrecht
+// Open E-Government
+// Copyright (C) 2005-2013 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -22,6 +22,10 @@
 
 #include <QObject>
 #include <QByteArray>
+
+#include <stdint.h>                    // uint8_t.
+
+namespace OEG { namespace Crypt {
 
 class AES
 {
@@ -143,4 +147,6 @@ const uint8_t AES::m_rcon[255] = {
   0x91, 0x39, 0x72, 0xe4, 0xd3, 0xbd, 0x61, 0xc2, 0x9f, 0x25, 0x4a, 0x94, 0x33,
   0x66, 0xcc, 0x83, 0x1d, 0x3a, 0x74, 0xe8, 0xcb
 };
+
+}}
 

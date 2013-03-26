@@ -1,7 +1,7 @@
 // $Id: Application.cpp,v 1.30 2007/05/30 18:40:31 gerrit Exp $
 //
-// Open eGovernment
-// Copyright (C) 2005-2012 by Gerrit M. Albrecht
+// Open E-Government
+// Copyright (C) 2005-2013 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -65,7 +65,7 @@ void AboutDialog::setInformationText()
 
   str = "<html><body><p>";
 
-  str += QString(_("The Open eGovenment Suite with its application \"%1\" is on the one hand "
+  str += QString(_("The Open E-Govenment Suite with its application \"%1\" is on the one hand "
            "an open source software project. "
            "You can always download the latest sources from the homepage at no cost. "
            "You may compile yourself the latest versions for free using free tools. "
@@ -73,7 +73,7 @@ void AboutDialog::setInformationText()
 
   str += "</p><p>";
 
-  str += _("But then Open eGovernment is also a commercial product. If you find the software "
+  str += _("But then Open E-Government is also a commercial product. If you find the software "
            "useful and if you would like to support the further development of this "
            "application, I kindly ask you to do so.");
 

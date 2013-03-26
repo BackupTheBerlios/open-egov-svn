@@ -24,6 +24,8 @@
 
 #include "ui_no-active-network.h"
 
+namespace OEG { namespace Qt {
+
 class NoActiveNetworkDialog : public QDialog, public Ui::NoActiveNetworkDialog
 {
   Q_OBJECT
@@ -39,4 +41,6 @@ class NoActiveNetworkDialog : public QDialog, public Ui::NoActiveNetworkDialog
   private:
 
 };
+
+}}
 

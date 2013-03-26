@@ -2,7 +2,7 @@
 
 TARGET       = oegMail
 VERSION      = 1.0.0.0
-QT          += gui
+QT          += gui widgets
 PACKAGES     = GETTEXT
 
 RC_FILE      = resources.rc
@@ -10,7 +10,7 @@ DEFINES     +=
 INCLUDEPATH += ../..
 LIBS        +=
 
-FORMS       += forms/mail-editor.ui
+FORMS       += forms/*.ui
 HEADERS     += *.h
 SOURCES     += *.cpp
 

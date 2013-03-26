@@ -10,7 +10,7 @@ DEFINES     +=
 INCLUDEPATH += ../..
 LIBS        +=
 
-FORMS       += 
+FORMS       += forms/*.ui
 HEADERS     += *.h
 SOURCES     += *.cpp
 

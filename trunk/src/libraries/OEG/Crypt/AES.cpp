@@ -1,7 +1,7 @@
 // $Id$
 //
-// Open eGovernment
-// Copyright (C) 2005-2012 by Gerrit M. Albrecht
+// Open E-Government
+// Copyright (C) 2005-2013 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -17,6 +17,9 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <OEG/Crypt/AES.h>
+
+using namespace OEG::Crypt;
+using namespace Qt;
 
 AES::AES()
  : m_rounds(0)

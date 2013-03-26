@@ -37,11 +37,12 @@ REM Setting up environment for Qt usage...
 REM Look into qtenv2.bat and/or qtvars.bat for updated data.
 REM C:\Windows\System32\cmd.exe /A /Q /K C:\Qt\Qt5.0.2\5.0.2\mingw47_32\bin\qtenv2.bat
 
-IF "%USEQT5%" == "YES" (
+IF NOT "%USEQT5%" == "YES" GOTO NO_USEQT5
   ECHO Using standard Qt5 setup directory...
   IF EXIST C:\Qt\Qt5.0.2\5.0.2\mingw47_32\nul SET QTDIR=C:\Qt\Qt5.0.2\5.0.2\mingw47_32
   SET PATH=%QTDIR%\bin;C:\Qt\Qt5.0.2\Tools\MinGW\bin;%PATH%
-)
+  GOTO QTDIR_FOUND_PATH_SET
+:NO_USEQT5
 
 IF NOT "%USEMINGW32QT32%" == "YES" GOTO NO_USEMINGW32QT32
   ECHO Using MinGW-32 and Qt5-32...
@@ -52,6 +53,7 @@ IF NOT "%USEMINGW32QT32%" == "YES" GOTO NO_USEMINGW32QT32
   IF EXIST D:\mingw32    SET MINGWDIR=D:\mingw32
   IF EXIST E:\mingw32    SET MINGWDIR=E:\mingw32
   SET PATH=%MINGWDIR%\bin;%QTDIR%\bin;%PATH%
+  GOTO QTDIR_FOUND_PATH_SET
 :NO_USEMINGW32QT32
 
 REM IF "%USEMINGW32QT32%" == "YES" (
@@ -71,7 +73,10 @@ IF "%USEMINGW64QT64%" == "YES" (
   IF EXIST D:\mingw64    SET MINGWDIR=D:\mingw64
   IF EXIST E:\mingw64    SET MINGWDIR=E:\mingw64
   SET PATH=%MINGWDIR%\bin;%QTDIR%\bin;%PATH%
+  GOTO QTDIR_FOUND_PATH_SET
 )
+
+:QTDIR_FOUND_PATH_SET
 
 REM SET QMAKESPEC=win32-g++
 REM SET PATH=%PATH%;E:\msys\bin

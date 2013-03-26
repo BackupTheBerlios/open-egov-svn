@@ -1,7 +1,7 @@
 // $Id$
 //
-// Open eGovernment
-// Copyright (C) 2005-2011 by Gerrit M. Albrecht
+// Open E-Government
+// Copyright (C) 2005-2013 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -24,6 +24,8 @@
 
 #include "ui_mail-editor.h"
 
+namespace OEG { namespace Mail {
+
 class MailEditorDialog : public QDialog, public Ui::MailEditorDialog
 {
   Q_OBJECT
@@ -38,4 +40,6 @@ class MailEditorDialog : public QDialog, public Ui::MailEditorDialog
   private:
 
 };
+
+}}
 

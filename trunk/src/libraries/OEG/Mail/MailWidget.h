@@ -1,7 +1,7 @@
 // $Id$
 //
-// Open eGovernment
-// Copyright (C) 2005-2011 by Gerrit M. Albrecht
+// Open E-Government
+// Copyright (C) 2005-2013 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -28,7 +28,7 @@ class QAction;
 class QMouseEvent;
 class QPaintEvent;
 
-namespace OEG { namespace Qt {
+namespace OEG { namespace Mail {
 
 class MailWidget : public QWidget
 {

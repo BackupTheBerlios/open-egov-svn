@@ -2,7 +2,7 @@
 
 TARGET       = oegImageProcessing
 VERSION      = 1.0.0.0
-QT          += gui
+QT          += gui widgets
 PACKAGES     = GETTEXT
 
 RC_FILE      = resources.rc

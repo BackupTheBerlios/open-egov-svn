@@ -2,7 +2,7 @@
 
 TARGET       = oegGIS
 VERSION      = 1.0.0.0
-QT          += network xml
+QT          += network xml widgets
 PACKAGES     = GETTEXT
 
 RC_FILE      = resources.rc
