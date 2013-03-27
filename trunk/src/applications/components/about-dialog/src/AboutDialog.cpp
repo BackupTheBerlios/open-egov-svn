@@ -65,7 +65,7 @@ void AboutDialog::setInformationText()
 
   str = "<html><body><p>";
 
-  str += QString(_("The Open E-Govenment Suite with its application \"%1\" is on the one hand "
+  str += QString(_("The Open E-Government Suite with its application \"%1\" is on the one hand "
            "an open source software project. "
            "You can always download the latest sources from the homepage at no cost. "
            "You may compile yourself the latest versions for free using free tools. "
