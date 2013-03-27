@@ -1,7 +1,7 @@
 // $Id$
 //
-// Open eGovernment
-// Copyright (C) 2005-2012 by Gerrit M. Albrecht
+// Open E-Government
+// Copyright (C) 2005-2013 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -184,7 +184,7 @@ int main(int argc, char *argv[])
 
   // Find project tag.
 
-  nodes = root.elementsByTagName("project");            // We want to get the "project" tag.
+  nodes = root.elementsByTagName("project");               // We want to get the "project" tag.
   if (nodes.count() <= 0) {
     qWarning() << "No project tag found.";
     return 0;
@@ -257,11 +257,11 @@ int main(int argc, char *argv[])
     }
 
     QTextStream out(&file);
-    out << "# $Id$\n";
+    out << "# $Id" << ":$\n";
     out << "#\n";
     out << "# Automatically generated file. Do not edit manually!\n";
     out << "# See application.xml in parent directory (project tag).\n";
-    out << "# This file is part of the Open eGovernment project.\n";
+    out << "# This file is part of the Open E-Government project.\n";
     out << "\n";
     out << "TARGET    = " << application_binary << "\n";
     out << "SOURCES   = *.cpp\n";
