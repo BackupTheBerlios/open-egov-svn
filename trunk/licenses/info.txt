@@ -1,0 +1,4 @@
+$Id$
+
+This directory is a central place for the license texts used in the about box or in the setup dialogs. All OEG files are placed under the GPL license.
+
