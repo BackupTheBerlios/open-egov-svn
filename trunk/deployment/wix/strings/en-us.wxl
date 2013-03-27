@@ -11,7 +11,7 @@
   <String Id="PackageBaseDescription">Open E-Government Base Windows Installer package</String>
   <String Id="PackageBaseComments">This is the core package needed for every Open E-Government Application.</String>
   <String Id="BasePackageMissing">You have to install the Open E-Government Base package first!</String>
-  <String Id="LicenseRTF" Overridable="yes">license.en.rtf</String>
+  <String Id="LicenseRTF" Overridable="yes">license.rtf</String>
   <String Id="AppNotSupported">This application is is not supported on your current OS. Minimal OS supported is Windows XP SP3.</String>
   <String Id="NewerVersionOfAppInstalled">A newer version of "!(loc.ProductName)" is already installed.</String>
 </WixLocalization>

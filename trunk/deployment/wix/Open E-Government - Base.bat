@@ -18,9 +18,9 @@ SET PATH=%PATH%;C:\Program Files (x86)\WiX Toolset v3.7\bin;C:\Programme\Windows
 SET CAPARA=-nologo -pedantic
 SET LIPARA=-nologo -pedantic -sw1101 -sw1102 -ext WixUIExtension 
 
-candle %CAPARA% -dCodepage=1252 -dLicense=..\..\licenses\license.en.rtf "Open E-Government - Base.wxs"
+candle %CAPARA% -dCodepage=1252 -dLicense=..\..\licenses\en_US\license.rtf "Open E-Government - Base.wxs"
 light %LIPARA% -cultures:en-us -loc strings\en-us.wxl -out en-us.msi "Open E-Government - Base.wixobj"
-candle %CAPARA% -dCodepage=1252 -dLicense=..\..\licenses\license.de.rtf "Open E-Government - Base.wxs"
+candle %CAPARA% -dCodepage=1252 -dLicense=..\..\licenses\de_DE\license.rtf "Open E-Government - Base.wxs"
 light %LIPARA% -cultures:de-de -loc strings\de-de.wxl -out de-de.msi "Open E-Government - Base.wixobj"
 
 DEL de-de.wixpdb en-us.wixpdb
