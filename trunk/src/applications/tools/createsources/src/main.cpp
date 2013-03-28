@@ -36,7 +36,7 @@ QString     application_version = "";
 QString     pro_qt              = "";
 QString     pro_packages        = "";
 QString     pro_config          = "";
-QString     mainwindow_class    = "";                    // <data name="mainwindow-class" value="" />
+QString     mainwindow_class    = "";
 
 int copyFileAndReplacePlaceholders(const QString &inputFileName, const QString &outputFileName)
 {
@@ -91,6 +91,30 @@ int copyFileAndReplacePlaceholders(const QString &inputFileName, const QString &
   return 0;
 }
 
+int updateFileAndReplaceHeader(const QString &newHeaderFile, const QString &sourceFileName)
+{
+  QFile inputFile(inputFileName);
+
+  if (! inputFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    qWarning("Input template file not open.");
+    return -1;
+  }
+
+
+
+
+
+  inputFile.close();
+
+  return 0;
+}
+
+QString templatesFileName(const QString &relativeTemplatesFileName)
+{
+  return QCoreApplication::applicationDirPath() + QDir::separator() +
+         ".." + QDir::separator() + "/src/templates/" + relativeTemplatesFileName;
+}
+
 int main(int argc, char *argv[])
 {
   QApplication app(argc, argv);
@@ -110,13 +134,13 @@ int main(int argc, char *argv[])
   pro_qt              = "";
   pro_packages        = "";
   pro_config          = "";
-  mainwindow_class    = "";                    // <data name="mainwindow-class" value="" />
+  mainwindow_class    = "MainWindow";                      // <data name="mainwindow-class" value="" />
 
   foreach (const QString &arg, args) {
-    if (arg.contains("--verbose",  Qt::CaseInsensitive)) {
+    if (arg.contains("--verbose", Qt::CaseInsensitive)) {
       verbose = true;
     }
-    if (arg.contains("--update-files",  Qt::CaseInsensitive)) {
+    if (arg.contains("--update-files", Qt::CaseInsensitive)) {
       update_files = true;
     }
   }
@@ -246,7 +270,7 @@ int main(int argc, char *argv[])
   QString srcDirName = fi.canonicalPath() + QDir::separator() + "src" + QDir::separator();
 
   if (generate_pro) {
-    filename = srcDirName + "src.proXXX";
+    filename = srcDirName + "src.pro";
     if (verbose)
       qWarning() << "Creating pro file:" << filename;
 
@@ -280,7 +304,7 @@ int main(int argc, char *argv[])
     if (dir.cd("forms")) {
       dir.setNameFilters(QStringList() << "*.ui");
       if (dir.entryList().count() > 0)
-        out << "*.ui";
+        out << "forms/*.ui";
       dir.cdUp();
     }
     out << "\n";
@@ -296,23 +320,19 @@ int main(int argc, char *argv[])
   }
 
   if (generate_main) {
-    filename = srcDirName + "main.cppXXX";
+    filename = srcDirName + "main.cpp";
     if (verbose)
       qWarning() << "Creating standard main file:" << filename;
 
-    copyFileAndReplacePlaceholders(QCoreApplication::applicationDirPath() + QDir::separator() +
-                                   ".." + QDir::separator() + "/src/templates/main.cpp",
-                                   filename);
+    copyFileAndReplacePlaceholders(templatesFileName("main.cpp"), filename);
   }
 
   if (generate_rc) {
-    filename = srcDirName + "application.rcXXX";
+    filename = srcDirName + "application.rc";
     if (verbose)
       qWarning() << "Creating rc file:" << filename;
 
-    copyFileAndReplacePlaceholders(QCoreApplication::applicationDirPath() + QDir::separator() +
-                                   ".." + QDir::separator() + "/src/templates/application.rc",
-                                   filename);
+    copyFileAndReplacePlaceholders(templatesFileName("application.rc"), filename);
   }
 
   if (update_files) {
@@ -327,7 +347,7 @@ int main(int argc, char *argv[])
     foreach (QString fn, dir.entryList()) {
       qDebug() << "Updating:" << fn;
 
-
+      updateFileAndReplaceHeader(templatesFileName("source-file-header.txt"), fn);
     }
   }
 
