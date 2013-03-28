@@ -91,7 +91,7 @@ int copyFileAndReplacePlaceholders(const QString &inputFileName, const QString &
   return 0;
 }
 
-int updateFileAndReplaceHeader(const QString &newHeaderFile, const QString &sourceFileName)
+int updateFileAndReplaceHeader(const QString &inputFileName, const QString &sourceFileName)
 {
   QFile inputFile(inputFileName);
 
