@@ -1,6 +1,6 @@
 // $Id:$
 //
-// Open eGovernment
+// Open E-Government
 // Copyright (C) 2005-$$CURRENT-YEAR$$ by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
@@ -42,7 +42,7 @@
 #endif
 
 #ifdef SNAPSHOT_BUILD
-#define	VER_RELEASE VS_FF_SPECIALBUILD|VS_FF_PRERELEASE
+#define VER_RELEASE VS_FF_SPECIALBUILD|VS_FF_PRERELEASE
 #else
 #define VER_RELEASE 0x0L
 #endif
@@ -62,19 +62,19 @@ BEGIN
     BEGIN
       VALUE "InternalName",     "$$APPLICATION-BINARY$$.exe\0"
       VALUE "OriginalFilename", "$$APPLICATION-BINARY$$.exe\0"
-      VALUE "FileDescription",  "Open eGovernment: $$APPLICATION-NAME$$.\0"
-      VALUE "ProductName",      "Open eGovernment: $$APPLICATION-NAME$$.\0"
+      VALUE "FileDescription",  "Open E-Government: $$APPLICATION-NAME$$.\0"
+      VALUE "ProductName",      "Open E-Government: $$APPLICATION-NAME$$.\0"
       VALUE "Comments",         "Homepage: www.open-egov.de\0"
       VALUE "CompanyName",      "gasi.de\0"
       VALUE "LegalCopyright",   "Copyright (C) 2004-$$CURRENT-YEAR$$ GASI.\0"
-      VALUE "LegalTrademarks",  "Open eGovernment.\0"
+      VALUE "LegalTrademarks",  "Open E-Government.\0"
       VALUE "FileVersion",      VER_FILEVERSION_STR
       VALUE "ProductVersion",   VER_PRODUCTVERSION_STR
 #ifdef VER_SNAPSHOT_BUILD
       VALUE "SpecialBuild",     "Snapshot development release"
 #endif
-#if VER_PRIVATE_BUILD
-//      VALUE "PrivateBuild",     "Built by ", szName, "\0"
+#ifdef VER_PRIVATE_BUILD
+      VALUE "PrivateBuild",     "Built by ", szUserName, "\0"
 #endif
 #ifdef VER_OLE_SELF_REGISTER
       VALUE "OleSelfRegister",  "\0"

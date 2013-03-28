@@ -15,24 +15,3 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
-
-// Automatically generated file. Do not edit manually!
-// See application.xml in parent directory (project tag).
-
-#include <OEG/Qt/Application.h>
-
-#include "$$MAINWINDOW-CLASS$$.h"
-
-int main(int argc, char *argv[])
-{
-  OEG::Qt::Application app(argc, argv, "$$APPLICATION-BINARY$$");
-
-  app.setApplicationName(_("$$APPLICATION-NAME$$"), "$$APPLICATION-VERSION$$");
-  app.setApplicationBuildData(__DATE__, __TIME__);
-
-  $$MAINWINDOW-CLASS$$ win;
-  win.show();
-
-  return app.exec();
-}
-
