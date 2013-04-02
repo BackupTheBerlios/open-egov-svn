@@ -19,13 +19,13 @@
 #include <OEG/Common.h>
 #include <OEG/Qt/Application.h>
 #include <OEG/Qt/MainWindow.h>
-#include <OEG/Qt/ToolProvider.h>
+#include <OEG/Qt/TabbedMenuBar.h>
 #include <OEG/Qt/DragAndDropHandler.h>
 
 #include <QtPrintSupport>
 
 #include <QAction>
-#include <QApplication>
+#include <QGuiApplication>
 #include <QKeySequence>
 #include <QLatin1String>
 #include <QLayout>
@@ -39,7 +39,7 @@ using namespace OEG::Qt;
 using namespace Qt;
 
 MainWindow::MainWindow(QWidget *parent /*=0*/, ::Qt::WindowFlags flags /*=0*/)
- : QMainWindow(parent, flags), m_tool_provider(0), m_printer(0)
+ : QMainWindow(parent, flags), m_tabbed_menubar(0), m_printer(0)
 {
   setWindowTitle(QCoreApplication::applicationName());
   setObjectName("MainWindow");
@@ -61,8 +61,8 @@ MainWindow::~MainWindow()
   while (! m_actions.isEmpty())
     delete m_actions.takeFirst();
 
-  if (m_tool_provider) {
-    delete m_tool_provider; m_tool_provider = 0;
+  if (m_tabbed_menubar) {
+    delete m_tabbed_menubar; m_tabbed_menubar = 0;
   }
 
   if (m_printer) {
@@ -77,7 +77,7 @@ void MainWindow::createAll()
   createMenus();
   createStatusBar();
   createToolBars();
-  createToolProvider();
+  createTabbedMenuBar();
 }
 
 void MainWindow::createActions()
@@ -102,10 +102,10 @@ void MainWindow::createToolBars()
 {
 }
 
-void MainWindow::createToolProvider()
+void MainWindow::createTabbedMenuBar()
 {
-  m_tool_provider = new ToolProvider(this);
-  m_tool_provider->hide();
+  m_tabbed_menubar = new TabbedMenuBar(this);
+  m_tabbed_menubar->hide();
 
 }
 

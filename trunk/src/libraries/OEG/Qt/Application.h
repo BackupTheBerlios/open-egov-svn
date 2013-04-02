@@ -23,7 +23,7 @@
 #include <OEG/Qt/HelpHandler.h>
 #include <OEG/Qt/Settings.h>
 
-#include <QApplication>
+#include <QGuiApplication>
 #include <QIcon>
 #include <QString>
 #include <QStringList>
@@ -37,7 +37,7 @@ namespace OEG { namespace Qt {
 class DatabaseManager;
 class Connector;
 
-class Application : public QApplication
+class Application : public QGuiApplication
 {
   Q_OBJECT
 

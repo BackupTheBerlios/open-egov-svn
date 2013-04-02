@@ -1,4 +1,4 @@
-// $Id$
+// $Id:$
 //
 // Open E-Government
 // Copyright (C) 2005-2013 by Gerrit M. Albrecht
@@ -16,12 +16,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <OEG/Qt/ToolProvider.h>
+#include <OEG/Qt/TabbedMenuBar.h>
 
 using namespace OEG::Qt;
 using namespace Qt;
 
-ToolProvider::ToolProvider(QWidget *parent /*=0*/, ::Qt::WindowFlags flags /*=0*/)
+TabbedMenuBar::TabbedMenuBar(QWidget *parent /*=0*/, ::Qt::WindowFlags flags /*=0*/)
  : QWidget(parent, flags)
 {
   setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
@@ -29,10 +29,30 @@ ToolProvider::ToolProvider(QWidget *parent /*=0*/, ::Qt::WindowFlags flags /*=0*
   resize(200, 110);
 }
 
-ToolProvider::~ToolProvider()
+TabbedMenuBar::~TabbedMenuBar()
 {
-  if (m_tab_list.count() > 0) {
+  removeAllTabs();
+}
 
+TabbedMenuBarTab *TabbedMenuBar::tab(const QString &title)
+{
+
+  return 0;
+}
+
+void TabbedMenuBar::removeTab(const QString &title)
+{
+}
+
+void TabbedMenuBar::loadFromXML(const QString &fileName)
+{
+}
+
+void TabbedMenuBar::removeAllTabs()
+{
+  if (m_tabs.count() > 0) {
+    while (! m_tabs.isEmpty())
+      delete m_tabs.takeFirst();
   }
 }
 

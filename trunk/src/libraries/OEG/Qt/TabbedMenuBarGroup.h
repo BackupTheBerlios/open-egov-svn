@@ -1,4 +1,4 @@
-// $Id$
+// $Id:$
 //
 // Open E-Government
 // Copyright (C) 2005-2013 by Gerrit M. Albrecht
@@ -21,7 +21,6 @@
 #include <OEG/Common.h>
 
 #include <QColor>
-#include <QEvent>
 #include <QIcon>
 #include <QPainter>
 #include <QStyle>
@@ -30,35 +29,34 @@
 #include <QVariantAnimation>
 #include <QWidget>
 
-#include <QList>
+#include <QObject>
+#include <QString>
 
 #include <QDebug>
 
-#include <OEG/Qt/ToolProviderTab.h>
-
 namespace OEG { namespace Qt {
 
-// The ToolProvider class implements a widget which combines the features of
-// QMenu and QToolBar without being a Microsoft Ribbon. It looks like an improved QTabBar,
-// but it isn't one, because it's nearly impossible to improve the original QTabBar class.
-// Needed features: multi-selection, background colors, a bigger tab spacing, ...
-
-class ToolProvider : public QWidget
+class TabbedMenuBarGroup : public QObject
 {
   Q_OBJECT
 
   public:
-    ToolProvider(QWidget *parent = 0, ::Qt::WindowFlags flags = 0);
-    ~ToolProvider();
+    TabbedMenuBarGroup(QObject *parent = 0);
+    ~TabbedMenuBarGroup();
 
-  protected:
+  public:
+    inline QString title() const { return m_title; }
+    inline void setTitle(const QString &title) { m_title = title; }
 
+    inline unsigned int width() const { return m_width; }
+    inline void setWidth(const unsigned int width) { m_width = width; }
 
-  protected:
-    QColor                    m_bg_color;                  // Background color.
-    bool                      m_alternative_mode;
-    QList<ToolProviderTab *>  m_tab_list;
-    ToolProviderTab           m_tab_template;
+    void addAction(const QAction *action, const QString &title);
+    void showCommandButton();
+
+  private:
+    QString       m_title;
+    unsigned int  m_width;
 };
 
 }}

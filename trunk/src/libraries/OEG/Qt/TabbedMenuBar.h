@@ -1,4 +1,4 @@
-// $Id$
+// $Id:$
 //
 // Open E-Government
 // Copyright (C) 2005-2013 by Gerrit M. Albrecht
@@ -21,6 +21,7 @@
 #include <OEG/Common.h>
 
 #include <QColor>
+#include <QEvent>
 #include <QIcon>
 #include <QPainter>
 #include <QStyle>
@@ -29,37 +30,41 @@
 #include <QVariantAnimation>
 #include <QWidget>
 
-#include <QObject>
-#include <QString>
+#include <QList>
 
 #include <QDebug>
 
+#include <OEG/Qt/TabbedMenuBarTab.h>
+
 namespace OEG { namespace Qt {
 
-class ToolProviderTab : public QObject
+// The TabbedMenuBar class implements a widget which combines the features of
+// QMenu and QToolBar without being a Microsoft Ribbon. It looks like an improved QTabBar,
+// but it's completely rewritten.
+// Needed features: multi-selection, background colors, a bigger tab spacing, ...
+
+class TabbedMenuBar : public QWidget
 {
   Q_OBJECT
 
   public:
-    ToolProviderTab(QObject *parent = 0);
-    ~ToolProviderTab();
+    TabbedMenuBar(QWidget *parent = 0, ::Qt::WindowFlags flags = 0);
+    ~TabbedMenuBar();
 
-    QString text;
-    QString toolTip;
-    QString whatsThis;
-    QColor  selectedTextColor;
-    QColor  selectedBackgroundColor;
-    QColor  textColor;
-    QColor  backgroundColor;
+  public:
+    TabbedMenuBarTab *tab(const QString &title);           // Finds or adds a register tab to the menubar.
+    void removeTab(const QString &title);
+
+    void loadFromXML(const QString &fileName);
 
   protected:
-    
-
-  private:
-
+    void removeAllTabs();
 
   protected:
-
+    QColor                     m_bg_color;                 // Background color.
+    bool                       m_alternative_mode;
+    QList<TabbedMenuBarTab *>  m_tabs;
+    TabbedMenuBarTab           m_tab_template;
 };
 
 }}

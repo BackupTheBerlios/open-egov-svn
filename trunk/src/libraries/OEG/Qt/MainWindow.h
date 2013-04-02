@@ -31,6 +31,7 @@ class QPrinter;
 namespace OEG { namespace Qt {
 
 class ToolProvider;
+class TabbedMenuBar;
 
 class MainWindow : public QMainWindow
 {
@@ -134,7 +135,7 @@ class MainWindow : public QMainWindow
     virtual void createMenus();
     virtual void createStatusBar();
     virtual void createToolBars();
-    virtual void createToolProvider();
+    virtual void createTabbedMenuBar();
 
     QAction *addStandardAction(const QString &baseName, const QString &title,
                                const QString &info, const QString &keySequence = QString());
@@ -149,7 +150,7 @@ class MainWindow : public QMainWindow
     QString standardActionName(const StandardAction &action);
 
   protected:
-    ToolProvider      *m_tool_provider;
+    TabbedMenuBar     *m_tabbed_menubar;
     QList<QAction *>   m_actions;
     unsigned int       m_default_width;
     unsigned int       m_default_height;
