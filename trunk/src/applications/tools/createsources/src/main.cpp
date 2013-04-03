@@ -24,6 +24,7 @@
 #include <QFileInfo>
 #include <QStringList>
 #include <QHash>
+#include <QApplication>
 
 #include <QDomDocument>
 #include <QDomImplementation>
