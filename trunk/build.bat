@@ -21,6 +21,10 @@ ECHO Building applications ...
 IF EXIST src\applications (
   ECHO src\applications
   CD src\applications
+  CD tools\createsources\src
+  qmake
+  mingw32-make
+  CD ..\..\..
   qmake -recursive
   mingw32-make
   CD ..\..

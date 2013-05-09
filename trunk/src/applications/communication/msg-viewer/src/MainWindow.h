@@ -54,7 +54,7 @@ class MainWindow : public OEG::Qt::MainWindow
     void standardActionOpen();
 
   private:
-    OEG::Mail::Mail          m_mail;                       // An eMail object filled by the plugin which parsed the file.
+    OEG::Mail::Mail          m_mail;                       // An E-Mail object filled by the plugin which parsed the file.
     QString                  m_file_name;                  // Filename of the mail returned by the file selection dialog.
     QTextEdit               *m_text;                       // Displays the E-Mail nicely.
     QFile                    m_file;                       // File object which belongs to the filename.

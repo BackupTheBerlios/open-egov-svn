@@ -3,11 +3,12 @@
 REM $Id$
 
 REM Script which is needed by the copy-files.bat script.
-REM It removes every (!) files from the official setup directories
+REM It removes all (!) files from the official setup directories
 REM and creates the correct directory structure for creating or
 REM copying new files into it.
 
-REM All copy goes to the bin/lib/plugins respective bin64/lib64/plugins64 directories.
+REM All copied files go to the bin/lib/plugins respective the
+REM bin64/lib64/plugins64 directories.
 REM This script cleans only bin and plugins, not the lib directories.
 
 CD /D "%0"\..
