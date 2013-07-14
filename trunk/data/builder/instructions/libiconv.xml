@@ -27,13 +27,13 @@
 
     <downloads>
       <download file="libiconv-1.14.tar.gz">
-        <url type="direct" checked="2012-11-07">http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz</url>
+        <url type="direct" checked="2013-05-10">http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>4.984.397</size>
       </download>
     </downloads>
 

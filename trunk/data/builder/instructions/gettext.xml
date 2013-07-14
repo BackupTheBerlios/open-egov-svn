@@ -33,9 +33,35 @@ Example:
 </comment>
   </comments>
 
+  <set version="0.18.2.1" date="2013-03-05" working="true">
+    <requires>
+      <app name="gcc" version="" type="build-tool" />
+      <app name="libiconv" version="1.14" type="required" />
+    </requires>
+
+    <downloads>
+      <download file="gettext-0.18.2.1.tar.gz">
+        <url type="direct" checked="2013-06-11">http://ftp.gnu.org/pub/gnu/gettext/gettext-0.18.2.1.tar.gz</url>
+        <size>15.901.092</size>
+      </download>
+    </downloads>
+
+    <options>
+    </options>
+
+    <patch>
+    </patch>
+
+    <compile>
+    </compile>
+
+    <install>
+    </install>
+  </set>
+
   <set version="0.18.1.1" date="2010-06-06" working="true">
     <requires>
-      <app name="gcc"      version="" type="compile" />
+      <app name="gcc"      version="" type="build-tool" />
       <app name="libiconv" version="" type="required" />
       <app name="xxx"      version="" type="recommended" />
     </requires>
@@ -77,7 +103,7 @@ make install
 
     <downloads>
       <download file="gettext-0.18.2.tar.gz">
-        <url type="direct" checked="2013-02-04">http://ftp.gnu.org/pub/gnu/gettext/gettext-0.18.2.tar.gz</url>
+        <url type="direct" checked="2013-05-10">http://ftp.gnu.org/pub/gnu/gettext/gettext-0.18.2.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
