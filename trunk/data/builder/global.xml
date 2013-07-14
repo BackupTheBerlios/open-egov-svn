@@ -22,7 +22,7 @@ export PATH="${PREFIX}/bin:${PATH}"
   </environment>
 
   <readme>
-This package belongs to the Open eGovernment project.
+This package belongs to the Open E-Government project.
 
 Name: NAME
 Version: VERSION
