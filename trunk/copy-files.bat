@@ -4,8 +4,9 @@ REM $Id: copy-files.bat 410 2012-03-22 22:29:36Z gerrit-albrecht $
 
 REM Copies the files needed for deployment into the OEG directory structure.
 REM After this step it should be possible to use compiled OEG applications
-REM without a MinGW/Qt (SDK) installation. Files not copied here must not be
-REM required by an OEG application.
+REM without a MinGW/Qt (SDK) installation. Qt files not copied here must not be
+REM required by an OEG application. But there are additonal files you need:
+REM zlib, gettext, ...
 
 CD /D "%0"\..
 
@@ -34,46 +35,49 @@ IF NOT EXIST plugins64 (
 )
 
 IF NOT "%COPYQT5DIR%" == "YES" GOTO NO_COPYQT5DIR
-  ECHO Copying original files from Qt5 setup directory...
+  ECHO Copying original files from a standard Qt5 directory...
   ECHO Script tested with this Qt setup file:
-  ECHO qt-windows-opensource-5.0.2-mingw47_32-x86-offline-2013-03-26-466.exe
-  SET SRCDIR=C:\Qt\Qt5.0.2\5.0.2\mingw47_32\bin
+  ECHO qt-windows-opensource-5.1.0-mingw48_opengl-x86-offline.exe
+  SET SRCDIR=C:\Qt\Qt5.1.0\5.1.0\mingw48_32\bin
   SET DSTDIR=bin
   ECHO Copying to "bin"
   ECHO S=%SRCDIR% D=%DSTDIR%
 
-  COPY /B /Y "%SRCDIR%\D3DCompiler_43.dll"        "%DSTDIR%"
-  COPY /B /Y "%SRCDIR%\icudt49.dll"               "%DSTDIR%"
-  COPY /B /Y "%SRCDIR%\icuin49.dll"               "%DSTDIR%"
-  COPY /B /Y "%SRCDIR%\icuuc49.dll"               "%DSTDIR%"
-  COPY /B /Y "%SRCDIR%\libEGL.dll"                "%DSTDIR%"
-  COPY /B /Y "%SRCDIR%\libgcc_s_sjlj-1.dll"       "%DSTDIR%"
-  COPY /B /Y "%SRCDIR%\libGLESv2.dll"             "%DSTDIR%"
-  COPY /B /Y "%SRCDIR%\libstdc++-6.dll"           "%DSTDIR%"
-  COPY /B /Y "%SRCDIR%\libwinpthread-1.dll"       "%DSTDIR%"
-REM COPY /B /Y "%SRCDIR%\Qt5CLucene.dll"            "%DSTDIR%"
-  COPY /B /Y "%SRCDIR%\Qt5Concurrent.dll"         "%DSTDIR%"
-  COPY /B /Y "%SRCDIR%\Qt5Core.dll"               "%DSTDIR%"
-REM COPY /B /Y "%SRCDIR%\Qt5Declarative.dll"        "%DSTDIR%"
+REM COPY /B /Y "%SRCDIR%\D3DCompiler_43.dll"        "%DSTDIR%"
+REM COPY /B /Y "%SRCDIR%\libEGL.dll"                "%DSTDIR%"
+REM COPY /B /Y "%SRCDIR%\libGLESv2.dll"             "%DSTDIR%"
 REM COPY /B /Y "%SRCDIR%\Qt5Designer.dll"           "%DSTDIR%"
 REM COPY /B /Y "%SRCDIR%\Qt5DesignerComponents.dll" "%DSTDIR%"
+REM COPY /B /Y "%SRCDIR%\Qt5Test.dll"               "%DSTDIR%"
+
+  COPY /B /Y "%SRCDIR%\icudt51.dll"               "%DSTDIR%"
+  COPY /B /Y "%SRCDIR%\icuin51.dll"               "%DSTDIR%"
+  COPY /B /Y "%SRCDIR%\icuuc51.dll"               "%DSTDIR%"
+  COPY /B /Y "%SRCDIR%\libgcc_s_dw2-1.dll"        "%DSTDIR%"
+  COPY /B /Y "%SRCDIR%\libstdc++-6.dll"           "%DSTDIR%"
+  COPY /B /Y "%SRCDIR%\libwinpthread-1.dll"       "%DSTDIR%"
+  COPY /B /Y "%SRCDIR%\Qt5CLucene.dll"            "%DSTDIR%"
+  COPY /B /Y "%SRCDIR%\Qt5Concurrent.dll"         "%DSTDIR%"
+  COPY /B /Y "%SRCDIR%\Qt5Core.dll"               "%DSTDIR%"
+  COPY /B /Y "%SRCDIR%\Qt5Declarative.dll"        "%DSTDIR%"
   COPY /B /Y "%SRCDIR%\Qt5Gui.dll"                "%DSTDIR%"
   COPY /B /Y "%SRCDIR%\Qt5Help.dll"               "%DSTDIR%"
   COPY /B /Y "%SRCDIR%\Qt5Multimedia.dll"         "%DSTDIR%"
-REM COPY /B /Y "%SRCDIR%\Qt5MultimediaQuick_p.dll"  "%DSTDIR%"
+  COPY /B /Y "%SRCDIR%\Qt5MultimediaQuick_p.dll"  "%DSTDIR%"
   COPY /B /Y "%SRCDIR%\Qt5MultimediaWidgets.dll"  "%DSTDIR%"
   COPY /B /Y "%SRCDIR%\Qt5Network.dll"            "%DSTDIR%"
   COPY /B /Y "%SRCDIR%\Qt5OpenGL.dll"             "%DSTDIR%"
   COPY /B /Y "%SRCDIR%\Qt5PrintSupport.dll"       "%DSTDIR%"
-REM COPY /B /Y "%SRCDIR%\Qt5Qml.dll"                "%DSTDIR%"
-REM COPY /B /Y "%SRCDIR%\Qt5Quick.dll"              "%DSTDIR%"
-REM COPY /B /Y "%SRCDIR%\Qt5QuickParticles.dll"     "%DSTDIR%"
-REM COPY /B /Y "%SRCDIR%\Qt5QuickTest.dll"          "%DSTDIR%"
+  COPY /B /Y "%SRCDIR%\Qt5Qml.dll"                "%DSTDIR%"
+  COPY /B /Y "%SRCDIR%\Qt5Quick.dll"              "%DSTDIR%"
+  COPY /B /Y "%SRCDIR%\Qt5QuickParticles.dll"     "%DSTDIR%"
+  COPY /B /Y "%SRCDIR%\Qt5QuickTest.dll"          "%DSTDIR%"
   COPY /B /Y "%SRCDIR%\Qt5Script.dll"             "%DSTDIR%"
   COPY /B /Y "%SRCDIR%\Qt5ScriptTools.dll"        "%DSTDIR%"
+  COPY /B /Y "%SRCDIR%\Qt5Sensors.dll"            "%DSTDIR%"
+  COPY /B /Y "%SRCDIR%\Qt5SerialPort.dll"         "%DSTDIR%"
   COPY /B /Y "%SRCDIR%\Qt5Sql.dll"                "%DSTDIR%"
   COPY /B /Y "%SRCDIR%\Qt5Svg.dll"                "%DSTDIR%"
-REM COPY /B /Y "%SRCDIR%\Qt5Test.dll"               "%DSTDIR%"
   COPY /B /Y "%SRCDIR%\Qt5V8.dll"                 "%DSTDIR%"
   COPY /B /Y "%SRCDIR%\Qt5WebKit.dll"             "%DSTDIR%"
   COPY /B /Y "%SRCDIR%\Qt5WebKitWidgets.dll"      "%DSTDIR%"
@@ -81,40 +85,51 @@ REM COPY /B /Y "%SRCDIR%\Qt5Test.dll"               "%DSTDIR%"
   COPY /B /Y "%SRCDIR%\Qt5Xml.dll"                "%DSTDIR%"
   COPY /B /Y "%SRCDIR%\Qt5XmlPatterns.dll"        "%DSTDIR%"
 
-  SET SRCDIR=C:\Qt\Qt5.0.2\5.0.2\mingw47_32\plugins
+  SET SRCDIR=C:\Qt\Qt5.1.0\5.1.0\mingw48_32\plugins
   SET DSTDIR=plugins
   ECHO Copying to "plugins"
 
   REM Copy all plugin files, without debug files or static libraries.
 
-  XCOPY /E /H /Y "%SRCDIR%\accessible\qtaccessiblequick.dll"        "plugins\qt\accessible"
-  XCOPY /E /H /Y "%SRCDIR%\accessible\qtaccessiblewidgets.dll"      "plugins\qt\accessible"
-  XCOPY /E /H /Y "%SRCDIR%\bearer\qgenericbearer.dll"               "plugins\qt\bearer"
-  XCOPY /E /H /Y "%SRCDIR%\bearer\qnativewifibearer.dll"            "plugins\qt\bearer"
-  XCOPY /E /H /Y "%SRCDIR%\designer\qaxwidget.dll"                  "plugins\qt\designer"
-  XCOPY /E /H /Y "%SRCDIR%\designer\qdeclarativeview.dll"           "plugins\qt\designer"
-  XCOPY /E /H /Y "%SRCDIR%\designer\qwebview.dll"                   "plugins\qt\designer"
-  XCOPY /E /H /Y "%SRCDIR%\iconengines\qsvgicon.dll"                "plugins\qt\iconengines"
-  XCOPY /E /H /Y "%SRCDIR%\imageformats\qgif.dll"                   "plugins\qt\imageformats"
-  XCOPY /E /H /Y "%SRCDIR%\imageformats\qico.dll"                   "plugins\qt\imageformats"
-  XCOPY /E /H /Y "%SRCDIR%\imageformats\qjpeg.dll"                  "plugins\qt\imageformats"
-  XCOPY /E /H /Y "%SRCDIR%\imageformats\qmng.dll"                   "plugins\qt\imageformats"
-  XCOPY /E /H /Y "%SRCDIR%\imageformats\qsvg.dll"                   "plugins\qt\imageformats"
-  XCOPY /E /H /Y "%SRCDIR%\imageformats\qtga.dll"                   "plugins\qt\imageformats"
-  XCOPY /E /H /Y "%SRCDIR%\imageformats\qtiff.dll"                  "plugins\qt\imageformats"
-  XCOPY /E /H /Y "%SRCDIR%\imageformats\qwbmp.dll"                  "plugins\qt\imageformats"
-  XCOPY /E /H /Y "%SRCDIR%\mediaservice\dsengine.dll"               "plugins\qt\mediaservice"
-  XCOPY /E /H /Y "%SRCDIR%\mediaservice\qtmedia_audioengine.dll"    "plugins\qt\mediaservice"
-  XCOPY /E /H /Y "%SRCDIR%\platforms\qminimal.dll"                  "plugins\qt\platforms"
-  XCOPY /E /H /Y "%SRCDIR%\platforms\qwindows.dll"                  "plugins\qt\platforms"
-  XCOPY /E /H /Y "%SRCDIR%\playlistformats\qtmultimedia_m3u.dll"    "plugins\qt\playlistformats"
-  XCOPY /E /H /Y "%SRCDIR%\printsupport\windowsprintersupport.dll"  "plugins\qt\printsupport"
-  XCOPY /E /H /Y "%SRCDIR%\qmltooling\qmldbg_inspector.dll"         "plugins\qt\qmltooling"
-  XCOPY /E /H /Y "%SRCDIR%\qmltooling\qmldbg_qtquick2.dll"          "plugins\qt\qmltooling"
-  XCOPY /E /H /Y "%SRCDIR%\qmltooling\qmldbg_tcp.dll"               "plugins\qt\qmltooling"
-  XCOPY /E /H /Y "%SRCDIR%\qmltooling\qmldbg_tcp_qtdeclarative.dll" "plugins\qt\qmltooling"
-  XCOPY /E /H /Y "%SRCDIR%\sqldrivers\qsqlite.dll"                  "plugins\qt\sqldrivers"
-  XCOPY /E /H /Y "%SRCDIR%\sqldrivers\qsqlodbc.dll"                 "plugins\qt\sqldrivers"
+  XCOPY /E /H /Y "%SRCDIR%\accessible\qtaccessiblequick.dll"                 "plugins\qt\accessible"
+  XCOPY /E /H /Y "%SRCDIR%\accessible\qtaccessiblewidgets.dll"               "plugins\qt\accessible"
+  XCOPY /E /H /Y "%SRCDIR%\bearer\qgenericbearer.dll"                        "plugins\qt\bearer"
+  XCOPY /E /H /Y "%SRCDIR%\bearer\qnativewifibearer.dll"                     "plugins\qt\bearer"
+  XCOPY /E /H /Y "%SRCDIR%\designer\qaxwidget.dll"                           "plugins\qt\designer"
+  XCOPY /E /H /Y "%SRCDIR%\designer\qdeclarativeview.dll"                    "plugins\qt\designer"
+  XCOPY /E /H /Y "%SRCDIR%\designer\qwebview.dll"                            "plugins\qt\designer"
+  XCOPY /E /H /Y "%SRCDIR%\iconengines\qsvgicon.dll"                         "plugins\qt\iconengines"
+  XCOPY /E /H /Y "%SRCDIR%\imageformats\qgif.dll"                            "plugins\qt\imageformats"
+  XCOPY /E /H /Y "%SRCDIR%\imageformats\qico.dll"                            "plugins\qt\imageformats"
+  XCOPY /E /H /Y "%SRCDIR%\imageformats\qjpeg.dll"                           "plugins\qt\imageformats"
+  XCOPY /E /H /Y "%SRCDIR%\imageformats\qmng.dll"                            "plugins\qt\imageformats"
+  XCOPY /E /H /Y "%SRCDIR%\imageformats\qsvg.dll"                            "plugins\qt\imageformats"
+  XCOPY /E /H /Y "%SRCDIR%\imageformats\qtga.dll"                            "plugins\qt\imageformats"
+  XCOPY /E /H /Y "%SRCDIR%\imageformats\qtiff.dll"                           "plugins\qt\imageformats"
+  XCOPY /E /H /Y "%SRCDIR%\imageformats\qwbmp.dll"                           "plugins\qt\imageformats"
+  XCOPY /E /H /Y "%SRCDIR%\mediaservice\dsengine.dll"                        "plugins\qt\mediaservice"
+  XCOPY /E /H /Y "%SRCDIR%\mediaservice\qtmedia_audioengine.dll"             "plugins\qt\mediaservice"
+  XCOPY /E /H /Y "%SRCDIR%\platforms\qminimal.dll"                           "plugins\qt\platforms"
+  XCOPY /E /H /Y "%SRCDIR%\platforms\qoffscreen.dll"                         "plugins\qt\platforms"
+  XCOPY /E /H /Y "%SRCDIR%\platforms\qwindows.dll"                           "plugins\qt\platforms"
+  XCOPY /E /H /Y "%SRCDIR%\playlistformats\qtmultimedia_m3u.dll"             "plugins\qt\playlistformats"
+  XCOPY /E /H /Y "%SRCDIR%\printsupport\windowsprintersupport.dll"           "plugins\qt\printsupport"
+  XCOPY /E /H /Y "%SRCDIR%\qml1tooling\qmldbg_inspector.dll"                 "plugins\qt\qml1tooling"
+  XCOPY /E /H /Y "%SRCDIR%\qml1tooling\qmldbg_tcp_qtdeclarative.dll"         "plugins\qt\qml1tooling"
+  XCOPY /E /H /Y "%SRCDIR%\qmltooling\qmldbg_qtquick2.dll"                   "plugins\qt\qmltooling"
+  XCOPY /E /H /Y "%SRCDIR%\qmltooling\qmldbg_tcp.dll"                        "plugins\qt\qmltooling"
+  XCOPY /E /H /Y "%SRCDIR%\sensorgestures\qtsensorgestures_plugin.dll"       "plugins\qt\sensorgestures"
+  XCOPY /E /H /Y "%SRCDIR%\sensorgestures\qtsensorgestures_shakeplugin.dll"  "plugins\qt\sensorgestures"
+  XCOPY /E /H /Y "%SRCDIR%\sensors\qtsensors_dummy.dll"                      "plugins\qt\sensors"
+  XCOPY /E /H /Y "%SRCDIR%\sensors\qtsensors_generic.dll"                    "plugins\qt\sensors"
+  XCOPY /E /H /Y "%SRCDIR%\sqldrivers\qsqlite.dll"                           "plugins\qt\sqldrivers"
+  XCOPY /E /H /Y "%SRCDIR%\sqldrivers\qsqlodbc.dll"                          "plugins\qt\sqldrivers"
+
+  SET SRCDIR=C:\Qt\Qt5.1.0\5.1.0\mingw48_32\translations
+  SET DSTDIR=translations
+  ECHO Copying to "translations"
+
+  XCOPY /E /H /Y "%SRCDIR%\qt*.qm"  "%DSTDIR%\"
 :NO_COPYQT5DIR
 
 IF "%COPYQT5MINGW32DIRS%" == "YES" (

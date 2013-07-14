@@ -34,13 +34,14 @@ GOTO TEMP_FOUND
 
 
 REM Setting up environment for Qt usage...
-REM Look into qtenv2.bat and/or qtvars.bat for updated data.
-REM C:\Windows\System32\cmd.exe /A /Q /K C:\Qt\Qt5.0.2\5.0.2\mingw47_32\bin\qtenv2.bat
+REM Look into qtenv2.bat for updated data.
+REM C:\Windows\System32\cmd.exe /A /Q /K C:\Qt\Qt5.1.0\5.1.0\mingw48_32\bin\qtenv2.bat
 
 IF NOT "%USEQT5%" == "YES" GOTO NO_USEQT5
   ECHO Using standard Qt5 setup directory...
-  IF EXIST C:\Qt\Qt5.0.2\5.0.2\mingw47_32\nul SET QTDIR=C:\Qt\Qt5.0.2\5.0.2\mingw47_32
-  SET PATH=%QTDIR%\bin;C:\Qt\Qt5.0.2\Tools\MinGW\bin;%PATH%
+  IF EXIST C:\Qt\Qt5.1.0\5.1.0\mingw48_32\nul SET QTDIR=C:\Qt\Qt5.1.0\5.1.0\mingw48_32
+  SET PATH=%QTDIR%\bin;C:\Qt\Qt5.1.0\Tools\mingw48_32\bin;%PATH%
+  SET EXAMPLESDIR=%QTDIR%\examples
   GOTO QTDIR_FOUND_PATH_SET
 :NO_USEQT5
 

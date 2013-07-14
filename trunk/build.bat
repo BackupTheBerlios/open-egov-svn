@@ -6,6 +6,15 @@ CALL ENV.BAT
 
 CD /D "%0"\..
 
+ECHO Building additional Qt plugins ...
+
+REM C:\Qt\Qt5.1.0\5.1.0\Src\qtbase\src\plugins\sqldrivers\mysql
+
+
+
+ECHO Installing required libraries ...
+
+
 ECHO Building libraries ...
 
 IF EXIST src\libraries (
