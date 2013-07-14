@@ -2,7 +2,7 @@
 
 rem $Id$
 
-cd /d %0\..\..\bin
+cd /d %0\..\..\bin.tools
 
 if not exist "%1" goto filenotfound
 
