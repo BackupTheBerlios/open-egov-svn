@@ -6,7 +6,8 @@ QT       += core
 # Added  network because libs including e.g. OEG/Qt/Application.h need this for the Connector.h
 # Wanna remove this, but need an elegant solution first.
 #dbus
-DESTDIR   = ../../../../bin
+DESTDIR       = ../../../../bin
+DESTDIRTOOLS  = $${DESTDIR}.tools
 QMAKE_LFLAGS += -Wl,-enable-stdcall-fixup -Wl,-enable-auto-import -Wl,-enable-runtime-pseudo-reloc
 #CONFIG += qdbus
 
@@ -54,7 +55,7 @@ else {
 # hard-coded (version number). Need a better solution...
 
 win32 {
-  BINDIR  = $${OUT_PWD}/$${DESTDIR}
+  BINDIR  = $${OUT_PWD}/$${DESTDIRTOOLS}
   contains(DIR_SEPARATOR, "\\") {
     BINDIR = $$replace(BINDIR, "/", "\\")
   }
