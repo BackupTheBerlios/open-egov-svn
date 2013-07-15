@@ -7,7 +7,6 @@ QT       += core
 # Wanna remove this, but need an elegant solution first.
 #dbus
 DESTDIR       = ../../../../bin
-DESTDIRTOOLS  = $${DESTDIR}.tools
 QMAKE_LFLAGS += -Wl,-enable-stdcall-fixup -Wl,-enable-auto-import -Wl,-enable-runtime-pseudo-reloc
 #CONFIG += qdbus
 
@@ -55,11 +54,12 @@ else {
 # hard-coded (version number). Need a better solution...
 
 win32 {
-  BINDIR  = $${OUT_PWD}/$${DESTDIRTOOLS}
+  BINDIR = $${OUT_PWD}/$${DESTDIR}
   contains(DIR_SEPARATOR, "\\") {
     BINDIR = $$replace(BINDIR, "/", "\\")
   }
-  PEFLAGS = $${BINDIR}$${DIR_SEPARATOR}peflags.exe
+  BINDIRTOOLS = $${BINDIR}.tools
+  PEFLAGS = $${BINDIRTOOLS}$${DIR_SEPARATOR}peflags.exe
   exists($${PEFLAGS}) {
     QMAKE_POST_LINK = \"$${PEFLAGS}\" --dynamicbase=true --nxcompat=true \"$${BINDIR}$${DIR_SEPARATOR}$${TARGET}1.dll\"
   }
