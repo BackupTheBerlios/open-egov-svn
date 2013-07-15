@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<category base="multimedia">
+  <strings lang="en_US">
+    <string name="title">Multimedia</string>
+    <string name="description">Multimedia applications.</string>
+  </strings>
+
+  <strings lang="de_DE">
+    <string name="title">Multimedia</string>
+    <string name="description">Multimedia-Anwendungen.</string>
+  </strings>
+</application>
+

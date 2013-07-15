@@ -4,7 +4,7 @@ TARGET    = builder
 SOURCES   = *.cpp
 HEADERS   = *.h
 FORMS     = 
-QT       += xml network
+QT       += xml network gui widgets
 PACKAGES  = QT GETTEXT
 
 include(../../../common.pri)

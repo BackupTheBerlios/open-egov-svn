@@ -17,6 +17,7 @@ TEMPLATE     = app
 CONFIG      += qt warn_on
 QT          += core gui xml
 DESTDIR      = $${PRO_OUT_PATH}$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}bin
+DESTDIRTOOLS  = $${DESTDIR}.tools
 INCLUDEPATH += ..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}libraries
 QMAKE_LFLAGS += -Wl,-enable-stdcall-fixup -Wl,-enable-auto-import -Wl,-enable-runtime-pseudo-reloc
 
@@ -64,10 +65,10 @@ win32 {
     QMAKE_POST_LINK += strip --strip-unneeded -o \"$${MYTEMPDIR}$${TARGET}.stripped\" \"$${DESTDIR}$${DIR_SEPARATOR}$${TARGET}.exe\" && MOVE /Y \"$${MYTEMPDIR}$${TARGET}.stripped\" \"$${DESTDIR}$${DIR_SEPARATOR}$${TARGET}.exe\"
   }
 
-  exists("$${DESTDIR}$${DIR_SEPARATOR}peflags.exe") {
+  exists("$${DESTDIRTOOLS}$${DIR_SEPARATOR}peflags.exe") {
     QMAKE_POST_LINK += "&&"
     #$${DESTDIR}$${DIR_SEPARATOR}$$replace(TARGET, " ", "\ ").exe
-    QMAKE_POST_LINK += cd $${DESTDIR} && peflags.exe --dynamicbase=true --nxcompat=true \"$${TARGET}.exe\"
+    QMAKE_POST_LINK += cd $${DESTDIR} && "$${DESTDIRTOOLS}$${DIR_SEPARATOR}peflags.exe" --dynamicbase=true --nxcompat=true \"$${TARGET}.exe\"
   }
   else {
     message("No peflags.exe found.")

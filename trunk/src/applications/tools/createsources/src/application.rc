@@ -16,10 +16,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+// Automatically generated file. Do not edit manually!
+// See application.xml in parent directory (project tag).
+
 #if defined(UNDER_CE)
-#  include <winbase.h>
+#include <winbase.h>
 #else
-#  include <winver.h>
+#include <winver.h>
 #endif
 
 #pragma code_page(1252)
@@ -38,29 +41,44 @@
 #define VER_DEBUG 0x0L
 #endif
 
+#ifdef SNAPSHOT_BUILD
+#define VER_RELEASE VS_FF_SPECIALBUILD|VS_FF_PRERELEASE
+#else
+#define VER_RELEASE 0x0L
+#endif
+
 VS_VERSION_INFO VERSIONINFO
 FILEVERSION     VER_FILEVERSION
 PRODUCTVERSION  VER_PRODUCTVERSION
-FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK   // 0x3F
-FILEFLAGS       VER_DEBUG
-FILEOS          VOS__WINDOWS32         // 0x00040000L
-FILETYPE        VFT_APP                // 0x1
-FILESUBTYPE     VFT2_UNKNOWN           // 0x0
+FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK    // 0x3F
+FILEFLAGS       (VER_DEBUG|VER_RELEASE)
+FILEOS          VOS__WINDOWS32          // 0x00040000L
+FILETYPE        VFT_APP                 // 0x1
+FILESUBTYPE     VFT2_UNKNOWN            // 0x0
 BEGIN
   BLOCK "StringFileInfo"
   BEGIN
-    BLOCK "040904E4"
+    BLOCK "040904E4"                    // see VarFileInfo
     BEGIN
       VALUE "InternalName",     "createsources.exe\0"
       VALUE "OriginalFilename", "createsources.exe\0"
-      VALUE "FileDescription",  "Open E-Government: CreateSources.\0"
-      VALUE "ProductName",      "Open E-Government: CreateSources.\0"
+      VALUE "FileDescription",  "Open E-Government: Create Sources.\0"
+      VALUE "ProductName",      "Open E-Government: Create Sources.\0"
       VALUE "Comments",         "Homepage: www.open-egov.de\0"
       VALUE "CompanyName",      "gasi.de\0"
       VALUE "LegalCopyright",   "Copyright (C) 2004-2013 GASI.\0"
       VALUE "LegalTrademarks",  "Open E-Government.\0"
       VALUE "FileVersion",      VER_FILEVERSION_STR
       VALUE "ProductVersion",   VER_PRODUCTVERSION_STR
+#ifdef VER_SNAPSHOT_BUILD
+      VALUE "SpecialBuild",     "Snapshot development release"
+#endif
+#ifdef VER_PRIVATE_BUILD
+      VALUE "PrivateBuild",     "Built by ", szUserName, "\0"
+#endif
+#ifdef VER_OLE_SELF_REGISTER
+      VALUE "OleSelfRegister",  "\0"
+#endif
     END
   END
 
@@ -70,8 +88,8 @@ BEGIN
     // It consists of any number of WORD,WORD pairs, with each pair
     // describing a language,codepage combination supported by the file.
     //
-    // For example, a file might have values "0x409,1252" indicating that it
-    // supports English language (0x409) in the Windows ANSI codepage (1252).
+    // The values "0x409,1252" indicate that the file supports English
+    // language (0x409) in the Windows ANSI codepage (1252).
     //
     // http://msdn.microsoft.com/en-us/library/aa381058%28VS.85%29.aspx
 

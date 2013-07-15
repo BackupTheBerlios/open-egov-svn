@@ -10,7 +10,7 @@
     <data name="generate-pro" value="true" />
     <data name="generate-main" value="false" />
     <data name="generate-rc" value="true" />
-    <data name="pro-qt" value="xml" />
+    <data name="pro-qt" value="gui widgets xml" />
     <data name="pro-packages" value="QT GETTEXT" />
     <data name="pro-config" value="console" />
     <data name="mainwindow-class" value="" />
