@@ -35,7 +35,9 @@ class Pixel : public QObject
     ~Pixel();
 
   protected:
-
+    unsigned char m_red;
+    unsigned char m_green;
+    unsigned char m_blue;
 };
 
 }}
