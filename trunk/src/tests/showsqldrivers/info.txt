@@ -1,0 +1,4 @@
+$Id$
+
+This code lists all available mysql drivers. You need it to
+check them, if you are missing a driver.
