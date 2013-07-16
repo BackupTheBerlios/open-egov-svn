@@ -3,18 +3,19 @@
 // Open E-Government
 // Copyright (C) 2005-2013 by Gerrit M. Albrecht
 //
-// This program is free software: you can redistribute it and/or
+// This file is part of the Open E-Government project (OEG project).
+// The OEG project is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 3
 // of the License, or (at your option) any later version.
 //
-// This program is distributed in the hope that it will be useful,
+// The OEG project is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 // See the GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with this program. If not, see <http://www.gnu.org/licenses/>.
+// along with the OEG project. If not, see <http://www.gnu.org/licenses/>.
 
 #include <OEG/Qt/Application.h>
 
@@ -39,18 +40,42 @@ QString     pro_packages        = "";
 QString     pro_config          = "";
 QString     mainwindow_class    = "";
 
+QString replaceTextWithText(const QString &text, const QString &pattern, const QString &data)
+{
+  QString line = text;
+
+  if (line.contains(pattern, Qt::CaseInsensitive))
+    line.replace(pattern, data, Qt::CaseInsensitive);
+
+  return line;
+}
+
+QString replacePlaceholders(const QString &text)
+{
+  QString line = text;
+
+  line = replaceTextWithText(line, "$$APPLICATION-VERSION-CSV$$", application_version.split(".").join(","));
+  line = replaceTextWithText(line, "$$APPLICATION-VERSION$$", application_version);
+  line = replaceTextWithText(line, "$$APPLICATION-BINARY$$", application_binary);
+  line = replaceTextWithText(line, "$$APPLICATION-NAME$$", application_name);
+  line = replaceTextWithText(line, "$$MAINWINDOW-CLASS$$", mainwindow_class);
+  line = replaceTextWithText(line, "$$CURRENT-YEAR$$", QString::number(QDate::currentDate().year()));
+
+  return line;
+}
+
 int copyFileAndReplacePlaceholders(const QString &inputFileName, const QString &outputFileName)
 {
   QFile inputFile(inputFileName);
 
   if (! inputFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-    qWarning("Input template file not open.");
+    qWarning(_("Input template file not open."));
     return -1;
   }
 
   QFile outputFile(outputFileName);
   if (! outputFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
-    qWarning("Output file not open.");
+    qWarning(_("Output file not open."));
     return -2;
   }
 
@@ -60,28 +85,7 @@ int copyFileAndReplacePlaceholders(const QString &inputFileName, const QString &
   while (! in.atEnd()) {
     QString line = in.readLine();
 
-    if (line.contains("$$CURRENT-YEAR$$", Qt::CaseInsensitive)) {
-      line.replace("$$CURRENT-YEAR$$", QString::number(QDate::currentDate().year()),
-                   Qt::CaseInsensitive);
-    }
-    if (line.contains("$$APPLICATION-VERSION-CSV$$", Qt::CaseInsensitive)) {
-      line.replace("$$APPLICATION-VERSION-CSV$$",
-                   application_version.split(".").join(","),
-                   Qt::CaseInsensitive);
-    }
-    if (line.contains("$$APPLICATION-VERSION$$", Qt::CaseInsensitive)) {
-      line.replace("$$APPLICATION-VERSION$$", application_version,
-                   Qt::CaseInsensitive);
-    }
-    if (line.contains("$$APPLICATION-BINARY$$", Qt::CaseInsensitive)) {
-      line.replace("$$APPLICATION-BINARY$$", application_binary, Qt::CaseInsensitive);
-    }
-    if (line.contains("$$APPLICATION-NAME$$", Qt::CaseInsensitive)) {
-      line.replace("$$APPLICATION-NAME$$", application_name, Qt::CaseInsensitive);
-    }
-    if (line.contains("$$MAINWINDOW-CLASS$$", Qt::CaseInsensitive)) {
-      line.replace("$$MAINWINDOW-CLASS$$", mainwindow_class, Qt::CaseInsensitive);
-    }
+	line = replacePlaceholders(line);
 
     out << line << "\n";
   }
@@ -94,18 +98,50 @@ int copyFileAndReplacePlaceholders(const QString &inputFileName, const QString &
 
 int updateFileAndReplaceHeader(const QString &inputFileName, const QString &sourceFileName)
 {
-  QFile inputFile(inputFileName);
+  QFile file(inputFileName);
 
-  if (! inputFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-    qWarning("Input template file not open.");
+  if (! file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    qWarning(_("Input template file not open."));
     return -1;
   }
 
+  QByteArray content;
 
+  while (! file.atEnd()) {
+    content += replacePlaceholders(file.readLine());
+    //content += "\n";
+  }
 
+  file.close();
 
+  file.setFileName(sourceFileName);
 
-  inputFile.close();
+  if (! file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    qWarning(_("Source file not open."));
+    return -2;
+  }
+
+  QByteArray line;
+
+  while (! file.atEnd() && file.readLine().startsWith("//"))    // Skip first comment block.
+    ;
+  content += "\n";                                              // Add a new line.
+  while (! file.atEnd())                                        // Copy all the following data.
+    content += file.readLine();
+
+  file.close();
+
+  // Copy collected data into the given source file.
+
+  //file.setFileName(file.fileName() + "X");
+
+  if (! file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+    qWarning(_("Source file not writeable."));
+    return -3;
+  }
+
+  file.write(content);
+  file.close();
 
   return 0;
 }
@@ -120,14 +156,14 @@ int main(int argc, char *argv[])
 {
   QApplication app(argc, argv);
 
-  QStringList args                = QCoreApplication::arguments();
-  QString     filename            = "";
-  bool        verbose             = false;
+  QStringList args          = QCoreApplication::arguments();
+  QString     filename      = "";
+  bool        verbose       = false;
 
-  bool        generate_pro        = false;                 // Data from application.xml
-  bool        generate_main       = false;
-  bool        generate_rc         = false;
-  bool        update_files        = false;                 // Only via command line, not needed in xml.
+  bool        generate_pro  = false;                       // Data from application.xml
+  bool        generate_main = false;
+  bool        generate_rc   = false;
+  bool        update_files  = false;                       // Only via command line, not needed in xml.
 
   application_binary  = "";
   application_name    = "";
@@ -169,7 +205,7 @@ int main(int argc, char *argv[])
 
   QFile file(filename);
   if (! file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-    qWarning("File not open.");
+    qWarning(_("File not open."));
     return -2;
   }
 
@@ -183,14 +219,14 @@ int main(int argc, char *argv[])
 
   QDomDocument document("application");
   if (! document.setContent(&file)) {
-    qWarning() << "Not a valid XML document.";
+    qWarning() << _("Not a valid XML document.");
     return 0;
   }
 
   QDomElement root = document.documentElement();           // Get the root element.
   QString rootTag = root.tagName();                        // Check the root tag name.
   if (! rootTag.contains("application"))
-    qDebug() << "Wrong root tag name:" << rootTag;
+    qDebug() << _("Wrong root tag name:") << rootTag;
 
   // Ready to find our data.
 
@@ -211,11 +247,11 @@ int main(int argc, char *argv[])
 
   nodes = root.elementsByTagName("project");               // We want to get the "project" tag.
   if (nodes.count() <= 0) {
-    qWarning() << "No project tag found.";
+    qWarning() << _("No project tag found.");
     return 0;
   }
   element = nodes.at(0).toElement();
-  qDebug() << "Using only the first tag:" << element.tagName();
+  qDebug() << _("Using only the first tag:") << element.tagName();
 
   // Parse the data tags inside of the project tag.
 
@@ -273,11 +309,11 @@ int main(int argc, char *argv[])
   if (generate_pro) {
     filename = srcDirName + "src.pro";
     if (verbose)
-      qWarning() << "Creating pro file:" << filename;
+      qWarning() << _("Creating pro file:") << filename;
 
     file.setFileName(filename);
     if (! file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-      qWarning("Output file not open.");
+      qWarning(_("Output file not open."));
       return -3;
     }
 
@@ -323,7 +359,7 @@ int main(int argc, char *argv[])
   if (generate_main) {
     filename = srcDirName + "main.cpp";
     if (verbose)
-      qWarning() << "Creating standard main file:" << filename;
+      qWarning() << _("Creating standard main file:") << filename;
 
     copyFileAndReplacePlaceholders(templatesFileName("main.cpp"), filename);
   }
@@ -331,7 +367,7 @@ int main(int argc, char *argv[])
   if (generate_rc) {
     filename = srcDirName + "application.rc";
     if (verbose)
-      qWarning() << "Creating rc file:" << filename;
+      qWarning() << _("Creating rc file:") << filename;
 
     copyFileAndReplacePlaceholders(templatesFileName("application.rc"), filename);
   }
