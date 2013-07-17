@@ -18,7 +18,6 @@ function oegenv {
   export OEG_BASE_DIR_INSTALL="/open-egovernment-install"
   export WORKDIR="/work"
   export OEGDIR="/i/Projekte/open-egov"
-  export OEG_ARCHIVES_DIR="${OEGDIR}/data/builder/archives/windows-${TARGETBITS}"
   export OEG_DOWNLOADS_DIR="${OEGDIR}/data/builder/downloads"
   export OEG_PATCHES_DIR="${OEGDIR}/data/builder/patches"
 
@@ -55,6 +54,8 @@ function oegenv {
     echo Wrong parameter: $1
     return
   fi
+
+  export OEG_ARCHIVES_DIR="${OEGDIR}/data/builder/archives/windows-${TARGETBITS}"
 }
 
 function oegarchive {
@@ -137,9 +138,25 @@ function oegextract {
   export FILENAME=$OEG_DOWNLOADS_DIR/$1
   echo "Extracting: ${FILENAME}"
 
-  if [[ $FILENAME == *.tar.gz ]]
-  then
+  if [[ $FILENAME == *.tar.gz ]]; then
     export FILEEXTENSION=.tar.gz
+	export OUTPUTDIR=`basename $FILENAME $FILEEXTENSION`
+    echo Extension: ${FILEEXTENSION}
+	echo Output Directory: ${OUTPUTDIR}
+
+    if [ -d "$WORKDIR/$OUTPUTDIR" ]
+    then
+      echo Error: The output directory already exists. Remove it first.
+      return
+    fi
+
+	"${PATH_TO_7ZIP}" x "${FILENAME}" -so | "${PATH_TO_7ZIP}" x -si -ttar -y
+	cd "$WORKDIR/$OUTPUTDIR"
+	return
+  fi
+
+  if [[ $FILENAME == *.tar.bz2 ]]; then
+    export FILEEXTENSION=.tar.bz2
 	export OUTPUTDIR=`basename $FILENAME $FILEEXTENSION`
     echo Extension: ${FILEEXTENSION}
 	echo Output Directory: ${OUTPUTDIR}
@@ -163,7 +180,19 @@ function oegextract {
 
   if [[ $FILENAME == *.zip ]]
   then
-    echo ZIP archive unhandled
+    export FILEEXTENSION=.zip
+	export OUTPUTDIR=`basename $FILENAME $FILEEXTENSION`
+    echo Extension: ${FILEEXTENSION}
+	echo Output Directory: ${OUTPUTDIR}
+
+    if [ -d "$WORKDIR/$OUTPUTDIR" ]
+    then
+      echo Error: The output directory already exists. Remove it first.
+      return
+    fi
+
+	"${PATH_TO_7ZIP}" x "${FILENAME}"
+	cd "$WORKDIR/$OUTPUTDIR"
 	return
   fi
 
@@ -196,6 +225,8 @@ function oegextract {
     echo XZ archive unhandled
 	return
   fi
+
+  echo Unknown file or archive format. Don\'t know how to extract...
 }
 
 # Extracts a binary archive into the base directory ("/open-egovernment").
@@ -216,6 +247,8 @@ function oegimport {
     return
   fi
 
+  pushd .
+
   cd "${BASEDIR}"
   case "${OEG_ARCHIVE_FORMAT}" in
     '7z')
@@ -231,5 +264,7 @@ function oegimport {
       echo "Unknown binary archive format: \"${OEG_ARCHIVE_FORMAT}\"!"
       ;;
   esac
+
+  popd
 }
 
