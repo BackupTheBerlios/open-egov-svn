@@ -2,7 +2,8 @@
 
 <!-- $Id$ -->
 
-<pack name="zlib" license="OSI OSS, GPL compatible"> <!-- http://de.wikipedia.org/wiki/Zlib-Lizenz -->
+<pack name="zlib" license="OSI OSS, GPL compatible" state="works">
+  <!-- http://de.wikipedia.org/wiki/Zlib-Lizenz -->
   <meta>
     <homepage>http://zlib.net/</homepage>
     <download>http://zlib.net/</download>
@@ -34,7 +35,7 @@
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>571.091</size>
+        <size>571091</size>
       </download>
     </downloads>
 
@@ -73,7 +74,7 @@ make install -fwin32/Makefile.gcc SHARED_MODE=1
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>560.351</size>
+        <size>560351</size>
       </download>
     </downloads>
 

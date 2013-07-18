@@ -2,13 +2,13 @@
 
 <!-- $Id$ -->
 
-<pack name="jpeg" license="">
+<pack name="libjpeg" license="GPLv2">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://libjpeg.sourceforge.net/</homepage>
+    <download>http://sourceforge.net/projects/libjpeg/</download>
     <descriptions>
       <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="long">The libjpeg is a free software library written for JPEG image compression.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
@@ -19,14 +19,14 @@
     <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
+  <set version="6b" date="2008-12-30" working="true">
     <requires>
       <app name="" version="" type="required" />
     </requires>
 
     <downloads>
       <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+        <url type="sourceforge" checked="2013-07-19">http://sourceforge.net/projects/libjpeg/files/libjpeg/6b/jpegsrc.v6b.tar.gz/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>

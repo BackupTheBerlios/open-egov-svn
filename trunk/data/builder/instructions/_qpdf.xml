@@ -2,37 +2,43 @@
 
 <!-- $Id$ -->
 
-<pack name="freetype" license="">
+<pack name="xz" license="Public Domain, some parts GPL" state="works">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://tukaani.org/xz/</homepage>
+    <download>http://tukaani.org/xz/</download>
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long"></description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>freetype</keywords>
+    <keywords>xz</keywords>
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
+    <comment date="" author=""> Building the code from the git repository requires GNU Autotools. Here are the minimum versions that should work with XZ Utils; using the latest versions is strongly recommended:
+
+    Autoconf 2.64
+    Automake 1.10
+    gettext 0.18 (Note: autopoint depends on cvs!)
+    libtool 2.2
+</comment>
   </comments>
 
-  <set version="" date="" working="true">
+  <set version="" date="2012-06-22" working="false">
     <requires>
-      <app name="" version="" type="required" />
+      <app name="gettext" version="0.18" type="required" />
     </requires>
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="xz-5.0.4.tar.xz"> <!-- windows binaries available -->
+        <url type="direct" checked="2012-11-12">http://tukaani.org/xz/xz-5.0.4.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>915.048</size>
       </download>
     </downloads>
 

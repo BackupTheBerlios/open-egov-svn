@@ -2,17 +2,17 @@
 
 <!-- $Id$ -->
 
-<pack name="p7zip" license="">
+<pack name="freetype" license="BSD">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://www.freetype.org/</homepage>
+    <download>http://sourceforge.net/projects/freetype/</download>
     <descriptions>
       <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="long">The FreeType project develops free, portable and high-quality software solutions for digital typography.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>p7zip</keywords>
+    <keywords>freetype</keywords>
   </meta>
 
   <comments>
@@ -25,8 +25,8 @@
     </requires>
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="freetype-2.5.0.1.tar.bz2">
+        <url type="sourceforge" checked="2013-07-18">http://sourceforge.net/projects/freetype/files/freetype2/2.5.0/freetype-2.5.0.1.tar.bz2/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>

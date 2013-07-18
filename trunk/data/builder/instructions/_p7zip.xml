@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="p7zip" license="" state="fails">
+  <meta>
+    <homepage>http://p7zip.sourceforge.net/</homepage>
+    <download>http://sourceforge.net/projects/p7zip/</download>
+    <descriptions>
+      <description lang="en" type="short">POSIX port of 7-zip.</description>
+      <description lang="en" type="long">This is the POSIX (UNIX, Linux, MacOS, ...) port of the 7-zip archiver.</description>
+      <description lang="de" type="short">POSIX-Portierung von 7-zip</description>
+      <description lang="de" type="long">Das ist die POSIX-Portierung (UNIX, Linux, MacOS, ...) des 7-zip-Archivierers.</description>
+    </descriptions>
+    <keywords>p7zip</keywords>
+  </meta>
+
+  <comments>
+    <comment date="2013-07-18" author="Gerrit M. Albrecht">
+Original 7-zip provides latest sources. Download from SF not from the homepage.
+
+http://www.7-zip.org/download.html
+http://sourceforge.net/projects/sevenzip/files/7-Zip/
+http://sourceforge.net/projects/sevenzip/files/7-Zip/9.22/7z922.tar.bz2/download
+
+http://www.7-zip.org/sdk.html
+http://downloads.sourceforge.net/sevenzip/lzma922.tar.bz2
+http://sourceforge.net/projects/sevenzip/files/LZMA%20SDK/
+http://sourceforge.net/projects/sevenzip/files/LZMA%20SDK/lzma922.tar.bz2/download
+    </comment>
+  </comments>
+
+  <set version="9.20.1" date="2013-07-18" working="true">
+    <requires></requires>
+
+    <downloads>
+      <download file="p7zip_9.20.1_src_all.tar.bz2">
+        <url type="sourceforge" checked="2013-07-18">http://sourceforge.net/projects/p7zip/files/latest/download</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size>3.835.235</size>
+      </download>
+    </downloads>
+
+    <options>
+    </options>
+
+    <patch>
+    </patch>
+
+    <compile>
+    </compile>
+
+    <install>
+    </install>
+  </set>
+</pack>
+

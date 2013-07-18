@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="giflib" license="">
+  <meta>
+    <homepage>http://giflib.sourceforge.net/</homepage>
+    <download>http://sourceforge.net/projects/giflib/</download>
+    <descriptions>
+      <description lang="en" type="short">GIFLIB handle GIF image files</description>
+      <description lang="en" type="long">The GIFLIB project maintains the giflib service library, which has been pulling images out of GIFs since 1989.</description>
+      <description lang="de" type="short">GIFLIB verarbeitet GIF-Grafikdateien</description>
+      <description lang="de" type="long">Das GIFLIB-Projekt kümmert sich um die giflib-Bibliothek, welche seit 1989 Bilder aus GIF-Dateien extrahiert.</description>
+    </descriptions>
+    <keywords>giflib, gif</keywords>
+  </meta>
+
+  <comments>
+    <comment date="" author=""></comment>
+  </comments>
+
+  <set version="5.0.4" date="2013-07-19" working="true">
+    <requires>
+      <app name="" version="" type="required" />
+    </requires>
+
+    <downloads>
+      <download file="giflib-5.0.4.tar.bz2">
+        <url type="sourceforge" checked="2013-07-19">http://sourceforge.net/projects/giflib/files/latest/download</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <options>
+    </options>
+
+    <patch>
+    </patch>
+
+    <compile>
+./configure --prefix=${PREFIX}
+make
+make install
+    </compile>
+
+    <install>
+    </install>
+  </set>
+</pack>
+

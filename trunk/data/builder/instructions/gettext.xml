@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<pack name="gettext" license="">
+<pack name="gettext" license="" state="works">
   <meta>
     <homepage>http://www.gnu.org/software/gettext/</homepage>
     <download>http://ftp.gnu.org/pub/gnu/gettext/</download>

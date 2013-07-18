@@ -2,15 +2,15 @@
 
 <!-- $Id$ -->
 
-<pack name="pcre" license="">
+<pack name="pcre" license="" state="okay">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://www.pcre.org/</homepage>
+    <download>https://sourceforge.net/projects/pcre/files/pcre/</download>
     <descriptions>
-      <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
-      <description lang="de" type="short"></description>
-      <description lang="de" type="long"></description>
+      <description lang="en" type="short">PCRE library</description>
+      <description lang="en" type="long">Perl Compatible Regular Expressions (PCRE) library.</description>
+      <description lang="de" type="short">PCRE-Bibliothek</description>
+      <description lang="de" type="long">Perl Compatible Regular Expressions (PCRE)-Bibliothek.</description>
     </descriptions>
     <keywords>pcre</keywords>
   </meta>
@@ -19,20 +19,25 @@
     <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="8.33" date="2013-07-17" working="true">
+    <requires></requires>
+    <options>
+      <option name="zlib"  value="true" default="true" conditions="" para-if-true="" para-if-false="" />
+      <option name="bzip2" value="true" default="true" conditions="" para-if-true="" req-if-true="" req-if-false="" para-if-false="" />
+      <option name="libedit"  value="true" default="true" conditions="" para-if-true="" para-if-false="" />
+      <option name="libreadline" value="true" default="true" conditions="" para-if-true="" para-if-false="" />
+    </options>
+    <recommended></recommended>
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="pcre-8.33.tar.gz">
+        <url type="direct" checked="2013-07-17">ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.33.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>1889401</size>
       </download>
     </downloads>
 
@@ -43,9 +48,13 @@
     </patch>
 
     <compile>
-./configure --prefix=${PREFIX}
+oegextract pcre-8.33.tar.gz
+#you may activate: libz libbz2 libedit libreadline
+configure --prefix=${OEG_BASE_DIR} --enable-utf8 --enable-newline-is-anycrlf
 make
-make install
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive pcre-8.33
     </compile>
 
     <install>

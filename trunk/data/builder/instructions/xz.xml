@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<pack name="xz" license="Public Domain, some parts GPL">
+<pack name="xz" license="Public Domain, some parts GPL" state="works">
   <meta>
     <homepage>http://tukaani.org/xz/</homepage>
     <download>http://tukaani.org/xz/</download>
@@ -16,7 +16,7 @@
   </meta>
 
   <comments>
-    <comment date="" author=""> Building the code from the git repository requires GNU Autotools. Here are the minimum versions that should work with XZ Utils; using the latest versions is strongly recommended:
+    <comment date="" author="">Building the code from the git repository requires GNU Autotools. Here are the minimum versions that should work with XZ Utils; using the latest versions is strongly recommended:
 
     Autoconf 2.64
     Automake 1.10
@@ -31,14 +31,14 @@
     </requires>
 
     <downloads>
-      <download file="xz-5.0.4.tar.xz"> <!-- windows binaries available -->
-        <url type="direct" checked="2012-11-12">http://tukaani.org/xz/xz-5.0.4.tar.xz</url>
+      <download file="xz-5.0.5.tar.xz"> <!-- windows binaries available -->
+        <url type="direct" checked="2012-11-12">http://tukaani.org/xz/xz-5.0.5.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>915.048</size>
+        <size>928.700</size>
       </download>
     </downloads>
 
