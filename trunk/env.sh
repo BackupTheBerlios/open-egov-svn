@@ -14,40 +14,38 @@ function oegenv {
     return   # don’t use exit!
   fi
 
-  export BASEDIR="/open-egovernment"
-  export OEG_BASE_DIR_INSTALL="/open-egovernment-install"
-  export WORKDIR="/work"
-  export OEGDIR="/i/Projekte/open-egov"
-  export OEG_DOWNLOADS_DIR="${OEGDIR}/data/builder/downloads"
-  export OEG_PATCHES_DIR="${OEGDIR}/data/builder/patches"
+  export OEG_BASE_DIR="/open-egovernment"
+  export OEG_INSTALL_DIR="/open-egovernment-install"
+  export OEG_WORK_DIR="/work"
+  export OEG_PROJECT_DIR="/i/Projekte/open-egov"
+  export OEG_DOWNLOADS_DIR="${OEG_PROJECT_DIR}/data/builder/downloads"
+  export OEG_PATCHES_DIR="${OEG_PROJECT_DIR}/data/builder/patches"
 
-  export CXXFLAGS="$CFLAGS"
-  export CPPFLAGS=""
   export LINGUAS="en de ar ru"
   export LANG=de
 
-  #export PATH_TO_7ZIP="/c/Programme/7-Zip/7z.exe"
-  export PATH_TO_7ZIP="/c/Program Files/7-Zip/7z.exe"
+  #export OEG_PATH_TO_7ZIP="/c/Programme/7-Zip/7z.exe"
+  export OEG_PATH_TO_7ZIP="/c/Program Files/7-Zip/7z.exe"
 
   #export OEG_ARCHIVE_FORMAT="zip"
   export OEG_ARCHIVE_FORMAT="7z"
 
-  # When installing to $OEG_BASE_DIR_INSTALL: Do we want a "make install" or "make install-strip"?
+  # When installing to $OEG_INSTALL_DIR: Do we want a "make install" or "make install-strip"?
   export OEG_CFG_MAKE_INSTALL_STRIP="yes"
 
   # Should oegarchive remove or update the target archive if there already exists one?
   export OEG_CFG_REMOVE_BINARY_ARCHIVE="yes"
 
-  local STDCFLAGS="-pipe -O2 -mms-bitfields -fomit-frame-pointer -I$BASEDIR/include"
+  local STDCFLAGS="-pipe -O2 -mms-bitfields -fomit-frame-pointer -I$OEG_BASE_DIR/include"
 
   if [ "$1" = "32" ]; then
     export CFLAGS="-m32 -march=i686 -mtune=i686 $STDCFLAGS"
-    export LDFLAGS="-m32 -pipe -L$BASEDIR/lib"
+    export LDFLAGS="-m32 -pipe -L$OEG_BASE_DIR/lib"
     export TARGETBITS="32"
     export CONFIGURE_HOST_PARA="--host=i686-w64-mingw32"
   elif [ "$1" = "64" ]; then
     export CFLAGS="-m64 -march=nocona -mtune=core2 $STDCFLAGS"
-    export LDFLAGS="-m64 -pipe -L$BASEDIR/lib64"
+    export LDFLAGS="-m64 -pipe -L$OEG_BASE_DIR/lib64"
     export TARGETBITS="64"
     export CONFIGURE_HOST_PARA="--host=x86_64-w64-mingw32"
   else
@@ -55,7 +53,10 @@ function oegenv {
     return
   fi
 
-  export OEG_ARCHIVES_DIR="${OEGDIR}/data/builder/archives/windows-${TARGETBITS}"
+  export CXXFLAGS="$CFLAGS"
+  export CPPFLAGS=""
+
+  export OEG_ARCHIVES_DIR="${OEG_PROJECT_DIR}/data/builder/archives/windows-${TARGETBITS}"
 }
 
 function oegarchive {
@@ -81,7 +82,7 @@ function oegarchive {
 
   local ARCHIVEFILENAME="${OEG_ARCHIVES_DIR}/$1"
 
-  cd "${OEG_BASE_DIR_INSTALL}/open-egovernment"
+  cd "${OEG_INSTALL_DIR}/open-egovernment"
 
   if [ -f "${ARCHIVEFILENAME}.${OEG_ARCHIVE_FORMAT}" ]; then
     if [ "$OEG_CFG_REMOVE_BINARY_ARCHIVE" = "yes" ]; then
@@ -93,11 +94,11 @@ function oegarchive {
   case "${OEG_ARCHIVE_FORMAT}" in
     '7z')
       echo "Creating a 7-zip binary archive ..."
-      "$PATH_TO_7ZIP" a -mx9 -t7z -ms -mmt -w.. "${ARCHIVEFILENAME}.${OEG_ARCHIVE_FORMAT}" .
+      "$OEG_PATH_TO_7ZIP" a -mx9 -t7z -ms -mmt -w.. "${ARCHIVEFILENAME}.${OEG_ARCHIVE_FORMAT}" .
       ;;
     'zip')
       echo "Creating a zip binary archive ..."
-      "$PATH_TO_7ZIP" a -tzip -w.. "${ARCHIVEFILENAME}.${OEG_ARCHIVE_FORMAT}" .
+      "$OEG_PATH_TO_7ZIP" a -tzip -w.. "${ARCHIVEFILENAME}.${OEG_ARCHIVE_FORMAT}" .
       ;;
     *)
       echo "Unknown binary archive format: \"${OEG_ARCHIVE_FORMAT}\"!"
@@ -108,13 +109,13 @@ function oegarchive {
 }
 
 function oegcleanbase {
-  cd $WORKDIR
+  cd ${OEG_WORK_DIR}
 
-  rm -rf ${BASEDIR}
-  mkdir ${BASEDIR}
+  rm -rf ${OEG_BASE_DIR}
+  mkdir ${OEG_BASE_DIR}
 
-  rm -rf ${OEG_BASE_DIR_INSTALL}
-  mkdir ${OEG_BASE_DIR_INSTALL}
+  rm -rf ${OEG_INSTALL_DIR}
+  mkdir ${OEG_INSTALL_DIR}
 }
 
 function oegextract {
@@ -134,7 +135,7 @@ function oegextract {
 	return
   fi
 
-  cd ${WORKDIR}
+  cd ${OEG_WORK_DIR}
   export FILENAME=$OEG_DOWNLOADS_DIR/$1
   echo "Extracting: ${FILENAME}"
 
@@ -144,14 +145,14 @@ function oegextract {
     echo Extension: ${FILEEXTENSION}
 	echo Output Directory: ${OUTPUTDIR}
 
-    if [ -d "$WORKDIR/$OUTPUTDIR" ]
+    if [ -d "$OEG_WORK_DIR/$OUTPUTDIR" ]
     then
       echo Error: The output directory already exists. Remove it first.
       return
     fi
 
-	"${PATH_TO_7ZIP}" x "${FILENAME}" -so | "${PATH_TO_7ZIP}" x -si -ttar -y
-	cd "$WORKDIR/$OUTPUTDIR"
+	"${OEG_PATH_TO_7ZIP}" x "${FILENAME}" -so | "${OEG_PATH_TO_7ZIP}" x -si -ttar -y
+	cd "$OEG_WORK_DIR/$OUTPUTDIR"
 	return
   fi
 
@@ -161,14 +162,14 @@ function oegextract {
     echo Extension: ${FILEEXTENSION}
 	echo Output Directory: ${OUTPUTDIR}
 
-    if [ -d "$WORKDIR/$OUTPUTDIR" ]
+    if [ -d "$OEG_WORK_DIR/$OUTPUTDIR" ]
     then
       echo Error: The output directory already exists. Remove it first.
       return
     fi
 
-	"${PATH_TO_7ZIP}" x "${FILENAME}" -so | "${PATH_TO_7ZIP}" x -si -ttar -y
-	cd "$WORKDIR/$OUTPUTDIR"
+	"${OEG_PATH_TO_7ZIP}" x "${FILENAME}" -so | "${OEG_PATH_TO_7ZIP}" x -si -ttar -y
+	cd "$OEG_WORK_DIR/$OUTPUTDIR"
 	return
   fi
 
@@ -185,14 +186,14 @@ function oegextract {
     echo Extension: ${FILEEXTENSION}
 	echo Output Directory: ${OUTPUTDIR}
 
-    if [ -d "$WORKDIR/$OUTPUTDIR" ]
+    if [ -d "$OEG_WORK_DIR/$OUTPUTDIR" ]
     then
       echo Error: The output directory already exists. Remove it first.
       return
     fi
 
-	"${PATH_TO_7ZIP}" x "${FILENAME}"
-	cd "$WORKDIR/$OUTPUTDIR"
+	"${OEG_PATH_TO_7ZIP}" x "${FILENAME}"
+	cd "$OEG_WORK_DIR/$OUTPUTDIR"
 	return
   fi
 
@@ -209,14 +210,14 @@ function oegextract {
     echo Extension: ${FILEEXTENSION}
 	echo Output Directory: ${OUTPUTDIR}
 
-    if [ -d "$WORKDIR/$OUTPUTDIR" ]
+    if [ -d "$OEG_WORK_DIR/$OUTPUTDIR" ]
     then
       echo Error: The output directory already exists. Remove it first.
       return
     fi
 
-	"${PATH_TO_7ZIP}" x "${FILENAME}" -so | "${PATH_TO_7ZIP}" x -si -ttar -y
-	cd "$WORKDIR/$OUTPUTDIR"
+	"${OEG_PATH_TO_7ZIP}" x "${FILENAME}" -so | "${OEG_PATH_TO_7ZIP}" x -si -ttar -y
+	cd "$OEG_WORK_DIR/$OUTPUTDIR"
 	return
   fi
 
@@ -254,11 +255,11 @@ function oegimport {
     '7z')
       echo "Searching for 7-zip binary archive ..."
       echo "Filename: ${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}"
-      "${PATH_TO_7ZIP}" x "${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}"
+      "${OEG_PATH_TO_7ZIP}" x "${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}"
       ;;
     'zip')
       echo "Searching for zip binary archive ..."
-      "${PATH_TO_7ZIP}" x "${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}"
+      "${OEG_PATH_TO_7ZIP}" x "${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}"
       ;;
     *)
       echo "Unknown binary archive format: \"${OEG_ARCHIVE_FORMAT}\"!"
