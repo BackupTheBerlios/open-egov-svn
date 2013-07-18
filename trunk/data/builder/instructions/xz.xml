@@ -32,13 +32,13 @@
 
     <downloads>
       <download file="xz-5.0.5.tar.xz"> <!-- windows binaries available -->
-        <url type="direct" checked="2012-11-12">http://tukaani.org/xz/xz-5.0.5.tar.xz</url>
+        <url type="direct" checked="2013-07-18">http://tukaani.org/xz/xz-5.0.5.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>928.700</size>
+        <size></size>
       </download>
     </downloads>
 
@@ -49,9 +49,20 @@
     </patch>
 
     <compile>
-./configure --prefix=${PREFIX}
+oegenv 32
+oegcleanbase
+oegextract xz-5.0.5.tar.xz
+configure --prefix=${OEG_BASE_DIR} --disable-static --disable-xzdec --disable-lzmadec
 make
-make install
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+make clean
+configure --prefix=${OEG_BASE_DIR} --disable-shared --disable-nls --disable-encoders --enable-small --disable-threads
+make -C src/liblzma
+make -C src/xzdec
+make -C src/liblzma DESTDIR=${OEG_INSTALL_DIR} install-strip
+cp -a extra ${OEG_INSTALL_DIR}${OEG_BASE_DIR}/share/doc/xz
+cd ${OEG_INSTALL_DIR}${OEG_BASE_DIR}
+oegarchive xz-5.0.5
     </compile>
 
     <install>

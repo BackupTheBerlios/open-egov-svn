@@ -4,11 +4,13 @@
 
 <pack name="libpng" license="">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://www.libpng.org/pub/png/</homepage>
+    <homepage>http://libpng.sourceforge.net/</homepage>
+    <homepage>http://sourceforge.net/projects/libpng/</homepage>
+    <download>http://sourceforge.net/projects/libpng/files/</download>
     <descriptions>
-      <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="short">Portable Network Graphics library</description>
+      <description lang="en" type="long">This is an open source project to develop and maintain the reference library for use in applications that read, create, and manipulate PNG raster image files.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
@@ -25,8 +27,9 @@
     </requires>
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <!-- only the .tar.?? files have a configure script -->
+      <download file="libpng-1.6.3.tar.xz">
+        <url type="sourceforge" checked="2013-07-19">http://sourceforge.net/projects/libpng/files/libpng16/1.6.3/libpng-1.6.3.tar.xz/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
