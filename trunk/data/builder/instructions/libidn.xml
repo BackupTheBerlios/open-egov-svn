@@ -2,13 +2,13 @@
 
 <!-- $Id$ -->
 
-<pack name="libidn" license="">
+<pack name="libidn" license="LGPL 2.1+">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://www.gnu.org/software/libidn/</homepage>
+    <download>ftp://ftp.gnu.org/gnu/libidn/</download>
     <descriptions>
       <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="long">GNU Libidn is a fully documented implementation of the Stringprep, Punycode and IDNA specifications. Libidn's purpose is to encode and decode internationalized domain names.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
@@ -16,17 +16,13 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="1.28" date="2013-07-10" state="works">
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="libidn-1.28.tar.gz">
+        <url type="direct" checked="2013-07-19">ftp://ftp.gnu.org/gnu/libidn/libidn-1.28.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,20 +32,8 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
-make
-make install
-    </compile>
-
-    <install>
-    </install>
+    <commands>
+    </commands>
   </set>
 </pack>
 

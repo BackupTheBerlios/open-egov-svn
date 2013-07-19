@@ -12,17 +12,13 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
+    <keywords>jpg, jpeg, libjpeg</keywords>
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
   <set version="6b" date="2008-12-30" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
 
     <downloads>
       <download file="">
@@ -36,20 +32,8 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
-make
-make install
-    </compile>
-
-    <install>
-    </install>
+    <commands>
+    </commands>
   </set>
 </pack>
 

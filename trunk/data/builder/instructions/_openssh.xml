@@ -4,11 +4,11 @@
 
 <pack name="openssh" license="">
   <meta>
-    <homepage></homepage>
+    <homepage>http://www.openssh.org/</homepage>
     <download></download>
     <descriptions>
       <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="long"> OpenSSH is a FREE version of the SSH connectivity tools that technical users of the Internet rely on. Users of telnet, rlogin, and ftp may not realize that their password is transmitted across the Internet unencrypted, but it is. OpenSSH encrypts all traffic (including passwords) to effectively eliminate eavesdropping, connection hijacking, and other attacks. Additionally, OpenSSH provides secure tunneling capabilities and several authentication methods, and supports all SSH protocol versions. The OpenSSH suite replaces rlogin and telnet with the ssh program, rcp with scp, and ftp with sftp. Also included is sshd (the server side of the package), and the other utilities like ssh-add, ssh-agent, ssh-keysign, ssh-keyscan, ssh-keygen and sftp-server. </description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
@@ -16,17 +16,13 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="6.2p2" date="2013-05-16" state="works">
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="openssh-6.2p2.tar.gz">
+        <url type="direct" checked="2013-07-19">http://ftp.halifax.rwth-aachen.de/openbsd/OpenSSH/portable/openssh-6.2p2.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,20 +32,8 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
-make
-make install
-    </compile>
-
-    <install>
-    </install>
+    <commands>
+    </commands>
   </set>
 </pack>
 

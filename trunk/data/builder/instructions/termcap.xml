@@ -18,11 +18,12 @@
   <comments>
   </comments>
 
-  <set version="1.3.1" date="2002-03-13" working="true">
-    <requires>
-      <app name="gcc" type="compile" />
-      <app name="" version="" type="recommended" />
-    </requires>
+  <set version="1.3.1" date="2002-03-13" state="works">
+    <flags>
+      <required></required>
+      <optional></optional>
+      <recommended></recommended>
+    </flags>
 
     <downloads>
       <download file="termcap-1.3.1.tar.gz">
@@ -32,21 +33,33 @@
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>439.416</size>
+        <size>439416</size>
       </download>
     </downloads>
 
-    <options>
-    </options>
+    <commands>
+oegenv 32
+oegcleanbase
+oegextract termcap-1.3.1.tar.gz
 
-    <patch>
-    </patch>
+# The DESTDIR in "make install DESTDIR=" is ignored, all files go to the prefix directory.
+# But termcap is installed in /etc/termcap! This overwrites the termcap of MSYS, so
+# we do not use the --enable-install-termcap configure option and place it manually.
 
-    <compile>
-    </compile>
+configure --prefix=${OEG_INSTALL_DIR}
+make
+make install
+#make install DESTDIR=${OEG_INSTALL_DIR}
 
-    <install>
-    </install>
+mkdir ${OEG_INSTALL_DIR}/etc
+cp termcap.src ${OEG_INSTALL_DIR}/etc/termcap
+
+cd ${OEG_INSTALL_DIR}
+
+# Files are in ${OEG_INSTALL_DIR}, not in ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
+# But it works...
+oegarchive termcap-1.3.1
+    </commands>
   </set>
 </pack>
 

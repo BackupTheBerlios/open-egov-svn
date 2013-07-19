@@ -4,11 +4,11 @@
 
 <pack name="libgw32c" license="">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://gnuwin32.sourceforge.net/packages/libgw32c.htm</homepage>
+    <download>http://gnuwin32.sourceforge.net/packages/libgw32c.htm</download>
     <descriptions>
-      <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="short">Small GNU C library for Windows</description>
+      <description lang="en" type="long">Implementation of a small part of GLibC, just enough to compile most Unix programs on MS Windows. It contains functions for passwords, process id's groups, and strings. Most are interfaces to the MS-Windows Win32 API, some are just dummy functions that do nothing. </description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
@@ -16,17 +16,13 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="0.4" date="" state="works">
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="libgw32c-0.4-src.zip">
+        <url type="sourceforge" checked="2013-07-19">http://gnuwin32.sourceforge.net/downlinks/libgw32c-src-zip.php</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,20 +32,8 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
-make
-make install
-    </compile>
-
-    <install>
-    </install>
+    <commands>
+    </commands>
   </set>
 </pack>
 

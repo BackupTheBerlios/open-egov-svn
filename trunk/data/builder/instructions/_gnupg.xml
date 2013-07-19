@@ -2,10 +2,11 @@
 
 <!-- $Id$ -->
 
-<pack name="gnupg">
+<pack name="gnupg" license="GPL-2">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://www.gnupg.org/</homepage>
+    <download>http://www.gnupg.org/download/</download>
+    <download>ftp://ftp.gnupg.org/gcrypt/gnupg/</download>
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long"></description>
@@ -16,17 +17,13 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+    <set version="1.4.13" date="2012-12-20" state="works">
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="gnupg-1.4.13.tar.bz2">
+        <url type="direct" checked="2013-07-20">ftp://ftp.gnupg.org/gcrypt/gnupg/gnupg-1.4.13.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,20 +33,26 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
+    <commands>
+    </commands>
+  </set>
 
-    <patch>
-    </patch>
+  <set version="2.0.20" date="2013-05-10" state="works">
 
-    <compile>
-./configure --prefix=${PREFIX}
-make
-make install
-    </compile>
+    <downloads>
+      <download file="gnupg-2.0.20.tar.bz2">
+        <url type="direct" checked="2013-07-20">ftp://ftp.gnupg.org/gcrypt/gnupg/gnupg-2.0.20.tar.bz2</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
 
-    <install>
-    </install>
+    <commands>
+    </commands>
   </set>
 </pack>
 

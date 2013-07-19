@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<pack name="zlib" license="OSI OSS, GPL compatible" state="works">
+<pack name="zlib" license="OSI OSS, GPL compatible">
   <!-- http://de.wikipedia.org/wiki/Zlib-Lizenz -->
   <meta>
     <homepage>http://zlib.net/</homepage>
@@ -13,19 +13,18 @@
       <description lang="de" type="short">Komprimierungs-Bibliothek</description>
       <description lang="de" type="long">zlib ist eine freie, allgemeine Zwecke, juristisch unverbundene, verlustfreie Komprimierungs-Bibliothek für den Einsatz auf nahezu jeder Computer-Hardware und jedem Betriebssystem.</description>
     </descriptions>
-    <keywords>zlib, gzip, zip</keywords>
+    <keywords>zlib, gzip, zip, packer</keywords>
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="1.2.8" date="2013-04-28" working="true">
-    <requires>
-      <app name="gcc"      version="" type="compile" />
-      <app name="libiconv" version="" type="required" />
-      <app name="xxx"      version="" type="recommended" />
-    </requires>
+  <set version="1.2.8" date="2013-04-28" state="works">
+    <flags>
+      <required></required>
+      <optional></optional>
+      <recommended></recommended>
+    </flags>
 
     <downloads>
       <download file="zlib-1.2.8.tar.gz">
@@ -39,63 +38,40 @@
       </download>
     </downloads>
 
-    <options>
-export INCLUDE_PATH=/open-egovernment/include
-export LIBRARY_PATH=/open-egovernment/lib
-export BINARY_PATH=/open-egovernment/bin
-    </options>
+    <commands>
+oegenv 32
+oegcleanbase
+oegextract zlib-1.2.8.tar.gz
+mkdir -p ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/bin
+mkdir -p ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/include
+mkdir -p ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/lib
 
-    <patch>
-    </patch>
+#export INCLUDE_PATH=/open-egovernment/include
+#export LIBRARY_PATH=/open-egovernment/lib
+#export BINARY_PATH=/open-egovernment/bin
 
-    <compile>
-# configure hatte keine Lust zum Arbeiten und verwies auf das Makefile.gcc
-# es gibt noch mehr Optionen (64 Bit, ...)
-make -fwin32/Makefile.gcc SHARED_MODE=1
-    </compile>
+# configure didn't worked well and refered to the file Makefile.gcc
+# There are a more options like 64 bit, ...
 
-    <install>
-make install -fwin32/Makefile.gcc SHARED_MODE=1
-    </install>
-  </set>
+BINARY_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/bin \
+INCLUDE_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/include \
+LIBRARY_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/lib make -fwin32/Makefile.gcc
 
-  <set version="1.2.7" date="2012-05-02" working="true">
-    <requires>
-      <app name="gcc"      version="" type="compile" />
-      <app name="libiconv" version="" type="required" />
-      <app name="xxx"      version="" type="recommended" />
-    </requires>
+BINARY_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/bin \
+INCLUDE_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/include \
+LIBRARY_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/lib make -fwin32/Makefile.gcc install
 
-    <downloads>
-      <download file="zlib-1.2.7.tar.gz">
-        <url type="direct" checked="2012-11-07">http://zlib.net/zlib-1.2.7.tar.gz</url>
-        <hash type="CRC32"></hash>
-        <hash type="MD5"></hash>
-        <hash type="SHA1"></hash>
-        <hash type="SHA512"></hash>
-        <hash type="RIPEMD256"></hash>
-        <size>560351</size>
-      </download>
-    </downloads>
+BINARY_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/bin \
+INCLUDE_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/include \
+LIBRARY_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/lib make -fwin32/Makefile.gcc SHARED_MODE=1
 
-    <options>
-export INCLUDE_PATH=/open-egovernment/include
-export LIBRARY_PATH=/open-egovernment/lib
-export BINARY_PATH=/open-egovernment/bin
-    </options>
+BINARY_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/bin \
+INCLUDE_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/include \
+LIBRARY_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/lib make -fwin32/Makefile.gcc install SHARED_MODE=1
 
-    <patch>
-    </patch>
-
-    <compile>
-# configure hatte keine Lust zum Arbeiten und verwies auf das Makefile.gcc
-# es gibt noch mehr Optionen (64 Bit, ...)
-make -fwin32/Makefile.gcc SHARED_MODE=1
-    </compile>
-
-    <install>
-make install -fwin32/Makefile.gcc SHARED_MODE=1
-    </install>
+cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
+oegarchive zlib-1.2.8
+    </commands>
   </set>
 </pack>
 

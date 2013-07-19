@@ -3,6 +3,15 @@
 <!-- $Id$ -->
 
 <settings>
+  <initscript>/i/Projekte/open-egov/env.sh</initscript>
+  <shell>/bin/bash</shell>
+
+  <mingw>
+export PATH=/c/Qt/Qt5.1.0/5.1.0/mingw48_32/bin:$PATH
+export PATH=/c/Qt/Qt5.1.0/Tools/mingw48_32/bin:$PATH
+#g++  # Test ob der Kompiler gefunden wird.
+  </mingw>
+
   <environment>
 export OEG_BASE_DIR="/open-egovernment"
 export OEG_INSTALL_DIR="/open-egovernment-install"
@@ -24,10 +33,6 @@ export CFLAGS="-pipe -Wall -O2 -mms-bitfields -march=i686 -I${OEG_BASE_DIR}/incl
 export LDFLAGS="-L${OEG_BASE_DIR}/lib"
 export PATH="${OEG_BASE_DIR}/bin:${PATH}"
   </environment>
-
-  <misc>
-    <shell>/bin/bash</shell>
-  </misc>
 
   <readme>This package belongs to the Open E-Government project.
 

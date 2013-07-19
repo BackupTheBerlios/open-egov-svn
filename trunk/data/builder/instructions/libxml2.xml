@@ -43,9 +43,21 @@
     </patch>
 
     <compile>
-./configure --prefix=${PREFIX}
+oegenv 32
+oegcleanbase
+oegimport libiconv-1.14
+oegimport gettext-0.18.3
+oegimport zlib-1.2.8
+oegextract libxml2-2.9.1.tar.gz
+cd /work/libxml2-2.9.1
+#configure --help
+#cd /work/libxml2-2.9.1
+configure --with-zlib=${OEG_BASE_DIR} --with-iconv=${OEG_BASE_DIR} --prefix=${OEG_BASE_DIR}
+# ohne: --with-lzma= -with-icu
 make
-make install
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive libxml2-2.9.1
     </compile>
 
     <install>

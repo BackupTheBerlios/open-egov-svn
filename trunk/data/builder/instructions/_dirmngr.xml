@@ -4,29 +4,25 @@
 
 <pack name="dirmngr" license="">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://www.gnupg.org/download/#dirmngr</homepage>
+    <download>ftp://ftp.gnupg.org/gcrypt/dirmngr/</download>
     <descriptions>
       <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="long">DirMngr is a daemon to handle CRL and certificate requests for GnuPG 2.0. It might also be installed as a system daemon for CRL and OCSP checks.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>dirmngr</keywords>
+    <keywords>dirmngr, gnupg</keywords>
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="1.1.1" date="2013-04-26" state="works">
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="dirmngr-1.1.1.tar.bz2">
+        <url type="direct" checked="2013-07-20">ftp://ftp.gnupg.org/gcrypt/dirmngr/dirmngr-1.1.1.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,20 +32,8 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
-make
-make install
-    </compile>
-
-    <install>
-    </install>
+    <commands>
+    </commands>
   </set>
 </pack>
 

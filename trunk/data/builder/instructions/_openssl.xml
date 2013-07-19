@@ -2,13 +2,13 @@
 
 <!-- $Id$ -->
 
-<pack name="openssl" license="">
+<pack name="openssl" license="Apache-style">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://www.openssl.org/</homepage>
+    <download>http://www.openssl.org/source/</download>
     <descriptions>
-      <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="short">OpenSSL toolkit</description>
+      <description lang="en" type="long">The OpenSSL Project is a collaborative effort to develop a robust, commercial-grade, full-featured, and Open Source toolkit implementing the Secure Sockets Layer (SSL v2/v3) and Transport Layer Security (TLS v1) protocols as well as a full-strength general purpose cryptography library. OpenSSL is based on the excellent SSLeay library.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
@@ -16,17 +16,13 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="1.0.1e" date="2013-02-11" state="works">
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="openssl-1.0.1e.tar.gz">
+        <url type="direct" checked="2013-07-19">http://www.openssl.org/source/openssl-1.0.1e.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,20 +32,8 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=/mingw
-make
-make install
-    </compile>
-
-    <install>
-    </install>
+    <commands>
+    </commands>
   </set>
 </pack>
 

@@ -2,27 +2,33 @@
 
 <!-- $Id$ -->
 
-<pack name="poldi" license="GPL-2">
+<pack name="libnet" license="">
   <meta>
-    <homepage>http://www.gnupg.org/</homepage>
-    <download>ftp://ftp.gnupg.org/gcrypt/alpha/poldi/</download>
+    <homepage></homepage>
+    <download></download>
     <descriptions>
       <description lang="en" type="short"></description>
-      <description lang="en" type="long">PAM module implementing authentication via OpenPGP smartcards.</description>
+      <description lang="en" type="long"></description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>gnupg, poldi</keywords>
+    <keywords></keywords>
   </meta>
 
   <comments>
+    <comment date="" author=""></comment>
   </comments>
 
-  <set version="0.4.1" date="2008-12-22" state="works">
+  <set version="" date="" state="works">
+    <flags>
+      <required></required>
+      <optional></optional>
+      <recommended></recommended>
+    </flags>
 
     <downloads>
-      <download file="poldi-0.4.1.tar.bz2">
-        <url type="direct" checked="2013-07-20">ftp://ftp.gnupg.org/gcrypt/alpha/poldi/poldi-0.4.1.tar.bz2</url>
+      <download file="">
+        <url type="direct" checked="2013-07-19"></url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>

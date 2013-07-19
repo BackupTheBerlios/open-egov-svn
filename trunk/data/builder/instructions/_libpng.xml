@@ -18,13 +18,9 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
   <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
 
     <downloads>
       <!-- only the .tar.?? files have a configure script -->
@@ -39,20 +35,8 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
-make
-make install
-    </compile>
-
-    <install>
-    </install>
+    <commands>
+    </commands>
   </set>
 </pack>
 

@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<pack name="gettext" license="" state="works">
+<pack name="gettext" license="">
   <meta>
     <homepage>http://www.gnu.org/software/gettext/</homepage>
     <download>http://ftp.gnu.org/pub/gnu/gettext/</download>
@@ -33,77 +33,16 @@ Example:
 </comment>
   </comments>
 
-  <set version="0.18.2.1" date="2013-03-05" working="true">
-    <requires>
-      <app name="gcc" version="" type="build-tool" />
-      <app name="libiconv" version="1.14" type="required" />
-    </requires>
+  <set version="0.18.3" date="2013-07-19" state="works">
+    <flags>
+      <required></required>
+      <optional></optional>
+      <recommended></recommended>
+    </flags>
 
     <downloads>
-      <download file="gettext-0.18.2.1.tar.gz">
-        <url type="direct" checked="2013-06-11">http://ftp.gnu.org/pub/gnu/gettext/gettext-0.18.2.1.tar.gz</url>
-        <size>15.901.092</size>
-      </download>
-    </downloads>
-
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-    </compile>
-
-    <install>
-    </install>
-  </set>
-
-  <set version="0.18.1.1" date="2010-06-06" working="true">
-    <requires>
-      <app name="gcc"      version="" type="build-tool" />
-      <app name="libiconv" version="" type="required" />
-      <app name="xxx"      version="" type="recommended" />
-    </requires>
-
-    <downloads>
-      <download file="gettext-0.18.1.1.tar.gz">
-        <url type="direct" checked="2012-11-07">http://ftp.gnu.org/pub/gnu/gettext/gettext-0.18.1.1.tar.gz</url>
-        <hash type="CRC32">2D4DB147</hash>
-        <hash type="MD5">3DD55B952826D2B32F51308F2F91AA89</hash>
-        <hash type="SHA1">5009DEB02F67FC3C59C8CE6B82408D1D35D4E38F</hash>
-        <hash type="SHA512">1735599307A2D12BE609ECFE1141815A11AF144C6B94301F6C7101242E0B628251A3613D1D70DF099EC07423BEFEAF10DFB53B8176F710C7E158C4FC63EA8747</hash>
-        <hash type="RIPEMD256">87D55E484104C98A93341566F02EA98A870126E9149595000892E1FC704E75CA</hash>
-        <size>15139737</size>
-      </download>
-    </downloads>
-
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
-make
-make install
-    </compile>
-
-    <install>
-    </install>
-  </set>
-
-  <set version="0.18.2" date="2012-12-25" working="true">
-    <requires>
-      <app name="gcc"      version="" type="compile" />
-      <app name="libiconv" version="" type="required" />
-      <app name="xxx"      version="" type="recommended" />
-    </requires>
-
-    <downloads>
-      <download file="gettext-0.18.2.tar.gz">
-        <url type="direct" checked="2013-05-10">http://ftp.gnu.org/pub/gnu/gettext/gettext-0.18.2.tar.gz</url>
+      <download file="gettext-0.18.3.tar.gz">
+        <url type="direct" checked="2013-07-19">http://ftp.gnu.org/pub/gnu/gettext/gettext-0.18.3.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -113,20 +52,17 @@ make install
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
+    <commands>
+oegenv 32
+oegcleanbase
+oegimport libiconv-1.14
+oegextract gettext-0.18.3.tar.gz
+configure --prefix=${OEG_BASE_DIR}
 make
-make install
-    </compile>
-
-    <install>
-    </install>
+make install DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive gettext-0.18.3
+    </commands>
   </set>
 </pack>
 

@@ -4,29 +4,30 @@
 
 <pack name="gzip" license="">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://www.gnu.org/software/gzip/</homepage><!-- www.gzip.org is an old one -->
+    <download>http://ftp.gnu.org/gnu/gzip/</download>
     <descriptions>
-      <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="short">GNU zip compression utility</description>
+      <description lang="en" type="long">GNU zip is a compression utility designed to be a replacement for compress. Its main advantages over "compress" are a much better compression and the freedom from patented algorithms.</description>
       <description lang="de" type="short"></description>
-      <description lang="de" type="long"></description>
+      <description lang="de" type="long">GNU Zip ist ein Komprimierprogramm, welches als Ersatz für compress entwickelt wurde. Die wichtigsten Vorteile gegenüber "compress" sind eine viel bessere Kompression und die Freiheit von patentierten Algorithmen.</description>
     </descriptions>
     <keywords>gzip, packer</keywords>
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="1.6" date="2013-06-09" state="works">
+    <flags>
+      <required></required>
+      <optional></optional>
+      <recommended></recommended>
+    </flags>
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="gzip-1.6.tar.xz">
+        <url type="direct" checked="2013-07-19">http://ftp.gnu.org/gnu/gzip/gzip-1.6.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,20 +37,8 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
-make
-make install
-    </compile>
-
-    <install>
-    </install>
+    <commands>
+    </commands>
   </set>
 </pack>
 

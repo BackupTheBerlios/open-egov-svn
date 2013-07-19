@@ -16,13 +16,14 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="" date="" state="works">
+    <flags>
+      <required>libxml2-2.6.27</required>
+      <optional></optional>
+      <recommended></recommended>
+    </flags>
 
     <downloads>
       <download file="">
@@ -36,20 +37,66 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
+    <commands>
+oegenv 32
+oegcleanbase
+oegextract libxslt-1.1.28.tar.gz
+oegimport libiconv-1.14
+oegimport gettext-0.18.3
+oegimport zlib-1.2.8
+oegimport libxml2-2.9.1   # important
+cd /work/libxslt-1.1.28/
+configure --with-libxml-prefix=${OEG_BASE_DIR} --with-libxml-include-prefix=${OEG_BASE_DIR}/include --with-libxml-libs-prefix=${OEG_BASE_DIR}/lib --prefix=${OEG_BASE_DIR}
 
-    <patch>
-    </patch>
 
-    <compile>
-./configure --prefix=${PREFIX}
-make
-make install
-    </compile>
+config.status: executing libtool commands
+/bin/rm: cannot lstat `libtoolT': No such file or directory
 
-    <install>
-    </install>
+You have to edit the configure file, find the line which contains $RM "$cfgfile", and replace it with $RM -f "$cfgfile". The "-f" tells rm that it shouldn't stop even if the file doesn't exists.
+
+search for "libtool":C)
+below it you find the RM, add -f:
+    $RM -f "$cfgfile"
+
+Maybe you can ignore the error because it is nearly the last command and the important stuff was already done at this point.
+
+> make
+
+security.c: In function 'xsltCheckWritePath':
+security.c:346:3: error: too many arguments to function 'mkdir'
+   ret = mkdir(directory, 0755);
+   ^
+In file included from c:\qt\qt5.1.0\tools\mingw48_32\i686-w64-mingw32\include\sys\stat.h:14:0,
+                 from security.c:18:
+c:\qt\qt5.1.0\tools\mingw48_32\i686-w64-mingw32\include\io.h:267:15: note: declared here
+   int __cdecl mkdir (const char *) __MINGW_ATTRIB_DEPRECATED_MSVC2005;
+               ^
+Makefile:502: recipe for target `security.lo' failed
+make[2]: *** [security.lo] Error 1
+make[2]: Leaving directory `/work/libxslt-1.1.28/libxslt'
+Makefile:547: recipe for target `all-recursive' failed
+make[1]: *** [all-recursive] Error 1
+make[1]: Leaving directory `/work/libxslt-1.1.28'
+Makefile:372: recipe for target `all' failed
+make: *** [all] Error 2
+
+
+in libxslt/security.c in function xsltCheckWritePath: find "mkdir" and remove the second parameter.
+then other error, chanegd back and compiled!
+
+Added:
+#include "win32config.h"
+to security.c
+directly after
+#include "libxslt.h"
+
+However, it may be enough to add only the mkdir macro.
+
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive libxslt-1.1.28
+    </commands>
   </set>
 </pack>
 

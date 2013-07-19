@@ -18,39 +18,39 @@
   <comments>
   </comments>
 
-  <set version="1.14" date="2011-08-07" working="true">
-    <requires>
-      <app name="gcc" type="compile" />
-      <app name="libiconv" version="" type="required" />
-      <app name="xxx" version="" type="recommended" />
-    </requires>
+  <set version="1.14" date="2011-08-07" state="works">
+    <flags>
+      <required></required>
+      <optional>gettext-0.18.3</optional>
+      <recommended>gettext-0.18.3</recommended>
+    </flags>
 
     <downloads>
       <download file="libiconv-1.14.tar.gz">
-        <url type="direct" checked="2013-05-10">http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz</url>
+        <url type="direct" checked="2013-07-19">http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>4.984.397</size>
+        <size>4984397</size>
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
+    <commands>
+oegenv 32
+oegcleanbase
+#wenn flag! oegimport gettext-0.18.3
+oegextract libiconv-1.14.tar.gz
+#cd ${OEG_WORK_DIR}/libiconv-1.14      # needed?
+configure --prefix=${OEG_BASE_DIR} -enable-shared
 make
-make install
-    </compile>
-
-    <install>
-    </install>
+#make install DESTDIR=/tmp/inst$$
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}"      # 2 cd commands needed?
+cd "${OEG_BASE_DIR}"
+oegarchive libiconv-1.14
+    </commands>
   </set>
 </pack>
 

@@ -4,8 +4,8 @@
 
 <pack name="scute" license="">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://www.scute.org/</homepage>
+    <download>http://www.scute.org/download.xhtml</download>
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long"></description>
@@ -16,17 +16,25 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="" date="" state="works">
+<!--
+Scute requires the following packages to compile:
+	  PackageMin. Version
+	  libgpg-error0.7
+	  libassuan0.6.10
+
+	Scute also requires the following packages to run:
+	  PackageMin. Version
+	  Firefoxany
+	  GnuPG2.0
+	  PinEntry0.7.0
+-->
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="scute-1.2.0.tar.bz2">
+        <url type="direct" checked="2013-07-19">ftp://ftp.gnupg.org/gcrypt/scute/scute-1.2.0.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,20 +44,8 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=/mingw
-make
-make install
-    </compile>
-
-    <install>
-    </install>
+    <commands>
+    </commands>
   </set>
 </pack>
 

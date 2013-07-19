@@ -18,11 +18,12 @@
   <comments>
   </comments>
 
-  <set version="2.0" date="1995-12-01" working="true">
-    <requires>
-      <app name="gcc" type="compile" />
-      <app name="" version="" type="recommended" />
-    </requires>
+  <set version="2.0" date="1995-12-01" state="works">
+    <flags>
+      <required>termcap (needed?)</required>
+      <optional></optional>
+      <recommended></recommended>
+    </flags>
 
     <downloads>
       <download file="termutils-2.0.tar.gz">
@@ -32,21 +33,20 @@
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>117.915</size>
+        <size>117915</size>
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-    </compile>
-
-    <install>
-    </install>
+    <commands>
+oegenv 32
+oegcleanbase
+oegextract termutils-2.0.tar.gz
+configure --prefix=${OEG_INSTALL_DIR}       # check, if it works with OEG_BASE_DIR
+make
+make install 
+cd ${OEG_INSTALL_DIR}
+oegarchive termutils-2.0
+    </commands>
   </set>
 </pack>
 

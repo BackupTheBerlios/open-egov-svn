@@ -16,7 +16,6 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
   <set version="" date="" working="true">
@@ -25,31 +24,27 @@
     </requires>
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="expat-2.1.0.tar.gz">
+        <url type="direct" checked="2013-07-19"></url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>562616</size>
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
+    <commands>
+oegenv 32
+oegcleanbase
+oegextract expat-2.1.0.tar.gz
+configure --prefix=${OEG_BASE_DIR}
 make
-make install
-    </compile>
-
-    <install>
-    </install>
+make install DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive expat-2.1.0
+    </commands>
   </set>
 </pack>
 

@@ -2,37 +2,34 @@
 
 <!-- $Id$ -->
 
-<pack name="xz" license="Public Domain, some parts GPL" state="works">
+<pack name="xz" license="Public Domain, some parts GPL">
   <meta>
     <homepage>http://tukaani.org/xz/</homepage>
     <download>http://tukaani.org/xz/</download>
     <descriptions>
-      <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
-      <description lang="de" type="short"></description>
-      <description lang="de" type="long"></description>
+      <description lang="en" type="short">XZ compression utilities</description>
+      <description lang="en" type="long">XZ Utils is free general-purpose data compression software with high compression ratio. XZ Utils are the successor to LZMA Utils.</description>
+      <description lang="de" type="short">XZ Komprimierungswerkzeuge</description>
+      <description lang="de" type="long">XZ Utils ist eine kostenlose Allzweck-Datenkomprimierungs-Software mit hoher Komprimierungsrate. XZ Utils sind die Nachfolger der LZMA Utils.</description>
     </descriptions>
-    <keywords>xz</keywords>
+    <keywords>xz, packer</keywords>
   </meta>
 
   <comments>
-    <comment date="" author="">Building the code from the git repository requires GNU Autotools. Here are the minimum versions that should work with XZ Utils; using the latest versions is strongly recommended:
-
-    Autoconf 2.64
-    Automake 1.10
-    gettext 0.18 (Note: autopoint depends on cvs!)
-    libtool 2.2
-</comment>
+    <comment date="2013-07-19" author="Gerrit Albrecht">Homepage: Building the code from the git repository requires GNU Autotools. Here are the minimum versions that should work with XZ Utils; using the latest versions is strongly recommended:
+    Autoconf 2.64, Automake 1.10, gettext 0.18 (Note: autopoint depends on cvs!), libtool 2.2</comment>
   </comments>
 
-  <set version="" date="2012-06-22" working="false">
-    <requires>
-      <app name="gettext" version="0.18" type="required" />
-    </requires>
+  <set version="5.0.5" date="2013-07-19" state="works">
+    <flags>
+      <required></required>
+      <optional>gettext-0.18 ???</optional>
+      <recommended></recommended>
+    </flags>
 
     <downloads>
       <download file="xz-5.0.5.tar.xz"> <!-- windows binaries available -->
-        <url type="direct" checked="2013-07-18">http://tukaani.org/xz/xz-5.0.5.tar.xz</url>
+        <url type="direct" checked="2013-07-19">http://tukaani.org/xz/xz-5.0.5.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -42,13 +39,7 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
+    <commands>
 oegenv 32
 oegcleanbase
 oegextract xz-5.0.5.tar.xz
@@ -63,10 +54,7 @@ make -C src/liblzma DESTDIR=${OEG_INSTALL_DIR} install-strip
 cp -a extra ${OEG_INSTALL_DIR}${OEG_BASE_DIR}/share/doc/xz
 cd ${OEG_INSTALL_DIR}${OEG_BASE_DIR}
 oegarchive xz-5.0.5
-    </compile>
-
-    <install>
-    </install>
+    </commands>
   </set>
 </pack>
 

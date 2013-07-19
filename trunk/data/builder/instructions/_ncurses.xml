@@ -16,17 +16,13 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="5.9" date="2011-04-04" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="5.9" date="2011-04-04" state="works">
 
     <downloads>
       <download file="ncurses-5.9.tar.gz">
-        <url type="direct" checked="2012-11-11">http://ftp.gnu.org/pub/gnu/ncurses/ncurses-5.9.tar.gz</url>
+        <url type="direct" checked="2013-07-19">http://ftp.gnu.org/pub/gnu/ncurses/ncurses-5.9.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,20 +32,8 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
-make
-make install
-    </compile>
-
-    <install>
-    </install>
+    <commands>
+    </commands>
   </set>
 </pack>
 

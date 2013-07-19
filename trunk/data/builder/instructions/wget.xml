@@ -8,48 +8,76 @@
     <download>http://ftp.gnu.org/gnu/wget/</download>
     <descriptions>
       <description lang="en" type="short">GNU Wget</description>
-      <description lang="en" type="long">GNU Wget is a free software package for retrieving files using HTTP, HTTPS and FTP, the most widely-used Internet protocols. It is a non-interactive commandline tool, so it may easily be called from scripts, cron jobs, terminals without X-Windows support, etc. GNU Wget has many features to make retrieving large files or mirroring entire web or FTP sites easy.</description>
-      <description lang="de" type="short"></description>
-      <description lang="de" type="long"></description>
+      <description lang="en" type="long">GNU Wget is a free software package for retrieving files using HTTP, HTTPS and FTP. It is a non-interactive commandline tool, so it may easily be called from scripts, cron jobs, or terminals. GNU Wget has many features to make retrieving large files or mirroring entire web or FTP sites easy.</description>
+      <description lang="de" type="short">GNU Wget</description>
+      <description lang="de" type="long">GNU Wget ist ein freies Software-Paket zum Abrufen von Dateien über HTTP, HTTPS und FTP. Es ist ein nicht-interaktives Kommandozeilen-Tool, so dass es leicht von Skripten, Cron-Jobs oder Terminals aus aufgerufen werden kann. GNU Wget hat viele Funktionen, die das Abrufen von großen Dateien oder Spiegeln von gesamten Web oder FTP-Sites einfach machen.</description>
     </descriptions>
     <keywords>wget</keywords>
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="1.14" date="2012-08-05" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="1.14" date="2012-08-05" state="works">
+    <flags>
+      <required>libiconv-1.14, gettext-0.18.3</required>
+      <optional></optional>
+      <recommended>libiconv-1.14, gettext-0.18.3</recommended>
+    </flags>
 
     <downloads>
       <download file="wget-1.14.tar.xz">
-        <url type="direct" checked="2012-11-13">http://ftp.gnu.org/gnu/wget/wget-1.14.tar.xz</url>
+        <url type="direct" checked="2013-07-19">http://ftp.gnu.org/gnu/wget/wget-1.14.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>1.584.060</size>
+        <size>1584060</size>
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
+    <commands>
+oegenv 32
+oegcleanbase
+oegimport libiconv-1.14
+oegimport gettext-0.18.2.1
+#zlib vergessen? (-lz)
+# pfad prüfen!
+oegextract wget-1.14.tar.xz
+oegpatch wget-1.14-01.txt
+configure --prefix=${OEG_BASE_DIR} --without-ssl --with-gnu-ld --with-libiconv-prefix=${OEG_BASE_DIR}
 make
-make install
-    </compile>
 
-    <install>
-    </install>
+gcc  -m32 -march=i686 -mtune=i686 -pipe -O2 -mms-bitfields -fomit-frame-pointer
+-I/open-egovernment/include  -m32 -pipe -L/open-egovernment/lib -o wget.exe cmpt
+.o connect.o convert.o  cookies.o ftp.o css_.o  css-url.o ftp-basic.o ftp-ls.o
+hash.o host.o html-parse.o  html-url.o http.o init.o log.o  main.o netrc.o progr
+ess.o  ptimer.o recur.o res.o retr.o  spider.o url.o warc.o utils.o  exits.o bui
+ld_info.o  version.o ftp-opie.o mswindows.o ../lib/libgnu.a -liconv /open-egover
+nment/lib/libintl.dll.a -L/open-egovernment/lib -lz  -lws2_32
+host.o:host.c:(.text+0x1bc): undefined reference to `IN6_ARE_ADDR_EQUAL'
+collect2.exe: error: ld returned 1 exit status
+Makefile:1333: recipe for target `wget.exe' failed
+
+eingefügt in src/host.c
+
+/* Described in RFC 2292, but not in 2553 */
+/* int IN6_ARE_ADDR_EQUAL(const struct in6_addr * a, const struct in6_addr * b) */
+
+#define IN6_ARE_ADDR_EQUAL(a, b)	\
+    (memcmp ((void*)(a), (void*)(b), sizeof (struct in6_addr)) == 0)
+
+aus:
+http://gitorious.org/mingw/mingw-w32api/blobs/240e5bbe9b18a18f3c975ba5ac923a4c537f3bb6/include/ws2tcpip.h
+
+
+#make install DESTDIR=/tmp/inst$$
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}"
+cd "${OEG_BASE_DIR}"    # okay????
+oegarchive wget-1.14
+    </commands>
   </set>
 </pack>
 

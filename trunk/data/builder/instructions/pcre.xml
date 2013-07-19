@@ -19,15 +19,19 @@
     <comment date="" author=""></comment>
   </comments>
 
-  <set version="8.33" date="2013-07-17" working="true">
-    <requires></requires>
+  <set version="8.33" date="2013-07-17" state="works">
+    <flags>
+      <required></required>
+      <optional></optional>
+      <recommended></recommended>
+    </flags>
+
     <options>
       <option name="zlib"  value="true" default="true" conditions="" para-if-true="" para-if-false="" />
       <option name="bzip2" value="true" default="true" conditions="" para-if-true="" req-if-true="" req-if-false="" para-if-false="" />
       <option name="libedit"  value="true" default="true" conditions="" para-if-true="" para-if-false="" />
       <option name="libreadline" value="true" default="true" conditions="" para-if-true="" para-if-false="" />
     </options>
-    <recommended></recommended>
 
     <downloads>
       <download file="pcre-8.33.tar.gz">
@@ -41,13 +45,7 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
+    <commands>
 oegextract pcre-8.33.tar.gz
 #you may activate: libz libbz2 libedit libreadline
 configure --prefix=${OEG_BASE_DIR} --enable-utf8 --enable-newline-is-anycrlf
@@ -55,10 +53,7 @@ make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive pcre-8.33
-    </compile>
-
-    <install>
-    </install>
+    </commands>
   </set>
 </pack>
 

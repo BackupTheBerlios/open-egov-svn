@@ -4,52 +4,55 @@
 
 <pack name="unrar" license="">
   <meta>
-    <homepage>http://www.rarlab.com/rar_add.htm</homepage>
-    <download></download>
+    <homepage>http://www.rarlab.com/</homepage>
+    <download>http://www.rarlab.com/rar_add.htm</download>
     <descriptions>
       <description lang="en" type="short">UnRAR</description>
-      <description lang="en" type="long"></description>
-      <description lang="de" type="short"></description>
-      <description lang="de" type="long"></description>
+      <description lang="en" type="long">RAR is the file format of the WinRAR archiver. Like other archives, RAR files are data containers, they store files in compressed form.</description>
+      <description lang="de" type="short">UnRAR</description>
+      <description lang="de" type="long">RAR ist das Dateiformat des WinRAR-Archivierers. Wie andere Archive sind RAR-Dateien Datencontainer, die Dateien in komprimierter Form enthalten.</description>
     </descriptions>
     <keywords>unrar, rar, packer</keywords>
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="5.0.8" date="2013-07-19" state="works">
+    <flags>
+      <required></required>
+      <optional></optional>
+      <recommended></recommended>
+    </flags>
 
     <downloads>
-      <download file="unrarsrc-4.2.4.tar.gz">
-        <url type="direct" checked="2012-11-13">http://www.rarlab.com/rar/unrarsrc-4.2.4.tar.gz</url>
+      <download file="unrarsrc-5.0.8.tar.gz">
+        <url type="direct" checked="2013-07-19">http://www.rarlab.com/rar/unrarsrc-5.0.8.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>207917</size>
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
+    <commands>
+oegenv 32
+oegcleanbase
+oegextract unrarsrc-5.0.8.tar.gz
+cd /work
+cd unrar
 make
-make install
-    </compile>
-
-    <install>
-    </install>
+strip unrar.exe  # "strip unrar" is not enough
+# "make install" would install to /usr/bin/unrar.exe
+mkdir ${OEG_INSTALL_DIR}
+mkdir ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
+mkdir ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/bin
+cp unrar ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/bin/unrar.exe
+cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
+oegarchive unrar-5.0.8
+    </commands>
   </set>
 </pack>
 

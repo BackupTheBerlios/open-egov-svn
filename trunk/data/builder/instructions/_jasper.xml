@@ -2,13 +2,13 @@
 
 <!-- $Id$ -->
 
-<pack name="jasper" license="">
+<pack name="jasper" license="JasPer License Version 2.0">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://www.ece.uvic.ca/~frodo/jasper/</homepage>
+    <download>http://www.ece.uvic.ca/~frodo/jasper/#download</download>
     <descriptions>
       <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="long">The JasPer Project is an open-source initiative to provide a free software-based reference implementation of the codec specified in the JPEG-2000 Part-1 standard (i.e., ISO/IEC 15444-1).</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
@@ -16,17 +16,13 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="1.900.1" date="2012-10-19" state="works">
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="jasper-1.900.1.zip">
+        <url type="direct" checked="2013-07-19">http://www.ece.uvic.ca/~frodo/jasper/software/jasper-1.900.1.zip</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,20 +32,8 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
-make
-make install
-    </compile>
-
-    <install>
-    </install>
+    <commands>
+    </commands>
   </set>
 </pack>
 

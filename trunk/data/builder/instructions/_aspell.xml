@@ -6,34 +6,34 @@
   <meta>
     <homepage>http://aspell.net/</homepage>
     <download>http://ftp.gnu.org/gnu/aspell/</download>
+    <!-- http://ftp.gnu.org/gnu/aspell/dict/ -->
     <download>ftp://ftp.gnu.org/gnu/aspell/dict/0index.html</download>
     <descriptions>
-      <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="short">Free OSS spell checker</description>
+      <description lang="en" type="long">GNU Aspell is a Free and Open Source spell checker designed to eventually replace Ispell. It can either be used as a library or as an independent spell checker. Its main feature is that it does a superior job of suggesting possible replacements for a misspelled word. Unlike Ispell, Aspell can also easily check documents in UTF-8 without having to use a special dictionary. Aspell will also do its best to respect the current locale setting. It supports using multiple dictionaries at once and intelligently handling personal dictionaries when more than one Aspell process is open at once.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>aspell</keywords>
+    <keywords>aspell, spell checker, dictionary</keywords>
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="0.60.6.1" date="2011-07-04" working="false">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="0.60.6.1" date="2011-07-04" state="works">
 
     <downloads>
       <download file="aspell-0.60.6.1.tar.gz">
-        <url type="direct" checked="2012-11-13">http://ftp.gnu.org/gnu/aspell/aspell-0.60.6.1.tar.gz</url>
+        <url type="direct" checked="2013-07-19">http://ftp.gnu.org/gnu/aspell/aspell-0.60.6.1.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
         <size></size>
+      </download>
+      <download file="aspell6-de-20030222-1.tar.bz2">
+        <url type="direct" checked="2013-07-19">ftp://ftp.gnu.org/gnu/aspell/dict/de/aspell6-de-20030222-1.tar.bz2</url>
       </download>
       <download file="aspell-lang-20101122.tar.gz">
         <url type="direct" checked="2012-11-13">http://ftp.gnu.org/gnu/aspell/aspell-lang-20101122.tar.gz</url>
@@ -46,20 +46,8 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
-make
-make install
-    </compile>
-
-    <install>
-    </install>
+    <commands>
+    </commands>
   </set>
 </pack>
 

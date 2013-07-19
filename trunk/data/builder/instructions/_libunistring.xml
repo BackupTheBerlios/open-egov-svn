@@ -2,31 +2,27 @@
 
 <!-- $Id$ -->
 
-<pack name="libintl" license="">
+<pack name="libunistring" license="">
   <meta>
     <homepage></homepage>
-    <download></download>
+    <download>http://ftp.gnu.org/gnu/libunistring/</download>
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long"></description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
+    <keywords>libunistring</keywords>
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="0.9.3" date="2010-05-02" state="works">
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="libunistring-0.9.3.tar.gz">
+        <url type="direct" checked="2013-07-19">http://ftp.gnu.org/gnu/libunistring/libunistring-0.9.3.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,20 +32,8 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
-make
-make install
-    </compile>
-
-    <install>
-    </install>
+    <commands>
+    </commands>
   </set>
 </pack>
 

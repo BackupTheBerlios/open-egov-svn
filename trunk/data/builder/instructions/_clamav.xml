@@ -18,40 +18,24 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="0.97.6" date="2012-09-17" working="false">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="0.97.8" date="2013-04-17" state="works">
 
     <downloads>
-      <download file="clamav-0.97.6.tar.gz">
-        <url type="sourceforge" checked="2012-11-12">http://sourceforge.net/projects/clamav/files/clamav/0.97.6/clamav-0.97.6.tar.gz/download</url>
+      <download file="clamav-0.97.8.tar.gz">
+        <url type="sourceforge" checked="2013-07-19">http://sourceforge.net/projects/clamav/files/clamav/0.97.8/clamav-0.97.8.tar.gz/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>14.765.896</size>
+        <size></size>
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
-make
-make install
-    </compile>
-
-    <install>
-    </install>
+    <commands>
+    </commands>
   </set>
 </pack>
 

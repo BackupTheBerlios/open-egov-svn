@@ -2,27 +2,27 @@
 
 <!-- $Id$ -->
 
-<pack name="poldi" license="GPL-2">
+<pack name="libgpg-error" license="">
   <meta>
-    <homepage>http://www.gnupg.org/</homepage>
-    <download>ftp://ftp.gnupg.org/gcrypt/alpha/poldi/</download>
+    <homepage>http://www.gnupg.org/download/#libgpg-error</homepage>
+    <download>ftp://ftp.gnupg.org/gcrypt/libgpg-error/</download>
     <descriptions>
       <description lang="en" type="short"></description>
-      <description lang="en" type="long">PAM module implementing authentication via OpenPGP smartcards.</description>
+      <description lang="en" type="long">DirMngr is a daemon to handle CRL and certificate requests for GnuPG 2.0. It might also be installed as a system daemon for CRL and OCSP checks.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>gnupg, poldi</keywords>
+    <keywords>libgpg-error, gnupg</keywords>
   </meta>
 
   <comments>
   </comments>
 
-  <set version="0.4.1" date="2008-12-22" state="works">
+  <set version="1.12" date="2013-06-24" state="works">
 
     <downloads>
-      <download file="poldi-0.4.1.tar.bz2">
-        <url type="direct" checked="2013-07-20">ftp://ftp.gnupg.org/gcrypt/alpha/poldi/poldi-0.4.1.tar.bz2</url>
+      <download file="libgpg-error-1.12.tar.bz2">
+        <url type="direct" checked="2013-07-20">ftp://ftp.gnupg.org/gcrypt/libgpg-error/libgpg-error-1.12.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>

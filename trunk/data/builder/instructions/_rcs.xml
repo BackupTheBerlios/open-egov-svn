@@ -4,29 +4,25 @@
 
 <pack name="rcs" license="">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://www.gnu.org/software/rcs/rcs.html</homepage>
+    <download>http://ftp.gnu.org/pub/gnu/rcs/</download>
     <descriptions>
       <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="long">The Revision Control System (RCS) manages multiple revisions of files. RCS automates the storing, retrieval, logging, identification, and merging of revisions. RCS is useful for text that is revised frequently.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
+    <keywords>rcs</keywords>
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="5.9.0" date="2013-05-06" state="works">
 
     <downloads>
       <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+        <url type="direct" checked="2013-07-19">http://ftp.gnu.org/pub/gnu/rcs/rcs-5.9.0.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,20 +32,8 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
-make
-make install
-    </compile>
-
-    <install>
-    </install>
+    <commands>
+    </commands>
   </set>
 </pack>
 

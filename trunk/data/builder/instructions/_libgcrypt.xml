@@ -4,29 +4,27 @@
 
 <pack name="libgcrypt" license="">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://www.gnupg.org/download/</homepage>
+    <!-- http://www.gnu.org/software/libgcrypt/ -->
+    <download>http://www.gnupg.org/download/</download>
+    <!-- ftp://ftp.gnupg.org/gcrypt/alpha/libgcrypt/ -->
     <descriptions>
       <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="long">Libgcrypt is a general purpose cryptographic library based on the code from GnuPG. It provides functions for all cryptographic building blocks: symmetric ciphers, hash algorithms, MACs, public key algorithms, large integer functions, random numbers and a lot of supporting functions. </description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
+    <keywords>libgcrypt, gnupg</keywords>
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="1.5.2" date="2013-04-18" state="works">
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="libgcrypt-1.5.2.tar.bz2">
+        <url type="direct" checked="2013-07-20">ftp://ftp.gnupg.org/gcrypt/libgcrypt/libgcrypt-1.5.2.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,20 +34,8 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
-make
-make install
-    </compile>
-
-    <install>
-    </install>
+    <commands>
+    </commands>
   </set>
 </pack>
 
