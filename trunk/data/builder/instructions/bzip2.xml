@@ -16,13 +16,9 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="1.0.6" date="2010-09-20" working="false">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="1.0.6" date="2010-09-20" state="works">
 
     <downloads>
       <download file="bzip2-1.0.6.tar.gz">
@@ -32,24 +28,64 @@
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>782.025</size>
+        <size>782025</size>
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
+    <commands>
+oegenv 32
+oegcleanbase
+oegextract bzip2-1.0.6.tar.gz
 make
-make install
-    </compile>
+# shows commands
+make -n install PREFIX=/open-egovernment
+make install PREFIX=/open-egovernment
 
-    <install>
-    </install>
+# Error:
+chmod a+x /open-egovernment/bin/bzip2
+chmod: Beim Setzen der Zugriffsrechte für "/open-egovernment/bin/bzip2": Bad file number
+
+mkdir -p /open-egovernment/bin
+mkdir -p /open-egovernment/lib
+mkdir -p /open-egovernment/man
+mkdir -p /open-egovernment/man/man1
+mkdir -p /open-egovernment/include
+cp -f bzip2 /open-egovernment/bin/bzip2              # haben .exe!
+cp -f bzip2 /open-egovernment/bin/bunzip2
+cp -f bzip2 /open-egovernment/bin/bzcat
+cp -f bzip2recover /open-egovernment/bin/bzip2recover
+#chmod a+x /open-egovernment/bin/bzip2
+#chmod a+x /open-egovernment/bin/bunzip2
+#chmod a+x /open-egovernment/bin/bzcat
+#chmod a+x /open-egovernment/bin/bzip2recover
+cp -f bzip2.1 /open-egovernment/man/man1
+#chmod a+r /open-egovernment/man/man1/bzip2.1
+cp -f bzlib.h /open-egovernment/include
+#chmod a+r /open-egovernment/include/bzlib.h
+cp -f libbz2.a /open-egovernment/lib
+#chmod a+r /open-egovernment/lib/libbz2.a
+cp -f bzgrep /open-egovernment/bin/bzgrep
+ln -s -f /open-egovernment/bin/bzgrep /open-egovernment/bin/bzegrep
+ln -s -f /open-egovernment/bin/bzgrep /open-egovernment/bin/bzfgrep
+#chmod a+x /open-egovernment/bin/bzgrep
+cp -f bzmore /open-egovernment/bin/bzmore
+ln -s -f /open-egovernment/bin/bzmore /open-egovernment/bin/bzless        # without extension!
+#chmod a+x /open-egovernment/bin/bzmore
+cp -f bzdiff /open-egovernment/bin/bzdiff
+ln -s -f /open-egovernment/bin/bzdiff /open-egovernment/bin/bzcmp
+#chmod a+x /open-egovernment/bin/bzdiff
+cp -f bzgrep.1 bzmore.1 bzdiff.1 /open-egovernment/man/man1
+#chmod a+r /open-egovernment/man/man1/bzgrep.1
+#chmod a+r /open-egovernment/man/man1/bzmore.1
+#chmod a+r /open-egovernment/man/man1/bzdiff.1
+echo ".so man1/bzgrep.1" > /open-egovernment/man/man1/bzegrep.1
+echo ".so man1/bzgrep.1" > /open-egovernment/man/man1/bzfgrep.1
+echo ".so man1/bzmore.1" > /open-egovernment/man/man1/bzless.1
+echo ".so man1/bzdiff.1" > /open-egovernment/man/man1/bzcmp.1
+
+cd "${BASEDIR}"
+oegarchive bzip2-1.0.6
+    </commands>
   </set>
 </pack>
 

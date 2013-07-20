@@ -4,7 +4,7 @@
 
 <pack name="libarchive" license="">
   <meta>
-    <homepage></homepage>
+    <homepage>http://www.libarchive.org/</homepage>
     <download></download>
     <descriptions>
       <description lang="en" type="short"></description>
@@ -12,14 +12,13 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
+    <keywords>libarchive</keywords>
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" state="works">
+  <set version="3.1.2" date="" state="works">
     <flags>
       <required></required>
       <optional></optional>
@@ -27,8 +26,8 @@
     </flags>
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2013-07-19"></url>
+      <download file="libarchive-3.1.2.tar.gz">
+        <url type="direct" checked="2013-07-19">http://www.libarchive.org/downloads/libarchive-3.1.2.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -39,6 +38,24 @@
     </downloads>
 
     <commands>
+oegenv 32
+oegcleanbase
+oegimport libiconv-1.14
+oegimport gettext-0.18.2.1
+oegimport bzip2-1.0.6
+oegimport expat-2.1.0
+oegimport libxml2-2.9.1
+oegimport xz-5.0.5
+oegimport zlib-1.2.8
+oegextract libarchive-3.1.2.tar.gz
+#cd /work/libarchive-3.1.2/
+#configure --prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-expat=${OEG_BASE_DIR}
+export PATH=$PATH:/open-egovernment/bin    # some tool during configure needs expat-1.dll
+configure --prefix=${OEG_BASE_DIR} --without-lzma --without-bz2lib
+make
+make install DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive libarchive-3.1.2
     </commands>
   </set>
 </pack>

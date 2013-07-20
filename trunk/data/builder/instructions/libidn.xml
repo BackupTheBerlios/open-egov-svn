@@ -33,6 +33,16 @@
     </downloads>
 
     <commands>
+oegenv 32
+oegcleanbase
+oegimport libiconv-1.14
+oegimport gettext-0.18.2.1
+oegextract libidn-1.28.tar.gz
+configure --prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --without-libpth-prefix --enable-threads=windows
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive libidn-1.28
     </commands>
   </set>
 </pack>

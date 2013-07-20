@@ -22,7 +22,7 @@
 
     <downloads>
       <download file="rsync-3.0.9.tar.gz">
-        <url type="direct" checked="2013-07-19">http://rsync.samba.org/ftp/rsync/src/rsync-3.0.9.tar.gz</url>
+        <url type="direct" checked="2013-07-20">http://rsync.samba.org/ftp/rsync/src/rsync-3.0.9.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>

@@ -5,7 +5,8 @@
 <pack name="expat" license="">
   <meta>
     <homepage></homepage>
-    <download></download>
+    <download>http://sourceforge.net/projects/expat/</download>
+    <!-- http://sourceforge.net/projects/expat/files/latest/download -->
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long"></description>
@@ -18,14 +19,11 @@
   <comments>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="" date="" state="works">
 
     <downloads>
       <download file="expat-2.1.0.tar.gz">
-        <url type="direct" checked="2013-07-19"></url>
+        <url type="sourceforge" checked="2013-07-19">http://downloads.sourceforge.net/project/expat/expat/2.1.0/expat-2.1.0.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>

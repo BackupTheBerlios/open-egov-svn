@@ -5,7 +5,7 @@
 <pack name="curl" license="">
   <meta>
     <homepage></homepage>
-    <download></download>
+    <download>http://curl.haxx.se/download.html</download>
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long"></description>
@@ -16,17 +16,13 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="7.31.0" date="2013-06-22" state="works">
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="curl-7.31.0.tar.bz2">
+        <url type="direct" checked="2013-07-19">http://curl.haxx.se/download/curl-7.31.0.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,20 +32,27 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
+    <commands>
+oegenv 32
+oegcleanbase
+oegimport libidn-1.28       # needs gettext (libintl)
+oegimport gettext-0.18.2.1  # needs libiconv
+oegimport libiconv-1.14
+oegimport zlib-1.2.8
+oegextract curl-7.31.0.tar.bz2
 
-    <patch>
-    </patch>
+# no includes in CFLAGS!
+export CFLAGS="-m32 -march=i686 -mtune=i686 -pipe -O2 -mms-bitfields -fomit-frame-pointer"
+export CPPFLAGS="-m32 -march=i686 -mtune=i686 -pipe -O2 -mms-bitfields -fomit-frame-pointer -I/open-egovernment/include"
 
-    <compile>
-./configure --prefix=${PREFIX}
+# disabled most options
+configure --prefix=/open-egovernment --without-ssl --without-gnutls --without-polarssl --without-cyassl --without-nss --without-axtls --without-ca-bundle --without-ca-path --without-libmetalink -without-libssh2 --without-librtmp --without-winidn -with-libidn=/open-egovernment --with-winssl --without-darwinssl --enable-ipv6 --with-zlib=/open-egovernment --enable-cookies --enable-sspi --enable-threaded-resolver --disable-tls-srp --enable-crypto-auth --enable-verbose --enable-manual --disable-gopher --enable-http --enable-ftp --enable-file --enable-rtsp --enable-proxy --enable-dict --enable-telnet --enable-tftp --enable-pop3 --enable-imap --enable-smtp --disable-ldap --disable-ldaps --disable-ares --disable-symbol-hiding
+
 make
-make install
-    </compile>
-
-    <install>
-    </install>
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive curl-7.31.0
+    </commands>
   </set>
 </pack>
 
