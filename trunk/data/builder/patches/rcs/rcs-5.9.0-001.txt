@@ -1,0 +1,26 @@
+diff -Naur src/b-isr.c src.neu/b-isr.c
+--- src/b-isr.c	2013-07-20 23:03:01 +0000
++++ src.neu/b-isr.c	2013-07-20 23:04:58 +0000
+@@ -37,6 +37,22 @@
+ #include "b-excwho.h"
+ #include "b-isr.h"
+ 
++// from http://unix.superglobalmegacorp.com/Net2/newsrc/sys/signal.h.html
++#define	SIGHUP	1	/* hangup */
++#define	SIGQUIT	3	/* quit */
++#define	SIGPIPE	13	/* write on a pipe with no one to read it */
++#define	SIGXCPU	24	/* exceeded CPU time limit */
++#define	SIGXFSZ	25	/* exceeded file size limit */
++
++// from http://www.dre.vanderbilt.edu/~schmidt/DOC_ROOT/ACE/ace/os_include/os_signal.h
++# if !defined (SA_SIGINFO)
++#   define SA_SIGINFO 0
++# endif /* SA_SIGINFO */
++#if !defined (SIGCHLD)
++#  define SIGCHLD 0
++#endif /* SIGCHLD */
++
++
+ void
+ maybe_reset_sigchld (void)
+ {

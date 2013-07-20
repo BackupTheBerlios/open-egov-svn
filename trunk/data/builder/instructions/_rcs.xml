@@ -7,7 +7,7 @@
     <homepage>http://www.gnu.org/software/rcs/rcs.html</homepage>
     <download>http://ftp.gnu.org/pub/gnu/rcs/</download>
     <descriptions>
-      <description lang="en" type="short"></description>
+      <description lang="en" type="short">Manages multiple revisions of files</description>
       <description lang="en" type="long">The Revision Control System (RCS) manages multiple revisions of files. RCS automates the storing, retrieval, logging, identification, and merging of revisions. RCS is useful for text that is revised frequently.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
@@ -21,18 +21,27 @@
   <set version="5.9.0" date="2013-05-06" state="works">
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2013-07-19">http://ftp.gnu.org/pub/gnu/rcs/rcs-5.9.0.tar.xz</url>
+      <download file="${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz">
+        <url type="direct" checked="2013-07-19">http://ftp.gnu.org/pub/gnu/rcs/${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>789296</size>
       </download>
     </downloads>
 
     <commands>
+oegenv 32
+oegcleanbase
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+oegpatch 001 # If SA_SIGINFO, SIGHUP, SIGQUIT, SIGPIPE, SIGXCPU, SIGXFSZ are undefined.
+configure --prefix=${OEG_BASE_DIR} --enable-threads=windows --without-libpth-prefix --with-gnu-ld
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>
