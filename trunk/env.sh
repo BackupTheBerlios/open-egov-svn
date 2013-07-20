@@ -59,6 +59,17 @@ function oegenv {
   export OEG_ARCHIVES_DIR="${OEG_PROJECT_DIR}/data/builder/archives/windows-${TARGETBITS}"
 }
 
+function oegpatch {
+  if [ ! $# == 1 ]; then
+    echo "Usage: oegarchive <number of patch file>"
+    return
+  fi
+
+  #create with: diff -Naur src src.neu > patch.txt
+  #patch --dry-run -p0 < patch.txt
+  patch -p0 < ${OEG_PATCHES_DIR}/${PACKAGE_NAME}/${PACKAGE_NAME}-${PACKAGE_VERSION}-$1.txt
+}
+
 function oegarchive {
   if [ ! $# == 1 ]; then
     echo "Usage: oegarchive \"name-version\""
@@ -132,7 +143,7 @@ function oegextract {
   if [ ! -f "$OEG_DOWNLOADS_DIR/$1" ]
   then
     echo Error: The file does not exist.
-	return
+    return
   fi
 
   cd ${OEG_WORK_DIR}
@@ -141,9 +152,9 @@ function oegextract {
 
   if [[ $FILENAME == *.tar.gz ]]; then
     export FILEEXTENSION=.tar.gz
-	export OUTPUTDIR=`basename $FILENAME $FILEEXTENSION`
+    export OUTPUTDIR=`basename $FILENAME $FILEEXTENSION`
     echo Extension: ${FILEEXTENSION}
-	echo Output Directory: ${OUTPUTDIR}
+    echo Output Directory: ${OUTPUTDIR}
 
     if [ -d "$OEG_WORK_DIR/$OUTPUTDIR" ]
     then
@@ -151,16 +162,16 @@ function oegextract {
       return
     fi
 
-	"${OEG_PATH_TO_7ZIP}" x "${FILENAME}" -so | "${OEG_PATH_TO_7ZIP}" x -si -ttar -y
-	cd "$OEG_WORK_DIR/$OUTPUTDIR"
-	return
+    "${OEG_PATH_TO_7ZIP}" x "${FILENAME}" -so | "${OEG_PATH_TO_7ZIP}" x -si -ttar -y
+    cd "$OEG_WORK_DIR/$OUTPUTDIR"
+    return
   fi
 
   if [[ $FILENAME == *.tar.bz2 ]]; then
     export FILEEXTENSION=.tar.bz2
-	export OUTPUTDIR=`basename $FILENAME $FILEEXTENSION`
+    export OUTPUTDIR=`basename $FILENAME $FILEEXTENSION`
     echo Extension: ${FILEEXTENSION}
-	echo Output Directory: ${OUTPUTDIR}
+    echo Output Directory: ${OUTPUTDIR}
 
     if [ -d "$OEG_WORK_DIR/$OUTPUTDIR" ]
     then
@@ -168,23 +179,23 @@ function oegextract {
       return
     fi
 
-	"${OEG_PATH_TO_7ZIP}" x "${FILENAME}" -so | "${OEG_PATH_TO_7ZIP}" x -si -ttar -y
-	cd "$OEG_WORK_DIR/$OUTPUTDIR"
-	return
+    "${OEG_PATH_TO_7ZIP}" x "${FILENAME}" -so | "${OEG_PATH_TO_7ZIP}" x -si -ttar -y
+    cd "$OEG_WORK_DIR/$OUTPUTDIR"
+    return
   fi
 
   if [[ $FILENAME == *.tar ]]
   then
     echo TAR archive unhandled
-	return
+    return
   fi
 
   if [[ $FILENAME == *.zip ]]
   then
     export FILEEXTENSION=.zip
-	export OUTPUTDIR=`basename $FILENAME $FILEEXTENSION`
+    export OUTPUTDIR=`basename $FILENAME $FILEEXTENSION`
     echo Extension: ${FILEEXTENSION}
-	echo Output Directory: ${OUTPUTDIR}
+    echo Output Directory: ${OUTPUTDIR}
 
     if [ -d "$OEG_WORK_DIR/$OUTPUTDIR" ]
     then
@@ -192,23 +203,23 @@ function oegextract {
       return
     fi
 
-	"${OEG_PATH_TO_7ZIP}" x "${FILENAME}"
-	cd "$OEG_WORK_DIR/$OUTPUTDIR"
-	return
+    "${OEG_PATH_TO_7ZIP}" x "${FILENAME}"
+    cd "$OEG_WORK_DIR/$OUTPUTDIR"
+    return
   fi
 
   if [[ $FILENAME == *.7z ]]
   then
     echo 7z archive unhandled
-	return
+    return
   fi
 
   if [[ $FILENAME == *.tar.xz ]]
   then
     export FILEEXTENSION=.tar.xz
-	export OUTPUTDIR=`basename $FILENAME $FILEEXTENSION`
+    export OUTPUTDIR=`basename $FILENAME $FILEEXTENSION`
     echo Extension: ${FILEEXTENSION}
-	echo Output Directory: ${OUTPUTDIR}
+    echo Output Directory: ${OUTPUTDIR}
 
     if [ -d "$OEG_WORK_DIR/$OUTPUTDIR" ]
     then
@@ -216,15 +227,15 @@ function oegextract {
       return
     fi
 
-	"${OEG_PATH_TO_7ZIP}" x "${FILENAME}" -so | "${OEG_PATH_TO_7ZIP}" x -si -ttar -y
-	cd "$OEG_WORK_DIR/$OUTPUTDIR"
-	return
+    "${OEG_PATH_TO_7ZIP}" x "${FILENAME}" -so | "${OEG_PATH_TO_7ZIP}" x -si -ttar -y
+    cd "$OEG_WORK_DIR/$OUTPUTDIR"
+    return
   fi
 
   if [[ $FILENAME == *.xz ]]
   then
     echo XZ archive unhandled
-	return
+    return
   fi
 
   echo Unknown file or archive format. Don\'t know how to extract...
