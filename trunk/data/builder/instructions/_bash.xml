@@ -41,11 +41,24 @@
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>7009201</size>
+        <size>2194482</size>
       </download>
     </downloads>
 
     <commands>
+oegenv 32
+oegcleanbase
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+oegimport libiconv-1.14
+oegimport gettext-0.18.2.1  #.3
+./configure --prefix=${OEG_BASE_DIR} --with-libiconv-prefix=/open-egovernment --with-gnu-ld --with-libintl-prefix=/open-egovernment --enable-readline --enable-alias --enable-cond-command --enable-prompt-string-decoding --enable-select
+make
+
+# error, no pwd.h
+
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

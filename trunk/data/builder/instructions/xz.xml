@@ -16,26 +16,38 @@
   </meta>
 
   <comments>
-    <comment date="2013-07-19" author="Gerrit Albrecht">Homepage: Building the code from the git repository requires GNU Autotools. Here are the minimum versions that should work with XZ Utils; using the latest versions is strongly recommended:
-    Autoconf 2.64, Automake 1.10, gettext 0.18 (Note: autopoint depends on cvs!), libtool 2.2</comment>
+    <comment date="2013-07-19" author="Gerrit Albrecht">Homepage: Building the code from the git repository requires GNU Autotools. Here are the minimum versions that should work with XZ Utils; using the latest versions is strongly recommended: Autoconf 2.64, Automake 1.10, gettext 0.18 (Note: autopoint depends on cvs!), libtool 2.2</comment>
   </comments>
 
   <set version="5.0.5" date="2013-07-19" state="works">
     <flags>
       <required></required>
-      <optional>gettext-0.18 ???</optional>
-      <recommended></recommended>
+      <optional>gettext libiconv</optional>
+      <recommended>gettext libiconv</recommended>
     </flags>
+
+    <options>
+      <option name="gettext" import-if-pos="gettext"
+              para-if-neu=""
+              para-if-pos="--with-libintl-prefix=${OEG_BASE_DIR}"
+              para-if-neg="--without-libintl-prefix"
+              info="" />
+      <option name="libiconv" import-if-pos="libiconv"
+              para-if-neu=""
+              para-if-pos="--with-libiconv-prefix=${OEG_BASE_DIR}"
+              para-if-neg="--without-libiconv-prefix"
+              info="" />
+    </options>
 
     <downloads>
       <download file="xz-5.0.5.tar.xz"> <!-- windows binaries available -->
-        <url type="direct" checked="2013-07-19">http://tukaani.org/xz/xz-5.0.5.tar.xz</url>
+        <url type="direct" checked="2013-07-22">http://tukaani.org/xz/xz-5.0.5.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>928700</size>
       </download>
     </downloads>
 
@@ -43,15 +55,29 @@
 oegenv 32
 oegcleanbase
 oegextract xz-5.0.5.tar.xz
-configure --prefix=${OEG_BASE_DIR} --disable-static --disable-xzdec --disable-lzmadec
+configure --prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-gnu-ld
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cp -a extra ${OEG_INSTALL_DIR}${OEG_BASE_DIR}/share/doc/xz   # copy 7z2lzma.bash and scanlzma.c
+
 make clean
 configure --prefix=${OEG_BASE_DIR} --disable-shared --disable-nls --disable-encoders --enable-small --disable-threads
 make -C src/liblzma
 make -C src/xzdec
-make -C src/liblzma DESTDIR=${OEG_INSTALL_DIR} install-strip
-cp -a extra ${OEG_INSTALL_DIR}${OEG_BASE_DIR}/share/doc/xz
+# no install, because we don't want to overwrite our existing shared binaries and e.g. the man pages...
+#make -C src/xzdec DESTDIR=${OEG_INSTALL_DIR} install-strip
+cp src/xzdec/xzdec.exe   /open-egovernment-install/open-egovernment/bin/xzdec.static.exe
+cp src/xzdec/lzmadec.exe /open-egovernment-install/open-egovernment/bin/lzmadec.static.exe
+strip -s /open-egovernment-install/open-egovernment/bin/xzdec.static.exe
+strip -s /open-egovernment-install/open-egovernment/bin/lzmadec.static.exe
+
+make clean
+configure --prefix=${OEG_BASE_DIR} --disable-shared --disable-nls
+make -C src/liblzma
+make -C src/xz
+cp src/xz/xz.exe /open-egovernment-install/open-egovernment/bin/xz.static.exe
+strip -s /open-egovernment-install/open-egovernment/bin/xz.static.exe
+
 cd ${OEG_INSTALL_DIR}${OEG_BASE_DIR}
 oegarchive xz-5.0.5
     </commands>

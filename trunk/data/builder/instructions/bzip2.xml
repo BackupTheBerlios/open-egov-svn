@@ -22,7 +22,7 @@
 
     <downloads>
       <download file="bzip2-1.0.6.tar.gz">
-        <url type="direct" checked="2012-11-12">http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz</url>
+        <url type="direct" checked="2013-07-22">http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -42,8 +42,8 @@ make -n install PREFIX=/open-egovernment
 make install PREFIX=/open-egovernment
 
 # Error:
-chmod a+x /open-egovernment/bin/bzip2
-chmod: Beim Setzen der Zugriffsrechte für "/open-egovernment/bin/bzip2": Bad file number
+#chmod a+x /open-egovernment/bin/bzip2
+#chmod: Beim Setzen der Zugriffsrechte für "/open-egovernment/bin/bzip2": Bad file number
 
 mkdir -p /open-egovernment/bin
 mkdir -p /open-egovernment/lib
@@ -83,7 +83,7 @@ echo ".so man1/bzgrep.1" > /open-egovernment/man/man1/bzfgrep.1
 echo ".so man1/bzmore.1" > /open-egovernment/man/man1/bzless.1
 echo ".so man1/bzdiff.1" > /open-egovernment/man/man1/bzcmp.1
 
-cd "${BASEDIR}"
+cd "${OEG_BASE_DIR}"
 oegarchive bzip2-1.0.6
     </commands>
   </set>

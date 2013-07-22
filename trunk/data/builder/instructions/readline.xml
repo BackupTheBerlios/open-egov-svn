@@ -12,7 +12,7 @@
     <descriptions>
       <description lang="en" type="short">The GNU Readline Library</description>
       <description lang="en" type="long"> The GNU Readline library provides a set of functions for use by applications that allow users to edit command lines as they are typed in. Both Emacs and vi editing modes are available. The Readline library includes additional functions to maintain a list of previously-entered command lines, to recall and perhaps reedit those lines, and perform csh-like history expansion on previous commands. The history facilites are also placed into a separate library, the History library, as part of the build process. The History library may be used without Readline in applications which desire its capabilities.</description>
-      <description lang="de" type="short">The GNU Readline Library</description>
+      <description lang="de" type="short">Die GNU Readline Bibliothek</description>
       <description lang="de" type="long"></description>
     </descriptions>
     <keywords>gnu, readline</keywords>
@@ -47,30 +47,23 @@ ftp://ftp.cwru.edu/pub/bash/readline-6.2-patches/readline62-004 2012-07-16
     </downloads>
 
     <commands>
-./configure --prefix=${PREFIX}
+oegenv 32
+oegcleanbase
+export PACKAGE_NAME=readline
+export PACKAGE_VERSION=6.2
+oegimport termcap-1.3.1
+oegextract readline-6.2.tar.gz
+oegpatch 001
+oegpatch 002
+oegpatch 003
+oegpatch 004
+# --with-curses    use the curses library instead of the termcap library
+configure --prefix=${OEG_BASE_DIR}
 make
-make install
-    </commands>
-  </set>
-
-  <set version="5.1" date="2005-12-08" state="works">
-
-    <downloads>
-      <download file="readline-5.1.tar.gz">
-        <url type="direct" checked="2012-11-13">http://ftp.gnu.org/gnu/bash/readline-5.1.tar.gz</url>
-        <hash type="CRC32"></hash>
-        <hash type="MD5"></hash>
-        <hash type="SHA1"></hash>
-        <hash type="SHA512"></hash>
-        <hash type="RIPEMD256"></hash>
-        <size>2030276</size>
-      </download>
-    </downloads>
-
-    <commands>
-./configure --prefix=${PREFIX}
-make
-make install
+# make don't know how to make "make install-strip"
+make install DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive readline-6.2
     </commands>
   </set>
 </pack>

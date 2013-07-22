@@ -1,0 +1,16 @@
+diff -Naur src1/sdiff.c src/sdiff.c
+--- src1/sdiff.c	2013-07-22 15:36:15 +0000
++++ src/sdiff.c	2013-07-22 15:36:20 +0000
+@@ -41,6 +41,12 @@
+ #define AUTHORS \
+   proper_name ("Thomas Lord")
+ 
++
++/* MinGW does not have a kill function, will ignore it to compile the source... */
++
++#define kill
++
++
+ /* Size of chunks read from files which must be parsed into lines.  */
+ #define SDIFF_BUFSIZE ((size_t) 65536)
+ 

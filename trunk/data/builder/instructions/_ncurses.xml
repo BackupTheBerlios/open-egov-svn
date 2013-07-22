@@ -33,6 +33,14 @@
     </downloads>
 
     <commands>
+oegenv 32
+oegcleanbase
+oegextract ncurses-5.9.tar.gz
+configure --prefix=${OEG_BASE_DIR} --without-cxx-binding --without-manpages --without-ada --enable-term-driver --enable-sp-funcs --with-normal --disable-home-terminfo --enable-interop
+make
+make install DESTDIR=${OEG_INSTALL_DIR}
+cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
+oegarchive ncurses-5.9
     </commands>
   </set>
 </pack>

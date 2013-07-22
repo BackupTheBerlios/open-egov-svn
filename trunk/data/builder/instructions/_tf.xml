@@ -20,10 +20,12 @@
 cd tf-version</comment>
   </comments>
 
-  <set version="5.0 beta 8" date="2007-01-14" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="5.0 beta 8" date="2007-01-14" state="fails-to-build">
+    <flags>
+      <required>pcre</required>
+      <optional></optional>
+      <recommended></recommended>
+    </flags>
 
     <downloads>
       <download file="tf-50b8.zip">
@@ -33,7 +35,7 @@ cd tf-version</comment>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>1.221.169</size>
+        <size>1221169</size>
       </download>
       <download file="tf-50b8.tar.gz">
         <url type="direct" checked="2012-11-13">http://sourceforge.net/projects/tinyfugue/files/tinyfugue/5.0%20beta%208/tf-50b8.tar.gz/download</url>
@@ -42,7 +44,7 @@ cd tf-version</comment>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>719.553</size>
+        <size>719553</size>
       </download>
       <download file="tf-50b8-help.tar.gz">
         <url type="direct" checked="2012-11-13">http://sourceforge.net/projects/tinyfugue/files/tinyfugue/5.0%20beta%208/tf-50b8-help.tar.gz/download</url>
@@ -51,24 +53,45 @@ cd tf-version</comment>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>175.591</size>
+        <size>175591</size>
       </download>
     </downloads>
 
-    <options>
-    </options>
+    <commands>
+export PACKAGE_NAME=tf
+export PACKAGE_VERSION=5.0b8
+oegenv 32
+oegcleanbase
+oegimport libiconv-1.14
+oegimport gettext-0.18.2.1
+oegimport pcre-8.33
+oegextract tf-50b8.tar.gz
 
-    <patch>
-    </patch>
+cd tf-50b8
+rm -rf autom4te.cache
+rm -rf macos
+rm -rf os2
+rm -rf os2make.cmd
+rm -rf src/pcre-2.08
 
-    <compile>
-./configure --prefix=${PREFIX}
+# Activate the use of an external pcre-lib, the internal pcre library
+# is very old and has compile problems and I have to few time for them.
+oegpatch 001
+
+# Creates an own Makefile
+oegpatch 002
+
+# Gives a hard-coded path to the tf-lib directory.
+oegpatch 003
+
+#configure --prefix=${OEG_BASE_DIR} --without-ssl --with-gnu-ld #--with-libiconv-prefix=${OEG_BASE_DIR}
 make
-make install
-    </compile>
-
-    <install>
-    </install>
+#make install DESTDIR=/tmp/inst$$
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}"
+cd "${OEG_BASE_DIR}"    # okay????
+oegarchive wget-1.14
+    </commands>
   </set>
 </pack>
 

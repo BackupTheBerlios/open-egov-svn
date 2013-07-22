@@ -19,6 +19,24 @@
   </comments>
 
   <set version="1.12" date="2013-06-24" state="works">
+    <flags>
+      <required></required>
+      <optional>gettext libiconv</optional>
+      <recommended>gettext libiconv</recommended>
+    </flags>
+
+    <options>
+      <option name="gettext" import-if-pos="gettext"
+              para-if-neu=""
+              para-if-pos="--with-libintl-prefix=${OEG_BASE_DIR}"
+              para-if-neg="--without-libintl-prefix"
+              info="" />
+      <option name="libiconv" import-if-pos="libiconv"
+              para-if-neu=""
+              para-if-pos="--with-libiconv-prefix=${OEG_BASE_DIR}"
+              para-if-neg="--without-libiconv-prefix"
+              info="" />
+    </options>
 
     <downloads>
       <download file="libgpg-error-1.12.tar.bz2">
@@ -32,7 +50,45 @@
       </download>
     </downloads>
 
+<!--
+for i in $(./potomo --get-linguas ./po); do \
+           /bin/mkdir -p "/open-egovernment-install/open-egovernment/share/local
+e/$i/LC_MESSAGES" || true; \
+           rm -f "/open-egovernment-install/open-egovernment/share/locale/$i/LC_
+MESSAGES/libgpg-error.mo" \
+                                                 2>/dev/null || true; \
+           ./potomo ./po/$i.po \
+              "/open-egovernment-install/open-egovernment/share/locale/$i/LC_MES
+SAGES/libgpg-error.mo" ; \
+done
+potomo: './po/cs.po' keeping UTF-8
+potomo: './po/da.po' keeping UTF-8
+potomo: './po/de.po' keeping UTF-8
+potomo: './po/eo.po' keeping utf-8
+potomo: './po/fr.po' keeping UTF-8
+potomo: './po/it.po' keeping UTF-8
+potomo: './po/ja.po' keeping UTF-8
+potomo: './po/nl.po' keeping UTF-8
+potomo: './po/pl.po' converting from ISO-8859-2 to utf-8         iconv.exe hangs!! kill!!!
+potomo: './po/ro.po' converting from ISO-8859-2 to utf-8         and here too
+potomo: './po/sv.po' keeping utf-8
+potomo: './po/uk.po' keeping UTF-8
+potomo: './po/vi.po' keeping UTF-8
+potomo: './po/zh_CN.po' keeping utf-8
+make[3]: Leaving directory `/work/libgpg-error-1.12'
+-->
+
     <commands>
+oegenv 32
+oegcleanbase
+oegimport libiconv-1.14
+oegimport gettext-0.18.3
+oegextract libgpg-error-1.12.tar.bz2
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR}
+make
+make install DESTDIR=${OEG_INSTALL_DIR}
+cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
+oegarchive libgpg-error-1.12
     </commands>
   </set>
 </pack>

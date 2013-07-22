@@ -16,13 +16,9 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="2.12.4" date="2009-06-09" working="false">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="2.12.4" date="2009-06-09" state="works">
 
     <downloads>
       <download file="WinMerge-2.12.4-src.7z">
@@ -36,20 +32,11 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
+    <commands>
+./configure --prefix=${OEG_BASE_DIR}
 make
 make install
-    </compile>
-
-    <install>
-    </install>
+    </commands>
   </set>
 </pack>
 

@@ -16,13 +16,9 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="1.06" date="2008-11-08" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="1.06" date="2008-11-08" state="works">
 
     <downloads>
       <download file="tack-1.06.tar.gz">
@@ -36,20 +32,11 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
+    <commands>
 ./configure --prefix=/mingw
 make
 make install
-    </compile>
-
-    <install>
-    </install>
+    </commands>
   </set>
 </pack>
 

@@ -16,40 +16,34 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="false">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="1.8.0" date="2013-06-18" state="fails-to-build">
 
     <downloads>
-      <download file="subversion-1.7.7.tar.bz2">
-        <url type="direct" checked="2012-11-11">http://mirror.serversupportforum.de/apache/subversion/subversion-1.7.7.tar.bz2</url>
+      <download file="subversion-1.8.0.tar.bz2">
+        <url type="direct" checked="2013-07-22">http://apache.lehtivihrea.org/subversion/subversion-1.8.0.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
-        <hash type="SHA1">c9fc0c5992eda36ba9affd93a15929e25958a951</hash>
+        <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
         <size></size>
       </download>
     </downloads>
 
-    <options>
-    </options>
+    <commands>
+oegenv 32
+oegcleanbase
+oegextract subversion-1.8.0.tar.bz2
 
-    <patch>
-    </patch>
+# too many dependencies atm
 
-    <compile>
-./configure --prefix=/mingw
-make
-make install
-    </compile>
+# http://sourceforge.net/projects/win32svn/files/1.7.6/apache22/svn-win32-1.7.6.zip/download
 
-    <install>
-    </install>
+cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
+oegarchive subversion-1.8.0
+    </commands>
   </set>
 </pack>
 

@@ -35,10 +35,28 @@ Example:
 
   <set version="0.18.3" date="2013-07-19" state="works">
     <flags>
-      <required></required>
+      <required>libiconv</required>
       <optional></optional>
       <recommended></recommended>
     </flags>
+
+    <options>
+      <option name="libiconv" import-if-pos="libiconv"
+              para-if-neu=""
+              para-if-pos="--with-libiconv-prefix=${OEG_BASE_DIR}"
+              para-if-neg="--without-libiconv-prefix"
+              info=""  />
+      <option name="libunistring" import-if-pos="libunistring"
+              para-if-neu="--with-included-libunistring"
+              para-if-pos="--with-libunistring-prefix=${OEG_BASE_DIR}"
+              para-if-neg="--without-libunistring-prefix"
+              info=""  />
+      <option name="libxml2" import-if-pos="libxml2"
+              para-if-neu="--with-included-libxml"
+              para-if-pos="--with-libxml2-prefix=${OEG_BASE_DIR}"
+              para-if-neg="--without-libxml2-prefix"
+              info="" /> <!-- --with-included-libxml or libxml2 -->
+    </options>
 
     <downloads>
       <download file="gettext-0.18.3.tar.gz">
@@ -48,16 +66,55 @@ Example:
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>16171945</size>
       </download>
     </downloads>
 
+<!--
+  --disable-openmp        do not use OpenMP
+  --disable-acl           do not support ACLs
+  --disable-curses        do not use libncurses, libtermcap even if they exist
+  --with-libpth-prefix[=DIR]  search for PACKLIBS in DIR/include and DIR/lib
+  --without-libpth-prefix     don't search for PACKLIBS in includedir and libdir
+  --with-libiconv-prefix[=DIR]  search for PACKLIBS in DIR/include and DIR/lib
+  --without-libiconv-prefix     don't search for PACKLIBS in includedir and libdir
+  --with-included-gettext use the GNU gettext library included here
+  --with-libintl-prefix[=DIR]  search for PACKLIBS in DIR/include and DIR/lib
+  --without-libintl-prefix     don't search for PACKLIBS in includedir and libdir
+  --with-included-glib    use the glib2 included here
+  --with-libglib-2.0-prefix[=DIR]  search for PACKLIBS in DIR/include and DIR/lib
+  --without-libglib-2.0-prefix     don't search for PACKLIBS in includedir and libdir
+  --with-included-libcroco  use the libcroco included here
+  --with-libcroco-0.6-prefix[=DIR]  search for PACKLIBS in DIR/include and DIR/lib
+  --without-libcroco-0.6-prefix     don't search for PACKLIBS in includedir and libdir
+  --with-libncurses-prefix[=DIR]  search for PACKLIBS in DIR/include and DIR/lib
+  --without-libncurses-prefix     don't search for PACKLIBS in includedir and libdir
+  --with-libtermcap-prefix[=DIR]  search for PACKLIBS in DIR/include and DIR/lib
+  --without-libtermcap-prefix     don't search for PACKLIBS in includedir and libdir
+  --with-libxcurses-prefix[=DIR]  search for PACKLIBS in DIR/include and DIR/lib
+  --without-libxcurses-prefix     don't search for PACKLIBS in includedir and libdir
+  --with-libcurses-prefix[=DIR]  search for PACKLIBS in DIR/include and DIR/lib
+  --without-libcurses-prefix     don't search for PACKLIBS in includedir and libdir
+  --without-included-regex     don't compile regex; this is the default on systems
+                          with recent-enough versions of the GNU C Library
+                          (use with caution on other systems).
+  --with-libexpat-prefix[=DIR]  search for PACKLIBS in DIR/include and DIR/lib
+  --without-libexpat-prefix     don't search for PACKLIBS in includedir and libdir
+  --without-emacs         do not use Emacs, don't install po-mode
+  --with-lispdir          override the default lisp directory
+  --without-git           don't use git to compress the infrastructure archive
+  --with-cvs              use cvs to compress the infrastructure archive
+                          (deprecated)
+  --without-bzip2         don't use bzip2 to compress the infrastructure archive
+
+  --without-xz            don't use xz to compress the infrastructure archive
+-->
     <commands>
 oegenv 32
 oegcleanbase
 oegimport libiconv-1.14
 oegextract gettext-0.18.3.tar.gz
-configure --prefix=${OEG_BASE_DIR}
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-libiconv-prefix=${BASEDIR}
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"

@@ -21,9 +21,15 @@
   <set version="1.14" date="2011-08-07" state="works">
     <flags>
       <required></required>
-      <optional>gettext-0.18.3</optional>
-      <recommended>gettext-0.18.3</recommended>
+      <optional>gettext</optional>
+      <recommended>gettext</recommended>
     </flags>
+
+    <options>
+      <option name="gettext" import-if-pos="gettext"
+              para-if-pos="--with-libintl-prefix=${OEG_BASE_DIR}"
+              para-if-neg="--without-libintl-prefix" />
+    </options>
 
     <downloads>
       <download file="libiconv-1.14.tar.gz">
@@ -37,18 +43,36 @@
       </download>
     </downloads>
 
+<!--
+cd ${WORKDIR}/libiconv-1.14-32
+#configure --host=i686 --build=i686 --prefix=${BASEDIR} -–enable-shared
+#mit Angabe von --host oder --build werden mit dem Qt5-MinGW keine DLLs erzeugt.
+configure --prefix=${BASEDIR} -–enable-shared
+# ./configure --host=x86_64-w64-mingw32
+# this will simply build and install the DLL
+# a further step is required in order to get the static library as well.
+# make distclean
+# ./configure --host=x86_64-w64-mingw32 --disable-shared
+# make install-strip
+make
+make install
+-->
+
     <commands>
 oegenv 32
 oegcleanbase
-#wenn flag! oegimport gettext-0.18.3
+# if option given:
+# oegimport libiconv-1.14    # maybe needed by gettext binaries
+# oegimport gettext-0.18.3
 oegextract libiconv-1.14.tar.gz
-#cd ${OEG_WORK_DIR}/libiconv-1.14      # needed?
-configure --prefix=${OEG_BASE_DIR} -enable-shared
+# --enable-relocatable doesn't work:
+#../srclib/libicrt.a(progreloc.o):progreloc.c:(.text+0x156): undefined reference to `compute_curr_prefix'
+#../srclib/libicrt.a(progreloc.o):progreloc.c:(.text+0x168): undefined reference to `set_relocation_prefix'
+configure --prefix=${OEG_BASE_DIR} --enable-shared --with-gnu-ld
 make
 #make install DESTDIR=/tmp/inst$$
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
-cd "${OEG_INSTALL_DIR}"      # 2 cd commands needed?
-cd "${OEG_BASE_DIR}"
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive libiconv-1.14
     </commands>
   </set>

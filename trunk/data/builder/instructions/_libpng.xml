@@ -20,12 +20,12 @@
   <comments>
   </comments>
 
-  <set version="" date="" working="true">
+  <set version="1.6.3" date="" state="works">
 
     <downloads>
       <!-- only the .tar.?? files have a configure script -->
       <download file="libpng-1.6.3.tar.xz">
-        <url type="sourceforge" checked="2013-07-19">http://sourceforge.net/projects/libpng/files/libpng16/1.6.3/libpng-1.6.3.tar.xz/download</url>
+        <url type="sourceforge" checked="2013-07-22">http://sourceforge.net/projects/libpng/files/libpng16/1.6.3/libpng-1.6.3.tar.xz/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,6 +36,19 @@
     </downloads>
 
     <commands>
+oegenv 32
+oegcleanbase
+oegimport zlib-1.2.8
+oegextract libpng-1.6.3.tar.xz
+#configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-zlib-prefix=${OEG_BASE_DIR}
+# #error ZLIB_VERNUM != PNG_ZLIB_VERNUM
+# Problem was: CFLAGS contained -I/open-egovernment/include to zlib
+# maybe this helps too: --disable-dependency-tracking
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld
+make
+make install DESTDIR=${OEG_INSTALL_DIR}
+cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
+oegarchive libpng-1.6.3
     </commands>
   </set>
 </pack>

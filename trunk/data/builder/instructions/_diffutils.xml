@@ -16,6 +16,7 @@
   </meta>
 
   <comments>
+    <comment date="2013-07-22" author="Gerrit Albrecht">sdiff.c calls a kill function which does not exist in MinGW. sdiff.exe probably works not completely as expected.</comment>
   </comments>
 
   <set version="3.3" date="2013-03-24" state="works">
@@ -33,6 +34,19 @@
     </downloads>
 
     <commands>
+export PACKAGE_NAME=diffutils
+export PACKAGE_VERSION=3.3
+oegenv 32
+oegcleanbase
+oegimport libiconv-1.14
+oegimport gettext-0.18.3
+oegextract diffutils-3.3.tar.xz
+configure --prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-gnu-ld --without-libsigsegv-prefix
+oegpatch 001       # Removes the kill() call in sdiff.c
+make
+make install DESTDIR=${OEG_INSTALL_DIR}
+cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
+oegarchive diffutils-3.3
     </commands>
   </set>
 </pack>

@@ -20,14 +20,14 @@
 
   <set version="2.0" date="1995-12-01" state="works">
     <flags>
-      <required>termcap (needed?)</required>
+      <required></required>
       <optional></optional>
       <recommended></recommended>
     </flags>
 
     <downloads>
       <download file="termutils-2.0.tar.gz">
-        <url type="direct" checked="2012-11-11">http://ftp.gnu.org/gnu/termutils/termutils-2.0.tar.gz</url>
+        <url type="direct" checked="2013-07-22">http://ftp.gnu.org/gnu/termutils/termutils-2.0.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -41,7 +41,10 @@
 oegenv 32
 oegcleanbase
 oegextract termutils-2.0.tar.gz
-configure --prefix=${OEG_INSTALL_DIR}       # check, if it works with OEG_BASE_DIR
+# Prefix is the install dir because it always installs into the prefix dir
+# and it should not install into the base dir in case it is not empty.
+# make install DESTDIR=${OEG_INSTALL_DIR} also copies into the prefix dir.
+configure --prefix=${OEG_INSTALL_DIR}
 make
 make install 
 cd ${OEG_INSTALL_DIR}

@@ -18,7 +18,7 @@
   <comments>
   </comments>
 
-  <set version="1.26" date="2011-03-12" working="false">
+  <set version="1.26" date="2011-03-12" state="works">
 
     <downloads>
       <download file="tar-1.26.tar.xz">

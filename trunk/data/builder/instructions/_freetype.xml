@@ -19,10 +19,33 @@
   </comments>
 
   <set version="2.5.0.1" date="2013-06-19" state="works">
+    <flags>
+      <required>bzip2 zlib libpng</required>
+      <optional></optional>
+      <recommended></recommended>
+    </flags>
+
+    <options>
+      <option name="bzip2" import-if-pos="bzip2"
+              para-if-neu=""
+              para-if-pos=""
+              para-if-neg="--without-bzip2"
+              info="do not support bzip2 compressed fonts" />
+      <option name="zlib" import-if-pos="zlib"
+              para-if-neu=""
+              para-if-pos=""
+              para-if-neg="--without-zlib"
+              info="use internal zlib instead of system-wide" />
+      <option name="libpng" import-if-pos="libpng"
+              para-if-neu=""
+              para-if-pos=""
+              para-if-neg="--without-png"
+              info="do not support png compressed OpenType embedded bitmaps" />
+    </options>
 
     <downloads>
       <download file="freetype-2.5.0.1.tar.bz2">
-        <url type="sourceforge" checked="2013-07-19">http://sourceforge.net/projects/freetype/files/freetype2/2.5.0/freetype-2.5.0.1.tar.bz2/download</url>
+        <url type="sourceforge" checked="2013-07-22">http://sourceforge.net/projects/freetype/files/freetype2/2.5.0/freetype-2.5.0.1.tar.bz2/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -33,6 +56,17 @@
     </downloads>
 
     <commands>
+oegenv 32
+oegcleanbase
+oegimport bzip2-1.0.6
+oegimport zlib-1.2.8
+oegimport libpng-1.6.3
+oegextract freetype-2.5.0.1.tar.bz2
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld
+make
+make install DESTDIR=${OEG_INSTALL_DIR}
+cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
+oegarchive freetype-2.5.0.1
     </commands>
   </set>
 </pack>
