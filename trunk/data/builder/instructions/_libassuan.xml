@@ -18,7 +18,7 @@
   <comments>
   </comments>
 
-  <set version="" date="" state="works">
+  <set version="2.1.1" date="" state="fails-to-build">
 
     <downloads>
       <download file="libassuan-2.1.1.tar.bz2">
@@ -32,7 +32,36 @@
       </download>
     </downloads>
 
+<!--
+checking for struct cmsghdr.cmsg_len... no
+configure: WARNING:
+***
+*** Data structure for sending ancillary data missing.
+*** Descriptor passing won't work.
+***
+
+checking for fopencookie... no
+configure: WARNING:
+***
+*** No implementation of fopencookie or funopen available.
+*** The assuan_get_data_fp function won't work; see the
+*** manual for details.  GnuPG does not require this feature.
+***
+-->
+
     <commands>
+export PACKAGE_NAME=libassuan
+export PACKAGE_VERSION=2.1.1
+oegenv 32
+oegcleanbase
+oegextract libassuan-2.1.1.tar.bz2
+oegimport libgpg-error-1.12
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-libgpg-error-prefix=${OEG_BASE_DIR}
+#oegpatch 001
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive libassuan-2.1.1
     </commands>
   </set>
 </pack>

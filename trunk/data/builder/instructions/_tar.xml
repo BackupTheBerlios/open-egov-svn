@@ -18,11 +18,32 @@
   <comments>
   </comments>
 
-  <set version="1.26" date="2011-03-12" state="works">
+  <set version="1.26" date="2011-03-12" state="fails-to-build">
+<!--
+  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
+  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+  --without-included-regex
+                          don't compile regex; this is the default on systems
+                          with recent-enough versions of the GNU C Library
+                          (use with caution on other systems).
+  --with-rmt=FILE         Use FILE as the default `rmt' program. Do not build
+                          included copy of `rmt'.
+  --with-compress=PROG    use PROG as compress compressor program
+  --with-gzip=PROG        use PROG as gzip compressor program
+  --with-bzip2=PROG       use PROG as bzip2 compressor program
+  --with-lzip=PROG        use PROG as lzip compressor program
+  --with-lzma=PROG        use PROG as lzma compressor program
+  --with-lzop=PROG        use PROG as lzop compressor program
+  --with-xz=PROG          use PROG as xz compressor program
+  --with-libiconv-prefix[=DIR]  search for libiconv in DIR/include and DIR/lib
+  --without-libiconv-prefix     don't search for libiconv in includedir and libdir
+  --with-libintl-prefix[=DIR]  search for libintl in DIR/include and DIR/lib
+  --without-libintl-prefix     don't search for libintl in includedir and libdir
+-->
 
     <downloads>
       <download file="tar-1.26.tar.xz">
-        <url type="direct" checked="2013-07-19">http://ftp.gnu.org/gnu/tar/tar-1.26.tar.xz</url>
+        <url type="direct" checked="2013-07-22">http://ftp.gnu.org/gnu/tar/tar-1.26.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -33,6 +54,19 @@
     </downloads>
 
     <commands>
+oegenv 32
+oegcleanbase
+oegimport libiconv-1.14
+oegimport gettext-0.18.3
+oegimport zlib-1.2.8
+oegimport bzip2-1.0.6
+oegimport xz-5.0.5
+oegextract tar-1.26.tar.xz
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR}
+make # fails
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive tar-1.26
     </commands>
   </set>
 </pack>

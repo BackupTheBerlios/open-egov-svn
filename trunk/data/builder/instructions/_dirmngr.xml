@@ -19,6 +19,23 @@
   </comments>
 
   <set version="1.1.1" date="2013-04-26" state="works">
+<!--
+  --with-gnu-ld           assume the C compiler uses GNU ld default=no
+  --with-libiconv-prefix[=DIR]  search for libiconv in DIR/include and DIR/lib
+  --without-libiconv-prefix     don't search for libiconv in includedir and libd
+ir
+  --with-libintl-prefix[=DIR]  search for libintl in DIR/include and DIR/lib
+  --without-libintl-prefix     don't search for libintl in includedir and libdir
+
+  --with-pth-prefix=PFX   prefix where GNU Pth is installed (optional)
+  --with-gpg-error-prefix=PFX
+                          prefix where GPG Error is installed (optional)
+  --with-libgcrypt-prefix=PFX
+                          prefix where LIBGCRYPT is installed (optional)
+  --with-libassuan-prefix=PFX
+                          prefix where LIBASSUAN is installed (optional)
+  --with-ksba-prefix=PFX  prefix where KSBA is installed (optional)
+-->
 
     <downloads>
       <download file="dirmngr-1.1.1.tar.bz2">

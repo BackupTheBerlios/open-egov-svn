@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="libsigsegv" license="">
+  <meta>
+    <homepage>http://www.gnu.org/software/libsigsegv/</homepage>
+    <download>http://ftp.gnu.org/gnu/libsigsegv/</download>
+    <descriptions>
+      <description lang="en" type="short">Handles page faults in user mode</description>
+      <description lang="en" type="long">GNU libsigsegv is a library for handling page faults in user mode. A page fault occurs when a program tries to access to a region of memory that is currently not available. Catching and handling a page fault is a useful technique for implementing: pageable virtual memory, memory-mapped access to persistent databases, generational garbage collectors, stack overflow handlers, or distributed shared memory.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>libsigsegv, gnu</keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="2.10" date="2011-04-03" state="not-build">
+
+    <downloads>
+      <download file="libsigsegv-2.10.tar.gz">
+        <url type="direct" checked="2013-07-22">http://ftp.gnu.org/gnu/libsigsegv/libsigsegv-2.10.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <commands>
+    </commands>
+  </set>
+</pack>
+

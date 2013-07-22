@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="regex" license="">
+  <meta>
+    <homepage></homepage>
+    <download>http://ftp.gnu.org/old-gnu/regex/</download>
+    <descriptions>
+      <description lang="en" type="short"></description>
+      <description lang="en" type="long"></description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>regex</keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="0.12" date="" state="works">
+    <flags>
+      <required></required>
+      <optional></optional>
+      <recommended></recommended>
+    </flags>
+
+    <downloads>
+      <download file="regex-0.12.tar.gz">
+        <url type="direct" checked="2013-07-23">http://ftp.gnu.org/old-gnu/regex/regex-0.12.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+<!--
+You can get newer versions of GNU regex, our regular expression matcher,
+from a GNU libc tarball.  The files you need are posix/regex.c and
+posix/regex.h.
+-->
+
+    <commands>
+export PACKAGE_NAME=regex
+export PACKAGE_VERSION=0.12
+oegenv 32
+oegcleanbase
+oegextract regex-0.12.tar.gz
+#oegpatch 001
+configure --with-libxml-prefix=${OEG_BASE_DIR} --with-libxml-include-prefix=${OEG_BASE_DIR}/include --with-libxml-libs-prefix=${OEG_BASE_DIR}/lib --prefix=${OEG_BASE_DIR}
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive regex-0.12
+    </commands>
+  </set>
+</pack>
+

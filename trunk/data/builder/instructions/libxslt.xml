@@ -4,11 +4,11 @@
 
 <pack name="libxslt" license="">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://xmlsoft.org/XSLT/</homepage>
+    <download>http://xmlsoft.org/sources/</download>
     <descriptions>
-      <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="short">XSLT C library developed for the GNOME project</description>
+      <description lang="en" type="long">Libxslt is the XSLT C library developed for the GNOME project. XSLT itself is a an XML language to define transformations for XML. Libxslt is based on libxml2 the XML C library developed for the GNOME project. It also implements most of the EXSLT set of processor-portable extensions functions and some of Saxon's evaluate and expressions extensions. People can either embed the library in their application or use xsltproc the command line processing tool.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
@@ -18,16 +18,16 @@
   <comments>
   </comments>
 
-  <set version="" date="" state="works">
+  <set version="1.1.28" date="2012-11-21" state="works">
     <flags>
-      <required>libxml2-2.6.27</required>
+      <required>libxml2</required>
       <optional></optional>
       <recommended></recommended>
     </flags>
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="libxslt-1.1.28.tar.gz">
+        <url type="direct" checked="2013-07-22">http://xmlsoft.org/sources/libxslt-1.1.28.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -38,62 +38,35 @@
     </downloads>
 
     <commands>
+export PACKAGE_NAME=libxslt
+export PACKAGE_VERSION=1.1.28
 oegenv 32
 oegcleanbase
-oegextract libxslt-1.1.28.tar.gz
 oegimport libiconv-1.14
 oegimport gettext-0.18.3
 oegimport zlib-1.2.8
 oegimport libxml2-2.9.1   # important
-cd /work/libxslt-1.1.28/
+oegextract libxslt-1.1.28.tar.gz
+
+# config.status: executing libtool commands
+# /bin/rm: cannot lstat `libtoolT': No such file or directory
+# Edit the configure file, find the line which contains $RM "$cfgfile", and replace it with $RM -f "$cfgfile".
+# The "-f" tells rm that it shouldn't stop even if the file doesn't exists.
+# Maybe you can ignore the error because it is nearly at the last command
+# and the important stuff was already done at this point.
+
+oegpatch 001
+
+# make in /work/libxslt-1.1.28/libxslt:
+# security.c: In function 'xsltCheckWritePath':
+# security.c:346:3: error: too many arguments to function 'mkdir'
+#    ret = mkdir(directory, 0755);
+
+oegpatch 002
+
 configure --with-libxml-prefix=${OEG_BASE_DIR} --with-libxml-include-prefix=${OEG_BASE_DIR}/include --with-libxml-libs-prefix=${OEG_BASE_DIR}/lib --prefix=${OEG_BASE_DIR}
-
-
-config.status: executing libtool commands
-/bin/rm: cannot lstat `libtoolT': No such file or directory
-
-You have to edit the configure file, find the line which contains $RM "$cfgfile", and replace it with $RM -f "$cfgfile". The "-f" tells rm that it shouldn't stop even if the file doesn't exists.
-
-search for "libtool":C)
-below it you find the RM, add -f:
-    $RM -f "$cfgfile"
-
-Maybe you can ignore the error because it is nearly the last command and the important stuff was already done at this point.
-
-> make
-
-security.c: In function 'xsltCheckWritePath':
-security.c:346:3: error: too many arguments to function 'mkdir'
-   ret = mkdir(directory, 0755);
-   ^
-In file included from c:\qt\qt5.1.0\tools\mingw48_32\i686-w64-mingw32\include\sys\stat.h:14:0,
-                 from security.c:18:
-c:\qt\qt5.1.0\tools\mingw48_32\i686-w64-mingw32\include\io.h:267:15: note: declared here
-   int __cdecl mkdir (const char *) __MINGW_ATTRIB_DEPRECATED_MSVC2005;
-               ^
-Makefile:502: recipe for target `security.lo' failed
-make[2]: *** [security.lo] Error 1
-make[2]: Leaving directory `/work/libxslt-1.1.28/libxslt'
-Makefile:547: recipe for target `all-recursive' failed
-make[1]: *** [all-recursive] Error 1
-make[1]: Leaving directory `/work/libxslt-1.1.28'
-Makefile:372: recipe for target `all' failed
-make: *** [all] Error 2
-
-
-in libxslt/security.c in function xsltCheckWritePath: find "mkdir" and remove the second parameter.
-then other error, chanegd back and compiled!
-
-Added:
-#include "win32config.h"
-to security.c
-directly after
-#include "libxslt.h"
-
-However, it may be enough to add only the mkdir macro.
-
+make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
-
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive libxslt-1.1.28
     </commands>
