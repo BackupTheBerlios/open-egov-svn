@@ -1,0 +1,10 @@
+--- libxslt/security.c.old	2013-07-22 21:29:28 +0000
++++ libxslt/security.c	2013-07-22 21:29:13 +0000
+@@ -8,6 +8,7 @@
+ 
+ #define IN_LIBXSLT
+ #include "libxslt.h"
++#include "win32config.h"
+ 
+ #include <string.h>
+ 

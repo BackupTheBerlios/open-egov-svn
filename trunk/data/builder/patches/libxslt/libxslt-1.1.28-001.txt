@@ -1,0 +1,11 @@
+--- configure.old	2013-07-22 21:23:19 +0000
++++ configure	2013-07-22 21:23:24 +0000
+@@ -15641,7 +15641,7 @@
+ 
+     cfgfile="${ofile}T"
+     trap "$RM \"$cfgfile\"; exit 1" 1 2 15
+-    $RM "$cfgfile"
++    $RM -f "$cfgfile"
+ 
+     cat <<_LT_EOF >> "$cfgfile"
+ #! $SHELL
