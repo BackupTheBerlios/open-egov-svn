@@ -4,8 +4,8 @@
 
 <pack name="tiff" license="">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://www.libtiff.org/</homepage>
+    <download>ftp://ftp.remotesensing.org/pub/libtiff/</download>
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long"></description>
@@ -21,8 +21,8 @@
   <set version="" date="" state="works">
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2013-07-21"></url>
+      <download file="tiff-4.0.3.tar.gz">
+        <url type="direct" checked="2013-07-23">ftp://ftp.remotesensing.org/pub/libtiff/tiff-4.0.3.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -32,10 +32,56 @@
       </download>
     </downloads>
 
+<!--
+  --with-sysroot=DIR Search for dependent libraries within DIR
+                        (or the compiler's sysroot if not specified).
+  --with-docdir=DIR       directory where documentation should be installed
+  --with-zlib-include-dir=DIR
+                          location of Zlib headers
+  --with-zlib-lib-dir=DIR location of Zlib library binary
+  --with-jpeg-include-dir=DIR
+                          location of IJG JPEG library headers
+  --with-jpeg-lib-dir=DIR location of IJG JPEG library binary
+  --with-jbig-include-dir=DIR
+                          location of JBIG-KIT headers
+  --with-jbig-lib-dir=DIR location of JBIG-KIT library binary
+  --with-lzma-include-dir=DIR
+                          location of liblzma headers
+  --with-lzma-lib-dir=DIR location of liblzma library binary
+  --with-jpeg12-include-dir=DIR
+                          location of libjpeg 12bit headers
+  --with-jpeg12-lib=LIBRARY
+                          path to libjpeg 12bit library
+  --with-x                use the X Window System
+  --with-default-strip-size=SIZE
+                          default size of the strip in bytes (when strip
+                          chopping enabled) [[default=8192]]
+
+Support for external codecs:
+  ZLIB support:                       yes
+  Pixar log-format algorithm:         yes
+  JPEG support:                       no
+  Old JPEG support:                   no
+  JPEG 8/12 bit dual mode:            no
+  ISO JBIG support:                   no
+  LZMA2 support:                      yes
+
+  C++ support:                        yes
+
+  OpenGL support:                     no
+-->
+
     <commands>
-./configure --prefix=${OEG_BASE_DIR}
+oegenv 32
+oegcleanbase
+oegimport zlib-1.2.8
+oegimport xz-5.0.5
+oegextract tiff-4.0.3.tar.gz
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --without-x --with-lzma-lib-dir=${OEG_BASE_DIR}/lib --with-lzma-include-dir=${OEG_BASE_DIR}/include --with-zlib-lib-dir=${OEG_BASE_DIR}/lib --with-zlib-include-dir=${OEG_BASE_DIR}/include
 make
-make install
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive tiff-4.0.3
     </commands>
   </set>
 </pack>
