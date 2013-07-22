@@ -36,16 +36,17 @@ function oegenv {
   # Should oegarchive remove or update the target archive if there already exists one?
   export OEG_CFG_REMOVE_BINARY_ARCHIVE="yes"
 
-  local STDCFLAGS="-pipe -O2 -mms-bitfields -fomit-frame-pointer -I$OEG_BASE_DIR/include"
+  # -fomit-frame-pointer?
+  local STDCFLAGS="-pipe -Wall -O2 -mms-bitfields"
 
   if [ "$1" = "32" ]; then
     export CFLAGS="-m32 -march=i686 -mtune=i686 $STDCFLAGS"
-    export LDFLAGS="-m32 -pipe -L$OEG_BASE_DIR/lib"
+    export LDFLAGS="-m32 -pipe -L${OEG_BASE_DIR}/lib"
     export TARGETBITS="32"
     export CONFIGURE_HOST_PARA="--host=i686-w64-mingw32"
   elif [ "$1" = "64" ]; then
     export CFLAGS="-m64 -march=nocona -mtune=core2 $STDCFLAGS"
-    export LDFLAGS="-m64 -pipe -L$OEG_BASE_DIR/lib64"
+    export LDFLAGS="-m64 -pipe -L${OEG_BASE_DIR}/lib64"
     export TARGETBITS="64"
     export CONFIGURE_HOST_PARA="--host=x86_64-w64-mingw32"
   else
@@ -53,8 +54,12 @@ function oegenv {
     return
   fi
 
+  export PKG_CONFIG_PATH="/mingw/lib/pkgconfig"
+  export CVS_RSH=ssh
+  export PATH="${OEG_BASE_DIR}/bin:${PATH}"
+
   export CXXFLAGS="$CFLAGS"
-  export CPPFLAGS=""
+  export CPPFLAGS="-I${OEG_BASE_DIR}/include"
 
   export OEG_ARCHIVES_DIR="${OEG_PROJECT_DIR}/data/builder/archives/windows-${TARGETBITS}"
 }
@@ -65,8 +70,9 @@ function oegpatch {
     return
   fi
 
-  #create with: diff -Naur src src.neu > patch.txt
-  #patch --dry-run -p0 < patch.txt
+  #create: diff -Naur src src.neu > patch.txt
+  #apply: patch --dry-run -p0 < patch.txt
+
   patch -p0 < ${OEG_PATCHES_DIR}/${PACKAGE_NAME}/${PACKAGE_NAME}-${PACKAGE_VERSION}-$1.txt
 }
 
@@ -186,7 +192,19 @@ function oegextract {
 
   if [[ $FILENAME == *.tar ]]
   then
-    echo TAR archive unhandled
+    export FILEEXTENSION=.tar
+    export OUTPUTDIR=`basename $FILENAME $FILEEXTENSION`
+    echo Extension: ${FILEEXTENSION}
+    echo Output Directory: ${OUTPUTDIR}
+
+    if [ -d "$OEG_WORK_DIR/$OUTPUTDIR" ]
+    then
+      echo Error: The output directory already exists. Remove it first.
+      return
+    fi
+
+    "${OEG_PATH_TO_7ZIP}" x "${FILENAME}"
+    cd "$OEG_WORK_DIR/$OUTPUTDIR"
     return
   fi
 
@@ -210,7 +228,19 @@ function oegextract {
 
   if [[ $FILENAME == *.7z ]]
   then
-    echo 7z archive unhandled
+    export FILEEXTENSION=.7z
+    export OUTPUTDIR=`basename $FILENAME $FILEEXTENSION`
+    echo Extension: ${FILEEXTENSION}
+    echo Output Directory: ${OUTPUTDIR}
+
+    if [ -d "$OEG_WORK_DIR/$OUTPUTDIR" ]
+    then
+      echo Error: The output directory already exists. Remove it first.
+      return
+    fi
+
+    "${OEG_PATH_TO_7ZIP}" x "${FILENAME}"
+    cd "$OEG_WORK_DIR/$OUTPUTDIR"
     return
   fi
 
@@ -261,7 +291,7 @@ function oegimport {
 
   pushd .
 
-  cd "${BASEDIR}"
+  cd "${OEG_BASE_DIR}"
   case "${OEG_ARCHIVE_FORMAT}" in
     '7z')
       echo "Searching for 7-zip binary archive ..."
