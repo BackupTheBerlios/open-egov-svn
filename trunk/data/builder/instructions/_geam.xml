@@ -16,17 +16,13 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="" date="" state="works">
 
     <downloads>
       <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+        <url type="direct" checked="2013-07-14"></url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,20 +32,13 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
+    <commands>
 
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
+configure --prefix=${PREFIX}
 make
 make install
-    </compile>
 
-    <install>
-    </install>
+    </commands>
   </set>
 </pack>
 

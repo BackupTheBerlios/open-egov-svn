@@ -4,8 +4,8 @@
 
 <pack name="pinentry" license="">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://www.gnupg.org/related_software/pinentry/index.de.html</homepage>
+    <download>ftp://ftp.gnupg.org/gcrypt/pinentry/</download>
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long"></description>
@@ -16,17 +16,13 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="0.8.3" date="2013-04-26" state="works">
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="pinentry-0.8.3.tar.bz2">
+        <url checked="2013-07-23">ftp://ftp.gnupg.org/gcrypt/pinentry/pinentry-0.8.3.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,20 +32,20 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
+    <commands>
+oegenv 32
+oegcleanbase
+oegextract pinentry-0.8.3.tar.bz2
+oegimport libiconv-1.14
+oegimport gettext-0.18.3
+oegimport ncurses-5.9
 
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-libiconv-prefix=${OEG_BASE_DIR} --without-gtk-prefix --disable-pinentry-qt --disable-pinentry-gtk2 --disable-threading
 make
-make install
-    </compile>
-
-    <install>
-    </install>
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
   </set>
 </pack>
 

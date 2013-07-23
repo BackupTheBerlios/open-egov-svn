@@ -5,7 +5,7 @@
 <pack name="tack" license="GPL">
   <meta>
     <homepage></homepage>
-    <download></download>
+    <download>http://ftp.gnu.org/pub/gnu/ncurses/</download>
     <descriptions>
       <description lang="en" type="short">Creates terminal descriptions</description>
       <description lang="en" type="long">The 'tack' program is a diagnostic that is designed to create and verify the correctness of terminfo's. This program can be used to create new terminal descriptions that are not included in the standard release. Although 'tack' has been distributed with ncurses, it is not an integral part of ncurses. It may be removed from the release without limiting the usefulness of ncurses on those terminals described in the terminfo data base.</description>
@@ -22,7 +22,7 @@
 
     <downloads>
       <download file="tack-1.06.tar.gz">
-        <url type="direct" checked="2012-11-11">http://ftp.gnu.org/pub/gnu/ncurses/tack-1.06.tar.gz</url>
+        <url checked="2013-07-24">http://ftp.gnu.org/pub/gnu/ncurses/tack-1.06.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -33,9 +33,16 @@
     </downloads>
 
     <commands>
-./configure --prefix=/mingw
+oegenv 32
+oegcleanbase
+oegextract tack-1.06.tar.gz
+oegimport ncurses-5.9
+configure --prefix=${OEG_BASE_DIR}
+# --with-ncurses  - wants ncurses_mingw.h, else curses.h
 make
-make install
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive tack-1.06
     </commands>
   </set>
 </pack>
