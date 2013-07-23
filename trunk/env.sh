@@ -54,7 +54,7 @@ function oegenv {
     return
   fi
 
-  export PKG_CONFIG_PATH="/mingw/lib/pkgconfig"
+  export PKG_CONFIG_PATH="/open-egovernment/lib/pkgconfig"
   export CVS_RSH=ssh
   export PATH="${OEG_BASE_DIR}/bin:${PATH}"
 
@@ -262,6 +262,25 @@ function oegextract {
     return
   fi
 
+  if [[ $FILENAME == *.tar.lz ]]
+  then
+    export FILEEXTENSION=.tar.lz
+    export OUTPUTDIR=`basename $FILENAME $FILEEXTENSION`
+    echo Extension: ${FILEEXTENSION}
+    echo Output Directory: ${OUTPUTDIR}
+
+    if [ -d "$OEG_WORK_DIR/$OUTPUTDIR" ]
+    then
+      echo Error: The output directory already exists. Remove it first.
+      return
+    fi
+
+    #"${OEG_PATH_TO_7ZIP}" x "${FILENAME}" -so | "${OEG_PATH_TO_7ZIP}" x -si -ttar -y
+    #cd "$OEG_WORK_DIR/$OUTPUTDIR"
+    echo Error: .tar.lz archive...
+    return
+  fi
+
   if [[ $FILENAME == *.xz ]]
   then
     echo XZ archive unhandled
@@ -296,11 +315,11 @@ function oegimport {
     '7z')
       echo "Searching for 7-zip binary archive ..."
       echo "Filename: ${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}"
-      "${OEG_PATH_TO_7ZIP}" x "${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}"
+      "${OEG_PATH_TO_7ZIP}" x -y "${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}"
       ;;
     'zip')
       echo "Searching for zip binary archive ..."
-      "${OEG_PATH_TO_7ZIP}" x "${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}"
+      "${OEG_PATH_TO_7ZIP}" x -y "${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}"
       ;;
     *)
       echo "Unknown binary archive format: \"${OEG_ARCHIVE_FORMAT}\"!"
