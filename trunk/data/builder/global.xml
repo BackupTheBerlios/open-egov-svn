@@ -27,7 +27,7 @@ export OEG_ARCHIVE_FORMAT="7z"
 export OEG_CFG_REMOVE_BINARY_ARCHIVE="yes"
 export OEG_PATH_TO_7ZIP="/c/Program Files/7-Zip/7z.exe"
 
-export PKG_CONFIG_PATH="/mingw/lib/pkgconfig"
+export PKG_CONFIG_PATH=/open-egovernment/lib/pkgconfig
 export CVS_RSH=ssh
 export CFLAGS="-pipe -Wall -O2 -mms-bitfields -march=i686 -I${OEG_BASE_DIR}/include"
 export LDFLAGS="-L${OEG_BASE_DIR}/lib"
