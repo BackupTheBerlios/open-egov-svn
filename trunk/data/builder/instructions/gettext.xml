@@ -55,7 +55,7 @@ Example:
               para-if-neu="--with-included-libxml"
               para-if-pos="--with-libxml2-prefix=${OEG_BASE_DIR}"
               para-if-neg="--without-libxml2-prefix"
-              info="" /> <!-- --with-included-libxml or libxml2 -->
+              info="" /> <!-- --with-included-libxml or ..-libxml2? -->
     </options>
 
     <downloads>
@@ -106,7 +106,6 @@ Example:
   --with-cvs              use cvs to compress the infrastructure archive
                           (deprecated)
   --without-bzip2         don't use bzip2 to compress the infrastructure archive
-
   --without-xz            don't use xz to compress the infrastructure archive
 -->
     <commands>

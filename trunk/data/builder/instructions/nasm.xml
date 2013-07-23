@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="nasm" license="Simplified (2-clause) BSD license">
+  <meta>
+    <homepage>http://www.nasm.us/</homepage>
+    <download>http://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D</download>
+    <descriptions>
+      <description lang="en" type="short">Netwide Assembler</description>
+      <description lang="en" type="long"></description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>nasm</keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="" date="2013-06-22" state="works">
+
+    <downloads>
+      <download file="nasm-2.10.09.tar.xz">
+        <url checked="2013-07-23">http://www.nasm.us/pub/nasm/releasebuilds/2.10.09/nasm-2.10.09.tar.xz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <commands>
+oegenv 32
+oegcleanbase
+oegextract nasm-2.10.09.tar.xz
+# make ignores "install-strip" and DESTDIR=
+# so we set prefix to install dir to put the binaries there.
+configure --prefix=${OEG_INSTALL_DIR}
+make
+make install
+cd "${OEG_INSTALL_DIR}"
+oegarchive nasm-2.10.09
+    </commands>
+  </set>
+</pack>
+

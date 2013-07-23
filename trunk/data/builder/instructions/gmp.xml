@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="gmp" license="GNU LGPL">
+  <meta>
+    <homepage>http://gmplib.org/</homepage>
+    <download>http://gmplib.org/</download>
+    <descriptions>
+      <description lang="en" type="short">The GNU Multiple Precision Arithmetic Library</description>
+      <description lang="en" type="long">GMP is a free library for arbitrary precision arithmetic, operating on signed integers, rational numbers, and floating point numbers. There is no practical limit to the precision except the ones implied by the available memory in the machine GMP runs on. GMP has a rich set of functions, and the functions have a regular interface. The main target applications for GMP are cryptography applications and research, Internet security applications, algebra systems, computational algebra research, etc.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>gmp, gnu</keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="" date="2013-05-20" state="works">
+
+    <downloads>
+      <download file="gmp-5.1.2.tar.xz">
+        <url checked="2013-07-23">ftp://ftp.gnu.org/gnu/gmp/gmp-5.1.2.tar.xz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size>1819560</size>
+      </download>
+    </downloads>
+
+    <commands>
+oegenv 32
+oegcleanbase
+oegimport readline-6.2
+oegextract gmp-5.1.2.tar.xz
+# --with-readline is optional, because auto-detected, readline is needed for demo executable
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-readline --disable-assembly --with-sysroot=${OEG_BASE_DIR}
+make
+#make check
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+# installs only static library. It's not possible to build both static and DLL,
+# since gmp.h is different for each. In configure --help both are "default".
+
+# Now we build the dynamic library.
+make clean
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-readline --disable-assembly --with-sysroot=${OEG_BASE_DIR} --disable-static --enable-shared
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive gmp-5.1.2
+    </commands>
+  </set>
+</pack>
+

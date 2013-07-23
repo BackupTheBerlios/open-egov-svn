@@ -12,17 +12,22 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
+    <keywords>jasper</keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="1.900.1" date="2012-10-19" state="works">
+    <flags>
+      <required></required>
+      <optional>libglut</optional>
+      <recommended></recommended>
+    </flags>
 
     <downloads>
       <download file="jasper-1.900.1.zip">
-        <url type="direct" checked="2013-07-19">http://www.ece.uvic.ca/~frodo/jasper/software/jasper-1.900.1.zip</url>
+        <url checked="2013-07-19">http://www.ece.uvic.ca/~frodo/jasper/software/jasper-1.900.1.zip</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -33,6 +38,17 @@
     </downloads>
 
     <commands>
+oegenv 32
+oegcleanbase
+oegextract jasper-1.900.1.zip
+# --with-x                use the X Window System
+# --with-glut-include-dir=DIR    Set GLUT include directory.
+# --with-glut-lib-dir=DIR        Set GLUT library directory.
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --without-x
+make
+make install DESTDIR=${OEG_INSTALL_DIR}
+cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
+oegarchive jasper-1.900.1
     </commands>
   </set>
 </pack>

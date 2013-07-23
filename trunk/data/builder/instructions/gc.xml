@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="bdw-gc" license="">
+  <meta>
+    <homepage>http://www.hpl.hp.com/personal/Hans_Boehm/gc/</homepage>
+    <download>http://www.hpl.hp.com/personal/Hans_Boehm/gc/gc_source/</download>
+    <descriptions>
+      <description lang="en" type="short">Boehm-Demers-Weiser conservative garbage collector</description>
+      <description lang="en" type="long"></description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>bdw gc, gc</keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="7.2d" date="2012-08-15" state="works">
+
+    <downloads>
+      <download file="gc-7.2d.tar.gz">
+        <url checked="2013-07-23">http://www.hpl.hp.com/personal/Hans_Boehm/gc/gc_source/gc-7.2d.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size>1263064</size>
+      </download>
+    </downloads>
+
+<!--
+--enable-threads=win32 or --enable-threads=pthreads
+BDWGC supports two threading models - posix (pthreads) and win32. For Windows (excluding Cygwin) the default is win32 (i.e. BDWGC uses Win32 API for synchronization and intercepts CreateThread invoked by client). Alternatively, you could build BDWGC which uses pthreads-w32 lib (by specifying --enable-threads=pthreads or -D GC_WIN32_PTHREADS) - this is recommended only if the client relies on pthreads-w32 too. Cygwin port of BDWGC uses mostly pthreads API and intercepts pthread_create() invoked by client (but could also intercept Win32 CreateThread starting from GC v7.3).
+-->
+
+    <commands>
+oegenv 32
+oegcleanbase
+oegextract gc-7.2d.tar.gz
+cd gc-7.2
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --enable-treads=win32
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive gc-7.2d
+    </commands>
+  </set>
+</pack>
+

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="libffi" license="own"><!-- https://github.com/atgreen/libffi/blob/master/LICENSE -->
+  <meta>
+    <homepage>http://www.sourceware.org/libffi/</homepage>
+    <download>ftp://sourceware.org/pub/libffi/</download>
+    <descriptions>
+      <description lang="en" type="short">Portable Foreign Function Interface Library</description>
+      <description lang="en" type="long">The libffi library provides a portable, high level programming interface to various calling conventions. This allows a programmer to call any function specified by a call interface description at run-time. FFI stands for Foreign Function Interface. A foreign function interface is the popular name for the interface that allows code written in one language to call code written in another language.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>libffi</keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="3.0.13" date="2013-03-17" state="works">
+
+    <downloads>
+      <download file="libffi-3.0.13.tar.gz">
+        <url checked="2013-07-23">ftp://sourceware.org/pub/libffi/libffi-3.0.13.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size>845747</size>
+      </download>
+    </downloads>
+
+    <commands>
+oegenv 32
+oegcleanbase
+oegextract libffi-3.0.13.tar.gz
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --enable-shared
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+# error: includes are in lib/libffi-3.0.13/include/*.h
+mv ${OEG_INSTALL_DIR}${OEG_BASE_DIR}/lib/libffi-3.0.13/include ${OEG_INSTALL_DIR}${OEG_BASE_DIR}/
+rm -rf ${OEG_INSTALL_DIR}${OEG_BASE_DIR}/lib/libffi-3.0.13
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive libffi-3.0.13
+    </commands>
+  </set>
+</pack>
+

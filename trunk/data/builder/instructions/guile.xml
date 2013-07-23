@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="guile" license="">
+  <meta>
+    <homepage>http://www.gnu.org/software/guile/</homepage>
+    <download>ftp://ftp.gnu.org/pub/gnu/guile/</download>
+    <descriptions>
+      <description lang="en" type="short">GNU Ubiquitous Intelligent Language for Extensions</description>
+      <description lang="en" type="long">Guile is the official GNU OS extension language. Guile is a library designed to help programmers create flexible applications. Using Guile in an application allows the application's functionality to be extended by users or other programmers with plug-ins, modules, or scripts. Guile provides what might be described as "practical software freedom," making it possible for users to customize an application to meet their needs without digging into the application's internals. Guile is an interpreter and compiler for the Scheme programming language, a clean and elegant dialect of Lisp. Guile is up to date with recent Scheme standards, supporting the Revised5 and most of the Revised6 language reports (including hygienic macros), as well as many SRFIs. It also comes with a library of modules that offer additional features, like an HTTP server and client, XML parsing, and object-oriented programming.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>guile, gnu</keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="2.0.9" date="2013-04-10" state="works">
+    <flags>
+      <required>libtool, gmp, libffi, gc</required>
+      <optional></optional>
+      <standard>libiconv, readline, gettext, libunistring</standard>
+    </flags>
+
+    <downloads>
+      <download file="guile-2.0.9.tar.xz">
+        <url checked="2013-07-23">ftp://ftp.gnu.org/pub/gnu/guile/guile-2.0.9.tar.xz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size>4514000</size>
+      </download>
+    </downloads>
+
+<!--
+  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
+  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+  --with-libiconv-prefix[=DIR]  search for libiconv in DIR/include and DIR/lib
+  --without-libiconv-prefix     don't search for libiconv in includedir and libdir
+  --with-libunistring-prefix[=DIR]  search for libunistring in DIR/include and DIR/lib
+  --without-libunistring-prefix     don't search for libunistring in includedir and libdir
+  --without-included-regex
+                          don't compile regex; this is the default on systems
+                          with recent-enough versions of the GNU C Library
+                          (use with caution on other systems).
+  --with-libltdl-prefix[=DIR]  search for libltdl in DIR/include and DIR/lib
+  --without-libltdl-prefix     don't search for libltdl in includedir and libdir
+
+  --with-lispdir          override the default lisp directory
+  --without-64-calls      don't attempt to use system and library calls with
+                          "64" in their names
+  --with-modules=FILES  Add support for dynamic modules
+  --with-libgmp-prefix[=DIR]  search for libgmp in DIR/include and DIR/lib
+  --without-libgmp-prefix     don't search for libgmp in includedir and libdir
+  --with-libintl-prefix[=DIR]  search for libintl in DIR/include and DIR/lib
+  --without-libintl-prefix     don't search for libintl in includedir and libdir
+
+  --with-threads          thread interface
+  --with-libreadline-prefix[=DIR]  search for libreadline in DIR/include and DIR/lib
+  --without-libreadline-prefix     don't search for libreadline in includedir and libdir
+-->
+
+    <commands>
+oegenv 32
+oegcleanbase
+export PKG_CONFIG_PATH=/open-egovernment/lib/pkgconfig
+oegimport libiconv-1.14
+oegimport readline-6.2
+oegimport gettext-0.18.3
+oegimport libunistring-0.9.3
+oegimport libtool-2.4.2        # libltdl is required
+oegimport gmp-5.1.2
+oegimport libffi-3.0.13        # required
+oegimport gc-7.2d              # required
+oegimport pkg-config-lite-0.28-1  # only build, exists already with mingw/msys
+oegextract guile-2.0.9.tar.xz
+# --without-libltdl-prefix doesn't work
+# --without-libgmp-prefix possible?
+BDW_GC_CFLAGS="-L/open-egovernment/lib" BDW_GC_LIBS="-lgc" LIBFFI_CFLAGS="-I/open-egovernment/include -L/open-egovernment/lib" LIBFFI_LIBS="-lffi" configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --with-libreadline-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-libunistring-prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libltdl-prefix=${OEG_BASE_DIR} --with-libgmp-prefix=${OEG_BASE_DIR} --without-threads
+
+# also want's to link against posix treads...
+#BDW_GC_CFLAGS="-L/open-egovernment/lib" BDW_GC_LIBS="-lgc" LIBFFI_CFLAGS="-I/open-egovernment/include -L/open-egovernment/lib" LIBFFI_LIBS="-lffi" configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --with-libreadline-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-libunistring-prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libltdl-prefix=${OEG_BASE_DIR} --with-libgmp-prefix=${OEG_BASE_DIR} --with-threads --disable-posix 
+
+
+# linking: stime.c: undefined reference to `clock_getcpuclockid', added function.
+
+oegpatch 001
+
+# linking: threads.c undefined reference to`GC_pthread_detach' and `GC_pthread_create'
+# solution: --without-threads
+# but then there were errors because of static declarations of non-static functions.
+# Patch removes the static keyword.
+
+oegpatch 002
+
+# make install has problems with guild.exe's name
+# When doing make install in meta dir it fails because there is no guild.exe,
+# only an guild script. We install it without extension.
+
+oegpatch 003
+
+make
+make install DESTDIR=${OEG_INSTALL_DIR}
+cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
+oegarchive guile-2.0.9
+    </commands>
+  </set>
+</pack>
+

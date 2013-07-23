@@ -20,12 +20,17 @@
   <comments>
   </comments>
 
-  <set version="1.6.3" date="" state="works">
+  <set version="1.6.3" date="2013-07-18" state="works">
+    <flags>
+      <required></required>
+      <optional></optional>
+      <recommended></recommended>
+    </flags>
 
     <downloads>
       <!-- only the .tar.?? files have a configure script -->
       <download file="libpng-1.6.3.tar.xz">
-        <url type="sourceforge" checked="2013-07-22">http://sourceforge.net/projects/libpng/files/libpng16/1.6.3/libpng-1.6.3.tar.xz/download</url>
+        <url checked="2013-07-22">http://sourceforge.net/projects/libpng/files/libpng16/1.6.3/libpng-1.6.3.tar.xz/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>

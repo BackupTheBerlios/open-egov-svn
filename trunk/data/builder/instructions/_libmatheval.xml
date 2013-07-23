@@ -4,35 +4,60 @@
 
 <pack name="libmatheval" license="">
   <meta>
-    <homepage></homepage>
+    <homepage>http://www.gnu.org/software/libmatheval/</homepage>
     <download>http://ftp.gnu.org/gnu/libmatheval/</download>
     <descriptions>
-      <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="short">Library to parse and evaluate symbolic expressions</description>
+      <description lang="en" type="long">GNU libmatheval is a library to parse and evaluate symbolic expressions input as text. It supports expressions in any number of variables of arbitrary names, decimal and symbolic constants, basic unary and binary operators, and elementary mathematical functions. In addition to parsing and evaluation, libmatheval can also compute symbolic derivatives and output expressions to strings.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>libmatheval</keywords>
+    <keywords>libmatheval, gnu</keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="1.1.10" date="2012-11-29" state="works">
+    <flags>
+      <required>guile</required>
+      <optional></optional>
+      <standard></standard>
+    </flags>
 
     <downloads>
       <download file="libmatheval-1.1.10.tar.gz">
-        <url type="direct" checked="2013-07-19">http://ftp.gnu.org/gnu/libmatheval/libmatheval-1.1.10.tar.gz</url>
+        <url checked="2013-07-19">http://ftp.gnu.org/gnu/libmatheval/libmatheval-1.1.10.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>551835</size>
       </download>
     </downloads>
 
     <commands>
+oegenv 32
+oegcleanbase
+oegimport guile-2.0.9
+oegimport  libiconv-1.14
+oegimport  readline-6.2
+oegimport  gettext-0.18.3
+oegimport  libunistring-0.9.3
+oegimport  libtool-2.4.2
+oegimport  gmp-5.1.2
+oegimport  libffi-3.0.13
+oegimport  gc-7.2d
+
+# check guile first !!!!
+
+oegextract libmatheval-1.1.10.tar.gz
+CFLAGS="-I${OEG_BASE_DIR}/include/guile/2.0" configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR}
+make
+make install DESTDIR=${OEG_INSTALL_DIR}
+cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
+oegarchive libmatheval-1.1.10
     </commands>
   </set>
 </pack>

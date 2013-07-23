@@ -7,7 +7,7 @@
     <homepage>http://libjpeg.sourceforge.net/</homepage>
     <download>http://sourceforge.net/projects/libjpeg/</download>
     <descriptions>
-      <description lang="en" type="short"></description>
+      <description lang="en" type="short">Free JPEG image compression library</description>
       <description lang="en" type="long">The libjpeg is a free software library written for JPEG image compression.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
@@ -18,21 +18,54 @@
   <comments>
   </comments>
 
-  <set version="6b" date="2008-12-30" working="true">
+  <set version="6b" date="2008-12-30" state="works">
 
     <downloads>
-      <download file="">
-        <url type="sourceforge" checked="2013-07-19">http://sourceforge.net/projects/libjpeg/files/libjpeg/6b/jpegsrc.v6b.tar.gz/download</url>
+      <download file="jpegsrc.v6b.tar.gz">
+        <url checked="2013-07-19">http://sourceforge.net/projects/libjpeg/files/libjpeg/6b/jpegsrc.v6b.tar.gz/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>613261</size>
       </download>
     </downloads>
 
     <commands>
+oegenv 32
+oegcleanbase
+oegimport libtool-2.4.2   # only to build the shared library
+oegextract jpegsrc.v6b.tar.gz
+cd jpeg-6b
+# "make install" installs to --prefix-dir, but we want it in $OEG_INSTALL_DIR.
+mkdir ${OEG_INSTALL_DIR}/bin
+mkdir ${OEG_INSTALL_DIR}/include
+mkdir ${OEG_INSTALL_DIR}/lib
+mkdir ${OEG_INSTALL_DIR}/man
+mkdir ${OEG_INSTALL_DIR}/man/man1
+configure --prefix=${OEG_INSTALL_DIR} --disable-shared --enable-static
+make
+make install
+
+# checking if libtool supports shared libraries... no
+# checking whether to build shared libraries... no
+# checking whether to build static libraries... yes
+#make clean
+#configure --prefix=${OEG_INSTALL_DIR} --enable-shared --disable-static
+#make
+#make install
+
+dlltool --export-all-symbols -D jpeg.dll -l libjpeg.dll.a -z in.def .libs/libjpeg.a
+ranlib libjpeg.dll.a
+gcc -shared -s -mwindows -def in.def -o jpeg.dll .libs/libjpeg.a
+make install-headers
+cp libjpeg.dll.a ${OEG_INSTALL_DIR}/lib/
+cp jpeg.dll ${OEG_INSTALL_DIR}/bin/
+#make test
+
+cd "${OEG_INSTALL_DIR}"
+oegarchive libjpeg-6b
     </commands>
   </set>
 </pack>

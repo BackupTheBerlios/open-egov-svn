@@ -4,7 +4,7 @@
 
 <pack name="gzip" license="">
   <meta>
-    <homepage>http://www.gnu.org/software/gzip/</homepage><!-- www.gzip.org is an old one -->
+    <homepage>http://www.gnu.org/software/gzip/</homepage><!-- www.gzip.org is old -->
     <download>http://ftp.gnu.org/gnu/gzip/</download>
     <descriptions>
       <description lang="en" type="short">GNU zip compression utility</description>
@@ -27,7 +27,7 @@
 
     <downloads>
       <download file="gzip-1.6.tar.xz">
-        <url type="direct" checked="2013-07-19">http://ftp.gnu.org/gnu/gzip/gzip-1.6.tar.xz</url>
+        <url checked="2013-07-19">http://ftp.gnu.org/gnu/gzip/gzip-1.6.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -38,6 +38,17 @@
     </downloads>
 
     <commands>
+export PACKAGE_NAME=gzip
+export PACKAGE_VERSION=1.6
+oegenv 32
+oegcleanbase
+oegextract gzip-1.6.tar.xz
+oegpatch 001
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --without-libpth-prefix --enable-threads=windows
+make
+make install DESTDIR=${OEG_INSTALL_DIR}
+cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
+oegarchive gzip-1.6
     </commands>
   </set>
 </pack>
