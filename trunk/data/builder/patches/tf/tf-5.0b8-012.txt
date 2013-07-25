@@ -1,0 +1,42 @@
+diff -Naur src.original/signals.c src/signals.c
+--- src.original/signals.c	2013-07-25 21:21:33 +0000
++++ src/signals.c	2013-07-25 21:23:20 +0000
+@@ -73,16 +73,6 @@
+ # endif
+ #endif
+ 
+-#ifdef SIGABRT
+-# define ABORT SIGABRT
+-#else
+-# ifdef SIGQUIT
+-#  define ABORT SIGQUIT
+-# else
+-#  define ABORT SIGTERM
+-# endif
+-#endif
+-
+ /* Zero out undefined signals, so we don't have to #ifdef everything later. */
+ #ifndef SIGHUP
+ # define SIGHUP 0
+@@ -112,6 +102,21 @@
+ # define SIGWINCH 0
+ #endif
+ 
++/* from: http://unix.superglobalmegacorp.com/Net2/newsrc/sys/signal.h.html */
++#ifndef SIGQUIT
++# define SIGQUIT 3
++#endif
++
++#ifdef SIGABRT
++# define ABORT SIGABRT
++#else
++# ifdef SIGQUIT
++#  define ABORT SIGQUIT
++# else
++#  define ABORT SIGTERM
++# endif
++#endif
++
+ #ifndef NSIG
+   /* Find an upper bound of the signals we use */
+ # define NSIG \

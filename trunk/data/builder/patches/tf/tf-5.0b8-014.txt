@@ -1,0 +1,22 @@
+diff -Naur ../src.original/main.c ../src/main.c
+--- ../src.original/main.c	2013-07-25 21:02:46 +0000
++++ ../src/main.c	2013-07-25 22:02:29 +0000
+@@ -136,7 +136,6 @@
+ #if SOCKS
+     SOCKSinit(argv0);  /* writes message to stdout */
+ #endif
+-    init_exename(argv0);
+ 
+     SRAND(getpid() + time(NULL));	/* seed random generator */
+     init_malloc();			/* malloc.c   */
+diff -Naur ../src.original/signals.h ../src/signals.h
+--- ../src.original/signals.h	2013-07-25 21:02:47 +0000
++++ ../src/signals.h	2013-07-25 22:02:15 +0000
+@@ -11,7 +11,6 @@
+ #define SIGNALS_H
+ 
+ extern void init_signals(void);
+-extern void init_exename(char *name);
+ extern void process_signals(void);
+ extern int  shell_status(int result);
+ extern int  shell(const char *cmd);
