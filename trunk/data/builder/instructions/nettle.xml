@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="nettle" license="">
+  <meta>
+    <homepage>http://www.lysator.liu.se/~nisse/nettle/</homepage>
+    <download>http://www.lysator.liu.se/~nisse/archive/</download>
+    <!-- old files: ftp://ftp.lysator.liu.se/pub/security/lsh -->
+    <descriptions>
+      <description lang="en" type="short">Low-level cryptographic library</description>
+      <description lang="en" type="long">Nettle is a cryptographic library that is designed to fit easily in more or less any context: In crypto toolkits for object-oriented languages (C++, Python, Pike, ...), in applications like LSH or GNUPG, or even in kernel space.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>libnettle</keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="2.7.1" date="2013-05-29" state="works">
+
+    <downloads>
+      <download file="nettle-2.7.1.tar.gz">
+        <url checked="2013-07-24">http://www.lysator.liu.se/~nisse/archive/nettle-2.7.1.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+<!--
+  --disable-public-key    Disable public key algorithms
+  --disable-assembler     Disable assembler code
+  --disable-static        Do not build any static library
+  --disable-shared        Do not build any shared library
+  --disable-pic           Do not try to compile library files as position
+                          independent code
+  --disable-openssl       Do not include openssl glue in the benchmark program
+  --enable-gcov           Instrument for gcov (requires a modern gcc)
+  --disable-documentation Omit building and installing the documentation.
+                          (default=auto)
+  --enable-arm-neon       Enable ARM Neon assembly. (default=auto)
+  --disable-dependency-tracking
+                          Disable dependency tracking. Dependency tracking
+-->
+
+    <commands>
+oegenv 32
+oegcleanbase
+oegextract nettle-2.7.1.tar.gz
+oegimport gmp-5.1.2    # GMP 3.1+ "required", else support for public key algorithms will be unavailable.
+configure --prefix=${OEG_BASE_DIR} --disable-openssl
+make
+make install DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive nettle-2.7.1
+    </commands>
+  </set>
+</pack>
+

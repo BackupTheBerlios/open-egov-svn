@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="liboop" license="LGPL">
+  <meta>
+    <homepage>http://www.lysator.liu.se/liboop/</homepage>
+    <download></download>
+    <descriptions>
+      <description lang="en" type="short">Low-level event loop management library</description>
+      <description lang="en" type="long">Liboop is a low-level event loop management library for POSIX-based operating systems. It supports the development of modular, multiplexed applications which may respond to events from several sources. It replaces the "select() loop" and allows the registration of event handlers for file and network I/O, timers and signals. Since processes use these mechanisms for almost all external communication, liboop can be used as the basis for almost any application.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>liboop</keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="liboop-1.0.tar.gz" date="2013-00-00" state="fails-to-build">
+
+    <downloads>
+      <download file="liboop.tar.gz">
+        <url checked="2013-07-24">http://download.ofb.net/liboop/liboop.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+<!--
+  --enable-shared[=PKGS]  build shared libraries [default=yes]
+  --enable-static[=PKGS]  build static libraries [default=yes]
+  --disable-dependency-tracking Speeds up one-time builds
+  --enable-dependency-tracking  Do not reject slow dependency extractors
+  --disable-libtool-lock  avoid locking (might break parallel builds)
+  --with-tags[=TAGS]      include additional configurations [automatic]
+  --without-adns          disable ADNS adapter
+  --without-readline      disable readline adapter
+  --without-glib          disable GLib adapter
+  --without-tcl           disable Tcl/Tk adapter
+  --with-libwww           build libwww adapter
+-->
+    <commands>
+oegenv 32
+oegcleanbase
+oegextract liboop.tar.gz
+cd liboop-1.0
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld 
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive liboop-1.0
+    </commands>
+  </set>
+</pack>
+
