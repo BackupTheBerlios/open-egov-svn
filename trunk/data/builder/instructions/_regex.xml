@@ -18,7 +18,7 @@
   <comments>
   </comments>
 
-  <set version="0.12" date="" state="works">
+  <set version="0.12" date="1993-04-03" state="to-old">
     <flags>
       <required></required>
       <optional></optional>
@@ -39,8 +39,7 @@
 
 <!--
 You can get newer versions of GNU regex, our regular expression matcher,
-from a GNU libc tarball.  The files you need are posix/regex.c and
-posix/regex.h.
+from a GNU libc tarball. The files you need are posix/regex.c and posix/regex.h.
 -->
 
     <commands>
@@ -49,12 +48,12 @@ export PACKAGE_VERSION=0.12
 oegenv 32
 oegcleanbase
 oegextract regex-0.12.tar.gz
-#oegpatch 001
-configure --with-libxml-prefix=${OEG_BASE_DIR} --with-libxml-include-prefix=${OEG_BASE_DIR}/include --with-libxml-libs-prefix=${OEG_BASE_DIR}/lib --prefix=${OEG_BASE_DIR}
-make
-make install-strip DESTDIR=${OEG_INSTALL_DIR}
-cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive regex-0.12
+configure --prefix=${OEG_BASE_DIR}   # only few parameters
+make regex.o
+#target doc wants tex, target tests fails ("nichts zu tun")
+#make install-strip DESTDIR=${OEG_INSTALL_DIR}
+#cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+#oegarchive regex-0.12
     </commands>
   </set>
 </pack>

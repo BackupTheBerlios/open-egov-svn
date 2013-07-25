@@ -4,12 +4,12 @@
 
 <pack name="expat" license="">
   <meta>
-    <homepage></homepage>
+    <homepage>http://expat.sourceforge.net/</homepage>
     <download>http://sourceforge.net/projects/expat/</download>
     <!-- http://sourceforge.net/projects/expat/files/latest/download -->
     <descriptions>
-      <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="short">Stream-oriented XML parser library</description>
+      <description lang="en" type="long">Expat is an XML parser library written in C. It is a stream-oriented parser in which an application registers handlers for things the parser might find in the XML document (like start tags).</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
@@ -19,7 +19,7 @@
   <comments>
   </comments>
 
-  <set version="" date="" state="works">
+  <set version="2.1.0" date="2012-03-03" state="works">
 
     <downloads>
       <download file="expat-2.1.0.tar.gz">

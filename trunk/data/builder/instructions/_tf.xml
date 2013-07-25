@@ -57,6 +57,28 @@ cd tf-version</comment>
       </download>
     </downloads>
 
+<!--
+  --enable-version        insert version number into names of installed files
+                          (equivalent to --program-suffix=\"-${TFVER}\")
+  --enable-symlink=NAME make a symlink NAME to the executable
+                          NAME=BINDIR/tf
+  --enable-core           enable debugging core files
+  --disable-ssl           disable SSL support
+  --enable-getaddrinfo    enable getaddrinfo() (if configure complains)
+  --disable-getaddrinfo   disable getaddrinfo() (implies --disable-inet6)
+  --disable-inet6         disable IPv6 support
+  --disable-termcap       use hardcoded vt100 codes instead of termcap
+  --enable-termcap=LIB    enable termcap with library LIB (e.g., "ncurses")
+                          (needed only if configure guesses incorrectly)
+  --disable-256colors     disable 256 color support (may reduce memory use)
+  --disable-mailcheck     disable mail checking
+  --enable-mailcheck=DIR  enable checking for mail in directory DIR
+                          (needed only if configure guesses incorrectly)
+  --disable-history       disable /recall and other history features
+  --disable-process       disable /quote and /repeat
+  --disable-float         disable floating point arithmetic and functions
+-->
+
     <commands>
 export PACKAGE_NAME=tf
 export PACKAGE_VERSION=5.0b8
@@ -65,6 +87,9 @@ oegcleanbase
 oegimport libiconv-1.14
 oegimport gettext-0.18.2.1
 oegimport pcre-8.33
+oegimport ncurses-5.9
+oegimport zlib-1.2.8
+oegimport openssl-1.0.1e
 oegextract tf-50b8.tar.gz
 
 cd tf-50b8
@@ -74,23 +99,43 @@ rm -rf os2
 rm -rf os2make.cmd
 rm -rf src/pcre-2.08
 
-# Activate the use of an external pcre-lib, the internal pcre library
-# is very old and has compile problems and I have to few time for them.
+# Activate the use of an external (current) pcre-lib, the internal pcre library
+# is very old and has compile problems and it is senseless to fix this old code.
 oegpatch 001
 
-# Creates an own Makefile
+# Patch configure to not exit from execution when netdb.h or select() missing.
 oegpatch 002
+configure --prefix=${OEG_BASE_DIR} --enable-getaddrinfo --disable-mailcheck --enable-termcap=ncurses
 
-# Gives a hard-coded path to the tf-lib directory.
-oegpatch 003
+rm bogus.mak
 
-#configure --prefix=${OEG_BASE_DIR} --without-ssl --with-gnu-ld #--with-libiconv-prefix=${OEG_BASE_DIR}
-make
-#make install DESTDIR=/tmp/inst$$
-make install-strip DESTDIR=${OEG_INSTALL_DIR}
-cd "${OEG_INSTALL_DIR}"
-cd "${OEG_BASE_DIR}"    # okay????
-oegarchive wget-1.14
+oegpatch 003    # remove PLATFORM_OS2 code
+oegpatch 004    # configure a new DATADIR definition.
+oegpatch 005    # tfio.h - remove warnings (double defines)
+oegpatch 006    # replace wprintf() with tfwprintf()
+oegpatch 007    # remove unused caddr_t
+oegpatch 008    # comment out not existing includes (netdb, socket)
+oegpatch 009    # remove the feature to disable core dumps
+oegpatch 010    # remove core command and core()/error_exit(), uses now crash()
+
+
+
+
+oegpatch 011    # remove the ability to create core dumps
+
+
+
+
+## Creates an own Makefile
+#oegpatch 002
+## Gives a hard-coded path to the tf-lib directory.
+#oegpatch 003
+#make
+##make install DESTDIR=/tmp/inst$$
+#make install-strip DESTDIR=${OEG_INSTALL_DIR}
+#cd "${OEG_INSTALL_DIR}"
+#cd "${OEG_BASE_DIR}"    # okay????
+#oegarchive wget-1.14
     </commands>
   </set>
 </pack>

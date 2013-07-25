@@ -4,49 +4,195 @@
 
 <pack name="gnutls" license="">
   <meta>
-    <homepage></homepage>
-    <download>ftp://ftp.gnu.org/gnu/gnutls/</download>
+    <homepage>http://www.gnutls.org/</homepage>
+    <download>ftp://ftp.gnutls.org/gcrypt/gnutls/</download>
+    <download>http://www.gnutls.org/download.html</download>
+    <!-- old files: ftp://ftp.gnu.org/gnu/gnutls/ -->
     <descriptions>
-      <description lang="en" type="short"></description>
+      <description lang="en" type="short">GnuTLS Transport Layer Security Library</description>
       <description lang="en" type="long"></description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>gnutls</keywords>
+    <keywords>gnutls, gnu</keywords>
   </meta>
 
   <comments>
   </comments>
 
-  <set version="1.0" date="2010-07-07" working="true">
-    <requires>
-      <app name="gcc" type="compile" />
-      <app name="" version="" type="recommended" />
-    </requires>
+  <set version="3.2.2" date="2013-07-14" state="works">
 
     <downloads>
-      <download file="gnutls-3.1.3.tar.xz">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="gnutls-3.2.2.tar.xz">
+        <url checked="2013-07-11">ftp://ftp.gnutls.org/gcrypt/gnutls/v3.2/gnutls-3.2.2.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>4890796</size>
+        <size></size>
       </download>
     </downloads>
 
-    <options>
-    </options>
+<!--
+  --disable-option-checking  ignore unrecognized --enable/--with options
+  --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
+  --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --enable-silent-rules   less verbose build output (undo: "make V=1")
+  --disable-silent-rules  verbose build output (undo: "make V=0")
+  --enable-dependency-tracking
+                          do not reject slow dependency extractors
+  --disable-dependency-tracking
+                          speeds up one-time build
+  --disable-largefile     omit support for large files
+  --enable-threads={posix|solaris|pth|win32}
+                          specify multithreading API
+  --disable-threads       build without multithread safety
+  --disable-cxx           unconditionally disable the C++ library
+  --disable-hardware-acceleration
+                          unconditionally disable hardware acceleration
+  --disable-dtls-srtp-support
+                          disable support for the DTLS-SRTP extension
+  --disable-dtls-alpn-support
+                          disable support for the Application Layer Protocol
+                          Negotiation (ALPN) extension
+  --disable-heartbeat-support
+                          disable support for the heartbeat extension
+  --disable-srp-authentication
+                          disable the SRP authentication support
+  --disable-psk-authentication
+                          disable the PSK authentication support
+  --disable-anon-authentication
+                          disable the anonymous authentication support
+  --disable-dhe           disable the DHE support
+  --disable-ecdhe         disable the ECDHE support
+  --disable-rsa-export    disable the RSA-EXPORT support
+  --disable-openpgp-authentication
+                          disable the OpenPGP authentication support
+  --enable-cryptodev      enable cryptodev support
+  --disable-ocsp          disable OCSP support
+  --disable-openssl-compatibility
+                          disable the OpenSSL compatibility support
+  --disable-doc           don't generate any documentation
+  --disable-tests         don't compile or run any tests
+  --enable-gtk-doc        use gtk-doc to build documentation [[default=no]]
+  --enable-gtk-doc-html   build documentation in html format [[default=yes]]
+  --enable-gtk-doc-pdf    build documentation in pdf format [[default=no]]
+  --disable-nls           do not use Native Language Support
+  --disable-rpath         do not hardcode runtime library paths
+  --enable-ld-version-script
+                          enable linker version script (default is enabled
+                          when possible)
+  --enable-shared[=PKGS]  build shared libraries [default=yes]
+  --enable-static[=PKGS]  build static libraries [default=yes]
+  --enable-fast-install[=PKGS]   optimize for fast installation [default=yes]
+  --disable-libtool-lock  avoid locking (might break parallel builds)
+  --disable-libdane       disable the built of libdane
+  --disable-nls           disable nls support in libopts
+  --enable-local-libopts  Use the supplied libopts tearoff code
+  --enable-libopts-install  Install libopts with client installation
+  --disable-optional-args not wanting optional option args
+  --enable-guile          build GNU Guile bindings
+  --disable-crywrap       unconditionally disable the crywrap TLS proxy service
+  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
+  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+  --with-included-libtasn1  use the included libtasn1
+  --with-html-dir=PATH    path to installed docs
+  --with-libiconv-prefix[=DIR]  search for libiconv in DIR/include and DIR/lib
+  --without-libiconv-prefix     don't search for libiconv in includedir and libdir
+  --with-libintl-prefix[=DIR]  search for libintl in DIR/include and DIR/lib
+  --without-libintl-prefix     don't search for libintl in includedir and libdir
+  --with-libpth-prefix[=DIR]  search for libpth in DIR/include and DIR/lib
+  --without-libpth-prefix     don't search for libpth in includedir and libdir
+  --with-libpthread-prefix[=DIR]  search for libpthread in DIR/include and DIR/lib
+  --without-libpthread-prefix     don't search for libpthread in includedir and libdir
+  --with-librt-prefix[=DIR]  search for librt in DIR/include and DIR/lib
+  --without-librt-prefix     don't search for librt in includedir and libdir
+  --with-unbound-root-key-file   specify the unbound root key file
+  --without-p11-kit       Build without p11-kit and PKCS#11 support
+  --with-tpm              Build with TPM (trousers) support. Note that trousers is under the
+                          Common Public License and incompatible with GPL programs.
+  --with-autoopts-config  specify the config-info script
+  --with-regex-header     a reg expr header is specified
+  --with-libregex         libregex installation prefix
+  --with-libregex-cflags  libregex compile flags
+  --with-libregex-libs    libregex link command arguments
+  --without-zlib          disable zlib compression support
+  --with-libz-prefix[=DIR]  search for libz in DIR/include and DIR/lib
+  --without-libz-prefix     don't search for libz in includedir and libdir
+  --with-default-trust-store-pkcs11=URI
+                          use the given pkcs11 uri as default trust store
+  --with-default-trust-store-file=FILE
+                          use the given file default trust store
+  --with-default-crl-file=FILE
+                          use the given CRL file as default
+  --with-guile-site-dir   use the given directory as the Guile site (use with care)
+  CFLAGS      C compiler flags
+  LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
+              nonstandard directory <lib dir>
+  LIBS        libraries to pass to the linker, e.g. -l<library>
+  CPPFLAGS    (Objective) C/C++ preprocessor flags, e.g. -I<include dir> if
+              you have headers in a nonstandard directory <include dir>
+  CPP         C preprocessor
+  CCAS        assembler compiler command (defaults to CC)
+  CCASFLAGS   assembler compiler flags (defaults to CFLAGS)
+  CXX         C++ compiler command
+  CXXFLAGS    C++ compiler flags
+  PKG_CONFIG  path to pkg-config utility
+  NETTLE_CFLAGS
+              C compiler flags for NETTLE, overriding pkg-config
+  NETTLE_LIBS linker flags for NETTLE, overriding pkg-config
+  HOGWEED_CFLAGS
+              C compiler flags for HOGWEED, overriding pkg-config
+  HOGWEED_LIBS
+              linker flags for HOGWEED, overriding pkg-config
+  GMP_CFLAGS  C compiler flags for gmp
+  GMP_LIBS    linker flags for gmp
+  LIBTASN1_CFLAGS
+              C compiler flags for LIBTASN1, overriding pkg-config
+  LIBTASN1_LIBS
+              linker flags for LIBTASN1, overriding pkg-config
+  CXXCPP      C++ preprocessor
+  P11_KIT_CFLAGS
+              C compiler flags for P11_KIT, overriding pkg-config
+  P11_KIT_LIBS
+              linker flags for P11_KIT, overriding pkg-config
+  LIBIDN_CFLAGS
+              C compiler flags for LIBIDN, overriding pkg-config
+  LIBIDN_LIBS linker flags for LIBIDN, overriding pkg-config
+-->
+    <commands>
+oegenv 32
+oegcleanbase
+oegextract gnutls-3.2.2.tar.xz
+oegimport gmp-5.1.2       # required
+oegimport  readline-6.2
+oegimport nettle-2.7.1    # required
+oegimport zlib-1.2.8      # optional, for compression
+oegimport libtasn1-3.3    # optional, for ASN.1 parsing, a copy is included in GnuTLS
+oegimport p11-kit-0.19.2  # optional, for smart card support
+oegimport  libiconv-1.14
+oegimport  gettext-0.18.3
+oegimport  libtasn1-3.3
+oegimport  libffi-3.0.13
+#oegimport trousers-      # optional, for TPM support
+#oegimport libunbound-    # optional, for DNSSEC/DANE functionality
 
-    <patch>
-    </patch>
+configure --prefix=${OEG_BASE_DIR} --with-libz-prefix=${OEG_BASE_DIR} --without-tpm --disable-doc --enable-shared --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --disable-guile --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR}
 
-    <compile>
-    </compile>
+# no libdane build da libunbound missed
+# HOGWEED (nettle)? libregex? libopts? libidn?
 
-    <install>
-    </install>
+# The DNSSEC root key file in C:\Program Files\Unbound\root.key was not found.
+# This file is needed for the verification of DNSSEC responses.
+# Use the command: unbound-anchor -a "C:\Program Files\Unbound\root.key"
+# to generate or update it.
+
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive gnutls-3.2.2
+    </commands>
   </set>
 </pack>
 

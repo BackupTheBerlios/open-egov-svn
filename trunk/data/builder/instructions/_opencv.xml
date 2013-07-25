@@ -8,7 +8,7 @@
     <download>http://sourceforge.net/projects/opencvlibrary/files/opencv-win/</download>
     <descriptions>
       <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="long">The Open Source Computer Vision Library has &gt;2500 algorithms, extensive documentation and sample code for real-time computer vision.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
@@ -16,40 +16,32 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="2.4.3" date="2012-11-02" working="false">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="2.4.6.1" date="2013-07-10" state="works">
 
     <downloads>
-      <download file="OpenCV-2.4.3.exe">
-        <url type="sourceforge" checked="2012-11-13">http://sourceforge.net/projects/opencvlibrary/files/opencv-win/2.4.3/OpenCV-2.4.3.exe/download</url>
+      <download file="opencv-2.4.6.1.tar.gz">
+        <url checked="2013-07-24">http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.6.1/opencv-2.4.6.1.tar.gz/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>263.702.108</size>
+        <size></size>
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
+    <commands>
+oegenv 32
+oegcleanbase
+oegextract opencv-2.4.6.1.tar.gz
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --enable-shared --enable-static
 make
-make install
-    </compile>
-
-    <install>
-    </install>
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive opencv-2.4.6.1
+    </commands>
   </set>
 </pack>
 

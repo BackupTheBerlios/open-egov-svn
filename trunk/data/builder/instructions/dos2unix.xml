@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="dos2unix" license="BSD License">
+  <meta>
+    <homepage>http://dos2unix.sourceforge.net/</homepage>
+    <!-- http://sourceforge.net/projects/dos2unix/ -->
+    <download>http://sourceforge.net/projects/dos2unix/files/dos2unix/</download>
+    <!-- http://sourceforge.net/projects/dos2unix/files/unix2dos/4.1.2/unix2dos-4.1.2.tar.gz/download -->
+    <descriptions>
+      <description lang="en" type="short">Converts between text files with DOS, UNIX or MAC line breaks</description>
+      <description lang="en" type="long">dos2unix includes utilities to convert text files with DOS or MAC line breaks to Unix line breaks and vice versa. It also includes conversion of UTF-16 to UTF-8.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>dos2unix, unix2dos</keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="6.0.3" date="2013-01-25" state="works">
+
+    <downloads>
+      <download file="dos2unix-6.0.3.tar.gz">
+        <url checked="2013-07-25">http://sourceforge.net/projects/dos2unix/files/dos2unix/6.0.3/dos2unix-6.0.3.tar.gz/download</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+      <download file="dos2unix-6.0.3-doc.tar.gz">
+        <url checked="2013-07-25">http://sourceforge.net/projects/dos2unix/files/dos2unix/6.0.3/dos2unix-6.0.3-doc.tar.gz/download</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+        <info>The main package contains the man pages only. This archive additionally contains htm, pdf, ps, and txt documents in nl, en, and es language.</info>
+      </download>
+    </downloads>
+
+    <commands>
+oegenv 32
+oegcleanbase
+oegimport libiconv-1.14
+oegimport gettext-0.18.3
+oegextract dos2unix-6.0.3.tar.gz                 # ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+#RPM_OPT_FLAGS is a way to add our search path for the libs
+RPM_OPT_FLAGS="-L/open-egovernment/lib" make -f mingw.mak
+make -f mingw.mak strip
+make -f mingw.mak install prefix=${OEG_INSTALL_DIR}   # prefix is only an installation prefix
+cd "${OEG_INSTALL_DIR}"                          # path changed
+oegarchive dos2unix-6.0.3                        # ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

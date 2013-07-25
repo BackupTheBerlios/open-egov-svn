@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<pack name="gmp" license="GNU LGPL">
+<pack name="gmp" license="GNU LGPL (LGPLv3, older v2)">
   <meta>
     <homepage>http://gmplib.org/</homepage>
     <download>http://gmplib.org/</download>
@@ -18,7 +18,7 @@
   <comments>
   </comments>
 
-  <set version="" date="2013-05-20" state="works">
+  <set version="5.1.2" date="2013-05-20" state="works">
 
     <downloads>
       <download file="gmp-5.1.2.tar.xz">
@@ -42,8 +42,8 @@ configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-readline --disable-assem
 make
 #make check
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
-# installs only static library. It's not possible to build both static and DLL,
-# since gmp.h is different for each. In configure --help both are "default".
+# installs only static library. It's not possible to build both static and DLL, since gmp.h
+# is different for each (one define only). In configure --help both are marked as "default".
 
 # Now we build the dynamic library.
 make clean

@@ -5,7 +5,7 @@
 <pack name="openssh" license="">
   <meta>
     <homepage>http://www.openssh.org/</homepage>
-    <download></download>
+    <download>http://ftp.halifax.rwth-aachen.de/openbsd/OpenSSH/portable/</download>
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long"> OpenSSH is a FREE version of the SSH connectivity tools that technical users of the Internet rely on. Users of telnet, rlogin, and ftp may not realize that their password is transmitted across the Internet unencrypted, but it is. OpenSSH encrypts all traffic (including passwords) to effectively eliminate eavesdropping, connection hijacking, and other attacks. Additionally, OpenSSH provides secure tunneling capabilities and several authentication methods, and supports all SSH protocol versions. The OpenSSH suite replaces rlogin and telnet with the ssh program, rcp with scp, and ftp with sftp. Also included is sshd (the server side of the package), and the other utilities like ssh-add, ssh-agent, ssh-keysign, ssh-keyscan, ssh-keygen and sftp-server. </description>
@@ -22,7 +22,7 @@
 
     <downloads>
       <download file="openssh-6.2p2.tar.gz">
-        <url type="direct" checked="2013-07-19">http://ftp.halifax.rwth-aachen.de/openbsd/OpenSSH/portable/openssh-6.2p2.tar.gz</url>
+        <url checked="2013-07-19">http://ftp.halifax.rwth-aachen.de/openbsd/OpenSSH/portable/openssh-6.2p2.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -32,7 +32,93 @@
       </download>
     </downloads>
 
+<!--
+  --disable-etc-default-login Disable using PATH from /etc/default/login no
+  --disable-lastlog       disable use of lastlog even if detected no
+  --disable-utmp          disable use of utmp even if detected no
+  --disable-utmpx         disable use of utmpx even if detected no
+  --disable-wtmp          disable use of wtmp even if detected no
+  --disable-wtmpx         disable use of wtmpx even if detected no
+  --disable-libutil       disable use of libutil (login() etc.) no
+  --disable-pututline     disable use of pututline() etc. (uwtmp) no
+  --disable-pututxline    disable use of pututxline() etc. (uwtmpx) no
+  --with-skey[=PATH]      Enable S/Key support (optionally in PATH)
+  --with-tcp-wrappers[=PATH] Enable tcpwrappers support (optionally in PATH)
+  --with-ldns[=PATH]      Use ldns for DNSSEC support (optionally in PATH)
+  --with-libedit[=PATH]   Enable libedit support for sftp
+  --with-audit=module     Enable audit support (modules=debug,bsm,linux)
+  --with-ssl-engine       Enable OpenSSL (hardware) ENGINE support
+  --with-pam              Enable PAM support
+  --with-kerberos5=PATH   Enable Kerberos 5 support
+  --with-privsep-path=xxx Path for privilege separation chroot (default=/var/empty)
+  --with-xauth=PATH       Specify path to xauth program
+  --with-maildir=/path/to/mail    Specify your system mail directory
+  --with-md5-passwords    Enable use of MD5 passwords
+  --without-shadow        Disable shadow password support
+  --with-ipaddr-display   Use ip address instead of hostname in \$DISPLAY
+  --with-4in6             Check for and convert IPv4 in IPv6 mapped addresses
+  --with-bsd-auth         Enable BSD auth support
+  --with-lastlog=FILE|DIR specify lastlog location common locations
+
+WARNING: the operating system that you are using does not
+appear to support getpeereid(), getpeerucred() or the
+SO_PEERCRED getsockopt() option. These facilities are used to
+enforce security checks to prevent unauthorised connections to
+ssh-agent. Their absence increases the risk that a malicious
+user can connect to your agent.
+
+    Compile OpenSSH portable for native Win32 by running the following   commands in the ssh root directory:
+
+    $ export CPPFLAGS="-mno-cygwin -I$PWD/openbsd-compat -I \
+    $PWD/contrib/win32/win32compat/includes"
+    $ export LDFLAGS="-mno-cygwin"
+    $ autoreconf
+    $ ./configure --build=i686-pc-mingw32 --host=i686-pc-mingw32 \
+    --with-ssl-dir=/usr/local/ssl --with-zlib=../zlib-1.2.4
+    $ cat config.h.tail >> config.h
+    $ make ssh.exe sshd.exe
+
+    Then copy the ssh.exe and sshd.exe executable files to the installation directory.
+
+    Note that the ssh client should be ready to work, while further
+    operations are needed to get the ssh server up and running:
+
+    Copy the sshd_config file from source directory to installation  directory and change 'UsePrivilegeSeparation' from 'yes' to 'no'.
+
+    Generate the SSH keys. Since port of ssh-keygen tool is not available, it is necessary to generate  the key-pair on another host or to use the cygwin ssh-keygen tool.  Copy the generated keys, namely ssh_host_rsa_key and ssh_host_dsa_key   to the installation directory.
+
+    Execute the sshd server:
+    $ sshd -r
+
+    Note that  the user who executes the sshd daemon requires some additional privileges  to be set:
+
+    SeCreateTokenPrivilege
+    SeAssignPrimaryTokenPrivilege
+    SeServiceLogonRight
+    SeIncreaseQuotaPrivilege
+    SeTcbPrivilege
+    SeImpersonatePrivilege
+-->
+
     <commands>
+oegenv 32
+oegcleanbase
+oegimport openssl-1.0.1e
+oegimport zlib-1.2.8
+oegextract openssh-6.2p2.tar.gz
+configure --prefix=${OEG_BASE_DIR} --with-sandbox=no --with-ssl-dir=${OEG_BASE_DIR}/var/ssl --with-zlib=${OEG_BASE_DIR} --with-pid-dir=${OEG_BASE_DIR}/var/run --with-mantype=man
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive openssh-6.2p2
+
+# cd ssh
+# make obj
+# make cleandir
+# make depend
+# make
+# make install
+# cp ssh_config sshd_config /etc/ssh
     </commands>
   </set>
 </pack>

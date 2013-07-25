@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="libevent" license="">
+  <meta>
+    <homepage>http://libevent.org/</homepage>
+    <download></download>
+    <descriptions>
+      <description lang="en" type="short">An event notification library</description>
+      <description lang="en" type="long">The libevent API provides a mechanism to execute a callback function when a specific event occurs on a file descriptor or after a timeout has been reached. Furthermore, libevent also support callbacks due to signals or regular timeouts. libevent is meant to replace the event loop found in event driven network servers. An application just needs to call event_dispatch() and then add or remove events dynamically without having to change the event loop.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>libevent</keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="2.0.21" date="2012-11-18" state="works">
+
+    <downloads>
+      <download file="libevent-2.0.21-stable.tar.gz">
+        <url checked="2013-07-24">https://github.com/downloads/libevent/libevent/libevent-2.0.21-stable.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <commands>
+oegenv 32
+oegcleanbase
+oegextract libevent-2.0.21-stable.tar.gz
+#oegimport openssl-???
+# --disable-thread-support     disable support for threading
+# --disable-openssl            disable support for openssl encryption
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --enable-shared --enable-static --disable-openssl 
+# --disable-thread-support   uses windows threads else, gives errors when disabled
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive libevent-2.0.21
+    </commands>
+  </set>
+</pack>
+

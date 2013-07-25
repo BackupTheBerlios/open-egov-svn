@@ -4,11 +4,12 @@
 
 <pack name="lsh" license="">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://www.lysator.liu.se/~nisse/lsh/</homepage>
+    <download>http://www.lysator.liu.se/~nisse/archive/</download>
+    <!-- old files: ftp://ftp.lysator.liu.se/pub/security/lsh -->
     <descriptions>
-      <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="short">Free implementation of the ssh v2 protocol</description>
+      <description lang="en" type="long">lsh is a free implementation (in the GNU sense) of the ssh version 2 protocol, standardised by the IETF SECSH working group.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
@@ -16,17 +17,13 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="2.1" date="2013-06-26" state="works">
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="lsh-2.1.tar.gz">
+        <url checked="2013-07-24">http://www.lysator.liu.se/~nisse/archive/lsh-2.1.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,20 +33,57 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
+<!--
+  --enable-gcov           Instrument for gcov (requires a modern gcc)
+  --enable-profiling      Instrument for gprof profiling
+  --without-pty           Disable pty support
+  --disable-srp           Disable the (experimental) support for SRP
+  --disable-gss           Disable the (experimental) support for GSS
+  --disable-kerberos      Don't support kerberos
+  --disable-pam           Don't support PAM
+  --enable-initgroups-workaround
+                          Use a special initgroups for supporting more groups
+  --disable-tcp-forward   Disable tcp forwarding
+  --disable-x11-forward   Disable x11 forwarding (proxy only)
+  --disable-agent-forward Disable auth-agent forwarding (proxy only)
+  --disable-ipv6          Disable IPv6 support
+  --disable-utmp          Disable utmp and wtmp support
 
-    <patch>
-    </patch>
+Optional Packages:
+  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
+  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+  --without-zlib          Don't use zlib compression
+  --with-tcpwrappers      Use tcp-wrappers for filtering connections
+  --with-scheme=PROGRAM Use a particular scheme implementation
+  --without-system-argp   Don't use the system's argp
+  --with-include-path     A colon-separated list of directories to search for
+                          include files
+  --with-lib-path         A colon-separated list of directories to search for
+                          libraries
+  --with-x                use the X Window System
+  GROFF       groff
+  M4          M4 macro processor
+  XMKMF       Path to xmkmf, Makefile generator for X Window System
+  XAUTH_PROGRAM
+              Program used to handle .Xauthority-files by lshd
+-->
 
-    <compile>
-./configure --prefix=${PREFIX}
+    <commands>
+oegenv 32
+oegcleanbase
+oegextract lsh-2.1.tar.gz
+oegimport zlib-1.2.8
+oegimport gmp-5.1.2
+oegimport  readline-6.2
+oegimport liboop
+# configure: error: liboop is missing.  blocks
+
+configure --prefix=${OEG_BASE_DIR} --without-scheme --without-x --without-tcpwrappers
 make
-make install
-    </compile>
-
-    <install>
-    </install>
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive lsh-2.1
+    </commands>
   </set>
 </pack>
 

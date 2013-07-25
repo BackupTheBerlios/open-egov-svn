@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="trousers" license="">
+  <meta>
+    <homepage>http://trousers.sourceforge.net/</homepage>
+    <download>http://sourceforge.net/projects/trousers/files/</download>
+    <descriptions>
+      <description lang="en" type="short">TrouSerS - The open-source TCG Software Stack</description>
+      <description lang="en" type="long"></description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>trousers</keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="0.3.10" date="2012-09-25" state="fails-to-build">
+
+    <downloads>
+      <download file="trousers-0.3.10.tar.gz">
+        <url checked="2013-07-24">http://sourceforge.net/projects/trousers/files/trousers/0.3.10/trousers-0.3.10.tar.gz/download</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+<!-- http://sourceforge.net/projects/trousers/files/OpenSSL%20TPM%20Engine/ -->
+
+<!--
+  --enable-strict-spec-compliance
+                          build TrouSerS as strictly spec compliant [default=off]
+  --enable-static[=PKGS]  build static libraries [default=no]
+  --enable-shared[=PKGS]  build shared libraries [default=yes]
+  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
+  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+  --with-openssl=PATH     Location of openssl libs/includes
+  --with-gmp              build TrouSerS with the GMP math lib (used in DAA)
+  --with-gui              type of gui popup (gtk/none) [default=gtk]
+  --with-api              Version of the TSS API to build [default=1.2]
+PKG_CONFIG  path to pkg-config utility
+PKG_CONFIG_PATH
+            directories to add to pkg-config's search path
+PKG_CONFIG_LIBDIR
+            path overriding pkg-config's built-in search path
+GTK_CFLAGS  C compiler flags for GTK, overriding pkg-config
+GTK_LIBS    linker flags for GTK, overriding pkg-config
+-->
+    <commands>
+oegenv 32
+oegcleanbase
+oegextract trousers-0.3.10.tar.gz
+oegimport openssl-1.0.1e
+oegimport  zlib-1.2.8   # needed by openssl
+oegimport gmp-5.1.2
+oegimport  readline-6.2
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gui=none --with-openssl=${OEG_BASE_DIR} --with-gnu-ld --enable-shared --with-gmp
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive trousers-0.3.10
+    </commands>
+  </set>
+</pack>
+

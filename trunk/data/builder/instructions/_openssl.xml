@@ -22,7 +22,7 @@
 
     <downloads>
       <download file="openssl-1.0.1e.tar.gz">
-        <url type="direct" checked="2013-07-19">http://www.openssl.org/source/openssl-1.0.1e.tar.gz</url>
+        <url checked="2013-07-24">http://www.openssl.org/source/openssl-1.0.1e.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -33,6 +33,54 @@
     </downloads>
 
     <commands>
+oegenv 32
+oegcleanbase
+oegimport nasm-2.10.09   # for building
+oegimport zlib-1.2.8     # linked dynamically!!!
+oegextract openssl-1.0.1e.tar.gz
+
+# needs perl to handle config and Configure scripts
+# It's possible to cross-compile it on Linux by configuring
+# with './Configure --cross-compile-prefix=i386-mingw32- mingw ...'.
+# You may call ./config and it will guess the OS and call Configure or you may call:
+#./Configure mingw   # only static builds
+./Configure --openssldir=/open-egovernment/var/ssl --prefix=/open-egovernment threads shared zlib-dynamic no-hw mingw
+
+# You really should use: tar xzf openssl-x.y.z.tar.gz. Else there are files
+# like test/md2test.c which are linked to other files (dummytest.c) and now
+# contain only the file name of the target.
+cp test/dummytest.c test/md2test.c
+cp test/dummytest.c test/rc5test.c
+cp test/dummytest.c test/jpaketest.c
+
+# If the script fails with "ld.exe: reopening xy.exe: Permission denied"
+# just run make again and it will build.
+make
+
+# if you have time:
+#make test
+
+# libcrypto.a and libssl.a are the static libraries.
+# To use the DLLs, link with libeay32.a and libssl32.a instead.
+
+# Select and copy files manually...
+#mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/bin"
+#mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/lib"
+#mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/include"
+#cp -R include/openssl "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/include/"
+#cp lib* "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/lib/"   # libcrypto.a, libcrypto.pc, libssl.a, libssl.pc
+#cp out32dll\ssleay32.lib c:\openssl\lib
+#cp out32dll\libeay32.lib c:\openssl\lib
+#cp out32dll\ssleay32.dll c:\openssl\bin
+#cp out32dll\libeay32.dll c:\openssl\bin
+#cp out32dll\openssl.exe  c:\openssl\bin
+
+# wrong man pages path: var\ssl\man\man3\...
+
+make INSTALL_PREFIX=${OEG_INSTALL_DIR} install
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive openssl-1.0.1e
     </commands>
   </set>
 </pack>

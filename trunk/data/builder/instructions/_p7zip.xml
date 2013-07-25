@@ -30,32 +30,32 @@ http://sourceforge.net/projects/sevenzip/files/LZMA%20SDK/lzma922.tar.bz2/downlo
     </comment>
   </comments>
 
-  <set version="9.20.1" date="2013-07-18" working="true">
-    <requires></requires>
+  <set version="9.20.1" date="2011-03-16" state="works">
 
     <downloads>
       <download file="p7zip_9.20.1_src_all.tar.bz2">
-        <url type="sourceforge" checked="2013-07-18">http://sourceforge.net/projects/p7zip/files/latest/download</url>
+        <url checked="2013-07-24">http://sourceforge.net/projects/p7zip/files/p7zip/9.20.1/p7zip_9.20.1_src_all.tar.bz2/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>3.835.235</size>
+        <size>3835235</size>
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-    </compile>
-
-    <install>
-    </install>
+    <commands>
+oegenv 32
+oegcleanbase
+oegextract p7zip_9.20.1_src_all.tar.bz2
+oegimport libiconv-1.14
+oegimport gettext-0.18.3
+configure --prefix=${OEG_BASE_DIR}
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive p7zip-9.20.1
+    </commands>
   </set>
 </pack>
 
