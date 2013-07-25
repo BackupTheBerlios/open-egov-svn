@@ -1,0 +1,22 @@
+--- configure.original	2013-07-25 11:40:35 +0000
++++ configure	2013-07-25 11:24:02 +0000
+@@ -4678,8 +4678,7 @@
+ 
+ else
+   { { echo "$as_me:$LINENO: error: TF can not work without select()." >&5
+-echo "$as_me: error: TF can not work without select()." >&2;}
+-   { (exit 1); exit 1; }; }
++echo "$as_me: error: TF can not work without select()." >&2;}; }
+ fi
+ 
+ 
+@@ -7305,8 +7304,7 @@
+ 	:;
+     else
+ 	:; { { echo "$as_me:$LINENO: error: can't find netdb.h" >&5
+-echo "$as_me: error: can't find netdb.h" >&2;}
+-   { (exit 1); exit 1; }; }
++echo "$as_me: error: can't find netdb.h" >&2;}; }
+     fi
+     unset found
+ 

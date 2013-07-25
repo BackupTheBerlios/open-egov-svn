@@ -1,0 +1,11 @@
+--- common/tests/test-compat.c.old	2013-07-25 20:35:52 +0000
++++ common/tests/test-compat.c	2013-07-25 20:35:16 +0000
+@@ -90,6 +90,8 @@
+       char *argv[])
+ {
+ 	p11_test (test_strndup, "/test/strndup");
++#ifdef OS_UNIX
+ 	p11_test (test_getauxval, "/test/getauxval");
++#endif /* OS_UNIX */
+ 	return p11_test_run (argc, argv);
+ }

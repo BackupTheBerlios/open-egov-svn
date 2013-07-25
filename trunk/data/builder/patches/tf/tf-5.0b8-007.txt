@@ -1,0 +1,17 @@
+diff -Naur src.original/malloc.c src/malloc.c
+--- src.original/malloc.c	2013-07-25 12:00:14 +0000
++++ src/malloc.c	2013-07-25 12:05:08 +0000
+@@ -12,7 +12,12 @@
+ #include "signals.h"
+ #include "malloc.h"
+ 
+-caddr_t mmalloc_base = NULL;
++/* caddr_t was missing. caddr_t is a legacy BSD type associated with some low level
++calls like mmap/munmap (not used in tf), and it should never be used in modern code.
++It was rejected by the POSIX standard. The standardized mmap uses void *
++The variable mmalloc_base was not used anywhere. Commented it out */
++
++/* caddr_t mmalloc_base = NULL; */
+ int low_memory_warning = 0;
+ static char *reserve = NULL;
+ 

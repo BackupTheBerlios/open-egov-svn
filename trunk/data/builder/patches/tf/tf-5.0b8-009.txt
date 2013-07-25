@@ -1,0 +1,130 @@
+diff -Naur src.original/signals.c src/signals.c
+--- src.original/signals.c	2013-07-25 15:45:31 +0000
++++ src/signals.c	2013-07-25 15:48:34 +0000
+@@ -13,10 +13,7 @@
+ #include <signal.h>
+ #include <setjmp.h>
+ #include "port.h"
+-#if DISABLE_CORE
+-# include <sys/time.h>
+-# include <sys/resource.h>
+-#endif
++#include <sys/time.h>
+ #include <sys/stat.h>   /* for debugger_dump() */
+ #include "tf.h"
+ #include "util.h"
+@@ -32,7 +29,7 @@
+ #include "expand.h" /* current_command */
+ 
+ #ifdef TF_AIX_DECLS
+-struct rusage *dummy_struct_rusage;
++/*struct rusage *dummy_struct_rusage;  from not existing sys/resource.h, not used anywhere else */
+ union wait *dummy_union_wait;
+ #endif
+ 
+@@ -125,7 +122,6 @@
+ #endif
+ 
+ VEC_TYPEDEF(sig_set, (NSIG-1));
+-const int feature_core = 1 - DISABLE_CORE;
+ 
+ static const char *argv0 = NULL;
+ static int have_pending_signals = 0;
+@@ -245,14 +241,6 @@
+     setsighandler(SIGUSR2 , signal_scheduler);
+     parent_tstp_handler = setsighandler(SIGTSTP , signal_scheduler);
+     setsighandler(SIGWINCH, signal_scheduler);
+-
+-#if DISABLE_CORE
+-    {
+-	struct rlimit rlim;
+-	rlim.rlim_cur = rlim.rlim_max = 0;
+-	setrlimit(RLIMIT_CORE, &rlim);
+-    }
+-#endif
+ }
+ 
+ #ifndef SIG_IGN
+@@ -318,11 +306,7 @@
+     if (sig == SIGQUIT) {
+ 	if (interactive) {
+ 	    fix_screen();
+-#if DISABLE_CORE
+-	    puts("SIGQUIT received.  Exit?  (y/n)\r");
+-#else
+ 	    puts("SIGQUIT received.  Dump core and exit?  (y/n)\r");
+-#endif
+ 	    fflush(stdout);
+ 	    if (igetchar() != 'y') {
+ 		redraw();
+@@ -343,15 +327,9 @@
+ 	    fclose(dumpfile);
+ 
+ 	if (!debugger_dump()) {
+-#if DISABLE_CORE
+-	    fputs("Also, if you can, reinstall tf with --enable-core, "
+-		"attempt to reproduce the\r\n", stderr);
+-	    fputs("error, get a stack trace and send it to the author.\r\n",
+-		stderr);
+-#else /* cores are enabled */
+ 	    fputs("Also, if you can, include a stack trace in your email.\r\n",
+ 		stderr);
+-# ifdef PLATFORM_UNIX
++#ifdef PLATFORM_UNIX
+ 	    fputs("To get a stack trace, do this:\r\n", stderr);
+ 	    fputs("cd src\r\n", stderr);
+ 	    fputs("script\r\n", stderr);
+@@ -367,8 +345,7 @@
+ 	    fputs("Then include the \"typescript\" file in your email.\r\n",
+ 		stderr);
+ 	    fputs("\n", stderr);
+-# endif /* PLATFORM_UNIX */
+-#endif /* DISABLE_CORE */
++#endif /* PLATFORM_UNIX */
+ 	}
+     }
+ 
+diff -Naur src.original/tfconfig.h src/tfconfig.h
+--- src.original/tfconfig.h	2013-07-25 15:45:31 +0000
++++ src/tfconfig.h	2013-07-25 15:48:47 +0000
+@@ -89,7 +89,6 @@
+ #define HAVE_GETADDRINFO 0
+ #define HAVE_GAI_STRERROR 0
+ #define ENABLE_INET6 1
+-#define DISABLE_CORE 1
+ /* #undef IN6_ADDR */
+ #define NO_HISTORY 0
+ #define NO_PROCESS 0
+diff -Naur src.original/tfconfig.h.in src/tfconfig.h.in
+--- src.original/tfconfig.h.in	2013-07-25 15:45:31 +0000
++++ src/tfconfig.h.in	2013-07-25 15:51:06 +0000
+@@ -88,7 +88,6 @@
+ #define HAVE_GETADDRINFO 0
+ #define HAVE_GAI_STRERROR 0
+ #define ENABLE_INET6 0
+-#define DISABLE_CORE 0
+ #undef IN6_ADDR
+ #define NO_HISTORY 0
+ #define NO_PROCESS 0
+diff -Naur src.original/util.c src/util.c
+--- src.original/util.c	2013-07-25 15:45:31 +0000
++++ src/util.c	2013-07-25 15:49:22 +0000
+@@ -60,7 +60,6 @@
+ 
+ struct feature features[] = {
+     { "256colors",	&feature_256colors, },
+-    { "core",		&feature_core, },
+     { "float",		&feature_float },
+     { "ftime",		&feature_ftime },
+     { "history",	&feature_history },
+diff -Naur src.original/util.h src/util.h
+--- src.original/util.h	2013-07-25 15:45:31 +0000
++++ src/util.h	2013-07-25 15:49:14 +0000
+@@ -50,7 +50,6 @@
+ extern struct feature features[];
+ 
+ extern const int feature_256colors;
+-extern const int feature_core;
+ extern const int feature_float;
+ extern const int feature_ftime;
+ extern const int feature_history;

@@ -1,0 +1,175 @@
+diff -Naur src.original/cmdlist.h src/cmdlist.h
+--- src.original/cmdlist.h	2013-07-25 15:54:06 +0000
++++ src/cmdlist.h	2013-07-25 15:55:15 +0000
+@@ -32,7 +32,6 @@
+ defcmd("BEEP"        , handle_beep_command        , 0)
+ defcmd("BIND"        , handle_bind_command        , 0)
+ defcmd("CONNECT"     , handle_connect_command     , 0)
+-defcmd("CORE"        , handle_core_command        , 0)
+ defcmd("DC"          , handle_dc_command          , 0)
+ defcmd("DEF"         , handle_def_command         , 0)
+ defcmd("DOKEY"       , handle_dokey_command       , 0)
+diff -Naur src.original/command.c src/command.c
+--- src.original/command.c	2013-07-25 15:54:06 +0000
++++ src/command.c	2013-07-25 15:55:13 +0000
+@@ -280,15 +280,6 @@
+     return shareval(val_one);
+ }
+ 
+-/* for debugging */
+-struct Value *handle_core_command(String *args, int offset)
+-{
+-    internal_error(__FILE__, __LINE__, "command: /core %s",
+-	args->data + offset);
+-    core("/core command", __FILE__, __LINE__, 0);
+-    return NULL; /* never reached */
+-}
+-
+ struct Value *handle_features_command(String *args, int offset)
+ {
+     struct feature *f;
+diff -Naur src.original/dstring.c src/dstring.c
+--- src.original/dstring.c	2013-07-25 15:54:06 +0000
++++ src/dstring.c	2013-07-25 15:59:04 +0000
+@@ -21,7 +21,7 @@
+ #include "port.h"
+ #include "malloc.h"
+ #include "tf.h"
+-#include "signals.h"	/* core() */
++#include "signals.h"	/* crash() */
+ 
+ static String *Stringpool = NULL;	/* freelist */
+ conString blankline[1] = { STRING_LITERAL("") };
+@@ -80,11 +80,11 @@
+ {
+     if (!str->resizable) {
+         internal_error2(file, line, str->file, str->line, "");
+-        core("resize: data not resizable", file, line, 0);
++        crash(TRUE, "resize: data not resizable", file, line, 0);
+     }
+     if (str->size < 0) {
+         internal_error2(file, line, str->file, str->line, "");
+-        core("resize freed string", file, line, 0);
++        crash(TRUE, "resize freed string", file, line, 0);
+     }
+     str->size = (str->len / ALLOCSIZE + 1) * ALLOCSIZE;
+ 
+@@ -188,7 +188,7 @@
+ 	 * clobbered the first time str was freed, so is unsafe. */
+         internal_error(file, line,
+ 	    "dSfree: links==%d, data=\"%.32b\"", str->links, '\"', str->data);
+-        core("dSfree: links==%d", file, line, str->links);
++        crash(TRUE, "dSfree: links==%d", file, line, str->links);
+     }
+ 
+     if (str->charattrs) Sfree(str, str->charattrs);
+@@ -224,7 +224,7 @@
+ String *dSnadd(String *str, int c, int n, const char *file, int line)
+ {
+     int oldlen = str->len;
+-    if (n < 0) core("dSnadd: n==%ld", file, line, (long)n);
++    if (n < 0) crash(TRUE, "dSnadd: n==%ld", file, line, (long)n);
+     str->len += n;
+     lcheck(str, file, line);
+     for (n = oldlen; n < str->len; n++)
+@@ -264,7 +264,7 @@
+ {
+     int len = strlen(src);
+ 
+-    if (n < 0) core("dSncpy: n==%ld", file, line, (long)n);
++    if (n < 0) crash(TRUE, "dSncpy: n==%ld", file, line, (long)n);
+     if (n > len) n = len;
+     dest->len = n;
+     if (dest->charattrs) {
+@@ -352,7 +352,7 @@
+     int oldlen = dest->len;
+     int len = strlen(src);
+ 
+-    if (n < 0) core("dSncat: n==%ld", file, line, (long)n);
++    if (n < 0) crash(TRUE, "dSncat: n==%ld", file, line, (long)n);
+     if (n > len) n = len;
+     dest->len += n;
+     lcheck(dest, file, line);
+@@ -367,7 +367,7 @@
+ {
+     unsigned int oldlen = dest->len;
+ 
+-    if ((int)n < 0) core("dSfncat: n==%ld", file, line, (long)n);
++    if ((int)n < 0) crash(TRUE, "dSfncat: n==%ld", file, line, (long)n);
+     dest->len += n;
+     lcheck(dest, file, line);
+     memcpy(dest->data + oldlen, src, n);
+diff -Naur src.original/malloc.c src/malloc.c
+--- src.original/malloc.c	2013-07-25 15:54:06 +0000
++++ src/malloc.c	2013-07-25 16:01:39 +0000
+@@ -31,7 +31,7 @@
+     void *memory;
+ 
+     if ((long)size <= 0)
+-        core("xmalloc(%ld).", file, line, (long)size);
++        crash(TRUE, "xmalloc(%ld).", file, line, (long)size);
+ 
+     memory = (void*)dmalloc(md, size, file, line);
+     if (!memory) {
+@@ -42,7 +42,7 @@
+             memory = (void*)dmalloc(md, size, file, line);
+         }
+         if (!memory)
+-            error_exit("xmalloc(%ld): out of memory.", file, line, (long)size);
++            crash(FALSE, "xmalloc(%ld): out of memory.", file, line, (long)size);
+     }
+ 
+     return memory;
+@@ -54,7 +54,7 @@
+     void *memory;
+ 
+     if ((long)size <= 0)
+-        core("xrealloc(%ld).", file, line, (long)size);
++        crash(TRUE, "xrealloc(%ld).", file, line, (long)size);
+ 
+     memory = (void*)drealloc(md, ptr, size, file, line);
+     if (!memory) {
+@@ -65,7 +65,7 @@
+             memory = (void*)drealloc(md, ptr, size, file, line);
+         }
+         if (!memory)
+-            error_exit("xrealloc(%ld): out of memory.", file, line, (long)size);
++            crash(FALSE, "xrealloc(%ld): out of memory.", file, line, (long)size);
+     }
+ 
+     return memory;
+diff -Naur src.original/signals.h src/signals.h
+--- src.original/signals.h	2013-07-25 15:54:06 +0000
++++ src/signals.h	2013-07-25 16:02:00 +0000
+@@ -22,7 +22,4 @@
+ extern void close_all(void); /* defined in socket.c */
+ extern const char *checkstring(const char *s);
+ 
+-#define core(fmt, file, line, n)	crash(TRUE, fmt, file, line, n)
+-#define error_exit(fmt, file, line, n)	crash(FALSE, fmt, file, line, n)
+-
+ #endif /* SIGNALS_H */
+diff -Naur src.original/socket.c src/socket.c
+--- src.original/socket.c	2013-07-25 15:54:06 +0000
++++ src/socket.c	2013-07-25 16:00:01 +0000
+@@ -780,7 +780,7 @@
+ 
+         if (count < 0) {
+             /* select() must have exited due to error or interrupt. */
+-            if (errno != EINTR) core(strerror(errno), __FILE__, __LINE__, 0);
++            if (errno != EINTR) crash(TRUE, strerror(errno), __FILE__, __LINE__, 0);
+             /* In case we're in a kb tfgetS(), clear things for parent loop. */
+             FD_ZERO(&active);
+             FD_ZERO(&connected);
+diff -Naur src.original/util.c src/util.c
+--- src.original/util.c	2013-07-25 15:54:06 +0000
++++ src/util.c	2013-07-25 16:01:01 +0000
+@@ -32,7 +32,7 @@
+ #include "tfio.h"
+ #include "output.h"	/* fix_screen() */
+ #include "tty.h"	/* reset_tty() */
+-#include "signals.h"	/* core() */
++#include "signals.h"
+ #include "variable.h"
+ #include "parse.h"	/* for expression in nextopt() numeric option */
+ 

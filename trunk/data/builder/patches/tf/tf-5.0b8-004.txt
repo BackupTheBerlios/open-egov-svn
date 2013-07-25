@@ -1,0 +1,30 @@
+diff -Naur src.original/Makefile src/Makefile
+--- src.original/Makefile	2013-07-25 12:41:51 +0000
++++ src/Makefile	2013-07-25 13:36:31 +0000
+@@ -38,7 +38,7 @@
+ # MANTYPE    = @MANTYPE@
+ MODE       = 755
+ CC         = gcc
+-CFLAGS     = -m32 -march=i686 -mtune=i686 -pipe -Wall -O2 -mms-bitfields -I/open-egovernment/include -DDATADIR=${datadir}
++CFLAGS     = -m32 -march=i686 -mtune=i686 -pipe -Wall -O2 -mms-bitfields -I/open-egovernment/include -DMYDATADIR=${datadir}
+ LDFLAGS    = -m32 -pipe -L/open-egovernment/lib 
+ STD_C      = @STD_C@
+ STRIP      = 
+diff -Naur src.original/tfdefs.h src/tfdefs.h
+--- src.original/tfdefs.h	2013-07-25 12:41:51 +0000
++++ src/tfdefs.h	2013-07-25 13:36:53 +0000
+@@ -10,4 +10,4 @@
+ #define UNAME "MINGW32_NT-6.1 2011-04-24 23:39 1.0.17(0.48/3/2)"
+ #define stringify_token(s) #s
+ #define stringify_value(s) stringify_token(s)
+-#define DEFAULT_TFLIBD stringify_value(DATADIR) "/tf-lib"
++#define DEFAULT_TFLIBD stringify_value(MYDATADIR) "/tf-lib"
+diff -Naur src.original/tfdefs.h.in src/tfdefs.h.in
+--- src.original/tfdefs.h.in	2013-07-25 12:41:51 +0000
++++ src/tfdefs.h.in	2013-07-25 13:37:39 +0000
+@@ -10,4 +10,4 @@
+ #define UNAME "@UNAME@"
+ #define stringify_token(s) #s
+ #define stringify_value(s) stringify_token(s)
+-#define DEFAULT_TFLIBD stringify_value(DATADIR) "/@LIBNAME@"
++#define DEFAULT_TFLIBD stringify_value(MYDATADIR) "/@LIBNAME@"

@@ -1,0 +1,310 @@
+diff -Naur src.original/expr.c src/expr.c
+--- src.original/expr.c	2013-07-25 15:33:33 +0000
++++ src/expr.c	2013-07-25 15:36:02 +0000
+@@ -836,19 +836,7 @@
+ 
+     int symbol = func - functab;
+ 
+-#ifdef __CYGWIN32__
+-    STATIC_STRING(systype, "cygwin32", 0);
+-#else
+-# ifdef PLATFORM_UNIX
+-    STATIC_STRING(systype, "unix", 0);
+-# else
+-#  ifdef PLATFORM_OS2
+-    STATIC_STRING(systype, "os/2", 0);
+-#  else
+-    STATIC_STRING(systype, "unknown", 0);
+-#  endif
+-# endif
+-#endif
++    STATIC_STRING(systype, "windows", 0);
+ 
+         switch (symbol) {
+ 
+diff -Naur src.original/main.c src/main.c
+--- src.original/main.c	2013-07-25 15:33:33 +0000
++++ src/main.c	2013-07-25 15:35:28 +0000
+@@ -57,11 +57,7 @@
+     "Copyright (C) 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2002, 2003, 2004, 2005, 2006-2007 Ken Keys (kenkeys@users.sourceforge.net)";
+ 
+ const char contrib[] =
+-#ifdef PLATFORM_OS2
+-    "OS/2 support written by Andreas Sahlbach (asa@stardiv.de)";
+-#else
+-    "";
+-#endif
++    "Windows port by Gerrit M. Albrecht (mail@gerrit-albrecht.de)";
+ 
+ int restriction = 0;
+ int debug = 0;
+diff -Naur src.original/output.c src/output.c
+--- src.original/output.c	2013-07-25 15:33:33 +0000
++++ src/output.c	2013-07-25 15:40:13 +0000
+@@ -37,11 +37,6 @@
+ #include "keyboard.h"	/* keyboard_pos */
+ #include "cmdlist.h"
+ 
+-#ifdef EMXANSI
+-# define INCL_VIO
+-# include <os2.h>
+-#endif
+-
+ /* Terminal codes and capabilities.
+  * Visual mode requires at least clear_screen and cursor_address.  The other
+  *   codes are good to have, but are not strictly necessary.
+@@ -181,16 +176,11 @@
+ #define bufputc(c)		Stringadd(outbuf, c)
+ #define bufputnc(c, n)		Stringnadd(outbuf, c, n)
+ 
+-#ifdef EMXANSI /* OS2 */
+-   static void crnl(int n);  
+-#else
+ # if USE_SGTTY  /* CRMOD is off (tty.c) */
+ #  define crnl(count)  do { bufputc('\r'); bufputnc('\n', count); } while (0)
+ # else             /* ONLCR is on (tty.c) */
+ #  define crnl(count)  bufputnc('\n', count)
+ # endif
+-#endif
+-
+ 
+ /* Others */
+ 
+@@ -230,11 +220,7 @@
+ 
+ STATIC_STRING(moreprompt, "--More--", F_BOLD | F_REVERSE);  /* pager prompt */
+ 
+-#ifndef EMXANSI
+-# define has_scroll_region (set_scroll_region != NULL)
+-#else
+-# define has_scroll_region (1)
+-#endif
++#define has_scroll_region (set_scroll_region != NULL)
+ 
+ 
+ #if HARDCODE
+@@ -355,20 +341,6 @@
+     return c;
+ }
+ 
+-#ifdef EMXANSI
+-void crnl(int n)
+-{
+-    int off = (cy + n) - bottom_margin;
+-    if (off < 0 || !visual) off = 0;
+-    bufputnc('\n', n - off);
+-    if (off) {
+-        bufflush();
+-        VioScrollUp(top_margin-1, 0, bottom_margin-1, columns, off, " \x07", 0);
+-        bufputc('\r');
+-    }
+-}
+-#endif
+-
+ void dobell(int n)
+ {
+     if (beep) {
+@@ -562,18 +534,12 @@
+     }
+ 
+     if (!bell) bell = "\007";
+-
+-#ifdef EMXANSI
+-    VioSetAnsi(1,0);                   /* ensure ansi-mode */
+-#endif /* EMXANSI */
+-
+ #endif /* TERMCAP */
+ 
+-#if 1
+     /* The insert_start code in iput() is apparently buggy.  Until it is
+      * fixed, we ignore the insert_start capability. */
+     insert_start = NULL;
+-#endif
++
+     if (!insert_end) insert_start = NULL;
+ 
+     if (columns <= 0) columns = DEFAULT_COLUMNS;
+@@ -596,13 +562,9 @@
+ static void setscroll(int top, int bottom)
+ {
+     if (top_margin == top && bottom_margin == bottom) return; /* optimization */
+-#ifdef EMXANSI
+-    bufflush();
+-#else
+     if (!set_scroll_region) return;
+     tpgoto(set_scroll_region, (bottom), (top));
+     cx = cy = -1;   /* cursor position is undefined */
+-#endif
+     bottom_margin = bottom;
+     top_margin = top;
+     if (top != 1 || bottom != lines) set_refresh_pending(REF_PHYSICAL);
+diff -Naur src.original/port.h src/port.h
+--- src.original/port.h	2013-07-25 15:33:33 +0000
++++ src/port.h	2013-07-25 15:38:16 +0000
+@@ -138,13 +138,6 @@
+ # endif
+ #endif
+ 
+-#ifdef PLATFORM_OS2
+-# define HAVE_GETCWD
+-# define getcwd _getcwd2   /* handles drive names */
+-# define chdir _chdir2     /* handles drive names */
+-#endif
+-
+-
+ #if !HAVE_LOCALE_H
+ # undef HAVE_SETLOCALE
+ #endif
+diff -Naur src.original/process.c src/process.c
+--- src.original/process.c	2013-07-25 15:33:33 +0000
++++ src/process.c	2013-07-25 15:37:59 +0000
+@@ -590,9 +590,6 @@
+ #ifdef PLATFORM_UNIX
+         Sprintf(newcmd, "{ %s; } </dev/null 2>&1", cmd);
+ #endif
+-#ifdef PLATFORM_OS2
+-        Sprintf(newcmd, "( %s ) <nul 2>&1", cmd);
+-#endif
+ 	/* RESTRICT_SHELL is checked by tfopen() */
+         if ((input = tfopen(newcmd->data, "p")) == NULL) {
+             operror(cmd);
+diff -Naur src.original/signals.c src/signals.c
+--- src.original/signals.c	2013-07-25 15:33:33 +0000
++++ src/signals.c	2013-07-25 15:37:35 +0000
+@@ -639,9 +639,5 @@
+     redraw();
+     if (result == -1) return result;
+     check_mail();
+-#ifdef PLATFORM_OS2
+-    return result;
+-#else /* UNIX */
+     return shell_status(result);
+-#endif
+ }
+diff -Naur src.original/socket.c src/socket.c
+--- src.original/socket.c	2013-07-25 15:33:33 +0000
++++ src/socket.c	2013-07-25 15:37:22 +0000
+@@ -95,10 +95,6 @@
+ #define INET6_ADDRSTRLEN 46
+ #endif
+ 
+-#ifdef PLATFORM_OS2
+-# define NONBLOCKING_GETHOST
+-#endif
+-
+ #ifdef PLATFORM_UNIX
+ # ifndef __CYGWIN32__
+ #  if HAVE_WAITPID
+@@ -191,9 +187,7 @@
+ #endif /* !HAVE_GETADDRINFO */
+ 
+ #ifdef NONBLOCKING_GETHOST
+-# ifndef PLATFORM_OS2
+-#  include <sys/uio.h> /* child uses writev() */
+-# endif
++# include <sys/uio.h> /* child uses writev() */
+   static void waitforhostname(int fd, const char *name, const char *port);
+   static int nonblocking_gethost(const char *name, const char *port,
+       struct addrinfo **addrs, pid_t *pidp, const char **what);
+@@ -1800,22 +1794,6 @@
+     close(fd);
+ }
+ 
+-# ifdef PLATFORM_OS2
+-typedef struct _threadpara {
+-    const char *hostname;
+-    const char *port;
+-    int   fd;
+-} threadpara;
+-
+-void os2waitforhostname(threadpara *targs)
+-{
+-    waitforhostname(targs->fd, targs->hostname, targs->port);
+-    FREE(targs->hostname);
+-    FREE(targs->port);
+-    FREE(targs);
+-}
+-# endif /* PLATFORM_OS2 */
+-
+ static int nonblocking_gethost(const char *name, const char *port,
+     struct addrinfo **res, pid_t *pidp, const char **what)
+ {
+@@ -1839,24 +1817,6 @@
+         }
+     }
+ #endif
+-#ifdef PLATFORM_OS2
+-    {
+-        threadpara *tpara;
+-  
+-        if ((tpara = XMALLOC(sizeof(threadpara)))) {
+-            setmode(fds[0],O_BINARY);
+-            setmode(fds[1],O_BINARY);
+-            tpara->fd = fds[1];
+-            tpara->hostname = STRDUP(name);
+-            tpara->port = STRDUP(port);
+-
+-            /* BUG: gethostbyname() isn't threadsafe! */
+-            *what = "_beginthread";
+-            if (_beginthread(os2waitforhostname,NULL,0x8000,(void*)tpara) != -1)
+-                return(fds[0]);
+-        }
+-    }
+-#endif
+ 
+     /* failed */
+     err = errno;
+diff -Naur src.original/tfio.c src/tfio.c
+--- src.original/tfio.c	2013-07-25 15:33:33 +0000
++++ src/tfio.c	2013-07-25 15:36:34 +0000
+@@ -265,9 +265,6 @@
+ #ifdef PLATFORM_UNIX
+             Sprintf(buffer, "%s %s 2>/dev/null", prog, newname);
+ #endif
+-#ifdef PLATFORM_OS2
+-            Sprintf(buffer, "%s %s 2>nul", prog, newname);
+-#endif
+             fp = popen(buffer->data, mode);
+             type = TF_PIPE;
+         }
+diff -Naur src.original/tty.c src/tty.c
+--- src.original/tty.c	2013-07-25 15:33:33 +0000
++++ src/tty.c	2013-07-25 15:41:21 +0000
+@@ -14,11 +14,6 @@
+ #include "tfconfig.h"
+ #include "port.h"
+ 
+-#ifdef EMXANSI
+-# define INCL_VIO
+-# include <os2.h>
+-#endif
+-
+ #if HAVE_TERMIOS_H                 /* POSIX is the way to go. */
+ # define USE_TERMIOS
+ # include <termios.h>
+@@ -149,10 +144,6 @@
+     if (is_cntrl(*lnext)   && *lnext)   add_ibind(lnext,   "/DOKEY LNEXT");
+ }
+ 
+-#ifdef EMXANSI
+-# define CAN_GET_WINSIZE
+-# undef TIOCGWINSZ
+-#endif
+ #ifdef TIOCGWINSZ
+ # define CAN_GET_WINSIZE
+ #endif
+@@ -183,14 +174,6 @@
+     }
+ # endif
+ 
+-# ifdef EMXANSI
+-    static VIOMODEINFO info;    /* must be static for thunking (16 bit func) */
+-    info.cb = sizeof(info);
+-    VioGetMode(&info,(HVIO)0);
+-    if (info.col > 0) columns = info.col;
+-    if (info.row > 0) lines = info.row;
+-# endif
+-
+     if (columns == ocol && lines == oline) return 1;
+     new_wrapsize = columns - (ocol - wrapsize);
+     if (new_wrapsize < 1)

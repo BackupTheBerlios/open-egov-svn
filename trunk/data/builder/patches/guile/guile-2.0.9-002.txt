@@ -1,0 +1,19 @@
+--- libguile/numbers.c.old	2013-07-23 14:05:45 +0000
++++ libguile/numbers.c	2013-07-23 14:05:10 +0000
+@@ -163,13 +163,13 @@
+ 
+ 
+ #if !defined (HAVE_ASINH)
+-static double asinh (double x) { return log (x + sqrt (x * x + 1)); }
++double asinh (double x) { return log (x + sqrt (x * x + 1)); }
+ #endif
+ #if !defined (HAVE_ACOSH)
+-static double acosh (double x) { return log (x + sqrt (x * x - 1)); }
++double acosh (double x) { return log (x + sqrt (x * x - 1)); }
+ #endif
+ #if !defined (HAVE_ATANH)
+-static double atanh (double x) { return 0.5 * log ((1 + x) / (1 - x)); }
++double atanh (double x) { return 0.5 * log ((1 + x) / (1 - x)); }
+ #endif
+ 
+ /* mpz_cmp_d in GMP before 4.2 didn't recognise infinities, so

@@ -1,0 +1,21 @@
+diff -Naur src.original/tfio.h src/tfio.h
+--- src.original/tfio.h	2013-07-25 11:52:55 +0000
++++ src/tfio.h	2013-07-25 11:53:55 +0000
+@@ -20,10 +20,16 @@
+ #include <stdarg.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>
+-#ifndef S_IROTH
++#ifndef S_IWUSR
+ # define S_IWUSR 00200
++#endif
++#ifndef S_IRUSR
+ # define S_IRUSR 00400
++#endif
++#ifndef S_IRGRP
+ # define S_IRGRP 00040
++#endif
++#ifndef S_IROTH
+ # define S_IROTH 00004
+ #endif
+ 

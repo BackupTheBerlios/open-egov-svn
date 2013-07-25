@@ -1,0 +1,33 @@
+--- libguile/stime.c.old	2013-07-23 14:15:16 +0000
++++ libguile/stime.c	2013-07-23 14:19:23 +0000
+@@ -822,6 +822,30 @@
+ #undef FUNC_NAME
+ #endif /* HAVE_STRPTIME */
+ 
++#ifdef HAVE_POSIX_CPUTIME
++
++/* specs: http://pubs.opengroup.org/onlinepubs/9699919799/functions/clock_getcpuclockid.html */
++
++int clock_getcpuclockid(pid_t pid, clockid_t *clock_id);
++
++int clock_getcpuclockid (pid_t pid, clockid_t *clock_id)
++{
++  if (0 == pid)
++  {
++    /* Calling with 0 pid is the same as using
++     * CLOCK_PROCESS_CPUTIME_ID.
++     */
++    *clock_id = CLOCK_PROCESS_CPUTIME_ID;
++    return 0;
++  }
++  /* Special clock values for getting time of other
++   * processes are not supported yet.
++   */
++  errno = ENOSYS;
++  return ENOSYS;
++}
++#endif
++
+ void
+ scm_init_stime()
+ {

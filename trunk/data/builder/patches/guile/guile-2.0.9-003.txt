@@ -1,0 +1,15 @@
+--- meta/Makefile.old	2013-07-23 15:07:38 +0000
++++ meta/Makefile	2013-07-23 15:06:49 +0000
+@@ -1797,10 +1797,8 @@
+ 
+ # What we now call `guild' used to be known as `guile-tools'.
+ install-exec-hook:
+-	guild="`echo $(ECHO_N) guild				\
+-	   | $(SED) -e '$(program_transform_name)'`$(EXEEXT)" ;	\
+-	guile_tools="`echo $(ECHO_N) guile-tools		\
+-	   | $(SED) -e '$(program_transform_name)'`$(EXEEXT)" ;	\
++	guild="guild" ;	\
++	guile_tools="guile-tools" ;	\
+ 	cd $(DESTDIR)$(bindir) && rm -f "$$guile_tools" &&	\
+ 	$(LN_S) "$$guild" "$$guile_tools"
+ 

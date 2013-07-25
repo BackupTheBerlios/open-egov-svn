@@ -1,0 +1,42 @@
+diff -Naur src.original/socket.c src/socket.c
+--- src.original/socket.c	2013-07-25 12:41:51 +0000
++++ src/socket.c	2013-07-25 13:34:10 +0000
+@@ -26,7 +26,7 @@
+ /* #include <sys/time.h> */
+ #include <fcntl.h>
+ #include <sys/file.h>	/* for FNONBLOCK on SVR4, hpux, ... */
+-#include <sys/socket.h>
++/*#include <sys/socket.h>*/
+ #include <signal.h>	/* for killing resolver child process */
+ 
+ #if HAVE_SSL
+@@ -36,7 +36,8 @@
+ #endif
+ 
+ #ifdef NETINET_IN_H
+-# include NETINET_IN_H
++/* include NETINET_IN_H */
++//#include <netinet/in.h>
+ #else
+ /* Last resort - we'll assume the "normal" stuff. */
+ struct in_addr {
+@@ -52,7 +53,8 @@
+ #endif
+ 
+ #ifdef ARPA_INET_H
+-# include ARPA_INET_H
++/* include ARPA_INET_H */
++//#include <arpa/inet.h>
+ #endif
+ 
+ #if HAVE_MCCP
+@@ -107,7 +109,8 @@
+ # endif
+ #endif
+ 
+-#include NETDB_H
++/* include NETDB_H */
++//#include <netdb.h>
+ 
+ #if !HAVE_GAI_STRERROR || !defined(AI_NUMERICHOST) || !defined(EAI_SERVICE)
+   /* System's implementation is incomplete.  Avoid it. */
