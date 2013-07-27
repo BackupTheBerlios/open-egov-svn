@@ -7,7 +7,6 @@
     <homepage>http://www.gnutls.org/</homepage>
     <download>ftp://ftp.gnutls.org/gcrypt/gnutls/</download>
     <download>http://www.gnutls.org/download.html</download>
-    <!-- old files: ftp://ftp.gnu.org/gnu/gnutls/ -->
     <descriptions>
       <description lang="en" type="short">GnuTLS Transport Layer Security Library</description>
       <description lang="en" type="long"></description>

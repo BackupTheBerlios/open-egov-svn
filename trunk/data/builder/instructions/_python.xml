@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<pack name="geam" license="">
+<pack name="python" license="">
   <meta>
     <homepage></homepage>
     <download></download>
@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="" date="" state="works">
+  <set version="" date="2013-00-00" state="works">
 
     <downloads>
       <download file="">
-        <url type="direct" checked="2013-07-14"></url>
+        <url checked="2013-"></url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -32,7 +32,18 @@
       </download>
     </downloads>
 
+<!--
+http://bugs.python.org/issue3871
+http://www.secker.nl/2012/03/08/setup-python-2-7-2-and-mingw-on-windows-xp/
+http://stackoverflow.com/questions/3297254/how-to-use-mingws-gcc-compiler-when-installing-python-package-using-pip
+http://python-mingw.donbennett.org/mywiki/Installation
+http://python-mingw.donbennett.org:8081/mywiki/
+http://www.google.co.ma/url?sa=t&rct=j&q=python%20mingw&source=web&cd=7&cad=rja&ved=0CFgQFjAG&url=http%3A%2F%2Feli.thegreenplace.net%2F2008%2F06%2F28%2Fcompiling-python-extensions-with-distutils-and-mingw%2F&ei=Oj30UcunNu3P4QTlzoGYDw&usg=AFQjCNHQaQMNgR4B-zbquaH5edoXJjpyKw&bvm=bv.49784469,d.bGE
+-->
+
     <commands>
+PACKAGE_NAME=python
+PACKAGE_VERSION=
 oegenv 32
 oegcleanbase
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz

@@ -26,7 +26,7 @@
         http://sourceforge.net/projects/qpdf/files/qpdf/5.0.0/qpdf-5.0.0-bin-mingw64.zip/download
         http://sourceforge.net/projects/qpdf/files/qpdf/5.0.0/qpdf-5.0.0-bin-mingw32.zip/download
         -->
-        <url type="sourceforge" checked="2013-07-19">http://sourceforge.net/projects/qpdf/files/qpdf/5.0.0/qpdf-5.0.0.tar.gz/download</url>
+        <url type="sourceforge" checked="2013-07-26">http://sourceforge.net/projects/qpdf/files/qpdf/5.0.0/qpdf-5.0.0.tar.gz/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -37,6 +37,21 @@
     </downloads>
 
     <commands>
+PACKAGE_NAME=qpdf
+PACKAGE_VERSION=5.0.0
+oegenv 32
+oegcleanbase
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+oegimport zlib-1.2.8
+oegimport pcre-8.33
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --enable-shared
+oegpatch 001       # extension missing while installing
+make
+#strip here
+#no shared dll
+make install DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

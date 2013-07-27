@@ -22,7 +22,7 @@
     <flags>
       <required></required>
       <optional></optional>
-      <recommended></recommended>
+      <standard></standard>
     </flags>
 
     <downloads>
@@ -40,6 +40,26 @@
 <!--
 You can get newer versions of GNU regex, our regular expression matcher,
 from a GNU libc tarball. The files you need are posix/regex.c and posix/regex.h.
+
+http://sourceforge.net/projects/mingw/files/MSYS/Base/regex/
+http://sourceforge.net/projects/mingw/files/MSYS/Base/regex/regex-1.20090805-2/regex-1.20090805-2-msys-1.0.13-src.tar.lzma/download
+2010-05-19
+xz -dc regex-1.20090805-2-msys-1.0.13-src.tar.lzma | tar xOf - regex-20090805.tar.xz | xz -dc | tar xvf -
+
+Enter the regex-20090805 directory and run the configure script. If using MinGW-w64, append --build=i686-w64-mingw32 or --build=x86_64-w64-mingw32 to the configure command depending on whether you use 32-bit or 64-bit MinGW-w64 build.
+
+cd regex-20090805
+configure --prefix=/mingw
+make
+make install
+
+Inside the MinGW folder, you'll find these files: libregex-1.dll, regex.h, libregex.a, libregex.dll.a, libregex.la. Some software expect to find libgnurx.a or libgnurx.dll.a. If so, copy libregex.a to libgnurx.a and libregex.dll.a to libgnurx.dll.a. To use this library, include the following lines in your code:
+
+#define _REGEX_RE_COMP
+#include <regex.h>
+
+_REGEX_RE_COMP allows us to use BSD regex functions re_comp and re_exec in addition to POSIX regex functions.
+
 -->
 
     <commands>
@@ -49,7 +69,13 @@ oegenv 32
 oegcleanbase
 oegextract regex-0.12.tar.gz
 configure --prefix=${OEG_BASE_DIR}   # only few parameters
-make regex.o
+#make regex.o
+
+gcc -DSTDC_HEADERS -DHAVE_STRING_H=1 -I/mingw/include -I. -c regex.c
+ar ru libregex.a regex.o
+cp libregex.a ${OEG_BASE_DIR}/lib
+cp regex.h ${OEG_BASE_DIR}/include/
+
 #target doc wants tex, target tests fails ("nichts zu tun")
 #make install-strip DESTDIR=${OEG_INSTALL_DIR}
 #cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"

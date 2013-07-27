@@ -16,13 +16,9 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="1.52.0" date="2012-11-05" working="false">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="1.52.0" date="2012-11-05" state="works">
 
     <downloads>
       <download file="boost_1_52_0.7z">
@@ -32,24 +28,12 @@
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>50.252.885</size>
+        <size>50252885</size>
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX}
-make
-make install
-    </compile>
-
-    <install>
-    </install>
+    <command>
+    </command>
   </set>
 </pack>
 

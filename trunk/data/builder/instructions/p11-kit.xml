@@ -70,15 +70,17 @@ oegimport libiconv-1.14
 oegimport gettext-0.18.3
 oegimport libtasn1-3.3
 oegimport libffi-3.0.13
+# gtkdoc xsltrans
 configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-gnu-ld --enable-shared --disable-doc --disable-doc-html --disable-doc-pdf --without-trust-paths
+oegpatch 001       # test case fails because of missing #ifdef #endif
 make
 
-# install fails here:
+# install would fail here:
 # cp -pR $(DESTDIR)$(libdir)/libp11-kit.so $(DESTDIR)$(libdir)/p11-kit-proxy.so
 # wrong path and extension of library, we have a bin/*.dll! just copy the DLL??
-oegpatch 001
-make install-strip DESTDIR=${OEG_INSTALL_DIR}
+oegpatch 002
 
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive p11-kit-0.19.2
     </commands>

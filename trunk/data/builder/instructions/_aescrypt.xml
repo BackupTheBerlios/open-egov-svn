@@ -2,27 +2,28 @@
 
 <!-- $Id$ -->
 
-<pack name="geam" license="">
+<pack name="aescrypt" license="">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>https://www.aescrypt.com/</homepage>
+    <download>https://www.aescrypt.com/download/</download>
     <descriptions>
       <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="long">AES Crypt is a file encryption software available on several operating systems that uses the industry standard Advanced Encryption Standard (AES) to easily and securely encrypt files.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
+    <keywords>aes, aescrypt</keywords>
   </meta>
 
   <comments>
   </comments>
 
-  <set version="" date="" state="works">
+  <set version="3.0.9" date="2013-00-00" state="fails-to-build">
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2013-07-14"></url>
+      <download file="aescrypt-3.0.9.tar.gz"> <!-- renamed -->
+        <!-- windows source https://www.aescrypt.com/download/v3/windows/AESCrypt_source_v309.zip -->
+        <url checked="2013-07-26">https://www.aescrypt.com/download/v3/linux/aescrypt-3.0.9.tgz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -33,11 +34,13 @@
     </downloads>
 
     <commands>
+PACKAGE_NAME=aescrypt
+PACKAGE_VERSION=3.0.9
 oegenv 32
 oegcleanbase
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-#oegimport libiconv-1.14
-#oegimport gettext-0.18.3
+oegimport libiconv-1.14
+oegimport gettext-0.18.3
 configure --prefix=${OEG_BASE_DIR}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}

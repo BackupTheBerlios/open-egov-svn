@@ -20,11 +20,67 @@
   <comments>
   </comments>
 
-  <set version="0.97.8" date="2013-04-17" state="works">
+<!--
+  --disable-option-checking  ignore unrecognized --enable/--with options
+  --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
+  --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --enable-static[=PKGS]  build static libraries [default=no]
+  --enable-shared[=PKGS]  build shared libraries [default=yes]
+  --enable-fast-install[=PKGS]  optimize for fast installation [default=yes]
+  --disable-dependency-tracking  speeds up one-time build
+  --enable-dependency-tracking   do not reject slow dependency extractors
+  --disable-libtool-lock  avoid locking (might break parallel builds)
+  --enable-ltdl-install   install libltdl
+  --enable-experimental enable experimental code
+  --disable-mempool       disable memory pools
+  --enable-check           Enable 'check' unit tests (default=auto)
+  --enable-coverage       turn on test coverage [default=no]
+  --disable-bzip2         disable bzip2 support
+  --disable-unrar         don't build libclamunrar and libclamunrar_iface
+  --disable-getaddrinfo          disable support for getaddrinfo
+  --disable-ipv6          disable IPv6 support
+  --disable-dns           disable support for database verification through DNS
+  --disable-clamuko       disable clamuko support (Linux, DragonFly and FreeBSD only)
+  --enable-milter         build clamav-milter
+  --disable-pthreads      disable POSIX threads support
+  --disable-cr            don't link with C reentrant library (BSD)
+  --enable-id-check       use id utility instead of /etc/passwd parsing
+  --enable-yp-check       use ypmatch utility instead of /etc/passwd parsing
+  --disable-clamav        disable test for clamav user/group
+  --enable-no-cache       use "Cache-Control: no-cache" in freshclam
+  --enable-dns-fix        enable workaround for broken DNS servers (as in SpeedTouch 510)
+  --enable-bigstack       increase thread stack size
+  --enable-readdir_r                enable support for readdir_r
+  --disable-fdpassing        don't build file descriptor passing support
+  --enable-clamdtop       Enable 'clamdtop' tool [default=auto]
+  --enable-distcheck-werror
+                          enable warnings as error for distcheck [default=no]
+  --enable-llvm           Enable 'llvm' JIT/verifier support [default=auto]
+
+  --with-included-ltdl    use the GNU ltdl sources included here
+  --with-ltdl-include=DIR use the ltdl headers installed in DIR
+  --with-ltdl-lib=DIR     use the libltdl.la installed in DIR
+  --with-fpu-words-bigendian=(yes/no/auto)    specify FPU endianess (default=auto)
+  --with-libcheck-prefix[=DIR]  search for libcheck in DIR/include and DIR/lib
+  --without-libcheck-prefix     don't search for libcheck in includedir and libdir
+  --with-libbz2-prefix[=DIR]  search for libbz2 in DIR/include and DIR/lib
+  --without-libbz2-prefix     don't search for libbz2 in includedir and libdir
+  --with-system-tommath link against system libtommath (default = no, use bundled)
+  --with-iconv supports iconv() (default=auto)
+  --with-user=uid         name of the clamav user (default=clamav)
+  --with-group=gid        name of the clamav group (default=clamav)
+  --with-dbdir=path       path to virus database directory
+  --with-libncurses-prefix[=DIR]  search for libncurses in DIR/include and DIR/lib
+  --without-libncurses-prefix     don't search for libncurses in includedir and libdir
+  --with-libpdcurses-prefix[=DIR]  search for libpdcurses in DIR/include and DIR/lib
+  --without-libpdcurses-prefix     don't search for libpdcurses in includedir and libdir
+-->
+
+  <set version="0.97.8" date="2013-04-17" state="fails-to-build">
 
     <downloads>
       <download file="clamav-0.97.8.tar.gz">
-        <url type="sourceforge" checked="2013-07-19">http://sourceforge.net/projects/clamav/files/clamav/0.97.8/clamav-0.97.8.tar.gz/download</url>
+        <url type="sourceforge" checked="2013-07-25">http://sourceforge.net/projects/clamav/files/clamav/0.97.8/clamav-0.97.8.tar.gz/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -35,6 +91,22 @@
     </downloads>
 
     <commands>
+export PACKAGE_NAME=clamav
+export PACKAGE_VERSION=0.97.8
+oegenv 32
+oegcleanbase
+oegextract clamav-0.97.8.tar.gz
+oegimport libiconv-1.14      # optional
+oegimport gettext-0.18.3     # maybe not needed
+oegimport zlib-1.2.8
+oegimport bzip2-1.0.6        # optional
+oegimport ncurses-5.9
+oegimport libtool-2.4.2      # optional
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-zlib=${OEG_BASE_DIR} --disable-rpath --enable-shared --with-iconv --with-libncurses-prefix=${OEG_BASE_DIR} --with-ltdl-include=${OEG_BASE_DIR}/include --with-ltdl-lib=${OEG_BASE_DIR}/lib
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive clamav-0.97.8
     </commands>
   </set>
 </pack>

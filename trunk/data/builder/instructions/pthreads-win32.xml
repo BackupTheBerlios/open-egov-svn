@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="pthreads-win32" license="LGPL">
+  <meta>
+    <homepage>http://sourceware.org/pthreads-win32/</homepage>
+    <download>ftp://sourceware.org/pub/pthreads-win32/</download>
+    <descriptions>
+      <description lang="en" type="short">Open Source POSIX Threads for Win32</description>
+      <description lang="en" type="long">The POSIX 1003.1-2001 standard defines an application programming interface (API) for writing multithreaded applications. This interface is known more commonly as pthreads. A good number of modern operating systems include a threading library of some kind: Solaris (UI) threads, Win32 threads, DCE threads, DECthreads, or any of the draft revisions of the pthreads standard. The trend is that most of these systems are slowly adopting the pthreads standard API, with application developers following suit to reduce porting woes. Win32 does not, and is unlikely to ever, support pthreads natively. This project seeks to provide a freely available and high-quality solution to this problem. Most people only implement what they personally need, and that usually does not help others. This project attempts to consolidate these implementations into one implementation of pthreads for Win32.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="2.9.1" date="2012-05-27" state="works">
+
+    <downloads>
+      <download file="pthreads-w32-2-9-1-release.tar.gz">
+        <url checked="2013-07-26">ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-2-9-1-release.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <commands>
+PACKAGE_NAME=pthreads-win32
+PACKAGE_VERSION=2.9.1
+oegenv 32
+oegcleanbase
+oegextract pthreads-w32-2-9-1-release.tar.gz
+
+# type "make" to see all possible targets
+
+# While "make clean GCE" this error occured:
+# nonportable.o:nonportable.c:(.text+0x436):
+# undefined reference to `ptw32_robust_mutex_remove'
+# collect2.exe: error: ld returned 1 exit status
+# GNUmakefile:531: recipe for target `pthreadGCE2.dll' failed
+
+oegpatch 001
+
+mkdir /open-egovernment-install/bin
+mkdir /open-egovernment-install/include
+mkdir /open-egovernment-install/lib
+
+make clean GC-static
+# renamed because same name as the dll link library.
+cp libpthreadGC2.a /open-egovernment-install/lib/libpthreadGC2static.a
+
+make clean GCE
+cp *.dll /open-egovernment-install/bin/
+cp *.a /open-egovernment-install/lib/
+
+make clean GC
+cp *.dll /open-egovernment-install/bin/
+cp *.a /open-egovernment-install/lib/
+
+cp need_errno.h pthread.h sched.h semaphore.h /open-egovernment-install/include/
+
+cd "${OEG_INSTALL_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

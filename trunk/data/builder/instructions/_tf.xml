@@ -92,7 +92,6 @@ oegimport zlib-1.2.8
 oegimport openssl-1.0.1e
 oegextract tf-50b8.tar.gz
 
-cd tf-50b8
 rm -rf autom4te.cache
 rm -rf macos
 rm -rf os2
@@ -103,33 +102,31 @@ rm -rf src/pcre-2.08
 # is very old and has compile problems and it is senseless to fix this old code.
 oegpatch 001
 
-# Patch configure to not exit from execution when netdb.h or select() missing.
-oegpatch 002
+oegpatch 002       # configure should not exit from execution when netdb.h or select() is missing.
+
 configure --prefix=${OEG_BASE_DIR} --enable-getaddrinfo --disable-mailcheck --enable-termcap=ncurses
 
 rm bogus.mak
 
-oegpatch 003    # remove PLATFORM_OS2 code
-oegpatch 004    # configure a new DATADIR definition.
-oegpatch 005    # tfio.h - remove warnings (double defines)
-oegpatch 006    # replace wprintf() with tfwprintf()
-oegpatch 007    # remove unused caddr_t
-oegpatch 008    # comment out not existing includes (netdb, socket)
-oegpatch 009    # remove the feature to disable core dumps
-oegpatch 010    # remove core command and core()/error_exit(), uses now crash()
+oegpatch 003       # remove PLATFORM_OS2 code
+oegpatch 004       # configure a new DATADIR definition.
+oegpatch 005       # tfio.h - remove warnings (double defines)
+oegpatch 006       # replace wprintf() with tfwprintf()
+oegpatch 007       # remove unused caddr_t
+oegpatch 008       # comment out not existing includes (netdb, socket)
+oegpatch 009       # remove the feature to disable core dumps
+oegpatch 010       # remove core command and core()/error_exit(), uses now crash()
+oegpatch 011       # remove the ability to create core dumps
+oegpatch 012       # SIGQUIT missed in signals.c
+oegpatch 013       # forgot to remove a call in 011
+oegpatch 014       # forgot to remove init_exename call/declaration
 
-
-
-
-oegpatch 011    # remove the ability to create core dumps
 
 
 
 
 ## Creates an own Makefile
-#oegpatch 002
 ## Gives a hard-coded path to the tf-lib directory.
-#oegpatch 003
 #make
 ##make install DESTDIR=/tmp/inst$$
 #make install-strip DESTDIR=${OEG_INSTALL_DIR}

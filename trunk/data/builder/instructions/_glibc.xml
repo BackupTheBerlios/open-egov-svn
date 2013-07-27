@@ -22,20 +22,30 @@
 
     <downloads>
       <download file="glibc-2.17.tar.xz">
-        <url type="direct" checked="2013-07-23">http://ftp.gnu.org/gnu/glibc/glibc-2.17.tar.xz</url>
+        <url checked="2013-07-23">http://ftp.gnu.org/gnu/glibc/glibc-2.17.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>10981956</size>
       </download>
     </downloads>
 
     <commands>
-./configure --prefix=${PREFIX}
+PACKAGE_NAME=glibc
+PACKAGE_VERSION=2.17
+oegenv 32
+oegcleanbase
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+oegimport libiconv-1.14
+oegimport gettext-0.18.3
+#oegimport 
+configure --prefix=${OEG_BASE_DIR}
 make
-make install
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

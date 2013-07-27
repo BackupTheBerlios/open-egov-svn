@@ -2,13 +2,13 @@
 
 <!-- $Id$ -->
 
-<pack name="geam" license="">
+<pack name=" dlfcn-win32" license="GNU LGPL">
   <meta>
     <homepage></homepage>
     <download></download>
     <descriptions>
-      <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="short">dlfcn library for Windows</description>
+      <description lang="en" type="long">This library implements a wrapper for dlfcn, as specified in POSIX and SUS, around the dynamic link library functions found in the Windows API.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="" date="" state="works">
+  <set version="r19" date="2010-05-04" state="works">
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2013-07-14"></url>
+      <download file="dlfcn-win32-r19.tar.bz2">
+        <url checked="2013-">http://dlfcn-win32.googlecode.com/files/dlfcn-win32-r19.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -33,9 +33,11 @@
     </downloads>
 
     <commands>
+PACKAGE_NAME=dlfcn-win32
+PACKAGE_VERSION=r19
 oegenv 32
 oegcleanbase
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
 #oegimport libiconv-1.14
 #oegimport gettext-0.18.3
 configure --prefix=${OEG_BASE_DIR}

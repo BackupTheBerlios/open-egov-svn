@@ -22,7 +22,7 @@
     <flags>
       <required>bzip2 zlib libpng</required>
       <optional></optional>
-      <recommended></recommended>
+      <standard></standard>
     </flags>
 
     <options>
