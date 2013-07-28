@@ -80,9 +80,10 @@ oegcleanbase
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 oegimport libiconv-1.14
 oegimport gettext-0.18.3
-oegimport python-??
+#oegimport python-3.3.2
+export PATH=$PATH:/c/Python33          # using the binary from python.org
+#xmlto   # for man pages
 configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --disable-rpath
-
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"

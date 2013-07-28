@@ -2,10 +2,10 @@
 
 <!-- $Id$ -->
 
-<pack name="python" license="">
+<pack name="python" license="GPL-compatible"><!-- http://docs.python.org/3/license.html -->
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://www.python.org/</homepage>
+    <download>http://www.python.org/download/</download>
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long"></description>
@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="" date="2013-00-00" state="works">
+  <set version="3.3.2" date="2013-05-15" state="fails-to-build">
 
     <downloads>
-      <download file="">
-        <url checked="2013-"></url>
+      <download file="Python-3.3.2.tar.bz2">
+        <url checked="2013-07-28">http://www.python.org/ftp/python/3.3.2/Python-3.3.2.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -39,17 +39,76 @@ http://stackoverflow.com/questions/3297254/how-to-use-mingws-gcc-compiler-when-i
 http://python-mingw.donbennett.org/mywiki/Installation
 http://python-mingw.donbennett.org:8081/mywiki/
 http://www.google.co.ma/url?sa=t&rct=j&q=python%20mingw&source=web&cd=7&cad=rja&ved=0CFgQFjAG&url=http%3A%2F%2Feli.thegreenplace.net%2F2008%2F06%2F28%2Fcompiling-python-extensions-with-distutils-and-mingw%2F&ei=Oj30UcunNu3P4QTlzoGYDw&usg=AFQjCNHQaQMNgR4B-zbquaH5edoXJjpyKw&bvm=bv.49784469,d.bGE
+
+  --disable-option-checking  ignore unrecognized --enable/--with options
+  --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
+  --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --enable-universalsdk[=SDKDIR]
+                          Build fat binary against Mac OS X SDK
+  --enable-framework[=INSTALLDIR]
+                          Build (MacOSX|Darwin) framework
+  --enable-shared         disable/enable building shared python library
+  --enable-profiling      enable C-level code profiling
+  --enable-loadable-sqlite-extensions
+                          support loadable extensions in _sqlite module
+  --enable-ipv6           Enable ipv6 (with ipv4) support
+  --disable-ipv6          Disable ipv6 support
+  --enable-big-digits[=BITS]
+                          use big digits for Python longs [[BITS=30]]
+  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
+  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+  --with-universal-archs=ARCH
+                          select architectures for universal build ("32-bit",
+                          "64-bit", "3-way", "intel" or "all")
+  --with-framework-name=FRAMEWORK
+                          specify an alternate name of the framework built
+                          with --enable-framework
+  --with-cxx-main=<compiler>
+                          compile main() and link python executable with C++
+                          compiler
+  --with-suffix=.exe      set executable suffix
+  --with-pydebug          build with Py_DEBUG defined
+  --with-libs='lib1 ...'  link against additional libs
+  --with-system-expat     build pyexpat module using an installed expat library
+  --with-system-ffi       build _ctypes module using an installed ffi library
+  --with-system-libmpdec  build _decimal module using an installed libmpdec
+                          library
+  --with-dbmliborder=db1:db2:...
+                          order to check db backends for dbm. Valid value is a
+                          colon separated string with the backend names
+                          `ndbm', `gdbm' and `bdb'.
+  --with-signal-module    disable/enable signal module
+  --with(out)-threads[=DIRECTORY]
+                          disable/enable thread support
+  --with(out)-thread[=DIRECTORY]
+                          deprecated; use --with(out)-threads
+  --with(out)-doc-strings disable/enable documentation strings
+  --with(out)-tsc         enable/disable timestamp counter profile
+  --with(out)-pymalloc    disable/enable specialized mallocs
+  --with-valgrind         Enable Valgrind support
+  --with-fpectl           enable SIGFPE catching
+  --with-libm=STRING      math library
+  --with-libc=STRING      C library
+  --with(out)-computed-gotos
+                          Use computed gotos in evaluation loop (enabled by
+                          default on supported compilers)
 -->
 
     <commands>
 PACKAGE_NAME=python
-PACKAGE_VERSION=
+PACKAGE_VERSION=3.3.2
 oegenv 32
 oegcleanbase
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-#oegimport libiconv-1.14
-#oegimport gettext-0.18.3
-configure --prefix=${OEG_BASE_DIR}
+oegimport expat-2.1.0
+oegimport libffi-3.0.13
+#libmpdec
+#sqlite
+#pthreads?
+#libutil
+#pty
+oegextract Python-3.3.2.tar.bz2
+oegpatch 001       # Remove check for getaddrinfo(). It fails, but we need it for IPv6.
+configure --prefix=${OEG_BASE_DIR} --enable-ipv6 --enable-shared --with-suffix=.exe --without-pydebug --with-system-expat --with-system-ffi 
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"

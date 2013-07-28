@@ -19,11 +19,6 @@
   </comments>
 
   <set version="4.2.2" date="2012-12-22" state="works">
-    <requires>
-      <app name="libiconv" version="" type="required" />
-      <app name="libintl"  version="" type="required" />
-      <app name="glibc"    version="" type="required" /><!-- for regex -->
-    </requires>
 
     <downloads>
       <download file="sed-4.2.2.tar.bz2">
@@ -38,7 +33,52 @@
       </download>
     </downloads>
 
+<!--
+Optional Features:
+  --disable-option-checking  ignore unrecognized --enable/--with options
+  --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
+  --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --enable-dependency-tracking
+                          do not reject slow dependency extractors
+  --disable-dependency-tracking
+                          speeds up one-time build
+  --disable-largefile     omit support for large files
+  --disable-acl           do not support ACLs
+  --disable-nls           do not use Native Language Support
+  --disable-rpath         do not hardcode runtime library paths
+  --disable-i18n          disable internationalization (default=enabled)
+  --enable-regex-tests    enable regex matcher regression tests (default=yes)
+
+Optional Packages:
+  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
+  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+  --without-included-regex
+                          don't compile regex; this is the default on systems
+                          with recent-enough versions of the GNU C Library
+                          (use with caution on other systems).
+  --without-selinux       do not use SELinux, even on systems with SELinux
+  --with-packager         String identifying the packager of this software
+  --with-packager-version Packager-specific version information
+  --with-packager-bug-reports
+                          Packager info for bug reports (URL/e-mail/...)
+  --with-gnu-ld           assume the C compiler uses GNU ld default=no
+  --with-libiconv-prefix[=DIR]  search for libiconv in DIR/include and DIR/lib
+  --without-libiconv-prefix     don't search for libiconv in includedir and libdir
+  --with-libintl-prefix[=DIR]  search for libintl in DIR/include and DIR/lib
+  --without-libintl-prefix     don't search for libintl in includedir and libdir
+-->
+
     <commands>
+oegenv 32
+oegcleanbase
+oegimport libiconv-1.14
+oegimport gettext-0.18.3
+oegextract sed-4.2.2.tar.bz2
+configure --prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --disable-acl
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive sed-4.2.2
     </commands>
   </set>
 </pack>
