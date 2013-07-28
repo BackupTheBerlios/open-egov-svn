@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<pack name="pcre" license="" state="okay">
+<pack name="pcre" license="">
   <meta>
     <homepage>http://www.pcre.org/</homepage>
     <download>https://sourceforge.net/projects/pcre/files/pcre/</download>
@@ -22,7 +22,7 @@
     <flags>
       <required></required>
       <optional></optional>
-      <recommended></recommended>
+      <standard></standard>
     </flags>
 
     <options>

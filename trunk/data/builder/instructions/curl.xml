@@ -22,7 +22,7 @@
 
     <downloads>
       <download file="curl-7.31.0.tar.bz2">
-        <url type="direct" checked="2013-07-19">http://curl.haxx.se/download/curl-7.31.0.tar.bz2</url>
+        <url checked="2013-07-19">http://curl.haxx.se/download/curl-7.31.0.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,18 +36,43 @@
 oegenv 32
 oegcleanbase
 oegimport libidn-1.28       # needs gettext (libintl)
-oegimport gettext-0.18.2.1  # needs libiconv
+oegimport gettext-0.18.3    # needs libiconv
 oegimport libiconv-1.14
 oegimport zlib-1.2.8
+oegimport gnutls-3.2.2
+oegimport  gmp-5.1.2       # required
+oegimport   readline-6.2
+oegimport  nettle-2.7.1    # required
+#oegimport  zlib-1.2.8      # optional, for compression
+oegimport  libtasn1-3.3    # optional, for ASN.1 parsing, a copy is included in GnuTLS
+oegimport  p11-kit-0.19.2  # optional, for smart card support
+#oegimport   libiconv-1.14
+oegimport   gettext-0.18.3
+#oegimport   libtasn1-3.3
+oegimport   libffi-3.0.13
+oegimport openssl-1.0.1e
+#oegimport  zlib-1.2.8
 oegextract curl-7.31.0.tar.bz2
 
 # no includes in CFLAGS!
 export CFLAGS="-m32 -march=i686 -mtune=i686 -pipe -O2 -mms-bitfields -fomit-frame-pointer"
-export CPPFLAGS="-m32 -march=i686 -mtune=i686 -pipe -O2 -mms-bitfields -fomit-frame-pointer -I/open-egovernment/include"
+export CPPFLAGS="$CFLAGS -I/open-egovernment/include"
 
 # disabled most options
-configure --prefix=/open-egovernment --without-ssl --without-gnutls --without-polarssl --without-cyassl --without-nss --without-axtls --without-ca-bundle --without-ca-path --without-libmetalink -without-libssh2 --without-librtmp --without-winidn -with-libidn=/open-egovernment --with-winssl --without-darwinssl --enable-ipv6 --with-zlib=/open-egovernment --enable-cookies --enable-sspi --enable-threaded-resolver --disable-tls-srp --enable-crypto-auth --enable-verbose --enable-manual --disable-gopher --enable-http --enable-ftp --enable-file --enable-rtsp --enable-proxy --enable-dict --enable-telnet --enable-tftp --enable-pop3 --enable-imap --enable-smtp --disable-ldap --disable-ldaps --disable-ares --disable-symbol-hiding
+# no: librtmp libmetalink libssh2
 
+# The configure option --enable-threaded-resolver has two
+# threading models: USE_THREADS_POSIX and USE_THREADS_WIN32.
+# But it always defines -lpthreads and USE_THREADS_POSIX.
+# However the error occurs since removing --without-ssl --without-gnutls
+# and adding the corresponding --with-... options. You can look at
+# the currently selected resolver threading library in the configure summary page
+# Maybe this helps?: oegimport pthreads-win32-2.9.1
+# Bug http://curl.haxx.se/mail/lib-2012-01/0291.html suggests
+# removing --enable-threaded-resolver and adding CPPFLAGS='-DUSE_THREADS_WIN32=1'.
+
+# not needed anymore: --without-ssl --without-gnutls
+configure CPPFLAGS='-DUSE_THREADS_WIN32=1' --prefix=${OEG_BASE_DIR} --with-ssl=${OEG_BASE_DIR} --with-gnutls=${OEG_BASE_DIR} --without-polarssl --without-cyassl --without-nss --without-axtls --without-ca-bundle --without-ca-path --without-libmetalink -without-libssh2 --without-librtmp --without-winidn -with-libidn=${OEG_BASE_DIR} --with-winssl --without-darwinssl --enable-ipv6 --with-zlib=${OEG_BASE_DIR} --enable-cookies --enable-sspi --disable-tls-srp --enable-crypto-auth --enable-verbose --enable-manual --disable-gopher --enable-http --enable-ftp --enable-file --enable-rtsp --enable-proxy --enable-dict --enable-telnet --enable-tftp --enable-pop3 --enable-imap --enable-smtp --disable-ldap --disable-ldaps --disable-ares --disable-symbol-hiding
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"

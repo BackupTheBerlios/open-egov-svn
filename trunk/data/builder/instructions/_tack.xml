@@ -37,7 +37,7 @@ oegenv 32
 oegcleanbase
 oegextract tack-1.06.tar.gz
 oegimport ncurses-5.9
-configure --prefix=${OEG_BASE_DIR}
+configure --prefix=${OEG_BASE_DIR} --with-ncurses --with-ncurses-dir=${OEG_BASE_DIR}
 # --with-ncurses  - wants ncurses_mingw.h, else curses.h
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}

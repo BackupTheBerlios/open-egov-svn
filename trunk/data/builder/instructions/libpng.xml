@@ -24,7 +24,7 @@
     <flags>
       <required></required>
       <optional></optional>
-      <recommended></recommended>
+      <standard></standard>
     </flags>
 
     <downloads>

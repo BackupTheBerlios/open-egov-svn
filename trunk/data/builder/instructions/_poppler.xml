@@ -4,7 +4,7 @@
 
 <pack name="poppler" license="">
   <meta>
-    <homepage></homepage>
+    <homepage>http://poppler.freedesktop.org/</homepage>
     <download></download>
     <descriptions>
       <description lang="en" type="short"></description>
@@ -16,17 +16,22 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="0.22.5" date="2013-06-16" state="works">
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="poppler-0.22.5.tar.gz">
+        <url checked="2013-07-28">http://poppler.freedesktop.org/poppler-0.22.5.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+      <download file="poppler-data-0.4.6.tar.gz">
+        <url checked="2013-07-28">http://poppler.freedesktop.org/poppler-data-0.4.6.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,20 +41,190 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
+<!--
+Optional Features:
+  --disable-option-checking  ignore unrecognized --enable/--with options
+  --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
+  --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --enable-silent-rules   less verbose build output (undo: "make V=1")
+  --disable-silent-rules  verbose build output (undo: "make V=0")
+  --enable-dependency-tracking
+                          do not reject slow dependency extractors
+  --disable-dependency-tracking
+                          speeds up one-time build
+  --enable-shared[=PKGS]  build shared libraries [default=yes]
+  --enable-static[=PKGS]  build static libraries [default=yes]
+  --enable-fast-install[=PKGS]
+                          optimize for fast installation [default=yes]
+  --disable-libtool-lock  avoid locking (might break parallel builds)
+  --enable-xpdf-headers   Install unsupported xpdf headers.
+  --enable-single-precision     use single precision arithmetic (instead of doub
+le precision) in the Splash backend
+  --enable-fixedpoint     use fixed point (instead of double precision) arithmet
+ic in the Splash backend
+  --disable-relocatable   Hardcode the poppler library location (on Windows).
+  --disable-libopenjpeg   Don't build against libopenjpeg.
+  --disable-libtiff       Don't build against libtiff.
+  --disable-largefile     omit support for large files
+  --enable-zlib           Build with zlib
+  --enable-libcurl        Build with libcurl based HTTP support.
+  --disable-libjpeg       Don't build against libjpeg.
+  --disable-libpng        Do not build against libpng.
+  --disable-splash-output Don't build the Splash graphics backend.
+  --disable-cairo-output  Don't build the cairo graphics backend.
+  --disable-poppler-glib  Don't compile poppler glib wrapper.
+  --enable-introspection=[no/auto/yes]
+                          Enable introspection for this build
+  --enable-gtk-doc        use gtk-doc to build documentation [[default=no]]
+  --enable-gtk-doc-html   build documentation in html format [[default=yes]]
+  --enable-gtk-doc-pdf    build documentation in pdf format [[default=no]]
+  --disable-poppler-qt4   Don't compile poppler Qt4 wrapper.
+  --disable-poppler-cpp   Don't compile poppler cpp wrapper.
+  --disable-gtk-test      Don't compile GTK+ test program.
+  --disable-utils         Don't compile poppler command line utils.
+  --enable-cms=[auto/lcms1/lcms2/none]
+                          Use color management system. 'auto' prefers lcms2
+                          over lcms1 if both are available [[default=auto]]
+  --with-x                use the X Window System
+  --with-html-dir=PATH    path to installed docs
+  --without-libiconv-prefix     don't search for libiconv in includedir and libdir
+  --with-testdatadir=/path/to/testdatadir  Specify test data dir
 
-    <patch>
-    </patch>
+Some influential environment variables:
+  CC          C compiler command
+  CFLAGS      C compiler flags
+  LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
+              nonstandard directory <lib dir>
+  LIBS        libraries to pass to the linker, e.g. -l<library>
+  CPPFLAGS    (Objective) C/C++ preprocessor flags, e.g. -I<include dir> if
+              you have headers in a nonstandard directory <include dir>
+  CPP         C preprocessor
+  CXX         C++ compiler command
+  CXXFLAGS    C++ compiler flags
+  CXXCPP      C++ preprocessor
+  PKG_CONFIG  path to pkg-config utility
+  PKG_CONFIG_PATH
+              directories to add to pkg-config's search path
+  PKG_CONFIG_LIBDIR
+              path overriding pkg-config's built-in search path
+  XMKMF       Path to xmkmf, Makefile generator for X Window System
+  LIBOPENJPEG_CFLAGS
+              C compiler flags for LIBOPENJPEG, overriding pkg-config
+  LIBOPENJPEG_LIBS
+              linker flags for LIBOPENJPEG, overriding pkg-config
+  LIBTIFF_CFLAGS
+              C compiler flags for LIBTIFF
+  LIBTIFF_LIBS
+              linker flags to link LIBTIFF (default is -ltiff)
+  LIBCURL_CFLAGS
+              C compiler flags for LIBCURL, overriding pkg-config
+  LIBCURL_LIBS
+              linker flags for LIBCURL, overriding pkg-config
+  LIBJPEG_CFLAGS
+              C compiler flags for LIBJPEG
+  LIBPNG_CFLAGS
+              C compiler flags for LIBPNG, overriding pkg-config
+  LIBPNG_LIBS linker flags for LIBPNG, overriding pkg-config
+  FREETYPE_CFLAGS
+              C compiler flags for FREETYPE, overriding pkg-config
+  FREETYPE_LIBS
+              linker flags for FREETYPE, overriding pkg-config
+  FONTCONFIG_CFLAGS
+              C compiler flags for FONTCONFIG, overriding pkg-config
+  FONTCONFIG_LIBS
+              linker flags for FONTCONFIG, overriding pkg-config
+  CAIRO_CFLAGS
+              C compiler flags for CAIRO, overriding pkg-config
+  CAIRO_LIBS  linker flags for CAIRO, overriding pkg-config
+  PDFTOCAIRO_CFLAGS
+              C compiler flags for PDFTOCAIRO, overriding pkg-config
+  PDFTOCAIRO_LIBS
+              linker flags for PDFTOCAIRO, overriding pkg-config
+  POPPLER_GLIB_CFLAGS
+              C compiler flags for POPPLER_GLIB, overriding pkg-config
+  POPPLER_GLIB_LIBS
+              linker flags for POPPLER_GLIB, overriding pkg-config
+  GTKDOC_DEPS_CFLAGS
+              C compiler flags for GTKDOC_DEPS, overriding pkg-config
+  GTKDOC_DEPS_LIBS
+              linker flags for GTKDOC_DEPS, overriding pkg-config
+  POPPLER_QT4_CFLAGS
+              C compiler flags for POPPLER_QT4, overriding pkg-config
+  POPPLER_QT4_LIBS
+              linker flags for POPPLER_QT4, overriding pkg-config
+  POPPLER_QT4_TEST_CFLAGS
+              C compiler flags for POPPLER_QT4_TEST, overriding pkg-config
+  POPPLER_QT4_TEST_LIBS
+              linker flags for POPPLER_QT4_TEST, overriding pkg-config
+  GTK_TEST_CFLAGS
+              C compiler flags for GTK_TEST, overriding pkg-config
+  GTK_TEST_LIBS
+              linker flags for GTK_TEST, overriding pkg-config
+  LCMS_CFLAGS C compiler flags for LCMS, overriding pkg-config
+  LCMS_LIBS   linker flags for LCMS, overriding pkg-config
 
-    <compile>
-./configure --prefix=${PREFIX}
+Building poppler with support for:
+  font configuration: win32
+  splash output:      yes
+  cairo output:       no (requires cairo >= 1.10.0)
+  qt4 wrapper:        no
+  glib wrapper:       no (requires cairo output)
+    introspection:    no
+  cpp wrapper:        no
+  use gtk-doc:        no
+  use libjpeg:        no
+  use libpng:         yes
+  use libtiff:        no
+  use zlib:           yes
+  use libcurl:        yes
+  use libopenjpeg:    no
+  use cms:            auto
+  command line utils: yes
+  test data dir:      /work/poppler-0.22.5/./../test
+
+  Warning: Using libjpeg is recommended
+  Warning: Using zlib is not totally safe
+  Warning: Using libopenjpeg is recommended
+-->
+
+    <commands>
+oegextract poppler-data-0.4.6.tar.gz
+oegextract poppler-0.22.5.tar.gz
+oegimport zlib-1.2.8
+oegimport bzip2-1.0.6
+oegimport pthreads-win32-2.9.1
+oegimport readline-6.2
+oegimport  termcap-1.3.1
+oegimport libjpeg-6b
+oegimport libpng-1.6.3
+#oegimport  zlib-1.2.8
+oegimport libiconv-1.14
+oegimport curl-7.31.0
+oegimport  libidn-1.28       # needs gettext (libintl)
+oegimport  gettext-0.18.3    # needs libiconv
+#oegimport  libiconv-1.14
+#oegimport  zlib-1.2.8
+oegimport  gnutls-3.2.2
+oegimport   gmp-5.1.2       # required
+#oegimport    readline-6.2
+oegimport   nettle-2.7.1    # required
+#oegimport   zlib-1.2.8      # optional, for compression
+oegimport   libtasn1-3.3    # optional, for ASN.1 parsing, a copy is included in GnuTLS
+oegimport   p11-kit-0.19.2  # optional, for smart card support
+oegimport    libiconv-1.14
+oegimport    gettext-0.18.3
+#oegimport    libtasn1-3.3
+oegimport    libffi-3.0.13
+oegimport  openssl-1.0.1e
+#oegimport   zlib-1.2.8
+
+#you may activate: libedit libcairo freetype openjpeg libjpeg6 pthreads
+configure --prefix=${OEG_BASE_DIR} --enable-shared --with-libiconv-prefix=${OEG_BASE_DIR} --with-font-configuration=win32 --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --disable-poppler-qt4 --disable-poppler-cpp --disable-gtk-test --disable-gtk-doc --disable-poppler-glib --enable-zlib --enable-libcurl
 make
-make install
-    </compile>
-
-    <install>
-    </install>
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive pcre-8.33
+    </commands>
   </set>
 </pack>
 

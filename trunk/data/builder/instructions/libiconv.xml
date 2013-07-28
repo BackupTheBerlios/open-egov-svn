@@ -22,7 +22,7 @@
     <flags>
       <required></required>
       <optional>gettext</optional>
-      <recommended>gettext</recommended>
+      <standard>gettext</standard>
     </flags>
 
     <options>
