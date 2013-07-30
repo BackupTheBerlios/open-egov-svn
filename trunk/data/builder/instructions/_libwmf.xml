@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="libwmf" license="GNU LGPL">
+  <meta>
+    <homepage></homepage>
+    <download>http://sourceforge.net/projects/wvware/files/libwmf/</download>
+    <descriptions>
+      <description lang="en" type="short">Library for converting WMF files</description>
+      <description lang="en" type="long">libwmf is a library for reading vector images in Microsoft's native Windows Metafile Format (WMF) and for either displaying them or converting them to more standard/open file formats such as the W3C's XML-based Scaleable Vector Graphic (SVG) format.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="0.2.8.4" date="2005-07-27" state="works">
+
+    <downloads>
+      <download file="libwmf-0.2.8.4.tar.gz">
+        <url checked="2013-07-30">http://sourceforge.net/projects/wvware/files/libwmf/0.2.8.4/libwmf-0.2.8.4.tar.gz/download</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+<!--
+  --enable-debug          set DEBUG option to libwmf default=no
+  --enable-ansi           set -ansi option to libwmf default=no
+  --enable-pedantic       set -pedantic option to libwmf default=no
+  --disable-heavy         only build libwmflite default=build all
+  --disable-dependency-tracking  speeds up one-time build
+  --enable-dependency-tracking   do not reject slow dependency extractors
+  --enable-shared[=PKGS]
+                          build shared libraries [default=yes]
+  --enable-static[=PKGS]
+                          build static libraries [default=yes]
+  --enable-fast-install[=PKGS]
+                          optimize for fast installation [default=yes]
+  --disable-libtool-lock  avoid locking (might break parallel builds)
+  --disable-gd            don't build GD, don't look for it, don't require it
+
+Optional Packages:
+  --with-tags[=TAGS]
+                          include additional configurations [automatic]
+  --with-layers           whether to build layers default is yes
+  --with-x                use the X Window System
+  --with-expat=DIR        use expat in DIR
+  --with-libxml2=DIR      use libxml2 in DIR
+  --with-freetype=DIR     use freetype2 in DIR
+  --with-zlib=DIR         use libz in DIR
+  --with-png=DIR          use libpng in DIR
+  --with-jpeg=DIR         use libjpeg in DIR
+  --with-sys-gd=DIR       use system GD in DIR (if compatible)
+  --with-docdir=DIR       install documentation in DIR
+  --with-fontdir=DIR      install Type1 fonts in DIR
+  --with-sysfontmap=FILE  default is /usr/share/fonts/fontmap
+  --with-xtrafontmap=FILE non-system XML fontmap
+  --with-gsfontmap=FILE   ghostscript fontmap
+  --with-gsfontdir=DIR    directory for ghostscript fonts
+  CC          C compiler command
+  CFLAGS      C compiler flags
+  LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
+              nonstandard directory <lib dir>
+  CPPFLAGS    C/C++ preprocessor flags, e.g. -I<include dir> if you have
+              headers in a nonstandard directory <include dir>
+  CPP         C preprocessor
+  CXX         C++ compiler command
+  CXXFLAGS    C++ compiler flags
+  CXXCPP      C++ preprocessor
+  F77         Fortran 77 compiler command
+  FFLAGS      Fortran 77 compiler flags
+-->
+
+    <commands>
+PACKAGE_NAME=libwmf
+PACKAGE_VERSION=0.2.8.4
+oegenv 32
+oegcleanbase
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+oegimport expat-2.1.0
+oegimport zlib-1.2.8
+oegimport libjpeg-6b
+oegimport freetype-2.5.0.1
+oegimport  bzip2-1.0.6
+#oegimport  zlib-1.2.8
+oegimport  libpng-1.6.3
+#oegimport libpng-1.6.3
+#oegimport  zlib-1.2.8
+#oegimport libxml2-2.9.1 # not used
+#oegimport  libiconv-1.14
+#oegimport  gettext-0.18.3
+#oegimport  zlib-1.2.8
+#not xml2 and expat at the same time. only expat: #--with-libxml2=${OEG_BASE_DIR}
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --without-x --with-expat=${OEG_BASE_DIR} --with-freetype=${OEG_BASE_DIR} --with-zlib=${OEG_BASE_DIR} --with-png=${OEG_BASE_DIR} --with-jpeg=${OEG_BASE_DIR}
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

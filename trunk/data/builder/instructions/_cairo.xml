@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="cairo" license="">
+  <meta>
+    <homepage>http://www.cairographics.org/</homepage>
+    <download>http://www.cairographics.org/releases/</download>
+    <descriptions>
+      <description lang="en" type="short"></description>
+      <description lang="en" type="long"></description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="1.12.14" date="2013-02-10" state="works">
+
+    <downloads>
+      <download file="cairo-1.12.14.tar.xz">
+        <url checked="2013-07-30">http://www.cairographics.org/releases/cairo-1.12.14.tar.xz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+<!--
+Optional Features:
+  --disable-option-checking  ignore unrecognized --enable/--with options
+  --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
+  --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --disable-dependency-tracking  speeds up one-time build
+  --enable-dependency-tracking   do not reject slow dependency extractors
+  --enable-silent-rules          less verbose build output (undo: `make V=1')
+  --disable-silent-rules         verbose build output (undo: `make V=0')
+  --enable-shared[=PKGS]  build shared libraries [default=yes]
+  --enable-static[=PKGS]  build static libraries [default=yes]
+  --enable-fast-install[=PKGS]
+                          optimize for fast installation [default=yes]
+  --disable-libtool-lock  avoid locking (might break parallel builds)
+  --enable-gtk-doc        use gtk-doc to build documentation [[default=no]]
+  --enable-gtk-doc-html   build documentation in html format [[default=yes]]
+  --enable-gtk-doc-pdf    build documentation in pdf format [[default=no]]
+  --disable-largefile     omit support for large files
+  --disable-atomic        disable use of native atomic operations
+  --enable-gcov           Enable gcov
+  --disable-valgrind      Disable valgrind support
+  --enable-xlib=[no/auto/yes]
+                          Enable cairo's Xlib surface backend feature
+                          [default=auto]
+  --enable-xlib-xrender=[no/auto/yes]
+                          Enable cairo's Xlib Xrender surface backend feature
+                          [default=auto]
+  --enable-xcb=[no/auto/yes]
+                          Enable cairo's XCB surface backend feature
+                          [default=auto]
+  --enable-xlib-xcb=[no/auto/yes]
+                          Enable cairo's Xlib/XCB functions feature
+                          [default=no]
+  --enable-xcb-shm=[no/auto/yes]
+                          Enable cairo's XCB/SHM functions feature
+                          [default=auto]
+  --enable-qt=[no/auto/yes]
+                          Enable cairo's Qt surface backend feature
+                          [default=no]
+  --enable-quartz=[no/auto/yes]
+                          Enable cairo's Quartz surface backend feature
+                          [default=auto]
+  --enable-quartz-font=[no/auto/yes]
+                          Enable cairo's Quartz font backend feature
+                          [default=auto]
+  --enable-quartz-image=[no/auto/yes]
+                          Enable cairo's Quartz Image surface backend feature
+                          [default=no]
+  --enable-win32=[no/auto/yes]
+                          Enable cairo's Microsoft Windows surface backend
+                          feature [default=auto]
+  --enable-win32-font=[no/auto/yes]
+                          Enable cairo's Microsoft Windows font backend
+                          feature [default=auto]
+  --enable-skia=[no/auto/yes]
+                          Enable cairo's Skia surface backend feature
+                          [default=no]
+  --enable-os2=[no/auto/yes]
+                          Enable cairo's OS/2 surface backend feature
+                          [default=no]
+  --enable-beos=[no/auto/yes]
+                          Enable cairo's BeOS/Zeta surface backend feature
+                          [default=no]
+  --enable-drm=[no/auto/yes]
+                          Enable cairo's DRM surface backend feature
+                          [default=no]
+  --enable-gallium=[no/auto/yes]
+                          Enable cairo's Gallium3D surface backend feature
+                          [default=no]
+  --enable-png=[no/auto/yes]
+                          Enable cairo's PNG functions feature [default=yes]
+  --enable-gl=[no/auto/yes]
+                          Enable cairo's OpenGL surface backend feature
+                          [default=no]
+  --enable-glesv2=[no/auto/yes]
+                          Enable cairo's OpenGLESv2 surface backend feature
+                          [default=no]
+  --enable-cogl=[no/auto/yes]
+                          Enable cairo's Cogl surface backend feature
+                          [default=no]
+  --enable-directfb=[no/auto/yes]
+                          Enable cairo's directfb surface backend feature
+                          [default=no]
+  --enable-vg=[no/auto/yes]
+                          Enable cairo's OpenVG surface backend feature
+                          [default=no]
+  --enable-egl=[no/auto/yes]
+                          Enable cairo's EGL functions feature [default=auto]
+  --enable-glx=[no/auto/yes]
+                          Enable cairo's GLX functions feature [default=auto]
+  --enable-wgl=[no/auto/yes]
+                          Enable cairo's WGL functions feature [default=auto]
+  --enable-script=[no/auto/yes]
+                          Enable cairo's script surface backend feature
+                          [default=yes]
+  --enable-ft=[no/auto/yes]
+                          Enable cairo's FreeType font backend feature
+                          [default=auto]
+  --enable-fc=[no/auto/yes]
+                          Enable cairo's Fontconfig font backend feature
+                          [default=auto]
+  --enable-ps=[no/auto/yes]
+                          Enable cairo's PostScript surface backend feature
+                          [default=yes]
+  --enable-pdf=[no/auto/yes]
+                          Enable cairo's PDF surface backend feature
+                          [default=yes]
+  --enable-svg=[no/auto/yes]
+                          Enable cairo's SVG surface backend feature
+                          [default=yes]
+  --enable-test-surfaces=[no/auto/yes]
+                          Enable cairo's test surfaces feature [default=no]
+  --enable-tee=[no/auto/yes]
+                          Enable cairo's tee surface backend feature
+                          [default=no]
+  --enable-xml=[no/auto/yes]
+                          Enable cairo's xml surface backend feature
+                          [default=no]
+  --enable-pthread=[no/auto/yes]
+                          Enable cairo's pthread feature [default=auto]
+  --enable-gobject=[no/auto/yes]
+                          Enable cairo's gobject functions feature
+                          [default=auto]
+  --enable-full-testing   Sets the test suite to perform full testing by
+                          default, which will dramatically slow down make
+                          check, but is a *requirement* before release.
+  --enable-trace=[no/auto/yes]
+                          Enable cairo's cairo-trace feature [default=auto]
+  --enable-interpreter=[no/auto/yes]
+                          Enable cairo's cairo-script-interpreter feature
+                          [default=yes]
+  --enable-symbol-lookup=[no/auto/yes]
+                          Enable cairo's symbol-lookup feature [default=auto]
+  --disable-some-floating-point
+                          Disable certain code paths that rely heavily on
+                          double precision floating-point calculation. This
+                          option can improve performance on systems without a
+                          double precision floating-point unit, but might
+                          degrade performance on those that do.
+  --with-html-dir=PATH    path to installed docs
+  --with-x                use the X Window System
+  --with-skia=/path/to/skia
+                          directory to find compiled skia sources
+  --with-skia-build=(Release|Debug)
+                              build of skia to link with, default is Release
+
+  --with-gallium=/path/to/mesa
+                          directory to find gallium enabled mesa
+
+Some influential environment variables:
+  CC          C compiler command
+  CFLAGS      C compiler flags
+  LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
+              nonstandard directory <lib dir>
+  LIBS        libraries to pass to the linker, e.g. -l<library>
+  CPPFLAGS    (Objective) C/C++ preprocessor flags, e.g. -I<include dir> if
+              you have headers in a nonstandard directory <include dir>
+  CPP         C preprocessor
+  PKG_CONFIG  path to pkg-config utility
+  GTKDOC_DEPS_CFLAGS
+              C compiler flags for GTKDOC_DEPS, overriding pkg-config
+  GTKDOC_DEPS_LIBS
+              linker flags for GTKDOC_DEPS, overriding pkg-config
+  CXX         C++ compiler command
+  CXXFLAGS    C++ compiler flags
+  CXXCPP      C++ preprocessor
+  VALGRIND_CFLAGS
+              C compiler flags for VALGRIND, overriding pkg-config
+  VALGRIND_LIBS
+              linker flags for VALGRIND, overriding pkg-config
+  xlib_CFLAGS C compiler flags for xlib, overriding pkg-config
+  xlib_LIBS   linker flags for xlib, overriding pkg-config
+  XMKMF       Path to xmkmf, Makefile generator for X Window System
+  xlib_xrender_CFLAGS
+              C compiler flags for xlib_xrender, overriding pkg-config
+  xlib_xrender_LIBS
+              linker flags for xlib_xrender, overriding pkg-config
+  xcb_CFLAGS  C compiler flags for xcb, overriding pkg-config
+  xcb_LIBS    linker flags for xcb, overriding pkg-config
+  xlib_xcb_CFLAGS
+              C compiler flags for xlib_xcb, overriding pkg-config
+  xlib_xcb_LIBS
+              linker flags for xlib_xcb, overriding pkg-config
+  xcb_shm_CFLAGS
+              C compiler flags for xcb_shm, overriding pkg-config
+  xcb_shm_LIBS
+              linker flags for xcb_shm, overriding pkg-config
+  qt_CFLAGS   C compiler flags for qt, overriding pkg-config
+  qt_LIBS     linker flags for qt, overriding pkg-config
+  drm_CFLAGS  C compiler flags for drm, overriding pkg-config
+  drm_LIBS    linker flags for drm, overriding pkg-config
+  png_REQUIRES
+              module name for libpng to search for using pkg-config
+  png_CFLAGS  C compiler flags for png, overriding pkg-config
+  png_LIBS    linker flags for png, overriding pkg-config
+  gl_CFLAGS   C compiler flags for gl, overriding pkg-config
+  gl_LIBS     linker flags for gl, overriding pkg-config
+  glesv2_CFLAGS
+              C compiler flags for glesv2, overriding pkg-config
+  glesv2_LIBS linker flags for glesv2, overriding pkg-config
+  cogl_CFLAGS C compiler flags for cogl, overriding pkg-config
+  cogl_LIBS   linker flags for cogl, overriding pkg-config
+  directfb_CFLAGS
+              C compiler flags for directfb, overriding pkg-config
+  directfb_LIBS
+              linker flags for directfb, overriding pkg-config
+  egl_CFLAGS  C compiler flags for egl, overriding pkg-config
+  egl_LIBS    linker flags for egl, overriding pkg-config
+  FREETYPE_CFLAGS
+              C compiler flags for FREETYPE, overriding pkg-config
+  FREETYPE_LIBS
+              linker flags for FREETYPE, overriding pkg-config
+  FONTCONFIG_CFLAGS
+              C compiler flags for FONTCONFIG, overriding pkg-config
+  FONTCONFIG_LIBS
+              linker flags for FONTCONFIG, overriding pkg-config
+  LIBSPECTRE_CFLAGS
+              C compiler flags for LIBSPECTRE, overriding pkg-config
+  LIBSPECTRE_LIBS
+              linker flags for LIBSPECTRE, overriding pkg-config
+  POPPLER_CFLAGS
+              C compiler flags for POPPLER, overriding pkg-config
+  POPPLER_LIBS
+              linker flags for POPPLER, overriding pkg-config
+  LIBRSVG_CFLAGS
+              C compiler flags for LIBRSVG, overriding pkg-config
+  LIBRSVG_LIBS
+              linker flags for LIBRSVG, overriding pkg-config
+  pixman_CFLAGS
+              C compiler flags for pixman, overriding pkg-config
+  pixman_LIBS linker flags for pixman, overriding pkg-config
+  GOBJECT_CFLAGS
+              C compiler flags for GOBJECT, overriding pkg-config
+  GOBJECT_LIBS
+              linker flags for GOBJECT, overriding pkg-config
+  glib_CFLAGS C compiler flags for glib, overriding pkg-config
+  glib_LIBS   linker flags for glib, overriding pkg-config
+  gtk_CFLAGS  C compiler flags for gtk, overriding pkg-config
+  gtk_LIBS    linker flags for gtk, overriding pkg-config
+-->
+
+    <commands>
+PACKAGE_NAME=cairo
+PACKAGE_VERSION=1.12.14
+oegenv 32
+oegcleanbase
+oegimport libpng-1.6.3
+oegimport  zlib-1.2.8
+oegimport pixman-0.30.0
+oegimport freetype-2.5.0.1
+oegimport  bzip2-1.0.6
+#oegimport  zlib-1.2.8
+#oegimport  libpng-1.6.3
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+# ghostscript - no win32 printing; lzo2 glib-2.0 pthread libiberty
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --disable-gtk-doc-html
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

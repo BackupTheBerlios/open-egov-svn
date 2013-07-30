@@ -20,11 +20,75 @@
   <comments>
   </comments>
 
-  <set version="1.5.2" date="2013-04-18" state="works">
+<!--
+  --disable-option-checking  ignore unrecognized --enable/--with options
+  --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
+  --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --enable-maintainer-mode  enable make rules and dependencies not useful
+                          (and sometimes confusing) to the casual installer
+  --disable-dependency-tracking  speeds up one-time build
+  --enable-dependency-tracking   do not reject slow dependency extractors
+  --enable-static[=PKGS]  build static libraries [default=no]
+  --enable-shared[=PKGS]  build shared libraries [default=yes]
+  --enable-fast-install[=PKGS]
+                          optimize for fast installation [default=yes]
+  --disable-libtool-lock  avoid locking (might break parallel builds)
+  --disable-endian-check  disable the endian check and trust the OS provided
+                          macros
+  --enable-ciphers=ciphers
+                          select the symmetric ciphers to include
+  --enable-pubkey-ciphers=ciphers
+                          select the public-key ciphers to include
+  --enable-digests=digests
+                          select the message digests to include
+  --enable-random=name    select which random number generator to use
+  --disable-dev-random    disable the use of dev random
+  --enable-random-daemon  Build and support the experimental gcryptrnd
+  --disable-asm           Disable MPI assembler modules
+  --enable-m-guard        Enable memory guard facility
+  --enable-hmac-binary-check
+                          Enable library integrity check
+  --disable-padlock-support
+                          Disable support for the PadLock Engine of VIA
+                          processors
+  --disable-aesni-support Disable support for the Intel AES-NI instructions
+  --disable-O-flag-munging
+                          Disable modification of the cc -O flag
+  --enable-ld-version-script
+                          enable/disable use of linker version script.
+                          (default is system dependent)
+  --enable-mpi-path=EXTRA_PATH
+                          prepend EXTRA_PATH to list of CPU specific
+                          optimizations
+  --disable-optimization  disable compiler optimization
+  --disable-noexecstack   disable non executable stack support
+
+Optional Packages:
+  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
+  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+  --with-egd-socket=NAME  Use NAME for the EGD socket)
+  --with-capabilities     Use linux capabilities [default=no]
+  --with-gpg-error-prefix=PFX     prefix where GPG Error is installed (optional)
+  --with-pth-prefix=PFX   prefix where GNU Pth is installed (optional)
+
+Some influential environment variables:
+  CC          C compiler command
+  CFLAGS      C compiler flags
+  LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
+              nonstandard directory <lib dir>
+  LIBS        libraries to pass to the linker, e.g. -l<library>
+  CPPFLAGS    (Objective) C/C++ preprocessor flags, e.g. -I<include dir> if
+              you have headers in a nonstandard directory <include dir>
+  CPP         C preprocessor
+  CCAS        assembler compiler command (defaults to CC)
+  CCASFLAGS   assembler compiler flags (defaults to CFLAGS)
+-->
+
+  <set version="1.5.3" date="2013-07-25" state="works">
 
     <downloads>
-      <download file="libgcrypt-1.5.2.tar.bz2">
-        <url type="direct" checked="2013-07-20">ftp://ftp.gnupg.org/gcrypt/libgcrypt/libgcrypt-1.5.2.tar.bz2</url>
+      <download file="libgcrypt-1.5.3.tar.bz2">
+        <url type="direct" checked="2013-07-20">ftp://ftp.gnupg.org/gcrypt/libgcrypt/libgcrypt-1.5.3.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -35,6 +99,21 @@
     </downloads>
 
     <commands>
+PACKAGE_NAME=libgcrypt
+PACKAGE_VERSION=1.5.3
+oegenv 32
+oegcleanbase
+oegimport libgpg-error-1.12   # optional
+oegimport  libiconv-1.14
+oegimport  gettext-0.18.3
+#oegimport gnupth  # optional
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+configure --prefix=${OEG_BASE_DIR} --with-gpg-error-prefix=${OEG_BASE_DIR} --enable-shared --with-gnu-ld --with-sysroot=${OEG_BASE_DIR}
+oegpatch 001       # Removes comments from src/libgcrypt.def, EXPORTS needs to be on the first line!
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

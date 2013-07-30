@@ -223,7 +223,7 @@ configure --prefix=${OEG_BASE_DIR} --enable-shared --with-libiconv-prefix=${OEG_
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive pcre-8.33
+oegarchive poppler-0.22.5
     </commands>
   </set>
 </pack>

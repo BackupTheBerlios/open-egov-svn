@@ -18,6 +18,10 @@
   <comments>
   </comments>
 
+  <alternatives>
+    <alternative name="libgnurx" />
+  </alternatives>
+
   <set version="0.12" date="1993-04-03" state="to-old">
     <flags>
       <required></required>
@@ -27,7 +31,7 @@
 
     <downloads>
       <download file="regex-0.12.tar.gz">
-        <url type="direct" checked="2013-07-23">http://ftp.gnu.org/old-gnu/regex/regex-0.12.tar.gz</url>
+        <url checked="2013-07-23">http://ftp.gnu.org/old-gnu/regex/regex-0.12.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>

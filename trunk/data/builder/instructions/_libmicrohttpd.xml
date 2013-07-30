@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="libmicrohttpd" license="">
+  <meta>
+    <homepage>http://www.gnu.org/software/libmicrohttpd/</homepage>
+    <download>http://ftp.gnu.org/gnu/libmicrohttpd/</download>
+    <descriptions>
+      <description lang="en" type="short">Small HTTP server as C library</description>
+      <description lang="en" type="long">GNU libmicrohttpd is a small C library that is supposed to make it easy to run an HTTP server as part of another application. If you want to be able to serve simple WWW pages from within your C or C++ application, check it out.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="0.9.28" date="2013-07-19" state="works">
+
+    <downloads>
+      <download file="libmicrohttpd-0.9.28.tar.gz">
+        <url checked="2013-07-30">http://ftp.gnu.org/gnu/libmicrohttpd/libmicrohttpd-0.9.28.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+<!--
+First, it's a bit of an open question as to where to put your own
+include and lib files under MinGW. Of course, there's a connection
+between where you place such files and whether or not additional
+configuration is needed. There are discussions about options and
+trade-offs here:
+
+http://www.mingw.org/wiki/IncludePathHOWTO
+http://www.mingw.org/wiki/LibraryPathHOWTO
+
+In my case I chose to put them in dirs that MinGW searches by default:
+/mingw/include and /mingw/lib.
+
+Second, on Windows gcc can link directly against dlls; unlike MSVC it
+doesn't (always) need import libraries.
+
+Third, while gcc can link directly against dlls, it has to know which
+dll it's looking for. The convention on Unix is to use a "-l<lib>"
+option. Some shortcut (symbolic link) magic then kicks in to redirect
+<lib> to the correct <lib>-<version> library. That doesn't happen on
+Windows. So, for example, libmicrohttpd uses "-lplibc"--but the actual
+dll name is "libplibc-1.dll", and gcc can't find the one from the
+other on its own.
+
+In my case--and no doubt this is a little odd--I placed unversioned
+dlls in my lib dir. But: each dll knows its original name, and that's
+what the linker records. So you still need to distribute the
+*versioned* dlls, not the *unversioned* ones. (If this approach
+doesn't appeal to you you can travel the more traditional route:
+create a .def using pexports and then create a .dll.a from the .def
+and .dll files.)
+
+The following steps assume you've placed needed dlls from prior
+libmicrohttpd binary packages in /mingw/bin.
+
+$ cp /mingw/bin/libgcrypt-11.dll /mingw/lib/libgcrypt.dll
+$ cp /mingw/bin/libgpg-error-0.dll /mingw/lib/libgpg-error.dll
+$ cp /mingw/bin/libiconv-2.dll /mingw/lib/libiconv.dll
+$ cp /mingw/bin/libintl-8.dll /mingw/lib/libintl.dll
+$ cp /mingw/bin/pthreadGC2.dll /mingw/lib/libpthread.dll
+
+(Note that pthread gets a "lib" prefix.)
+
+$ cd PlibC-0.1.5
+$ CFLAGS="-O2 -march=i686" ./configure --prefix=/mingw
+$ make
+$ make install
+$ cd ..
+
+$ cd libmicrohttpd-0.4.4
+$ CFLAGS="-O2 -march=i686" ./configure --prefix=/mingw --disable-https
+--enable-messages
+(Obviously, adjust configure flags as required!)
+$ make
+$ make install
+$ cd ..
+
+The libplibc and libmicrohttpd dlls will now be in /mingw/bin.
+-->
+
+    <commands>
+PACKAGE_NAME=libmicrohttpd
+PACKAGE_VERSION=0.9.28
+oegenv 32
+oegcleanbase
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+#oegimport libiconv-1.14
+#oegimport gettext-0.18.3
+configure --prefix=${OEG_BASE_DIR}
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

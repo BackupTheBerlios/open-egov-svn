@@ -22,8 +22,8 @@
   <set version="2.8.11.2" date="2013-07-03" state="fails-to-build">
 
     <downloads>
-      <download file="cmake-2.8.11.2.zip">
-        <url type="direct" checked="2013-07-22">http://www.cmake.org/files/v2.8/cmake-2.8.11.2.zip</url>
+      <download file="cmake-2.8.11.2.tar.gz">
+        <url type="direct" checked="2013-07-22">http://www.cmake.org/files/v2.8/cmake-2.8.11.2.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -33,30 +33,61 @@
       </download>
     </downloads>
 
+<!--
+if you want our own libs:
+oegimport expat-2.1.0
+oegimport zlib-1.2.8
+oegimport curl-7.31.0
+oegimport  libidn-1.28
+oegimport  gettext-0.18.3
+oegimport  libiconv-1.14
+oegimport  zlib-1.2.8
+oegimport  gnutls-3.2.2
+oegimport   gmp-5.1.2
+oegimport    readline-6.2
+oegimport   nettle-2.7.1
+#oegimport   zlib-1.2.8
+oegimport   libtasn1-3.3
+oegimport   p11-kit-0.19.2
+#oegimport    libiconv-1.14
+oegimport    gettext-0.18.3
+#oegimport    libtasn1-3.3
+oegimport    libffi-3.0.13
+oegimport  openssl-1.0.1e
+#oegimport   zlib-1.2.8
+oegimport bzip2-1.0.6
+oegimport libarchive-3.1.2
+#oegimport  libiconv-1.14
+#oegimport  gettext-0.18.3
+#oegimport  bzip2-1.0.6
+#oegimport  expat-2.1.0
+oegimport  libxml2-2.9.1
+oegimport  xz-5.0.5
+#oegimport  zlib-1.2.8
+-->
+
     <commands>
 oegenv 32
 oegcleanbase
 oegextract cmake-2.8.11.2.zip
-oegimport expat-2.1.0
-oegimport zlib-1.2.8
-oegimport curl-7.31.0
-oegimport bzip2-1.0.6
-oegimport libarchive
+
+# Remove Qt paths from PATH!
 # configure: don't use --no-qt-gui, this tests for qt and fails if Qt5.1 instead of Qt4 is found...
+# A fast fix was to remove the "Qt Version" in CMakeLists.txt or remove it together with "Qt required"
+# completely as KDE was also required in the CMakeLists.txt and has Qt as it's dependency.
 
-The fix was to remove the "Qt Version" in CMakeLists.txt or remove it together with "Qt required" completely as KDE was also required in the CMakeLists.txt and has Qt as it's dependency. 
+# --no-system-libarchive
+configure --prefix=/open-egovernment --no-qt-gui --system-expat --system-curl --system-zlib --system-bzip2 --system-libarchive
 
-configure --prefix=/open-egovernment --no-qt-gui --system-expat --system-curl --system-zlib --system-bzip2 --no-system-libarchive
+# Minimal setup with included copies of all the libraries.
+configure --prefix=/open-egovernment --no-qt-gui --no-system-libs
 
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
-cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+cd "${OEG_INSTALL_DIR}/msys${OEG_BASE_DIR}"
 oegarchive cmake-2.8.11.2
 
-
-Steps to reproduce:
-
-echo 'find_package(Qt4 REQUIRED)' > CMakeLists.txt; mkdir build; cd build; cmake ..
+#echo 'find_package(Qt4 REQUIRED)' > CMakeLists.txt; mkdir build; cd build; cmake ..
     </commands>
   </set>
 </pack>

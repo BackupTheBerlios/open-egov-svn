@@ -32,17 +32,28 @@
       </download>
     </downloads>
 
+<!--
+  --help                    print this message
+  --prefix=PREFIX           install in PREFIX [/mingw]
+  --libdir=DIR              install libs in DIR [/mingw/lib]
+  --incdir=DIR              install includes in DIR [/mingw/include]
+  --enable-shared           build shared libraries [no]
+  --enable-static           build static libraries [yes]
+  --enable-msvc             create msvc-compatible import lib [auto]
+  --enable-stripping        strip shared library [yes]
+  --cc=CC                   use C compiler CC [gcc]
+  --cross-prefix=PREFIX     use PREFIX for compilation tools []
+-->
+
     <commands>
 PACKAGE_NAME=dlfcn-win32
 PACKAGE_VERSION=r19
 oegenv 32
 oegcleanbase
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
-#oegimport libiconv-1.14
-#oegimport gettext-0.18.3
-configure --prefix=${OEG_BASE_DIR}
+configure --prefix=${OEG_BASE_DIR} --libdir=${OEG_BASE_DIR}/lib --incdir=${OEG_BASE_DIR}/include --enable-shared --enable-static --enable-stripping
 make
-make install-strip DESTDIR=${OEG_INSTALL_DIR}
+make install DESTDIR=${OEG_INSTALL_DIR}
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

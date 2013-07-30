@@ -2,27 +2,27 @@
 
 <!-- $Id$ -->
 
-<pack name="libxml2" license="">
+<pack name="wv2" license="">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://sourceforge.net/projects/wvware/</homepage>
+    <download>http://sourceforge.net/projects/wvware/files/</download>
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long"></description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>libxml2, xml</keywords>
+    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
-  <set version="" date="" state="works">
+  <set version="0.4.2" date="2009-10-31" state="works">
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="wv2-0.4.2.tar.bz2">
+        <url checked="2013-07-30">http://sourceforge.net/projects/wvware/files/wv2-0.4.2.tar.bz2/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -32,32 +32,20 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
+    <commands>
+PACKAGE_NAME=wv2
+PACKAGE_VERSION=0.4.2
 oegenv 32
 oegcleanbase
-oegimport libiconv-1.14
-oegimport gettext-0.18.3
-oegimport zlib-1.2.8
-oegextract libxml2-2.9.1.tar.gz
-cd /work/libxml2-2.9.1
-#configure --help
-#cd /work/libxml2-2.9.1
-configure --with-zlib=${OEG_BASE_DIR} --with-iconv=${OEG_BASE_DIR} --prefix=${OEG_BASE_DIR}
-# ohne: --with-lzma= -with-icu
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+#oegimport libiconv-1.14
+#oegimport gettext-0.18.3
+configure --prefix=${OEG_BASE_DIR}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive libxml2-2.9.1
-    </compile>
-
-    <install>
-    </install>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
   </set>
 </pack>
 

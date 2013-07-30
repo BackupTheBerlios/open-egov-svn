@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="3.1.2" date="" state="works">
+  <set version="3.1.2" date="2013-01-13" state="works">
     <flags>
       <required></required>
       <optional></optional>
-      <recommended></recommended>
+      <standard></standard>
     </flags>
 
     <downloads>
@@ -41,19 +41,19 @@
 oegenv 32
 oegcleanbase
 oegimport libiconv-1.14
-oegimport gettext-0.18.2.1
+oegimport gettext-0.18.3
 oegimport bzip2-1.0.6
 oegimport expat-2.1.0
 oegimport libxml2-2.9.1
 oegimport xz-5.0.5
 oegimport zlib-1.2.8
 oegextract libarchive-3.1.2.tar.gz
-#cd /work/libarchive-3.1.2/
+#configure looks for: libpcre, lzo, nettle, openssl
 #configure --prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-expat=${OEG_BASE_DIR}
-export PATH=$PATH:/open-egovernment/bin    # some tool during configure needs expat-1.dll
+#export PATH=$PATH:/open-egovernment/bin    # some tool during configure needs expat-1.dll
 configure --prefix=${OEG_BASE_DIR} --without-lzma --without-bz2lib
 make
-make install DESTDIR=${OEG_INSTALL_DIR}
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive libarchive-3.1.2
     </commands>

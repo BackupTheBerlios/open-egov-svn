@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="cairomm" license="">
+  <meta>
+    <homepage>http://www.cairographics.org/</homepage>
+    <download>http://www.cairographics.org/releases/</download>
+    <descriptions>
+      <description lang="en" type="short"></description>
+      <description lang="en" type="long"></description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="1.10.0" date="2011-05-09" state="fails-to-build">
+
+    <downloads>
+      <download file="cairomm-1.10.0.tar.gz">
+        <url checked="2013-07-30">http://www.cairographics.org/releases/cairomm-1.10.0.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+<!--
+  --disable-option-checking  ignore unrecognized --enable/--with options
+  --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
+  --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --enable-maintainer-mode  enable make rules and dependencies not useful
+                          (and sometimes confusing) to the casual installer
+  --disable-dependency-tracking  speeds up one-time build
+  --enable-dependency-tracking   do not reject slow dependency extractors
+  --enable-static[=PKGS]  build static libraries [default=no]
+  --enable-shared[=PKGS]  build shared libraries [default=yes]
+  --enable-fast-install[=PKGS]
+                          optimize for fast installation [default=yes]
+  --disable-libtool-lock  avoid locking (might break parallel builds)
+  --disable-documentation do not build or install the documentation
+  --enable-warnings[=min|max|fatal|no]
+                          set compiler pedantry level [default=min]
+  --enable-tests          enable automated tests [default=no]
+  --enable-api-exceptions  Build exceptions API.
+                              [default=yes]
+  --with-libstdc-doc=[TAGFILE@]HTMLREFDIR
+                          Link to external libstdc documentation [auto]
+  --with-libsigc-doc=[TAGFILE@]HTMLREFDIR
+                          Link to external libsigc documentation [auto]
+  --with-boost[=DIR]      use boost (default is No) - it is possible to
+                          specify the root directory for boost (optional)
+  --with-boost-unit-test-framework[=special-lib]
+                          use the Unit_Test_Framework library from boost - it
+                          is possible to specify a certain library for the
+                          linker e.g.
+                          --with-boost-unit-test-framework=boost_unit_test_framework-gcc
+Some influential environment variables:
+  ACLOCAL_FLAGS
+              aclocal flags, e.g. -I <macro dir>
+  CXX         C++ compiler command
+  CXXFLAGS    C++ compiler flags
+  LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
+              nonstandard directory <lib dir>
+  LIBS        libraries to pass to the linker, e.g. -l<library>
+  CPPFLAGS    (Objective) C/C++ preprocessor flags, e.g. -I<include dir> if
+              you have headers in a nonstandard directory <include dir>
+  CC          C compiler command
+  CFLAGS      C compiler flags
+  CPP         C preprocessor
+  CXXCPP      C++ preprocessor
+  PKG_CONFIG  path to pkg-config utility
+  PKG_CONFIG_PATH
+              directories to add to pkg-config's search path
+  PKG_CONFIG_LIBDIR
+              path overriding pkg-config's built-in search path
+  CAIROMM_CFLAGS
+              C compiler flags for CAIROMM, overriding pkg-config
+  CAIROMM_LIBS
+              linker flags for CAIROMM, overriding pkg-config
+  PERL        path to Perl interpreter
+  DOT         path to dot utility
+  DOXYGEN     path to Doxygen utility
+  XSLTPROC    path to xsltproc utility
+-->
+
+    <commands>
+PACKAGE_NAME=cairomm
+PACKAGE_VERSION=1.10.0
+oegenv 32
+oegcleanbase
+oegimport cairo-1.12.14
+oegimport  libpng-1.6.3
+oegimport   zlib-1.2.8
+oegimport  pixman-0.30.0
+oegimport  freetype-2.5.0.1
+oegimport   bzip2-1.0.6
+#oegimport   zlib-1.2.8
+#oegimport   libpng-1.6.3
+
+oegimport libsigc++-2.3.1
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --disable-documentation
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

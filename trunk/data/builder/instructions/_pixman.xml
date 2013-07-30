@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="pixman" license="">
+  <meta>
+    <homepage>http://www.cairographics.org/</homepage>
+    <download>http://www.cairographics.org/releases/</download>
+    <descriptions>
+      <description lang="en" type="short"></description>
+      <description lang="en" type="long"></description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="0.30.0" date="2013-05-08" state="works">
+
+    <downloads>
+      <download file="pixman-0.30.0.tar.gz">
+        <url checked="2013-07-30">http://www.cairographics.org/releases/pixman-0.30.0.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+<!--
+  --disable-option-checking  ignore unrecognized --enable/--with options
+  --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
+  --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --enable-silent-rules          less verbose build output (undo: `make V=1')
+  --disable-silent-rules         verbose build output (undo: `make V=0')
+  --disable-dependency-tracking  speeds up one-time build
+  --enable-dependency-tracking   do not reject slow dependency extractors
+  --enable-shared[=PKGS]  build shared libraries [default=yes]
+  --enable-static[=PKGS]  build static libraries [default=yes]
+  --enable-fast-install[=PKGS]
+                          optimize for fast installation [default=yes]
+  --disable-libtool-lock  avoid locking (might break parallel builds)
+  --disable-openmp        do not use OpenMP
+  --disable-loongson-mmi  disable Loongson MMI fast paths
+  --disable-mmx           disable x86 MMX fast paths
+  --disable-sse2          disable SSE2 fast paths
+  --disable-vmx           disable VMX fast paths
+  --disable-arm-simd      disable ARM SIMD fast paths
+  --disable-arm-neon      disable ARM NEON fast paths
+  --disable-arm-iwmmxt    disable ARM IWMMXT fast paths
+  --disable-arm-iwmmxt2   build ARM IWMMXT fast paths with -march=iwmmxt
+                          instead of -march=iwmmxt2
+  --disable-mips-dspr2    disable MIPS DSPr2 fast paths
+  --disable-gcc-inline-asm
+                          disable GNU-style inline assembler
+  --enable-static-testprogs
+                          build test programs as static binaries [default=no]
+  --enable-timers         enable TIMER_BEGIN and TIMER_END macros [default=no]
+  --enable-gtk            enable tests using GTK+ [default=auto]
+  --enable-libpng         Build support for libpng (default: auto)
+  CC          C compiler command
+  CFLAGS      C compiler flags
+  LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
+              nonstandard directory <lib dir>
+  LIBS        libraries to pass to the linker, e.g. -l<library>
+  CPPFLAGS    (Objective) C/C++ preprocessor flags, e.g. -I<include dir> if
+              you have headers in a nonstandard directory <include dir>
+  CCAS        assembler compiler command (defaults to CC)
+  CCASFLAGS   assembler compiler flags (defaults to CFLAGS)
+  CPP         C preprocessor
+  PKG_CONFIG  path to pkg-config utility
+  PKG_CONFIG_PATH
+              directories to add to pkg-config's search path
+  PKG_CONFIG_LIBDIR
+              path overriding pkg-config's built-in search path
+  GTK_CFLAGS  C compiler flags for GTK, overriding pkg-config
+  GTK_LIBS    linker flags for GTK, overriding pkg-config
+  PNG_CFLAGS  C compiler flags for PNG, overriding pkg-config
+  PNG_LIBS    linker flags for PNG, overriding pkg-config
+-->
+
+    <commands>
+PACKAGE_NAME=pixman
+PACKAGE_VERSION=0.30.0
+oegenv 32
+oegcleanbase
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+#oegimport libiconv-1.14
+#oegimport gettext-0.18.3
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR}
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="libsigc++" license="">
+  <meta>
+    <homepage>http://libsigc.sourceforge.net/</homepage>
+    <download>http://ftp.gnome.org/pub/GNOME/sources/libsigc++/</download>
+    <descriptions>
+      <description lang="en" type="short">Callback Framework for C++</description>
+      <description lang="en" type="long">The libsigc++ package implements a typesafe callback system for standard C++.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="2.3.1" date="2012-10-18" state="works">
+
+    <downloads>
+      <download file="libsigc++-2.3.1.tar.xz">
+        <url checked="2013-07-30">http://ftp.gnome.org/pub/GNOME/sources/libsigc++/2.3/libsigc++-2.3.1.tar.xz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+<!--
+  --enable-silent-rules          less verbose build output (undo: `make V=1')
+  --disable-silent-rules         verbose build output (undo: `make V=0')
+  --enable-maintainer-mode  enable make rules and dependencies not useful
+                          (and sometimes confusing) to the casual installer
+  --disable-dependency-tracking  speeds up one-time build
+  --enable-dependency-tracking   do not reject slow dependency extractors
+  --enable-static[=PKGS]  build static libraries [default=no]
+  --enable-shared[=PKGS]  build shared libraries [default=yes]
+  --enable-fast-install[=PKGS]
+                          optimize for fast installation [default=yes]
+  --disable-libtool-lock  avoid locking (might break parallel builds)
+  --disable-documentation do not build or install the documentation
+  --enable-warnings[=min|max|fatal|no]
+                          set compiler pedantry level [default=min]
+  --with-libstdc-doc=[TAGFILE@]HTMLREFDIR
+                          Link to external libstdc documentation [auto]
+
+Some influential environment variables:
+  ACLOCAL_FLAGS
+              aclocal flags, e.g. -I <macro dir>
+  CXX         C++ compiler command
+  CXXFLAGS    C++ compiler flags
+  LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
+              nonstandard directory <lib dir>
+  LIBS        libraries to pass to the linker, e.g. -l<library>
+  CPPFLAGS    (Objective) C/C++ preprocessor flags, e.g. -I<include dir> if
+              you have headers in a nonstandard directory <include dir>
+  CC          C compiler command
+  CFLAGS      C compiler flags
+  CPP         C preprocessor
+  CXXCPP      C++ preprocessor
+  M4          M4 macro processor command
+  PERL        path to Perl interpreter
+  DOT         path to dot utility
+  DOXYGEN     path to Doxygen utility
+  XSLTPROC    path to xsltproc utility
+  PKG_CONFIG  path to pkg-config utility
+  PKG_CONFIG_PATH
+              directories to add to pkg-config's search path
+  PKG_CONFIG_LIBDIR
+              path overriding pkg-config's built-in search path
+-->
+
+    <commands>
+PACKAGE_NAME=libsigc++
+PACKAGE_VERSION=2.3.1
+oegenv 32
+oegcleanbase
+oegimport libxslt-1.1.28
+oegimport  libiconv-1.14
+oegimport  gettext-0.18.3
+oegimport  zlib-1.2.8
+oegimport  libxml2-2.9.1
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR}
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+
