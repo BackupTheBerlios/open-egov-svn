@@ -19,14 +19,12 @@
     <comment date="" author=""></comment>
   </comments>
 
-  <set version="4.9.5" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="4.9.5" date="2009-02-23" state="fails-to-build">
+    <!-- pwd.h grp.h getpwnam() getpwuid() getgrgid() getgrnam() ... ->
 
     <downloads>
       <download file="gnuit-4.9.5.tar.gz">
-        <url type="direct" checked="2012-11-11">ftp://ftp.gnu.org/gnu/gnuit/gnuit-4.9.5.tar.gz</url>
+        <url checked="2013-07-30">ftp://ftp.gnu.org/gnu/gnuit/gnuit-4.9.5.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,20 +34,19 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
-    <compile>
-./configure --prefix=${PREFIX} --with-terminfo
+    <commands>
+PACKAGE_NAME=gnuit
+PACKAGE_VERSION=4.9.5
+oegenv 32
+oegcleanbase
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+oegimport ncurses-5.9   # or termcap, curses, ncursesw, termlib, ...
+configure --prefix=${PREFIX} --enable-gcc-warnings
 make
-make install
-    </compile>
-
-    <install>
-    </install>
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
   </set>
 </pack>
 

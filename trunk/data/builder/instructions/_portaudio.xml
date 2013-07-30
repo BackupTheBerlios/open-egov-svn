@@ -19,19 +19,36 @@
   </comments>
 
 <!--
-svn co https://www.portaudio.com/repos/portaudio/trunk portaudio-svn
+#svn co https://www.portaudio.com/repos/portaudio/trunk portaudio-svn
+svn co https://subversion.assembla.com/svn/portaudio/portaudio/ portaudio-svn
 cd portaudio-svn
 configure --enable-cxx --enable-shared --enable-static --prefix=/r/portaudio-win32
 make
 make tests
 make install
 -->
+  <set file="repository" type="svn">
+    <get>https://subversion.assembla.com/svn/portaudio/portaudio/</get>
+    <update></update>
+
+    <commands>
+PACKAGE_NAME=portaudio
+PACKAGE_VERSION=svn-DATE
+oegenv 32
+oegcleanbase
+#oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tgz
+
+make install DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
 
   <set version="19-20111121" date="2011-11-21" state="works">
 
     <downloads>
-      <download file="pa_stable_v19_20111121.tgz">
-        <url checked="2013-07-26">http://www.portaudio.com/archives/pa_stable_v19_20111121.tgz</url>
+      <download file="pa_stable_v19_20111121.tgz ">
+        <url checked="2013-07-30">http://www.portaudio.com/archives/pa_stable_v19_20111121.tgz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -41,17 +58,30 @@ make install
       </download>
     </downloads>
 
+<!--
+  --with-alsa             Enable support for ALSA [autodetect]
+  --with-jack             Enable support for JACK [autodetect]
+  --with-oss              Enable support for OSS [autodetect]
+  --with-asihpi           Enable support for ASIHPI [autodetect]
+  --with-winapi           Select Windows API support
+                          ([wmme|directx|asio|wasapi|wdmks][,...]) [wmme]
+  --with-asiodir          ASIO directory [/usr/local/asiosdk2]
+  --with-dxdir            DirectX directory [/usr/local/dx7sdk]
+-->
+
     <commands>
 PACKAGE_NAME=portaudio
 PACKAGE_VERSION=19-20111121
 oegenv 32
 oegcleanbase
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tgz
 #oegimport libiconv-1.14
 #oegimport gettext-0.18.3
-configure --prefix=${OEG_BASE_DIR}
+cd portaudio
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --disable-cxx --enable-shared --enable-static --disable-debug-output
 make
-make install-strip DESTDIR=${OEG_INSTALL_DIR}
+make tests
+make install DESTDIR=${OEG_INSTALL_DIR}
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

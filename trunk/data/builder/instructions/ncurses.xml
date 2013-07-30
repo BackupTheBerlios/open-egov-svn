@@ -22,7 +22,7 @@
 
     <downloads>
       <download file="ncurses-5.9.tar.gz">
-        <url type="direct" checked="2013-07-19">http://ftp.gnu.org/pub/gnu/ncurses/ncurses-5.9.tar.gz</url>
+        <url checked="2013-07-19">http://ftp.gnu.org/pub/gnu/ncurses/ncurses-5.9.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
