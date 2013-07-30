@@ -5,7 +5,7 @@
 <pack name="jwhois" license="">
   <meta>
     <homepage>http://www.gnu.org/software/jwhois/</homepage>
-    <download></download>
+    <download>http://ftp.gnu.org/gnu/jwhois/</download>
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long">Internet Whois client that contains an extensible configuration file which defines its operation. The client supports queries to foreign hosts either through the RFC 954 - NICNAME/WHOIS protocol, the RFC 2167 - Referral Whois 1.5 protocol, or HTTP using an external browser.</description>
@@ -22,7 +22,7 @@
 
     <downloads>
       <download file="jwhois-4.0.tar.gz">
-        <url type="direct" checked="2013-07-19">http://ftp.gnu.org/gnu/jwhois/jwhois-4.0.tar.gz</url>
+        <url checked="2013-07-31">http://ftp.gnu.org/gnu/jwhois/jwhois-4.0.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -32,7 +32,42 @@
       </download>
     </downloads>
 
+<!--
+  --enable-DEFAULTHOST=HOST   default whois host (default whois.internic.net)
+  --enable-WHOISSERVERS=DOMAIN default whois-servers.net domain (default whois-servers.net)
+  --enable-CACHEEXPIRE=HOURS  default expire time in hours for cached objects
+                                   (default 168 hours)
+  --enable-GROUP=group        group that owns the cache database
+                                   (default "nogroup")
+  --disable-dependency-tracking  speeds up one-time build
+  --enable-dependency-tracking   do not reject slow dependency extractors
+  --disable-nls           do not use Native Language Support
+  --disable-rpath         do not hardcode runtime library paths
+  --without-cache             disable cache manager (see README for more info)
+  --enable-sgid                enable installation with setgid GROUP
+  --with-localedir=DIR        locale info in DIR PREFIX/share/locale
+  --with-libiconv-prefix[=DIR]  search for libiconv in DIR/include and DIR/lib
+  --without-libiconv-prefix     don't search for libiconv in includedir and libdir
+  --with-libintl-prefix[=DIR]  search for libintl in DIR/include and DIR/lib
+  --without-libintl-prefix     don't search for libintl in includedir and libdir
+  --with-libidn=DIR       Support IDN (needs GNU Libidn)
+-->
+
     <commands>
+PACKAGE_NAME=jwhois
+PACKAGE_VERSION=4.0
+oegenv 32
+oegcleanbase
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+oegimport libiconv-1.14
+oegimport gettext-0.18.3
+oegimport libidn-1.28
+configure --prefix=${OEG_BASE_DIR} --disable-rpath --with-libidn=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-gnu-ld
+# https://github.com/rmoriz/jwhois4-patches/tree/master/contents
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>
