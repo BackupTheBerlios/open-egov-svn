@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
-<!-- $Id:$ -->
+<!-- $Id$ -->
 
-<pack name="" license="">
+<pack name="libatomic_ops" license="misc">
+  <!-- http://www.hpl.hp.com/research/linux/atomic_ops/LICENSING.txt -->
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://www.hpl.hp.com/research/linux/atomic_ops/index.php4</homepage>
+    <download>http://www.hpl.hp.com/research/linux/atomic_ops/download.php4</download>
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long"></description>
@@ -16,14 +17,13 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="2013-00-00" state="not-tried">
+  <set version="7.2d" date="2013-00-00" state="not-tried">
 
     <downloads>
-      <download file="">
-        <url checked="2013-"></url>
+      <download file="libatomic_ops-7.2d.tar.gz">
+        <url checked="2013-07-31">http://www.hpl.hp.com/research/linux/atomic_ops/download/libatomic_ops-7.2d.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -34,8 +34,8 @@
     </downloads>
 
     <commands>
-PACKAGE_NAME=
-PACKAGE_VERSION=
+PACKAGE_NAME=libatomic_ops
+PACKAGE_VERSION=7.2d
 oegenv 32
 oegcleanbase
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz

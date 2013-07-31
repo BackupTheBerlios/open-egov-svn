@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
-<!-- $Id:$ -->
+<!-- $Id$ -->
 
-<pack name="" license="">
+<pack name="avahi" license="GNU LGPL">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://avahi.org/</homepage>
+    <download>http://avahi.org/download/</download>
     <descriptions>
       <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="long">Avahi is a fully LGPL framework for Multicast DNS Service Discovery. It allows programs to publish and discover services and hosts running on a local network with no specific configuration. For example you can plug into a network and instantly find printers to print to, files to look at and people to talk to.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
@@ -16,14 +16,13 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="2013-00-00" state="not-tried">
+  <set version="0.6.31" date="2012-03-14" state="not-tried">
 
     <downloads>
-      <download file="">
-        <url checked="2013-"></url>
+      <download file="avahi-0.6.31.tar.gz">
+        <url checked="2013-07-31">http://avahi.org/download/avahi-0.6.31.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -34,8 +33,8 @@
     </downloads>
 
     <commands>
-PACKAGE_NAME=
-PACKAGE_VERSION=
+PACKAGE_NAME=avahi
+PACKAGE_VERSION=0.6.31
 oegenv 32
 oegcleanbase
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz

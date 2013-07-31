@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
-<!-- $Id:$ -->
+<!-- $Id$ -->
 
-<pack name="" license="">
+<pack name="gconf" license="">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>https://projects.gnome.org/gconf/</homepage>
+    <download>ftp://ftp.gnome.org/pub/GNOME/sources/GConf/</download>
     <descriptions>
       <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="long">GConf is a system for storing application preferences. It is intended for user preferences; not configuration of something like Apache, or arbitrary data storage.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
@@ -16,14 +16,13 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="2013-00-00" state="not-tried">
+  <set version="3.2.6" date="2013-01-22" state="not-tried">
 
     <downloads>
-      <download file="">
-        <url checked="2013-"></url>
+      <download file="GConf-3.2.6.tar.xz">
+        <url checked="2013-07-31">ftp://ftp.gnome.org/pub/GNOME/sources/GConf/3.2/GConf-3.2.6.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -34,11 +33,11 @@
     </downloads>
 
     <commands>
-PACKAGE_NAME=
-PACKAGE_VERSION=
+PACKAGE_NAME=gconf
+PACKAGE_VERSION=3.2.6
 oegenv 32
 oegcleanbase
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+oegextract GConf-${PACKAGE_VERSION}.tar.xz
 #oegimport libiconv-1.14
 #oegimport gettext-0.18.3
 configure --prefix=${OEG_BASE_DIR}

@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
-<!-- $Id:$ -->
+<!-- $Id$ -->
 
-<pack name="" license="">
+<pack name="libjson" license="">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://libjson.sourceforge.net/</homepage>
+    <download>http://sourceforge.net/projects/libjson/files/</download>
     <descriptions>
       <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="long">A JSON reader and writer which is super-effiecient and usually runs circles around other JSON libraries. It's highly customizable to optimize for your particular project, and very lightweight.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
@@ -16,14 +16,13 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="2013-00-00" state="not-tried">
+  <set version="7.6.1" date="2013-00-00" state="not-tried">
 
     <downloads>
-      <download file="">
-        <url checked="2013-"></url>
+      <download file="libjson_7.6.1.zip">
+        <url checked="2013-07-31">http://sourceforge.net/projects/libjson/files/libjson_7.6.1.zip/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -34,8 +33,8 @@
     </downloads>
 
     <commands>
-PACKAGE_NAME=
-PACKAGE_VERSION=
+PACKAGE_NAME=libjson
+PACKAGE_VERSION=7.6.1
 oegenv 32
 oegcleanbase
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz

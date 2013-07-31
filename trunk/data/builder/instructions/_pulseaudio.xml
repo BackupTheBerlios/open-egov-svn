@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="" license="">
+  <meta>
+    <homepage>http://www.freedesktop.org/wiki/Software/PulseAudio/</homepage>
+    <homepage>http://pulseaudio.org/</homepage>
+    <download>http://freedesktop.org/software/pulseaudio/releases/</download>
+    <descriptions>
+      <description lang="en" type="short"></description>
+      <description lang="en" type="long">PulseAudio is a sound system for POSIX OSes, meaning that it is a proxy for your sound applications. It allows you to do advanced operations on your sound data as it passes between your application and your hardware. Things like transferring the audio to a different machine, changing the sample format or channel count and mixing several sounds into one are easily achieved using a sound server.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="4.0" date="2013-06-03" state="works">
+
+    <downloads>
+      <download file="pulseaudio-4.0.tar.xz">
+        <url checked="2013-07-31">http://freedesktop.org/software/pulseaudio/releases/pulseaudio-4.0.tar.xz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+<!--
+Optional Features:
+  --disable-option-checking  ignore unrecognized --enable/--with options
+  --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
+  --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --enable-silent-rules          less verbose build output (undo: `make V=1')
+  --disable-silent-rules         verbose build output (undo: `make V=0')
+  --disable-dependency-tracking  speeds up one-time build
+  --enable-dependency-tracking   do not reject slow dependency extractors
+  --disable-nls           do not use Native Language Support
+  --disable-atomic-arm-linux-helpers
+                          use inline asm or libatomic_ops instead
+  --enable-atomic-arm-memory-barrier
+                          only really needed in SMP arm systems
+  --enable-neon-opt       Enable NEON optimisations on ARM CPUs that support it
+  --enable-static[=PKGS]  build static libraries [default=no]
+  --enable-shared[=PKGS]  build shared libraries [default=yes]
+  --enable-fast-install[=PKGS]
+                          optimize for fast installation [default=yes]
+  --disable-libtool-lock  avoid locking (might break parallel builds)
+  --disable-largefile     omit support for large files
+  --disable-rpath         do not hardcode runtime library paths
+  --disable-x11           Disable optional X11 support
+  --disable-tests         Disable unit tests
+  --disable-samplerate    Disable optional libsamplerate support
+  --disable-oss-output    Disable optional OSS output support
+  --disable-oss-wrapper   Disable optional OSS wrapper support
+  --disable-coreaudio-output
+                          Disable optional CoreAudio output support
+  --disable-alsa          Disable optional ALSA support
+  --disable-esound        Disable optional EsounD support
+  --disable-waveout       Disable optional WaveOut audio support
+  --disable-glib2         Disable optional GLib 2 support
+  --disable-gtk3          Disable optional Gtk+ 3 support
+  --disable-gconf         Disable optional GConf support
+  --disable-avahi         Disable optional Avahi support
+  --disable-jack          Disable optional JACK support
+  --disable-asyncns       Disable optional Async DNS support
+  --disable-tcpwrap       Disable optional TCP wrappers support
+  --disable-lirc          Disable optional LIRC support
+  --disable-dbus          Disable optional D-Bus support
+  --disable-bluez         Disable optional BlueZ support
+  --disable-udev          Disable optional UDEV support
+  --disable-hal-compat    Disable optional HAL->udev transition compatibility support
+  --disable-ipv6          Disable optional IPv6 support
+  --disable-openssl       Disable OpenSSL support (used for Airtunes/RAOP)
+  --disable-xen           Disable optional Xen paravirtualized driver
+  --enable-gcov           Enable optional gcov coverage analysis
+  --enable-orc            use Orc if installed
+  --disable-systemd       Disable optional systemd support
+  --disable-manpages      Disable building and installation of man pages
+  --disable-per-user-esound-socket
+                          Use global esound socket directory /tmp/.esd/socket.
+  --enable-webrtc-aec     Enable the optional WebRTC-based echo canceller
+  --enable-adrian-aec     Enable Adrian's optional echo canceller
+  --disable-default-build-tests
+                          Build test programs only during make check
+  --disable-legacy-database-entry-format
+                          Try to load legacy (< 1.0) database files (card,
+                          device and volume restore).
+  --enable-static-bins    Statically link executables.
+  --enable-force-preopen  Preopen modules, even when dlopen() is supported.
+
+  --with-libiconv-prefix[=DIR]  search for libiconv in DIR/include and DIR/lib
+  --without-libiconv-prefix     don't search for libiconv in includedir and libdir
+  --without-caps          Omit support for POSIX capabilities.
+  --with-database=auto|tdb|gdbm|simple
+                          Choose database backend.
+  --without-fftw          Omit FFTW-using modules (equalizer)
+  --without-speex         Omit speex (resampling, AEC)
+  --with-system-user=<user>
+                          User for running the PulseAudio daemon as a
+                          system-wide instance (pulse)
+  --with-system-group=<group>
+                          Group for running the PulseAudio daemon as a
+                          system-wide instance (pulse)
+  --with-access-group=<group>
+                          Group which is allowed access to a system-wide
+                          PulseAudio daemon (pulse-access)
+  --with-preopen-mods     Modules to preopen in daemon (default: all).
+  --with-module-dir       Directory where to install the modules to (defaults
+                          to ${libdir}/pulse-${PA_MAJORMINOR}/modules
+  --with-udev-rules-dir   Directory where to install udev rules to (defaults
+                          to /lib/udev/rules.d)
+
+Some influential environment variables:
+  CC          C compiler command
+  CFLAGS      C compiler flags
+  LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
+              nonstandard directory <lib dir>
+  LIBS        libraries to pass to the linker, e.g. -l<library>
+  CPPFLAGS    (Objective) C/C++ preprocessor flags, e.g. -I<include dir> if
+              you have headers in a nonstandard directory <include dir>
+  CXX         C++ compiler command
+  CXXFLAGS    C++ compiler flags
+  CPP         C preprocessor
+  PKG_CONFIG  path to pkg-config utility
+  PKG_CONFIG_PATH
+              directories to add to pkg-config's search path
+  PKG_CONFIG_LIBDIR
+              path overriding pkg-config's built-in search path
+  CXXCPP      C++ preprocessor
+  X11_CFLAGS  C compiler flags for X11, overriding pkg-config
+  X11_LIBS    linker flags for X11, overriding pkg-config
+  LIBCHECK_CFLAGS
+              C compiler flags for LIBCHECK, overriding pkg-config
+  LIBCHECK_LIBS
+              linker flags for LIBCHECK, overriding pkg-config
+  LIBJSON_CFLAGS
+              C compiler flags for LIBJSON, overriding pkg-config
+  LIBJSON_LIBS
+              linker flags for LIBJSON, overriding pkg-config
+  LIBSNDFILE_CFLAGS
+              C compiler flags for LIBSNDFILE, overriding pkg-config
+  LIBSNDFILE_LIBS
+              linker flags for LIBSNDFILE, overriding pkg-config
+  LIBSAMPLERATE_CFLAGS
+              C compiler flags for LIBSAMPLERATE, overriding pkg-config
+  LIBSAMPLERATE_LIBS
+              linker flags for LIBSAMPLERATE, overriding pkg-config
+  TDB_CFLAGS  C compiler flags for TDB, overriding pkg-config
+  TDB_LIBS    linker flags for TDB, overriding pkg-config
+  ASOUNDLIB_CFLAGS
+              C compiler flags for ASOUNDLIB, overriding pkg-config
+  ASOUNDLIB_LIBS
+              linker flags for ASOUNDLIB, overriding pkg-config
+  GLIB20_CFLAGS
+              C compiler flags for GLIB20, overriding pkg-config
+  GLIB20_LIBS linker flags for GLIB20, overriding pkg-config
+  GTK30_CFLAGS
+              C compiler flags for GTK30, overriding pkg-config
+  GTK30_LIBS  linker flags for GTK30, overriding pkg-config
+  GCONF_CFLAGS
+              C compiler flags for GCONF, overriding pkg-config
+  GCONF_LIBS  linker flags for GCONF, overriding pkg-config
+  AVAHI_CFLAGS
+              C compiler flags for AVAHI, overriding pkg-config
+  AVAHI_LIBS  linker flags for AVAHI, overriding pkg-config
+  JACK_CFLAGS C compiler flags for JACK, overriding pkg-config
+  JACK_LIBS   linker flags for JACK, overriding pkg-config
+  LIBASYNCNS_CFLAGS
+              C compiler flags for LIBASYNCNS, overriding pkg-config
+  LIBASYNCNS_LIBS
+              linker flags for LIBASYNCNS, overriding pkg-config
+  DBUS_CFLAGS C compiler flags for DBUS, overriding pkg-config
+  DBUS_LIBS   linker flags for DBUS, overriding pkg-config
+  BLUEZ_CFLAGS
+              C compiler flags for BLUEZ, overriding pkg-config
+  BLUEZ_LIBS  linker flags for BLUEZ, overriding pkg-config
+  SBC_CFLAGS  C compiler flags for SBC, overriding pkg-config
+  SBC_LIBS    linker flags for SBC, overriding pkg-config
+  UDEV_CFLAGS C compiler flags for UDEV, overriding pkg-config
+  UDEV_LIBS   linker flags for UDEV, overriding pkg-config
+  OPENSSL_CFLAGS
+              C compiler flags for OPENSSL, overriding pkg-config
+  OPENSSL_LIBS
+              linker flags for OPENSSL, overriding pkg-config
+  FFTW_CFLAGS C compiler flags for FFTW, overriding pkg-config
+  FFTW_LIBS   linker flags for FFTW, overriding pkg-config
+  LIBSPEEX_CFLAGS
+              C compiler flags for LIBSPEEX, overriding pkg-config
+  LIBSPEEX_LIBS
+              linker flags for LIBSPEEX, overriding pkg-config
+  ORC_CFLAGS  C compiler flags for ORC, overriding pkg-config
+  ORC_LIBS    linker flags for ORC, overriding pkg-config
+  SYSTEMD_CFLAGS
+              C compiler flags for SYSTEMD, overriding pkg-config
+  SYSTEMD_LIBS
+              linker flags for SYSTEMD, overriding pkg-config
+  WEBRTC_CFLAGS
+              C compiler flags for WEBRTC, overriding pkg-config
+  WEBRTC_LIBS linker flags for WEBRTC, overriding pkg-config
+
+    LIBS:                          -lpcreposix
+
+    Enable X11:                    no
+    Enable OSS Output:             no
+    Enable OSS Wrapper:            no
+    Enable EsounD:                 yes
+    Enable Alsa:                   no
+    Enable CoreAudio:              no
+    Enable Solaris:                no
+    Enable WaveOut:                yes
+    Enable GLib 2.0:               no
+    Enable Gtk+ 3.0:               no
+    Enable GConf:                  no
+    Enable Avahi:                  no
+    Enable Jack:                   no
+    Enable Async DNS:              no
+    Enable LIRC:                   no
+    Enable Xen PV driver:          no
+    Enable D-Bus:                  no
+      Enable BlueZ:                no
+    Enable udev:                   no
+      Enable HAL->udev compat:     no
+    Enable systemd login:          no
+    Enable TCP Wrappers:           no
+    Enable libsamplerate:          no
+    Enable IPv6:                   yes
+    Enable OpenSSL (for Airtunes): yes
+    Enable fftw:                   no
+    Enable orc:                    no
+    Enable Adrian echo canceller:  yes
+    Enable speex (resampler, AEC): no
+    Enable WebRTC echo canceller:  no
+    Enable gcov coverage:          no
+    Enable unit tests:             no
+    Database
+      tdb:                         no
+      gdbm:                        no
+      simple database:             yes
+
+    System User:                   pulse
+    System Group:                  pulse
+    Access Group:                  pulse-access
+    Enable per-user EsounD socket: yes
+    Force preopen:                 no
+    Preopened modules:             all
+
+    Legacy Database Entry Support: yes
+-->
+
+    <commands>
+PACKAGE_NAME=pulseaudio
+PACKAGE_VERSION=4.0
+oegenv 32
+oegcleanbase
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+oegimport libiconv-1.14
+oegimport gettext-0.18.3          # configure looks for it, needed? or optionally used?
+oegimport libtool-2.4.2           # configure: error: Unable to find libltdl version 2 (libtool 2.4 or later)
+oegimport json-c-0.11             # configure: error: Package requirements ( json >= 0.9 ) were not met
+oegimport libsndfile-1.0.25
+oegimport pcre-8.33               # regex needed: regcomp(), constants, ...
+#oegimport libatomic_ops-7.2d      # optional, if configure tells us so
+#oegimport openssl-1.0.1e          # optional
+#oegimport  zlib-1.2.8             # if openssl
+
+# ./configure: /bin/intltool-update: /opt/perl/bin/perl: bad interpreter: No such
+# file or directory
+# checking for intltool >= 0.35.0...  found
+# configure: error: Your intltool is too old.  You need intltool 0.35.0 or later.
+
+oegpatch 001  # apply 1x only
+
+# daemon/caps.c: In function 'pa_drop_root':
+# daemon/caps.c:77:9: error: 'uid' undeclared (first use in this function)
+#     if (uid != 0)
+# (--without-caps added)
+
+#   CC     libraop_la-raop_client.lo
+# modules/raop/raop_client.c:30:23: fatal error: sys/ioctl.h: No such file or directory
+# #include <sys/ioctl.h>
+# ?
+
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --enable-shared --disable-rpath --with-libiconv-prefix=${OEG_BASE_DIR} --disable-solaris --disable-x11 --without-caps --disable-manpages
+# regex, pcre, speex, liboil?
+
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

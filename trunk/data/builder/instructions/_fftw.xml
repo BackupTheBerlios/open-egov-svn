@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="fftw" license="GNU GPL">
+  <meta>
+    <homepage>http://www.fftw.org/</homepage>
+    <download>ftp://ftp.fftw.org/pub/fftw/</download>
+    <descriptions>
+      <description lang="en" type="short"></description>
+      <description lang="en" type="long"></description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+<!-- https://github.com/FFTW/fftw3 -->
+
+  <set version="3.3.3" date="2012-11-25" state="not-tried">
+
+    <downloads>
+      <download file="fftw-3.3.3.tar.gz">
+        <url checked="2013-07-31">http://www.fftw.org/fftw-3.3.3.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+<!--
+  --disable-option-checking  ignore unrecognized --enable/--with options
+  --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
+  --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --enable-maintainer-mode  enable make rules and dependencies not useful
+                          (and sometimes confusing) to the casual installer
+  --enable-shared[=PKGS]  build shared libraries [default=no]
+  --enable-fma            enable optimizations for machines with fused
+                          multiply-add
+  --enable-debug          compile fftw with extra runtime checks for debugging
+  --enable-debug-malloc   enable malloc debugging version
+  --enable-debug-alignment  enable alignment debugging hacks
+  --enable-random-estimator enable pseudorandom estimator (debugging hack)
+  --disable-alloca        disable use of the alloca() function (may be broken
+                          on mingw64)
+  --enable-single         compile fftw in single precision
+  --enable-float          synonym for --enable-single
+  --enable-long-double    compile fftw in long-double precision
+  --enable-quad-precision compile fftw in quadruple precision if available
+  --enable-sse            enable SSE optimizations
+  --enable-sse2           enable SSE/SSE2 optimizations
+  --enable-avx            enable AVX optimizations
+  --enable-altivec        enable Altivec optimizations
+  --enable-neon           enable ARM NEON optimizations
+  --enable-mips-zbus-timer  use MIPS ZBus cycle-counter
+  --disable-dependency-tracking  speeds up one-time build
+  --enable-dependency-tracking   do not reject slow dependency extractors
+  --enable-static[=PKGS]  build static libraries [default=yes]
+  --enable-fast-install[=PKGS]  optimize for fast installation [default=yes]
+  --disable-libtool-lock  avoid locking (might break parallel builds)
+  --enable-mpi            compile FFTW MPI library
+  --disable-fortran       don't include Fortran-callable wrappers
+  --enable-openmp         use OpenMP directives for parallelism
+  --enable-threads        compile FFTW SMP threads library
+  --with-slow-timer       use low-precision timers (SLOW)
+  --with-our-malloc       use our aligned malloc (helpful for Win32)
+  --with-windows-f77-mangling
+                          use common Win32 Fortran interface styles
+  --with-incoming-stack-boundary=X
+                          Assume that stack is aligned to (1<<X) bytes
+  --with-g77-wrappers     force inclusion of g77-compatible wrappers in
+                          addition to any other Fortran compiler that is
+                          detected
+  --with-combined-threads combine threads into main libfftw3
+
+Some influential environment variables:
+  CC          C compiler command
+  CFLAGS      C compiler flags
+  LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
+              nonstandard directory <lib dir>
+  LIBS        libraries to pass to the linker, e.g. -l<library>
+  CPPFLAGS    (Objective) C/C++ preprocessor flags, e.g. -I<include dir> if
+              you have headers in a nonstandard directory <include dir>
+  CPP         C preprocessor
+  MPICC       MPI C compiler command
+  F77         Fortran 77 compiler command
+  FFLAGS      Fortran 77 compiler flags
+-->
+
+    <commands>
+PACKAGE_NAME=fftw
+PACKAGE_VERSION=3.3.3
+oegenv 32
+oegcleanbase
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+# --disable-alloca if alloca() is broken under MinGW 64 bit.
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --with-our-malloc --enable-shared --enable-threads --disable-static --with-combined-threads --enable-sse2 --with-windows-f77-mangling --enable-single
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

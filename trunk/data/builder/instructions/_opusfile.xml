@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
-<!-- $Id:$ -->
+<!-- $Id$ -->
 
-<pack name="" license="">
+<pack name="opusfile" license="BSD License">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://www.opus-codec.org/</homepage>
+    <download>http://www.opus-codec.org/downloads/</download>
+    <!-- http://downloads.xiph.org/releases/opus/ -->
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long"></description>
@@ -16,14 +17,13 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="2013-00-00" state="not-tried">
+  <set state="not-tried">
 
     <downloads>
-      <download file="">
-        <url checked="2013-"></url>
+      <download file="opusfile-0.2.tar.gz" version="0.2" date="2012-11-13">
+        <url checked="2013-07-31">http://downloads.xiph.org/releases/opus/opusfile-0.2.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -34,8 +34,8 @@
     </downloads>
 
     <commands>
-PACKAGE_NAME=
-PACKAGE_VERSION=
+PACKAGE_NAME=opusfile
+PACKAGE_VERSION=0.2
 oegenv 32
 oegcleanbase
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz

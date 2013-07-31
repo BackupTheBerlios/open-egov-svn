@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="speex" license="BSD License">
+  <meta>
+    <homepage>http://www.speex.org/</homepage>
+    <download>http://www.speex.org/downloads/</download>
+    <alert>The Speex codec has been obsoleted by Opus. It will continue to be available, but since Opus is better than Speex in all aspects, users are encouraged to switch.</alert>
+    <descriptions>
+      <description lang="en" type="short">A Free Codec For Free Speech</description>
+      <description lang="en" type="long">Speex is an Open Source/Free Software patent-free audio compression format designed for speech. The Speex Project aims to lower the barrier of entry for voice applications by providing a free alternative to expensive proprietary speech codecs. Moreover, Speex is well-adapted to Internet applications and provides useful features that are not present in most other codecs.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+<!--
+Optional Features:
+  --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
+  --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --enable-maintainer-mode  enable make rules and dependencies not useful
+                          (and sometimes confusing) to the casual installer
+  --enable-shared[=PKGS]  build shared libraries [default=yes]
+  --enable-static[=PKGS]  build static libraries [default=yes]
+  --enable-fast-install[=PKGS]
+                          optimize for fast installation [default=yes]
+  --disable-dependency-tracking  speeds up one-time build
+  --enable-dependency-tracking   do not reject slow dependency extractors
+  --disable-libtool-lock  avoid locking (might break parallel builds)
+  --disable-oggtest       Do not try to compile and run a test Ogg program
+  --enable-valgrind       Enable valgrind extra checks
+  --enable-sse            Enable SSE support
+  --enable-fixed-point    Compile as fixed-point
+  --disable-float-api     Disable the floating-point API
+  --disable-vbr           Disable VBR and VAD from the codec
+  --enable-arm4-asm       Make use of ARM4 assembly optimizations
+  --enable-arm5e-asm      Make use of ARM5E assembly optimizations
+  --enable-blackfin-asm   Make use of Blackfin assembly optimizations
+  --enable-fixed-point-debug  Debug fixed-point implementation
+  --enable-ti-c55x        Enable support for TI C55X DSP
+
+Optional Packages:
+  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
+  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+  --with-tags[=TAGS]      include additional configurations [automatic]
+  --with-ogg=PFX   Prefix where libogg is installed (optional)
+  --with-ogg-libraries=DIR   Directory where libogg library is installed (option
+al)
+  --with-ogg-includes=DIR   Directory where libogg header files are installed (o
+ptional)
+  --with-fft=choice       use an alternate FFT implementation. The available
+                          choices are kiss (default fixed point), smallft
+                          (default floating point), gpl-fftw3 and
+                          proprietary-intel-mkl
+
+Some influential environment variables:
+  CC          C compiler command
+  CFLAGS      C compiler flags
+  LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
+              nonstandard directory <lib dir>
+  LIBS        libraries to pass to the linker, e.g. -l<library>
+  CPPFLAGS    C/C++/Objective C preprocessor flags, e.g. -I<include dir> if
+              you have headers in a nonstandard directory <include dir>
+  CPP         C preprocessor
+  CXX         C++ compiler command
+  CXXFLAGS    C++ compiler flags
+  CXXCPP      C++ preprocessor
+  F77         Fortran 77 compiler command
+  FFLAGS      Fortran 77 compiler flags
+  PKG_CONFIG  path to pkg-config utility
+  FFT_CFLAGS  C compiler flags for FFT, overriding pkg-config
+  FFT_LIBS    linker flags for FFT, overriding pkg-config
+-->
+
+  <set version="1.2rc1" date="2013-00-00" state="not-tried">
+
+    <downloads>
+      <download file="">
+        <url checked="2013-07-31">http://downloads.xiph.org/releases/speex/speex-1.2rc1.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <!-- http://git.xiph.org/speex.git -->
+
+    <commands>
+PACKAGE_NAME=speex
+PACKAGE_VERSION=1.2rc1
+oegenv 32
+oegcleanbase
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+#oegimport libiconv-1.14
+#oegimport gettext-0.18.3
+oegimport libogg-1.3.1   # optional
+oegimport fftw-3.3.3     # optional
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-ogg=${OEG_BASE_DIR} --with-fft=gpl-fftw3
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

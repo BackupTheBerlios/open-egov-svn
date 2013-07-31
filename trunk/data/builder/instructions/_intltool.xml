@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="intltool" license="">
+  <meta>
+    <homepage>http://freedesktop.org/wiki/Software/intltool/</homepage>
+    <download>https://launchpad.net/intltool/+download</download>
+    <descriptions>
+      <description lang="en" type="short">Tools to centralize translation using PO files</description>
+      <description lang="en" type="long">intltool is a set of tools to centralize translation of many different file formats using GNU gettext-compatible PO files. It is an internationalization tool used for extracting translatable strings from source files, collecting the extracted strings with messages from traditional source files and merging the translations into .xml, .desktop and .oaf files.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>perl</keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="0.50.2" date="2012-02-26" state="not-tried">
+
+    <downloads>
+      <download file="intltool-0.50.2.tar.gz">
+        <url checked="2013-">http://launchpad.net/intltool/trunk/0.50.2/+download/intltool-0.50.2.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+<!--
+http://www.linuxfromscratch.org/blfs/view/svn/general/intltool.html
+
+deps:
+XML::Parser-2.41
+
+Installation of Intltool
+
+configure --prefix=/usr && make
+make check.
+make install &&
+install -v -m644 -D doc/I18N-HOWTO \
+    /usr/share/doc/intltool-0.50.2/I18N-HOWTO
+
+Installed Programs: intltool-extract, intltool-merge, intltool-prepare, intltool-update and intltoolize
+Installed Libraries: None
+Installed Directories: /usr/share/doc/intltool-0.50.2 and /usr/share/intltool
+
+intltoolize
+prepares a package to use intltool.
+
+intltool-extract
+generates header files that can be read by gettext.
+
+intltool-merge
+merges translated strings into various file types.
+
+intltool-prepare
+updates pot files and merges them with translation files.
+
+intltool-update
+updates the po template files and merges them with the translations. 
+-->
+
+    <commands>
+PACKAGE_NAME=intltool
+PACKAGE_VERSION=0.50.2
+oegenv 32
+oegcleanbase
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+configure --prefix=${OEG_BASE_DIR}
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+
