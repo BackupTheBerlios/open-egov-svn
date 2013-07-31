@@ -1,0 +1,8 @@
+--- /bin/intltool-update.old	2013-07-31 10:52:36 +0000
++++ /bin/intltool-update	2013-07-31 10:50:41 +0000
+@@ -1,4 +1,4 @@
+-#!/opt/perl/bin/perl -w
++#!/bin/perl -w
+ # -*- Mode: perl; indent-tabs-mode: nil; c-basic-offset: 4  -*-
+ 
+ #
