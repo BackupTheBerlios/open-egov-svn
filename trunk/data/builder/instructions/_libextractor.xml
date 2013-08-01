@@ -139,6 +139,11 @@ configure: NOTICE: libsmf not found, midi support disabled
 configure: NOTICE: libmpeg2 not found, mpeg2 support disabled
 configure: NOTICE: gstreamer not found, gstreamer support disabled
 configure: NOTICE: gtk+ not found, gtk support disabled
+
+../../src/main/.libs/libextractor.a(libextractor_la-extractor_plugpath.o):extractor_plugpath.c:(.text+0x14d): undefined reference to `strtok_r'
+../../src/main/.libs/libextractor.a(libextractor_la-extractor_plugpath.o):extractor_plugpath.c:(.text+0x172): undefined reference to `strtok_r'
+../../src/main/.libs/libextractor.a(libextractor_la-extractor_plugpath.o):extractor_plugpath.c:(.text+0x67e): undefined reference to `_win_readdir'
+../../src/main/.libs/libextractor.a(libextractor_la-extractor_plugpath.o):extractor_plugpath.c:(.text+0x760): undefined reference to `_win_closedir'
 -->
 
     <commands>

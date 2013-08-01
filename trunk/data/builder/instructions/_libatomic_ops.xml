@@ -19,7 +19,7 @@
   <comments>
   </comments>
 
-  <set version="7.2d" date="2013-00-00" state="not-tried">
+  <set version="7.2d" date="2013-00-00" state="works">
 
     <downloads>
       <download file="libatomic_ops-7.2d.tar.gz">
@@ -39,8 +39,7 @@ PACKAGE_VERSION=7.2d
 oegenv 32
 oegcleanbase
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-#oegimport libiconv-1.14
-#oegimport gettext-0.18.3
+cd libatomic_ops-7.2
 configure --prefix=${OEG_BASE_DIR}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
