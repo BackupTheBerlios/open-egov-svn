@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="ldns" license="">
+  <meta>
+    <homepage>http://www.nlnetlabs.nl/projects/ldns</homepage>
+    <download>http://www.nlnetlabs.nl/downloads/ldns/</download>
+    <descriptions>
+      <description lang="en" type="short"></description>
+      <description lang="en" type="long">The goal of ldns is to simplify DNS programming, it supports recent RFCs like the DNSSEC documents, and allows developers to easily create software conforming to current RFCs, and experimental software for current Internet Drafts. A secondary benefit of using ldns is speed.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="1.6.16" date="2013-00-00" state="works">
+
+    <downloads>
+      <download file="">
+        <url checked="2012-11-13">http://www.nlnetlabs.nl/downloads/ldns/ldns-1.6.16.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+<!--
+ --disable-ldns-config  disable installation of ldns-config (default=enabled)
+  --enable-shared[=PKGS]  build shared libraries [default=yes]
+  --enable-static[=PKGS]  build static libraries [default=yes]
+  --enable-fast-install[=PKGS]
+                          optimize for fast installation [default=yes]
+  --disable-libtool-lock  avoid locking (might break parallel builds)
+  --disable-sha2          Disable SHA256 and SHA512 RRSIG support
+  --disable-gost          Disable GOST support
+  --disable-ecdsa         Disable ECDSA support
+  --disable-rpath         disable hardcoded rpath (default=enabled)
+
+Optional Packages:
+  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
+  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+  --with-drill            Also build drill.
+  --with-examples         Also build examples.
+  --with-pyldns           generate python library, or --without-pyldns to
+                          disable Python support.
+  --without-pyldnsx       Do not install the ldnsx python module, or
+                          --with-pyldnsx to install it.
+  --with-pic[=PKGS]       try to use only PIC/non-PIC objects [default=use
+                          both]
+  --with-gnu-ld           assume the C compiler uses GNU ld [default=no]
+  --with-sysroot=DIR Search for dependent libraries within DIR
+                        (or the compiler's sysroot if not specified).
+  --with-ssl=pathname     enable SSL (will check /usr/local/ssl /usr/lib/ssl
+                          /usr/ssl /usr/pkg /usr/local /opt/local /usr/sfw
+                          /usr)
+  --with-trust-anchor=KEYFILE
+                          Default location of the trust anchor file for drill
+                          and ldns-dane. [default=SYSCONFDIR/unbound/root.key]
+  --with-ca-file=CAFILE   File containing CA certificates for ldns-dane
+  --with-ca-path=CAPATH   Directory containing CA certificate files for
+                          ldns-dane
+-->
+
+    <commands>
+PACKAGE_NAME=ldns
+PACKAGE_VERSION=1.6.16
+oegenv 32
+oegcleanbase
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+oegimport openssl-1.0.1e
+oegimport  zlib-1.2.8
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --with-ssl=${OEG_BASE_DIR} --disable-rpath --enable-shared --enable-static
+oegpatch 001
+oegpatch 002
+make
+make install DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+
+# Default trust anchor: /open-egovernment/etc/unbound/root.key
+
+oegimport ldns-1.6.16
+
+cd drill
+configure --prefix=${OEG_BASE_DIR} --with-ssl=${OEG_BASE_DIR} --disable-rpath --with-ldns=${OEG_BASE_DIR}
+make
+#make install DESTDIR=${OEG_INSTALL_DIR}   # error, chmod has problems
+cd ..
+
+cp -R .libs lib   # no link to the library binary there, we copy it simply
+cd examples
+configure --prefix=${OEG_BASE_DIR} --with-ssl=${OEG_BASE_DIR} --disable-rpath --with-ldns=${OEG_BASE_DIR}
+oegpatch 003   # all examples, added missing functions, changed includes.
+make
+#make install DESTDIR=${OEG_INSTALL_DIR}   # error, chmod has problems
+cd ..
+
+    </commands>
+  </set>
+</pack>
+

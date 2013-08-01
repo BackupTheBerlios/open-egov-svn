@@ -124,6 +124,21 @@ Some influential environment variables:
               C compiler flags for GSF_GNOME, overriding pkg-config
   GSF_GNOME_LIBS
               linker flags for GSF_GNOME, overriding pkg-config
+
+configure: NOTICE: libbz2 not found, bz2 support disabled
+configure: NOTICE: libexiv2 not found, exiv2 disabled
+configure: NOTICE: libtiff not found, tiff disabled
+configure: NOTICE: libjpeg not found, jpeg disabled
+configure: NOTICE: libgif not found, gif disabled
+configure: NOTICE: libgsf not found, no OLE2 (MS Office) support
+configure: NOTICE: FFmpeg thumbnailer plugin disabled
+configure: NOTICE: libgtk2+ not found, gtk thumbnail support disabled
+configure: NOTICE: libvorbis not found, vorbis support disabled
+configure: NOTICE: libflac not found, flac support disabled
+configure: NOTICE: libsmf not found, midi support disabled
+configure: NOTICE: libmpeg2 not found, mpeg2 support disabled
+configure: NOTICE: gstreamer not found, gstreamer support disabled
+configure: NOTICE: gtk+ not found, gtk support disabled
 -->
 
     <commands>
