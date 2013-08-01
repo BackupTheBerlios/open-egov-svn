@@ -174,8 +174,8 @@ oegimport  libiconv-1.14
 oegimport  gettext-0.18.3
 oegimport  libtasn1-3.3
 oegimport  libffi-3.0.13
-#oegimport trousers-      # optional, for TPM support
-#oegimport libunbound-    # optional, for DNSSEC/DANE functionality
+#oegimport trousers-0.3.10    # optional, for TPM support
+#oegimport libunbound-1.4.20  # optional, for DNSSEC/DANE functionality
 
 configure --prefix=${OEG_BASE_DIR} --with-libz-prefix=${OEG_BASE_DIR} --without-tpm --disable-doc --enable-shared --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --disable-guile --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR}
 

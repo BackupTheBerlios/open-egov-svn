@@ -62,16 +62,24 @@ make install
 oegenv 32
 oegcleanbase
 # if option given:
-# oegimport libiconv-1.14    # maybe needed by gettext binaries
-# oegimport gettext-0.18.3
+oegimport libiconv-1.14    # maybe needed by gettext binaries
+oegimport gettext-0.18.3
 oegextract libiconv-1.14.tar.gz
 # --enable-relocatable doesn't work:
 #../srclib/libicrt.a(progreloc.o):progreloc.c:(.text+0x156): undefined reference to `compute_curr_prefix'
 #../srclib/libicrt.a(progreloc.o):progreloc.c:(.text+0x168): undefined reference to `set_relocation_prefix'
-configure --prefix=${OEG_BASE_DIR} --enable-shared --with-gnu-ld
+# --enable-extra-encodings - add support for a few rarely used encodings - we want this?
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --enable-shared --with-gnu-ld --disable-rpaths
 make
 #make install DESTDIR=/tmp/inst$$
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+make distclean
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --disable-shared --enable-static --with-gnu-ld --disable-rpaths
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive libiconv-1.14
     </commands>

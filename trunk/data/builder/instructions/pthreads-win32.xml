@@ -53,17 +53,16 @@ mkdir /open-egovernment-install/bin
 mkdir /open-egovernment-install/include
 mkdir /open-egovernment-install/lib
 
-make clean GC-static
-# renamed because same name as the dll link library.
-cp libpthreadGC2.a /open-egovernment-install/lib/libpthreadGC2static.a
+make clean GC
+cp pthreadGC2.dll /open-egovernment-install/bin/
+cp libpthreadGC2.a /open-egovernment-install/lib/libpthreadGC2.dll.a
 
 make clean GCE
-cp *.dll /open-egovernment-install/bin/
-cp *.a /open-egovernment-install/lib/
+cp pthreadGCE2.dll /open-egovernment-install/bin/
+cp libpthreadGCE2.a /open-egovernment-install/lib/libpthreadGCE2.dll.a
 
-make clean GC
-cp *.dll /open-egovernment-install/bin/
-cp *.a /open-egovernment-install/lib/
+make clean GC-static
+cp libpthreadGC2.a /open-egovernment-install/lib/
 
 cp need_errno.h pthread.h sched.h semaphore.h /open-egovernment-install/include/
 
