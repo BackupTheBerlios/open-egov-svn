@@ -1,0 +1,13 @@
+--- dane.c.old	2013-08-01 14:53:01 +0000
++++ dane.c	2013-08-01 14:53:06 +0000
+@@ -15,8 +15,8 @@
+ #include <unistd.h>
+ #include <stdlib.h>
+ #include <sys/types.h>
+-#include <sys/socket.h>
+-#include <netdb.h>
++/*#include <sys/socket.h>
++#include <netdb.h>*/
+ 
+ #ifdef HAVE_SSL
+ #include <openssl/ssl.h>
