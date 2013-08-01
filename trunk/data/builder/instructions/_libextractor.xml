@@ -5,10 +5,10 @@
 <pack name="libextractor" license="">
   <meta>
     <homepage>http://www.gnunet.org/libextractor/</homepage>
-    <download></download>
+    <download>http://ftp.gnu.org/gnu/libextractor/</download>
     <descriptions>
-      <description lang="en" type="short"></description>
-      <description lang="en" type="long">A library for meta-data extraction from binary documents.</description>
+      <description lang="en" type="short">Library for meta-data extraction from binary files</description>
+      <description lang="en" type="long">GNU Libextractor is a library used to extract meta data from files. The goal is to provide developers of file-sharing networks, browsers or WWW-indexing bots with a universal library to obtain simple keywords and meta data to match against queries and to show to users instead of only relying on filenames. libextractor contains the shell command extract that, similar to the well-known file command, can extract meta data from a file an print the results to stdout.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="" date="2013-00-00" state="works">
+  <set version="1.1" date="2013-06-29" state="works">
 
     <downloads>
-      <download file="">
-        <url checked="2013-"></url>
+      <download file="libextractor-1.1.tar.gz">
+        <url checked="2013-08-01">http://ftp.gnu.org/gnu/libextractor/libextractor-1.1.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -32,15 +32,112 @@
       </download>
     </downloads>
 
+<!--
+Optional Features:
+  --disable-option-checking  ignore unrecognized --enable/--with options
+  --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
+  --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --enable-silent-rules          less verbose build output (undo: `make V=1')
+  --disable-silent-rules         verbose build output (undo: `make V=0')
+  --disable-dependency-tracking  speeds up one-time build
+  --enable-dependency-tracking   do not reject slow dependency extractors
+  --enable-shared[=PKGS]  build shared libraries [default=yes]
+  --enable-static[=PKGS]  build static libraries [default=yes]
+  --enable-fast-install[=PKGS]
+                          optimize for fast installation [default=yes]
+  --disable-libtool-lock  avoid locking (might break parallel builds)
+  --enable-ltdl-install   install libltdl
+  --disable-rpath         do not hardcode runtime library paths
+  --disable-largefile     omit support for large files
+  --enable-gcc-hardening  enable compiler security checks
+  --enable-linker-hardening  enable linker security fixups
+  --enable-experimental   enable compiling experimental code
+  --disable-testruns      disable running tests on make check (default is YES)
+  --disable-nls           do not use Native Language Support
+  --disable-glibtest      do not try to compile and run a test GLIB program
+  --disable-glib          disable glib support
+  --disable-gtktest       do not try to compile and run a test GTK+ program
+  --disable-gsf           Turn off gsf
+  --disable-gnome         Turn off gsf-gnome
+  --enable-ffmpeg         Enable FFmpeg support
+  --disable-ffmpeg        Disable FFmpeg support
+  --enable-framework      enable Mac OS X framework build helpers
+  --enable-coverage       compile the library with code coverage support
+
+Optional Packages:
+  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
+  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+  --with-pic[=PKGS]       try to use only PIC/non-PIC objects [default=use
+                          both]
+  --with-gnu-ld           assume the C compiler uses GNU ld [default=no]
+  --with-sysroot=DIR Search for dependent libraries within DIR
+                        (or the compiler's sysroot if not specified).
+  --with-included-ltdl    use the GNU ltdl sources included here
+  --with-ltdl-include=DIR use the ltdl headers installed in DIR
+  --with-ltdl-lib=DIR     use the libltdl.la installed in DIR
+  --with-plibc=PFX    Base of PliBC installation
+  --with-gnu-ld           assume the C compiler uses GNU ld default=no
+  --with-libiconv-prefix[=DIR]  search for libiconv in DIR/include and DIR/lib
+  --without-libiconv-prefix     don't search for libiconv in includedir and libd
+ir
+  --with-plugindirname    install directory for plugins (always relative to
+                          libdir)
+  --with-libintl-prefix[=DIR]  search for libintl in DIR/include and DIR/lib
+  --without-libintl-prefix     don't search for libintl in includedir and libdir
+
+  --with-gtk-version=VERSION    version number of gtk to use (>=3.0.0 by default
+)
+  --with-gstreamer        Build with the GStreamer plugin
+
+Some influential environment variables:
+  CC          C compiler command
+  CFLAGS      C compiler flags
+  LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
+              nonstandard directory <lib dir>
+  LIBS        libraries to pass to the linker, e.g. -l<library>
+  CPPFLAGS    (Objective) C/C++ preprocessor flags, e.g. -I<include dir> if
+              you have headers in a nonstandard directory <include dir>
+  CPP         C preprocessor
+  CXX         C++ compiler command
+  CXXFLAGS    C++ compiler flags
+  CXXCPP      C++ preprocessor
+  PKG_CONFIG  path to pkg-config utility
+  GSTREAMER_CFLAGS
+              C compiler flags for GSTREAMER, overriding pkg-config
+  GSTREAMER_LIBS
+              linker flags for GSTREAMER, overriding pkg-config
+  GSTREAMER_PBUTILS_CFLAGS
+              C compiler flags for GSTREAMER_PBUTILS, overriding pkg-config
+  GSTREAMER_PBUTILS_LIBS
+              linker flags for GSTREAMER_PBUTILS, overriding pkg-config
+  GSTREAMER_TAG_CFLAGS
+              C compiler flags for GSTREAMER_TAG, overriding pkg-config
+  GSTREAMER_TAG_LIBS
+              linker flags for GSTREAMER_TAG, overriding pkg-config
+  GSTREAMER_APP_CFLAGS
+              C compiler flags for GSTREAMER_APP, overriding pkg-config
+  GSTREAMER_APP_LIBS
+              linker flags for GSTREAMER_APP, overriding pkg-config
+  GSF_CFLAGS  C compiler flags for GSF, overriding pkg-config
+  GSF_LIBS    linker flags for GSF, overriding pkg-config
+  GSF_GNOME_CFLAGS
+              C compiler flags for GSF_GNOME, overriding pkg-config
+  GSF_GNOME_LIBS
+              linker flags for GSF_GNOME, overriding pkg-config
+-->
+
     <commands>
-PACKAGE_NAME=
-PACKAGE_VERSION=
+PACKAGE_NAME=libextractor
+PACKAGE_VERSION=1.1
 oegenv 32
 oegcleanbase
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-#oegimport libiconv-1.14
-#oegimport gettext-0.18.3
-configure --prefix=${OEG_BASE_DIR}
+oegimport libiconv-1.14
+oegimport gettext-0.18.3
+oegimport plibc-0.1.7
+oegimport libtool-2.4.2   # then with --enable-ltdl-install, --with-included-ltdl
+#ffmpeg
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-libintl-prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --disable-glib --disable-glibtests --disable-gtktest --with-plibc=${OEG_BASE_DIR} --disable-rpath --enable-static --enable-shared --enable-ltdl-install --with-ltdl-lib=${OEG_BASE_DIR}/lib --with-ltdl-include=${OEG_BASE_DIR}/include --disable-ffmpeg --with-sysroot=${OEG_BASE_DIR}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
