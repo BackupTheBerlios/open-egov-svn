@@ -24,7 +24,7 @@
 #include <QWidget>
 #include <QList>
 
-class OEG::Qt::ToolProvider;
+class OEG::Qt::TabbedMenuBar;
 
 class MainWindow : public OEG::Qt::MainWindow
 {
@@ -37,7 +37,7 @@ class MainWindow : public OEG::Qt::MainWindow
     virtual void createDockWidgets();
     virtual void createMenus();
     virtual void createToolBars();
-    virtual void createToolProvider() {};
+    virtual void createTabbedMenuBar() {};
 
   protected:
 
