@@ -20,6 +20,8 @@
 
 #include <OEG/Qt/MainWindow.h>
 
+#include <QTableWidget>
+
 #include <QString>
 #include <QWidget>
 #include <QList>
@@ -40,6 +42,6 @@ class MainWindow : public OEG::Qt::MainWindow
     virtual void createTabbedMenuBar() {};
 
   protected:
-
+    QTableWidget m_table_widget;
 };
 

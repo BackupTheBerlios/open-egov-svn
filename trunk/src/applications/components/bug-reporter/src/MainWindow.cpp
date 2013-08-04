@@ -18,7 +18,7 @@
 
 #include "MainWindow.h"
 
-#include <OEG/Qt/ToolProvider.h>
+#include <OEG/Qt/TabbedMenuBar.h>
 
 #include <QApplication>
 #include <QMenuBar>

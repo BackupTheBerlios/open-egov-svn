@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
 {
   setWindowIcon(QIcon("icon.png"));
 
-  //createAll();
+  createAll();
 }
 
 void MainWindow::createActions()

@@ -49,7 +49,6 @@
   </comments>
 
   <configuration>
-    <!-- Misc -->
     <section name="common" icon="" stringnumber="10" context="local">
       <entry name="show-centered" type="boolean" default="false" context="global">
         <text name="title"       stringnumber="11" />
@@ -65,24 +64,12 @@
     <property name="database" value="false" />
   </properties>
 
-  <setup>
-    <requires>
-      <package name="gettext" type="bin" minversion="" maxversion="current" />
-    </requires>
-  </setup>
-
-  <compilation>
-    <requires>
-      <libraries>
-        <library name="gettext" minversion="" maxversion="current" />
-      </libraries>
-      <tools>
-        <tool name="strip" type="optional" />
-        <tool name="peflags" type="optional" />
-        <tool name="signtool" type="optional" />
-      </tools>
-    </requires>
-  </compilation>
+  <requires>
+    <package name="gettext" type="bin" minversion="" maxversion="current" />
+    <package name="strip" type="compiletool" />
+    <package name="peflags" type="compiletool" />
+    <package name="signtool" type="compiletool" />
+  </requires>
 
   <todos>
     <todo priority="normal" date="2010-07-14" author="3" email="4">Add and format the license texts in DE and EN.</todo>
