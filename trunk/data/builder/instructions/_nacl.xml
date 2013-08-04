@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<!-- http://njör.de/Projekte/subnacl.html -->
+
+<pack name="nacl" license="">
+  <meta>
+    <homepage>http://nacl.cr.yp.to/</homepage>
+    <download></download>
+    <descriptions>
+      <description lang="en" type="short">Networking and Cryptography library</description>
+      <description lang="en" type="long">NaCl (pronounced "salt") is a new easy-to-use high-speed software library for network communication, encryption, decryption, signatures, etc. NaCl's goal is to provide all of the core operations needed to build higher-level cryptographic tools.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="2011-02-21" date="2011-02-21" state="not-tried">
+
+    <downloads>
+      <download file="nacl-20110221.tar.bz2">
+        <url checked="2013-08-02">http://hyperelliptic.org/nacl/nacl-20110221.tar.bz2</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <commands>
+PACKAGE_NAME=nacl
+PACKAGE_VERSION=2011-02-21
+oegenv 32
+oegcleanbase
+oegextract nacl-20110221.tar.bz2
+#oegimport libiconv-1.14
+#oegimport gettext-0.18.3
+#configure --prefix=${OEG_BASE_DIR}
+#make
+#make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+./do
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

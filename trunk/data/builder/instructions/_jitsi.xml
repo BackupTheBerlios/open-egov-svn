@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="jitsi" license="GNU LGPL">
+  <meta>
+    <homepage>https://jitsi.org/</homepage>
+    <download>https://jitsi.org/Main/Download</download>
+    <descriptions>
+      <description lang="en" type="short">Open Source Video Calls and Chat</description>
+      <description lang="en" type="long">Jitsi (formerly SIP Communicator) is an audio/video and chat communicator that supports protocols such as SIP, XMPP/Jabber, AIM/ICQ, Windows Live, Yahoo! and many other useful features.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="2.2" date="2013-05-28" state="not-tried">
+
+    <downloads>
+      <download file="jitsi-src-2.2.4603.9615.zip">
+        <url checked="2013-08-03">https://download.jitsi.org/jitsi/src/jitsi-src-2.2.4603.9615.zip</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <commands>
+PACKAGE_NAME=jitsi
+PACKAGE_VERSION=2.2
+oegenv 32
+oegcleanbase
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+#oegimport libiconv-1.14
+#oegimport gettext-0.18.3
+configure --prefix=${OEG_BASE_DIR}
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+
