@@ -20,9 +20,9 @@
 
 #include <OEG/Qt/MainWindow.h>
 
-#include <QString.h>
-#include <QWidget.h>
-#include <QList.h>
+#include <QString>
+#include <QWidget>
+#include <QList>
 
 class OEG::Qt::TabbedMenuBar;
 
