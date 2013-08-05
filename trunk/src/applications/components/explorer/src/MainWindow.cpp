@@ -16,7 +16,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <OEG/Qt/ToolProvider.h>
+#include <OEG/Qt/TabbedMenuBar.h>
 
 #include <QApplication>
 #include <QMenuBar>
