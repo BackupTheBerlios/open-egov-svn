@@ -52,7 +52,7 @@ FolderView::FolderView(QWidget *parent /*=0*/)
   verticalHeader()->hide();
   horizontalHeader()->setSortIndicator(0, Qt::AscendingOrder);
   horizontalHeader()->setSortIndicatorShown(true);
-  horizontalHeader()->setClickable(true);
+  //horizontalHeader()->setClickable(true); // not qt 5.1
 
   connect(this, SIGNAL(doubleClicked(const QModelIndex &)),
           this, SLOT(doubleClicked(const QModelIndex &)));
