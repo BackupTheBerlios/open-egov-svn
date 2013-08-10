@@ -41,12 +41,12 @@ int main(int argc, char *argv[])
  QDir::setCurrent("data/file-identifier");
 
   if (arguments.count() == 1) {
-    qWarning() << "No args given.";
+    qWarning() << _("No args given.");
     return -1;
   }
 
   if ((arguments.contains("-h")) || (arguments.contains("--help"))) {
-    qWarning() << "Arguments:";
+    qWarning() << _("Arguments:");
     qWarning() << " -f or --file-type: return readable name of file type";
     qWarning() << " -m or --mime-type: return mime type of file";
     qWarning() << " -v or --viewer: return viewer module for file";
@@ -87,19 +87,19 @@ int main(int argc, char *argv[])
 
   fileName  = QFileInfo(fileName).absoluteFilePath();
 
-  qDebug() << "File: " << fileName;
+  qDebug() << "File:" << fileName;
 
   // Read data/file-identifier/filetypes.xml.
 
   QFile file(fileName);
   if (! file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-    qWarning("File not open.");
+    qWarning(_("File not open."));
     return 0;
   }
 
   QDomDocument document("filetypes");
   if (! document.setContent(&file)) {
-    qWarning() << "Not a valid XML document.";
+    qWarning() << _("Not a valid XML document.");
     return 0;
   }
 
@@ -114,11 +114,11 @@ int main(int argc, char *argv[])
 
   nodes = root.elementsByTagName("searchpatterns");        // We want to get the "searchpatterns"-Tag.
   if (nodes.count() <= 0) {
-    qWarning() << "No searchpatterns-Tag found.";
+    qWarning() << _("No searchpatterns-Tag found.");
     return -3;
   }
   el = nodes.at(0).toElement();
-  qDebug() << "Using only the first Tag:" << el.tagName();
+  qDebug() << _("Using only the first Tag:") << el.tagName();
 
   QDomNodeList table_nodes, row_nodes;
   QDomElement  element;
