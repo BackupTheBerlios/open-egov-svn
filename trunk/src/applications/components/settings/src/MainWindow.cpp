@@ -16,7 +16,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <OEG/Qt/ToolProvider.h>
+#include <OEG/Qt/TabbedMenuBar.h>
 
 #include <QAction>
 #include <QDockWidget>
@@ -52,5 +52,11 @@ void MainWindow::createToolBars()
   QToolBar *toolbar = addToolBar(_("File"));
   toolbar->addAction(standardAction(Exit));
 
+}
+
+void MainWindow::createStatusBar()
+{
+
+  OEG::Qt::MainWindow::createStatusBar();
 }
 

@@ -24,7 +24,7 @@
 #include <QString>
 #include <QWidget>
 
-class OEG::Qt::ToolProvider;
+class OEG::Qt::TabbedMenuBar;
 
 class MainWindow : public OEG::Qt::MainWindow
 {
@@ -33,9 +33,11 @@ class MainWindow : public OEG::Qt::MainWindow
   public:
     MainWindow(QWidget *parent = 0);
 
-    void createActions();
-    void createMenus();
-    void createToolBars();
+    virtual void createActions();
+    virtual void createStatusBar();
+    virtual void createMenus();
+    virtual void createToolBars();
+    virtual void createTabbedMenuBar() {};
 
   protected:
 
