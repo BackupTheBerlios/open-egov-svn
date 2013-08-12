@@ -183,8 +183,8 @@ int main(int argc, char *argv[])
   }
 
   if (argc <= 1) {
-    qWarning("Create Sources: No xml file given as parameter.");
-    qWarning("Parameters: [--verbose] <XML file>");
+    qWarning(_("Create Sources: No xml file given as parameter. Using application.xml."));
+    qWarning(_("Parameters: [--verbose] [--update-files] <XML file>"));
 
     filename = "application.xml";
   }
@@ -193,9 +193,10 @@ int main(int argc, char *argv[])
   }
 
   if (! QFile::exists(filename)) {
-    qWarning("File does not exist.");
+    qWarning(_("File does not exist."));
 
-    filename = QFileDialog::getOpenFileName(0, _("Select the XML instruction file"), QDir::currentPath(), _("XML Files (*.xml)"));
+    filename = QFileDialog::getOpenFileName(0, _("Select the XML instruction file"),
+                                            QDir::currentPath(), _("XML Files (*.xml)"));
     if (filename.isEmpty())
       return 0;
 
@@ -210,9 +211,9 @@ int main(int argc, char *argv[])
   }
 
   if (verbose) {
-    qDebug() << "Parameters:";
-    qDebug() << "  filename" << filename;
-    qDebug() << "  update files" << update_files;
+    qWarning() << _("Parameters:");
+    qWarning() << "  filename" << filename;
+    qWarning() << "  update files" << update_files;
   }
 
   // Parse XML file.
@@ -261,6 +262,8 @@ int main(int argc, char *argv[])
 
     if (data.tagName() != "data")                          // Unknown tag or comment (<!-- --> is an empty tag).
       continue;
+
+    // TODO: Hangs, if comments <!-- --> are inserted in project section.
 
     QString attr_name  = data.attribute("name");           // Parse entry, every data tag cotains
     QString attr_value = data.attribute("value");          // a name and value pair of attributes.
@@ -382,7 +385,8 @@ int main(int argc, char *argv[])
     dir.setSorting(QDir::Name);
 
     foreach (QString fn, dir.entryList()) {
-      qDebug() << "Updating:" << fn;
+      if (verbose)
+        qWarning() << _("Updating:") << fn;
 
       updateFileAndReplaceHeader(templatesFileName("source-file-header.txt"), fn);
     }

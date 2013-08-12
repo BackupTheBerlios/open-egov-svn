@@ -1,5 +1,5 @@
 # $Id$
 
 TEMPLATE = subdirs
-SUBDIRS  = keyboard
+SUBDIRS  = keyboard midi-player
 

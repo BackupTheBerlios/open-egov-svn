@@ -1,7 +1,7 @@
 # $Id$
 
 TEMPLATE = subdirs
-SUBDIRS  = doc src
+SUBDIRS  = src locale
 
 include(../../application.pri)
 
