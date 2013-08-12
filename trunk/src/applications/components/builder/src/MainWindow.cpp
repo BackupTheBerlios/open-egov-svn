@@ -67,7 +67,7 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
   m_table_widget->setContextMenuPolicy(Qt::CustomContextMenu);
 
   QHeaderView *horizontalHeader = m_table_widget->horizontalHeader();
-  horizontalHeader->setSectionResizeMode(0, QHeaderView::ResizeToContents);
+  horizontalHeader->setSectionResizeMode(0, QHeaderView::Fixed);
   horizontalHeader->setSectionResizeMode(1, QHeaderView::Stretch);
   horizontalHeader->setSectionResizeMode(2, QHeaderView::Stretch);
   horizontalHeader->setSectionResizeMode(3, QHeaderView::ResizeToContents);
@@ -147,7 +147,7 @@ void MainWindow::updatePackageList()
   m_table_widget->setSortingEnabled(false);
 
   QHeaderView *horizontalHeader = m_table_widget->horizontalHeader();
-  horizontalHeader->setSectionResizeMode(0, QHeaderView::ResizeToContents);
+  horizontalHeader->setSectionResizeMode(0, QHeaderView::Fixed);
   horizontalHeader->setSectionResizeMode(1, QHeaderView::ResizeToContents);
   horizontalHeader->setSectionResizeMode(2, QHeaderView::Stretch);
   horizontalHeader->setSectionResizeMode(3, QHeaderView::ResizeToContents);
@@ -199,7 +199,6 @@ void MainWindow::updatePackageList()
   m_table_widget->sortItems(0, Qt::AscendingOrder);
   m_table_widget->setUpdatesEnabled(true);
 
-#if 0
   QFontMetrics fm(m_table_widget->font());
 
   for (int row=0 ; row<m_table_widget->rowCount(); row++) {
@@ -211,12 +210,12 @@ void MainWindow::updatePackageList()
       maxWidth = fm.width(text);
 
     QHeaderView *hv = m_table_widget->horizontalHeader();
-    if (maxWidth > hv->sectionSize(row)) {
+    if (maxWidth > hv->sectionSize(0)) {
       //horizontalHeader->setSectionResizeMode(0, QHeaderView::ResizeToContents);
-      //hv->resizeSection(row, maxWidth * 1.5);
+      //hv->resizeSection(0, maxWidth * 1.5);
+      m_table_widget->setColumnWidth(0, maxWidth * 1.5);
     }
   }
-#endif
 
   updateStatusBar();
 }
