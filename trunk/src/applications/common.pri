@@ -15,7 +15,7 @@ else {
 
 TEMPLATE     = app
 CONFIG      += qt warn_on
-QT          += core gui xml
+QT          += core gui widgets xml
 DESTDIR      = $${PRO_OUT_PATH}$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}bin
 DESTDIRTOOLS  = $${DESTDIR}.tools
 INCLUDEPATH += ..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}libraries
