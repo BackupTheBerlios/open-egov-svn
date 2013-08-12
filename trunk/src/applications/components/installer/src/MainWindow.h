@@ -16,20 +16,31 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <OEG/Qt/Application.h>
+#pragma once
 
-#include "MainWindow.h"
+#include <OEG/Common.h>
+#include <OEG/Qt/MainWindow.h>
 
-int main(int argc, char *argv[])
+#include <QString>
+#include <QWidget>
+#include <QList>
+
+class OEG::Qt::TabbedMenuBar;
+
+class MainWindow : public OEG::Qt::MainWindow
 {
-  OEG::Qt::Application app(argc, argv, "process-list");
+  Q_OBJECT
 
-  app.setApplicationName(_("Process List"), "0.1");
-  app.setApplicationBuildData(__DATE__, __TIME__);
+  public:
+    MainWindow(QWidget *parent = 0);
 
-  MainWindow win;
-  win.show();
+    virtual void createActions();
+    virtual void createDockWidgets();
+    virtual void createMenus();
+    virtual void createToolBars();
+    virtual void createTabbedMenuBar() {};
 
-  return app.exec();
-}
+  protected:
+
+};
 

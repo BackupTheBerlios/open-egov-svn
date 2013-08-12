@@ -16,7 +16,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <OEG/Qt/ToolProvider.h>
+#include <OEG/Qt/TabbedMenuBar.h>
 #include <OEG/Qt/ProcessList.h>
 #include <OEG/Qt/ProcessInfo.h>
 #include <OEG/Qt/ModuleInfo.h>
@@ -84,7 +84,7 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
   m_table->clearFocus();
 
   m_timer = new QTimer(this);
-  m_timer->setInterval(1000 * 2); // every 2 seconds
+  m_timer->setInterval(1000 * 2); // every 2 seconds, TODO: clock changes also all 2 seconds only
   connect(m_timer, SIGNAL(timeout()), this, SLOT(action_reload()));
   m_timer->start();
 }
@@ -137,8 +137,8 @@ void MainWindow::createMenus()
 void MainWindow::createToolBars()
 {
   QToolBar *toolbar = addToolBar(_("File"));
-  toolbar->addAction(standardAction(Exit));
   toolbar->addAction(standardAction(Reload));
+  toolbar->addAction(standardAction(Exit));
 }
 
 void MainWindow::createStatusBar()

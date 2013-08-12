@@ -20,11 +20,14 @@
 
 #include <OEG/Qt/MainWindow.h>
 
-#include <QTableWidget>
-
 #include <QString>
 #include <QWidget>
 #include <QList>
+
+class QTableWidget;
+class QProcess;
+class QLabel;
+class QLineEdit;
 
 class OEG::Qt::TabbedMenuBar;
 
@@ -36,12 +39,40 @@ class MainWindow : public OEG::Qt::MainWindow
     MainWindow(QWidget *parent = 0);
 
     virtual void createActions();
+    virtual void createStatusBar();
     virtual void createDockWidgets();
     virtual void createMenus();
     virtual void createToolBars();
     virtual void createTabbedMenuBar() {};
 
+    void processInit();
+
+  protected slots:
+    void updatePackageList();
+    void clearEnvironment();
+    void installRequiredPackages();
+    void compilePackage();
+    void createBinaryArchive();
+    void newPackage();
+    void editPackage();
+    void overlayPackage();
+    void openCommandLineInterface();
+    void commonSettings();
+    void onTableCustomContextMenuRequested(const QPoint &pos);
+    void updateStatusBar();
+
+    void processReadStdOut();                              // Worker process related slots.
+    void processStarted();
+    void processFinished(int signal);
+
+    void filterTextChanged(const QString &text);           // Text in filter line edit in toolbar changed.
+
   protected:
-    QTableWidget m_table_widget;
+    QTableWidget *m_table_widget;
+    QProcess     *m_background_process;                    // Help process e.g. to scan the instructions files.
+    QProcess     *m_worker_process;                        // The building and installing process. Opens a bash.
+    QLabel       *m_number_of_packages;
+    QLabel       *m_number_of_selected_rows;
+    QLineEdit    *m_package_filter;
 };
 

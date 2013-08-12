@@ -43,7 +43,7 @@ class MainWindow : public OEG::Qt::MainWindow
     virtual void createStatusBar();
     virtual void createMenus();
     virtual void createToolBars();
-    virtual void createToolProvider() {};
+    virtual void createTabbedMenuBar() {};
 
   public slots:
     void action_reload();
