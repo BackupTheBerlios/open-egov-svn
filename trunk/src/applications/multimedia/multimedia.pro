@@ -1,5 +1,5 @@
 # $Id$
 
 TEMPLATE = subdirs
-SUBDIRS  = keyboard midi-player
+SUBDIRS  = keyboard midi-player online-tv
 

@@ -2,15 +2,15 @@
 
 <!-- $Id$ -->
 
-<application category="multimedia" base="midi-player">
+<application category="multimedia" base="online-tv">
   <project>
-    <data name="application-binary"  value="midi-player" />
-    <data name="application-name"    value="MIDI Player" />
+    <data name="application-binary"  value="online-tv" />
+    <data name="application-name"    value="Online TV" />
     <data name="application-version" value="1.0.0.0" />
     <data name="generate-pro"        value="true" />
     <data name="generate-main"       value="true" />
     <data name="generate-rc"         value="true" />
-    <data name="pro-qt"              value="gui widgets multimedia" />
+    <data name="pro-qt"              value="gui widgets multimedia network sql xml" />
     <data name="pro-packages"        value="QT GETTEXT" />
     <data name="pro-config"          value="" />
     <data name="mainwindow-class"    value="MainWindow" />
@@ -26,7 +26,7 @@
   <dictionary>
     <!-- solely required group, other groups overlay these values -->
     <group lang="en_US">
-      <string number="1">MIDI Player</string>
+      <string number="1">Online TV</string>
       <string number="2">.</string>
       <string number="3">Gerrit M. Albrecht</string>
       <string number="4">mail@gerrit-albrecht.de</string>
@@ -36,7 +36,7 @@
     </group>
 
     <group lang="de_DE">
-      <string number="1">MIDI-Abspieler</string>
+      <string number="1">Online-TV</string>
       <string number="2">.</string>
       <string number="3">Gerrit M. Albrecht</string>
       <string number="4">mail@gerrit-albrecht.de</string>
