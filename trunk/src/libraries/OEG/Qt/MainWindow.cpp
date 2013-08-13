@@ -372,6 +372,14 @@ QString MainWindow::standardActionName(const StandardAction &action)
   return "";
 }
 
+void MainWindow::addSettingsMenu()
+{
+}
+
+void MainWindow::addViewMenu()
+{
+}
+
 void MainWindow::addHelpMenu()
 {
   QMenu *menu;

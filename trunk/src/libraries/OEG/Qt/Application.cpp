@@ -40,7 +40,7 @@ using namespace OEG::Qt;
 using namespace Qt;
 
 Application::Application(int &argc, char *argv[], const QString &base)
- : QGuiApplication(argc, argv), m_database_manager(0), m_tray_icon(0), m_connector(0)
+ : QApplication(argc, argv), m_database_manager(0), m_tray_icon(0), m_connector(0)
 {
   srand(time(0));
 

@@ -35,10 +35,12 @@ class MessageBox : public QMessageBox
     MessageBox(QWidget *parent = 0);
     ~MessageBox();
 
-  public slots:
+  public:
     static void ErrorMessage(const QString &message, QWidget *parent = 0);
     static void WarnMessage(const QString &message, QWidget *parent = 0);
     static void InfoMessage(const QString &message, QWidget *parent = 0);
+
+  public slots:
 
   signals:
 

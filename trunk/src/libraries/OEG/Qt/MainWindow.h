@@ -139,6 +139,8 @@ class MainWindow : public QMainWindow
 
     QAction *addStandardAction(const QString &baseName, const QString &title,
                                const QString &info, const QString &keySequence = QString());
+    void addSettingsMenu();
+    void addViewMenu();
     void addHelpMenu();
 
     void setDefaultWindowSize(unsigned int width, unsigned int height);
