@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
   if ((arguments.contains("-h")) || (arguments.contains("--help"))) {
     qWarning() << "Arguments:";
     qWarning() << " -d or --decrypt: decrypt mode, else encrypt mode";
-    qWarning() << " -i or --input <file>: inpout file path and name";
+    qWarning() << " -i or --input <file>: input file path and name";
     qWarning() << " -o or --output <file>: output file path and name (optional)";
     qWarning() << " -p or --password <pw>: password for encrypting or decrypting";
     return 0;
