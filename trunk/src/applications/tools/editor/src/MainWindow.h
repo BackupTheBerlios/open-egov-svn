@@ -23,9 +23,11 @@
 
 #include <QList>
 #include <QString>
+#include <QLabel>
 #include <QWidget>
 
 class PluginInterface;
+class TextEditor;
 
 class MainWindow : public OEG::Qt::MainWindow
 {
@@ -36,10 +38,11 @@ class MainWindow : public OEG::Qt::MainWindow
     virtual ~MainWindow();
 
     virtual void createActions();
+    virtual void createStatusBar();
     virtual void createDockWidgets();
     virtual void createMenus();
     virtual void createToolBars();
-    virtual void createToolProvider() {};
+    virtual void createTabbedMenuBar() {};
 
   public slots:
     void standardActionClose();
@@ -47,11 +50,25 @@ class MainWindow : public OEG::Qt::MainWindow
     void standardActionNew();
     void standardActionPrint();
 
+  protected:
+    TextEditor *currentEditor() const;
+
+  protected slots:
+    void updateStatusBar();
+
   private:
     void loadPlugins();
+    void loadFileTypes();
 
   protected:
     OEG::Qt::TabWidget       *m_tabs;
     QList<PluginInterface *>  m_plugins;
+    QLabel                   *m_sb_file_type;
+    QLabel                   *m_sb_number_of_lines;
+    QLabel                   *m_sb_current_row;
+    QLabel                   *m_sb_current_column;
+    QLabel                   *m_sb_overwrite_mode;
+    QList<QObject *>          m_file_types;
+    QString                   m_file_dialog_last_path;
 };
 

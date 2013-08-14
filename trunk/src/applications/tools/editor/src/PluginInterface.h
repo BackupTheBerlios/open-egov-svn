@@ -35,7 +35,7 @@ class PluginInterface
     virtual unsigned int pluginVersion() const = 0;
     virtual QString pluginDate() const = 0;
 
-    virtual QWidget       *createGUI(QWidget *parent = 0) = 0;
+    virtual QWidget *createGUI(QWidget *parent = 0) = 0;
 
   protected:
 

@@ -23,6 +23,7 @@
 #include <QContextMenuEvent>
 #include <QFontMetrics>
 #include <QIcon>
+#include <QTimer>
 #include <QMenu>
 #include <QPainter>
 #include <QPaintEvent>
@@ -31,10 +32,12 @@
 #include <QTextEdit>
 #include <QTextLayout>
 
+#include <QDebug>
+
 #include "TextEditor.h"
 
 TextEditor::TextEditor(QWidget *parent /*=0*/)
- : QTextEdit(parent)
+ : QTextEdit(parent), m_line_count(0)
 {
   m_right_margin_show            = true;
   m_right_margin_position        = 80;
@@ -48,10 +51,18 @@ TextEditor::TextEditor(QWidget *parent /*=0*/)
   m_highlight_current_line_left  = false;
   m_highlight_current_line_right = false;
   m_highlight_current_line_color = Qt::yellow;
-  m_warning_text                 = "!!! Warning Warning Warning !!!";
+  m_warning_text                 = "";                // "!!! Warning Warning Warning !!!";
+  m_warning_text_color           = Qt::red;
+  m_warning_text_font            = QFont("Arial", 30);
 
+  m_dynamic_line_numbers_width   = true;
+
+  m_text_changed                 = false;
+
+  // http://qt-project.org/doc/qt-5.1/qtwidgets/qtextedit.html#LineWrapMode-enum
   setLineWrapMode(QTextEdit::NoWrap);
   setUndoRedoEnabled(true);
+  setOverwriteMode(false);
   setViewportMargins(0, 0, 0, 0);
 
   connect(this,                         SIGNAL(cursorPositionChanged()),
@@ -62,8 +73,11 @@ TextEditor::TextEditor(QWidget *parent /*=0*/)
           this,                         SLOT(update()));
   //connect(document()->documentLayout(), SIGNAL(update(QRectF &)),
   //        this,                         SLOT(update()));
-  connect(document(),                   SIGNAL(modificationChanged(bool)),
-          this,                         SIGNAL(contentModified(bool)));
+  //connect(document(),                   SIGNAL(modificationChanged(bool)),
+  //        this,                         SLOT(contentModified(bool)));
+
+  //setWarningText();
+  //QTimer::singleShot(secs, this, SLOT(xxx()));
 }
 
 void TextEditor::documentLayoutUpdateSlot(const QRectF &rect)
@@ -75,6 +89,22 @@ TextEditor::~TextEditor()
 {
 }
 
+void TextEditor::updateLineNumbersViewPort()
+{
+  if (m_line_numbers_show) {
+    if (m_dynamic_line_numbers_width)
+      setLineNumbersWidth(-1);
+
+    if (m_line_numbers_width < 1)
+      m_line_numbers_width = 40;
+
+    setViewportMargins(m_line_numbers_width, 0, 0, 0);
+  }
+  else {
+    setViewportMargins(0, 0, 0, 0);
+  }
+}
+
 void TextEditor::showLineNumbers(const bool show /*=true*/)
 {
   if (show == m_line_numbers_show)
@@ -82,17 +112,23 @@ void TextEditor::showLineNumbers(const bool show /*=true*/)
 
   m_line_numbers_show = show;
 
-  if (show) {
-    if (m_line_numbers_width < 1)
-      m_line_numbers_width = 50;
-
-    setViewportMargins(m_line_numbers_width, 0, 0, 0);
-  }
-  else {
-    setViewportMargins(0, 0, 0, 0);
-  }
+  updateLineNumbersViewPort();
 
   repaint();
+}
+
+unsigned long int TextEditor::lineCount()
+{
+  unsigned long int lines = document()->blockCount();
+
+  if (m_line_count != lines) {
+    updateLineNumbersViewPort();
+    emit lineCountChanged();
+  }
+
+  m_line_count = lines;
+
+  return m_line_count;
 }
 
 void TextEditor::setLineNumbersWidth(const int width)
@@ -102,17 +138,18 @@ void TextEditor::setLineNumbersWidth(const int width)
 
   m_line_numbers_width = width;
 
+  if (width > 3)
+	return;
+
+  const QFontMetrics fm(font());
+  int widthInChars = QString::number(lineCount()).length();                    // Number of chars needed for line count display.
+  QString widthString = QString("%1").arg("", widthInChars, QLatin1Char('8')); // Create a string with maximum width.
+  int maxWidth = fm.width(widthString) + 2 * 2 + 1;                            // Calculate its pixel width.
+
   // If the space is not enough, it is expanded depending on the line count of the text.
 
-#if 0
-  const QFontMetrics fm(font());
-  int maxWidth = fm.width(QString::number(lines())) + 2 * 2 + 1;
-
-  if (maxWidth > m_line_numbers_width)
+  if ((width <= 0) || (maxWidth > m_line_numbers_width))
     m_line_numbers_width = maxWidth;
-#endif
-
-  repaint();
 }
 
 void TextEditor::highlightCurrentLineRight(const bool highlight /*=true*/)
@@ -160,8 +197,7 @@ void TextEditor::paintEvent(QPaintEvent *event)
 
 bool TextEditor::event(QEvent *event) 
 {
-  if (event->type() == QEvent::Paint) 
-  {
+  if (event->type() == QEvent::Paint) {
     paintLineNumbers();
   }
 
@@ -182,14 +218,14 @@ void TextEditor::paintLineNumbers()
                      m_line_numbers_width, cursorRect().height(), m_highlight_current_line_color);
   }
 
-  // Between line number area and text area is a 1px gray line. It can be changed to another color: TODO
+  // Between line number area and text area is a 1px gray line. It can be changed to another color/width: TODO
   painter.fillRect(m_line_numbers_width, 0, 1, height(), QColor(200, 200, 200));
 
   int verticalScrollBarValue = verticalScrollBar()->value();
   int lineNumber = 1;
   int currentLine = textCursor().blockNumber() + 1;
 
-  qDebug() << "CL" << currentLine << "BC" << document()->blockCount() << "LB" << document()->lastBlock().blockNumber()
+  qDebug() << "CL" << currentLine << "BC" << document()->blockCount() << "LB#" << document()->lastBlock().blockNumber()
            << "LC(LB)" << document()->lastBlock().lineCount();
 
   for (QTextBlock block = document()->begin(); block.isValid(); block = block.next(), lineNumber++) {
@@ -254,21 +290,24 @@ void TextEditor::setWarningText(const QString &text)
 
 void TextEditor::paintWarningText()
 {
+  if (! m_warning_text_show)
+    return;
+
   if (m_warning_text.length() < 1)
     return;
 
   QPainter painter(viewport());
 
-  painter.setPen(Qt::red);
-  painter.setFont(QFont("Arial", 30));
+  painter.setPen(m_warning_text_color);
+  painter.setFont(m_warning_text_font);
   painter.drawText(viewport()->rect(), Qt::AlignCenter, m_warning_text);
 }
 
 void TextEditor::cursorPositionChangedSlot()
 {
-  viewport()->update();                                    // Update the text area to highlight the correct line.
+  viewport()->update();                                              // Update the text area to highlight the correct line.
 
-  if (m_line_numbers_show && m_highlight_current_line_right)    // Update the line numbers area at the left side.
+  if (m_line_numbers_show && m_highlight_current_line_right)         // Update the line numbers area at the left side.
     repaint();
 }
 

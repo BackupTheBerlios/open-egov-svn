@@ -19,6 +19,7 @@
 #pragma once
 
 #include <QColor>
+#include <QFont>
 #include <QString>
 #include <QTextEdit>
 #include <QWidget>
@@ -42,14 +43,20 @@ class TextEditor : public QTextEdit
     void highlightCurrentLineRight(const bool highlight = true);
     void setWarningText(const QString &text);
 
+    unsigned long int lineCount();
+
   protected:
     virtual void contextMenuEvent(QContextMenuEvent *event);
     virtual void paintEvent(QPaintEvent *event);
     virtual bool event(QEvent *event);
+    void updateLineNumbersViewPort();
 
   public slots:
     void cursorPositionChangedSlot();
     void documentLayoutUpdateSlot(const QRectF &rect);
+
+  signals:
+    void lineCountChanged();
 
   private:
     void paintLineNumbers();
@@ -71,5 +78,16 @@ class TextEditor : public QTextEdit
     bool     m_highlight_current_line_right;               // Enable the highlighting of the current line.
     QColor   m_highlight_current_line_color;               // Color for highlighting the current line.
     QString  m_warning_text;
+    bool     m_warning_text_show;
+    int      m_warning_text_hide_after_x_secs;
+    QColor   m_warning_text_color;
+    QFont    m_warning_text_font;
+    int      m_warning_text_position_x;
+    int      m_warning_text_position_y;
+    bool     m_warning_text_position_use;
+
+    bool              m_dynamic_line_numbers_width;
+    unsigned long int m_line_count;                        // Needed to ensure that LC area's width is big enough.
+    bool              m_text_changed;
 };
 

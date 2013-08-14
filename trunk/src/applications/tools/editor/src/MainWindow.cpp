@@ -17,7 +17,7 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <OEG/Qt/Application.h>
-#include <OEG/Qt/ToolProvider.h>
+#include <OEG/Qt/TabbedMenuBar.h>
 
 #include <QAction>
 #include <QApplication>
@@ -27,6 +27,9 @@
 #include <QToolBar>
 #include <QIcon>
 #include <QTabWidget>
+#include <QLabel>
+#include <QLatin1String>
+#include <QString>
 
 #include "PluginInterface.h"
 #include "TextEditor.h"
@@ -37,17 +40,17 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
 {
   setWindowIcon(QIcon("icon.png"));
 
-  createAll();
-
   m_tabs = new OEG::Qt::TabWidget(this);
   if (! m_tabs) {
     qDebug() << "No tab widget.";
     return;
   }
 
+  m_file_dialog_last_path = "";   // Save it on disk?
+
   m_tabs->setMovable(true);
   m_tabs->setDocumentMode(true);
-  m_tabs->setTabsClosable(false);
+  m_tabs->setTabsClosable(false);   // TODO: into config
   m_tabs->setUsesScrollButtons(true);
   m_tabs->separateCloseTabButton(_("Close Tab"));
   standardActionNew();
@@ -55,7 +58,13 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
 
   setCentralWidget(m_tabs);
 
+  activateWindow();
+  currentEditor()->setFocus();
+
+  createAll();
+
   loadPlugins();
+  loadFileTypes();
 }
 
 MainWindow::~MainWindow()
@@ -65,44 +74,90 @@ MainWindow::~MainWindow()
   }
 }
 
+void MainWindow::updateStatusBar()
+{
+  if (! currentEditor()) {
+    qDebug() << "MainWindow::updateStatusBar(): no editor object.";
+    return;
+  }
+
+  m_sb_number_of_lines->setText(_("Lines:") + QLatin1String(" ") + QString::number(currentEditor()->lineCount()));
+  m_sb_current_row->setText(_("Row:") + QLatin1String(" ") + QString::number(0));
+  m_sb_current_column->setText(_("Col:") + QLatin1String(" ") + QString::number(0));
+  m_sb_overwrite_mode->setText((currentEditor()->overwriteMode()) ? _("INS") : _("OWR"));
+}
+
 void MainWindow::createActions()
 {
   OEG::Qt::MainWindow::createActions();
 
 }
 
+void MainWindow::createStatusBar()
+{
+  m_sb_number_of_lines = new QLabel("Lines: 0000");
+  m_sb_number_of_lines->setMinimumSize(m_sb_number_of_lines->sizeHint());
+  m_sb_number_of_lines->setAlignment(Qt::AlignCenter);
+  m_sb_number_of_lines->setToolTip(_("The number of text lines."));
+  statusBar()->addPermanentWidget(m_sb_number_of_lines);
+
+  m_sb_current_row = new QLabel("Row: 0000");
+  m_sb_current_row->setMinimumSize(m_sb_current_row->sizeHint());
+  m_sb_current_row->setAlignment(Qt::AlignCenter);
+  m_sb_current_row->setToolTip(_("Current row of the cursor."));
+  statusBar()->addPermanentWidget(m_sb_current_row);
+
+  m_sb_current_column = new QLabel("Col: 0000");
+  m_sb_current_column->setMinimumSize(m_sb_current_column->sizeHint());
+  m_sb_current_column->setAlignment(Qt::AlignCenter);
+  m_sb_current_column->setToolTip(_("Current column of the cursor."));
+  statusBar()->addPermanentWidget(m_sb_current_column);
+
+  m_sb_overwrite_mode = new QLabel("XXX");
+  m_sb_overwrite_mode->setMinimumSize(m_sb_overwrite_mode->sizeHint());
+  m_sb_overwrite_mode->setAlignment(Qt::AlignRight);
+  m_sb_overwrite_mode->setToolTip(_("Tells, if insert or overwrite mode."));
+  statusBar()->addPermanentWidget(m_sb_overwrite_mode);
+
+  OEG::Qt::MainWindow::createStatusBar();
+
+  updateStatusBar();
+}
+
 void MainWindow::createMenus()
 {
-  QMenu *fileMenu = menuBar()->addMenu(_("&File"));
-  fileMenu->addAction(standardAction(New));
-  fileMenu->addAction(standardAction(Open));
-  fileMenu->addAction(standardAction(Reload));
-  fileMenu->addAction(standardAction(Save));
-  fileMenu->addAction(standardAction(SaveAs));
-  fileMenu->addAction(standardAction(Close));
-  fileMenu->addSeparator();
-  fileMenu->addAction(standardAction(Print));
-  fileMenu->addAction(standardAction(PrintPreview));
-  fileMenu->addAction(standardAction(PrintSettings));
-  fileMenu->addSeparator();
-  fileMenu->addAction(standardAction(Exit));
+  QMenu *menu;
 
-  QMenu *editMenu = menuBar()->addMenu(_("&Edit"));
-  editMenu->addAction(standardAction(Undo));
-  editMenu->addAction(standardAction(Redo));
-  editMenu->addSeparator();
-  editMenu->addAction(standardAction(Cut));
-  editMenu->addAction(standardAction(Copy));
-  editMenu->addAction(standardAction(Paste));
-  editMenu->addSeparator();
-  editMenu->addAction(standardAction(SelectAll));
-  editMenu->addSeparator();
-  editMenu->addAction(standardAction(Delete));
+  menu = getStandardMenu(FileMenu);
+  menu->addAction(standardAction(New));
+  menu->addAction(standardAction(Open));
+  menu->addAction(standardAction(Reload));
+  menu->addAction(standardAction(Save));
+  menu->addAction(standardAction(SaveAs));
+  menu->addAction(standardAction(Close));
+  menu->addSeparator();
+  menu->addAction(standardAction(Print));
+  menu->addAction(standardAction(PrintPreview));
+  menu->addAction(standardAction(PrintSettings));
+  menu->addSeparator();
+  menu->addAction(standardAction(Exit));
+
+  menu = getStandardMenu(EditMenu);
+  menu->addAction(standardAction(Undo));
+  menu->addAction(standardAction(Redo));
+  menu->addSeparator();
+  menu->addAction(standardAction(Cut));
+  menu->addAction(standardAction(Copy));
+  menu->addAction(standardAction(Paste));
+  menu->addSeparator();
+  menu->addAction(standardAction(SelectAll));
+  menu->addSeparator();
+  menu->addAction(standardAction(Delete));
 
   QMenu *extensionsMenu = menuBar()->addMenu(_("E&xtensions"));
   extensionsMenu->addAction("Test");
 
-  addHelpMenu();
+  addStandardMenu(HelpMenu);
 }
 
 void MainWindow::createToolBars()
@@ -140,23 +195,23 @@ void MainWindow::loadPlugins()
 
   qDebug() << "Loading Plugins from: " << pluginsDir.absolutePath();
 
-  PluginInterface *interface;
+  PluginInterface *pluginAPI;  // Do not name it "interface".
   QObject *plugin;
 
   foreach (QString fileName, pluginsDir.entryList(QDir::Files)) {
     QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
     plugin = pluginLoader.instance();
     if (plugin) {
-      interface = qobject_cast<PluginInterface *>(plugin);
-      if (interface) {
-        if (interface->pluginApplicationName() != baseName) {
+      pluginAPI = qobject_cast<PluginInterface *>(plugin);
+      if (pluginAPI) {
+        if (pluginAPI->pluginApplicationName() != baseName) {
           qWarning() << "Application base names from plugin and application do not match:";
           qWarning() << " plugin file name:" << fileName;
           qDebug() << " application base name:" << baseName;
-          qDebug() << " plugin application name:" << interface->pluginApplicationName();
+          qDebug() << " plugin application name:" << pluginAPI->pluginApplicationName();
         }
         else {
-          m_plugins.append(interface);
+          m_plugins.append(pluginAPI);
         }
       }
     }
@@ -168,13 +223,40 @@ void MainWindow::loadPlugins()
   qDebug() << "Number of Plugins found: " << m_plugins.count();
 }
 
+void MainWindow::loadFileTypes()
+{
+}
+
 void MainWindow::standardActionClose()
 {
   m_tabs->closeTab();
 }
 
+#include <QStringList>
+#include <QFileDialog>
+#include <QFile>
+#include <QByteArray>
+
 void MainWindow::standardActionOpen()
 {
+  QStringList files = QFileDialog::getOpenFileNames(this, _("Open a text file"), m_file_dialog_last_path);
+  QString     fileName;
+
+  for (int i = 0; i < files.size(); i++) {
+    fileName = files.at(i);
+
+    if (! fileName.isNull()) {
+      m_file_dialog_last_path = QFileInfo(fileName).path();  // Store path for the next time.
+
+      QFile file(fileName);
+      if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QByteArray text = file.readAll();
+
+        standardActionNew();
+        currentEditor()->insertPlainText(text.constData());
+      }
+    }
+  }
 }
 
 void MainWindow::standardActionNew()
@@ -185,13 +267,28 @@ void MainWindow::standardActionNew()
     return;
 
   editor->highlightCurrentLine();
-  editor->setLineNumbersWidth(50);
+  editor->setLineNumbersWidth(-1);
   editor->showLineNumbers();
+
+  connect(editor, SIGNAL(textChanged()),
+          this,   SLOT(updateStatusBar()));
 
   m_tabs->addTab(editor, _("Unnamed"));
 }
 
 void MainWindow::standardActionPrint()
 {
+}
+
+TextEditor *MainWindow::currentEditor() const
+{
+  if (! m_tabs)
+    return 0;
+
+  QWidget *w = m_tabs->currentWidget();
+  if (! w)
+    return 0;
+
+  return dynamic_cast<TextEditor *>(w);
 }
 
