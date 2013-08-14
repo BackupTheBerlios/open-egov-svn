@@ -74,9 +74,6 @@
 
   <todos>
     <todo priority="normal" date="2010-07-14" author="3" email="4">Add and format the license texts in DE and EN.</todo>
-    <todo priority="normal" date="2013-03-28" author="3" email="4">Updating source files not implemented.</todo>
-    <todo priority="normal" date="2013-03-28" author="3" email="4">Should only write files to disk if there are changes.</todo>
-    <todo priority="normal" date="2013-03-28" author="3" email="4">Update headers template needs keyword replacing.</todo>
   </todos>
 
   <changes>

@@ -18,6 +18,7 @@
 
 #include <OEG/Qt/TabbedMenuBar.h>
 #include <OEG/Qt/Application.h>
+#include <OEG/Qt/TableWidget.h>
 
 #include <QApplication>
 #include <QMenuBar>
@@ -38,10 +39,10 @@
 #include <QFileInfoList>
 #include <QLineEdit>
 #include <QHash>
-#include <QFontMetrics>
 
 #include <iostream>
 
+#include "CreatePackageDialog.h"
 #include "MainWindow.h"
 
 MainWindow::MainWindow(QWidget *parent /*=0*/)
@@ -49,7 +50,7 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
 {
   setWindowIcon(QIcon("icon.png"));
 
-  m_table_widget = new QTableWidget(this);
+  m_table_widget = new OEG::Qt::TableWidget(this);
   m_table_widget->setColumnCount(6);                       // Always adjust to number of columns below.
   m_table_widget->setHorizontalHeaderLabels(QStringList()
     << _("Package")
@@ -68,7 +69,7 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
 
   QHeaderView *horizontalHeader = m_table_widget->horizontalHeader();
   horizontalHeader->setSectionResizeMode(0, QHeaderView::Fixed);
-  horizontalHeader->setSectionResizeMode(1, QHeaderView::Stretch);
+  horizontalHeader->setSectionResizeMode(1, QHeaderView::Fixed);
   horizontalHeader->setSectionResizeMode(2, QHeaderView::Stretch);
   horizontalHeader->setSectionResizeMode(3, QHeaderView::ResizeToContents);
   horizontalHeader->setSectionResizeMode(4, QHeaderView::ResizeToContents);
@@ -116,14 +117,6 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
           this,           SLOT(updateStatusBar()));
 
   updatePackageList();
-
-  m_table_widget->setVisible(false);
-  m_table_widget->resizeColumnsToContents();
-  m_table_widget->setVisible(true);
-
-  m_table_widget->setSortingEnabled(true);
-  m_table_widget->sortItems(0, Qt::AscendingOrder);
-  m_table_widget->setUpdatesEnabled(true);
 }
 
 void MainWindow::updatePackageList()
@@ -142,17 +135,9 @@ void MainWindow::updatePackageList()
   dir.setSorting(QDir::Name | QDir::Reversed);
 
   m_table_widget->setUpdatesEnabled(false);
-  m_table_widget->clearContents();   // "the table dimensions stay the same".
-  m_table_widget->setRowCount(0);
   m_table_widget->setSortingEnabled(false);
-
-  QHeaderView *horizontalHeader = m_table_widget->horizontalHeader();
-  horizontalHeader->setSectionResizeMode(0, QHeaderView::Fixed);
-  horizontalHeader->setSectionResizeMode(1, QHeaderView::ResizeToContents);
-  horizontalHeader->setSectionResizeMode(2, QHeaderView::Stretch);
-  horizontalHeader->setSectionResizeMode(3, QHeaderView::ResizeToContents);
-  horizontalHeader->setSectionResizeMode(4, QHeaderView::ResizeToContents);
-  horizontalHeader->setSectionResizeMode(5, QHeaderView::ResizeToContents);
+  m_table_widget->clearContents();                         // "the table dimensions stay the same".
+  m_table_widget->setRowCount(0);                          // Reset number of rows.
 
   QFileInfoList list = dir.entryInfoList();
   for (int i = 0; i < list.size(); i++) {
@@ -167,7 +152,12 @@ void MainWindow::updatePackageList()
     hash["filename"] = fileInfo.fileName();
     hash["filesize"] = fileInfo.size();
 
-    item = new QTableWidgetItem(fileInfo.fileName());
+    QString s = fileInfo.fileName();
+    if (s.endsWith(".xml", Qt::CaseInsensitive))
+      s.chop(4);
+    hash["packagename"] = s;
+
+    item = new QTableWidgetItem(s);
     item->setData(Qt::UserRole, hash);
     item->setFlags(item->flags() ^ Qt::ItemIsEditable);
     m_table_widget->setItem(currentRow, 0, item);
@@ -199,23 +189,15 @@ void MainWindow::updatePackageList()
   m_table_widget->sortItems(0, Qt::AscendingOrder);
   m_table_widget->setUpdatesEnabled(true);
 
-  QFontMetrics fm(m_table_widget->font());
+  m_table_widget->setVisible(false);
+  m_table_widget->resizeColumnsToContents();
+  m_table_widget->setVisible(true);
+  m_table_widget->setSortingEnabled(true);
+  m_table_widget->sortItems(0, Qt::AscendingOrder);
+  m_table_widget->setUpdatesEnabled(true);
 
-  for (int row=0 ; row<m_table_widget->rowCount(); row++) {
-    int maxWidth = 0;
-
-    QString text = m_table_widget->item(row, 0)->text();
-
-    if (fm.width(text) > maxWidth)
-      maxWidth = fm.width(text);
-
-    QHeaderView *hv = m_table_widget->horizontalHeader();
-    if (maxWidth > hv->sectionSize(0)) {
-      //horizontalHeader->setSectionResizeMode(0, QHeaderView::ResizeToContents);
-      //hv->resizeSection(0, maxWidth * 1.5);
-      m_table_widget->setColumnWidth(0, maxWidth * 1.5);
-    }
-  }
+  m_table_widget->resizeColumnToMaximumContents(0);
+  m_table_widget->resizeColumnToMaximumContents(1);
 
   updateStatusBar();
 }
@@ -238,11 +220,11 @@ void MainWindow::createBinaryArchive()
 
 void MainWindow::newPackage()
 {
-  //CreatePackageDialog dialog;
+  CreatePackageDialog dialog;
 
-  //if (dialog.exec()) {
+  if (dialog.exec()) {
 
-  //}
+  }
 }
 
 void MainWindow::editPackage()
@@ -326,7 +308,7 @@ void MainWindow::createMenus()
   QMenu   *menu;
   QAction *action;
 
-  menu = menuBar()->addMenu(_("&File"));
+  menu = getStandardMenu(FileMenu);
   menu->addAction(standardAction(Reload));
   menu->addSeparator();
   menu->addAction(standardAction(Exit));
@@ -352,11 +334,11 @@ void MainWindow::createMenus()
   action = menu->addAction(_("Open Command Line Interface"));
   connect(action, SIGNAL(triggered()), this, SLOT(openCommandLineInterface()));
 
-  menu = menuBar()->addMenu(_("&Settings"));
+  menu = getStandardMenu(SettingsMenu);
   action = menu->addAction(_("Common..."));
   connect(action, SIGNAL(triggered()), this, SLOT(commonSettings()));
 
-  addHelpMenu();
+  addStandardMenu(HelpMenu);
 }
 
 void MainWindow::createToolBars()
@@ -419,5 +401,19 @@ void MainWindow::processFinished(int signal)
 
 void MainWindow::filterTextChanged(const QString &text)
 {
+  QString search = text.trimmed();
+
+  for (int i = 0; i < m_table_widget->rowCount(); i++) {
+    if (search.length() == 0) {                            // No filter set, show all rows.
+      if (m_table_widget->isRowHidden(i))
+        m_table_widget->showRow(i);
+    }
+    else {                                                 // Search packages to be shown.
+      QHash<QString, QVariant> hash = m_table_widget->item(i, 0)->data(Qt::UserRole).toHash();
+
+      m_table_widget->setRowHidden(i, (hash["packagename"].toString().contains(search, Qt::CaseInsensitive))
+                                      ? false : true);
+    }
+  }
 }
 

@@ -130,8 +130,7 @@ void MainWindow::createMenus()
   QMenu   *menu;
   QAction *action;
 
-  menu = menuBar()->addMenu(_("&File"));
-
+  menu = getStandardMenu(FileMenu);
   menu->addAction(_("Update contents"), this, SLOT(updateFileSystemViews()));
   menu->addSeparator();
 
@@ -152,7 +151,12 @@ void MainWindow::createMenus()
   connect(action, SIGNAL(triggered()),
           this,   SLOT(newTabWithPath()));
 
-  menu = menuBar()->addMenu(_("&View"));
+  menu = getStandardMenu(SettingsMenu);
+  action = menu->addAction(_("Common..."));
+  connect(action, SIGNAL(triggered()),
+          this,   SLOT(commonSettings()));
+
+  menu = getStandardMenu(ViewMenu);
   action = menu->addAction(_("&Buttons"));
   connect(action, SIGNAL(triggered()),
           this,   SLOT(viewButtons()));
@@ -166,7 +170,7 @@ void MainWindow::createMenus()
   connect(action, SIGNAL(triggered()),
           this,   SLOT(viewMyDirectories()));
 
-  addHelpMenu();
+  addStandardMenu(HelpMenu);
 }
 
 void MainWindow::createToolBars()

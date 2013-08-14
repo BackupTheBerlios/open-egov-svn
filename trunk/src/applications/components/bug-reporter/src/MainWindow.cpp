@@ -46,10 +46,12 @@ void MainWindow::createActions()
 
 void MainWindow::createMenus()
 {
-  QMenu *fileMenu = menuBar()->addMenu(_("&File"));
-  fileMenu->addAction(standardAction(Exit));
+  QMenu *menu;
 
-  addHelpMenu();
+  menu = getStandardMenu(FileMenu);
+  menu->addAction(standardAction(Exit));
+
+  addStandardMenu(HelpMenu);
 }
 
 void MainWindow::createToolBars()

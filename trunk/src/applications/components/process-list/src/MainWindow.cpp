@@ -126,12 +126,19 @@ void MainWindow::createActions()
 
 void MainWindow::createMenus()
 {
-  QMenu *menu = menuBar()->addMenu(_("&File"));
+  QMenu   *menu;
+  QAction *action;
+
+  menu = getStandardMenu(FileMenu);
   menu->addAction(standardAction(Reload));
   menu->addSeparator();
   menu->addAction(standardAction(Exit));
 
-  addHelpMenu();
+  menu = getStandardMenu(SettingsMenu);
+  action = menu->addAction(_("Common..."));
+  connect(action, SIGNAL(triggered()), this, SLOT(commonSettings()));
+
+  addStandardMenu(HelpMenu);
 }
 
 void MainWindow::createToolBars()

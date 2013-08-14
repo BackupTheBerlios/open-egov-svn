@@ -19,6 +19,7 @@
 #pragma once
 
 #include <OEG/Qt/MainWindow.h>
+#include <OEG/Qt/TableWidget.h>
 
 #include <QString>
 #include <QWidget>
@@ -68,11 +69,11 @@ class MainWindow : public OEG::Qt::MainWindow
     void filterTextChanged(const QString &text);           // Text in filter line edit in toolbar changed.
 
   protected:
-    QTableWidget *m_table_widget;
-    QProcess     *m_background_process;                    // Help process e.g. to scan the instructions files.
-    QProcess     *m_worker_process;                        // The building and installing process. Opens a bash.
-    QLabel       *m_number_of_packages;
-    QLabel       *m_number_of_selected_rows;
-    QLineEdit    *m_package_filter;
+    OEG::Qt::TableWidget *m_table_widget;
+    QProcess             *m_background_process;            // Help process e.g. to scan the instructions files.
+    QProcess             *m_worker_process;                // The building and installing process. Opens a bash.
+    QLabel               *m_number_of_packages;
+    QLabel               *m_number_of_selected_rows;
+    QLineEdit            *m_package_filter;
 };
 

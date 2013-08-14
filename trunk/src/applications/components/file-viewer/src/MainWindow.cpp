@@ -71,8 +71,7 @@ void MainWindow::createMenus()
   QMenu   *menu;
   QAction *action;
 
-  menu = menuBar()->addMenu(_("&File"));
-
+  menu = getStandardMenu(FileMenu);
   menu->addAction(_("Update contents"), this, SLOT(updateFileSystemViews()));
   menu->addSeparator();
 
@@ -85,7 +84,7 @@ void MainWindow::createMenus()
   menu->addSeparator();
   menu->addAction(standardAction(Exit));
 
-  addHelpMenu();
+  addStandardMenu(HelpMenu);
 }
 
 void MainWindow::createToolBars()

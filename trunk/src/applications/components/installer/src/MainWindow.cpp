@@ -40,23 +40,28 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
 
 void MainWindow::createActions()
 {
-  //OEG::Qt::MainWindow::createActions();
+  OEG::Qt::MainWindow::createActions();
 
 }
 
 void MainWindow::createMenus()
 {
-  QMenu *menu;
+  QMenu   *menu;
+  QAction *action;
 
-  menu = menuBar()->addMenu(_("&File"));
+  menu = getStandardMenu(FileMenu);
   menu->addAction(standardAction(Exit));
 
-  menu = menuBar()->addMenu(_("&Edit"));
+  menu = getStandardMenu(EditMenu);
   menu->addAction(standardAction(Cut));
   menu->addAction(standardAction(Copy));
   menu->addAction(standardAction(Paste));
 
-  addHelpMenu();
+  menu = getStandardMenu(SettingsMenu);
+  action = menu->addAction(_("Common..."));
+  connect(action, SIGNAL(triggered()), this, SLOT(commonSettings()));
+
+  addStandardMenu(HelpMenu);
 }
 
 void MainWindow::createToolBars()
