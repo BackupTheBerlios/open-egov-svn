@@ -27,6 +27,7 @@
 class QAction;
 class QLayout;
 class QPrinter;
+class QMenu;
 
 namespace OEG { namespace Qt {
 
@@ -89,6 +90,10 @@ class MainWindow : public QMainWindow
       Database
     };
 
+    enum StandardMenus {
+      FileMenu, EditMenu, SettingsMenu, ViewMenu, HelpMenu
+    };
+
   public:
     MainWindow(QWidget *parent = 0, ::Qt::WindowFlags flags = 0);
     virtual ~MainWindow();
@@ -139,9 +144,9 @@ class MainWindow : public QMainWindow
 
     QAction *addStandardAction(const QString &baseName, const QString &title,
                                const QString &info, const QString &keySequence = QString());
-    void addSettingsMenu();
-    void addViewMenu();
-    void addHelpMenu();
+
+    QMenu *getStandardMenu(const StandardMenus &menu);
+    void addStandardMenu(const StandardMenus &menu);
 
     void setDefaultWindowSize(unsigned int width, unsigned int height);
     void setCentralLayout(QLayout *layout);
@@ -159,6 +164,12 @@ class MainWindow : public QMainWindow
     QPrinter          *m_printer;
     bool               m_printer_initialized;
     DataStorageMode    m_data_storage_mode;
+
+    QMenu             *m_menu_file;                        // The standard menus.
+    QMenu             *m_menu_edit;
+    QMenu             *m_menu_settings;
+    QMenu             *m_menu_view;
+    QMenu             *m_menu_help;
 };
 
 }}

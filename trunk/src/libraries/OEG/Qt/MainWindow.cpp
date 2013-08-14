@@ -39,7 +39,8 @@ using namespace OEG::Qt;
 using namespace Qt;
 
 MainWindow::MainWindow(QWidget *parent /*=0*/, ::Qt::WindowFlags flags /*=0*/)
- : QMainWindow(parent, flags), m_tabbed_menubar(0), m_printer(0)
+ : QMainWindow(parent, flags), m_tabbed_menubar(0), m_printer(0),
+   m_menu_file(0), m_menu_edit(0), m_menu_settings(0), m_menu_view(0), m_menu_help(0)
 {
   setWindowTitle(QCoreApplication::applicationName());
   setObjectName("MainWindow");
@@ -118,7 +119,7 @@ QAction *MainWindow::addStandardAction(const QString &baseName, const QString &t
 
   a->setObjectName(baseName);
   if (baseName.length() > 0)
-    a->setIcon(QIcon(baseName));
+    a->setIcon(QIcon(dynamic_cast<OEG::Qt::Application *>(qApp)->locateFile(baseName, Application::Icon)));
   a->setShortcut(keySequence);
   a->setToolTip(info);
   a->setStatusTip(info);
@@ -372,31 +373,71 @@ QString MainWindow::standardActionName(const StandardAction &action)
   return "";
 }
 
-void MainWindow::addSettingsMenu()
+QMenu *MainWindow::getStandardMenu(const StandardMenus &menu)
 {
+  addStandardMenu(menu);
+
+  switch (menu) {
+    case FileMenu:
+      return m_menu_file;
+    case EditMenu:
+      return m_menu_edit;
+    case ViewMenu:
+      return m_menu_view;
+    case SettingsMenu:
+      return m_menu_settings;
+    case HelpMenu:
+      return m_menu_help;
+  }
+
+  return 0;
 }
 
-void MainWindow::addViewMenu()
+void MainWindow::addStandardMenu(const StandardMenus &menu)
 {
-}
+  switch (menu) {
+    case FileMenu:
+      if (! m_menu_file) {
+        m_menu_file = menuBar()->addMenu(_("&File"));
 
-void MainWindow::addHelpMenu()
-{
-  QMenu *menu;
+      }
+      break;
+    case EditMenu:
+      if (! m_menu_edit) {
+        m_menu_edit = menuBar()->addMenu(_("&Edit"));
 
-  menuBar()->addSeparator();
+      }
+      break;
+    case ViewMenu:
+      if (! m_menu_view) {
+        m_menu_view = menuBar()->addMenu(_("&View"));
 
-  menu = menuBar()->addMenu(_("&Help"));
-  menu->addAction(standardAction(HelpContents));
-  //menu->addAction(standardAction(HelpIndex));    // into prefs.
-  //menu->addAction(standardAction(HelpSearch));
-  menu->addSeparator();
-  menu->addAction(standardAction(GoToHomepage));
-  menu->addAction(standardAction(HelpForum));
-  menu->addAction(standardAction(ReportBug));
-  menu->addSeparator();
-  menu->addAction(standardAction(AboutApp));
-  menu->addAction(standardAction(AboutQt));
+      }
+      break;
+    case SettingsMenu:
+      if (! m_menu_settings) {
+        m_menu_settings = menuBar()->addMenu(_("&Settings"));
+
+      }
+      break;
+    case HelpMenu:
+      if (! m_menu_help) {
+        menuBar()->addSeparator();
+
+        m_menu_help = menuBar()->addMenu(_("&Help"));
+        m_menu_help->addAction(standardAction(HelpContents));
+        //m_menu_help->addAction(standardAction(HelpIndex));    // into prefs?
+        //m_menu_help->addAction(standardAction(HelpSearch));
+        m_menu_help->addSeparator();
+        m_menu_help->addAction(standardAction(GoToHomepage));
+        m_menu_help->addAction(standardAction(HelpForum));
+        m_menu_help->addAction(standardAction(ReportBug));
+        m_menu_help->addSeparator();
+        m_menu_help->addAction(standardAction(AboutApp));
+        m_menu_help->addAction(standardAction(AboutQt));
+      }
+      break;
+  }
 }
 
 void MainWindow::setDefaultWindowSize(unsigned int width, unsigned int height)

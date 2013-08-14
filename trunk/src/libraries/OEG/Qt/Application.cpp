@@ -267,7 +267,7 @@ QString Application::locateFile(const QString &filename, FileType type /*=Unknow
       {
         QDir dir;
 
-        // TODO: avoid change dirs
+        // TODO: avoid change dirs, simplify, icon management!
 
         dir.cd(standardDirectory(User));
         if (dir.exists("resources/icons")) {
@@ -288,6 +288,15 @@ QString Application::locateFile(const QString &filename, FileType type /*=Unknow
           dir.cd("resources/icons");
           if (QFile::exists(dir.canonicalPath() + "/" + filename))
             return dir.canonicalPath() + "/" + filename;
+        }
+
+        dir.cd(standardDirectory(Base));
+        if (dir.exists("share/icons/default profile/standard")) {
+          dir.cd("share/icons/default profile/standard");
+          if (QFile::exists(dir.canonicalPath() + "/" + filename))
+            return dir.canonicalPath() + "/" + filename;
+          if (QFile::exists(dir.canonicalPath() + "/" + filename + ".svg"))
+            return dir.canonicalPath() + "/" + filename + ".svg";
         }
 
         qWarning() << "Icon not found! Checked in user/common/app resources dir.";
