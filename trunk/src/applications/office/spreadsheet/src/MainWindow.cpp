@@ -17,6 +17,7 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <OEG/Qt/Application.h>
+#include <OEG/Qt/TabbedMenuBar.h>
 #include <OEG/Qt/TabWidget.h>
 #include <OEG/Qt/MessageBox.h>
 
@@ -60,9 +61,6 @@ MainWindow::MainWindow()
   vbox->addWidget(m_tabs);
   setCentralLayout(vbox);
 
-  //createActions();
-  //createMenus();
-  //createToolBars();
   createAll();
 
   setMinimumSize(200, 180);
@@ -296,30 +294,39 @@ void MainWindow::createActions()
 #endif
 }
 
+void MainWindow::createDockWidgets()
+{
+}
+
 void MainWindow::createMenus()
 {
+  QMenu   *menu;
+  QAction *action;
+
+  menu = getStandardMenu(FileMenu);
+  menu->addAction(standardAction(New));
+  menu->addAction(standardAction(Open));
+  menu->addAction(standardAction(Save));
+  menu->addAction(standardAction(SaveAs));
+  menu->addAction(standardAction(Close));
+  //m_menu_file->addAction(m_action_file_page_setup);
+  //m_menu_file->addAction(m_action_file_print);
+  //m_menu_file->addAction(m_action_file_print_preview);
+  menu->addSeparator();
+  menu->addAction(standardAction(Exit));
+
+  menu = getStandardMenu(EditMenu);
+  menu->addAction(standardAction(Undo));
+  menu->addAction(standardAction(Redo));
+  menu->addSeparator();
+  menu->addAction(standardAction(Cut));
+  menu->addAction(standardAction(Copy));
+  menu->addAction(standardAction(Paste));
+  menu->addSeparator();
+  menu->addAction(standardAction(Delete));
+
+  menu = getStandardMenu(ViewMenu);
 #if 0
-  m_menu_file = menuBar()->addMenu(_("&File"));
-  m_menu_file->addAction(m_action_file_load);
-  m_menu_file->addAction(m_action_file_save);
-  m_menu_file->addAction(m_action_file_save_as);
-  m_menu_file->addAction(m_action_file_close);
-  m_menu_file->addSeparator();
-  m_menu_file->addAction(m_action_file_page_setup);
-  m_menu_file->addAction(m_action_file_print);
-  m_menu_file->addAction(m_action_file_print_preview);
-  m_menu_file->addSeparator();
-  m_menu_file->addAction(m_action_file_exit);
-
-  m_menu_edit = menuBar()->addMenu(_("&Edit"));
-  m_menu_edit->addAction(m_action_edit_undo);
-  m_menu_edit->addAction(m_action_edit_redo);
-  m_menu_edit->addSeparator();
-  m_menu_edit->addAction(m_action_edit_cut);
-  m_menu_edit->addAction(m_action_edit_copy);
-  m_menu_edit->addAction(m_action_edit_paste);
-
-  m_menu_view = menuBar()->addMenu(_("&View"));
   m_menu_view->addSeparator()->setText(tr("Alignment"));
   m_menu_view_toolbars = m_menu_view->addMenu(_("ToolBars"));
   m_menu_view_toolbars->addAction(m_action_view_toolbar_file);
@@ -329,32 +336,32 @@ void MainWindow::createMenus()
   m_menu_view_docks = m_menu_view->addMenu(_("Docks"));
   m_menu_view_docks->addAction(m_action_view_dock_functions);
   m_menu_view_docks->addAction(m_action_view_dock_properties);
+#endif
 
-  m_menu_settings = menuBar()->addMenu(_("&Settings"));
+  menu = getStandardMenu(SettingsMenu);
+#if 0
   m_menu_settings->addAction(m_action_settings_common);
   m_menu_settings->addAction(m_action_settings_document);
   m_menu_settings->addAction(m_action_settings_security);
   m_menu_settings->addAction(m_action_settings_view);
+#endif
 
   m_menu_insert = menuBar()->addMenu(_("&Insert"));
+#if 0
   m_menu_insert->addAction(m_action_insert_rows);
   m_menu_insert->addAction(m_action_insert_columns);
   m_menu_insert->addSeparator();
   m_menu_insert->addAction(m_action_insert_sheet);
   m_menu_insert->addAction(m_action_insert_diagram);
-
-  menuBar()->addSeparator();
-
-  m_menu_help = menuBar()->addMenu(_("&Help"));
-  m_menu_help->addAction(m_action_about_me);
-  m_menu_help->addAction(m_action_about_qt);
 #endif
+
+  addStandardMenu(HelpMenu);
 }
 
 void MainWindow::createToolBars()
 {
-#if 0
   m_toolbar_file = addToolBar(_("File"));
+#if 0
   //m_toolbar_file->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
   m_toolbar_file->addAction(m_action_file_load);
   m_toolbar_file->addAction(m_action_file_save);
@@ -378,6 +385,10 @@ void MainWindow::createToolBars()
 
   m_toolbar_widgets = addToolBar(_("Widgets"));
 #endif
+}
+
+void MainWindow::createTabbedMenuBar()
+{
 }
 
 void MainWindow::tabWidgetTitleDoubleClicked(int index)

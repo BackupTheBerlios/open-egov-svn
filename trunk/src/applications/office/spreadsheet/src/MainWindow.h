@@ -65,9 +65,11 @@ class MainWindow : public OEG::Qt::MainWindow
     void action_settings_security();
     void action_settings_view();
 
-    void createActions();
-    void createMenus();
-    void createToolBars();
+    virtual void createActions();
+    virtual void createDockWidgets();
+    virtual void createMenus();
+    virtual void createToolBars();
+    virtual void createTabbedMenuBar();
 
     void tabWidgetTitleDoubleClicked(int index);
     void tabWidgetContextMenu(const QPoint &pos);

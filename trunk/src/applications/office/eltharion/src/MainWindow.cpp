@@ -16,7 +16,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <OEG/Qt/ToolProvider.h>
+#include <OEG/Qt/TabbedMenuBar.h>
 
 #include <QApplication>
 #include <QMenuBar>
@@ -45,8 +45,9 @@ void MainWindow::createActions()
 void MainWindow::createMenus()
 {
   QMenu *menu;
+  QAction *action;
 
-  menu = menuBar()->addMenu(_("&File"));
+  menu = getStandardMenu(FileMenu);
   menu->addAction(standardAction(New));
   menu->addAction(standardAction(Edit));
   menu->addAction(standardAction(Print));
@@ -54,7 +55,7 @@ void MainWindow::createMenus()
   menu->addSeparator();
   menu->addAction(standardAction(Exit));
 
-  menu = menuBar()->addMenu(_("&Edit"));
+  menu = getStandardMenu(EditMenu);
   menu->addAction(standardAction(Undo));
   menu->addAction(standardAction(Redo));
   menu->addSeparator();
@@ -63,7 +64,7 @@ void MainWindow::createMenus()
   menu->addAction(standardAction(Paste));
   menu->addAction(standardAction(Delete));
 
-  addHelpMenu();
+  addStandardMenu(HelpMenu);
 }
 
 void MainWindow::createToolBars()
