@@ -7,12 +7,14 @@
     <translation number="1" localeid="1" value="Bilddatei" />
     <translation number="2" localeid="1" value="MIME-Type" />
     <translation number="3" localeid="1" value="kompilierte Java-Klassendateien (Bytecode)" />
+    <translation number="4" localeid="1" value="beliebiger anderer Dateityp" />
   </translations>
 
   <datatypes>
     <datatype number="1">image</datatype>
     <datatype number="2">document</datatype>
     <datatype number="3">database</datatype>
+    <datatype number="4">other</datatype>
   </datatypes>
 
   <searchpatterns>
@@ -23,6 +25,7 @@
     <searchpattern filetypeid="4">0:0x47 0x49 0x46 0x38 0x39 0x61</searchpattern> <!-- GIF89a -->
     <searchpattern filetypeid="5">0:0xca 0xfe 0xba 0xbe</searchpattern> <!-- JAVA class -->
     <searchpattern filetypeid="6">0:"SQLite format 3"</searchpattern> <!-- SQLite -->
+    <searchpattern filetypeid="7">0:"icns"</searchpattern> <!-- Mac icons file -->
   </searchpatterns>
 
   <data>
@@ -102,6 +105,19 @@ Specification: http://www.jpeg.org/public/jfif.pdf</field>
       <field name="creator"></field>
       <field name="organization"></field>
       <field name="website">http://www.sqlite.org/</field>
+      <field name="comments"></field>
+    </filetype>
+
+    <filetype>
+      <field name="id">7</field>
+      <field name="type">4</field>
+      <field name="name">Apple Icon Image</field>
+      <field name="extensions">icns</field>
+      <field name="mime-type"></field>
+      <field name="wikipedia">Apple Icon Image format</field>
+      <field name="creator">Apple Inc.</field>
+      <field name="organization"></field>
+      <field name="website"></field>
       <field name="comments"></field>
     </filetype>
   </data>
