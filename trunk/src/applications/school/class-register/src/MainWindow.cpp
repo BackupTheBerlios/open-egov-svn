@@ -1,7 +1,7 @@
 // $Id: MainWindow.cpp 228 2010-08-04 18:14:44Z gerrit-albrecht $
 //
 // Open eGovernment
-// Copyright (C) 2005-2011 by Gerrit M. Albrecht
+// Copyright (C) 2005-2013 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -40,6 +40,10 @@ void MainWindow::createActions()
 {
   OEG::Qt::MainWindow::createActions();
 
+}
+
+void MainWindow::createStatusBar()
+{
 }
 
 void MainWindow::createDockWidgets()
@@ -81,6 +85,5 @@ void MainWindow::createToolBars()
 
 void MainWindow::createTabbedMenuBar()
 {
-
 }
 

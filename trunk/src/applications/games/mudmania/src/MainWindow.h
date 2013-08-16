@@ -30,6 +30,8 @@ class Splitter;
 class QScriptEngine;
 class MultiLineEdit;
 
+class OEG::Qt::TabbedMenuBar;
+
 class MainWindow : public OEG::Qt::MainWindow
 {
   Q_OBJECT
@@ -41,9 +43,11 @@ class MainWindow : public OEG::Qt::MainWindow
     virtual ~MainWindow();
 
     virtual void createActions();
+    virtual void createStatusBar();
+    virtual void createDockWidgets();
     virtual void createMenus();
     virtual void createToolBars();
-    virtual void createDockWidgets();
+    virtual void createTabbedMenuBar();
 
     void createJavaScriptObjects();
     void runJavaScript(const QString &s);

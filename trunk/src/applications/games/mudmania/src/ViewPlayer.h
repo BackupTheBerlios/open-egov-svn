@@ -22,6 +22,7 @@
 
 #include <QtCore>
 #include <QtGui>
+#include <QtWidgets>
 
 #include "ConnectionThread.h"
 #include "View.h"

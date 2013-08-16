@@ -4,7 +4,8 @@ TARGET    = screensaver-runner
 SOURCES   = *.cpp
 HEADERS   = *.h
 FORMS     = 
-QT        = core gui -xml
+QT        = core gui
+QT -= xml
 PACKAGES  = 
 CONFIG   += console static
 

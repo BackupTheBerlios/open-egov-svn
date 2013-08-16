@@ -1,5 +1,5 @@
 # $Id$
 
 TEMPLATE = subdirs
-SUBDIRS  = class-register
+SUBDIRS  = attendance-register class-register timetables
 

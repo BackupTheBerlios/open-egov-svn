@@ -17,6 +17,7 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <OEG/Qt/TabWidget.h>
+#include <OEG/Qt/TabbedMenuBar.h>
 #include <OEG/Qt/Application.h>
 
 #include <QAction>
@@ -78,11 +79,20 @@ void MainWindow::createActions()
           this,                          SLOT(actionConnectToggle()));
 }
 
+void MainWindow::createStatusBar()
+{
+}
+
+void MainWindow::createDockWidgets()
+{
+}
+
 void MainWindow::createMenus()
 {
-  QMenu *menu;
+  QMenu   *menu;
+  QAction *action;
 
-  menu = menuBar()->addMenu(_("&File"));
+  menu = getStandardMenu(FileMenu);
   menu->addAction(standardAction(New));
   menu->addSeparator();
   menu->addAction(standardAction(Save));
@@ -94,15 +104,23 @@ void MainWindow::createMenus()
   menu->addSeparator();
   menu->addAction(standardAction(Exit));
 
-  menu = menuBar()->addMenu(_("&Edit"));
+  menu = getStandardMenu(EditMenu);
+  menu->addAction(standardAction(SelectAll));
+  menu->addSeparator();
   menu->addAction(standardAction(Cut));
   menu->addAction(standardAction(Copy));
   menu->addAction(standardAction(Paste));
+  menu->addSeparator();
+  menu->addAction(standardAction(Delete));
 
   menu = menuBar()->addMenu(_("&Connection"));
   menu->addAction(standardAction(ConnectToggle));
 
-  addHelpMenu();
+  menu = getStandardMenu(SettingsMenu);
+  action = menu->addAction(_("Common..."));
+  connect(action, SIGNAL(triggered()), this, SLOT(commonSettings()));
+
+  addStandardMenu(HelpMenu);
 }
 
 void MainWindow::createToolBars()
@@ -116,7 +134,7 @@ void MainWindow::createToolBars()
   toolbar->addAction(action);
 }
 
-void MainWindow::createDockWidgets()
+void MainWindow::createTabbedMenuBar()
 {
 }
 

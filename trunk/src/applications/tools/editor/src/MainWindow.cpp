@@ -30,6 +30,10 @@
 #include <QLabel>
 #include <QLatin1String>
 #include <QString>
+#include <QStringList>
+#include <QFileDialog>
+#include <QFile>
+#include <QByteArray>
 
 #include "PluginInterface.h"
 #include "TextEditor.h"
@@ -59,7 +63,6 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
   setCentralWidget(m_tabs);
 
   activateWindow();
-  currentEditor()->setFocus();
 
   createAll();
 
@@ -124,6 +127,10 @@ void MainWindow::createStatusBar()
   updateStatusBar();
 }
 
+void MainWindow::createDockWidgets()
+{
+}
+
 void MainWindow::createMenus()
 {
   QMenu *menu;
@@ -180,7 +187,7 @@ void MainWindow::createToolBars()
   toolbar->addAction(standardAction(Delete));
 }
 
-void MainWindow::createDockWidgets()
+void MainWindow::createTabbedMenuBar()
 {
 }
 
@@ -227,38 +234,6 @@ void MainWindow::loadFileTypes()
 {
 }
 
-void MainWindow::standardActionClose()
-{
-  m_tabs->closeTab();
-}
-
-#include <QStringList>
-#include <QFileDialog>
-#include <QFile>
-#include <QByteArray>
-
-void MainWindow::standardActionOpen()
-{
-  QStringList files = QFileDialog::getOpenFileNames(this, _("Open a text file"), m_file_dialog_last_path);
-  QString     fileName;
-
-  for (int i = 0; i < files.size(); i++) {
-    fileName = files.at(i);
-
-    if (! fileName.isNull()) {
-      m_file_dialog_last_path = QFileInfo(fileName).path();  // Store path for the next time.
-
-      QFile file(fileName);
-      if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        QByteArray text = file.readAll();
-
-        standardActionNew();
-        currentEditor()->insertPlainText(text.constData());
-      }
-    }
-  }
-}
-
 void MainWindow::standardActionNew()
 {
   TextEditor *editor = new TextEditor(this);
@@ -270,10 +245,88 @@ void MainWindow::standardActionNew()
   editor->setLineNumbersWidth(-1);
   editor->showLineNumbers();
 
-  connect(editor, SIGNAL(textChanged()),
-          this,   SLOT(updateStatusBar()));
+  connect(editor,                 SIGNAL(textChanged()),
+          this,                   SLOT(updateStatusBar()));
+  connect(editor,                 SIGNAL(cursorPositionChanged()),
+          this,                   SLOT(updateStatusBar()));
+  connect(editor,                 SIGNAL(copyAvailable(bool)),
+          standardAction(Cut),    SLOT(setEnabled(bool)));
+  connect(editor,                 SIGNAL(copyAvailable(bool)),
+          standardAction(Copy),   SLOT(setEnabled(bool)));
+  connect(editor,                 SIGNAL(copyAvailable(bool)),
+          standardAction(Delete), SLOT(setEnabled(bool)));
+  connect(editor,                 SIGNAL(undoAvailable(bool)),
+          standardAction(Undo),   SLOT(setEnabled(bool)));
+  connect(editor,                 SIGNAL(redoAvailable(bool)),
+          standardAction(Redo),   SLOT(setEnabled(bool)));
 
   m_tabs->addTab(editor, _("Unnamed"));
+
+  m_tabs->setCurrentIndex(m_tabs->count()-1);
+
+  currentEditor()->setFocus();
+}
+
+void MainWindow::standardActionOpen()
+{
+  bool        documentOpened = false;
+  QStringList files = QFileDialog::getOpenFileNames(this, _("Open a text file"), m_file_dialog_last_path);
+  QString     filePathWithName;
+
+  for (int i = 0; i < files.size(); i++) {
+    filePathWithName = files.at(i);
+
+    qDebug() << "File name:" << filePathWithName;
+
+    if (! filePathWithName.isNull()) {
+      QFileInfo fi(filePathWithName);
+
+      QString extension = fi.completeSuffix();
+      QString fileName  = fi.fileName();
+
+      m_file_dialog_last_path = fi.canonicalPath();        // Store path for the next time.
+
+      QFile file(filePathWithName);
+      if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QByteArray text = file.readAll();
+
+        standardActionNew();
+        TextEditor *editor = currentEditor();
+        editor->insertPlainText(text.constData());
+        editor->setDocumentTitle(fileName);
+        editor->textCursor().movePosition(QTextCursor::Start);
+        
+        m_tabs->setTabText(m_tabs->currentIndex(), fileName);
+        m_tabs->setTabToolTip(m_tabs->currentIndex(), filePathWithName);
+        m_tabs->setTabWhatsThis(m_tabs->currentIndex(), "xxx");
+
+        documentOpened = true;                             // We opened a new document.
+      }
+    }
+  }
+
+  // If count of tabs is greater than 1 and the first tab is _("Unnamed")
+  // and unchanged/empty, then remove the first tab.
+
+  if ((m_tabs->count() > 1) && (documentOpened)) {
+    if (m_tabs->tabBar()->tabText(0) == _("Unnamed")) {
+      TextEditor *editor = dynamic_cast<TextEditor *>(m_tabs->widget(0));
+	  if (editor) {
+        if (! editor->document()->isModified()) {
+          m_tabs->removeTab(0);
+          delete editor; editor = 0;
+        }
+      }
+//editor->document()->characterCount()
+//editor->document()->blockCount()
+//tabBar()->setTabTextColor(int index, const QColor & color)
+    }
+  }
+}
+
+void MainWindow::standardActionClose()
+{
+  m_tabs->closeTab();
 }
 
 void MainWindow::standardActionPrint()

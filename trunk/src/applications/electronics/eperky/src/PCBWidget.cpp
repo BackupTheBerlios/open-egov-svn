@@ -17,7 +17,6 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <OEG/Qt/Application.h>
-#include <OEG/Qt/ToolProvider.h>
 
 #include <QApplication>
 #include <QTextEdit>

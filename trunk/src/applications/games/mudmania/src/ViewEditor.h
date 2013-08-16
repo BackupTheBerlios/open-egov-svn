@@ -24,6 +24,7 @@
 
 #include <QtCore>
 #include <QtGui>
+#include <QTextEdit>
 
 #include "View.h"
 

@@ -1,10 +1,15 @@
-# $Id: src.pro 227 2010-08-04 18:13:48Z gerrit-albrecht $
+# $Id:$
+#
+# Automatically generated file. Do not edit manually!
+# See application.xml in parent directory (project tag).
+# This file is part of the Open E-Government project.
 
 TARGET    = suchfuxx
 SOURCES   = *.cpp
 HEADERS   = *.h
 FORMS     = 
-QT       += 
+QT       += network gui widgets
+CONFIG   += 
 PACKAGES  = QT GETTEXT
 
 include(../../../common.pri)

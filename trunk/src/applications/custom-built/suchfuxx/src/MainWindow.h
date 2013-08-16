@@ -40,10 +40,11 @@ class MainWindow : public OEG::Qt::MainWindow
     virtual ~MainWindow();
 
     virtual void createActions();
+    virtual void createStatusBar();
     virtual void createDockWidgets();
     virtual void createMenus();
     virtual void createToolBars();
-    virtual void createToolProvider() {};
+    virtual void createTabbedMenuBar();
 
   public slots:
     void loadFile();

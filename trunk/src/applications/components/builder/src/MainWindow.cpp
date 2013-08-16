@@ -303,6 +303,10 @@ void MainWindow::createStatusBar()
   OEG::Qt::MainWindow::createStatusBar();
 }
 
+void MainWindow::createDockWidgets()
+{
+}
+
 void MainWindow::createMenus()
 {
   QMenu   *menu;
@@ -363,7 +367,7 @@ void MainWindow::createToolBars()
           this,             SLOT(filterTextChanged(const QString &)));
 }
 
-void MainWindow::createDockWidgets()
+void MainWindow::createTabbedMenuBar()
 {
 }
 

@@ -20,6 +20,7 @@
 
 #include <QDebug>
 #include <QIODevice>
+#include <QDataStream>
 #include <QTcpSocket>
 
 #include "Telnet.h"
@@ -95,6 +96,8 @@ void Telnet::loginUser(const QString &username, const QString &password)
 
 void Telnet::sendControl(Control ctrl)
 {
+  Q_UNUSED(ctrl);
+
 }
 
 void Telnet::sendData(const QString &data)
@@ -110,7 +113,7 @@ void Telnet::sendSync()
 {
 }
 
-QTcpSocket *Telnet::socket () const
+QTcpSocket *Telnet::socket() const
 {
   return m_socket;
 }

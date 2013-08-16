@@ -19,6 +19,10 @@
 #include <QtCore>
 #include <QtGui>
 
+#include <QApplication>
+#include <QFileDialog>
+#include <QMessageBox>  // TODO: remove
+
 #include "ViewEditor.h"
 
 ViewEditor::ViewEditor(QWidget *parent /*=0*/)

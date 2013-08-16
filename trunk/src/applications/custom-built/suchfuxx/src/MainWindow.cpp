@@ -16,6 +16,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+#include <OEG/Qt/Application.h>
+#include <OEG/Qt/TabbedMenuBar.h>
+
 #include <QAction>
 #include <QBrush>
 #include <QDir>
@@ -45,8 +48,6 @@
 #include <QVBoxLayout>
 
 #include <QDebug>
-
-#include <OEG/Qt/Application.h>
 
 #include "FilePlanEntry.h"
 #include "MainWindow.h"
@@ -214,24 +215,17 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
   connect(m_fileplan, SIGNAL(itemSelectionChanged()),
           this,       SLOT(updateStatusBar()));
 
-  QHeaderView *hh = m_fileplan->horizontalHeader();
-  hh->setResizeMode(0, QHeaderView::Interactive);
-  hh->setResizeMode(1, QHeaderView::Interactive);
-  hh->setResizeMode(2, QHeaderView::Interactive);
-  hh->resizeSection(0, 60);
-  hh->setStretchLastSection(true);
+  QHeaderView *hv = m_fileplan->horizontalHeader();
+  hv->setSectionResizeMode(0, QHeaderView::Interactive);
+  hv->setSectionResizeMode(1, QHeaderView::Interactive);
+  hv->setSectionResizeMode(2, QHeaderView::Interactive);
+  hv->resizeSection(0, 60);
+  hv->setStretchLastSection(true);
   //m_fileplan->setGridStyle(Qt::DotLine); // Qt::NoPen Qt::SolidLine
 
   QFontMetrics fm(m_fileplan->font());
   //int sectionLength = fm.width(s);
 
-
-
-  m_sb_pos = new QLabel();
-  m_sb_pos->setText("    ");
-  m_sb_pos->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-  m_sb_pos->setAlignment(Qt::AlignBottom | Qt::AlignRight);
-  statusBar()->addPermanentWidget(m_sb_pos);
 }
 
 MainWindow::~MainWindow()
@@ -252,12 +246,26 @@ void MainWindow::createActions()
 
 }
 
+void MainWindow::createStatusBar()
+{
+  m_sb_pos = new QLabel();
+  m_sb_pos->setText("    ");
+  m_sb_pos->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+  m_sb_pos->setAlignment(Qt::AlignBottom | Qt::AlignRight);
+  statusBar()->addPermanentWidget(m_sb_pos);
+}
+
+void MainWindow::createDockWidgets()
+{
+}
+
 void MainWindow::createMenus()
 {
   QMenu   *menu;
   QAction *action;
 
-  menu = menuBar()->addMenu(_("&File"));
+  menu = getStandardMenu(FileMenu);
+  menu->addAction(standardAction(New));
 
   action = menu->addAction(_("Load ..."));
   connect(action, SIGNAL(triggered()), this, SLOT(loadFile()));
@@ -266,9 +274,21 @@ void MainWindow::createMenus()
   connect(action, SIGNAL(triggered()), this, SLOT(saveFile()));
 
   menu->addSeparator();
+  menu->addAction(standardAction(Print));
+  menu->addSeparator();
   menu->addAction(standardAction(Exit));
 
-  addHelpMenu();
+  menu = getStandardMenu(EditMenu);
+  menu->addAction(standardAction(Undo));
+  menu->addAction(standardAction(Redo));
+  menu->addSeparator();
+  menu->addAction(standardAction(Cut));
+  menu->addAction(standardAction(Copy));
+  menu->addAction(standardAction(Paste));
+  menu->addSeparator();
+  menu->addAction(standardAction(Delete));
+
+  addStandardMenu(HelpMenu);
 }
 
 void MainWindow::createToolBars()
@@ -284,7 +304,7 @@ void MainWindow::createToolBars()
   //popupButton1->setIcon( QIcon( ":/icons/new.png" ) );
 }
 
-void MainWindow::createDockWidgets()
+void MainWindow::createTabbedMenuBar()
 {
 }
 

@@ -72,11 +72,14 @@ void MainWindow::createMenus()
 
 void MainWindow::loadPlugins()
 {
-  QDir pluginsDir(qApp->applicationDirPath());
+  QString baseName = dynamic_cast<OEG::Qt::Application *>(qApp)->baseName();
+  QDir pluginsDir(qApp->applicationDirPath(), "*.dll;*.so");  // Ignore .a files.
 
   if (pluginsDir.dirName().toLower() == "bin")
     pluginsDir.cdUp();
-  pluginsDir.cd("plugins/desktop");
+  pluginsDir.cd("plugins/" + baseName);
+
+  qDebug() << "Loading Plugins from: " << pluginsDir.absolutePath();
 
   PluginInterface *pluginInterface;
   QObject *plugin;

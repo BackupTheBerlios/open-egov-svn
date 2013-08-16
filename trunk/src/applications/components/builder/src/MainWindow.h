@@ -44,7 +44,7 @@ class MainWindow : public OEG::Qt::MainWindow
     virtual void createDockWidgets();
     virtual void createMenus();
     virtual void createToolBars();
-    virtual void createTabbedMenuBar() {};
+    virtual void createTabbedMenuBar();
 
     void processInit();
 

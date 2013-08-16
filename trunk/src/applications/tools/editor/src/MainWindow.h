@@ -42,12 +42,12 @@ class MainWindow : public OEG::Qt::MainWindow
     virtual void createDockWidgets();
     virtual void createMenus();
     virtual void createToolBars();
-    virtual void createTabbedMenuBar() {};
+    virtual void createTabbedMenuBar();
 
   public slots:
-    void standardActionClose();
-    void standardActionOpen();
     void standardActionNew();
+    void standardActionOpen();
+    void standardActionClose();
     void standardActionPrint();
 
   protected:

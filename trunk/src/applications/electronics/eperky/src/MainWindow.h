@@ -36,7 +36,7 @@ class ProjectTab;
 class PartListTab;
 class PCBTab;
 
-class OEG::Qt::ToolProvider;
+class OEG::Qt::TabbedMenuBar;
 
 class MainWindow : public OEG::Qt::MainWindow
 {
@@ -47,10 +47,11 @@ class MainWindow : public OEG::Qt::MainWindow
     virtual ~MainWindow();
 
     virtual void createActions();
+    virtual void createStatusBar();
     virtual void createDockWidgets();
     virtual void createMenus();
     virtual void createToolBars();
-    virtual void createToolProvider() {};
+    virtual void createTabbedMenuBar();
 
   private:
     void loadPlugins();

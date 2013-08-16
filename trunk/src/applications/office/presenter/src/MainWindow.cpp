@@ -49,9 +49,9 @@ void MainWindow::createMenus()
 
   menu = getStandardMenu(FileMenu);
   menu->addAction(standardAction(New));
-  menu->addAction(standardAction(Edit));
+  menu->addAction(standardAction(Open));
+  menu->addAction(standardAction(Close));
   menu->addAction(standardAction(Print));
-  menu->addAction(standardAction(Edit));
   menu->addSeparator();
   menu->addAction(standardAction(Exit));
 

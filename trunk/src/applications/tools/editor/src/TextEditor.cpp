@@ -181,7 +181,7 @@ void TextEditor::highlightCurrentLine(const bool highlight /*=true*/)
 void TextEditor::contextMenuEvent(QContextMenuEvent *event)
 {
   QMenu *menu = createStandardContextMenu();
-  menu->addAction(_("Test"));
+  //menu->addAction(_("Test"));
   menu->exec(event->globalPos());
   delete menu;
 }

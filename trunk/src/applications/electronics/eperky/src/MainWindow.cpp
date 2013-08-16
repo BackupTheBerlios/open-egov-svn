@@ -17,7 +17,7 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <OEG/Qt/Application.h>
-#include <OEG/Qt/ToolProvider.h>
+#include <OEG/Qt/TabbedMenuBar.h>
 
 #include <QApplication>
 #include <QMenuBar>
@@ -87,27 +87,44 @@ void MainWindow::createActions()
 
 }
 
+void MainWindow::createStatusBar()
+{
+
+  OEG::Qt::MainWindow::createStatusBar();
+}
+
+void MainWindow::createDockWidgets()
+{
+}
+
 void MainWindow::createMenus()
 {
-  QMenu *fileMenu = menuBar()->addMenu(_("&File"));
-  fileMenu->addAction(standardAction(New));
-  fileMenu->addAction(standardAction(Open));
-  fileMenu->addAction(standardAction(Save));
-  fileMenu->addAction(standardAction(SaveAs));
-  fileMenu->addSeparator();
-  fileMenu->addAction(standardAction(Exit));
+  QMenu   *menu;
+  QAction *action;
 
-  QMenu *editMenu = menuBar()->addMenu(_("&Edit"));
-  editMenu->addAction(standardAction(Undo));
-  editMenu->addAction(standardAction(Redo));
-  editMenu->addSeparator();
-  editMenu->addAction(standardAction(Cut));
-  editMenu->addAction(standardAction(Copy));
-  editMenu->addAction(standardAction(Paste));
-  editMenu->addSeparator();
-  editMenu->addAction(standardAction(Delete));
+  menu = getStandardMenu(FileMenu);
+  menu->addAction(standardAction(New));
+  menu->addAction(standardAction(Open));
+  menu->addAction(standardAction(Save));
+  menu->addAction(standardAction(SaveAs));
+  menu->addSeparator();
+  menu->addAction(standardAction(Exit));
 
-  addHelpMenu();
+  menu = getStandardMenu(EditMenu);
+  menu->addAction(standardAction(Undo));
+  menu->addAction(standardAction(Redo));
+  menu->addSeparator();
+  menu->addAction(standardAction(Cut));
+  menu->addAction(standardAction(Copy));
+  menu->addAction(standardAction(Paste));
+  menu->addSeparator();
+  menu->addAction(standardAction(Delete));
+
+  menu = getStandardMenu(SettingsMenu);
+  action = menu->addAction(_("Common..."));
+  connect(action, SIGNAL(triggered()), this, SLOT(commonSettings()));
+
+  addStandardMenu(HelpMenu);
 }
 
 void MainWindow::createToolBars()
@@ -142,7 +159,7 @@ void MainWindow::createToolBars()
   toolbar->addAction(standardAction(ZoomOut));
 }
 
-void MainWindow::createDockWidgets()
+void MainWindow::createTabbedMenuBar()
 {
 }
 
@@ -157,25 +174,26 @@ void MainWindow::loadPlugins()
 
   qDebug() << "Loading Plugins from: " << pluginsDir.absolutePath();
 
-  PluginInterface *interface;
+  PluginInterface *pluginInterface;
   QObject *plugin;
+  QWidget *gui;
 
   foreach (QString fileName, pluginsDir.entryList(QDir::Files)) {
     QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
     plugin = pluginLoader.instance();
     if (plugin) {
-      interface = qobject_cast<PluginInterface *>(plugin);
-      if (interface) {
-        if (interface->pluginApplicationName() != baseName) {
+      pluginInterface = qobject_cast<PluginInterface *>(plugin);
+      if (pluginInterface) {
+        if (pluginInterface->pluginApplicationName() != baseName) {
           qWarning() << "Application base names from plugin and application do not match:";
           qWarning() << " plugin file name:" << fileName;
           qDebug() << " application base name:" << baseName;
-          qDebug() << " plugin application name:" << interface->pluginApplicationName();
+          qDebug() << " plugin application name:" << pluginInterface->pluginApplicationName();
         }
         else {
-          m_plugins.append(interface);
+          m_plugins.append(pluginInterface);
 
-          QGraphicsItem *item = interface->createGraphicsItem();
+          QGraphicsItem *item = pluginInterface->createGraphicsItem();
           m_tab_schematics->scene()->addItem(item);
           item->setPos(10, 10);
           item->show();
@@ -183,7 +201,7 @@ void MainWindow::loadPlugins()
 
           m_tab_schematics->scene()->addText("1234567--------")->setPos(10, 100);
 
-          //gui = interface->createGUI(this);
+          //gui = pluginInterface->createGUI(this);
           //if (gui) {
           //  gui->show();
           //}

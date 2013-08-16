@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<category base="games">
+<category base="gis">
   <strings lang="en_US">
     <string name="title">GIS</string>
     <string name="description">Applications using Geographic Information Systems.</string>
