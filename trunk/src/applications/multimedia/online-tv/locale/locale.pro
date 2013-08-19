@@ -1,6 +1,0 @@
-# $Id$
-
-TEMPLATE = subdirs
-SUBDIRS  = 
-
-
