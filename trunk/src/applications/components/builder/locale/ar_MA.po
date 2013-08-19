@@ -1,0 +1,182 @@
+# Arabic translations for PACKAGE package.
+# Copyright (C) 2013 Open E-Government Project
+# This file is distributed under the same license as the PACKAGE package.
+# <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: msgid-bugs@open-egov.de\n"
+"POT-Creation-Date: 2013-08-19 14:48+0200\n"
+"PO-Revision-Date: 2013-08-19 14:48+0200\n"
+"Last-Translator: <EMAIL@ADDRESS>\n"
+"Language-Team: Arabic\n"
+"Language: ar_MA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CP1252\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#
+# File: ../src/MainWindow.cpp, line: 320
+msgid "&Build"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 321
+msgid "&Clear environment"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 325
+msgid "&Compile package"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 360
+msgid "&Filter:"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 330
+msgid "&Instructions"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 61
+msgid "A"
+msgstr ""
+
+#
+# File: ../src/main.cpp, line: 30
+msgid "Builder"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 342
+msgid "Common..."
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 327
+msgid "Create binary &archive"
+msgstr ""
+
+#
+# File: ../src/EditPackageDialog.cpp, line: 26
+msgid "Edit Package"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 333
+msgid "Edit package..."
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 353
+msgid "File"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 58
+msgid "Flags"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 91
+msgid "Flags you may select"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 60
+msgid "I"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 323
+msgid "Install &required packages"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 81
+msgid "Name of the package"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 331
+msgid "New package..."
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 338
+msgid "Open Command Line Interface"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 335
+msgid "Overlay package..."
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 56
+msgid "Package"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 265
+msgid "Packages:"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 280
+msgid "Reloads the list of packages."
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 267
+msgid "Selected:"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 298
+msgid "The number of currently selected packages."
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 292
+msgid "The number of packages."
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 106
+msgid "The package is archived as binary"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 101
+msgid "The package is currently installed"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 96
+msgid "The package is functional and works"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 279
+msgid "Update package list"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 57
+msgid "Version"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 86
+msgid "Version number"
+msgstr ""
+
+#
+# File: ../src/MainWindow.cpp, line: 59
+msgid "W"
+msgstr ""

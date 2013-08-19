@@ -1,182 +1,214 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Open E-Government Project
+# German translations for PACKAGE package.
+# Copyright (C) 2013 Gerrit M. Albrecht
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# <EMAIL@ADDRESS>, 2013.
 #
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: msgid-bugs@open-egov.de\n"
+"POT-Creation-Date: 2013-08-19 14:51+0200\n"
+"PO-Revision-Date: 2013-08-19 10:41+0200\n"
+"Last-Translator: <EMAIL@ADDRESS>\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CP1252\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#
+# File: main.cpp, line: 27
 #, fuzzy
-msgid   ""
-msgstr  "Project-Id-Version: PACKAGE VERSION\n"
-        "Report-Msgid-Bugs-To: msgid-bugs@open-egov.de\n"
-        "POT-Creation-Date: 2013-08-19 14:51+0200\n"
-        "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-        "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-        "Language-Team: LANGUAGE <LL@li.org>\n"
-        "Language: \n"
-        "MIME-Version: 1.0\n"
-        "Content-Type: text/plain; charset=CHARSET\n"
-        "Content-Transfer-Encoding: 8bit\n"
-#
-# File: ../src/MainWindow.cpp, line: 320
-# File: ../src/MainWindow.cpp, line: 320
-msgid   "&Build"
-msgstr  ""
+msgid "&Build"
+msgstr "Bauhof"
+
 #
 # File: ../src/MainWindow.cpp, line: 321
 # File: ../src/MainWindow.cpp, line: 321
-msgid   "&Clear environment"
-msgstr  ""
+msgid "&Clear environment"
+msgstr "&Säubere Bauplatz"
+
 #
 # File: ../src/MainWindow.cpp, line: 325
 # File: ../src/MainWindow.cpp, line: 325
-msgid   "&Compile package"
-msgstr  ""
+msgid "&Compile package"
+msgstr "&Übersetze Paket"
+
 #
-# File: ../src/MainWindow.cpp, line: 360
-# File: ../src/MainWindow.cpp, line: 360
-msgid   "&Filter:"
-msgstr  ""
+# File: MainWindow.cpp, line: 47
+#, fuzzy
+msgid "&Filter:"
+msgstr "&Datei"
+
 #
 # File: ../src/MainWindow.cpp, line: 330
 # File: ../src/MainWindow.cpp, line: 330
-msgid   "&Instructions"
-msgstr  ""
+msgid "&Instructions"
+msgstr "&Anweisungen"
+
 #
 # File: ../src/MainWindow.cpp, line: 61
 # File: ../src/MainWindow.cpp, line: 61
-msgid   "A"
-msgstr  ""
+msgid "A"
+msgstr "A"
+
 #
-# File: ../src/main.cpp, line: 30
-# File: ../src/main.cpp, line: 30
-msgid   "Builder"
-msgstr  ""
+# File: main.cpp, line: 27
+msgid "Builder"
+msgstr "Bauhof"
+
 #
 # File: ../src/MainWindow.cpp, line: 342
 # File: ../src/MainWindow.cpp, line: 342
-msgid   "Common..."
-msgstr  ""
+msgid "Common..."
+msgstr "Allgemeines..."
+
 #
 # File: ../src/MainWindow.cpp, line: 327
 # File: ../src/MainWindow.cpp, line: 327
-msgid   "Create binary &archive"
-msgstr  ""
+msgid "Create binary &archive"
+msgstr "Erstelle binäres &Archiv"
+
 #
 # File: ../src/EditPackageDialog.cpp, line: 26
 # File: ../src/EditPackageDialog.cpp, line: 26
-msgid   "Edit Package"
-msgstr  ""
+msgid "Edit Package"
+msgstr "Bearbeite Paket"
+
 #
 # File: ../src/MainWindow.cpp, line: 333
 # File: ../src/MainWindow.cpp, line: 333
-msgid   "Edit package..."
-msgstr  ""
+msgid "Edit package..."
+msgstr "Bearbeite Paket..."
+
 #
-# File: ../src/MainWindow.cpp, line: 353
-# File: ../src/MainWindow.cpp, line: 353
-msgid   "File"
-msgstr  ""
+# File: MainWindow.cpp, line: 58
+msgid "File"
+msgstr "Datei"
+
 #
 # File: ../src/MainWindow.cpp, line: 58
 # File: ../src/MainWindow.cpp, line: 58
-msgid   "Flags"
-msgstr  ""
+msgid "Flags"
+msgstr "Flags"
+
 #
 # File: ../src/MainWindow.cpp, line: 91
 # File: ../src/MainWindow.cpp, line: 91
-msgid   "Flags you may select"
-msgstr  ""
+msgid "Flags you may select"
+msgstr "Flags, die ausgewählt werden können"
+
 #
 # File: ../src/MainWindow.cpp, line: 60
 # File: ../src/MainWindow.cpp, line: 60
-msgid   "I"
-msgstr  ""
+msgid "I"
+msgstr "I"
+
 #
 # File: ../src/MainWindow.cpp, line: 323
 # File: ../src/MainWindow.cpp, line: 323
-msgid   "Install &required packages"
-msgstr  ""
+msgid "Install &required packages"
+msgstr "Installiere benötigte Pakete"
+
 #
 # File: ../src/MainWindow.cpp, line: 81
 # File: ../src/MainWindow.cpp, line: 81
-msgid   "Name of the package"
-msgstr  ""
+msgid "Name of the package"
+msgstr "Name des Pakets"
+
 #
 # File: ../src/MainWindow.cpp, line: 331
 # File: ../src/MainWindow.cpp, line: 331
-msgid   "New package..."
-msgstr  ""
+msgid "New package..."
+msgstr "Neues Paket..."
+
 #
 # File: ../src/MainWindow.cpp, line: 338
 # File: ../src/MainWindow.cpp, line: 338
-msgid   "Open Command Line Interface"
-msgstr  ""
+msgid "Open Command Line Interface"
+msgstr "Öffne Kommandozeilenschnittstelle"
+
 #
 # File: ../src/MainWindow.cpp, line: 335
 # File: ../src/MainWindow.cpp, line: 335
-msgid   "Overlay package..."
-msgstr  ""
+msgid "Overlay package..."
+msgstr "Überlagere Paket..."
+
 #
 # File: ../src/MainWindow.cpp, line: 56
 # File: ../src/MainWindow.cpp, line: 56
-msgid   "Package"
-msgstr  ""
+msgid "Package"
+msgstr "Paket"
+
 #
 # File: ../src/MainWindow.cpp, line: 265
 # File: ../src/MainWindow.cpp, line: 265
-msgid   "Packages:"
-msgstr  ""
+msgid "Packages:"
+msgstr "Pakete:"
+
 #
 # File: ../src/MainWindow.cpp, line: 280
 # File: ../src/MainWindow.cpp, line: 280
-msgid   "Reloads the list of packages."
-msgstr  ""
+msgid "Reloads the list of packages."
+msgstr "Lädt die Paket-Liste erneut."
+
 #
 # File: ../src/MainWindow.cpp, line: 267
 # File: ../src/MainWindow.cpp, line: 267
-msgid   "Selected:"
-msgstr  ""
+msgid "Selected:"
+msgstr "Ausgewählt:"
+
 #
 # File: ../src/MainWindow.cpp, line: 298
 # File: ../src/MainWindow.cpp, line: 298
-msgid   "The number of currently selected packages."
-msgstr  ""
+msgid "The number of currently selected packages."
+msgstr "Die Anzahl der aktuell ausgewählten Pakete."
+
 #
 # File: ../src/MainWindow.cpp, line: 292
 # File: ../src/MainWindow.cpp, line: 292
-msgid   "The number of packages."
-msgstr  ""
+msgid "The number of packages."
+msgstr "Die Anzahl der Pakete."
+
 #
 # File: ../src/MainWindow.cpp, line: 106
 # File: ../src/MainWindow.cpp, line: 106
-msgid   "The package is archived as binary"
-msgstr  ""
+msgid "The package is archived as binary"
+msgstr "Das Paket ist als Binärpaket archiviert"
+
 #
 # File: ../src/MainWindow.cpp, line: 101
 # File: ../src/MainWindow.cpp, line: 101
-msgid   "The package is currently installed"
-msgstr  ""
+msgid "The package is currently installed"
+msgstr "Das Paket ist aktuell installiert"
+
 #
 # File: ../src/MainWindow.cpp, line: 96
 # File: ../src/MainWindow.cpp, line: 96
-msgid   "The package is functional and works"
-msgstr  ""
+msgid "The package is functional and works"
+msgstr "Das Paket ist funktionsfähig"
+
 #
 # File: ../src/MainWindow.cpp, line: 279
 # File: ../src/MainWindow.cpp, line: 279
-msgid   "Update package list"
-msgstr  ""
+msgid "Update package list"
+msgstr "Aktualisiere Paketliste"
+
 #
 # File: ../src/MainWindow.cpp, line: 57
 # File: ../src/MainWindow.cpp, line: 57
-msgid   "Version"
-msgstr  ""
+msgid "Version"
+msgstr "Version"
+
 #
 # File: ../src/MainWindow.cpp, line: 86
 # File: ../src/MainWindow.cpp, line: 86
-msgid   "Version number"
-msgstr  ""
+msgid "Version number"
+msgstr "Versionsnummer"
+
 #
 # File: ../src/MainWindow.cpp, line: 59
 # File: ../src/MainWindow.cpp, line: 59
-msgid   "W"
-msgstr  ""
+msgid "W"
+msgstr "W"
