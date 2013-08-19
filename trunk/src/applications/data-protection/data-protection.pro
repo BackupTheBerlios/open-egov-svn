@@ -1,5 +1,5 @@
 # $Id$
 
 TEMPLATE = subdirs
-SUBDIRS  = register-of-processing-operations
+SUBDIRS  = audit-manager register-of-processing-operations
 

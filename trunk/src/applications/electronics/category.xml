@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<category base="electronics">
+  <strings lang="en_US">
+    <string name="title">Electronics</string>
+    <string name="description">Applications for simulation of electronic circuits and creating PCBs.</string>
+  </strings>
+
+  <strings lang="de_DE">
+    <string name="title">Elektronik</string>
+    <string name="description">Anwendungen zur Schaltungssimulation und Leiterplattenerstellung.</string>
+  </strings>
+</application>
+

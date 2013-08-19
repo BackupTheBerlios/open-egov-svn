@@ -1,5 +1,5 @@
 # $Id$
 
 TEMPLATE = subdirs
-SUBDIRS  = src locale
+SUBDIRS  = src locale doc
 
