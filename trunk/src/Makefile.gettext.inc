@@ -2,63 +2,78 @@
 
 # All messages in the sources are english messages. If gettext asks
 # to include a --from-code=iso-8859-1 or so it means there is still
-# an untranslated german text. This is a bug.
+# an untranslated german text. This would be a bug.
 
-THISDIR := $(notdir $(shell pwd))
-SOURCES := $(shell ls -1 ../src/*.cpp | grep -v moc_ | grep -v SMTP | xargs)
-#$(wildcard ../src/*.cpp)
+TOP_DIR    ?= $(abspath $(CURDIR))
+MF_DIR     ?= $(dir $(lastword $(MAKEFILE_LIST)))
+BASE_DIR   ?= $(abspath $(join $(dir $(lastword $(MAKEFILE_LIST))),/..))
+BASE_NAME  := $(notdir $(abspath $(join $(TOP_DIR),/..)))
+BIN_DIR    ?= $(abspath $(join $(BASE_DIR),/bin))
+LOCALE_DIR ?= $(abspath $(join $(BASE_DIR),/locale))
 
-EXTRACT := xgettext --add-location --no-wrap --sort-by-file --foreign-user --force-po \
-           --trigraphs --default-domain=$(BASENAME) --add-comments --strict --language=C++ \
-           --msgid-bugs-address="mail@gerrit-albrecht.de" --keyword=_
-#--extract-all
-MERGE   := msgmerge --update --force-po --no-wrap --quiet
+LANGS      := $(sort $(dir $(wildcard $(LOCALE_DIR)/*_*/)))
+LANG_CODES := $(sort $(notdir $(abspath $(LANGS))))
+
+
+MERGE_FLAGS   := --update --force-po --no-wrap --quiet
 #--compendium=test.po
-FORMAT  := msgfmt --check --use-fuzzy --statistics --strict
-MSGINIT := msginit
-#--verbose
 
-LANGS   := $(shell find . -maxdepth 1 -type d -name "[a-zA-Z0-9]*" | sed 's/\.\///' | grep -v CVS | grep -v .svn | xargs)
+FORMAT_FLAGS  := --check --use-fuzzy --statistics --strict
 
-.PHONY: $(DIRS)
+EXTRACT_FLAGS := --add-location --no-wrap --foreign-user --force-po \
+                 --trigraphs --add-comments --strict --indent --sort-output --width=76 \
+                 --copyright-holder="Open E-Government Project" --keyword=_ \
+                 --msgid-bugs-address="msgid-bugs@open-egov.de" --language=C++
+#--extract-all --omit-header  --sort-by-file statt --sort-output
 
-%.mo: %.po
-	rm -f $@.mo; msgfmt -o $@.mo $@.po
-	test ! -f $@.mo || touch $@.mo
+MSGINIT_FLAGS := --no-wrap
+#--color --style=$(join $(BASE_DIR),\share\gettext\styles\po-default.css)
+#don't use --no-translator
+
+MSGCAT_FLAGS := --no-location --use-first --unique --no-wrap --strict --to-code=UTF-8
+
+
+#$(info $(OS))
+#$(info $(PROCESSOR_ARCHITECTURE))
+
+ifeq ($(OS),Windows_NT)
+  CMDSEP = &
+
+  #CCFLAGS += -D WIN32
+  ifeq ($(PROCESSOR_ARCHITECTURE),AMD64)
+    #CCFLAGS += -D AMD64
+  endif
+  ifeq ($(PROCESSOR_ARCHITECTURE),x86)
+    #CCFLAGS += -D IA32
+  endif
+
+  include $(MF_DIR)/Makefile.gettext.windows.inc
+else
+  CMDSEP = ;
+
+  UNAME_S := $(shell uname -s)
+  UNAME_P := $(shell uname -p)
+
+  ifeq ($(UNAME_S),Linux)
+    #CCFLAGS += -D LINUX
+  endif
+  ifeq ($(UNAME_S),Darwin)
+    #CCFLAGS += -D OSX
+  endif
+
+  ifeq ($(UNAME_P),x86_64)
+    #CCFLAGS += -D AMD64
+  endif
+  ifneq ($(filter %86,$(UNAME_P)),)
+    #CCFLAGS += -D IA32
+  endif
+  ifneq ($(filter arm%,$(UNAME_P)),)
+    #CCFLAGS += -D ARM
+  endif
+
+  include Makefile.gettext.linux.inc
+endif
 
 all:
-	@echo "Parameters: init extract compile merge"
-
-init:
-	@for lang in $(LANGS); do \
-		if ! test -e $$lang/$(BASENAME).po ; then \
-			echo "Initializing $$lang/$(BASENAME).po ..." ;\
-			$(MSGINIT) --input=$(BASENAME).pot --output-file=$$lang/$(BASENAME).po --no-wrap --locale=$$lang ;\
-		fi;\
-	done
-
-extract:
-	$(EXTRACT) -d $(BASENAME) -o $(BASENAME).pot --language=C++ --copyright-holder="Gerrit M. Albrecht" \
-		   --msgid-bugs-address="mail@gerrit-albrecht.de" \
-		   $(SOURCES)
-
-merge:
-	@for lang in $(LANGS); do \
-		if test -w $$lang/$(BASENAME).po ; then \
-			echo "Merging $$lang/$(BASENAME).po ..."; \
-			$(MERGE) $$lang/$(BASENAME).po $(BASENAME).pot ; \
-		fi; \
-	done
-
-compile:
-	@for lang in $(LANGS); do \
-		if test -e $$lang/$(BASENAME).po ; then \
-			echo "Compiling $$lang/$(BASENAME).po ..."; \
-			$(FORMAT) --output-file=$$lang/LC_MESSAGES/$(BASENAME).mo $$lang/$(BASENAME).po ; \
-		fi; \
-	done
-
-install:
-	sudo cp de_DE/LC_MESSAGES/$(BASENAME).mo /usr/share/locale/de/LC_MESSAGES/$(BASENAME).mo
-
+	@echo Parameters: check init extract compile merge install
 
