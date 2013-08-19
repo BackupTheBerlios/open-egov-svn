@@ -88,11 +88,6 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
           this,             SLOT(modelFileRenamed(const QString &,const QString &,const QString &)));
   connect(m_dock_model,     SIGNAL(rootPathChanged(const QString &)),
           this,             SLOT(modelRootPathChanged(const QString &)));
-
-  connect(m_tabs,           SIGNAL(currentChanged(int)),
-          this,             SLOT(tabCurrentChanged(int)));
-  connect(m_tabs,           SIGNAL(tabCloseRequested(int)),
-          this,             SLOT(tabCloseRequested(int)));
 #endif
 }
 
@@ -123,6 +118,22 @@ void MainWindow::createActions()
 {
   OEG::Qt::MainWindow::createActions();
 
+  a_toggle_statusbar = new QAction(_("View &statusbar"), this);
+  a_toggle_statusbar->setCheckable(true);
+  a_toggle_statusbar->setChecked(true);
+
+  statusBar();
+
+  connect(a_toggle_statusbar, SIGNAL(triggered()),
+          this,               SLOT(toggleStatusBar()));
+
+  a_toggle_menubar = new QAction(_("View &menubar"), this);
+  a_toggle_menubar->setCheckable(true);
+  a_toggle_menubar->setChecked(true);
+
+  connect(a_toggle_menubar,   SIGNAL(triggered()),
+          this,               SLOT(toggleMenuBar()));
+
 }
 
 void MainWindow::createMenus()
@@ -134,10 +145,10 @@ void MainWindow::createMenus()
   menu->addAction(_("Update contents"), this, SLOT(updateFileSystemViews()));
   menu->addSeparator();
 
-  action = menu->addAction(_("Load ..."));
+  action = standardAction(Open);
   connect(action, SIGNAL(triggered()),
           this,   SLOT(loadXXX()));
-  action = menu->addAction(_("Save ..."));
+  action = standardAction(Save);
   connect(action, SIGNAL(triggered()),
           this,   SLOT(saveXXX()));
   menu->addSeparator();
@@ -157,6 +168,9 @@ void MainWindow::createMenus()
           this,   SLOT(commonSettings()));
 
   menu = getStandardMenu(ViewMenu);
+  menu->addAction(a_toggle_menubar);
+  menu->addAction(a_toggle_statusbar);
+  menu->addSeparator();
   action = menu->addAction(_("&Buttons"));
   connect(action, SIGNAL(triggered()),
           this,   SLOT(viewButtons()));
@@ -292,16 +306,6 @@ void MainWindow::viewDirectoryLoaded(const QString &path)
   statusBar()->showMessage(_("Directory retrieved."));
 }
 
-void MainWindow::tabCurrentChanged(int index)
-{
-  qDebug() << "MainWindow::tabCurrentChanged" << index;
-}
-
-void MainWindow::tabCloseRequested(int index)
-{
-  qDebug() << "MainWindow::tabCloseRequested" << index;
-}
-
 // The tree view has the following columns: Name, Size, Type, Date Modified.
 // It is possible that columns occur after certain actions (e.g. Date Modified
 // not before expanding some paths). The column count depends on the model.
@@ -323,5 +327,21 @@ void MainWindow::newTabWithPath()
   QAction *action = qobject_cast<QAction *>(sender());
 
   m_folder_manager->addFolderTabToActiveSide(action->text());
+}
+
+void MainWindow::toggleStatusBar()
+{
+  if (a_toggle_statusbar->isChecked())
+    statusBar()->show();
+  else
+    statusBar()->hide();
+}
+
+void MainWindow::toggleMenuBar()
+{
+  if (a_toggle_menubar->isChecked())
+    menuBar()->show();
+  else
+    menuBar()->hide();
 }
 

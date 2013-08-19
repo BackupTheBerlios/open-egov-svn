@@ -33,6 +33,7 @@ class QTreeView;
 class QFileSystemModel;
 class QSplitter;
 class QListView;
+class QAction;
 
 class ButtonsDockWidget;
 class FileSystemModel;
@@ -66,10 +67,9 @@ class MainWindow : public OEG::Qt::MainWindow
     void updateFileSystemViews();
     void viewDirectoryLoaded(const QString &path);
 
-    void tabCurrentChanged(int index);
-    void tabCloseRequested(int index);
-
     void newTabWithPath();
+    void toggleStatusBar();
+    void toggleMenuBar();
 
   private:
     QDockWidget         *m_dock_my_dirs;
@@ -80,5 +80,7 @@ class MainWindow : public OEG::Qt::MainWindow
     QDockWidget         *m_dock_preview;
     QFileSystemModel    *m_dock_model;
     FolderManager       *m_folder_manager;
+    QAction             *a_toggle_menubar;
+    QAction             *a_toggle_statusbar;
 };
 

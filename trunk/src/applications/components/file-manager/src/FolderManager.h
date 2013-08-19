@@ -31,6 +31,12 @@ class FolderManager : public QSplitter
   Q_OBJECT
 
   public:
+    enum SideOfView {
+      LeftSide  = true,
+      RightSide = false
+    };
+
+  public:
     FolderManager(QWidget *parent = 0);
     virtual ~FolderManager();
 
@@ -38,13 +44,15 @@ class FolderManager : public QSplitter
     OEG::Qt::TabWidget *currentTabWidget();
 
   protected:
-    void addFolderTab(const QString &path, const bool left = true);
-    inline bool activeView() const { return m_active_view_is_left; }
-    void setActiveView(const bool activeView = true);
-    FolderView *currentFolderView(const bool activeView = true);
+    void addFolderTab(const QString &path, const SideOfView side);
+    inline SideOfView activeSide() const { return m_active_side; }
+    void setActiveSide(const SideOfView side);
+    FolderView *currentFolderView(const SideOfView side);
 
   protected slots:
     void runCommand(const QString &name);
+    void tabCurrentChanged(int index);
+    void tabCloseRequested(int index);
 
   protected slots:
     void tabWidgetCurrentChanged();
@@ -53,7 +61,7 @@ class FolderManager : public QSplitter
   protected:
     OEG::Qt::TabWidget  *m_tabs_left;
     OEG::Qt::TabWidget  *m_tabs_right;
-    bool                 m_active_view_is_left;
+    SideOfView           m_active_side;
     QFileSystemModel    *m_file_system_model;
 };
 

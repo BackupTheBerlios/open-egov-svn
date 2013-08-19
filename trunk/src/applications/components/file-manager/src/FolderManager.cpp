@@ -48,11 +48,20 @@ FolderManager::FolderManager(QWidget *parent /*=0*/)
   m_tabs_right->setMinimumSize(300, 200);
   m_tabs_right->separateCloseTabButton(_("Close this tab."));
 
-  setActiveView(true);
+  connect(m_tabs_left,    SIGNAL(currentChanged(int)),
+          this,           SLOT(tabCurrentChanged(int)));
+  connect(m_tabs_left,    SIGNAL(tabCloseRequested(int)),
+          this,           SLOT(tabCloseRequested(int)));
+  connect(m_tabs_right,   SIGNAL(currentChanged(int)),
+          this,           SLOT(tabCurrentChanged(int)));
+  connect(m_tabs_right,   SIGNAL(tabCloseRequested(int)),
+          this,           SLOT(tabCloseRequested(int)));
 
-  addFolderTab(QDir::currentPath(), true);
-  addFolderTab("C:\\", true);
-  addFolderTab("I:\\", false);
+  setActiveSide(LeftSide);
+
+  addFolderTab(QDir::currentPath(), LeftSide);
+  addFolderTab("C:\\", LeftSide);
+  addFolderTab("I:\\", RightSide);
 
   m_tabs_left->setCurrentIndex(0);                         // Before createAll()!
   m_tabs_right->setCurrentIndex(0);                        // Before createAll()!
@@ -83,9 +92,9 @@ FolderManager::~FolderManager()
 {
 }
 
-void FolderManager::addFolderTab(const QString &path, const bool left /*=true*/)
+void FolderManager::addFolderTab(const QString &path, const SideOfView side)
 {
-  OEG::Qt::TabWidget *tabs = (left) ? m_tabs_left : m_tabs_right;
+  OEG::Qt::TabWidget *tabs = (side == LeftSide) ? m_tabs_left : m_tabs_right;
   FolderView *view = new FolderView(0);
 
   view->setModel(m_file_system_model);
@@ -105,30 +114,30 @@ void FolderManager::addFolderTab(const QString &path, const bool left /*=true*/)
 
 OEG::Qt::TabWidget *FolderManager::currentTabWidget()
 {
-  return (m_active_view_is_left) ? m_tabs_left : m_tabs_right;
+  return (m_active_side == LeftSide) ? m_tabs_left : m_tabs_right;
 }
 
 void FolderManager::addFolderTabToActiveSide(const QString &path)
 {
-  addFolderTab(path, m_active_view_is_left);
+  addFolderTab(path, m_active_side);
 }
 
-void FolderManager::setActiveView(const bool activeView /*=true*/)
+void FolderManager::setActiveSide(const SideOfView side)
 {
-  qDebug() << "FolderManager::setActiveView()" << activeView;
+  qDebug() << "FolderManager::setActiveViewSide()" << side;
 
-  m_active_view_is_left = activeView;  // true=left, false=right.
+  m_active_side = side;
 
   FolderView *view;
 
-  view = currentFolderView(true);
+  view = currentFolderView(LeftSide);
   if (view) {
-    view->activateView(m_active_view_is_left);
+    view->activateView(m_active_side == LeftSide);
   }
 
-  view = currentFolderView(false);
+  view = currentFolderView(RightSide);
   if (view) {
-    view->activateView(! m_active_view_is_left);
+    view->activateView(m_active_side != LeftSide);
   }
 }
 
@@ -136,9 +145,9 @@ void FolderManager::setActiveView(const bool activeView /*=true*/)
 // activeView. If it is true, the left side's, else the right side's
 // current FolderView is retrieved.
 
-FolderView *FolderManager::currentFolderView(const bool activeView /*=true*/)
+FolderView *FolderManager::currentFolderView(const SideOfView side)
 {
-  OEG::Qt::TabWidget *tabs = (activeView) ? m_tabs_left : m_tabs_right;
+  OEG::Qt::TabWidget *tabs = (side == LeftSide) ? m_tabs_left : m_tabs_right;
 
   if (tabs->currentIndex() < 0)
     return 0;
@@ -153,10 +162,10 @@ void FolderManager::tabWidgetCurrentChanged()
   OEG::Qt::TabWidget *widget = qobject_cast<OEG::Qt::TabWidget *>(sender());
 
   if (widget == m_tabs_left)
-    setActiveView(true);
+    setActiveSide(LeftSide);
 
   if (widget == m_tabs_right)
-    setActiveView(false);
+    setActiveSide(RightSide);
 }
 
 void FolderManager::folderViewActivated()
@@ -166,10 +175,10 @@ void FolderManager::folderViewActivated()
   FolderView *view = qobject_cast<FolderView *>(sender());
 
   if (m_tabs_left->indexOf(view) >= 0)
-    setActiveView(true);
+    setActiveSide(LeftSide);
 
   if (m_tabs_right->indexOf(view) >= 0)
-    setActiveView(false);
+    setActiveSide(RightSide);
 }
 
 // Called after clicking a button from the dock. The parameter is
@@ -179,8 +188,8 @@ void FolderManager::runCommand(const QString &name)
 {
   qDebug() << "FolderManager::runCommand()" << name;
 
-  FolderView *sourceView = currentFolderView(m_active_view_is_left);
-  FolderView *targetView = currentFolderView(! m_active_view_is_left);
+  FolderView *sourceView = currentFolderView(m_active_side);
+  FolderView *targetView = currentFolderView((m_active_side == LeftSide) ? RightSide : LeftSide);
 
   if (! sourceView) {
     qDebug() << "no source view";
@@ -203,13 +212,23 @@ void FolderManager::runCommand(const QString &name)
     selectionModel->select(selectionModel->selection(), QItemSelectionModel::Toggle);
 
 #if 0
-    QAbstractItemModel  *model           = sourceView->model();
-    QModelIndex          topLeft         = model->index(0, 0);
-    QModelIndex          bottomRight     = model->index(model->rowCount(parent)-1,
-                                                        model->columnCount(parent)-1);
+    QAbstractItemModel  *model        = sourceView->model();
+    QModelIndex          topLeft      = model->index(0, 0);
+    QModelIndex          bottomRight  = model->index(model->rowCount(parent)-1,
+                                                     model->columnCount(parent)-1);
     QItemSelection selection(topLeft, bottomRight);
     selectionModel->select(selection, QItemSelectionModel::Toggle);
 #endif
   }
+}
+
+void FolderManager::tabCurrentChanged(int index)
+{
+  qDebug() << "FolderManager::tabCurrentChanged" << index;
+}
+
+void FolderManager::tabCloseRequested(int index)
+{
+  qDebug() << "FolderManager::tabCloseRequested" << index;
 }
 
