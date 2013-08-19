@@ -1,0 +1,585 @@
+# English translations for PACKAGE package.
+# Copyright (C) 2013 Open E-Government Project
+# This file is distributed under the same license as the PACKAGE package.
+# <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: msgid-bugs@open-egov.de\n"
+"POT-Creation-Date: 2013-08-19 15:35+0200\n"
+"PO-Revision-Date: 2013-08-19 15:35+0200\n"
+"Last-Translator: <EMAIL@ADDRESS>\n"
+"Language-Team: English\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CP1252\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#
+# File: ../MainWindow.cpp, line: 154
+msgid "&Close"
+msgstr "&Close"
+
+#
+# File: ../MainWindow.cpp, line: 216
+msgid "&Colors ..."
+msgstr "&Colors ..."
+
+#
+# File: ../MainWindow.cpp, line: 219
+msgid "&Common ..."
+msgstr "&Common ..."
+
+#
+# File: ../MainWindow.cpp, line: 407
+msgid "&Edit"
+msgstr "&Edit"
+
+#
+# File: ../MainWindow.cpp, line: 401
+msgid "&File"
+msgstr "&File"
+
+#
+# File: ../MainWindow.cpp, line: 222
+msgid "&Fonts ..."
+msgstr "&Fonts ..."
+
+#
+# File: ../MainWindow.cpp, line: 194
+msgid "&Forum ..."
+msgstr "&Forum ..."
+
+#
+# File: ../MainWindow.cpp, line: 427
+msgid "&Help"
+msgstr "&Help"
+
+#
+# File: ../MainWindow.cpp, line: 182
+msgid "&Help ..."
+msgstr "&Help ..."
+
+#
+# File: ../MainWindow.cpp, line: 179
+msgid "&Homepage ..."
+msgstr "&Homepage ..."
+
+#
+# File: ../MainWindow.cpp, line: 197
+msgid "&New"
+msgstr "&New"
+
+#
+# File: ../MainWindow.cpp, line: 201
+msgid "&Open"
+msgstr "&Open"
+
+#
+# File: ../MainWindow.cpp, line: 212
+msgid "&Preferences ..."
+msgstr "&Preferences ..."
+
+#
+# File: ../MainWindow.cpp, line: 228
+msgid "&Print"
+msgstr "&Print"
+
+#
+# File: ../MainWindow.cpp, line: 240
+msgid "&Redo"
+msgstr "&Redo"
+
+#
+# File: ../MainWindow.cpp, line: 244
+msgid "&Reload"
+msgstr "&Reload"
+
+#
+# File: ../MainWindow.cpp, line: 419
+msgid "&Settings"
+msgstr "&Settings"
+
+#
+# File: ../MainWindow.cpp, line: 225
+msgid "&Shortcuts ..."
+msgstr "&Shortcuts ..."
+
+#
+# File: ../MainWindow.cpp, line: 263
+msgid "&Undo"
+msgstr "&Undo"
+
+#
+# File: ../MainWindow.cpp, line: 413
+msgid "&View"
+msgstr "&View"
+
+#
+# File: ../MainWindow.cpp, line: 138
+msgid "About &App ..."
+msgstr "About &App ..."
+
+#
+# File: ../MainWindow.cpp, line: 142
+msgid "About &Qt ..."
+msgstr "About &Qt ..."
+
+#
+# File: ../MainWindow.cpp, line: 174
+msgid "Alt+F4"
+msgstr "Alt+F4"
+
+#
+# File: ../MainWindow.cpp, line: 146
+msgid "Clear"
+msgstr "Clear"
+
+#
+# File: ../MainWindow.cpp, line: 146
+msgid "Clear output window."
+msgstr "Clear output window."
+
+#
+# File: ../LineEdit.cpp, line: 46
+msgid "Clear the text."
+msgstr "Clear the text."
+
+#
+# File: ../MainWindow.cpp, line: 154
+msgid "Close."
+msgstr "Close."
+
+#
+# File: ../MainWindow.cpp, line: 150
+msgid "Connect"
+msgstr "Connect"
+
+#
+# File: ../MainWindow.cpp, line: 158
+msgid "Copy"
+msgstr "Copy"
+
+#
+# File: ../MainWindow.cpp, line: 158
+msgid "Copy data."
+msgstr "Copy data."
+
+#
+# File: ../Application.cpp, line: 200
+msgid "Couldn't detect system tray."
+msgstr "Couldn't detect system tray."
+
+#
+# File: ../MainWindow.cpp, line: 197
+msgid "Create new document."
+msgstr "Create new document."
+
+#
+# File: ../MainWindow.cpp, line: 275
+msgid "Ctrl++"
+msgstr "Ctrl++"
+
+#
+# File: ../MainWindow.cpp, line: 279
+msgid "Ctrl+-"
+msgstr "Ctrl+-"
+
+#
+# File: ../MainWindow.cpp, line: 260
+msgid "Ctrl+A"
+msgstr "Ctrl+A"
+
+#
+# File: ../MainWindow.cpp, line: 256
+msgid "Ctrl+Alt+S"
+msgstr "Ctrl+Alt+S"
+
+#
+# File: ../MainWindow.cpp, line: 158
+msgid "Ctrl+C"
+msgstr "Ctrl+C"
+
+#
+# File: ../MainWindow.cpp, line: 197
+msgid "Ctrl+N"
+msgstr "Ctrl+N"
+
+#
+# File: ../MainWindow.cpp, line: 201
+msgid "Ctrl+O"
+msgstr "Ctrl+O"
+
+#
+# File: ../MainWindow.cpp, line: 228
+msgid "Ctrl+P"
+msgstr "Ctrl+P"
+
+#
+# File: ../MainWindow.cpp, line: 252
+msgid "Ctrl+S"
+msgstr "Ctrl+S"
+
+#
+# File: ../MainWindow.cpp, line: 283
+msgid "Ctrl+Shift+-"
+msgstr "Ctrl+Shift+-"
+
+#
+# File: ../MainWindow.cpp, line: 205
+msgid "Ctrl+V"
+msgstr "Ctrl+V"
+
+#
+# File: ../MainWindow.cpp, line: 154
+msgid "Ctrl+W"
+msgstr "Ctrl+W"
+
+#
+# File: ../MainWindow.cpp, line: 162
+msgid "Ctrl+X"
+msgstr "Ctrl+X"
+
+#
+# File: ../MainWindow.cpp, line: 240
+msgid "Ctrl+Y"
+msgstr "Ctrl+Y"
+
+#
+# File: ../MainWindow.cpp, line: 263
+msgid "Ctrl+Z"
+msgstr "Ctrl+Z"
+
+#
+# File: ../MainWindow.cpp, line: 162
+msgid "Cut"
+msgstr "Cut"
+
+#
+# File: ../MainWindow.cpp, line: 162
+msgid "Cut data."
+msgstr "Cut data."
+
+#
+# File: ../MainWindow.cpp, line: 166
+msgid "Del"
+msgstr "Del"
+
+#
+# File: ../MainWindow.cpp, line: 166
+msgid "Delete"
+msgstr "Delete"
+
+#
+# File: ../MainWindow.cpp, line: 166
+msgid "Delete data."
+msgstr "Delete data."
+
+#
+# File: ../MainWindow.cpp, line: 174
+msgid "E&xit"
+msgstr "E&xit"
+
+#
+# File: ../MainWindow.cpp, line: 170
+msgid "Edit"
+msgstr "Edit"
+
+#
+# File: ../MainWindow.cpp, line: 170
+msgid "Edit data."
+msgstr "Edit data."
+
+#
+# File: ../MainWindow.cpp, line: 174
+msgid "Exit the application."
+msgstr "Exit the application."
+
+#
+# File: ../MainWindow.cpp, line: 182
+msgid "F1"
+msgstr "F1"
+
+#
+# File: ../MainWindow.cpp, line: 244
+msgid "F5"
+msgstr "F5"
+
+#
+# File: ../Application.cpp, line: 52
+#. Set it before any use of gettext or settings!
+#. Init gettext.
+msgid "G.A.S.I."
+msgstr "G.A.S.I."
+
+#
+# File: ../MainWindow.cpp, line: 186
+msgid "Help &Index ..."
+msgstr "Help &Index ..."
+
+#
+# File: ../MainWindow.cpp, line: 190
+msgid "Help &Search ..."
+msgstr "Help &Search ..."
+
+#
+# File: ../MainWindow.cpp, line: 142
+msgid "Information about the Qt framework."
+msgstr "Information about the Qt framework."
+
+#
+# File: ../MainWindow.cpp, line: 138
+msgid "Information about this appliciation."
+msgstr "Information about this appliciation."
+
+#
+# File: ../ProcessList.cpp, line: 400
+msgid "No handle"
+msgstr "No handle"
+
+#
+# File: ../MainWindow.cpp, line: 150
+msgid "Open a new Connection."
+msgstr "Open a new Connection."
+
+#
+# File: ../MainWindow.cpp, line: 201
+msgid "Open existing document."
+msgstr "Open existing document."
+
+#
+# File: ../MainWindow.cpp, line: 248
+msgid "Open the bug report dialog."
+msgstr "Open the bug report dialog."
+
+#
+# File: ../MainWindow.cpp, line: 182
+msgid "Open the help window with contents."
+msgstr "Open the help window with contents."
+
+#
+# File: ../MainWindow.cpp, line: 186
+msgid "Open the help window with index."
+msgstr "Open the help window with index."
+
+#
+# File: ../MainWindow.cpp, line: 190
+msgid "Open the help window with search."
+msgstr "Open the help window with search."
+
+#
+# File: ../MainWindow.cpp, line: 179
+msgid "Open the homepage in the standard browser."
+msgstr "Open the homepage in the standard browser."
+
+#
+# File: ../MainWindow.cpp, line: 209
+msgid "Open the plugin manager."
+msgstr "Open the plugin manager."
+
+#
+# File: ../MainWindow.cpp, line: 216
+msgid "Open the preferences dialog for colors settings."
+msgstr "Open the preferences dialog for colors settings."
+
+#
+# File: ../MainWindow.cpp, line: 219
+msgid "Open the preferences dialog for common settings."
+msgstr "Open the preferences dialog for common settings."
+
+#
+# File: ../MainWindow.cpp, line: 222
+msgid "Open the preferences dialog with fonts settings."
+msgstr "Open the preferences dialog with fonts settings."
+
+#
+# File: ../MainWindow.cpp, line: 225
+msgid "Open the preferences dialog with shortcuts settings."
+msgstr "Open the preferences dialog with shortcuts settings."
+
+#
+# File: ../MainWindow.cpp, line: 212
+msgid "Open the preferences dialog."
+msgstr "Open the preferences dialog."
+
+#
+# File: ../MainWindow.cpp, line: 194
+msgid "Open the webpage of an online-help forum."
+msgstr "Open the webpage of an online-help forum."
+
+#
+# File: ../MainWindow.cpp, line: 205
+msgid "Paste"
+msgstr "Paste"
+
+#
+# File: ../MainWindow.cpp, line: 205
+msgid "Paste data into document."
+msgstr "Paste data into document."
+
+#
+# File: ../MainWindow.cpp, line: 209
+msgid "Plugins ..."
+msgstr "Plugins ..."
+
+#
+# File: ../MainWindow.cpp, line: 232
+msgid "Print Preview ..."
+msgstr "Print Preview ..."
+
+#
+# File: ../MainWindow.cpp, line: 236
+msgid "Print Settings ..."
+msgstr "Print Settings ..."
+
+#
+# File: ../MainWindow.cpp, line: 236
+msgid "Print Settings."
+msgstr "Print Settings."
+
+#
+# File: ../MainWindow.cpp, line: 228
+msgid "Print document."
+msgstr "Print document."
+
+#
+# File: ../MainWindow.cpp, line: 232
+msgid "Print preview."
+msgstr "Print preview."
+
+#
+# File: ../ProcessList.cpp, line: 423
+msgid "Process closed successfully."
+msgstr "Process closed successfully."
+
+#
+# File: ../ProcessList.cpp, line: 429
+msgid "Process terminated."
+msgstr "Process terminated."
+
+#
+# File: ../MainWindow.cpp, line: 99
+msgid "Ready."
+msgstr "Ready."
+
+#
+# File: ../MainWindow.cpp, line: 240
+msgid "Redo changes."
+msgstr "Redo changes."
+
+#
+# File: ../MainWindow.cpp, line: 244
+msgid "Reload data."
+msgstr "Reload data."
+
+#
+# File: ../MainWindow.cpp, line: 248
+msgid "Report &Bug ..."
+msgstr "Report &Bug ..."
+
+#
+# File: ../MainWindow.cpp, line: 252
+msgid "Save"
+msgstr "Save"
+
+#
+# File: ../MainWindow.cpp, line: 256
+msgid "Save &As ..."
+msgstr "Save &As ..."
+
+#
+# File: ../MainWindow.cpp, line: 256
+msgid "Save document into a new file."
+msgstr "Save document into a new file."
+
+#
+# File: ../MainWindow.cpp, line: 252
+msgid "Save the document."
+msgstr "Save the document."
+
+#
+# File: ../MainWindow.cpp, line: 260
+msgid "Select &All"
+msgstr "Select &All"
+
+#
+# File: ../MainWindow.cpp, line: 260
+msgid "Select all."
+msgstr "Select all."
+
+#
+# File: ../MainWindow.cpp, line: 283
+msgid "Set normal zoom value."
+msgstr "Set normal zoom value."
+
+#
+# File: ../Application.cpp, line: 200
+msgid "Systray"
+msgstr "Systray"
+
+#
+# File: ../MainWindow.cpp, line: 291
+msgid "This action is unnamed and therefore without description."
+msgstr "This action is unnamed and therefore without description."
+
+#
+# File: ../MainWindow.cpp, line: 263
+msgid "Undo changes."
+msgstr "Undo changes."
+
+#
+# File: ../MainWindow.cpp, line: 290
+msgid "Unnamed Action"
+msgstr "Unnamed Action"
+
+#
+# File: ../MainWindow.cpp, line: 267
+msgid "Zoom Fit Width"
+msgstr "Zoom Fit Width"
+
+#
+# File: ../MainWindow.cpp, line: 271
+msgid "Zoom Fit Window"
+msgstr "Zoom Fit Window"
+
+#
+# File: ../MainWindow.cpp, line: 275
+msgid "Zoom In"
+msgstr "Zoom In"
+
+#
+# File: ../MainWindow.cpp, line: 283
+msgid "Zoom Normal"
+msgstr "Zoom Normal"
+
+#
+# File: ../MainWindow.cpp, line: 279
+msgid "Zoom Out"
+msgstr "Zoom Out"
+
+#
+# File: ../MainWindow.cpp, line: 267
+msgid "Zoom document until it fits into the window with."
+msgstr "Zoom document until it fits into the window with."
+
+#
+# File: ../MainWindow.cpp, line: 271
+msgid "Zoom document until it fits into the window."
+msgstr "Zoom document until it fits into the window."
+
+#
+# File: ../MainWindow.cpp, line: 275
+msgid "Zoom into document."
+msgstr "Zoom into document."
+
+#
+# File: ../MainWindow.cpp, line: 279
+msgid "Zoom out of document."
+msgstr "Zoom out of document."
+
+#
+# File: ../Application.cpp, line: 53
+msgid "open-egov.de"
+msgstr "open-egov.de"

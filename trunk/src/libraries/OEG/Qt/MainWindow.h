@@ -81,7 +81,11 @@ class MainWindow : public QMainWindow
       ZoomFitWindow,
       ZoomIn,
       ZoomOut,
-      ZoomNormal
+      ZoomNormal,
+      ViewToggleStatusBar,
+      ViewToggleMenuBar,
+      ViewToggleFileToolBar,
+      ViewToggleTabbedMenuBar
     };
 
     enum DataStorageMode {
