@@ -1,0 +1,4 @@
+# $Id$
+
+TEMPLATE = subdirs
+SUBDIRS  = 
