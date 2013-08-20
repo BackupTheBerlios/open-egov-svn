@@ -34,10 +34,11 @@ class MainWindow : public OEG::Qt::MainWindow
     MainWindow(QWidget *parent = 0);
 
     virtual void createActions();
+    virtual void createStatusBar();
     virtual void createDockWidgets();
     virtual void createMenus();
     virtual void createToolBars();
-    virtual void createTabbedMenuBar() {};
+    virtual void createTabbedMenuBar();
 
   public slots:
     void standardActionOpen();
