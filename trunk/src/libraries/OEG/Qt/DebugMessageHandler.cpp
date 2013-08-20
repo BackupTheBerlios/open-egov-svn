@@ -24,7 +24,7 @@
 
 #include <OEG/Qt/Application.h>
 #include <OEG/Qt/DebugMessageHandler.h>
-#include <OEG/Qt/MessageBox.h>
+#include <OEG/Qt/MessageDialog.h>
 #include <OEG/Qt/Settings.h>
 
 #include <stdio.h>

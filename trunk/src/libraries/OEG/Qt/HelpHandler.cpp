@@ -24,7 +24,7 @@
 #include <OEG/Qt/Application.h>
 #include <OEG/Qt/HelpHandler.h>
 //#include <OEG/Qt/HelpWindow.h>
-#include <OEG/Qt/MessageBox.h>
+#include <OEG/Qt/MessageDialog.h>
 #include <OEG/Qt/Settings.h>
 
 using namespace OEG::Qt;
