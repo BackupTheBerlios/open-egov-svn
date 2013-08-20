@@ -31,17 +31,25 @@
 MainWindow::MainWindow(QWidget *parent /*=0*/)
  : OEG::Qt::MainWindow(parent)
 {
-  createAll();
-
-  setCentralWidget(new QLabel);
-
   setWindowIcon(QIcon("icon.png"));
+
+  setCentralWidget(new QLabel(this));
+
+  createAll();
 }
 
 void MainWindow::createActions()
 {
-  //OEG::Qt::MainWindow::createActions();
+  OEG::Qt::MainWindow::createActions();
 
+}
+
+void MainWindow::createStatusBar()
+{
+}
+
+void MainWindow::createDockWidgets()
+{
 }
 
 void MainWindow::createMenus()
@@ -73,7 +81,7 @@ void MainWindow::createToolBars()
 
 }
 
-void MainWindow::createDockWidgets()
+void MainWindow::createTabbedMenuBar()
 {
 }
 

@@ -39,6 +39,16 @@ void MainWindow::createActions()
 {
 }
 
+void MainWindow::createStatusBar()
+{
+
+  OEG::Qt::MainWindow::createStatusBar();
+}
+
+void MainWindow::createDockWidgets()
+{
+}
+
 void MainWindow::createMenus()
 {
   QMenu   *menu;
@@ -62,9 +72,8 @@ void MainWindow::createToolBars()
 
 }
 
-void MainWindow::createStatusBar()
+void MainWindow::createTabbedMenuBar()
 {
-
-  OEG::Qt::MainWindow::createStatusBar();
 }
+
 

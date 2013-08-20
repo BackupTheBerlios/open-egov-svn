@@ -42,8 +42,13 @@ class MainWindow : public OEG::Qt::MainWindow
     void actionProcessList();
 
   private:
-    void createActions();
-    void createMenus();
+    virtual void createActions();
+    virtual void createStatusBar();
+    virtual void createDockWidgets();
+    virtual void createMenus();
+    virtual void createToolBars();
+    virtual void createTabbedMenuBar();
+
     void loadPlugins();
 
   protected:

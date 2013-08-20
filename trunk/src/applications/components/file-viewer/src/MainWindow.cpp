@@ -16,8 +16,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <OEG/Qt/TabbedMenuBar.h>
-
 #include <QAction>
 #include <QApplication>
 #include <QDir>
@@ -35,7 +33,8 @@
 
 #include <QDebug>
 
-#include <OEG/Qt/MessageBox.h>
+#include <OEG/Qt/TabbedMenuBar.h>
+#include <OEG/Qt/MessageDialog.h>
 
 #include "MainWindow.h"
 
@@ -64,6 +63,14 @@ void MainWindow::createActions()
 {
   OEG::Qt::MainWindow::createActions();
 
+}
+
+void MainWindow::createStatusBar()
+{
+}
+
+void MainWindow::createDockWidgets()
+{
 }
 
 void MainWindow::createMenus()
@@ -96,7 +103,7 @@ void MainWindow::createToolBars()
   toolbar->addAction(standardAction(Exit));
 }
 
-void MainWindow::createDockWidgets()
+void MainWindow::createTabbedMenuBar()
 {
 }
 

@@ -33,10 +33,9 @@ AboutDialog::AboutDialog(QWidget *parent /*=0*/)
 
   QStringList arguments = OEG::Qt::Application::arguments();
   if (arguments.count() > 1) {                                       // Called from CLI with parameters.
-    QString s = arguments.join("");
-    QMessageBox::information(0, s, arguments.at(1));
-
-
+    //QString s = arguments.join("");
+    //QMessageBox::information(0, s, arguments.at(1));
+    m_base_name = arguments.at(1);
   }
 
   QString headLine;
@@ -69,7 +68,7 @@ void AboutDialog::setInformationText()
            "an open source software project. "
            "You can always download the latest sources from the homepage at no cost. "
            "You may compile yourself the latest versions for free using free tools. "
-           "Even the official binaries are available for free.")).arg(qApp->applicationName());
+           "Even the official binaries are available for free.")).arg(m_base_name);
 
   str += "</p><p>";
 
@@ -86,7 +85,8 @@ void AboutDialog::setInformationText()
            "implemented with a higher priority, ... Thats all.");
   str += "</p>";
 
-  QString homepage = "http://www.open-egov.de/projects/" + dynamic_cast<OEG::Qt::Application *>(qApp)->baseName() + "/";
+  // dynamic_cast<OEG::Qt::Application *>(qApp)->baseName()
+  QString homepage = "http://www.open-egov.de/projects/" + m_base_name + "/";
 
   if (homepage.length() > 0) {
     str += "<p>";

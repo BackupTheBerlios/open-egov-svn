@@ -30,8 +30,6 @@ class QProcess;
 class QLabel;
 class QLineEdit;
 
-class OEG::Qt::TabbedMenuBar;
-
 class MainWindow : public OEG::Qt::MainWindow
 {
   Q_OBJECT

@@ -42,6 +42,14 @@ void MainWindow::createActions()
 
 }
 
+void MainWindow::createStatusBar()
+{
+}
+
+void MainWindow::createDockWidgets()
+{
+}
+
 void MainWindow::createMenus()
 {
   QMenu   *menu;
@@ -67,7 +75,7 @@ void MainWindow::createToolBars()
   toolbar->addAction(standardAction(Exit));
 }
 
-void MainWindow::createDockWidgets()
+void MainWindow::createTabbedMenuBar()
 {
 }
 

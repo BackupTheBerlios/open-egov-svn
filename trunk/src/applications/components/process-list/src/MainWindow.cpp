@@ -124,6 +124,27 @@ void MainWindow::createActions()
 #endif
 }
 
+void MainWindow::createStatusBar()
+{
+  OEG::Qt::MainWindow::createStatusBar();
+
+  m_number_of_processes = new QLabel(" 000 ");
+  m_number_of_processes->setMinimumSize(m_number_of_processes->sizeHint());
+  m_number_of_processes->setAlignment(Qt::AlignCenter);
+  m_number_of_processes->setToolTip(_("The number of processes."));
+  statusBar()->addPermanentWidget(m_number_of_processes);
+
+  m_current_time = new QLabel(" 00:00:00 ");
+  m_current_time->setMinimumSize(m_current_time->sizeHint());
+  m_current_time->setAlignment(Qt::AlignCenter);
+  m_current_time->setToolTip(_("The current time."));
+  statusBar()->addPermanentWidget(m_current_time);
+}
+
+void MainWindow::createDockWidgets()
+{
+}
+
 void MainWindow::createMenus()
 {
   QMenu   *menu;
@@ -148,21 +169,8 @@ void MainWindow::createToolBars()
   toolbar->addAction(standardAction(Exit));
 }
 
-void MainWindow::createStatusBar()
+void MainWindow::createTabbedMenuBar()
 {
-  m_number_of_processes = new QLabel(" 000 ");
-  m_number_of_processes->setMinimumSize(m_number_of_processes->sizeHint());
-  m_number_of_processes->setAlignment(Qt::AlignCenter);
-  m_number_of_processes->setToolTip(_("The number of processes."));
-  statusBar()->addPermanentWidget(m_number_of_processes);
-
-  m_current_time = new QLabel(" 00:00:00 ");
-  m_current_time->setMinimumSize(m_current_time->sizeHint());
-  m_current_time->setAlignment(Qt::AlignCenter);
-  m_current_time->setToolTip(_("The current time."));
-  statusBar()->addPermanentWidget(m_current_time);
-
-  OEG::Qt::MainWindow::createStatusBar();
 }
 
 void MainWindow::action_reload()

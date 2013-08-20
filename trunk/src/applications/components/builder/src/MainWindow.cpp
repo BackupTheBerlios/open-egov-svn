@@ -298,9 +298,9 @@ void MainWindow::createStatusBar()
   m_number_of_selected_rows->setToolTip(_("The number of currently selected packages."));
   statusBar()->addPermanentWidget(m_number_of_selected_rows);
 
-  updateStatusBar();
-
   OEG::Qt::MainWindow::createStatusBar();
+
+  updateStatusBar();
 }
 
 void MainWindow::createDockWidgets()

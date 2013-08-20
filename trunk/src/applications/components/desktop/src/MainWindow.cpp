@@ -53,6 +53,15 @@ void MainWindow::createActions()
   connect(m_action_process_list, SIGNAL(triggered()), this, SLOT(actionProcessList()));
 }
 
+void MainWindow::createStatusBar()
+{
+  OEG::Qt::MainWindow::createStatusBar();
+}
+
+void MainWindow::createDockWidgets()
+{
+}
+
 void MainWindow::createMenus()
 {
   QMenu   *menu;
@@ -68,6 +77,14 @@ void MainWindow::createMenus()
   connect(action, SIGNAL(triggered()), this, SLOT(commonSettings()));
 
   addStandardMenu(HelpMenu);
+}
+
+void MainWindow::createToolBars()
+{
+}
+
+void MainWindow::createTabbedMenuBar()
+{
 }
 
 void MainWindow::loadPlugins()

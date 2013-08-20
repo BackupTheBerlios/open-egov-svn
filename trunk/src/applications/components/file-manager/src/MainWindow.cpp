@@ -16,8 +16,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <OEG/Qt/TabbedMenuBar.h>
-
 #include <QAction>
 #include <QApplication>
 #include <QDir>
@@ -44,8 +42,9 @@
 
 #include <QDebug>
 
-#include <OEG/Qt/MessageBox.h>
+#include <OEG/Qt/MessageDialog.h>
 #include <OEG/Qt/TabWidget.h>
+#include <OEG/Qt/TabbedMenuBar.h>
 
 #include "ButtonsDockWidget.h"
 #include "FileSystemModel.h"
@@ -136,6 +135,50 @@ void MainWindow::createActions()
 
 }
 
+void MainWindow::createStatusBar()
+{
+}
+
+void MainWindow::createDockWidgets()
+{
+  m_dock_my_dirs = new QDockWidget(_("My Directories"), this);
+  m_dock_my_dirs_view = new QListView(m_dock_my_dirs);
+  m_dock_my_dirs->setWidget(m_dock_my_dirs_view);
+  addDockWidget(Qt::LeftDockWidgetArea, m_dock_my_dirs);
+
+  m_dock_buttons = new ButtonsDockWidget(_("Buttons"), this);
+  addDockWidget(Qt::BottomDockWidgetArea, m_dock_buttons);
+
+  QFileSystemModel *m_dock_model = new QFileSystemModel;
+  m_dock_model->setRootPath(QDir::currentPath());
+  m_dock_model->setReadOnly(true);
+  m_dock_model->setFilter(QDir::Drives | QDir::AllDirs | QDir::NoDotAndDotDot);
+
+  //scrollTo(index)
+  //setExpanded(index, true);
+  //setRootIndex(index)
+  //model->setSorting( QDir::DirsFirst | QDir::IgnoreCase );
+
+  m_dock_tree = new QDockWidget(_("Directory Tree"), this);
+  m_dock_tree_view = new QTreeView(m_dock_tree);
+  m_dock_tree_view->header()->hide();
+  m_dock_tree_view->setAnimated(false);
+  m_dock_tree_view->setSortingEnabled(false);
+  m_dock_tree_view->setIndentation(20);
+  m_dock_tree_view->setAutoExpandDelay(1);
+  m_dock_tree_view->setUniformRowHeights(true);
+  m_dock_tree_view->setModel(m_dock_model); //currentFolderView()->fileSystemModel()
+  m_dock_tree_view->setSortingEnabled(true); // LATER via SIGNAL; tree->setRootIndex(model->index(QDir::currentPath()));
+  m_dock_tree_view->resizeColumnToContents(0);  // Does not work. LATER
+  m_dock_tree->setWidget(m_dock_tree_view);
+  addDockWidget(Qt::LeftDockWidgetArea, m_dock_tree);
+  removeColumnsFromTree();
+
+  m_dock_preview = new QDockWidget(_("Preview"), this);
+  m_dock_preview->setWidget(new QLabel("Preview", this));
+  addDockWidget(Qt::RightDockWidgetArea, m_dock_preview);
+}
+
 void MainWindow::createMenus()
 {
   QMenu   *menu;
@@ -196,44 +239,8 @@ void MainWindow::createToolBars()
   toolbar->addAction(standardAction(Exit));
 }
 
-void MainWindow::createDockWidgets()
+void MainWindow::createTabbedMenuBar()
 {
-  m_dock_my_dirs = new QDockWidget(_("My Directories"), this);
-  m_dock_my_dirs_view = new QListView(m_dock_my_dirs);
-  m_dock_my_dirs->setWidget(m_dock_my_dirs_view);
-  addDockWidget(Qt::LeftDockWidgetArea, m_dock_my_dirs);
-
-  m_dock_buttons = new ButtonsDockWidget(_("Buttons"), this);
-  addDockWidget(Qt::BottomDockWidgetArea, m_dock_buttons);
-
-  QFileSystemModel *m_dock_model = new QFileSystemModel;
-  m_dock_model->setRootPath(QDir::currentPath());
-  m_dock_model->setReadOnly(true);
-  m_dock_model->setFilter(QDir::Drives | QDir::AllDirs | QDir::NoDotAndDotDot);
-
-  //scrollTo(index)
-  //setExpanded(index, true);
-  //setRootIndex(index)
-  //model->setSorting( QDir::DirsFirst | QDir::IgnoreCase );
-
-  m_dock_tree = new QDockWidget(_("Directory Tree"), this);
-  m_dock_tree_view = new QTreeView(m_dock_tree);
-  m_dock_tree_view->header()->hide();
-  m_dock_tree_view->setAnimated(false);
-  m_dock_tree_view->setSortingEnabled(false);
-  m_dock_tree_view->setIndentation(20);
-  m_dock_tree_view->setAutoExpandDelay(1);
-  m_dock_tree_view->setUniformRowHeights(true);
-  m_dock_tree_view->setModel(m_dock_model); //currentFolderView()->fileSystemModel()
-  m_dock_tree_view->setSortingEnabled(true); // LATER via SIGNAL; tree->setRootIndex(model->index(QDir::currentPath()));
-  m_dock_tree_view->resizeColumnToContents(0);  // Does not work. LATER
-  m_dock_tree->setWidget(m_dock_tree_view);
-  addDockWidget(Qt::LeftDockWidgetArea, m_dock_tree);
-  removeColumnsFromTree();
-
-  m_dock_preview = new QDockWidget(_("Preview"), this);
-  m_dock_preview->setWidget(new QLabel("Preview", this));
-  addDockWidget(Qt::RightDockWidgetArea, m_dock_preview);
 }
 
 FolderView *MainWindow::currentFolderView()
