@@ -17,9 +17,9 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <OEG/Qt/Application.h>
-#include <OEG/Qt/MessageBox.h>
 
-#include "MainWindow.h"
+#include <QMessageBox>
+
 #include "Server.h"
 
 int main(int argc, char *argv[])
@@ -42,9 +42,6 @@ int main(int argc, char *argv[])
     QCoreApplication::quit();
     return 2;
   }
-
-  MainWindow win;
-  win.show();
 
   return app.exec();
 }
