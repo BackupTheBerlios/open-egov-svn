@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2012 by Gerrit M. Albrecht
+// Copyright (C) 2005-2011 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -33,6 +33,10 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
 {
   setWindowIcon(QIcon("icon.png"));
 
+  QWidget *w = new QWidget(this);
+
+  setCentralWidget(w);
+
   createAll();
 }
 
@@ -40,6 +44,16 @@ void MainWindow::createActions()
 {
   OEG::Qt::MainWindow::createActions();
 
+}
+
+void MainWindow::createStatusBar()
+{
+  OEG::Qt::MainWindow::createStatusBar();
+
+}
+
+void MainWindow::createDockWidgets()
+{
 }
 
 void MainWindow::createMenus()
@@ -62,7 +76,12 @@ void MainWindow::createMenus()
   menu->addAction(standardAction(Cut));
   menu->addAction(standardAction(Copy));
   menu->addAction(standardAction(Paste));
+  menu->addSeparator();
   menu->addAction(standardAction(Delete));
+
+  menu = getStandardMenu(SettingsMenu);
+  action = menu->addAction(_("Common..."));
+  connect(action, SIGNAL(triggered()), this, SLOT(commonSettings()));
 
   addStandardMenu(HelpMenu);
 }
@@ -86,7 +105,7 @@ void MainWindow::createToolBars()
   toolbar->addAction(standardAction(Delete));
 }
 
-void MainWindow::createDockWidgets()
+void MainWindow::createTabbedMenuBar()
 {
 }
 

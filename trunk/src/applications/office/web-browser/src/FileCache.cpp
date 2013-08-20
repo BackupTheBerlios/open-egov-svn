@@ -36,7 +36,7 @@ FileCache::FileCache(QObject *parent)
 
 QString FileCache::giveText(const QString &name)
 {
-  m_downloader.getFile(name);
+  m_downloader.downloadFile(name);
 
   connect(&m_downloader, SIGNAL(done()), this, SLOT(gotFile()));
 

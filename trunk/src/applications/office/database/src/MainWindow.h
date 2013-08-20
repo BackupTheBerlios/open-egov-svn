@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2012 by Gerrit M. Albrecht
+// Copyright (C) 2005-2011 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -24,8 +24,6 @@
 #include <QWidget>
 #include <QList>
 
-class OEG::Qt::TabbedMenuBar;
-
 class MainWindow : public OEG::Qt::MainWindow
 {
   Q_OBJECT
@@ -36,10 +34,11 @@ class MainWindow : public OEG::Qt::MainWindow
     MainWindow(QWidget *parent = 0);
 
     virtual void createActions();
+    virtual void createStatusBar();
     virtual void createDockWidgets();
     virtual void createMenus();
     virtual void createToolBars();
-    virtual void createTabbedMenuBar() {};
+    virtual void createTabbedMenuBar();
 
     void setTitle(const QString &title);
     QString title() const;

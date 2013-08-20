@@ -24,8 +24,6 @@
 #include <QWidget>
 #include <QList>
 
-class OEG::Qt::TabbedMenuBar;
-
 class MainWindow : public OEG::Qt::MainWindow
 {
   Q_OBJECT
@@ -36,10 +34,11 @@ class MainWindow : public OEG::Qt::MainWindow
     MainWindow(QWidget *parent = 0);
 
     virtual void createActions();
+    virtual void createStatusBar();
     virtual void createDockWidgets();
     virtual void createMenus();
     virtual void createToolBars();
-    virtual void createTabbedMenuBar() {};
+    virtual void createTabbedMenuBar();
 
     void setTitle(const QString &title);
     QString title() const;

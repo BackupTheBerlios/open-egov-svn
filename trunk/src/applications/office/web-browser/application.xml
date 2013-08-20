@@ -3,41 +3,79 @@
 <!-- $Id$ -->
 
 <application category="office" base="web-browser">
-  <strings>
+  <project>
+    <data name="application-binary"  value="web-browser" />
+    <data name="application-name"    value="Web Browser" />
+    <data name="application-version" value="1.0.0.0" />
+    <data name="generate-pro"        value="true" />
+    <data name="generate-main"       value="true" />
+    <data name="generate-rc"         value="true" />
+    <data name="pro-qt"              value="gui widgets multimedia network sql xml" />
+    <data name="pro-packages"        value="QT GETTEXT" />
+    <data name="pro-config"          value="warn_on thread qt" />
+    <data name="mainwindow-class"    value="MainWindow" />
+  </project>
+
+  <head>
+    <text name="title"       stringnumber="1" />
+    <text name="description" stringnumber="2" />
+    <text name="author"      stringnumber="3" />
+    <text name="email"       stringnumber="4" />
+  </head>
+
+  <dictionary>
+    <!-- solely required group, other groups overlay these values -->
     <group lang="en_US">
-      <string name="title">Web Browser</string>
-      <string name="description">Application to explore the World Wide Web.</string>
+      <string number="1">Web Browser</string>
+      <string number="2">Application to explore the World Wide Web.</string>
+      <string number="3">Gerrit M. Albrecht</string>
+      <string number="4">mail@gerrit-albrecht.de</string>
+      <string number="10">Common</string>
+      <string number="11"></string>
+      <string number="12"></string>
     </group>
 
     <group lang="de_DE">
-      <string name="title">Webbrowser</string>
-      <string name="description">Anwendung zum Erkunden des World Wide Webs.</string>
+      <string number="1">Webbrowser</string>
+      <string number="2">Anwendung zum Erkunden des World Wide Webs.</string>
+      <string number="3">Gerrit M. Albrecht</string>
+      <string number="4">mail@gerrit-albrecht.de</string>
+      <string number="10">Allgemein</string>
+      <string number="11"></string>
+      <string number="12"></string>
     </group>
-  </strings>
+  </dictionary>
+
+  <comments>
+  </comments>
+
+  <configuration>
+    <section name="common" icon="" stringnumber="10" context="local">
+      <entry name="show-centered" type="boolean" default="false" context="global">
+        <text name="title"       stringnumber="11" />
+        <text name="description" stringnumber="12" />
+      </entry>
+    </section>
+  </configuration>
 
   <properties>
-    <property name="dbus" value="false" />
-    <property name="embed" value="false" />
-    <property name="stable" value="false" />
+    <property name="dbus"     value="false" />
+    <property name="embed"    value="false" />
+    <property name="stable"   value="true" />
     <property name="database" value="false" />
   </properties>
 
-  <setup>
-    <requires>base</requires>
-  </setup>
+  <requires>
+  </requires>
 
-  <features>
-    <todos>
-    </todos>
-    <changes>
-    </changes>
-  </features>
+  <todos>
+  </todos>
 
-  <datastructure>
-    <table name="">
-      
-    </table>
-  </datastructure>
+  <changes>
+  </changes>
+
+  <datastructures>
+  </datastructures>
 
   <databases>
   </databases>

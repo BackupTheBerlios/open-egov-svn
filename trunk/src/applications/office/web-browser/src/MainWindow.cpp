@@ -33,6 +33,10 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
 {
   setWindowIcon(QIcon("icon.png"));
 
+  QWidget *w = new QWidget(this);
+
+  setCentralWidget(w);
+
   createAll();
 }
 
@@ -40,6 +44,16 @@ void MainWindow::createActions()
 {
   OEG::Qt::MainWindow::createActions();
 
+}
+
+void MainWindow::createStatusBar()
+{
+  OEG::Qt::MainWindow::createStatusBar();
+
+}
+
+void MainWindow::createDockWidgets()
+{
 }
 
 void MainWindow::createMenus()
@@ -50,6 +64,8 @@ void MainWindow::createMenus()
   menu = getStandardMenu(FileMenu);
   menu->addAction(standardAction(New));
   menu->addAction(standardAction(Open));
+  menu->addAction(standardAction(Close));
+  menu->addSeparator();
   menu->addAction(standardAction(Print));
   menu->addSeparator();
   menu->addAction(standardAction(Exit));
@@ -64,6 +80,10 @@ void MainWindow::createMenus()
   menu->addSeparator();
   menu->addAction(standardAction(Delete));
 
+  menu = getStandardMenu(SettingsMenu);
+  action = menu->addAction(_("Common..."));
+  connect(action, SIGNAL(triggered()), this, SLOT(commonSettings()));
+
   addStandardMenu(HelpMenu);
 }
 
@@ -73,9 +93,9 @@ void MainWindow::createToolBars()
 
   toolbar = addToolBar(_("File"));
   toolbar->addAction(standardAction(New));
-  toolbar->addAction(standardAction(Edit));
+  toolbar->addAction(standardAction(Open));
+  toolbar->addAction(standardAction(Close));
   toolbar->addAction(standardAction(Print));
-  toolbar->addAction(standardAction(Edit));
   toolbar->addSeparator();
   toolbar->addAction(standardAction(Undo));
   toolbar->addAction(standardAction(Redo));
@@ -86,7 +106,7 @@ void MainWindow::createToolBars()
   toolbar->addAction(standardAction(Delete));
 }
 
-void MainWindow::createDockWidgets()
+void MainWindow::createTabbedMenuBar()
 {
 }
 

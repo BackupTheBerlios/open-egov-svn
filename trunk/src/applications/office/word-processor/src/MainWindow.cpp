@@ -16,8 +16,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include "MainWindow.h"
-
 #include <OEG/Qt/TabbedMenuBar.h>
 
 #include <QApplication>
@@ -28,10 +26,16 @@
 #include <QAction>
 #include <QIcon>
 
+#include "MainWindow.h"
+
 MainWindow::MainWindow(QWidget *parent /*=0*/)
  : OEG::Qt::MainWindow(parent)
 {
   setWindowIcon(QIcon("icon.png"));
+
+  QWidget *w = new QWidget(this);
+
+  setCentralWidget(w);
 
   createAll();
 }
@@ -42,6 +46,16 @@ void MainWindow::createActions()
 
 }
 
+void MainWindow::createStatusBar()
+{
+  OEG::Qt::MainWindow::createStatusBar();
+
+}
+
+void MainWindow::createDockWidgets()
+{
+}
+
 void MainWindow::createMenus()
 {
   QMenu   *menu;
@@ -49,9 +63,9 @@ void MainWindow::createMenus()
 
   menu = getStandardMenu(FileMenu);
   menu->addAction(standardAction(New));
-  menu->addAction(standardAction(Edit));
+  menu->addAction(standardAction(Open));
+  menu->addAction(standardAction(Close));
   menu->addAction(standardAction(Print));
-  menu->addAction(standardAction(Edit));
   menu->addSeparator();
   menu->addAction(standardAction(Exit));
 
@@ -62,7 +76,12 @@ void MainWindow::createMenus()
   menu->addAction(standardAction(Cut));
   menu->addAction(standardAction(Copy));
   menu->addAction(standardAction(Paste));
+  menu->addSeparator();
   menu->addAction(standardAction(Delete));
+
+  menu = getStandardMenu(SettingsMenu);
+  action = menu->addAction(_("Common..."));
+  connect(action, SIGNAL(triggered()), this, SLOT(commonSettings()));
 
   addStandardMenu(HelpMenu);
 }
@@ -73,9 +92,9 @@ void MainWindow::createToolBars()
 
   toolbar = addToolBar(_("File"));
   toolbar->addAction(standardAction(New));
-  toolbar->addAction(standardAction(Edit));
+  toolbar->addAction(standardAction(Open));
+  toolbar->addAction(standardAction(Close));
   toolbar->addAction(standardAction(Print));
-  toolbar->addAction(standardAction(Edit));
   toolbar->addSeparator();
   toolbar->addAction(standardAction(Undo));
   toolbar->addAction(standardAction(Redo));
@@ -86,7 +105,7 @@ void MainWindow::createToolBars()
   toolbar->addAction(standardAction(Delete));
 }
 
-void MainWindow::createDockWidgets()
+void MainWindow::createTabbedMenuBar()
 {
 }
 
