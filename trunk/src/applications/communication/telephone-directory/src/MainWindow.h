@@ -20,11 +20,9 @@
 
 #include <OEG/Qt/MainWindow.h>
 
-#include <QString.h>
-#include <QWidget.h>
-#include <QList.h>
-
-class OEG::Qt::TabbedMenuBar;
+#include <QString>
+#include <QWidget>
+#include <QList>
 
 class MainWindow : public OEG::Qt::MainWindow
 {
@@ -34,10 +32,12 @@ class MainWindow : public OEG::Qt::MainWindow
     MainWindow(QWidget *parent = 0);
 
     virtual void createActions();
+    virtual void createStatusBar();
     virtual void createDockWidgets();
     virtual void createMenus();
     virtual void createToolBars();
-    virtual void createTabbedMenuBar() {};
+    virtual void createTabbedMenuBar();
+
 
   protected:
 

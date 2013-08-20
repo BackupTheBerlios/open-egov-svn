@@ -33,6 +33,8 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
 {
   setWindowIcon(QIcon("icon.png"));
 
+  setCentralWidget(new QWidget(this));
+
   createAll();
 }
 
@@ -42,12 +44,28 @@ void MainWindow::createActions()
 
 }
 
+void MainWindow::createStatusBar()
+{
+}
+
+void MainWindow::createDockWidgets()
+{
+}
+
 void MainWindow::createMenus()
 {
-  QMenu *fileMenu = menuBar()->addMenu(_("&File"));
-  fileMenu->addAction(standardAction(Exit));
+  QMenu   *menu;
+  QAction *action;
 
-  addHelpMenu();
+  menu = getStandardMenu(FileMenu);
+  //menu->addSeparator();
+  menu->addAction(standardAction(Exit));
+
+  menu = getStandardMenu(SettingsMenu);
+  action = menu->addAction(_("Common..."));
+  connect(action, SIGNAL(triggered()), this, SLOT(commonSettings()));
+
+  addStandardMenu(HelpMenu);
 }
 
 void MainWindow::createToolBars()
@@ -59,7 +77,7 @@ void MainWindow::createToolBars()
   toolbar->addAction(standardAction(Exit));
 }
 
-void MainWindow::createDockWidgets()
+void MainWindow::createTabbedMenuBar()
 {
 }
 

@@ -57,26 +57,44 @@ void MainWindow::createActions()
 
 }
 
+void MainWindow::createStatusBar()
+{
+}
+
+void MainWindow::createDockWidgets()
+{
+}
+
 void MainWindow::createMenus()
 {
-  QMenu *menu;
+  QMenu   *menu;
+  QAction *action;
 
-  menu = menuBar()->addMenu(_("&File"));
+  menu = getStandardMenu(FileMenu);
   menu->addAction(standardAction(Open));
   menu->addSeparator();
   menu->addAction(standardAction(Exit));
 
-  addHelpMenu();
+  menu = getStandardMenu(SettingsMenu);
+  action = menu->addAction(_("Common..."));
+  connect(action, SIGNAL(triggered()), this, SLOT(commonSettings()));
+
+  addStandardMenu(HelpMenu);
 }
 
 void MainWindow::createToolBars()
 {
+  QAction  *action;
   QToolBar *toolbar;
 
   toolbar = addToolBar(_("File"));
   toolbar->addAction(standardAction(Open));
   toolbar->addSeparator();
   toolbar->addAction(standardAction(Exit));
+}
+
+void MainWindow::createTabbedMenuBar()
+{
 }
 
 void MainWindow::standardActionOpen()

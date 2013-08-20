@@ -48,9 +48,13 @@ class MainWindow : public OEG::Qt::MainWindow
     void parseMessageFile(const QString &fileName);
 
   private slots:
-    void createActions();
-    void createMenus();
-    void createToolBars();
+    virtual void createActions();
+    virtual void createStatusBar();
+    virtual void createDockWidgets();
+    virtual void createMenus();
+    virtual void createToolBars();
+    virtual void createTabbedMenuBar();
+
     void standardActionOpen();
 
   private:
