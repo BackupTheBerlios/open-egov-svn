@@ -18,9 +18,9 @@
 
 #include <OEG/Qt/Application.h>
 
-#include "DocumentProperties.h"
+#include "DocumentPropertiesData.h"
 
-DocumentProperties::DocumentProperties()
+DocumentPropertiesData::DocumentPropertiesData()
  : QObject()
 {
 }

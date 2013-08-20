@@ -24,12 +24,12 @@
 #include <QDateTime>
 #include <QString>
 
-class DocumentProperties : public QObject
+class DocumentPropertiesData : public QObject
 {
   Q_OBJECT
 
   public:
-    DocumentProperties();
+    DocumentPropertiesData();
 
     inline QString filename() const { return m_filename; }
     inline void setFilename(const QString &filename) { m_filename = filename; }
