@@ -19,31 +19,31 @@
 #include <QApplication>
 #include <QWidget>
 
-#include <OEG/Qt/MessageBox.h>
+#include <OEG/Qt/MessageDialog.h>
 
 using namespace OEG::Qt;
 using namespace Qt;
 
-MessageBox::MessageBox(QWidget *parent /*=0*/)
+MessageDialog::MessageDialog(QWidget *parent /*=0*/)
  : QMessageBox(parent)
 {
 }
 
-MessageBox::~MessageBox()
+MessageDialog::~MessageDialog()
 {
 }
 
-void MessageBox::ErrorMessage(const QString &message, QWidget *parent /*=0*/)
+void MessageDialog::ErrorMessage(const QString &message, QWidget *parent /*=0*/)
 {
   QMessageBox::critical(parent, qApp->applicationName(), message);
 }
 
-void MessageBox::WarnMessage(const QString &message, QWidget *parent /*=0*/)
+void MessageDialog::WarnMessage(const QString &message, QWidget *parent /*=0*/)
 {
   QMessageBox::warning(parent, qApp->applicationName(), message);
 }
 
-void MessageBox::InfoMessage(const QString &message, QWidget *parent /*=0*/)
+void MessageDialog::InfoMessage(const QString &message, QWidget *parent /*=0*/)
 {
   QMessageBox::information(parent, qApp->applicationName(), message);
 }

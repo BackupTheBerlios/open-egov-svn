@@ -27,13 +27,13 @@ class QWidget;
 
 namespace OEG { namespace Qt {
 
-class MessageBox : public QMessageBox
+class MessageDialog : public QMessageBox
 {
   Q_OBJECT
 
   public:
-    MessageBox(QWidget *parent = 0);
-    ~MessageBox();
+    MessageDialog(QWidget *parent = 0);
+    ~MessageDialog();
 
   public:
     static void ErrorMessage(const QString &message, QWidget *parent = 0);
