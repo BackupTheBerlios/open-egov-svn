@@ -20,11 +20,9 @@
 
 #include <OEG/Qt/MainWindow.h>
 
-#include <QString.h>
-#include <QWidget.h>
-#include <QList.h>
-
-class OEG::Qt::ToolProvider;
+#include <QString>
+#include <QWidget>
+#include <QList>
 
 class MainWindow : public OEG::Qt::MainWindow
 {
@@ -33,11 +31,12 @@ class MainWindow : public OEG::Qt::MainWindow
   public:
     MainWindow(QWidget *parent = 0);
 
-    void createActions();
-    void createMenus();
-    void createToolBars();
-    void createStatusBar();
-    void createDockWidgets();
+    virtual void createActions();
+    virtual void createStatusBar();
+    virtual void createDockWidgets();
+    virtual void createMenus();
+    virtual void createToolBars();
+    virtual void createTabbedMenuBar();
 
   protected:
 

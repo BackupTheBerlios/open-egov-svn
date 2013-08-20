@@ -19,7 +19,7 @@
 #include "MainWindow.h"
 
 #include <OEG/Qt/Application.h>
-#include <OEG/Qt/ToolProvider.h>
+#include <OEG/Qt/TabbedMenuBar.h>
 
 #include <QMenuBar>
 #include <QToolBar>
@@ -31,34 +31,74 @@
 MainWindow::MainWindow(QWidget *parent /*=0*/)
  : OEG::Qt::MainWindow(parent)
 {
-  createAll();
-
   setWindowIcon(QIcon("icon.png"));
 
+  setCentralWidget(new QWidget());
+
+  createAll();
 }
 
 void MainWindow::createActions()
 {
-}
-
-void MainWindow::createMenus()
-{
-  QMenu *fileMenu = menuBar()->addMenu(_("&File"));
-
-}
-
-void MainWindow::createToolBars()
-{
-  QToolBar *fileToolBar = addToolBar(_("File"));
+  OEG::Qt::MainWindow::createActions();
 
 }
 
 void MainWindow::createStatusBar()
 {
+  OEG::Qt::MainWindow::createStatusBar();
+
   statusBar()->showMessage(_("Ready."));
 }
 
 void MainWindow::createDockWidgets()
+{
+}
+
+
+void MainWindow::createMenus()
+{
+  QMenu   *menu;
+  QAction *action;
+
+  menu = getStandardMenu(FileMenu);
+  menu->addAction(standardAction(New));
+  menu->addAction(standardAction(Open));
+  menu->addAction(standardAction(Save));
+  menu->addAction(standardAction(SaveAs));
+  menu->addSeparator();
+  menu->addAction(standardAction(Print));
+  menu->addSeparator();
+  menu->addAction(standardAction(Exit));
+
+  menu = menuBar()->addMenu(_("&Build"));
+  action = menu->addAction(_("&Build Project"));
+  connect(action, SIGNAL(triggered()), this, SLOT(buildProject()));
+
+  menu = getStandardMenu(SettingsMenu);
+  action = menu->addAction(_("Common..."));
+  connect(action, SIGNAL(triggered()), this, SLOT(commonSettings()));
+
+  addStandardMenu(HelpMenu);
+}
+
+void MainWindow::createToolBars()
+{
+  QAction  *action;
+  QToolBar *toolbar;
+
+  toolbar = addToolBar(_("File"));
+  toolbar->addAction(standardAction(New));
+  toolbar->addAction(standardAction(Open));
+  toolbar->addAction(standardAction(Save));
+  toolbar->addAction(standardAction(SaveAs));
+  toolbar->addSeparator();
+  toolbar->addAction(standardAction(Print));
+  toolbar->addSeparator();
+  toolbar->addAction(standardAction(Exit));
+}
+
+void MainWindow::createTabbedMenuBar()
 {
 }
 

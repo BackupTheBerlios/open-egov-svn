@@ -16,6 +16,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+// Automatically generated file. Do not edit manually!
+// See application.xml in parent directory (project tag).
+
 #include <OEG/Qt/Application.h>
 
 #include "MainWindow.h"
@@ -24,7 +27,7 @@ int main(int argc, char *argv[])
 {
   OEG::Qt::Application app(argc, argv, "wixi");
 
-  app.setApplicationName(_("WiXi"), "0.1");
+  app.setApplicationName(_("WiXi"), "1.0.0.0");
   app.setApplicationBuildData(__DATE__, __TIME__);
 
   MainWindow win;
