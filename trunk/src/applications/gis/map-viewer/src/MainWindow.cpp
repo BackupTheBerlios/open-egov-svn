@@ -88,11 +88,28 @@ void MainWindow::createActions()
 #endif
 }
 
+void MainWindow::createStatusBar()
+{
+  OEG::Qt::MainWindow::createStatusBar();
+
+  m_coordinates = new QLabel(" 00.0000, 00.0000 ");
+  m_coordinates->setMinimumSize(m_coordinates->sizeHint());
+  m_coordinates->setAlignment(Qt::AlignCenter);
+  m_coordinates->setToolTip(_("Current coordinates."));
+  statusBar()->addPermanentWidget(m_coordinates);
+}
+
+void MainWindow::createDockWidgets()
+{
+}
+
 void MainWindow::createMenus()
 {
-  QMenu *menu;
+  QMenu   *menu;
+  QAction *action;
 
-  menu = menuBar()->addMenu(_("&File"));
+  menu = getStandardMenu(FileMenu);
+  menu->addAction(standardAction(New));
   menu->addSeparator();
   menu->addAction(standardAction(Exit));
 
@@ -100,31 +117,28 @@ void MainWindow::createMenus()
   menu->addAction(standardAction(ZoomNormal));
   menu->addAction(standardAction(ZoomIn));
   menu->addAction(standardAction(ZoomOut));
-  menu->addSeparator();
+  //menu->addSeparator();
   //menu->addAction(standardAction("engine_google"));
   //menu->addAction(standardAction("engine_osm"));
 
-  addHelpMenu();
+  menu = getStandardMenu(SettingsMenu);
+  action = menu->addAction(_("Common..."));
+  connect(action, SIGNAL(triggered()), this, SLOT(commonSettings()));
+
+  addStandardMenu(HelpMenu);
 }
 
 void MainWindow::createToolBars()
 {
-  QAction  *a;
-  QToolBar *t;
+  QAction  *action;
+  QToolBar *toolbar;
 
-  t = addToolBar(_("File"));
-  t->addAction(standardAction(Exit));
+  toolbar = addToolBar(_("File"));
+  toolbar->addAction(standardAction(Exit));
 }
 
-void MainWindow::createStatusBar()
+void MainWindow::createTabbedMenuBar()
 {
-  m_coordinates = new QLabel(" 00.0000, 00.0000 ");
-  m_coordinates->setMinimumSize(m_coordinates->sizeHint());
-  m_coordinates->setAlignment(Qt::AlignCenter);
-  m_coordinates->setToolTip(_("Current coordinates."));
-  statusBar()->addPermanentWidget(m_coordinates);
-
-  OEG::Qt::MainWindow::createStatusBar();
 }
 
 void MainWindow::receiveCoordinatesAtMouse(double x, double y)
