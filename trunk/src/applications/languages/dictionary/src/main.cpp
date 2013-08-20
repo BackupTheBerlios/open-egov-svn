@@ -1,7 +1,7 @@
 // $Id$
 //
-// Open eGovernment
-// Copyright (C) 2005-2011 by Gerrit M. Albrecht
+// Open E-Government
+// Copyright (C) 2005-2013 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -16,6 +16,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+// Automatically generated file. Do not edit manually!
+// See application.xml in parent directory (project tag).
+
 #include <OEG/Qt/Application.h>
 
 #include "MainWindow.h"
@@ -24,7 +27,7 @@ int main(int argc, char *argv[])
 {
   OEG::Qt::Application app(argc, argv, "dictionary");
 
-  app.setApplicationName(_("Dictionary"), "0.1");
+  app.setApplicationName(_("Dictionary"), "1.0.0.0");
   app.setApplicationBuildData(__DATE__, __TIME__);
 
   MainWindow win;

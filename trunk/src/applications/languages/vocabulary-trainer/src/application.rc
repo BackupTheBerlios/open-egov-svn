@@ -1,4 +1,4 @@
-// $Id$
+// $Id:$
 //
 // Open E-Government
 // Copyright (C) 2005-2013 by Gerrit M. Albrecht
@@ -60,10 +60,10 @@ BEGIN
   BEGIN
     BLOCK "040904E4"                    // see VarFileInfo
     BEGIN
-      VALUE "InternalName",     "dictionary.exe\0"
-      VALUE "OriginalFilename", "dictionary.exe\0"
-      VALUE "FileDescription",  "Open E-Government: Dictionary.\0"
-      VALUE "ProductName",      "Open E-Government: Dictionary.\0"
+      VALUE "InternalName",     "vocabulary-trainer.exe\0"
+      VALUE "OriginalFilename", "vocabulary-trainer.exe\0"
+      VALUE "FileDescription",  "Open E-Government: Vocabulary Trainer.\0"
+      VALUE "ProductName",      "Open E-Government: Vocabulary Trainer.\0"
       VALUE "Comments",         "Homepage: www.open-egov.de\0"
       VALUE "CompanyName",      "gasi.de\0"
       VALUE "LegalCopyright",   "Copyright (C) 2004-2013 GASI.\0"

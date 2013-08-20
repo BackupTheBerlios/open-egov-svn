@@ -16,7 +16,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <OEG/Qt/ToolProvider.h>
+#include <OEG/Qt/TabbedMenuBar.h>
 
 #include <QApplication>
 #include <QMenuBar>
@@ -33,6 +33,10 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
 {
   setWindowIcon(QIcon("icon.png"));
 
+  QWidget *w = new QWidget(this);
+
+  setCentralWidget(w);
+
   createAll();
 }
 
@@ -42,12 +46,36 @@ void MainWindow::createActions()
 
 }
 
+void MainWindow::createStatusBar()
+{
+  OEG::Qt::MainWindow::createStatusBar();
+
+}
+
+void MainWindow::createDockWidgets()
+{
+}
+
 void MainWindow::createMenus()
 {
-  QMenu *fileMenu = menuBar()->addMenu(_("&File"));
-  fileMenu->addAction(standardAction(Exit));
+  QMenu   *menu;
+  QAction *action;
 
-  addHelpMenu();
+  menu = getStandardMenu(FileMenu);
+  menu->addAction(standardAction(New));
+  menu->addSeparator();
+  menu->addAction(standardAction(Exit));
+
+  menu = getStandardMenu(EditMenu);
+  menu->addAction(standardAction(Cut));
+  menu->addAction(standardAction(Copy));
+  menu->addAction(standardAction(Paste));
+
+  menu = getStandardMenu(SettingsMenu);
+  action = menu->addAction(_("Common..."));
+  connect(action, SIGNAL(triggered()), this, SLOT(commonSettings()));
+
+  addStandardMenu(HelpMenu);
 }
 
 void MainWindow::createToolBars()
@@ -59,7 +87,7 @@ void MainWindow::createToolBars()
   toolbar->addAction(standardAction(Exit));
 }
 
-void MainWindow::createDockWidgets()
+void MainWindow::createTabbedMenuBar()
 {
 }
 

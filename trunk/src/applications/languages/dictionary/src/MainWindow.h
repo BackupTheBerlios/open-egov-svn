@@ -24,8 +24,6 @@
 #include <QWidget>
 #include <QList>
 
-class OEG::Qt::ToolProvider;
-
 class MainWindow : public OEG::Qt::MainWindow
 {
   Q_OBJECT
@@ -33,11 +31,12 @@ class MainWindow : public OEG::Qt::MainWindow
   public:
     MainWindow(QWidget *parent = 0);
 
-    void createActions();
-    void createMenus();
-    void createToolBars();
-    void createStatusBar();
-    void createDockWidgets();
+    virtual void createActions();
+    virtual void createStatusBar();
+    virtual void createDockWidgets();
+    virtual void createMenus();
+    virtual void createToolBars();
+    virtual void createTabbedMenuBar();
 
   protected:
 
