@@ -3,5 +3,5 @@
 TEMPLATE = subdirs
 SUBDIRS  = src locale doc
 
-include(../../application.pri)
+include(../../../application.pri)
 
