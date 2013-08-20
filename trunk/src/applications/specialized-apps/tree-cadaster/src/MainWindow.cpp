@@ -126,13 +126,13 @@ void MainWindow::createToolBars()
 
 void MainWindow::createStatusBar()
 {
+  OEG::Qt::MainWindow::createStatusBar();
+
   m_number_of_trees = new QLabel(" 000000 ");
   m_number_of_trees->setMinimumSize(m_number_of_trees->sizeHint());
   m_number_of_trees->setAlignment(Qt::AlignCenter);
   m_number_of_trees->setToolTip(_("The number of trees in the database."));
   statusBar()->addPermanentWidget(m_number_of_trees);
-
-  OEG::Qt::MainWindow::createStatusBar();
 }
 
 void MainWindow::contextMenuEvent(QContextMenuEvent *event)
