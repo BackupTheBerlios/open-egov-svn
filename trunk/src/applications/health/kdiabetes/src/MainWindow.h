@@ -23,6 +23,8 @@
 #include <QString>
 #include <QWidget>
 
+class QLabel;
+
 class MainWindow : public OEG::Qt::MainWindow
 {
   Q_OBJECT
@@ -30,10 +32,14 @@ class MainWindow : public OEG::Qt::MainWindow
   public:
     MainWindow(QWidget *parent = 0);
 
+    virtual void createActions();
+    virtual void createStatusBar();
+    virtual void createDockWidgets();
     virtual void createMenus();
     virtual void createToolBars();
+    virtual void createTabbedMenuBar();
 
   protected:
-
+    QLabel   *m_sb_clock;
 };
 
