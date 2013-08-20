@@ -21,6 +21,18 @@ DESTDIRTOOLS  = $${DESTDIR}.tools
 INCLUDEPATH += ..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}..$${DIR_SEPARATOR}libraries
 QMAKE_LFLAGS += -Wl,-enable-stdcall-fixup -Wl,-enable-auto-import -Wl,-enable-runtime-pseudo-reloc
 
+# If console flag was explicitly given, then use console always!
+# Ignore console flag for release builds.
+
+contains(CONFIG, console) {
+  message(Compiling with console flag...)
+}
+else {
+  release {
+    CONFIG -= console
+  }
+}
+
 exists(../config.pri) {
   #message("File config.pri found and included!")
   include(../config.pri)
@@ -94,6 +106,11 @@ contains(PACKAGES, CRYPT) {
   message(Adding support for OEG-Crypt ...)
   LIBSLINE += -loegCrypt$${MYTARGETSUFFIX}1
   PRE_TARGETDEPS += $${DESTDIR}/liboegCrypt$${MYTARGETSUFFIX}1.a
+}
+contains(PACKAGES, CONTACTS) {
+  message(Adding support for OEG-Contacts ...)
+  LIBSLINE += -loegContacts$${MYTARGETSUFFIX}1
+  PRE_TARGETDEPS += $${DESTDIR}/liboegContacts$${MYTARGETSUFFIX}1.a
 }
 contains(PACKAGES, GIS) {
   message(Adding support for OEG-GIS ...)
