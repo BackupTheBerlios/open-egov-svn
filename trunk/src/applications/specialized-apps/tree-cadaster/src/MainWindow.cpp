@@ -102,13 +102,35 @@ void MainWindow::createActions()
 #endif
 }
 
+void MainWindow::createStatusBar()
+{
+  OEG::Qt::MainWindow::createStatusBar();
+
+  m_number_of_trees = new QLabel(" 000000 ");
+  m_number_of_trees->setMinimumSize(m_number_of_trees->sizeHint());
+  m_number_of_trees->setAlignment(Qt::AlignCenter);
+  m_number_of_trees->setToolTip(_("The number of trees in the database."));
+  statusBar()->addPermanentWidget(m_number_of_trees);
+}
+
+void MainWindow::createDockWidgets()
+{
+}
+
 void MainWindow::createMenus()
 {
-  QMenu *menu = menuBar()->addMenu(_("&File"));
+  QMenu   *menu;
+  QAction *action;
+
+  menu = getStandardMenu(FileMenu);
   //menu->addSeparator();
   menu->addAction(standardAction(Exit));
 
-  addHelpMenu();
+  menu = getStandardMenu(SettingsMenu);
+  action = menu->addAction(_("Common..."));
+  connect(action, SIGNAL(triggered()), this, SLOT(commonSettings()));
+
+  addStandardMenu(HelpMenu);
 }
 
 void MainWindow::createToolBars()
@@ -124,15 +146,8 @@ void MainWindow::createToolBars()
   //t->addAction(standardAction("reload"));
 }
 
-void MainWindow::createStatusBar()
+void MainWindow::createTabbedMenuBar()
 {
-  OEG::Qt::MainWindow::createStatusBar();
-
-  m_number_of_trees = new QLabel(" 000000 ");
-  m_number_of_trees->setMinimumSize(m_number_of_trees->sizeHint());
-  m_number_of_trees->setAlignment(Qt::AlignCenter);
-  m_number_of_trees->setToolTip(_("The number of trees in the database."));
-  statusBar()->addPermanentWidget(m_number_of_trees);
 }
 
 void MainWindow::contextMenuEvent(QContextMenuEvent *event)
