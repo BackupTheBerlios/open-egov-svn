@@ -22,7 +22,7 @@
 #include <OEG/Qt/MainWindow.h>
 #include <OEG/Qt/TabWidget.h>
 
-#include "DocumentProperties.h"
+#include "DocumentPropertiesData.h"
 #include "Settings.h"
 
 class QAction;
@@ -66,6 +66,7 @@ class MainWindow : public OEG::Qt::MainWindow
     void action_settings_view();
 
     virtual void createActions();
+    virtual void createStatusBar();
     virtual void createDockWidgets();
     virtual void createMenus();
     virtual void createToolBars();
@@ -115,14 +116,14 @@ class MainWindow : public OEG::Qt::MainWindow
     QAction             *m_action_settings_security;
     QAction             *m_action_settings_view;
 
-    OEG::Qt::TabWidget  *m_tabs;
-    QToolBar            *m_toolbar_edit;
-    QToolBar            *m_toolbar_format;
-    QToolBar            *m_toolbar_widgets;
-    QToolBar            *m_toolbar_file;
-    FunctionsDock       *m_dock_functions;
-    PropertiesDock      *m_dock_properties;
-    DocumentProperties   m_properties;
-    Settings             m_settings;
+    OEG::Qt::TabWidget     *m_tabs;
+    QToolBar               *m_toolbar_edit;
+    QToolBar               *m_toolbar_format;
+    QToolBar               *m_toolbar_widgets;
+    QToolBar               *m_toolbar_file;
+    FunctionsDock          *m_dock_functions;
+    PropertiesDock         *m_dock_properties;
+    DocumentPropertiesData  m_properties;
+    Settings                m_settings;
 };
 

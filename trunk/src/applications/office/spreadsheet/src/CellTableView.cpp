@@ -79,17 +79,17 @@ void CellTableView::decodePositionName(const QString &pos, int *row, int *col)
 #if 0
   To Check the encode and decode routines use something like this:
 
-#include <GASI/Qt/MessageBox.h>
+#include <OEG/Qt/MessageDialog.h>
 
-  GASI::Qt::MessageBox::InfoMessage(QString::number(CellTableView::decodeColumnName("A")));
-  GASI::Qt::MessageBox::InfoMessage(QString::number(CellTableView::decodeColumnName("CG")));
-  GASI::Qt::MessageBox::InfoMessage(QString::number(CellTableView::decodeColumnName("AA")));
-  GASI::Qt::MessageBox::InfoMessage(QString::number(CellTableView::decodeColumnName("IV")));
+  OEG::Qt::MessageDialog::InfoMessage(QString::number(CellTableView::decodeColumnName("A")));
+  OEG::Qt::MessageDialog::InfoMessage(QString::number(CellTableView::decodeColumnName("CG")));
+  OEG::Qt::MessageDialog::InfoMessage(QString::number(CellTableView::decodeColumnName("AA")));
+  OEG::Qt::MessageDialog::InfoMessage(QString::number(CellTableView::decodeColumnName("IV")));
 
-  GASI::Qt::MessageBox::InfoMessage(CellTableView::encodeColumnName(1));
-  GASI::Qt::MessageBox::InfoMessage(CellTableView::encodeColumnName(85));
-  GASI::Qt::MessageBox::InfoMessage(CellTableView::encodeColumnName(27));
-  GASI::Qt::MessageBox::InfoMessage(CellTableView::encodeColumnName(256));
+  OEG::Qt::MessageDialog::InfoMessage(CellTableView::encodeColumnName(1));
+  OEG::Qt::MessageDialog::InfoMessage(CellTableView::encodeColumnName(85));
+  OEG::Qt::MessageDialog::InfoMessage(CellTableView::encodeColumnName(27));
+  OEG::Qt::MessageDialog::InfoMessage(CellTableView::encodeColumnName(256));
 #endif
 
 QString CellTableView::encodeColumnName(int col)

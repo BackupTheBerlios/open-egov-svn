@@ -24,6 +24,8 @@
 
 #include "ui_document_properties.h"
 
+#include "DocumentPropertiesData.h"
+
 class DocumentPropertiesDialog : public QDialog, public Ui::DocumentPropertiesDialog
 {
   Q_OBJECT

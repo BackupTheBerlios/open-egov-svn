@@ -19,9 +19,11 @@
 #include <QtCore>
 #include <QtGui>
 
+#include <QHeaderView>
+
 #include <OEG/Common.h>
 #include <OEG/Qt/Application.h>
-#include <OEG/Qt/MessageBox.h>
+#include <OEG/Qt/MessageDialog.h>
 
 #include "PropertiesDock.h"
 #include "Cell.h"
@@ -175,7 +177,7 @@ void PropertiesDock::loadItemValues(QTableWidgetItem *item)
   QTableWidgetItem *i;
 
   if (! item) {
-    OEG::Qt::MessageBox::WarnMessage(_("PropertiesDock::loadItemValues(): No item!"));
+    OEG::Qt::MessageDialog::WarnMessage(_("PropertiesDock::loadItemValues(): No item!"));
     return;
   }
 
@@ -202,12 +204,12 @@ void PropertiesDock::tableCellChanged(int row, int column)
     return;
 
   if (! m_item) {
-    OEG::Qt::MessageBox::WarnMessage(_("PropertiesDock::tableCellChanged(): No item!"));
+    OEG::Qt::MessageDialog::WarnMessage(_("PropertiesDock::tableCellChanged(): No item!"));
     return;
   }
 
   QString str = itemAt(row, column)->text();
-  OEG::Qt::MessageBox::WarnMessage(str);
+  OEG::Qt::MessageDialog::WarnMessage(str);
 
   if (column == 2) {
     switch (row) {

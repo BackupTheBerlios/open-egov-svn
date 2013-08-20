@@ -18,10 +18,12 @@
 
 #include <OEG/Common.h>
 #include <OEG/Qt/Application.h>
-#include <OEG/Qt/MessageBox.h>
+#include <OEG/Qt/MessageDialog.h>
 
 #include <QtCore>
 #include <QtGui>
+
+#include <QLabel>
 
 #include "Cell.h"
 #include "CellTable.h"

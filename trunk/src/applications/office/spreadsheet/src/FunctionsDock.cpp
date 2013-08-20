@@ -21,6 +21,9 @@
 #include <QtCore>
 #include <QtGui>
 
+#include <QTableWidget>
+#include <QHeaderView>
+
 #include "FunctionsDock.h"
 
 FunctionsDock::FunctionsDock(QWidget *parent /*=0*/)

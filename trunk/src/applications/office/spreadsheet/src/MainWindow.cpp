@@ -19,11 +19,15 @@
 #include <OEG/Qt/Application.h>
 #include <OEG/Qt/TabbedMenuBar.h>
 #include <OEG/Qt/TabWidget.h>
-#include <OEG/Qt/MessageBox.h>
+#include <OEG/Qt/MessageDialog.h>
 
 #include <QtGui>
 #include <QtXml>
 #include <QDomDocument>
+#include <QMenuBar>
+#include <QStatusBar>
+#include <QFileDialog>
+#include <QHeaderView>
 
 #include "CommonOptionsDialog.h"
 #include "DocumentOptionsDialog.h"
@@ -59,7 +63,7 @@ MainWindow::MainWindow()
   QVBoxLayout *vbox = new QVBoxLayout;
   vbox->setMargin(2);
   vbox->addWidget(m_tabs);
-  setCentralLayout(vbox);
+  setCentralLayout(vbox);   // setCentralWidget() ???
 
   createAll();
 
@@ -209,11 +213,11 @@ void MainWindow::createActions()
   //connect(m_action_file_load, SIGNAL(triggered()), this, SLOT(action_file_load()));
   //connect(m_action_file_save, SIGNAL(triggered()), this, SLOT(action_file_save()));
 
-#if 0
   m_action_file_properties = new QAction(_("Properties ..."), this);
   m_action_file_properties->setStatusTip(_("Edit document properties."));
   connect(m_action_file_properties, SIGNAL(triggered()), this, SLOT(action_file_properties()));
 
+#if 0
   m_action_view_toolbar_edit = new QAction(_("Edit"), this);
   m_action_view_toolbar_edit->setStatusTip(_("Toggle edit toolbar."));
   m_action_view_toolbar_edit->setCheckable(true);
@@ -294,6 +298,12 @@ void MainWindow::createActions()
 #endif
 }
 
+void MainWindow::createStatusBar()
+{
+  OEG::Qt::MainWindow::createStatusBar();
+
+}
+
 void MainWindow::createDockWidgets()
 {
 }
@@ -309,9 +319,13 @@ void MainWindow::createMenus()
   menu->addAction(standardAction(Save));
   menu->addAction(standardAction(SaveAs));
   menu->addAction(standardAction(Close));
-  //m_menu_file->addAction(m_action_file_page_setup);
-  //m_menu_file->addAction(m_action_file_print);
-  //m_menu_file->addAction(m_action_file_print_preview);
+  menu->addSeparator();
+  menu->addAction(m_action_file_properties);
+  menu->addSeparator();
+  menu->addAction(standardAction(Print));
+  //menu->addAction(m_action_file_page_setup);
+  //menu->addAction(m_action_file_print);
+  //menu->addAction(m_action_file_print_preview);
   menu->addSeparator();
   menu->addAction(standardAction(Exit));
 
@@ -446,8 +460,8 @@ void MainWindow::loadDocument(const QString &filename)
   QFile file(filename);
 
   if (! file.open(QIODevice::ReadOnly)) {
-    OEG::Qt::MessageBox::WarnMessage(QString(_("Can't read file %1:\n%2."))
-                                     .arg(file.fileName()).arg(file.errorString()));
+    OEG::Qt::MessageDialog::WarnMessage(QString(_("Can't read file %1:\n%2."))
+                                     .arg(file.fileName()).arg(file.errorString()), this);
     return;
   }
 
@@ -466,8 +480,8 @@ void MainWindow::saveDocument(const QString &filename)
   QFile file(filename);
 
   if (! file.open(QIODevice::WriteOnly)) {
-    OEG::Qt::MessageBox::WarnMessage(QString(_("Can't write file %1:\n%2."))
-                                     .arg(file.fileName()).arg(file.errorString()));
+    OEG::Qt::MessageDialog::WarnMessage(QString(_("Can't write file %1:\n%2."))
+                                     .arg(file.fileName()).arg(file.errorString()), this);
     return;
   }
 
