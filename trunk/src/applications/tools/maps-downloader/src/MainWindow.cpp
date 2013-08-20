@@ -16,8 +16,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <OEG/Qt/ToolProvider.h>
-
 #include <QAction>
 #include <QApplication>
 #include <QLabel>
@@ -45,7 +43,7 @@
 
 #include <QDebug>
 
-#include <OEG/Qt/MessageBox.h>
+#include <OEG/Qt/MessageDialog.h>
 #include <OEG/Qt/TabWidget.h>
 
 #include "Thread.h"

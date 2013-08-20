@@ -44,7 +44,7 @@
 #include <QDebug>
 
 #include <OEG/Qt/ToolProvider.h>
-#include <OEG/Qt/MessageBox.h>
+#include <OEG/Qt/MessageDialog.h>
 #include <OEG/Qt/TabWidget.h>
 
 #include "MainWindow.h"
