@@ -1,7 +1,7 @@
 // $Id$
 //
 // Open eGovernment
-// Copyright (C) 2005-2010 by Gerrit M. Albrecht
+// Copyright (C) 2005-2011 by Gerrit M. Albrecht
 //
 // This program is free software: you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -19,9 +19,12 @@
 #pragma once
 
 #include <OEG/Qt/MainWindow.h>
+#include <OEG/Qt/TabWidget.h>
 
 #include <QString>
 #include <QWidget>
+
+class QLabel;
 
 class MainWindow : public OEG::Qt::MainWindow
 {
@@ -30,10 +33,15 @@ class MainWindow : public OEG::Qt::MainWindow
   public:
     MainWindow(QWidget *parent = 0);
 
+    virtual void createActions();
+    virtual void createStatusBar();
+    virtual void createDockWidgets();
     virtual void createMenus();
     virtual void createToolBars();
+    virtual void createTabbedMenuBar();
 
   protected:
-
+    QLabel             *m_sb_xxx;
+    OEG::Qt::TabWidget *m_tabs;
 };
 

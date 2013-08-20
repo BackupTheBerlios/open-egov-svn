@@ -16,8 +16,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+#include <QLabel>
 #include <QMenu>
 #include <QMenuBar>
+#include <QStatusBar>
 #include <QToolBar>
 
 #include "MainWindow.h"
@@ -27,24 +29,66 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
 {
   setWindowIcon(QIcon("icon.png"));
 
-  createAll();
+  QWidget *w = new QWidget(this);
 
+  setCentralWidget(w);
+
+  createAll();
+}
+
+void MainWindow::createActions()
+{
+  OEG::Qt::MainWindow::createActions();
+
+  QAction *action;
+  QString s;
+
+  action = standardAction(New);
+  action->setText(_("&New ..."));
+  s = _("Create a new file.");
+  action->setToolTip(s);
+  action->setStatusTip(s);
+  connect(action, SIGNAL(triggered()),
+          this,   SLOT(newDataAction()));
+}
+
+void MainWindow::createStatusBar()
+{
+  OEG::Qt::MainWindow::createStatusBar();
+
+  m_sb_xxx = new QLabel("12345");
+  m_sb_xxx->setMinimumSize(m_sb_xxx->sizeHint());
+  m_sb_xxx->setAlignment(Qt::AlignCenter);
+  m_sb_xxx->setToolTip(_("xxx."));
+  statusBar()->addPermanentWidget(m_sb_xxx);
+
+  //updateStatusBar();
+}
+
+void MainWindow::createDockWidgets()
+{
 }
 
 void MainWindow::createMenus()
 {
-  QMenu *menu;
+  QMenu   *menu;
+  QAction *action;
 
-  menu = menuBar()->addMenu(_("&File"));
+  menu = getStandardMenu(FileMenu);
+  menu->addAction(standardAction(New));
   menu->addSeparator();
   menu->addAction(standardAction(Exit));
 
-  menu = menuBar()->addMenu(_("&Edit"));
+  menu = getStandardMenu(EditMenu);
   menu->addAction(standardAction(Cut));
   menu->addAction(standardAction(Copy));
   menu->addAction(standardAction(Paste));
 
-  addHelpMenu();
+  menu = getStandardMenu(SettingsMenu);
+  action = menu->addAction(_("Common..."));
+  connect(action, SIGNAL(triggered()), this, SLOT(commonSettings()));
+
+  addStandardMenu(HelpMenu);
 }
 
 void MainWindow::createToolBars()
@@ -53,6 +97,12 @@ void MainWindow::createToolBars()
   QToolBar *toolbar;
 
   toolbar = addToolBar(_("File"));
+  toolbar->addAction(standardAction(New));
+  toolbar->addSeparator();
   toolbar->addAction(standardAction(Exit));
+}
+
+void MainWindow::createTabbedMenuBar()
+{
 }
 
