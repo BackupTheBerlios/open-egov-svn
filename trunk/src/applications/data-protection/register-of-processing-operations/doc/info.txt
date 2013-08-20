@@ -5,7 +5,7 @@ It is also required by an EU directive. From there is the english name.
 
 Das Verfahrensverzeichnis enthält Angaben zu Datenverarbeitungen. Es ist erforderlich, wenn bspw.
 automatisierte Verfahren personenbezogene Daten verarbeiten. Inhalte sind in § 18 Abs. 2 BDSG und
-(länderspezifisch) bspw. in § 14 DSG-LSA gelistet.
+länderspezifisch in verschiedenen Landesgesetzen, bspw. für das Land Sachsen-Anhalt in § 14 DSG LSA, gelistet.
 
 maximum storage time
 
