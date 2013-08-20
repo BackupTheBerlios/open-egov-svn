@@ -24,8 +24,6 @@
 #include <QWidget>
 #include <QList>
 
-class OEG::Qt::TabbedMenuBar;
-
 class MainWindow : public OEG::Qt::MainWindow
 {
   Q_OBJECT
