@@ -1,5 +1,5 @@
 $Id$
 
-* Use own MessageBox class.
+* Use own MessageDialog class.
 * TrayIcon management from own Application class and not in a separate class.
 

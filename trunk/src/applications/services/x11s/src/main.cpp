@@ -17,7 +17,7 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <OEG/Qt/Application.h>
-#include <OEG/Qt/MessageBox.h>
+#include <OEG/Qt/MessageDialog.h>
 
 #include <QDebug>
 #include <QMessageBox>
@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
   app.setQuitOnLastWindowClosed(false);
 
   if (! QSystemTrayIcon::isSystemTrayAvailable()) {
-    OEG::Qt::MessageBox::WarnMessage(_("System tray is unavailable"));
+    OEG::Qt::MessageDialog::WarnMessage(_("System tray is unavailable"));
     return 1;
   }
 
