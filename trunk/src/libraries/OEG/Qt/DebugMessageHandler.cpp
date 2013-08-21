@@ -19,8 +19,10 @@
 #include <QApplication>
 #include <QTextStream>
 #include <QDateTime>
-#include <QtDebug>
 #include <QFile>
+
+#include <QtDebug>
+#include <QtGlobal>
 
 #include <OEG/Qt/Application.h>
 #include <OEG/Qt/DebugMessageHandler.h>
@@ -29,6 +31,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
 using namespace OEG::Qt;
 
@@ -40,7 +46,7 @@ using namespace OEG::Qt;
 // application aborts immediately. To restore the message handler,
 // call qInstallMsgHandler(0).
 
-void OEG_DebugMessageHandler(QtMsgType type, const QMessageLogContext &, const QString &message)
+void OEG_DebugMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &message)
 {
   QString text = "";
 
@@ -60,21 +66,27 @@ void OEG_DebugMessageHandler(QtMsgType type, const QMessageLogContext &, const Q
   }
 
   text += ": ";
-  text.append(message);                                    // not: QString("%s").arg(message);
+  text.append(message);                          // not: QString("%s").arg(message);
 
-  if (true) { // send to debug window.
+#ifdef _WIN32
+  if (true) {                                    // Send to the Windows Debugger.
+    OutputDebugString(reinterpret_cast<const wchar_t *>(text.utf16())); // Windows API.
   }
+#endif
 
-  if (false) { // log into a file.
+  if (false) {                                   // Log into a file.
     QFile file("oeg-debug.log");
     file.open(QIODevice::WriteOnly | QIODevice::Append);
     QTextStream ts(&file);
     ts << text << endl;
   }
 
-  if (true) {  // console output.
+  if (true) {                                    // Console output.
     text += "\n";
     fprintf(stderr, text.toLocal8Bit().constData());
+    //fprintf(stderr, "MESSAGE (%s:%u %s): %s\n", context.file, context.line,
+    //        context.function, text.toLocal8Bit().constData());
+    //fflush(stderr);
   }
 
   if (type == QtFatalMsg)

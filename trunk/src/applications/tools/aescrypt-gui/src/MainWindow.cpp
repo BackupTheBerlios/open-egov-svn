@@ -16,7 +16,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <OEG/Qt/ToolProvider.h>
+#include <OEG/Qt/Application.h>
+#include <OEG/Qt/TabbedMenuBar.h>
 
 #include <QMenuBar>
 #include <QToolBar>
@@ -31,11 +32,11 @@
 MainWindow::MainWindow(QWidget *parent /*=0*/)
  : OEG::Qt::MainWindow(parent)
 {
+  setWindowIcon(QIcon("icon.png"));
+
   createAll();
 
-  setCentralWidget(new QLabel);
-
-  setWindowIcon(QIcon("icon.png"));
+  setCentralWidget(new QLabel(this));
 }
 
 void MainWindow::createActions()
@@ -48,7 +49,7 @@ void MainWindow::createMenus()
 {
   QMenu *menu;
 
-  menu = menuBar()->addMenu(_("&File"));
+  menu = getStandardMenu(FileMenu);
   menu->addAction(standardAction(Exit));
 
   menu = menuBar()->addMenu(_("&Edit"));
@@ -56,7 +57,7 @@ void MainWindow::createMenus()
   menu->addAction(standardAction(Copy));
   menu->addAction(standardAction(Paste));
 
-  addHelpMenu();
+  addStandardMenu(HelpMenu);
 }
 
 void MainWindow::createToolBars()

@@ -25,8 +25,6 @@
 #include <QWidget>
 #include <QList>
 
-class OEG::Qt::ToolProvider;
-
 class MainWindow : public OEG::Qt::MainWindow
 {
   Q_OBJECT
