@@ -19,6 +19,7 @@
 #include "MainWindow.h"
 
 #include <OEG/Qt/TabbedMenuBar.h>
+#include <OEG/Mail/Mail.h>
 
 #include <QApplication>
 #include <QMenuBar>
@@ -27,6 +28,7 @@
 #include <QStatusBar>
 #include <QAction>
 #include <QIcon>
+#include <QDateTime>
 
 MainWindow::MainWindow(QWidget *parent /*=0*/)
  : OEG::Qt::MainWindow(parent)
@@ -78,5 +80,18 @@ void MainWindow::createTabbedMenuBar()
 
 void MainWindow::sendBugReport()
 {
+  OEG::Mail::Mail mail;
+
+  QString mailText = "";
+  mailText += "simple test text\nsecond line\nand another....\n";
+  mailText += "\n";
+  mailText += "Application: " + m_base_name + "\n";
+  mailText += "Date: " + QDateTime::currentDateTime().toString();
+
+  mail.addHeaders(QStringList() << "To: automatic-bug-report@open-egov.de"
+                                << "From: OEG User"
+                                << "Subject: Bug-Report");
+  mail.setText(mailText);
+  mail.send();
 }
 

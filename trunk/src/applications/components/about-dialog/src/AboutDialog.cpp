@@ -22,6 +22,11 @@
 #include <QStringList>
 #include <QUrl>
 
+#include <QDomDocument>
+#include <QDomImplementation>
+#include <QDomNodeList>
+#include <QDomElement>
+
 #include <OEG/Qt/Application.h>
 
 #include "AboutDialog.h"
@@ -31,11 +36,17 @@ AboutDialog::AboutDialog(QWidget *parent /*=0*/)
 {
   setupUi(this);
 
+  m_base_name = "";
+
   QStringList arguments = OEG::Qt::Application::arguments();
-  if (arguments.count() > 1) {                                       // Called from CLI with parameters.
+  if (arguments.count() > 1) {                   // Called from CLI with parameters.
     //QString s = arguments.join("");
     //QMessageBox::information(0, s, arguments.at(1));
     m_base_name = arguments.at(1);
+  }
+
+  if (m_base_name.length() > 0) {
+    readPackageData(m_base_name);
   }
 
   QString headLine;
@@ -56,6 +67,40 @@ AboutDialog::AboutDialog(QWidget *parent /*=0*/)
 
   connect(m_textbrowser_information, SIGNAL(anchorClicked(const QUrl &)),
           this,                      SLOT(openUrl(const QUrl &)));
+}
+
+void AboutDialog::readPackageData(const QString &baseName)
+{
+  QString fileName = "share/open-egovernment/applications/" + baseName + ".xml";
+
+  if (! QFile::exists(fileName)) {
+    qDebug() << _("File does not exist:") << fileName;
+	qWarning() << _("Package not found:") << baseName;
+    return;
+  }
+
+  QFile file(fileName);
+  if (! file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    qWarning(_("File not open."));
+    return;
+  }
+
+  QDomDocument document("application");                    // Parse XML file.
+  if (! document.setContent(&file)) {
+    qWarning() << _("Not a valid XML document.");
+    return;
+  }
+
+  QDomElement root = document.documentElement();           // Get the root element.
+  QString rootTagName = root.tagName();                    // Check the root tag name.
+  if (! rootTagName.contains("package"))
+    qDebug() << _("Wrong root tag name:") << rootTagName;
+
+
+
+
+
+  file.close();
 }
 
 void AboutDialog::setInformationText()

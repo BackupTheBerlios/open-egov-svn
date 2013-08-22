@@ -34,6 +34,15 @@ TabbedMenuBar::~TabbedMenuBar()
   removeAllTabs();
 }
 
+TabbedMenuBarTab *TabbedMenuBar::addTab(const QString &title)
+{
+  TabbedMenuBarTab *tab = new TabbedMenuBarTab(this);
+
+  //m_tabs->add(tab);
+
+  return tab;
+}
+
 TabbedMenuBarTab *TabbedMenuBar::tab(const QString &title)
 {
 

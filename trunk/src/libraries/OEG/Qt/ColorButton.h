@@ -31,7 +31,7 @@ namespace OEG { namespace Qt {
 class ColorButton : public QPushButton
 {
   Q_OBJECT
-  Q_PROPERTY(QColor color READ color WRITE setColor)
+  Q_PROPERTY(QColor m_color READ color WRITE setColor)
 
   public:
     ColorButton(QWidget *parent = 0);

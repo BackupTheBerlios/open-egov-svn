@@ -19,7 +19,6 @@
 #include <OEG/Qt/Application.h>
 
 #include <QString>
-#include <QFileDialog>
 #include <QFile>
 #include <QFileInfo>
 #include <QStringList>
@@ -37,6 +36,15 @@ QString escapeString(const QString &str)
 {
   // Doubling the ' character is for SQLite. MySQL uses \' for escaping.
   return str.split("'").join("''");
+}
+
+void showParameters()
+{
+  qWarning("Parameters: --showSQL --verbose --target <XML file>");
+}
+
+void executeQuery(const QString &query)
+{
 }
 
 int main(int argc, char *argv[])
@@ -60,15 +68,20 @@ int main(int argc, char *argv[])
     else if (arg.contains("--target",  Qt::CaseInsensitive)) {
       target = 2;
     }
+    else if (arg.contains("--help",  Qt::CaseInsensitive)) {
+      showParameters();
+      return 0;
+    }
   }
 
   if (argc <= 1) {
     qWarning("Create Database: No xml file given as parameter.");
-    qWarning("Parameters: --showSQL --verbose --target <XML file>");
+    showParameters();
 
-    fileName = QFileDialog::getOpenFileName(0, "Create Database", QDir::currentPath(), _("XML Files (*.xml)"));
-    if (fileName.isEmpty())
-      return 0;
+    //fileName = QFileDialog::getOpenFileName(0, "Create Database", QDir::currentPath(), _("XML Files (*.xml)"));
+    //if (fileName.isEmpty())
+    //  return 0;
+    return -1;
   }
   else {
     fileName = args.last();
@@ -76,7 +89,7 @@ int main(int argc, char *argv[])
 
   QFile file(fileName);
   if (! file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-    qWarning("File not open.");
+    qWarning(_("File not open."));
     return 0;
   }
 
@@ -90,19 +103,19 @@ int main(int argc, char *argv[])
   QFileInfo fi(fileName);
   fileName = fi.completeBaseName() + ".db";
   if (verbose)
-    qWarning("Creating database: " + fileName.toAscii());
+    qWarning(qPrintable(QString(_("Creating database: ")) + fileName.toLatin1()));
 
   QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
   db.setDatabaseName(fileName);
   //db.setDatabaseName("DRIVER={Microsoft Access Driver (*.mdb)};FIL={MS Access};DBQ=myaccessfile.mdb");
   if (! db.open()) {
-    qWarning() << "Can't open database file.";
+    qWarning() << _("Can't open database file.");
     return 0;
   }
 
   QDomDocument document("database");
   if (! document.setContent(&file)) {
-    qWarning() << "Not a valid XML document.";
+    qWarning() << _("Not a valid XML document.");
     return 0;
   }
 
@@ -114,12 +127,12 @@ int main(int argc, char *argv[])
   QSqlQuery query(db);
 
   QDomNodeList nodes;
-  QDomElement el;
-  QStringList columns;
+  QDomElement  el;
+  QStringList  columns;
 
   nodes = root.elementsByTagName("structures");            // We want to get the "structures"-Tag.
   if (nodes.count() <= 0) {
-    qWarning() << "No structures-Tag found.";
+    qWarning() << _("No structures tag found.");
     return 0;
   }
   el = nodes.at(0).toElement();
@@ -133,17 +146,33 @@ int main(int argc, char *argv[])
 
   query_string = "PRAGMA foreign_keys = ON;";
   if (showSQL)
-    qWarning() << "SQL: " << query_string;
+    qWarning() << _("SQL:") << query_string;
   if (! query.exec(query_string))
-    qWarning() << "Query failed: " << query_string;
+    qWarning() << _("Query failed:") << query_string;
 
   query_string = "PRAGMA foreign_keys;";
   if (showSQL)
-    qWarning() << "SQL: " << query_string;
+    qWarning() << _("SQL:") << query_string;
   if (! query.exec(query_string))
-    qWarning() << "Query failed: " << query_string;
+    qWarning() << _("Query failed:") << query_string;
   query.next();
   qWarning() << "PRAGMA foreign_keys:" << query.value(0).toString();
+
+  // Set "journal_mode" to in memory, journal isn't needed while creating the databases.
+
+  query_string = "PRAGMA journal_mode = MEMORY;";
+  if (showSQL)
+    qWarning() << _("SQL:") << query_string;
+  if (! query.exec(query_string))
+    qWarning() << _("Query failed:") << query_string;
+
+  query_string = "PRAGMA journal_mode;";
+  if (showSQL)
+    qWarning() << _("SQL:") << query_string;
+  if (! query.exec(query_string))
+    qWarning() << _("Query failed:") << query_string;
+  query.next();
+  qWarning() << "PRAGMA journal_mode:" << query.value(0).toString();
 
   QHash<QString, QString> column_datatypes;                // column_datatypes[tablename.tablecolumn] = "datatype"
 
@@ -194,6 +223,9 @@ int main(int argc, char *argv[])
         }
         else if (s_type == "string") {
           s += s_name + " TEXT";
+        }
+        else if (s_type == "blob") {
+          s += s_name + " BLOB";
         }
         else if (s_type == "date") {
           s += s_name + " TEXT";
@@ -298,14 +330,14 @@ int main(int argc, char *argv[])
         query_string += columns.join(", ");                    // Join the parameters to one comma-separated string.
       }
       else {
-        qWarning() << "Found table with no columns.";
+        qWarning() << _("Found table with no columns.");
       }
       query_string += ")";
 
       if (showSQL)
-        qWarning() << "SQL: " << query_string;
+        qWarning() << _("SQL:") << query_string;
       if (! query.exec(query_string))
-        qWarning() << "Query failed: " << query_string;
+        qWarning() << _("Query failed:") << query_string;
     }
   }
 

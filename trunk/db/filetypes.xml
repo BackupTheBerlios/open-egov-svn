@@ -20,7 +20,7 @@
       <column name="type"             type="integer" flags="" />
       <column name="name"             type="string"  flags="required" />
       <column name="extensions"       type="string"  flags="" />
-      <column name="mime-type"        type="string"  flags="" />
+      <column name="mimetype"         type="string"  flags="" />
       <column name="wikipedia"        type="string"  flags="" />
       <column name="creator"          type="string"  flags="" />
       <column name="organization"     type="string"  flags="" />
@@ -80,7 +80,7 @@
         <field name="type">1</field>
         <field name="name">JPEG File Interchange Format (JFIF)</field>
         <field name="extensions">jpg jpeg jfif jpe</field>
-        <field name="mime-type">image/jpeg</field>
+        <field name="mimetype">image/jpeg</field>
         <field name="wikipedia">JPEG File Interchange Format</field>
         <field name="creator">Eric Hamilton</field>
         <field name="organization">Joint Photographic Experts Group</field>
@@ -94,7 +94,7 @@ Specification: http://www.jpeg.org/public/jfif.pdf</field>
         <field name="type">1</field>
         <field name="name">Portable Network Graphics (PNG)</field>
         <field name="extensions">png</field>
-        <field name="mime-type">image/png</field>
+        <field name="mimetype">image/png</field>
         <field name="wikipedia">Portable Network Graphics</field>
         <field name="creator">Thomas Boutell, Tom Lane</field>
         <field name="organization">PNG Development Group</field>
@@ -107,7 +107,7 @@ Specification: http://www.jpeg.org/public/jfif.pdf</field>
         <field name="type">2</field>
         <field name="name">Portable Document Format (PDF)</field>
         <field name="extensions">pdf</field>
-        <field name="mime-type">application/pdf</field>
+        <field name="mimetype">application/pdf</field>
         <field name="wikipedia">Portable Document Format</field>
         <field name="creator"></field>
         <field name="organization">Adobe Systems</field>
@@ -120,7 +120,7 @@ Specification: http://www.jpeg.org/public/jfif.pdf</field>
         <field name="type">1</field>
         <field name="name">Graphics Interchange Format</field>
         <field name="extensions">gif</field>
-        <field name="mime-type">image/gif</field>
+        <field name="mimetype">image/gif</field>
         <field name="wikipedia">Graphics Interchange Format</field>
         <field name="creator"></field>
         <field name="organization"></field>
@@ -133,7 +133,7 @@ Specification: http://www.jpeg.org/public/jfif.pdf</field>
         <field name="type"></field>
         <field name="name">JAVA compiled bytecode</field>
         <field name="extensions">class</field>
-        <field name="mime-type">application/java-byte-code application/java application/x-java-class application/x-java-vm application/x-java.vm application/x-java-bean application/x-jinit-bean application/x-jinit-applet application/x-java application/octet-stream</field>
+        <field name="mimetype">application/java-byte-code application/java application/x-java-class application/x-java-vm application/x-java.vm application/x-java-bean application/x-jinit-bean application/x-jinit-applet application/x-java application/octet-stream</field>
         <field name="wikipedia"></field>
         <field name="creator"></field>
         <field name="organization"></field>
@@ -146,7 +146,7 @@ Specification: http://www.jpeg.org/public/jfif.pdf</field>
         <field name="type">3</field>
         <field name="name">SQLite database</field>
         <field name="extensions">db sqlite</field>
-        <field name="mime-type">application/x-sqlite3</field>
+        <field name="mimetype">application/x-sqlite3</field>
         <field name="wikipedia">SQLite</field>
         <field name="creator"></field>
         <field name="organization"></field>

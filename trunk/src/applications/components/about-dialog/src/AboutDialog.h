@@ -37,6 +37,7 @@ class AboutDialog : public QDialog, public Ui::AboutDialog
     void setLocalizedLicenseText(QString &text);
 
   protected:
+    void readPackageData(const QString &baseName);
 
   protected slots:
     void openUrl(const QUrl &link);

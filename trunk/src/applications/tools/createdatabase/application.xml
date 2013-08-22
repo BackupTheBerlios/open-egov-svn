@@ -3,41 +3,79 @@
 <!-- $Id$ -->
 
 <application category="tools" base="createdatabase">
-  <strings>
+  <project>
+    <data name="application-binary"  value="createdatabase" />
+    <data name="application-name"    value="Create Database" />
+    <data name="application-version" value="1.0.0.0" />
+    <data name="generate-pro"        value="true" />
+    <data name="generate-main"       value="false" />
+    <data name="generate-rc"         value="true" />
+    <data name="pro-qt"              value="xml sql" />
+    <data name="pro-packages"        value="QT GETTEXT" />
+    <data name="pro-config"          value="console" />
+    <data name="mainwindow-class"    value="MainWindow" />
+  </project>
+
+  <head>
+    <text name="title"       stringnumber="1" />
+    <text name="description" stringnumber="2" />
+    <text name="author"      stringnumber="3" />
+    <text name="email"       stringnumber="4" />
+  </head>
+
+  <dictionary>
+    <!-- solely required group, other groups overlay these values -->
     <group lang="en_US">
-      <string name="title">Create Database</string>
-      <string name="description">Creates databases via SQL queries out of a XML description.</string>
+      <string number="1">Create Database</string>
+      <string number="2">Creates databases via SQL queries out of a XML description.</string>
+      <string number="3">Gerrit M. Albrecht</string>
+      <string number="4">mail@gerrit-albrecht.de</string>
+      <string number="10">Common</string>
+      <string number="11"></string>
+      <string number="12"></string>
     </group>
 
     <group lang="de_DE">
-      <string name="title">Create Database</string>
-      <string name="description">Erstellt Datenbanken mittels SQL-Anfragen aus einer XML-Datei.</string>
+      <string number="1">Create Database</string>
+      <string number="2">Erstellt Datenbanken mittels SQL-Anfragen aus einer XML-Datei.</string>
+      <string number="3">Gerrit M. Albrecht</string>
+      <string number="4">mail@gerrit-albrecht.de</string>
+      <string number="10">Allgemein</string>
+      <string number="11"></string>
+      <string number="12"></string>
     </group>
-  </strings>
+  </dictionary>
+
+  <comments>
+  </comments>
+
+  <configuration>
+    <section name="common" icon="" stringnumber="10" context="local">
+      <entry name="show-centered" type="boolean" default="false" context="global">
+        <text name="title"       stringnumber="11" />
+        <text name="description" stringnumber="12" />
+      </entry>
+    </section>
+  </configuration>
 
   <properties>
-    <property name="dbus" value="false" />
-    <property name="embed" value="false" />
-    <property name="stable" value="false" />
+    <property name="dbus"     value="false" />
+    <property name="embed"    value="false" />
+    <property name="stable"   value="true" />
     <property name="database" value="false" />
   </properties>
 
-  <setup>
-    <requires>base</requires>
-  </setup>
+  <requires>
+  </requires>
 
-  <features>
-    <todos>
-    </todos>
-    <changes>
-    </changes>
-  </features>
+  <todos>
+  </todos>
 
-  <datastructure>
-    <table name="">
-      
-    </table>
-  </datastructure>
+  <changes>
+  </changes>
+
+  <datastructures>
+  </datastructures>
 
   <databases>
   </databases>

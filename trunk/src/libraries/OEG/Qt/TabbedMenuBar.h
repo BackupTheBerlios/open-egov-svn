@@ -52,7 +52,8 @@ class TabbedMenuBar : public QWidget
     ~TabbedMenuBar();
 
   public:
-    TabbedMenuBarTab *tab(const QString &title);           // Finds or adds a register tab to the menubar.
+    TabbedMenuBarTab *addTab(const QString &title);        // Adds a register tab to the menubar.
+    TabbedMenuBarTab *tab(const QString &title);           // Finds a register tab to the menubar.
     void removeTab(const QString &title);
 
     void loadFromXML(const QString &fileName);

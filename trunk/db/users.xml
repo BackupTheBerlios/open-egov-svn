@@ -51,6 +51,8 @@
         <field name="username">root</field>
         <field name="password"></field>
         <field name="role">oeg</field>
+        <field name="uuid"></field>
+        <field name="people_id"></field>
         <field name="active">1</field>
       </row>
     </table>
@@ -58,8 +60,15 @@
     <table name="people">
       <row>
         <field name="id">1</field>
+        <field name="title"></field>
         <field name="firstname">Gerrit</field>
+        <field name="middlename"></field>
         <field name="lastname">Albrecht</field>
+        <field name="date_birthday"></field>
+        <field name="date_created"></field>
+        <field name="date_changed"></field>
+        <field name="date_last_login"></field>
+        <field name="date_last_logout"></field>
       </row>
     </table>
   </data>

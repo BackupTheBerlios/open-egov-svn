@@ -34,6 +34,7 @@ class Attachment;
 class Mail : public QObject
 {
   Q_OBJECT
+  Q_PROPERTY(QString m_text READ text WRITE setText)
 
   public:
     Mail(QObject *parent = 0);
@@ -47,15 +48,24 @@ class Mail : public QObject
     void setHeaders(const QStringList &headers);
     void addHeaders(const QStringList &headers);
 
-    QStringList text();
+    QString mailText();
+
+    void setText(const QString &text);
+    QString text() const;
+
+    void send();
 
   protected:
     void clear();
 
   protected:
     QList<Attachment *>  m_attachments;
-    MimeType             m_content_type;
     QStringList          m_headers;
+    MimeType             m_content_type;
+    QString              m_text;
+
+    QString              m_smtp_server;
+    int                  m_smtp_port;
 };
 
 }}

@@ -530,7 +530,7 @@ their classifications and names.
       </row>
     </table>
 
-    <table name="domains"> <!-- Domänen -->
+    <table name="domain"> <!-- Domänen -->
       <row>
         <field name="id">1</field>                         <!-- in Phyla (Stämme) unterteilt -->
         <field name="value">Bacteria</field>
@@ -815,6 +815,10 @@ their classifications and names.
         <field name="citation_id">1</field>
         <field name="flag_ids"></field>
         <field name="domain_id">3</field>
+        <field name="regnum_id"></field>
+        <field name="subregnum_id"></field>
+        <field name="divisio_id"></field>
+        <field name="stammgroup_id"></field>
         <field name="superstamm_id"></field>
         <field name="stamm_id"></field>
         <field name="substamm_id"></field>

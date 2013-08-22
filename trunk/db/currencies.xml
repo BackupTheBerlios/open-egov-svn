@@ -497,7 +497,7 @@ http://simap.europa.eu/codes-and-nomenclatures/currencies/index_de.htm
       <row>
         <field name="id">79</field>
         <field name="code">JOD</field>
-        <field name="country_id"></field>
+        <field name="country_id">108</field>
         <field name="translation_id">79</field>
       </row>
       <row>

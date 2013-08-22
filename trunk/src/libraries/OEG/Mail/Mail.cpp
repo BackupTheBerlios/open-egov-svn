@@ -84,7 +84,7 @@ void Mail::addHeaders(const QStringList &headers)
     m_headers += headers;
 }
 
-QStringList Mail::text()
+QString Mail::mailText()
 {
   QStringList text;
   QString s;
@@ -94,6 +94,23 @@ QStringList Mail::text()
   text << s;
   //m_attachments
 
-  return text;
+  return text.join("");
+}
+
+void Mail::setText(const QString &text)
+{
+  m_text = text;
+}
+
+QString Mail::text() const
+{
+  return m_text;
+}
+
+void Mail::send()
+{
+  QString data = mailText();
+
+  
 }
 

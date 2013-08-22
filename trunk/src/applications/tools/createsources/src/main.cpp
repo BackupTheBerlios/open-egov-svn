@@ -17,15 +17,17 @@
 // You should have received a copy of the GNU General Public License
 // along with the OEG project. If not, see <http://www.gnu.org/licenses/>.
 
-#include <OEG/Qt/Application.h>
-
 #include <QString>
-#include <QFileDialog>
 #include <QFile>
 #include <QFileInfo>
 #include <QStringList>
 #include <QHash>
-#include <QApplication>
+#include <QCoreApplication>
+#include <QDebug>
+#include <QDir>
+#include <QtCore>                      // Missed foreach define. Don't know from where it comes.
+
+#include <OEG/Common.h>                // We need only gettext().
 
 #include <QDomDocument>
 #include <QDomImplementation>
@@ -149,21 +151,22 @@ int updateFileAndReplaceHeader(const QString &inputFileName, const QString &sour
 QString templatesFileName(const QString &relativeTemplatesFileName)
 {
   return QCoreApplication::applicationDirPath() + QDir::separator() +
-         ".." + QDir::separator() + "/src/templates/" + relativeTemplatesFileName;
+         ".." + QDir::separator() + "src" + QDir::separator() +
+         "templates" + QDir::separator() + relativeTemplatesFileName;
 }
 
 int main(int argc, char *argv[])
 {
-  QApplication app(argc, argv);
+  QCoreApplication app(argc, argv);
 
   QStringList args          = QCoreApplication::arguments();
   QString     filename      = "";
   bool        verbose       = false;
 
-  bool        generate_pro  = false;                       // Data from application.xml
+  bool        generate_pro  = false;                       // All data comes from application.xml file.
   bool        generate_main = false;
   bool        generate_rc   = false;
-  bool        update_files  = false;                       // Only via command line, not needed in xml.
+  bool        update_files  = false;                       // Only via command line, not in XML file.
 
   application_binary  = "";
   application_name    = "";
@@ -195,13 +198,12 @@ int main(int argc, char *argv[])
   if (! QFile::exists(filename)) {
     qWarning(_("File does not exist."));
 
-    filename = QFileDialog::getOpenFileName(0, _("Select the XML instruction file"),
-                                            QDir::currentPath(), _("XML Files (*.xml)"));
-    if (filename.isEmpty())
-      return 0;
+    //filename = QFileDialog::getOpenFileName(0, _("Select the XML instruction file"),
+    //                                        QDir::currentPath(), _("XML Files (*.xml)"));
+    //if (filename.isEmpty())
+    //  return 0;
 
-    if (! QFile::exists(filename))
-      return -1;
+    return -1;
   }
 
   QFile file(filename);
@@ -236,7 +238,7 @@ int main(int argc, char *argv[])
   QDomNode     entries;
   QString      s;
 
-  // Automatically set application binary from the XML application tag if attribute if present.
+  // Automatically set application binary from the XML application tag if attribute is present.
 
   if (element.hasAttribute("base")) {
     s = element.attribute("base");
@@ -265,7 +267,7 @@ int main(int argc, char *argv[])
 
     // TODO: Hangs, if comments <!-- --> are inserted in project section.
 
-    QString attr_name  = data.attribute("name");           // Parse entry, every data tag cotains
+    QString attr_name  = data.attribute("name");           // Parse entry, every data tag contains
     QString attr_value = data.attribute("value");          // a name and value pair of attributes.
 
     if (attr_name == "application-binary") {
@@ -316,7 +318,7 @@ int main(int argc, char *argv[])
 
     file.setFileName(filename);
     if (! file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-      qWarning(_("Output file not open."));
+      qWarning() << _("Output file not open.");
       return -3;
     }
 

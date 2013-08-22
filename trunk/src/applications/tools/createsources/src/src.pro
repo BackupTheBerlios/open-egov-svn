@@ -8,7 +8,7 @@ TARGET    = createsources
 SOURCES   = *.cpp
 HEADERS   = 
 FORMS     = 
-QT       += gui widgets xml
+QT       += xml
 CONFIG   += console
 PACKAGES  = QT GETTEXT
 
