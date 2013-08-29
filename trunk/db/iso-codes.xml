@@ -8743,68 +8743,76 @@ http://www.mcanerin.com/en/articles/gTLD.asp
         <field name="translation_id">315</field>
       </row>
 -->
+      <row> <!-- Moroccan Arabic, Moroccan (darija, ary ISO 639-3)
+http://en.wikipedia.org/wiki/Moroccan_language
+http://globalrecordings.net/en/langcode/ary -->
+        <field name="id">491</field>
+        <field name="value">Moroccan Arabic; Darija</field>
+        <field name="alpha2code"></field>
+        <field name="alpha3codeb">ary</field>
+        <field name="alpha3codet"></field>
+        <field name="dictionary">1</field>
+        <field name="scope">0</field>
+        <field name="type">0</field>
+        <field name="translation_id"></field>
+      </row>
     </table>
 
     <table name="locales">
       <row>
         <field name="id">1</field>
         <field name="country_id">NULL</field>
-        <field name="language_id">22</field>  <!-- de -->
+        <field name="language_id">152</field>  <!-- de -->
       </row>
       <row>
         <field name="id">2</field>
         <field name="country_id">NULL</field>
-        <field name="language_id">25</field>  <!-- en -->
+        <field name="language_id">125</field>  <!-- en -->
       </row>
       <row>
         <field name="id">3</field>
         <field name="country_id">NULL</field>
-        <field name="language_id">5</field>   <!-- ar -->
+        <field name="language_id">21</field>   <!-- ar -->
       </row>
       <row>
         <field name="id">4</field>
         <field name="country_id">NULL</field>
-        <field name="language_id">95</field>  <!-- ru -->
+        <field name="language_id">366</field>  <!-- ru -->
       </row>
       <row>
         <field name="id">5</field>
         <field name="country_id">81</field>   <!-- DE -->
-        <field name="language_id">22</field>  <!-- de -->
+        <field name="language_id">152</field>  <!-- de -->
       </row>
       <row>
         <field name="id">6</field>
         <field name="country_id">225</field>  <!-- GB -->
-        <field name="language_id">25</field>  <!-- en -->
+        <field name="language_id">125</field>  <!-- en -->
       </row>
       <row>
         <field name="id">7</field>
         <field name="country_id">226</field>  <!-- US -->
-        <field name="language_id">25</field>  <!-- en -->
+        <field name="language_id">125</field>  <!-- en -->
       </row>
       <row>
         <field name="id">8</field>
         <field name="country_id">177</field>  <!-- RU -->
-        <field name="language_id">95</field>  <!-- ru -->
+        <field name="language_id">366</field>  <!-- ru -->
       </row>
       <row>
         <field name="id">9</field>            <!-- maroccan arabic -->
         <field name="country_id">144</field>  <!-- MA -->
-        <field name="language_id">5</field>   <!-- ar -->
+        <field name="language_id">21</field>   <!-- ar -->
       </row>
-<!--
-Moroccan (darija, ary ISO 639-3)
-http://en.wikipedia.org/wiki/Moroccan_language
-http://globalrecordings.net/en/langcode/ary
--->
       <row>
         <field name="id">10</field>           <!-- maroccan "darija" -->
         <field name="country_id">144</field>  <!-- MA -->
-        <field name="language_id">5</field>   <!-- ar -->
+        <field name="language_id">491</field>   <!-- ar -->
       </row>
       <row>
         <field name="id">11</field>           <!-- latin -->
         <field name="country_id">NULL</field>
-        <field name="language_id">65</field>  <!-- la -->
+        <field name="language_id">248</field>  <!-- la -->
       </row>
     </table>
   </data>
