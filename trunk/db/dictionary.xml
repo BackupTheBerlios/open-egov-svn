@@ -4,19 +4,12 @@
 
 <database name="dictionary" version="1" date="2012-05-28" flags="const:true security:false privacy:false">
   <structures>
-    <table name="abbreviations">
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="full_text_id"   type="integer" flags="required" />
-      <column name="short_text_id"  type="integer" flags="required" />
-      <column name="locale_id"      type="integer" flags="required references:iso-codes.locales(id)" />
-    </table>
-
     <table name="word_types">       <!-- e.g. noun, verb, article -->
       <column name="id"             type="integer" flags="primarykey" />
       <column name="translation_id" type="integer" flags="required references:translations(id)" />
     </table>
 
-    <table name="translations">
+    <table name="translations">     <!-- translations of dictionary-related words, e.g. word types -->
       <column name="id"             type="integer" flags="index" /> <!-- there are multiple translations with same id -->
       <column name="value"          type="string"  flags="required" />
       <column name="locale_id"      type="integer" flags="required references:iso-codes.locales(id)" />
@@ -26,20 +19,21 @@
       <column name="id"             type="integer" flags="primarykey" />
       <column name="locale_id"      type="integer" flags="required references:iso-codes.locales(id)" />
       <column name="word_type_id"   type="integer" flags="references:word_types(id)" />
+      <column name="connection_id"  type="integer" flags="references:connections(id)" />
+      <column name="value"          type="string"  flags="required" />
+    </table>
+
+    <table name="connections">
+      <column name="id"             type="integer" flags="primarykey" />
+    </table>
+
+    <table name="contexts">
+      <column name="id"             type="integer" flags="primarykey" />
       <column name="value"          type="string"  flags="required" />
     </table>
   </structures>
 
   <data>
-    <table name="abbreviations">
-      <row>
-        <field name="id">1</field>
-        <field name="full_text_id">1</field>
-        <field name="short_text_id">1</field>
-        <field name="locale_id">1</field>
-      </row>
-    </table>
-
     <table name="translations">
       <row>
         <field name="id">1</field>
@@ -91,6 +85,16 @@
         <field name="value">particle</field>
         <field name="locale_id">2</field>
       </row>
+      <row>
+        <field name="id">6</field>
+        <field name="value">Abkürzung</field>
+        <field name="locale_id">1</field>
+      </row>
+      <row>
+        <field name="id">6</field>
+        <field name="value">abbreviation</field>
+        <field name="locale_id">2</field>
+      </row>
     </table>
 
     <table name="word_types">
@@ -121,61 +125,77 @@
         <field name="id">1</field>
         <field name="locale_id">1</field>
         <field name="word_type_id">1</field>
+        <field name="connection_id">1</field>
         <field name="value">Katze</field>
       </row>
       <row>
         <field name="id">2</field>
         <field name="locale_id">1</field>
         <field name="word_type_id">1</field>
+        <field name="connection_id">2</field>
         <field name="value">Hase</field>
       </row>
       <row>
         <field name="id">3</field>
         <field name="locale_id">1</field>
         <field name="word_type_id">1</field>
+        <field name="connection_id">3</field>
         <field name="value">Hund</field>
       </row>
       <row>
         <field name="id">4</field>
         <field name="locale_id">1</field>
         <field name="word_type_id">1</field>
+        <field name="connection_id">4</field>
         <field name="value">Blume</field>
-      </row>
+     </row>
       <row>
         <field name="id">5</field>
         <field name="locale_id">1</field>
         <field name="word_type_id">1</field>
+        <field name="connection_id">5</field>
         <field name="value">Haus</field>
       </row>
       <row>
         <field name="id">6</field>
         <field name="locale_id">2</field>
         <field name="word_type_id">1</field>
+        <field name="connection_id">1</field>
         <field name="value">cat</field>
       </row>
       <row>
         <field name="id">7</field>
         <field name="locale_id">2</field>
         <field name="word_type_id">1</field>
+        <field name="connection_id">2</field>
         <field name="value">rabbit</field>
       </row>
       <row>
         <field name="id">8</field>
         <field name="locale_id">2</field>
         <field name="word_type_id">1</field>
+        <field name="connection_id">3</field>
         <field name="value">dog</field>
       </row>
       <row>
         <field name="id">9</field>
         <field name="locale_id">2</field>
         <field name="word_type_id">1</field>
+        <field name="connection_id">4</field>
         <field name="value">flower</field>
       </row>
       <row>
         <field name="id">10</field>
         <field name="locale_id">2</field>
         <field name="word_type_id">1</field>
+        <field name="connection_id">5</field>
         <field name="value">house</field>
+      </row>
+    </table>
+
+    <table name="connections">
+      <row>
+        <field name="id">1</field>
       </row>
     </table>
   </data>
