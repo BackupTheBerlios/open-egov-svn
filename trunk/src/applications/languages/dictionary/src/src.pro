@@ -7,9 +7,9 @@
 TARGET    = dictionary
 SOURCES   = *.cpp
 HEADERS   = *.h
-FORMS     = 
+FORMS     = forms/*.ui
 QT       += network gui widgets sql
-CONFIG   += 
+CONFIG   += console
 PACKAGES  = QT GETTEXT
 
 include(../../../common.pri)
