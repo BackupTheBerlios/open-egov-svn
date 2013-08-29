@@ -40,13 +40,14 @@
 #include <QSqlQuery>
 
 #include "AddWordDialog.h"
+#include "Language.h"
 #include "MainWindow.h"
 
 MainWindow::MainWindow(QWidget *parent /*=0*/)
  : OEG::Qt::MainWindow(parent)
 {
-  m_locale_id_input  = 0;
-  m_locale_id_output = 0;
+  m_language_id_input  = 0;
+  m_language_id_output = 0;
 
   setWindowIcon(QIcon("icon.png"));
 
@@ -95,10 +96,15 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
   m_dictionary_db.setDatabaseName(QDir::toNativeSeparators(dbfile));
 
   if (! m_dictionary_db.open()) {
-    qWarning() << "database not open:";
-	QSqlError le = m_dictionary_db.lastError();
-	qWarning() << le.text();
+    qWarning() << "Database not open:" << m_dictionary_db.lastError().text();
+    qWarning() << "File:" << dbfile;
   }
+}
+
+MainWindow::~MainWindow()
+{
+  while (! m_languages.isEmpty())
+    delete m_languages.takeFirst();
 }
 
 void MainWindow::createActions()
@@ -170,10 +176,13 @@ void MainWindow::createMenus()
   menu->addAction(standardAction(Cut));
   menu->addAction(standardAction(Copy));
   menu->addAction(standardAction(Paste));
+  menu->addSeparator();
+  menu->addAction(standardAction(Delete));
 
   menu = getStandardMenu(SettingsMenu);
   action = menu->addAction(_("Common..."));
-  connect(action, SIGNAL(triggered()), this, SLOT(commonSettings()));
+  connect(action, SIGNAL(triggered()),
+          this,   SLOT(commonSettings()));
 
   addStandardMenu(HelpMenu);
 }
@@ -233,14 +242,14 @@ void MainWindow::translate()
 
   if (! query.prepare("SELECT connection_id FROM words WHERE value = :word")) {
     qWarning() << "prepare failed";
-	return;
+    return;
   }
 
   query.bindValue(":word", m_le_input->text());
 
   if (! query.exec()) {
     qWarning() << "exec failed";
-	return ;
+    return ;
   }
 
   if (query.next()) {   // while?
@@ -253,17 +262,17 @@ void MainWindow::translate()
   }
 
   if (! query.prepare("SELECT value FROM words WHERE connection_id = :connection_id AND "
-                                                    "locale_id     = :locale_id")) {
+                                                    "language_id   = :language_id")) {
     qWarning() << "prepare failed";
-	return;
+    return;
   }
 
   query.bindValue(":connection_id", connection_id);
-  query.bindValue(":locale_id",     2);
+  query.bindValue(":language_id",   m_language_id_output);
   
   if (! query.exec()) {
     qWarning() << "exec failed";
-	return;
+    return;
   }
 
   QString s = "";
@@ -299,8 +308,8 @@ void MainWindow::loadSupportedLanguages()
 
   if (! iso_codes_db.open()) {
     qWarning() << "database not open:";
-	QSqlError le = iso_codes_db.lastError();
-	qWarning() << le.text();
+    QSqlError le = iso_codes_db.lastError();
+    qWarning() << le.text();
     return;
   }
 
@@ -311,17 +320,27 @@ void MainWindow::loadSupportedLanguages()
 
   QSqlQuery query(iso_codes_db);
 
-  if (! query.exec("SELECT languages.value FROM languages INNER JOIN locales "
-                                               "ON locales.language_id = languages.id")) {
+  // The locales table is deprecated now, will move to ISO 639-3 and additional meta data.
+  // "SELECT languages.value FROM languages INNER JOIN locales ON locales.language_id = languages.id"
+  if (! query.exec("SELECT id,value,alpha2code,alpha3codeb,translation_id FROM languages WHERE dictionary = 1")) {
     qWarning() << "exec failed";
-	return;
+    return;
   }
 
   m_supported_languages << _("?");
   m_supported_languages << _("*");
 
   while (query.next()) {
-    m_supported_languages << query.value(0).toString();
+    Language *lang = new Language(this);
+    lang->m_id             = query.value(0).toInt();
+    lang->m_value          = query.value(1).toString();
+    lang->m_alpha2code     = query.value(2).toString();
+    lang->m_alpha3codeb    = query.value(3).toString();
+    lang->m_alpha3codet    = query.value(4).toString();
+    lang->m_translation_id = query.value(5).toInt();
+    m_languages << lang;
+
+    m_supported_languages << query.value(1).toString();
   }
 
   iso_codes_db.close();
@@ -329,9 +348,19 @@ void MainWindow::loadSupportedLanguages()
 
 void MainWindow::currentIndexChangedInputCombobox(const QString &text)
 {
+  for (int i = 0; i < m_languages.size(); i++) {
+    Language *lang = m_languages.at(i);
+    if (lang->m_value == text)
+      m_language_id_input = lang->m_id;
+  }
 }
 
 void MainWindow::currentIndexChangedOutputCombobox(const QString &text)
 {
+  for (int i = 0; i < m_languages.size(); i++) {
+    Language *lang = m_languages.at(i);
+    if (lang->m_value == text)
+      m_language_id_output = lang->m_id;
+  }
 }
 

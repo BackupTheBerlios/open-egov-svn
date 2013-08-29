@@ -33,12 +33,15 @@ class QTextEdit;
 class QGridLayout;
 class QAction;
 
+class Language;
+
 class MainWindow : public OEG::Qt::MainWindow
 {
   Q_OBJECT
 
   public:
     MainWindow(QWidget *parent = 0);
+   ~MainWindow();
 
     virtual void createActions();
     virtual void createStatusBar();
@@ -61,21 +64,22 @@ class MainWindow : public OEG::Qt::MainWindow
     void loadSupportedLanguages();
 
   protected:
-    QLineEdit   *m_le_input;
-    QTextEdit   *m_te_output;
-    QComboBox   *m_cb_input_language;
-    QComboBox   *m_cb_output_language;
-    QLabel      *m_la_input;
-    QLabel      *m_la_output;
-    QGridLayout *m_layout;
-    QAction     *a_add_word;
-    QAction     *a_translate;
-    QAction     *a_toggle_direction;
-    QLabel      *l_sb_word_count_global;
-    QLabel      *l_sb_combinations_count;
-    QSqlDatabase m_dictionary_db;
-    QStringList  m_supported_languages;
-    int          m_locale_id_input;
-    int          m_locale_id_output;
+    QLineEdit         *m_le_input;
+    QTextEdit         *m_te_output;
+    QComboBox         *m_cb_input_language;
+    QComboBox         *m_cb_output_language;
+    QLabel            *m_la_input;
+    QLabel            *m_la_output;
+    QGridLayout       *m_layout;
+    QAction           *a_add_word;
+    QAction           *a_translate;
+    QAction           *a_toggle_direction;
+    QLabel            *l_sb_word_count_global;
+    QLabel            *l_sb_combinations_count;
+    QSqlDatabase       m_dictionary_db;
+    int                m_language_id_input;
+    int                m_language_id_output;
+    QStringList        m_supported_languages;
+    QList<Language *>  m_languages;
 };
 
