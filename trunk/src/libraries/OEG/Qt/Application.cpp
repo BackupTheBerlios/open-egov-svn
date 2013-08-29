@@ -36,6 +36,12 @@
 #include <stdlib.h>
 #include <time.h>
 
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <unistd.h>
+#endif
+
 using namespace OEG::Qt;
 using namespace Qt;
 
@@ -223,17 +229,19 @@ void Application::removeSystemTrayIcon()
 
 QString Application::standardDirectory(DirectoryType type)
 {
+  QString path;
   QDir dir;
 
   switch (type) {
     case Temp:
-      return QDir::tempPath();
+      return QDir::toNativeSeparators(QDir::tempPath());
 
-    case User:
-      return QDir::homePath();
+    case Home:    // C:/Documents and Settings/Username
+      return QDir::toNativeSeparators(QDir::homePath());
 
-    case Common:  // C:\Programme\Gemeinsame Dateien\GASI\resources
-      return standardDirectory(Temp); // TODO
+    case Common:  // C:\Programme\Gemeinsame Dateien\open-egovernment\resources
+      path = standardDirectory(Base) + "/share/open-egovernment";
+      return QDir::toNativeSeparators(QDir::cleanPath(path));
       break;
 
     case Data:
@@ -246,12 +254,28 @@ QString Application::standardDirectory(DirectoryType type)
       break;
 
     case Base:
-      dir.cd(QCoreApplication::applicationDirPath());
+      path = QCoreApplication::applicationDirPath();
+	  if (path.endsWith("/bin"))
+	    path = path.left(path.length() - 4);
+      return QDir::cleanPath(path);
+      break;
 
-      if (dir.dirName() == "bin")
-        dir.cdUp();
-
-      return dir.canonicalPath();
+    case User:
+      path = standardDirectory(Base) + "/users/";
+#ifdef _WIN32
+      {
+        TCHAR userNameBuffer[100];
+        DWORD userNameLength = sizeof(userNameBuffer);
+        if (GetUserName(userNameBuffer, &userNameLength)) {          // Win32 API.
+          path += QString::fromWCharArray(userNameBuffer);
+        }
+      }
+#else
+      path += getlogin();                                            // Linux.
+#endif
+      if (dir.exists(path)) {
+        return QDir::cleanPath(path);
+      }
       break;
   }
 
@@ -261,15 +285,14 @@ QString Application::standardDirectory(DirectoryType type)
 QString Application::locateFile(const QString &filename, FileType type /*=Unknown*/)
 {
   QString path;
+  QDir    dir;
 
   switch (type) {
     case Icon:
       {
-        QDir dir;
-
         // TODO: avoid change dirs, simplify, icon management!
 
-        dir.cd(standardDirectory(User));
+        dir.cd(standardDirectory(Home));
         if (dir.exists("resources/icons")) {
           dir.cd("resources/icons");
           if (QFile::exists(dir.canonicalPath() + "/" + filename))
@@ -297,9 +320,24 @@ QString Application::locateFile(const QString &filename, FileType type /*=Unknow
             return dir.canonicalPath() + "/" + filename;
           if (QFile::exists(dir.canonicalPath() + "/" + filename + ".svg"))
             return dir.canonicalPath() + "/" + filename + ".svg";
+          if (QFile::exists(dir.canonicalPath() + "/" + filename + ".png"))
+            return dir.canonicalPath() + "/" + filename + ".png";
         }
 
-        qWarning() << "Icon not found! Checked in user/common/app resources dir.";
+        qWarning() << "Icon not found! Checked in home/common/base resources dir.";
+
+        return QString();
+      }
+      break;
+
+    case UserDatabase:
+      {
+        path = standardDirectory(User) + "/db/" + filename;
+
+		if (QFile::exists(path))
+          return QDir::cleanPath(path);
+
+        qWarning() << "Database not found! Checked in users/username/db directory.";
 
         return QString();
       }
@@ -307,18 +345,12 @@ QString Application::locateFile(const QString &filename, FileType type /*=Unknow
 
     case Database:
       {
-        QDir dir;
+        path = standardDirectory(Base) + "/db/" + filename;
 
-        // A database is always in the program folder. TODO: allow other directories.
+		if (QFile::exists(path))
+          return QDir::cleanPath(path);
 
-        dir.cd(standardDirectory(Base));
-        //if (dir.exists("db")) {
-        //  dir.cd("db");
-          if (QFile::exists(dir.canonicalPath() + "/" + filename))
-            return dir.canonicalPath() + "/" + filename;
-        //}
-
-        qWarning() << "Database not found! Checked only in program dir/db.";
+        qWarning() << "Database not found! Checked in db directory.";
 
         return QString();
       }
@@ -332,7 +364,6 @@ QString Application::locateFile(const QString &filename, FileType type /*=Unknow
 
     case Help:
       {
-        QDir dir;
         QString lang = QLocale::system().name();
 
         // Help files are always there, were also the program files are located.
@@ -357,8 +388,6 @@ QString Application::locateFile(const QString &filename, FileType type /*=Unknow
 
     case Plugin:
       {
-        QDir dir;
-
         dir.cd(standardDirectory(Base));
         if (dir.exists("plugins")) {
           dir.cd("plugins");
@@ -373,14 +402,14 @@ QString Application::locateFile(const QString &filename, FileType type /*=Unknow
             return dir.canonicalPath() + "/" + filename;
         }
 
-        dir.cd(standardDirectory(User));
+        dir.cd(standardDirectory(Home));
         if (dir.exists("plugins")) {
           dir.cd("plugins");
           if (QFile::exists(dir.canonicalPath() + "/" + filename))
             return dir.canonicalPath() + "/" + filename;
         }
 
-        qWarning() << "Plugin not found! Checked in app/common/user plugins dir.";
+        qWarning() << "Plugin not found! Checked in app/common/home plugins dir.";
 
         return QString();
       }

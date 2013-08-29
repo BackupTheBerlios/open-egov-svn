@@ -42,8 +42,8 @@ class Application : public QApplication
   Q_OBJECT
 
   public:
-    enum DirectoryType { Temp, User, Common, Data, Base };
-    enum FileType { Icon, Database, Image, Text, Plugin, Help, Unknown };
+    enum DirectoryType { Temp, Home, Common, Data, Base, User };
+    enum FileType { Icon, Database, UserDatabase, Image, Text, Plugin, Help, Unknown };
 
     enum ApplicationFlag {                       // Flags are not frozen, they are in evaluation and may change...
       AF_Application = 0x00000001,               // This is an standard application.
