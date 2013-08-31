@@ -353,15 +353,19 @@ void MainWindow::translate()
 
 void MainWindow::toggleDirection()
 {
-  int i = m_cb_input_language->currentIndex();
-  int o = m_cb_output_language->currentIndex();
+  QString text;
+  int     index;
 
-  m_cb_input_language->setCurrentIndex(o);
-  m_cb_output_language->setCurrentIndex(i);
+  text  = m_cb_output_language->currentText();
+  index = m_cb_input_language->findText(text, Qt::MatchExactly | Qt::MatchCaseSensitive);
+  text  = m_cb_input_language->currentText();
+  m_cb_input_language->setCurrentIndex(index);
+  index = m_cb_output_language->findText(text, Qt::MatchExactly | Qt::MatchCaseSensitive);
+  m_cb_output_language->setCurrentIndex(index);
 
-  QString s = m_le_input->text();
+  text = m_le_input->text();
   m_le_input->setText(m_te_output->toPlainText());
-  m_te_output->setPlainText(s);
+  m_te_output->setPlainText(text);
 
   translate();
 }
@@ -446,7 +450,7 @@ void MainWindow::loadWordTypes()
     return;
   }
 
-  query.bindValue(":language_id",   152 /*de*/);
+  query.bindValue(":language_id", 152 /*de*/);
   
   if (! query.exec()) {
     qWarning() << "exec() failed.";
