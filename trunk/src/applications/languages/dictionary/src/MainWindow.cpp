@@ -41,12 +41,13 @@
 
 #include "AddWordDialog.h"
 #include "Language.h"
+#include "WordType.h"
 #include "MainWindow.h"
 
 MainWindow::MainWindow(QWidget *parent /*=0*/)
  : OEG::Qt::MainWindow(parent)
 {
-  m_language_id_input  = 0;
+  m_language_id_input  = 0;  // TODO: store values from last session.
   m_language_id_output = 0;
 
   setWindowIcon(QIcon("icon.png"));
@@ -59,13 +60,14 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
   m_cb_input_language = new QComboBox(this);
   m_cb_input_language->setDuplicatesEnabled(false);
   m_cb_input_language->setEditable(false);
-  m_cb_input_language->addItems(m_supported_languages);
+  m_cb_input_language->addItems(supportedLanguages(true, true));
   m_cb_input_language->setCurrentIndex(0);
   m_cb_output_language = new QComboBox(this);
   m_cb_output_language->setDuplicatesEnabled(false);
   m_cb_output_language->setEditable(false);
-  m_cb_output_language->addItems(m_supported_languages);
+  m_cb_output_language->addItems(supportedLanguages(false, true));
   m_cb_output_language->setCurrentIndex(0);
+
   connect(m_cb_input_language, SIGNAL(currentIndexChanged(const QString &)),
           this, SLOT(currentIndexChangedInputCombobox(const QString &)));
   connect(m_cb_output_language, SIGNAL(currentIndexChanged(const QString &)),
@@ -99,12 +101,17 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
     qWarning() << "Database not open:" << m_dictionary_db.lastError().text();
     qWarning() << "File:" << dbfile;
   }
+
+  loadWordTypes();
 }
 
 MainWindow::~MainWindow()
 {
   while (! m_languages.isEmpty())
     delete m_languages.takeFirst();
+
+  while (! m_word_types.isEmpty())
+    delete m_word_types.takeFirst();
 }
 
 void MainWindow::createActions()
@@ -218,20 +225,78 @@ void MainWindow::updateStatusBar()
 
 void MainWindow::addWord()
 {
+  int index;
   AddWordDialog dialog;
+
+  dialog.m_cb_1_language->setDuplicatesEnabled(false);
+  dialog.m_cb_1_language->setEditable(false);
+  dialog.m_cb_1_language->addItems(supportedLanguages(false, false));
+
+  index = dialog.m_cb_1_language->findText(m_cb_input_language->currentText(), Qt::MatchExactly | Qt::MatchCaseSensitive);
+  dialog.m_cb_1_language->setCurrentIndex(index);
+
+  dialog.m_cb_2_language->setDuplicatesEnabled(false);
+  dialog.m_cb_2_language->setEditable(false);
+  dialog.m_cb_2_language->addItems(supportedLanguages(false, false));
+
+  index = dialog.m_cb_2_language->findText(m_cb_output_language->currentText(), Qt::MatchExactly | Qt::MatchCaseSensitive);
+  dialog.m_cb_2_language->setCurrentIndex(index);
+
+  dialog.m_cb_1_word_type->setDuplicatesEnabled(false);
+  dialog.m_cb_1_word_type->setEditable(false);
+  dialog.m_cb_1_word_type->addItems(m_supported_word_types);
+  dialog.m_cb_1_word_type->setCurrentIndex(-1);
+
+  dialog.m_cb_2_word_type->setDuplicatesEnabled(false);
+  dialog.m_cb_2_word_type->setEditable(false);
+  dialog.m_cb_2_word_type->addItems(m_supported_word_types);
+  dialog.m_cb_2_word_type->setCurrentIndex(-1);
 
   dialog.m_lineedit_1->setText(m_le_input->text());
 
-  if (dialog.exec()) {
+  if (! dialog.exec())
+    return;
 
+  qDebug() << "Adding:" << dialog.m_lineedit_1->text() << dialog.m_lineedit_2->text();
+
+  QSqlDatabase db = QSqlDatabase::database("dictionary_db");
+
+  if (! db.isOpen()) {
+    qWarning() << "Database not open.";
+    return;
   }
+
+  QSqlQuery query(db);
+
+#if 0
+  if (! query.prepare("INSERT INTO words(id,language_id,word_type_id,connection_id,value) "
+                      "VALUES "
+                      ":language_id")) {
+    qWarning() << "prepare() failed.";
+    return;
+  }
+
+  query.bindValue(":language_id",   152 /*de*/);
+  
+  if (! query.exec()) {
+    qWarning() << "exec() failed.";
+    return;
+  }
+
+  while (query.next()) {
+    WordType *type = new WordType(this);
+    type->m_id    = query.value(0).toInt();
+    type->m_value = query.value(1).toString();
+    m_word_types << type;
+
+    m_supported_word_types << query.value(1).toString();
+  }
+#endif
 }
 
 void MainWindow::translate()
 {
   int connection_id = 0;
-
-  //QSqlDatabase db = QSqlDatabase::database("connection-name");
 
   if (! m_dictionary_db.isOpen()) {
     qWarning() << "db not open";
@@ -240,15 +305,17 @@ void MainWindow::translate()
 
   QSqlQuery query(m_dictionary_db);
 
-  if (! query.prepare("SELECT connection_id FROM words WHERE value = :word")) {
-    qWarning() << "prepare failed";
+  if (! query.prepare("SELECT connection_id FROM words WHERE value = :word AND "
+                                                    "language_id   = :language_id")) {
+    qWarning() << "prepare() failed.";
     return;
   }
 
-  query.bindValue(":word", m_le_input->text());
+  query.bindValue(":word",        m_le_input->text());
+  query.bindValue(":language_id", m_language_id_input);
 
   if (! query.exec()) {
-    qWarning() << "exec failed";
+    qWarning() << "exec() failed.";
     return ;
   }
 
@@ -257,13 +324,13 @@ void MainWindow::translate()
   }
 
   if (connection_id <= 0) {
-    qWarning() << "wrong connection id";
+    qWarning() << "Wrong connection id.";
     return;
   }
 
   if (! query.prepare("SELECT value FROM words WHERE connection_id = :connection_id AND "
                                                     "language_id   = :language_id")) {
-    qWarning() << "prepare failed";
+    qWarning() << "prepare() failed.";
     return;
   }
 
@@ -271,7 +338,7 @@ void MainWindow::translate()
   query.bindValue(":language_id",   m_language_id_output);
   
   if (! query.exec()) {
-    qWarning() << "exec failed";
+    qWarning() << "exec() failed.";
     return;
   }
 
@@ -299,6 +366,23 @@ void MainWindow::toggleDirection()
   translate();
 }
 
+QStringList MainWindow::supportedLanguages(const bool detectLanguage /*=false*/, const bool allLanguages /*=false*/)
+{
+  QStringList list;
+
+  if (detectLanguage) {
+    list << _("?");
+  }
+
+  if (allLanguages) {
+    list << _("*");
+  }
+
+  list += m_supported_languages;
+
+  return list;
+}
+
 void MainWindow::loadSupportedLanguages()
 {
   QSqlDatabase iso_codes_db = QSqlDatabase::addDatabase("QSQLITE", "iso_codes_db");
@@ -307,28 +391,26 @@ void MainWindow::loadSupportedLanguages()
   iso_codes_db.setDatabaseName(QDir::toNativeSeparators(filename));
 
   if (! iso_codes_db.open()) {
-    qWarning() << "database not open:";
+    qWarning() << "Could not open database:";
     QSqlError le = iso_codes_db.lastError();
     qWarning() << le.text();
     return;
   }
 
   if (! iso_codes_db.isOpen()) {
-    qWarning() << "db not open";
+    qWarning() << "Database is not open.";
     return;
   }
 
   QSqlQuery query(iso_codes_db);
 
-  // The locales table is deprecated now, will move to ISO 639-3 and additional meta data.
-  // "SELECT languages.value FROM languages INNER JOIN locales ON locales.language_id = languages.id"
+  // The locales table is deprecated now, will move to ISO 639-3 and additional meta data (favorites).
+  // Currently we use an additional column "dictionary" to select the wanted relevant dictionaries.
+
   if (! query.exec("SELECT id,value,alpha2code,alpha3codeb,translation_id FROM languages WHERE dictionary = 1")) {
-    qWarning() << "exec failed";
+    qWarning() << "exec() failed.";
     return;
   }
-
-  m_supported_languages << _("?");
-  m_supported_languages << _("*");
 
   while (query.next()) {
     Language *lang = new Language(this);
@@ -346,21 +428,79 @@ void MainWindow::loadSupportedLanguages()
   iso_codes_db.close();
 }
 
+void MainWindow::loadWordTypes()
+{
+  QSqlDatabase db = QSqlDatabase::database("dictionary_db");
+
+  if (! db.isOpen()) {
+    qWarning() << "Database not open.";
+    return;
+  }
+
+  QSqlQuery query(db);
+
+  if (! query.prepare("SELECT word_types.id,translations.value "
+                      "FROM word_types INNER JOIN translations ON translations.id = word_types.id "
+                      "WHERE translations.language_id = :language_id")) {
+    qWarning() << "prepare() failed.";
+    return;
+  }
+
+  query.bindValue(":language_id",   152 /*de*/);
+  
+  if (! query.exec()) {
+    qWarning() << "exec() failed.";
+    return;
+  }
+
+  while (query.next()) {
+    WordType *type = new WordType(this);
+    type->m_id    = query.value(0).toInt();
+    type->m_value = query.value(1).toString();
+    m_word_types << type;
+
+    m_supported_word_types << query.value(1).toString();
+  }
+}
+
 void MainWindow::currentIndexChangedInputCombobox(const QString &text)
 {
   for (int i = 0; i < m_languages.size(); i++) {
     Language *lang = m_languages.at(i);
-    if (lang->m_value == text)
+    if (lang->m_value == text) {
       m_language_id_input = lang->m_id;
+      return;
+    }
   }
+
+  if (text == _("?")) {
+    m_language_id_input = -1;
+    return;
+  }
+
+  if (text == _("*")) {
+    m_language_id_input = 0;
+    return;
+  }
+
+  qWarning() << "Unknown language selected:" << text;
 }
 
 void MainWindow::currentIndexChangedOutputCombobox(const QString &text)
 {
   for (int i = 0; i < m_languages.size(); i++) {
     Language *lang = m_languages.at(i);
-    if (lang->m_value == text)
+    if (lang->m_value == text) {
       m_language_id_output = lang->m_id;
+      return;
+    }
   }
+
+  if (text == _("*")) {
+    m_language_id_output = 0;
+    return;
+  }
+
+  qWarning() << "Unknown language selected:" << text;
 }
 

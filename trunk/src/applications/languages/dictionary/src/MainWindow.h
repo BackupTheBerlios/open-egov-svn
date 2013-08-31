@@ -34,6 +34,7 @@ class QGridLayout;
 class QAction;
 
 class Language;
+class WordType;
 
 class MainWindow : public OEG::Qt::MainWindow
 {
@@ -62,6 +63,8 @@ class MainWindow : public OEG::Qt::MainWindow
 
   protected:
     void loadSupportedLanguages();
+    void loadWordTypes();
+    QStringList supportedLanguages(const bool detectLanguage=false, const bool allLanguages=false);
 
   protected:
     QLineEdit         *m_le_input;
@@ -80,6 +83,8 @@ class MainWindow : public OEG::Qt::MainWindow
     int                m_language_id_input;
     int                m_language_id_output;
     QStringList        m_supported_languages;
+    QStringList        m_supported_word_types;
     QList<Language *>  m_languages;
+    QList<WordType *>  m_word_types;
 };
 
