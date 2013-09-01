@@ -1,0 +1,11 @@
+$Id$
+
+http://en.wikipedia.org/wiki/Part_of_speech
+http://de.wikipedia.org/wiki/Grammatikbegriffe_im_Deutschen
+
+
+Notes:
+
+Use "SELECT max(connection_id) FROM words;"
+instead the removed connections table.
+

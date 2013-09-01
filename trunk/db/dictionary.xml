@@ -9,6 +9,18 @@
       <column name="translation_id" type="integer" flags="required references:translations(id)" />
     </table>
 
+    <table name="flags">            <!-- official catagories -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="value"          type="string"  flags="required" /> <!-- only until they are complete and use translation_id -->
+      <column name="translation_id" type="integer" flags="references:translations(id)" />
+    </table>
+
+    <table name="categories">       <!-- informatics, programming languages, monuments, ... -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="value"          type="string"  flags="required" /> <!-- only until they are complete and use translation_id -->
+      <column name="translation_id" type="integer" flags="required references:translations(id)" />
+    </table>
+
     <table name="translations">     <!-- translations of dictionary-related words, e.g. word types -->
       <column name="id"             type="integer" flags="index" /> <!-- there are multiple translations with same id -->
       <column name="value"          type="string"  flags="required" />
@@ -23,10 +35,6 @@
       <column name="value"          type="string"  flags="required" />
     </table>
 
-    <table name="connections">
-      <column name="id"             type="integer" flags="primarykey" />
-    </table>
-
     <table name="contexts">
       <column name="id"             type="integer" flags="primarykey" />
       <column name="value"          type="string"  flags="required" />
@@ -37,165 +45,479 @@
     <table name="translations">
       <row>
         <field name="id">1</field>
+        <field name="value">unklassifiziert</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">1</field>
+        <field name="value">unclassified</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">2</field>
         <field name="value">Substantiv</field>
         <field name="language_id">152</field>
       </row>
       <row>
-        <field name="id">1</field>
-        <field name="value">noun</field>
+        <field name="id">2</field>
+        <field name="value">Noun</field>
         <field name="language_id">125</field>
       </row>
       <row>
-        <field name="id">2</field>
+        <field name="id">3</field>
         <field name="value">Verb</field>
         <field name="language_id">152</field>
       </row>
       <row>
-        <field name="id">2</field>
-        <field name="value">verb</field>
-        <field name="language_id">125</field>
-      </row>
-      <row>
         <field name="id">3</field>
-        <field name="value">Pronomen</field>
-        <field name="language_id">152</field>
-      </row>
-      <row>
-        <field name="id">3</field>
-        <field name="value">pronoun</field>
+        <field name="value">Verb</field>
         <field name="language_id">125</field>
       </row>
       <row>
         <field name="id">4</field>
+        <field name="value">Adjektiv</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">4</field>
+        <field name="value">Adjective</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">5</field>
         <field name="value">Artikel</field>
         <field name="language_id">152</field>
       </row>
       <row>
-        <field name="id">4</field>
+        <field name="id">5</field>
         <field name="value">article</field>
         <field name="language_id">125</field>
       </row>
       <row>                                                <!-- https://de.wikipedia.org/wiki/Partikel_%28Grammatik%29 -->
-        <field name="id">5</field>
+        <field name="id">6</field>
         <field name="value">Partikel</field>
         <field name="language_id">152</field>
       </row>
       <row>                                                <!-- https://en.wikipedia.org/wiki/Grammatical_particle -->
-        <field name="id">5</field>
-        <field name="value">particle</field>
+        <field name="id">6</field>
+        <field name="value">Particle</field>
         <field name="language_id">125</field>
       </row>
       <row>
-        <field name="id">6</field>
+        <field name="id">7</field>
+        <field name="value">Adverb</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">7</field>
+        <field name="value">Adverb</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">8</field>
+        <field name="value">Determinativ</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">8</field>
+        <field name="value">Determiner</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">9</field>
+        <field name="value">Konjunktion</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">9</field>
+        <field name="value">Conjunction</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">10</field>
+        <field name="value">Pronomen</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">10</field>
+        <field name="value">Pronoun</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">11</field>
+        <field name="value">Adposition</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">11</field>
+        <field name="value">Adposition</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">12</field>
         <field name="value">Abkürzung</field>
         <field name="language_id">152</field>
       </row>
       <row>
-        <field name="id">6</field>
-        <field name="value">abbreviation</field>
+        <field name="id">12</field>
+        <field name="value">Abbreviation</field>
         <field name="language_id">125</field>
       </row>
-    </table>
+      <row>
+        <field name="id">13</field>
+        <field name="value">Phrase</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">13</field>
+        <field name="value">Phrase</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">14</field>
+        <field name="value">Sprichwort</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">14</field>
+        <field name="value">Proverb</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">15</field>
+        <field name="value">Zitat</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">15</field>
+        <field name="value">Quotation</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">16</field>
+        <field name="value">Geflügeltes Wort</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">16</field>
+        <field name="value">Winged word</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">17</field>
+        <field name="value">Name</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">17</field>
+        <field name="value">Name</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">18</field>
+        <field name="value">Zahlwort, Numeral</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">18</field>
+        <field name="value">Numeral</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">19</field>
+        <field name="value">Nomen</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">19</field>
+        <field name="value">Nomen</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">20</field>
+        <field name="value">Interjektion</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">20</field>
+        <field name="value">Interjection</field>
+        <field name="language_id">125</field>
+      </row>
+    </table> 
 
     <table name="word_types">
-      <row>                                                <!-- noun -->
+      <row>                                                <!-- not classified -->
         <field name="id">1</field>
         <field name="translation_id">1</field>
       </row>
-      <row>                                                <!-- verb -->
-        <field name="id">2</field>
-        <field name="translation_id">2</field>
+      <row>                                                <!-- noun -->
+        <field name="id">2</field>                         <!-- http://de.wikipedia.org/wiki/Substantiv -->
+        <field name="translation_id">2</field>             <!-- http://de.wikipedia.org/wiki/Nomen -->
       </row>
-      <row>                                                <!-- pronoun -->
+      <row>                                                <!-- verb -->
         <field name="id">3</field>
         <field name="translation_id">3</field>
       </row>
-      <row>                                                <!-- article -->
-        <field name="id">4</field>
+      <row>                                                <!-- adjective -->
+        <field name="id">4</field>                         <!-- http://en.wikipedia.org/wiki/Adjective -->
         <field name="translation_id">4</field>
       </row>
-      <row>                                                <!-- particle -->
-        <field name="id">5</field>
+      <row>                                                <!-- article -->
+        <field name="id">5</field>                         <!-- http://en.wikipedia.org/wiki/English_articles -->
         <field name="translation_id">5</field>
       </row>
+      <row>                                                <!-- particle -->
+        <field name="id">6</field>                         <!-- http://de.wikipedia.org/wiki/Partikel_%28Grammatik%29 -->
+        <field name="translation_id">6</field>
+      </row>
+      <row>                                                <!-- adverb -->
+        <field name="id">7</field>                         <!-- http://de.wikipedia.org/wiki/Adverb -->
+        <field name="translation_id">7</field>             <!-- http://en.wikipedia.org/wiki/Adverb -->
+      </row>
+      <row>                                                <!-- determiner -->
+        <field name="id">8</field>                         <!-- http://en.wikipedia.org/wiki/Determiner_%28linguistics%29 -->
+        <field name="translation_id">8</field>             <!-- http://de.wikipedia.org/wiki/Determinativ_%28Wortart%29 -->
+      </row>
+      <row>                                                <!-- conjunction -->
+        <field name="id">9</field>                         <!-- http://de.wikipedia.org/wiki/Konjunktion_%28Wortart%29 -->
+        <field name="translation_id">9</field>             <!-- http://en.wikipedia.org/wiki/Conjunction_%28grammar%29 -->
+      </row>
+      <row>                                                <!-- pronoun -->
+        <field name="id">10</field>
+        <field name="translation_id">10</field>
+      </row>
+      <row>                                                <!-- adposition (preposition, postposition, or circumposition) -->
+        <field name="id">11</field>                        <!-- http://en.wikipedia.org/wiki/Preposition_and_postposition -->
+        <field name="translation_id">11</field>            <!-- http://de.wikipedia.org/wiki/Adposition -->
+      </row>
+      <row>                                                <!-- abbreviation -->
+        <field name="id">12</field>
+        <field name="translation_id">12</field>
+      </row>
+      <row>                                                <!-- phrase -->
+        <field name="id">13</field>                        <!-- http://de.wikipedia.org/wiki/Phrase_%28Linguistik%29 -->
+        <field name="translation_id">13</field>            <!-- http://en.wikipedia.org/wiki/Phrase -->
+      </row>
+      <row>                                                <!-- proverb  -->
+        <field name="id">14</field>                        <!-- http://de.wikipedia.org/wiki/Sprichwort -->
+        <field name="translation_id">14</field>            <!-- http://en.wikipedia.org/wiki/Proverb -->
+      </row>
+      <row>                                                <!-- quotation -->
+        <field name="id">15</field>                        <!-- http://de.wikipedia.org/wiki/Zitat -->
+        <field name="translation_id">15</field>            <!-- http://en.wikipedia.org/wiki/Quotation -->
+      </row>
+      <row>                                                <!-- winged word -->
+        <field name="id">16</field>                        <!-- http://de.wikipedia.org/wiki/Gefl%C3%BCgeltes_Wort -->
+        <field name="translation_id">16</field>            <!-- http://en.wikipedia.org/wiki/Winged_word -->
+      </row>
+      <row>                                                <!-- name -->
+        <field name="id">17</field>                        <!-- http://de.wikipedia.org/wiki/Benennung , Begriff -->
+        <field name="translation_id">17</field>            <!-- http://en.wikipedia.org/wiki/Name -->
+      </row>
+      <row>                                                <!-- numeral -->
+        <field name="id">18</field>                        <!-- http://de.wikipedia.org/wiki/Numeral -->
+        <field name="translation_id">18</field>            <!-- http://en.wikipedia.org/wiki/Numeral_%28linguistics%29 -->
+      </row>
+      <row>                                                <!-- nomen -->
+        <field name="id">19</field>                        <!-- http://de.wikipedia.org/wiki/Nomen -->
+        <field name="translation_id">19</field>
+      </row>
+      <row>                                                <!-- interjection or exclamation -->
+        <field name="id">20</field>                        <!-- http://en.wikipedia.org/wiki/Interjection-->
+        <field name="translation_id">20</field>            <!-- http://de.wikipedia.org/wiki/Empfindungswort -->
+      </row>
+    </table>
+
+    <table name="flags">
+      <row>
+        <field name="id">1</field>
+        <field name="value">cook.</field>
+        <field name="translation_id"></field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="value">ornith.</field>
+        <field name="translation_id"></field>
+      </row>
+      <row>
+        <field name="id">3</field>
+        <field name="value">naut.</field>
+        <field name="translation_id"></field>
+      </row>
+      <row>
+        <field name="id">4</field>
+        <field name="value">coll.</field>
+        <field name="translation_id"></field>
+      </row>
+      <row>
+        <field name="id">5</field>
+        <field name="value">bot.</field>
+        <field name="translation_id"></field>
+      </row>
+      <row>
+        <field name="id">6</field>
+        <field name="value">rel.</field>
+        <field name="translation_id"></field>
+      </row>
+      <row>
+        <field name="id">7</field>
+        <field name="value">pol.</field>
+        <field name="translation_id"></field>
+      </row>
+      <row>
+        <field name="id">8</field>
+        <field name="value">law</field>
+        <field name="translation_id"></field>
+      </row>
+      <row>
+        <field name="id">9</field>
+        <field name="value">tech.</field>
+        <field name="translation_id"></field>
+      </row>
+      <row>
+        <field name="id">10</field>
+        <field name="value">biol.</field>
+        <field name="translation_id"></field>
+      </row>
+      <row>
+        <field name="id">11</field>
+        <field name="value">med.</field>
+        <field name="translation_id"></field>
+      </row>
+      <row>
+        <field name="id">12</field>
+        <field name="value">comp.</field>
+        <field name="translation_id"></field>
+      </row>
+      <row>
+        <field name="id">13</field>
+        <field name="value">telecom.</field>
+        <field name="translation_id"></field>
+      </row>
+      <row>
+        <field name="id">14</field>
+        <field name="value">zool.</field>
+        <field name="translation_id"></field>
+      </row>
+      <row>
+        <field name="id">15</field>
+        <field name="value">math.</field>
+        <field name="translation_id"></field>
+      </row>
+      <row>
+        <field name="id">16</field>
+        <field name="value">phys.</field>
+        <field name="translation_id"></field>
+      </row>
+      <row>
+        <field name="id">17</field>
+        <field name="value">elec.</field>
+        <field name="translation_id"></field>
+      </row>
+      <row>
+        <field name="id">18</field>
+        <field name="value">engin.</field>
+        <field name="translation_id"></field>
+      </row>
+      <row>
+        <field name="id">19</field>
+        <field name="value">thea.</field>
+        <field name="translation_id"></field>
+      </row>
+      <row>
+        <field name="id">20</field>
+        <field name="value">chem.</field>
+        <field name="translation_id"></field>
+      </row>
+      <row>
+        <field name="id">21</field>
+        <field name="value">ling.</field>
+        <field name="translation_id"></field>
+      </row>
+    </table>
+
+    <table name="">            <!-- coll. colloquial [abbr.: coll.], umgangssprachlich [Abk.: ugs.] -->
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="translation_id" type="integer" flags="required references:translations(id)" />
     </table>
 
     <table name="words">
       <row>
         <field name="id">1</field>
         <field name="language_id">152</field>
-        <field name="word_type_id">1</field>
+        <field name="word_type_id">2</field>
         <field name="connection_id">1</field>
         <field name="value">Katze</field>
       </row>
       <row>
         <field name="id">2</field>
         <field name="language_id">152</field>
-        <field name="word_type_id">1</field>
+        <field name="word_type_id">2</field>
         <field name="connection_id">2</field>
         <field name="value">Hase</field>
       </row>
       <row>
         <field name="id">3</field>
         <field name="language_id">152</field>
-        <field name="word_type_id">1</field>
+        <field name="word_type_id">2</field>
         <field name="connection_id">3</field>
         <field name="value">Hund</field>
       </row>
       <row>
         <field name="id">4</field>
         <field name="language_id">152</field>
-        <field name="word_type_id">1</field>
+        <field name="word_type_id">2</field>
         <field name="connection_id">4</field>
         <field name="value">Blume</field>
      </row>
       <row>
         <field name="id">5</field>
         <field name="language_id">152</field>
-        <field name="word_type_id">1</field>
+        <field name="word_type_id">2</field>
         <field name="connection_id">5</field>
         <field name="value">Haus</field>
       </row>
       <row>
         <field name="id">6</field>
         <field name="language_id">125</field>
-        <field name="word_type_id">1</field>
+        <field name="word_type_id">2</field>
         <field name="connection_id">1</field>
         <field name="value">cat</field>
       </row>
       <row>
         <field name="id">7</field>
         <field name="language_id">125</field>
-        <field name="word_type_id">1</field>
+        <field name="word_type_id">2</field>
         <field name="connection_id">2</field>
         <field name="value">rabbit</field>
       </row>
       <row>
         <field name="id">8</field>
         <field name="language_id">125</field>
-        <field name="word_type_id">1</field>
+        <field name="word_type_id">2</field>
         <field name="connection_id">3</field>
         <field name="value">dog</field>
       </row>
       <row>
         <field name="id">9</field>
         <field name="language_id">125</field>
-        <field name="word_type_id">1</field>
+        <field name="word_type_id">2</field>
         <field name="connection_id">4</field>
         <field name="value">flower</field>
       </row>
       <row>
         <field name="id">10</field>
         <field name="language_id">125</field>
-        <field name="word_type_id">1</field>
+        <field name="word_type_id">2</field>
         <field name="connection_id">5</field>
         <field name="value">house</field>
       </row>
-    </table>
-
-    <table name="connections">
       <row>
-        <field name="id">1</field>
+        <field name="id">11</field>
+        <field name="language_id">125</field>
+        <field name="word_type_id">2</field>
+        <field name="connection_id">5</field>
+        <field name="value">houses</field>
       </row>
     </table>
   </data>
