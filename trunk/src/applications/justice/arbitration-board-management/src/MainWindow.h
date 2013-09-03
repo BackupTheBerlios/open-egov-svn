@@ -23,12 +23,34 @@
 
 #include <QString>
 #include <QWidget>
+#include <QSqlDatabase>
+#include <QStringList>
 
 class QLabel;
 
 class MainWindow : public OEG::Qt::MainWindow
 {
   Q_OBJECT
+
+  public:
+    enum HistoryEntryIDs {
+      HEID_FIRST_CONSULT=0,
+      HEID_CASE_OPENED,
+      HEID_PAID_DUE,
+      HEID_SERVED_SUBPOENA,
+      HEID_HEARING,
+      HEID_REHASHING,
+      HEID_CASE_REOPENED,
+      HEID_SERVED_PROTOCOL_COPY,
+      HEID_WAITING,
+      HEID_NOTE,
+      HEID_CONSULTATION,
+      HEID_REFUNDED_MONEY,
+      HEID_CASE_CLOSED,
+      HEID_DATABASE_OPENED,
+      HEID_CASE_ARCHIVED,
+      HEID_CASE_ACCESSED
+    };
 
   public:
     MainWindow(QWidget *parent = 0);
@@ -41,7 +63,23 @@ class MainWindow : public OEG::Qt::MainWindow
     virtual void createTabbedMenuBar();
 
   protected:
-    QLabel             *m_sb_xxx;
+    void updateStatusBar();
+
+    QStringList catchwordList();
+    QStringList resultTypeId();
+    QStringList historyEntryId();
+
+    void addHistoryEntry(const int historyEntryId, const QString &value="");
+
+  protected slots:
+    void selectForms();
+    void selectLaw();
+
+  protected:
+    QLabel             *m_sb_file_count;
+    QLabel             *m_sb_current_file;
     OEG::Qt::TabWidget *m_tabs;
+    QSqlDatabase        m_db;
+    int                 m_current_case_id;
 };
 

@@ -74,12 +74,8 @@
   <changes>
   </changes>
 
-  <datastructures>
-  </datastructures>
-
   <databases>
-    <database type="sqlite" public="false" versioning="false">
-    </database>
+    <database name="arbitration-board-management" type="sqlite" public="false" readonly="false" />
   </databases>
 </application>
 
