@@ -38,8 +38,10 @@ class LineEdit : public QLineEdit
 
   public:
     LineEdit(QWidget *parent = 0);
-	LineEdit(const QString &contents, QWidget *parent = 0);
+    LineEdit(const QString &contents, QWidget *parent = 0);
     ~LineEdit();
+
+    void addClearButton();
 
   protected:
     void resizeEvent(QResizeEvent *event);
@@ -49,7 +51,6 @@ class LineEdit : public QLineEdit
 
   private:
     QToolButton *m_clear_button;
-    bool         m_enable_clear_button;
 };
 
 }}

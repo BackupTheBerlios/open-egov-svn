@@ -34,7 +34,6 @@ class QSystemTrayIcon;
 
 namespace OEG { namespace Qt {
 
-class DatabaseManager;
 class Connector;
 
 class Application : public QApplication
@@ -86,6 +85,7 @@ class Application : public QApplication
     QString locateFile(const QString &filename, FileType type = Unknown);
 
     inline HelpHandler *helpHandler() { return &m_help_handler; }
+    inline DatabaseManager *databaseManager() { return m_database_manager; }
 
     void addApplicationFlags(ApplicationFlags set);
 

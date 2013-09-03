@@ -41,6 +41,15 @@ class TabbedMenuBarGroup : public QObject
   Q_OBJECT
 
   public:
+    enum DisplayMode {
+      TextAlways, TextOrIcon, IconAlways
+    };
+
+    enum StandardMenuBarTabs {
+      File, Edit, Insert, PageLayout, View, Settings,  Help
+    };
+
+  public:
     TabbedMenuBarGroup(QObject *parent = 0);
     ~TabbedMenuBarGroup();
 
@@ -57,6 +66,7 @@ class TabbedMenuBarGroup : public QObject
   private:
     QString       m_title;
     unsigned int  m_width;
+    bool          m_show_command_button;
 };
 
 }}

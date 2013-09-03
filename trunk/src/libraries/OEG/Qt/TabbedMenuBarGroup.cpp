@@ -24,6 +24,9 @@ using namespace Qt;
 TabbedMenuBarGroup::TabbedMenuBarGroup(QObject *parent /*=0*/)
  : QObject(parent)
 {
+  m_title               = "";
+  m_width               = 40;
+  m_show_command_button = false;
 }
 
 TabbedMenuBarGroup::~TabbedMenuBarGroup()
@@ -36,5 +39,6 @@ void TabbedMenuBarGroup::addAction(const QAction *action, const QString &title)
 
 void TabbedMenuBarGroup::showCommandButton()
 {
+  m_show_command_button = true;
 }
 

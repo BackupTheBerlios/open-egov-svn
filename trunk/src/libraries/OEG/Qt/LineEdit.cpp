@@ -34,13 +34,25 @@ LineEdit::LineEdit(QWidget *parent /*=0*/)
 }
 
 LineEdit::LineEdit(const QString &contents, QWidget *parent /*=0*/)
- : QLineEdit(contents, parent)
+ : QLineEdit(contents, parent), m_clear_button(0)
 {
-  m_enable_clear_button = false;
+  addClearButton();
+}
 
+LineEdit::~LineEdit()
+{
+  if (m_clear_button) {
+    delete m_clear_button; m_clear_button = 0;
+  }
+}
+
+void LineEdit::addClearButton()
+{
   m_clear_button = new QToolButton(this);
+
   if (! m_clear_button)
     return;
+
   m_clear_button->setCursor(ArrowCursor);
   m_clear_button->setStyleSheet("QToolButton { border: none; padding: 0px; }");
   m_clear_button->setToolTip(_("Clear the text."));
@@ -52,19 +64,15 @@ LineEdit::LineEdit(const QString &contents, QWidget *parent /*=0*/)
           this,           SLOT(onTextChanged(const QString &)));
 }
 
-LineEdit::~LineEdit()
-{
-  if (m_clear_button) {
-    delete m_clear_button; m_clear_button = 0;
-  }
-}
-
 void LineEdit::resizeEvent(QResizeEvent *event)
 {
 }
 
 void LineEdit::onTextChanged(const QString &text)
 {
+  if (! m_clear_button)
+    return;
+
   m_clear_button->setVisible(! text.isEmpty());
 }
 

@@ -32,6 +32,9 @@ class MessageDialog : public QMessageBox
   Q_OBJECT
 
   public:
+    enum StandardMessages { AAA, BBB, CCC };
+
+  public:
     MessageDialog(QWidget *parent = 0);
     ~MessageDialog();
 
