@@ -1,0 +1,17 @@
+/* $Id:$ */
+
+body {
+  background:#ffffff;
+  color: #151515;
+  font-family: Arial, Helvetica, Verdana, sans-serif;
+}
+
+pre,code,tt {
+  font-family: "Courier New", monospace;
+  font-size: .9em;
+}
+
+p {
+  text-align: justify;
+}
+
