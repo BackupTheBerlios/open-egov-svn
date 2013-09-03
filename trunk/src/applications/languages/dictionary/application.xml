@@ -74,12 +74,10 @@
   <changes>
   </changes>
 
-  <datastructures>
-  </datastructures>
-
   <databases>
-    <database type="sqlite" public="false" versioning="false">
-    </database>
+    <database name="iso-codes"  type="sqlite" public="true"  readonly="true" />
+    <database name="dictionary" type="sqlite" public="true"  readonly="true" />
+    <database name="dictionary" type="sqlite" public="false" readonly="false" />
   </databases>
 </application>
 

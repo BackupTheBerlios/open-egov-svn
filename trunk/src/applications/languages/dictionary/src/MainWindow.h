@@ -41,6 +41,9 @@ class MainWindow : public OEG::Qt::MainWindow
   Q_OBJECT
 
   public:
+    enum NumberOfWords { AllWordsInDatabase, OnlyLanguageA, OnlyLanguageB, CombinationAB };
+
+  public:
     MainWindow(QWidget *parent = 0);
    ~MainWindow();
 
@@ -65,6 +68,13 @@ class MainWindow : public OEG::Qt::MainWindow
     void loadSupportedLanguages();
     void loadWordTypes();
     QStringList supportedLanguages(const bool detectLanguage=false, const bool allLanguages=false);
+    int maxConnectionId();
+    QString wordTypeValue(const int id);
+    int wordTypeId(const QString &value);
+    int languageId(const QString &languageName);
+    int currentLanguageIdA();
+    int currentLanguageIdB();
+    unsigned long numberOfWords(NumberOfWords which);
 
   protected:
     QLineEdit         *m_le_input;
@@ -80,8 +90,6 @@ class MainWindow : public OEG::Qt::MainWindow
     QLabel            *l_sb_word_count_global;
     QLabel            *l_sb_combinations_count;
     QSqlDatabase       m_dictionary_db;
-    int                m_language_id_input;
-    int                m_language_id_output;
     QStringList        m_supported_languages;
     QStringList        m_supported_word_types;
     QList<Language *>  m_languages;

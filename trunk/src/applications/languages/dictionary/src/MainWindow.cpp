@@ -47,8 +47,7 @@
 MainWindow::MainWindow(QWidget *parent /*=0*/)
  : OEG::Qt::MainWindow(parent)
 {
-  m_language_id_input  = 0;  // TODO: store values from last session.
-  m_language_id_output = 0;
+  // TODO: store settings from last session.
 
   setWindowIcon(QIcon("icon.png"));
 
@@ -173,6 +172,8 @@ void MainWindow::createMenus()
   menu = getStandardMenu(FileMenu);
   menu->addAction(standardAction(New));
   menu->addSeparator();
+  menu->addAction(standardAction(Print));
+  menu->addSeparator();
   menu->addAction(standardAction(Exit));
 
   menu = getStandardMenu(EditMenu);
@@ -217,10 +218,15 @@ void MainWindow::createTabbedMenuBar()
 
 void MainWindow::updateStatusBar()
 {
+  long l;
+
+  l = numberOfWords(AllWordsInDatabase);
   l_sb_word_count_global->setText(_("Word count:") + QLatin1String(" ") +
-    QString::number(1000));
+    QString::number(l));
+
+  l = numberOfWords(CombinationAB);
   l_sb_combinations_count->setText(_("Dictionary size:") + QLatin1String(" ") +
-    QString::number(100));
+    QString::number(l));
 }
 
 void MainWindow::addWord()
@@ -257,7 +263,19 @@ void MainWindow::addWord()
   if (! dialog.exec())
     return;
 
-  qDebug() << "Adding:" << dialog.m_lineedit_1->text() << dialog.m_lineedit_2->text();
+  // Retrieve all needed data.
+
+  int connection_id = maxConnectionId() + 1;
+  int language_id_a = languageId(dialog.m_cb_1_language->currentText());
+  int language_id_b = languageId(dialog.m_cb_2_language->currentText());
+  QString text_a = dialog.m_lineedit_1->text().trimmed();
+  QString text_b = dialog.m_lineedit_2->text().trimmed();
+  int word_type_id_a = wordTypeId(dialog.m_cb_1_word_type->currentText());
+  int word_type_id_b = wordTypeId(dialog.m_cb_2_word_type->currentText());
+
+  qDebug() << "Adding:" << text_a << text_b;
+  qDebug() << "  LID a" << language_id_a << "LID b" << language_id_b << "CoID" << connection_id;
+  qDebug() << "  WTID a" << word_type_id_a << "WTID b" << word_type_id_b;
 
   QSqlDatabase db = QSqlDatabase::database("dictionary_db");
 
@@ -266,89 +284,137 @@ void MainWindow::addWord()
     return;
   }
 
+
+
+
   QSqlQuery query(db);
 
 #if 0
   if (! query.prepare("INSERT INTO words(id,language_id,word_type_id,connection_id,value) "
-                      "VALUES "
-                      ":language_id")) {
+                      "VALUES (NULL,:language_id,:word_type_id,:connection_id,:value)")) {
     qWarning() << "prepare() failed.";
     return;
   }
 
-  query.bindValue(":language_id",   152 /*de*/);
-  
+  query.bindValue(":language_id",   language_id_a);
+  query.bindValue(":word_type_id",  word_type_id_a);
+  query.bindValue(":connection_id", connection_id);
+  query.bindValue(":value",         text_a);
+
   if (! query.exec()) {
     qWarning() << "exec() failed.";
     return;
   }
 
-  while (query.next()) {
-    WordType *type = new WordType(this);
-    type->m_id    = query.value(0).toInt();
-    type->m_value = query.value(1).toString();
-    m_word_types << type;
-
-    m_supported_word_types << query.value(1).toString();
+  if (query.next()) {
+    qDebug() << query.value(0).toString();
   }
 #endif
 }
 
 void MainWindow::translate()
 {
+  QString result = "";
+
   int connection_id = 0;
 
   if (! m_dictionary_db.isOpen()) {
-    qWarning() << "db not open";
+    qWarning() << "Database not open.";
     return;
   }
 
-  QSqlQuery query(m_dictionary_db);
+  QList<int> connection_ids;
 
-  if (! query.prepare("SELECT connection_id FROM words WHERE value = :word AND "
-                                                    "language_id   = :language_id")) {
-    qWarning() << "prepare() failed.";
+  {
+    QSqlQuery query(m_dictionary_db);
+
+    int language_id_a = currentLanguageIdA();
+    if (language_id_a == 0) {                              // Search all languages for this text phrase.
+      if (! query.prepare("SELECT connection_id FROM words WHERE value = :word ORDER BY language_id")) {
+        qWarning() << "prepare() failed.";
+        return;
+      }
+    }
+    else {                                                 // Search only within the selected language.
+      if (! query.prepare("SELECT connection_id FROM words WHERE value = :word "
+                          "AND language_id = :language_id ORDER BY language_id")) {
+        qWarning() << "prepare() failed.";
+        return;
+      }
+
+      query.bindValue(":language_id", language_id_a);
+    }
+    query.bindValue(":word", m_le_input->text().trimmed());
+
+    if (! query.exec()) {
+      qWarning() << "exec() failed.";
+      return ;
+    }
+
+    while (query.next()) {                                 // There may be more than one entries for the search term.
+      connection_id = query.value(0).toInt();
+
+      if (connection_id <= 0) {
+        qWarning() << "Wrong connection id:" << connection_id;
+        break;
+      }
+
+      connection_ids << connection_id;
+    }
+  }
+
+  if (connection_ids.size() <= 0) {
+    result = "<strong>" + QLatin1String(_("Text not found.")) + "</strong>";
+    m_te_output->setHtml(result);
     return;
   }
 
-  query.bindValue(":word",        m_le_input->text());
-  query.bindValue(":language_id", m_language_id_input);
+  result = "";
 
-  if (! query.exec()) {
-    qWarning() << "exec() failed.";
-    return ;
+  while (! connection_ids.isEmpty()) {
+    connection_id = connection_ids.takeFirst();
+
+    QSqlQuery query(m_dictionary_db);
+
+    int language_id_b = currentLanguageIdB();
+    if (language_id_b == 0) {                              // Show results for all languages.
+      if (! query.prepare("SELECT value,word_type_id "
+                          "FROM words WHERE connection_id = :connection_id "
+                                           "ORDER BY language_id")) {
+        qWarning() << "prepare() failed.";
+        return;
+      }
+    }
+    else {
+      if (! query.prepare("SELECT value,word_type_id "
+                          "FROM words WHERE connection_id = :connection_id AND "
+                                           "language_id   = :language_id")) {
+        qWarning() << "prepare() failed.";
+        return;
+      }
+
+      query.bindValue(":language_id", language_id_b);
+    }
+    query.bindValue(":connection_id", connection_id);
+
+    if (! query.exec()) {
+      qWarning() << "exec() failed.";
+      return;
+    }
+
+    // TODO: Add number.
+
+    while (query.next()) {
+      result += "<strong>" + query.value(0).toString() + "</strong>";
+      int word_type = query.value(1).toInt();
+      result += " (" + wordTypeValue(word_type) + ")<br><br>";
+    }
   }
 
-  if (query.next()) {   // while?
-    connection_id = query.value(0).toInt();
-  }
+  if (result.length() == 0)
+    result = "<strong>" + QLatin1String(_("No results found in dictionary.")) + "</strong>";
 
-  if (connection_id <= 0) {
-    qWarning() << "Wrong connection id.";
-    return;
-  }
-
-  if (! query.prepare("SELECT value FROM words WHERE connection_id = :connection_id AND "
-                                                    "language_id   = :language_id")) {
-    qWarning() << "prepare() failed.";
-    return;
-  }
-
-  query.bindValue(":connection_id", connection_id);
-  query.bindValue(":language_id",   m_language_id_output);
-  
-  if (! query.exec()) {
-    qWarning() << "exec() failed.";
-    return;
-  }
-
-  QString s = "";
-
-  while (query.next()) {
-    s += query.value(0).toString() + " ";
-  }
-
-  m_te_output->setPlainText(s);
+  m_te_output->setHtml(result);
 }
 
 void MainWindow::toggleDirection()
@@ -444,13 +510,13 @@ void MainWindow::loadWordTypes()
   QSqlQuery query(db);
 
   if (! query.prepare("SELECT word_types.id,translations.value "
-                      "FROM word_types INNER JOIN translations ON translations.id = word_types.id "
+                      "FROM word_types INNER JOIN translations ON translations.id = word_types.translation_id "
                       "WHERE translations.language_id = :language_id")) {
     qWarning() << "prepare() failed.";
     return;
   }
 
-  query.bindValue(":language_id", 152 /*de*/);
+  query.bindValue(":language_id", 152 /*de*/);     // TODO: Use GUI language.
   
   if (! query.exec()) {
     qWarning() << "exec() failed.";
@@ -469,42 +535,162 @@ void MainWindow::loadWordTypes()
 
 void MainWindow::currentIndexChangedInputCombobox(const QString &text)
 {
-  for (int i = 0; i < m_languages.size(); i++) {
-    Language *lang = m_languages.at(i);
-    if (lang->m_value == text) {
-      m_language_id_input = lang->m_id;
-      return;
-    }
-  }
+  updateStatusBar();
 
-  if (text == _("?")) {
-    m_language_id_input = -1;
-    return;
-  }
-
-  if (text == _("*")) {
-    m_language_id_input = 0;
-    return;
-  }
-
-  qWarning() << "Unknown language selected:" << text;
+  qWarning() << "Input language selected:" << text;
 }
 
 void MainWindow::currentIndexChangedOutputCombobox(const QString &text)
 {
-  for (int i = 0; i < m_languages.size(); i++) {
-    Language *lang = m_languages.at(i);
-    if (lang->m_value == text) {
-      m_language_id_output = lang->m_id;
-      return;
+  updateStatusBar();
+
+  qWarning() << "Output language selected:" << text;
+}
+
+int MainWindow::maxConnectionId()
+{
+  QSqlDatabase db = QSqlDatabase::database("dictionary_db");
+
+  if (! db.isOpen()) {
+    qWarning() << "Database not open.";
+    return -1;
+  }
+
+  QSqlQuery query("SELECT max(connection_id) FROM words", db);
+
+  if (! query.exec()) {
+    qWarning() << "exec() failed.";
+    return -2;
+  }
+
+  if (query.next()) {
+    int id = query.value(0).toInt();
+    qDebug() << "Max connection_id:" << id;
+    return id;
+  }
+
+  return 0;
+}
+
+QString MainWindow::wordTypeValue(const int id)
+{
+  for (int i = 0; i < m_word_types.size(); i++) {
+    WordType *type = m_word_types.at(i);
+    if (type->m_id == id) {
+      return type->m_value;
     }
   }
 
-  if (text == _("*")) {
-    m_language_id_output = 0;
-    return;
+  return "";
+}
+
+int MainWindow::wordTypeId(const QString &value)
+{
+  for (int i = 0; i < m_word_types.size(); i++) {
+    WordType *type = m_word_types.at(i);
+    if (type->m_value == value) {
+      return type->m_id;
+    }
   }
 
-  qWarning() << "Unknown language selected:" << text;
+  return 0;
+}
+
+// Finds for a language name the language id using the m_languages list.
+// Needed to find the ID for the SQL query by reading the combobox popup values.
+
+int MainWindow::languageId(const QString &languageName)
+{
+  for (int i = 0; i < m_languages.size(); i++) {
+    Language *lang = m_languages.at(i);
+    if (lang->m_value == languageName) {
+      return lang->m_id;
+    }
+  }
+
+  return 0;
+}
+
+int MainWindow::currentLanguageIdA()
+{
+  QString text = m_cb_input_language->currentText();
+
+  if (text == _("?"))
+    return -1;
+
+  if (text == _("*"))
+    return 0;
+
+  return languageId(text);
+}
+
+int MainWindow::currentLanguageIdB()
+{
+  QString text = m_cb_output_language->currentText();
+
+  if (text == _("*"))
+    return 0;
+
+  return languageId(text);
+}
+
+unsigned long MainWindow::numberOfWords(NumberOfWords which)
+{
+  QSqlDatabase db = QSqlDatabase::database("dictionary_db");
+
+  if (! db.isOpen()) {
+    qWarning() << "Database not open.";
+    return -1;
+  }
+
+  QString sql;
+  switch (which) {
+    case AllWordsInDatabase:
+      sql = "SELECT count(*) FROM words";
+      break;
+    case OnlyLanguageA:
+      sql = "SELECT count(*) FROM words WHERE language_id=:l_id_a";
+      break;
+    case OnlyLanguageB:
+      sql = "SELECT count(*) FROM words WHERE language_id=:l_id_b";
+      break;
+    case CombinationAB:
+      sql = "SELECT DISTINCT count(id) "
+            "FROM words "
+            "WHERE language_id = :l_id_a AND connection_id IN "
+            "( "
+            "  SELECT connection_id "
+            "  FROM words "
+            "  WHERE language_id = :l_id_b "
+            ")";
+      break;
+    default:
+      break;
+  }
+
+  QSqlQuery query(db);
+
+  if (! query.prepare(sql)) {
+    qWarning() << "prepare() failed.";
+    return 0L;
+  }
+
+  if ((which == OnlyLanguageA) || (which == CombinationAB))
+    query.bindValue(":l_id_a", currentLanguageIdA());
+  if ((which == OnlyLanguageB) || (which == CombinationAB))
+    query.bindValue(":l_id_b", currentLanguageIdB());
+
+  if (! query.exec()) {
+    qWarning() << "exec() failed.";
+    return 0L;
+  }
+
+  if (query.next()) {
+    int id = query.value(0).toInt();
+    qDebug() << "max connection_id:" << id;
+    return id;
+  }
+
+  return 0L;
 }
 
