@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- $Id$ -->
+
+<database name="arbitration-board-management" version="1" date="2013-09-03" flags="const:false security:true privacy:true">
+  <structures>
+    <table name="cases">
+      <column name="id"             type="integer" flags="primarykey" />
+      <column name="title"          type="string"  flags="required" />
+      <column name="number"         type="integer" flags="" />
+      <column name="opened"         type="date"    flags="" />
+      <column name="closed"         type="date"    flags="" />
+      <column name="catchword_id"   type="integer" flags="references:source_code" />
+      <column name="case_type_id"   type="integer" flags="references:source_code" />
+      <column name="result_type_id" type="integer" flags="references:source_code" />
+      <column name="comment"        type="string"  flags="" />
+    </table>
+
+    <!-- not in public table to ensure privacy of involved persons, encryption not implemented yet -->
+    <table name="people">
+      <column name="id"               type="integer" flags="primarykey" />
+      <column name="first_name"       type="string"  flags="required" />
+      <column name="last_name"        type="string"  flags="required" />
+      <column name="birthday"         type="date"    flags="" />
+      <column name="street"           type="string"  flags="required" />
+      <column name="number"           type="string"  flags="required" />
+      <column name="city"             type="string"  flags="required" />
+      <column name="post_code"        type="string"  flags="required" />
+      <column name="people_type_id"   type="integer" flags="references:source_code" />
+      <column name="case_id"          type="integer" flags="references:cases(id)" />
+      <column name="comment"          type="string"  flags="" />
+    </table>
+
+    <table name="histories">
+      <column name="id"               type="integer" flags="primarykey" />
+      <column name="case_id"          type="integer" flags="references:cases(id)" />
+      <column name="current_date"     type="date"    flags="" />
+      <column name="value"            type="string"  flags="" />
+      <column name="history_entry_id" type="integer" flags="references:source_code" />
+    </table>
+
+    <table name="translations">
+      <column name="id"               type="integer" flags="index" />
+      <column name="value"            type="string"  flags="required" />
+      <column name="language_id"      type="integer" flags="required references:iso-codes.languages(id)" />
+    </table>
+  </structures>
+
+  <data>
+    <table name="translations">
+      <row>
+        <field name="id">1</field>
+        <field name="value">Schiedsperson</field> <!-- Schlichter, Vermittler -->
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">1</field>
+        <field name="value">arbitrator</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="value">Antragsteller</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">2</field>
+        <field name="value">applicant</field> <!-- plaintiff -->
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">3</field>
+        <field name="value">Antragsgegner</field> <!-- beklagte Partei, Antragsgegnerin -->
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">3</field>
+        <field name="value">defendant</field> <!-- respondent -->
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">4</field>
+        <field name="value">Zeuge</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">4</field>
+        <field name="value">witness</field> <!-- attestor -->
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">5</field>
+        <field name="value">Anwalt</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">5</field>
+        <field name="value">attorney at law</field> <!-- advocate -->
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">6</field>
+        <field name="value">Beistand</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">6</field>
+        <field name="value">counsel</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">7</field>
+        <field name="value">Ehepartner</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">7</field>
+        <field name="value">spouse</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">8</field>
+        <field name="value">Kind</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">8</field>
+        <field name="value">child</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">9</field>
+        <field name="value">Verwandter</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">9</field>
+        <field name="value">relative</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">10</field>
+        <field name="value">Freund</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">10</field>
+        <field name="value">friend</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">11</field>
+        <field name="value">andere Person</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">11</field>
+        <field name="value">other person</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">12</field>
+        <field name="value">Bürgerliches Recht</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">12</field>
+        <field name="value">civil law</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">13</field>
+        <field name="value">Nachbarrecht</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">13</field>
+        <field name="value">law concerning the respective interests of neighbors</field>
+        <field name="language_id">125</field>
+      </row>
+      <row>
+        <field name="id">14</field>
+        <field name="value">Strafrecht</field>
+        <field name="language_id">152</field>
+      </row>
+      <row>
+        <field name="id">14</field>
+        <field name="value">criminal law</field>
+        <field name="language_id">125</field>
+      </row>
+    </table>
+  </data>
+</database>
+

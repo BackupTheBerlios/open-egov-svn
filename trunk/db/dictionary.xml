@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<database name="dictionary" version="1" date="2012-05-28" flags="const:true security:false privacy:false">
+<database name="dictionary" version="2" date="2013-09-03" flags="const:true security:false privacy:false">
   <structures>
     <table name="word_types">       <!-- e.g. noun, verb, article -->
       <column name="id"             type="integer" flags="primarykey" />
@@ -436,9 +436,12 @@
       </row>
     </table>
 
-    <table name="">            <!-- coll. colloquial [abbr.: coll.], umgangssprachlich [Abk.: ugs.] -->
-      <column name="id"             type="integer" flags="primarykey" />
-      <column name="translation_id" type="integer" flags="required references:translations(id)" />
+    <table name="flags">            <!-- coll. colloquial [abbr.: coll.], umgangssprachlich [Abk.: ugs.] -->
+      <row>
+        <field name="id">1</field>
+        <field name="value">coll.</field>
+        <field name="translation_id"></field>
+      </row>
     </table>
 
     <table name="words">
