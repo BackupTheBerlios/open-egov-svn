@@ -38,6 +38,7 @@ class Language : public QObject
     int     m_scope;
     int     m_type;
     int     m_translation_id;
+    int     m_is_rtl;  // TODO
 
   protected:
 

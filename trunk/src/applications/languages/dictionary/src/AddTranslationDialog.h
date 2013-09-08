@@ -16,13 +16,26 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#include <OEG/Qt/Application.h>
+#pragma once
 
-#include "Language.h"
+#include <OEG/Common.h>
 
-Language::Language(QObject *parent /*=0*/)
- : QObject(parent)
+#include <QDialog>
+
+#include "ui_add_translation.h"
+
+class AddTranslationDialog : public QDialog, public Ui::AddTranslationDialog
 {
-  m_is_rtl = false;
-}
+  Q_OBJECT
+
+  public:
+    AddTranslationDialog(QWidget *parent = 0);
+
+  protected:
+
+  private slots:
+
+  private:
+
+};
 

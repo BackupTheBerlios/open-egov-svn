@@ -16,13 +16,40 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+#pragma once
+
 #include <OEG/Qt/Application.h>
 
-#include "Language.h"
+#include <QDockWidget>
 
-Language::Language(QObject *parent /*=0*/)
- : QObject(parent)
+QT_FORWARD_DECLARE_CLASS(QAction)
+QT_FORWARD_DECLARE_CLASS(QActionGroup)
+QT_FORWARD_DECLARE_CLASS(QListWidget)
+QT_FORWARD_DECLARE_CLASS(QMenu)
+QT_FORWARD_DECLARE_CLASS(QListWidgetItem)
+
+class HistoryDockWidget : public QDockWidget
 {
-  m_is_rtl = false;
-}
+  Q_OBJECT
+
+  public:
+    HistoryDockWidget(QWidget *parent = 0, Qt::WindowFlags flags = 0);
+
+  protected:
+    //virtual void contextMenuEvent(QContextMenuEvent *event);
+
+  signals:
+    void queryDictionary(const QString &value);
+
+  private slots:
+    void updateContextMenu();
+
+  public slots:
+    void newHistoryEntry(const QString &s);
+    void historyListItemDoubleClicked(QListWidgetItem *item);
+
+  protected:
+    QListWidget *m_list;
+    QMenu       *m_context_menu;
+};
 

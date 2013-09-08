@@ -33,6 +33,7 @@ class QTextEdit;
 class QGridLayout;
 class QAction;
 
+class HistoryDockWidget;
 class Language;
 class WordType;
 
@@ -58,19 +59,26 @@ class MainWindow : public OEG::Qt::MainWindow
     void updateStatusBar();
 
     void addWord();
+    void addTranslation();
     void translate();
     void toggleDirection();
+
+    void standardActionZoomIn();
+    void standardActionZoomNormal();
+    void standardActionZoomOut();
 
     void currentIndexChangedInputCombobox(const QString &text);
     void currentIndexChangedOutputCombobox(const QString &text);
 
   protected:
+    void activateZoomValues();
     void loadSupportedLanguages();
     void loadWordTypes();
     QStringList supportedLanguages(const bool detectLanguage=false, const bool allLanguages=false);
     int maxConnectionId();
     QString wordTypeValue(const int id);
     int wordTypeId(const QString &value);
+    Language *language(const QString &languageName);
     int languageId(const QString &languageName);
     int currentLanguageIdA();
     int currentLanguageIdB();
@@ -85,6 +93,7 @@ class MainWindow : public OEG::Qt::MainWindow
     QLabel            *m_la_output;
     QGridLayout       *m_layout;
     QAction           *a_add_word;
+    QAction           *a_add_translation;
     QAction           *a_translate;
     QAction           *a_toggle_direction;
     QLabel            *l_sb_word_count_global;
@@ -94,5 +103,7 @@ class MainWindow : public OEG::Qt::MainWindow
     QStringList        m_supported_word_types;
     QList<Language *>  m_languages;
     QList<WordType *>  m_word_types;
+    HistoryDockWidget *m_dockwidget_history;
+    unsigned int       m_zoom_level;
 };
 

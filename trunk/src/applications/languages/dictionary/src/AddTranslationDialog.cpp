@@ -18,11 +18,12 @@
 
 #include <OEG/Qt/Application.h>
 
-#include "Language.h"
+#include "AddTranslationDialog.h"
 
-Language::Language(QObject *parent /*=0*/)
- : QObject(parent)
+AddTranslationDialog::AddTranslationDialog(QWidget *parent /*=0*/)
+ : QDialog(parent)
 {
-  m_is_rtl = false;
+  setupUi(this);
+
 }
 

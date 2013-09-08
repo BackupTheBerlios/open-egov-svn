@@ -40,9 +40,11 @@
 #include <QSqlQuery>
 
 #include "AddWordDialog.h"
+#include "AddTranslationDialog.h"
+#include "HistoryDockWidget.h"
 #include "Language.h"
-#include "WordType.h"
 #include "MainWindow.h"
+#include "WordType.h"
 
 MainWindow::MainWindow(QWidget *parent /*=0*/)
  : OEG::Qt::MainWindow(parent)
@@ -53,7 +55,8 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
 
   loadSupportedLanguages();
 
-  m_le_input  = new QLineEdit(this);
+  m_le_input = new QLineEdit(this);
+  m_le_input->setLayoutDirection(Qt::LeftToRight);
   m_te_output = new QTextEdit(this);
   m_te_output->setReadOnly(true);
   m_cb_input_language = new QComboBox(this);
@@ -91,9 +94,8 @@ MainWindow::MainWindow(QWidget *parent /*=0*/)
 
   createAll();
 
-  m_dictionary_db = QSqlDatabase::addDatabase("QSQLITE", "dictionary_db");
-  QString dbfile = dynamic_cast<OEG::Qt::Application *>(qApp)->locateFile("dictionary.db",
-                                                                          OEG::Qt::Application::UserDatabase);
+  m_dictionary_db = QSqlDatabase::addDatabase("QSQLITE", "dictionary.db");
+  QString dbfile = qApp->locateFile("dictionary.db", OEG::Qt::Application::UserDatabase);
   m_dictionary_db.setDatabaseName(QDir::toNativeSeparators(dbfile));
 
   if (! m_dictionary_db.open()) {
@@ -120,12 +122,16 @@ void MainWindow::createActions()
   OEG::Qt::MainWindow::createActions();
 
   a_add_word = new QAction(_("&Add word ..."), this);
+  a_add_translation = new QAction(_("Add t&ranslation ..."), this);
   a_translate = new QAction(_("&Translate"), this);
   a_toggle_direction = new QAction(_("Toggle &direction"), this);
 
   s = _("Add one or more words to the dictionary.");
   a_add_word->setToolTip(s);
   a_add_word->setStatusTip(s);
+  s = _("Add a new word combination to the dictionary.");
+  a_add_translation->setToolTip(s);
+  a_add_translation->setStatusTip(s);
   s = _("Translate input text.");
   a_translate->setToolTip(s);
   a_translate->setStatusTip(s);
@@ -135,6 +141,8 @@ void MainWindow::createActions()
 
   connect(a_add_word,         SIGNAL(triggered()),
           this,               SLOT(addWord()));
+  connect(a_add_translation,  SIGNAL(triggered()),
+          this,               SLOT(addTranslation()));
   connect(a_translate,        SIGNAL(triggered()),
           this,               SLOT(translate()));
   connect(a_toggle_direction, SIGNAL(triggered()),
@@ -162,6 +170,12 @@ void MainWindow::createStatusBar()
 
 void MainWindow::createDockWidgets()
 {
+  m_dockwidget_history = new HistoryDockWidget(this);
+  m_dockwidget_history->setWindowIcon(QIcon(QPixmap(":/res/dockwidget_history.png")));
+  addDockWidget(Qt::LeftDockWidgetArea, m_dockwidget_history);
+
+  connect(m_dockwidget_history, SIGNAL(queryDictionary(const QString &)),
+          this,                 SLOT(requeryDictionary(const QString &)));
 }
 
 void MainWindow::createMenus()
@@ -173,24 +187,42 @@ void MainWindow::createMenus()
   menu->addAction(standardAction(New));
   menu->addSeparator();
   menu->addAction(standardAction(Print));
+  menu->addAction(standardAction(PrintPreview));
+  menu->addAction(standardAction(PrintSettings));
   menu->addSeparator();
   menu->addAction(standardAction(Exit));
 
   menu = getStandardMenu(EditMenu);
   menu->addAction(a_translate);
   menu->addAction(a_add_word);
+  menu->addAction(a_add_translation);
   menu->addAction(a_toggle_direction);
   menu->addSeparator();
   menu->addAction(standardAction(Cut));
   menu->addAction(standardAction(Copy));
   menu->addAction(standardAction(Paste));
   menu->addSeparator();
+  menu->addAction(standardAction(SelectAll));
   menu->addAction(standardAction(Delete));
 
+  menu = getStandardMenu(ViewMenu);
+  menu->addAction(standardAction(ViewToggleStatusBar));
+  menu->addAction(standardAction(ViewToggleMenuBar));
+  menu->addAction(standardAction(ViewToggleFileToolBar));
+  menu->addAction(standardAction(ViewToggleTabbedMenuBar));
+  menu->addSeparator();
+  menu->addAction(standardAction(ZoomIn));
+  menu->addAction(standardAction(ZoomNormal));
+  menu->addAction(standardAction(ZoomOut));
+
   menu = getStandardMenu(SettingsMenu);
-  action = menu->addAction(_("Common..."));
-  connect(action, SIGNAL(triggered()),
-          this,   SLOT(commonSettings()));
+  menu->addAction(standardAction(PreferencesCommon));
+  menu->addAction(standardAction(PreferencesColors));
+  menu->addAction(standardAction(PreferencesFonts));
+  menu->addAction(standardAction(PreferencesShortcuts));
+  //action = menu->addAction(_("Common..."));
+  //connect(action, SIGNAL(triggered()),
+  //        this,   SLOT(commonSettings()));
 
   addStandardMenu(HelpMenu);
 }
@@ -207,7 +239,12 @@ void MainWindow::createToolBars()
   toolbar->addSeparator();
   toolbar->addAction(a_translate);
   toolbar->addAction(a_add_word);
+  toolbar->addAction(a_add_translation);
   toolbar->addAction(a_toggle_direction);
+  toolbar->addSeparator();
+  toolbar->addAction(standardAction(ZoomOut));
+  toolbar->addAction(standardAction(ZoomNormal));
+  toolbar->addAction(standardAction(ZoomIn));
   toolbar->addSeparator();
   toolbar->addAction(standardAction(Exit));
 }
@@ -234,13 +271,14 @@ void MainWindow::addWord()
   int index;
   AddWordDialog dialog;
 
-  dialog.m_cb_1_language->setDuplicatesEnabled(false);
-  dialog.m_cb_1_language->setEditable(false);
-  dialog.m_cb_1_language->addItems(supportedLanguages(false, false));
+  dialog.m_cb_language->setDuplicatesEnabled(false);
+  dialog.m_cb_language->setEditable(false);
+  dialog.m_cb_language->addItems(supportedLanguages(false, false));
 
-  index = dialog.m_cb_1_language->findText(m_cb_input_language->currentText(), Qt::MatchExactly | Qt::MatchCaseSensitive);
-  dialog.m_cb_1_language->setCurrentIndex(index);
+  index = dialog.m_cb_language->findText(m_cb_input_language->currentText(), Qt::MatchExactly | Qt::MatchCaseSensitive);
+  dialog.m_cb_language->setCurrentIndex(index);
 
+#if 0
   dialog.m_cb_2_language->setDuplicatesEnabled(false);
   dialog.m_cb_2_language->setEditable(false);
   dialog.m_cb_2_language->addItems(supportedLanguages(false, false));
@@ -259,12 +297,13 @@ void MainWindow::addWord()
   dialog.m_cb_2_word_type->setCurrentIndex(-1);
 
   dialog.m_lineedit_1->setText(m_le_input->text());
+#endif
 
   if (! dialog.exec())
     return;
 
   // Retrieve all needed data.
-
+#if 0
   int connection_id = maxConnectionId() + 1;
   int language_id_a = languageId(dialog.m_cb_1_language->currentText());
   int language_id_b = languageId(dialog.m_cb_2_language->currentText());
@@ -276,14 +315,14 @@ void MainWindow::addWord()
   qDebug() << "Adding:" << text_a << text_b;
   qDebug() << "  LID a" << language_id_a << "LID b" << language_id_b << "CoID" << connection_id;
   qDebug() << "  WTID a" << word_type_id_a << "WTID b" << word_type_id_b;
+#endif
 
-  QSqlDatabase db = QSqlDatabase::database("dictionary_db");
+  QSqlDatabase db = QSqlDatabase::database("dictionary.db");
 
   if (! db.isOpen()) {
     qWarning() << "Database not open.";
     return;
   }
-
 
 
 
@@ -310,6 +349,42 @@ void MainWindow::addWord()
     qDebug() << query.value(0).toString();
   }
 #endif
+}
+
+void MainWindow::addTranslation()
+{
+  int index;
+  AddTranslationDialog dialog;
+
+  dialog.m_cb_1_language->setDuplicatesEnabled(false);
+  dialog.m_cb_1_language->setEditable(false);
+  dialog.m_cb_1_language->addItems(supportedLanguages(false, false));
+
+  index = dialog.m_cb_1_language->findText(m_cb_input_language->currentText(), Qt::MatchExactly | Qt::MatchCaseSensitive);
+  dialog.m_cb_1_language->setCurrentIndex(index);
+
+  dialog.m_cb_2_language->setDuplicatesEnabled(false);
+  dialog.m_cb_2_language->setEditable(false);
+  dialog.m_cb_2_language->addItems(supportedLanguages(false, false));
+
+  index = dialog.m_cb_2_language->findText(m_cb_output_language->currentText(), Qt::MatchExactly | Qt::MatchCaseSensitive);
+  dialog.m_cb_2_language->setCurrentIndex(index);
+
+  dialog.m_cb_1_word_type->setDuplicatesEnabled(false);
+  dialog.m_cb_1_word_type->setEditable(false);
+  dialog.m_cb_1_word_type->addItems(m_supported_word_types);
+  dialog.m_cb_1_word_type->setCurrentIndex(-1);
+
+  dialog.m_cb_2_word_type->setDuplicatesEnabled(false);
+  dialog.m_cb_2_word_type->setEditable(false);
+  dialog.m_cb_2_word_type->addItems(m_supported_word_types);
+  dialog.m_cb_2_word_type->setCurrentIndex(-1);
+
+  dialog.m_le_word_1->setText(m_le_input->text());
+
+  if (! dialog.exec())
+    return;
+
 }
 
 void MainWindow::translate()
@@ -436,6 +511,36 @@ void MainWindow::toggleDirection()
   translate();
 }
 
+void MainWindow::standardActionZoomIn()
+{
+  m_zoom_level++;
+
+  activateZoomValues();
+}
+
+void MainWindow::standardActionZoomNormal()
+{
+  m_zoom_level = 24;
+
+  activateZoomValues();
+}
+
+void MainWindow::standardActionZoomOut()
+{
+  if (--m_zoom_level <= 0)
+    m_zoom_level = 1;
+
+  activateZoomValues();
+}
+
+void MainWindow::activateZoomValues()
+{
+  //QFont font("Simplified Arabic", m_zoom_level);
+  //
+  //m_input->setFont(font);
+  //m_output->setFont(font);
+}
+
 QStringList MainWindow::supportedLanguages(const bool detectLanguage /*=false*/, const bool allLanguages /*=false*/)
 {
   QStringList list;
@@ -456,8 +561,7 @@ QStringList MainWindow::supportedLanguages(const bool detectLanguage /*=false*/,
 void MainWindow::loadSupportedLanguages()
 {
   QSqlDatabase iso_codes_db = QSqlDatabase::addDatabase("QSQLITE", "iso_codes_db");
-  QString filename = dynamic_cast<OEG::Qt::Application *>(qApp)->locateFile("iso-codes.db",
-                                                                       OEG::Qt::Application::Database);
+  QString filename = qApp->locateFile("iso-codes.db", OEG::Qt::Application::Database);
   iso_codes_db.setDatabaseName(QDir::toNativeSeparators(filename));
 
   if (! iso_codes_db.open()) {
@@ -477,7 +581,7 @@ void MainWindow::loadSupportedLanguages()
   // The locales table is deprecated now, will move to ISO 639-3 and additional meta data (favorites).
   // Currently we use an additional column "dictionary" to select the wanted relevant dictionaries.
 
-  if (! query.exec("SELECT id,value,alpha2code,alpha3codeb,translation_id FROM languages WHERE dictionary = 1")) {
+  if (! query.exec("SELECT id,value,alpha2code,alpha3codeb,alpha3codet,translation_id FROM languages WHERE dictionary = 1")) {
     qWarning() << "exec() failed.";
     return;
   }
@@ -500,7 +604,7 @@ void MainWindow::loadSupportedLanguages()
 
 void MainWindow::loadWordTypes()
 {
-  QSqlDatabase db = QSqlDatabase::database("dictionary_db");
+  QSqlDatabase db = QSqlDatabase::database("dictionary.db");
 
   if (! db.isOpen()) {
     qWarning() << "Database not open.";
@@ -538,6 +642,16 @@ void MainWindow::currentIndexChangedInputCombobox(const QString &text)
   updateStatusBar();
 
   qWarning() << "Input language selected:" << text;
+
+  Language *lang = language(text);
+  if (lang) {
+    if (lang->m_is_rtl || (lang->m_alpha2code == "ar")) {
+      m_le_input->setLayoutDirection(Qt::RightToLeft);
+    }
+    else {
+      m_le_input->setLayoutDirection(Qt::LeftToRight);
+    }
+  }
 }
 
 void MainWindow::currentIndexChangedOutputCombobox(const QString &text)
@@ -549,7 +663,7 @@ void MainWindow::currentIndexChangedOutputCombobox(const QString &text)
 
 int MainWindow::maxConnectionId()
 {
-  QSqlDatabase db = QSqlDatabase::database("dictionary_db");
+  QSqlDatabase db = QSqlDatabase::database("dictionary.db");
 
   if (! db.isOpen()) {
     qWarning() << "Database not open.";
@@ -596,20 +710,35 @@ int MainWindow::wordTypeId(const QString &value)
   return 0;
 }
 
-// Finds for a language name the language id using the m_languages list.
-// Needed to find the ID for the SQL query by reading the combobox popup values.
+// Finds a filled language object given a language name.
+// Needed to find the RTL or LTR value for a language.
 
-int MainWindow::languageId(const QString &languageName)
+Language *MainWindow::language(const QString &languageName)
 {
   for (int i = 0; i < m_languages.size(); i++) {
     Language *lang = m_languages.at(i);
     if (lang->m_value == languageName) {
-      return lang->m_id;
+      return lang;
     }
   }
 
   return 0;
 }
+
+// Finds for a language name the language id using the m_languages list.
+// Needed to find the ID for the SQL query by reading the combobox popup values.
+
+int MainWindow::languageId(const QString &languageName)
+{
+  Language *lang = language(languageName);
+
+  if (lang)
+    return lang->m_id;
+
+  return 0;
+}
+
+// Returns the language id for the input field.
 
 int MainWindow::currentLanguageIdA()
 {
@@ -624,6 +753,8 @@ int MainWindow::currentLanguageIdA()
   return languageId(text);
 }
 
+// Returns the language id for the output field.
+
 int MainWindow::currentLanguageIdB()
 {
   QString text = m_cb_output_language->currentText();
@@ -636,7 +767,7 @@ int MainWindow::currentLanguageIdB()
 
 unsigned long MainWindow::numberOfWords(NumberOfWords which)
 {
-  QSqlDatabase db = QSqlDatabase::database("dictionary_db");
+  QSqlDatabase db = QSqlDatabase::database("dictionary.db");
 
   if (! db.isOpen()) {
     qWarning() << "Database not open.";

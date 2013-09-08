@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AddTranslationDialog</class>
+ <widget class="QDialog" name="AddTranslationDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>401</width>
+    <height>250</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Add Translation:</string>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>true</bool>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QVBoxLayout" name="m_vertical_layout">
+     <item>
+      <layout class="QGridLayout" name="m_grid_layout">
+       <item row="4" column="1">
+        <widget class="QComboBox" name="m_cb_2_language"/>
+       </item>
+       <item row="3" column="1">
+        <spacer name="m_vertical_spacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="m_cb_1_word_type"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="m_la_word_1">
+         <property name="text">
+          <string>Word:</string>
+         </property>
+         <property name="buddy">
+          <cstring>m_le_word_1</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="m_cb_1_language"/>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="m_la_word_2">
+         <property name="text">
+          <string>Word:</string>
+         </property>
+         <property name="buddy">
+          <cstring>m_le_word_2</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="m_le_word_1"/>
+       </item>
+       <item row="6" column="1">
+        <widget class="QLineEdit" name="m_le_word_2"/>
+       </item>
+       <item row="5" column="1">
+        <widget class="QComboBox" name="m_cb_2_word_type"/>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="m_la_language_1">
+         <property name="text">
+          <string>&amp;From:</string>
+         </property>
+         <property name="buddy">
+          <cstring>m_cb_1_language</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="m_la_language_2">
+         <property name="text">
+          <string>&amp;To:</string>
+         </property>
+         <property name="buddy">
+          <cstring>m_cb_2_language</cstring>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="Line" name="m_horizontal_line">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDialogButtonBox" name="m_button_box">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>m_cb_1_language</tabstop>
+  <tabstop>m_cb_1_word_type</tabstop>
+  <tabstop>m_le_word_1</tabstop>
+  <tabstop>m_cb_2_language</tabstop>
+  <tabstop>m_cb_2_word_type</tabstop>
+  <tabstop>m_le_word_2</tabstop>
+  <tabstop>m_button_box</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>m_button_box</sender>
+   <signal>accepted()</signal>
+   <receiver>AddTranslationDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>229</x>
+     <y>320</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>m_button_box</sender>
+   <signal>rejected()</signal>
+   <receiver>AddTranslationDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>297</x>
+     <y>326</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
