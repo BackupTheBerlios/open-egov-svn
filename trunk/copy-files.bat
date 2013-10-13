@@ -14,9 +14,9 @@ REM Here you have to set the source paths from where you want to copy the files.
 REM All copies go into the bin/lib/plugins respective bin64/lib64/plugins64 directories.
 
 SET CLEANDIRS=NO
-SET COPYQT5DIR=YES
-SET COPYQT5MINGW32DIRS=NO
-SET COPYQT5MINGW64DIRS=NO
+SET COPYQT5DIR=NO
+SET COPYQT5MINGW32DIRS=YES
+SET COPYQT5MINGW64DIRS=YES
 SET COPYQT5FROMOWNDIR=NO
 
 IF "%CLEANDIRS%" == "YES" CALL clean-dirs.bat
@@ -134,7 +134,7 @@ REM COPY /B /Y "%SRCDIR%\Qt5Test.dll"               "%DSTDIR%"
 
 IF "%COPYQT5MINGW32DIRS%" == "YES" (
   ECHO Copying files from mingwbuilds Qt5-32 and MinGW-32 directories...
-  SET SRCDIR=E:\Qt32-5.0.1\bin
+  SET SRCDIR=C:\Qt32-5.1.1\bin
   SET DSTDIR=bin
   ECHO Copying to "bin"
 
@@ -166,7 +166,7 @@ REM COPY /B /Y "%SRCDIR%\ssleay32.dll"              "%DSTDIR%"
 REM COPY /B /Y "%SRCDIR%\zeroconf.dll"              "%DSTDIR%"
 REM COPY /B /Y "%SRCDIR%\zlib1.dll"                 "%DSTDIR%"
 
-  SET SRCDIR=E:\Qt32-5.0.1\plugins
+  SET SRCDIR=E:\Qt32-5.1.1\plugins
   SET DSTDIR=plugins
   ECHO Copying to "plugins"
 
@@ -190,7 +190,7 @@ REM COPY /B /Y "%SRCDIR%\zlib1.dll"                 "%DSTDIR%"
 
 IF "%COPYQT5MINGW64DIRS%" == "YES" (
   ECHO Copying files from mingwbuilds Qt5-64 and MinGW-64 directories...
-  SET SRCDIR=E:\Qt64-5.0.1\bin
+  SET SRCDIR=E:\Qt64-5.1.1\bin
   SET DSTDIR=bin64
   ECHO Copying to "bin64"
 

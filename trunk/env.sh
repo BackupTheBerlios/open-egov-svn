@@ -1,7 +1,7 @@
 # $Id$
 #
 # This file contains functions to help while building required packages
-# without prebuilt archives or the builder application. It is needed e.g.
+# without pre-built archives or the builder application. It is needed e.g.
 # if the compiler changed or was updated and the builder is unable to
 # build new OSS library binaries because the existing binary archives
 # are incompatible with the current tools.
@@ -40,23 +40,28 @@ function oegenv {
   local STDCFLAGS="-pipe -Wall -O2 -mms-bitfields"
 
   if [ "$1" = "32" ]; then
-    export CFLAGS="-m32 -march=i686 -mtune=i686 $STDCFLAGS"
-    export LDFLAGS="-m32 -pipe -L${OEG_BASE_DIR}/lib"
     export TARGETBITS="32"
+    export OEG_BASE_BIN_DIR="${OEG_BASE_DIR}/bin"
+    export OEG_BASE_LIB_DIR="${OEG_BASE_DIR}/lib"
+    export CFLAGS="-m${TARGETBITS} -march=i686 -mtune=i686 $STDCFLAGS"
+    export LDFLAGS="-m${TARGETBITS} -pipe -L${OEG_BASE_LIB_DIR}"
     export CONFIGURE_HOST_PARA="--host=i686-w64-mingw32"
+    export PKG_CONFIG_PATH="${OEG_BASE_DIR}/lib/pkgconfig"
   elif [ "$1" = "64" ]; then
-    export CFLAGS="-m64 -march=nocona -mtune=core2 $STDCFLAGS"
-    export LDFLAGS="-m64 -pipe -L${OEG_BASE_DIR}/lib64"
     export TARGETBITS="64"
+    export OEG_BASE_BIN_DIR="${OEG_BASE_DIR}/bin64"
+    export OEG_BASE_LIB_DIR="${OEG_BASE_DIR}/lib64"
+    export CFLAGS="-m${TARGETBITS} -march=nocona -mtune=core2 $STDCFLAGS"
+    export LDFLAGS="-m${TARGETBITS} -pipe -L${OEG_BASE_LIB_DIR}"
     export CONFIGURE_HOST_PARA="--host=x86_64-w64-mingw32"
+    export PKG_CONFIG_PATH="${OEG_BASE_DIR}/lib${TARGETBITS}/pkgconfig"
   else
     echo Wrong parameter: $1
     return
   fi
 
-  export PKG_CONFIG_PATH="/open-egovernment/lib/pkgconfig"
   export CVS_RSH=ssh
-  export PATH="${OEG_BASE_DIR}/bin:${PATH}"
+  export PATH="${OEG_BASE_BIN_DIR}:${PATH}"
 
   export CXXFLAGS="$CFLAGS"
   export CPPFLAGS="-I${OEG_BASE_DIR}/include"
