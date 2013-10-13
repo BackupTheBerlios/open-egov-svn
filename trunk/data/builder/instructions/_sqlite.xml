@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="sqlite" license="">
+  <meta>
+    <homepage>http://www.sqlite.org/</homepage>
+    <download>http://www.sqlite.org/download.html</download>
+    <descriptions>
+      <description lang="en" type="short">SQLite database engine</description>
+      <description lang="en" type="long">SQLite is a software library that implements a self-contained, serverless, zero-configuration, transactional SQL database engine. SQLite is the most widely deployed SQL database engine in the world. The source code for SQLite is in the public domain.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>database, sql, sqlite</keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="" date="2013-03-03" state="not-tried">
+
+    <downloads>
+      <download file="sqlite-3.8.0.2.tar.gz">
+        <url checked="2013-09-19">http://www.sqlite.org/2013/sqlite-autoconf-3080002.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <commands>
+PACKAGE_NAME=sqlite
+PACKAGE_VERSION=3.8.0.2
+oegcleanbase
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+#oegimport libiconv-1.14
+#oegimport gettext-0.18.3
+configure --prefix=${OEG_BASE_DIR}
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

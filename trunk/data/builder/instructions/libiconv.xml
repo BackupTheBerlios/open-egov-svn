@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<pack name="libiconv" license="">
+<pack name="libiconv" license="LGPL/GPL">
   <meta>
     <homepage>http://www.gnu.org/software/libiconv/</homepage>
     <download>http://ftp.gnu.org/pub/gnu/libiconv/</download>
@@ -26,14 +26,16 @@
     </flags>
 
     <options>
-      <option name="gettext" import-if-pos="gettext"
+      <option name="gettext"
+              import-if-pos="gettext"
+              import-if-neg=""
               para-if-pos="--with-libintl-prefix=${OEG_BASE_DIR}"
               para-if-neg="--without-libintl-prefix" />
     </options>
 
     <downloads>
       <download file="libiconv-1.14.tar.gz">
-        <url type="direct" checked="2013-07-19">http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz</url>
+        <url type="direct" checked="2013-09-19">http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -62,23 +64,30 @@ make install
 oegenv 32
 oegcleanbase
 # if option given:
-oegimport libiconv-1.14    # maybe needed by gettext binaries
-oegimport gettext-0.18.3
+oegimport libiconv-1.14    # For gettext binaries, called during the libiconv build.
+oegimport gettext-0.18.3.1
 oegextract libiconv-1.14.tar.gz
-# --enable-relocatable doesn't work:
+# --enable-relocatable doesn't work always, just remove this parameter:
 #../srclib/libicrt.a(progreloc.o):progreloc.c:(.text+0x156): undefined reference to `compute_curr_prefix'
 #../srclib/libicrt.a(progreloc.o):progreloc.c:(.text+0x168): undefined reference to `set_relocation_prefix'
+# reason is a missing relocatable.o in srclib/libicrt.a
+# http://savannah.gnu.org/bugs/?38422
 # --enable-extra-encodings - add support for a few rarely used encodings - we want this?
 
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --enable-shared --with-gnu-ld --disable-rpaths
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --enable-relocatable --enable-shared --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR}
 make
-#make install DESTDIR=/tmp/inst$$
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 make distclean
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --disable-shared --enable-static --with-gnu-ld --disable-rpaths
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --enable-relocatable --disable-shared --enable-static --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+# 64 Bit:
+mv bin/*.dll bin64/
+rm -rf bin
+# edit .la files in lib64
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive libiconv-1.14
