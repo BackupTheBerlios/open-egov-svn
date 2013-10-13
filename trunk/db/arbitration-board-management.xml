@@ -31,12 +31,12 @@
       <column name="comment"          type="string"  flags="" />
     </table>
 
-    <table name="histories">
+    <table name="files">
       <column name="id"               type="integer" flags="primarykey" />
       <column name="case_id"          type="integer" flags="references:cases(id)" />
       <column name="current_date"     type="date"    flags="" />
       <column name="value"            type="string"  flags="" />
-      <column name="history_entry_id" type="integer" flags="references:source_code" />
+      <column name="file_entry_id"    type="integer" flags="references:source_code" />
     </table>
 
     <table name="translations">
