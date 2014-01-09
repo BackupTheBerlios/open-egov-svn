@@ -1,0 +1,18 @@
+$Id$
+
+- Allow delayed shortcuts like in Microsoft Office and display them as markers
+  containing the char to press.
+- Command line tools should only use QCoreApplication. It's easier, if tools
+  such as createsources don't depend on OEG libraries.
+- Command line tools should never use GUIs (e.g. selection files with a dialog box).
+  Currently common.pri links always against widgets and gui libraries, maybe
+  it's possible to make a clever fix for this too.
+- env.sh: oegimport should import dependent archives automatically. Problem:
+  archives have to contain a file with compile flags, which need to be analyzed to
+  determine e.g. if "oegimport gettext-xy" should also import libiconv or not.
+- 64 bit files need extra commands. e.g. libiconv installs DLLs into bin instead
+  into bin64 and we need to move them. Don't know how to handle this. Actually
+  looking for a switch in configure or libtool to change this directory.
+- Currently it's not possible to build 32 and 64 bit files in parallel tasks
+  because they use the same MSYS file structure (build and setup directories).
+  

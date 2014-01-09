@@ -1,0 +1,6 @@
+$Id$
+
+- process-list: to slow. Updating needs to long. Clock changes only every 2 seconds.
+- about-dialog: Wrong data displayed. Need commmunication with the source app.
+- settings: Not ready yet, but needed!
+
