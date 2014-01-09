@@ -1,5 +1,5 @@
 Open E-Government
-Copyright (C) 2005-2013 by Gerrit M. Albrecht
+Copyright (C) 2005-2014 by Gerrit M. Albrecht
 
 This file is part of the Open E-Government (OEG) project.
 The OEG project is free software: you can redistribute it and/or
