@@ -28,6 +28,11 @@
       <recommended></recommended>
     </flags>
 
+<!--
+ftp://ftp.cwru.edu/pub/bash/readline-6.3-rc1.tar.gz
+7.1.14
+-->
+
     <downloads>
       <download file="readline-6.2.tar.gz">
         <url type="direct" checked="2013-07-19">ftp://ftp.cwru.edu/pub/bash/readline-6.2.tar.gz</url>

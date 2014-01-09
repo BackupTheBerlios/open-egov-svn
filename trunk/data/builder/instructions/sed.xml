@@ -22,7 +22,7 @@
 
     <downloads>
       <download file="sed-4.2.2.tar.bz2">
-        <url type="direct" checked="2013-07-19">http://ftp.gnu.org/gnu/sed/sed-4.2.2.tar.bz2</url>
+        <url type="direct" checked="2014-01-07">http://ftp.gnu.org/gnu/sed/sed-4.2.2.tar.bz2</url>
         <!-- http://sourceforge.net/projects/gnuwin32/files//sed/4.2.1/sed-4.2.1-src.zip/download -->
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
@@ -34,24 +34,10 @@
     </downloads>
 
 <!--
-Optional Features:
-  --disable-option-checking  ignore unrecognized --enable/--with options
-  --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
-  --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
   --enable-dependency-tracking
                           do not reject slow dependency extractors
   --disable-dependency-tracking
                           speeds up one-time build
-  --disable-largefile     omit support for large files
-  --disable-acl           do not support ACLs
-  --disable-nls           do not use Native Language Support
-  --disable-rpath         do not hardcode runtime library paths
-  --disable-i18n          disable internationalization (default=enabled)
-  --enable-regex-tests    enable regex matcher regression tests (default=yes)
-
-Optional Packages:
-  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
-  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
   --without-included-regex
                           don't compile regex; this is the default on systems
                           with recent-enough versions of the GNU C Library
@@ -59,26 +45,22 @@ Optional Packages:
   --without-selinux       do not use SELinux, even on systems with SELinux
   --with-packager         String identifying the packager of this software
   --with-packager-version Packager-specific version information
-  --with-packager-bug-reports
-                          Packager info for bug reports (URL/e-mail/...)
-  --with-gnu-ld           assume the C compiler uses GNU ld default=no
-  --with-libiconv-prefix[=DIR]  search for libiconv in DIR/include and DIR/lib
-  --without-libiconv-prefix     don't search for libiconv in includedir and libdir
-  --with-libintl-prefix[=DIR]  search for libintl in DIR/include and DIR/lib
-  --without-libintl-prefix     don't search for libintl in includedir and libdir
+  --with-packager-bug-reports  Packager info for bug reports (URL/e-mail/...)
 -->
 
     <commands>
+PACKAGE_NAME=sed
+PACKAGE_VERSION=4.2.2
 oegenv 32
 oegcleanbase
 oegimport libiconv-1.14
-oegimport gettext-0.18.3
-oegextract sed-4.2.2.tar.bz2
+oegimport gettext-0.18.3.1
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+oegpatch 001
 configure --prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --disable-acl
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
-cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive sed-4.2.2
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

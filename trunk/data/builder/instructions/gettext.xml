@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<pack name="gettext" license="">
+<pack name="gettext" license="GPLv3">
   <meta>
     <homepage>http://www.gnu.org/software/gettext/</homepage>
     <download>http://ftp.gnu.org/pub/gnu/gettext/</download>
@@ -16,7 +16,7 @@
   </meta>
 
   <comments>
-    <comment date="" author="">When compiling gettext 0.16.1, an error may occure:
+    <comment date="" author="">When compiling gettext 0.16.1, an error may occur:
 
 ./localename.c:1145: error: duplicate case value
 ./localename.c:1144: error: previously used here
@@ -33,40 +33,56 @@ Example:
 </comment>
   </comments>
 
-  <set version="0.18.3.1" date="2013-08-16" state="works">
+  <set version="0.18.3.2" date="2014-01-07" state="works">
     <flags>
-      <required>libiconv</required>
-      <optional></optional>
-      <recommended></recommended>
+      <flag name="libpth"
+            required="no"
+            standard="no"
+            imports="libpth"
+            para-if-pos="--with-libpth-prefix=${OEG_BASE_DIR}"
+            para-if-neg="--without-libpth-prefix"
+            info=""  />
+      <flag name="libiconv"
+            required="yes"
+            standard="yes"
+            imports="libiconv"
+            para-if-pos="--with-libiconv-prefix=${OEG_BASE_DIR}"
+            para-if-neg="--without-libiconv-prefix"
+            info="Needed for character set conversion of PO files from/to Unicode."  />
+      <flag name="libunistring"
+            required="no"
+            standard="no"
+            imports="libunistring"
+            para-if-pos="--with-libunistring-prefix=${OEG_BASE_DIR}"
+            para-if-neg="--without-libunistring-prefix"
+            info="Needed for the line breaking in PO files and for xgettext. If not present, a subset of libunistring (included in this package) will be compiled into libgettextlib."  />
+            <!-- --with-included-libunistring -->
+      <flag name="libxml2"
+            required="no"
+            standard="no"
+            imports="libxml2"
+            para-if-pos="--with-libxml2-prefix=${OEG_BASE_DIR}"
+            para-if-neg="--without-libxml2-prefix"
+            info="Needed for the --color option of the various programs. If not present, a subset of libxml2 (included in this package) will be compiled into libgettextlib." />
+            <!-- --with-included-libxml or ..-libxml2? -->
+      <flag name="ncurses"
+            required="no"
+            standard="no"
+            imports="ncurses"
+            para-if-pos="--with-libncurses-prefix=${OEG_BASE_DIR} --without-libtermcap-prefix"
+            para-if-neg="--disable-curses --without-libncurses-prefix --without-libtermcap-prefix"
+            info="Needed for the --color option of the 'msgcat' program. Highly recommended. GNU ncurses (preferred) or libtermcap (discouraged) or a curses library (legacy)." />
     </flags>
 
-    <options>
-      <option name="libiconv" import-if-pos="libiconv"
-              para-if-neu=""
-              para-if-pos="--with-libiconv-prefix=${OEG_BASE_DIR}"
-              para-if-neg="--without-libiconv-prefix"
-              info=""  />
-      <option name="libunistring" import-if-pos="libunistring"
-              para-if-neu="--with-included-libunistring"
-              para-if-pos="--with-libunistring-prefix=${OEG_BASE_DIR}"
-              para-if-neg="--without-libunistring-prefix"
-              info=""  />
-      <option name="libxml2" import-if-pos="libxml2"
-              para-if-neu="--with-included-libxml"
-              para-if-pos="--with-libxml2-prefix=${OEG_BASE_DIR}"
-              para-if-neg="--without-libxml2-prefix"
-              info="" /> <!-- --with-included-libxml or ..-libxml2? -->
-    </options>
-
     <downloads>
-      <download file="gettext-0.18.3.1.tar.gz">
-        <url type="direct" checked="2013-09-19">http://ftp.gnu.org/pub/gnu/gettext/gettext-0.18.3.1.tar.gz</url>
+      <download file="gettext-0.18.3.2.tar.gz">
+        <url type="direct" checked="2014-01-09">http://ftp.gnu.org/pub/gnu/gettext/gettext-0.18.3.2.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>16.189.249</size>
       </download>
     </downloads>
 
@@ -74,10 +90,6 @@ Example:
   --disable-openmp        do not use OpenMP
   --disable-acl           do not support ACLs
   --disable-curses        do not use libncurses, libtermcap even if they exist
-  --with-libpth-prefix[=DIR]  search for PACKLIBS in DIR/include and DIR/lib
-  --without-libpth-prefix     don't search for PACKLIBS in includedir and libdir
-  --with-libiconv-prefix[=DIR]  search for PACKLIBS in DIR/include and DIR/lib
-  --without-libiconv-prefix     don't search for PACKLIBS in includedir and libdir
   --with-included-gettext use the GNU gettext library included here
   --with-libintl-prefix[=DIR]  search for PACKLIBS in DIR/include and DIR/lib
   --without-libintl-prefix     don't search for PACKLIBS in includedir and libdir
@@ -109,16 +121,27 @@ Example:
   --without-xz            don't use xz to compress the infrastructure archive
 -->
     <commands>
-oegenv 32
+oegmingwpath 64
+oegenv 64
+
+PACKAGE_NAME=gettext
+PACKAGE_VERSION=0.18.3.2
 oegcleanbase
-oegimport libiconv-1.14
-oegextract gettext-0.18.3.tar.gz
-#configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-libiconv-prefix=${OEG_BASE_DIR}
+
+oegimport libiconv
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --enable-relocatable --disable-rpath --with-libiconv-prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR}
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
+
+<if64bits>
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive gettext-0.18.3
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

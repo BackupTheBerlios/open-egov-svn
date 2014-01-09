@@ -2,13 +2,14 @@
 
 <!-- $Id$ -->
 
-<pack name="libxml2" license="">
+<pack name="libxml2" license="MIT License"> <!-- http://www.opensource.org/licenses/mit-license.html -->
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://xmlsoft.org/</homepage>
+    <download>http://xmlsoft.org/sources/</download>
+    <download>ftp://xmlsoft.org/libxml2/</download>
     <descriptions>
-      <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="short">XML C parser and toolkit</description>
+      <description lang="en" type="long">Libxml2 is the XML C parser and toolkit developed for the Gnome project (but usable outside of the Gnome platform).</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
@@ -18,46 +19,56 @@
   <comments>
   </comments>
 
-  <set version="" date="" state="works">
+  <set version="2.9.1" date="2013-04-19" state="works">
+    <flags>
+      <flag name="libiconv"
+            required="no"
+            standard="yes"
+            imports="libiconv"
+            para-if-pos="--with-iconv=${OEG_BASE_DIR}"
+            para-if-neg="--without-iconv"
+            info="Needed for character set conversion purposes."  />
+    <flag name="zlib"
+            required="no"
+            standard="yes"
+            imports="zlib"
+            para-if-pos="--with-zlib=${OEG_BASE_DIR}"
+            para-if-neg="--without-zlib"
+            info="" />
+    </flags>
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="libxml2-2.9.1.tar.gz">
+        <url type="direct" checked="2014-01-09">ftp://xmlsoft.org/libxml2/libxml2-2.9.1.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>5.172.503</size>
       </download>
     </downloads>
 
-    <options>
-    </options>
+    <commands>
+oegmingwpath 64
+oegenv 64
 
-    <patch>
-    </patch>
-
-    <compile>
-oegenv 32
+PACKAGE_NAME=libxml2
+PACKAGE_VERSION=2.9.1
 oegcleanbase
-oegimport libiconv-1.14
-oegimport gettext-0.18.3
-oegimport zlib-1.2.8
-oegextract libxml2-2.9.1.tar.gz
-cd /work/libxml2-2.9.1
-#configure --help
-#cd /work/libxml2-2.9.1
-configure --with-zlib=${OEG_BASE_DIR} --with-iconv=${OEG_BASE_DIR} --prefix=${OEG_BASE_DIR}
-# ohne: --with-lzma= -with-icu
+
+oegimport libiconv
+oegimport gettext
+oegimport zlib
+oegextract libxml2
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --with-zlib=${OEG_BASE_DIR} --with-iconv=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} --without-python
+# ohne: --with-lzma= --with-icu
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
-cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive libxml2-2.9.1
-    </compile>
 
-    <install>
-    </install>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
   </set>
 </pack>
 

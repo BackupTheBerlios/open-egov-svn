@@ -28,49 +28,36 @@
 
     <downloads>
       <download file="zlib-1.2.8.tar.gz">
-        <url type="direct" checked="2013-06-11">http://zlib.net/zlib-1.2.8.tar.gz</url>
+        <url type="direct" checked="2014-01-07">http://zlib.net/zlib-1.2.8.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>571091</size>
+        <size>571.091</size>
       </download>
     </downloads>
 
     <commands>
-oegenv 32
+oegmingwpath 64
+oegenv 64
+
+PACKAGE_NAME=zlib
+PACKAGE_VERSION=1.2.8
 oegcleanbase
-oegextract zlib-1.2.8.tar.gz
-mkdir -p ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/bin
-mkdir -p ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/include
-mkdir -p ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/lib
 
-#export INCLUDE_PATH=/open-egovernment/include
-#export LIBRARY_PATH=/open-egovernment/lib
-#export BINARY_PATH=/open-egovernment/bin
+oegextract zlib
 
-# configure didn't worked well and refered to the file Makefile.gcc
-# There are a more options like 64 bit, ...
+# configure for MinGW is disabled :-(
+#configure --prefix=${OEG_BASE_DIR} --eprefix=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} --sharedlibdir=${OEG_BASE_BIN_DIR} --includedir=${OEG_BASE_DIR}/include --enable-shared --64
 
-BINARY_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/bin \
-INCLUDE_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/include \
-LIBRARY_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/lib make -fwin32/Makefile.gcc
+make -fwin32/Makefile.gcc
+make -fwin32/Makefile.gcc install BINARY_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_BIN_DIR} INCLUDE_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/include LIBRARY_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_LIB_DIR}
 
-BINARY_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/bin \
-INCLUDE_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/include \
-LIBRARY_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/lib make -fwin32/Makefile.gcc install
+make -fwin32/Makefile.gcc SHARED_MODE=1
+make -fwin32/Makefile.gcc install BINARY_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_BIN_DIR} INCLUDE_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/include LIBRARY_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_LIB_DIR} SHARED_MODE=1
 
-BINARY_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/bin \
-INCLUDE_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/include \
-LIBRARY_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/lib make -fwin32/Makefile.gcc SHARED_MODE=1
-
-BINARY_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/bin \
-INCLUDE_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/include \
-LIBRARY_PATH=${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/lib make -fwin32/Makefile.gcc install SHARED_MODE=1
-
-cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
-oegarchive zlib-1.2.8
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

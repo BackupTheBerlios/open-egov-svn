@@ -6,6 +6,7 @@
   <meta>
     <homepage>http://xmlsoft.org/XSLT/</homepage>
     <download>http://xmlsoft.org/sources/</download>
+    <download>ftp://xmlsoft.org/libxml2/</download>
     <descriptions>
       <description lang="en" type="short">XSLT C library developed for the GNOME project</description>
       <description lang="en" type="long">Libxslt is the XSLT C library developed for the GNOME project. XSLT itself is a an XML language to define transformations for XML. Libxslt is based on libxml2 the XML C library developed for the GNOME project. It also implements most of the EXSLT set of processor-portable extensions functions and some of Saxon's evaluate and expressions extensions. People can either embed the library in their application or use xsltproc the command line processing tool.</description>
@@ -20,33 +21,40 @@
 
   <set version="1.1.28" date="2012-11-21" state="works">
     <flags>
-      <required>libxml2</required>
-      <optional></optional>
-      <recommended></recommended>
+      <flag name="libxml2"
+            required="yes"
+            standard="yes"
+            imports="libxml2"
+            para-if-pos="--with-libxml-prefix=${OEG_BASE_DIR} --with-libxml-include-prefix=${OEG_BASE_DIR}/include --with-libxml-libs-prefix=${OEG_BASE_DIR}/lib"
+            para-if-neg=""
+            info="" />
     </flags>
 
     <downloads>
       <download file="libxslt-1.1.28.tar.gz">
-        <url type="direct" checked="2013-07-22">http://xmlsoft.org/sources/libxslt-1.1.28.tar.gz</url>
+        <url type="direct" checked="2014-01-09">http://xmlsoft.org/sources/libxslt-1.1.28.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>3.435.907</size>
       </download>
     </downloads>
 
     <commands>
+oegmingwpath 64
+oegenv 64
+
 export PACKAGE_NAME=libxslt
 export PACKAGE_VERSION=1.1.28
-oegenv 32
 oegcleanbase
-oegimport libiconv-1.14
-oegimport gettext-0.18.3
-oegimport zlib-1.2.8
-oegimport libxml2-2.9.1   # important
-oegextract libxslt-1.1.28.tar.gz
+
+oegimport libiconv
+oegimport gettext
+oegimport zlib
+oegimport libxml2   # important
+oegextract libxslt
 
 # config.status: executing libtool commands
 # /bin/rm: cannot lstat `libtoolT': No such file or directory
@@ -64,11 +72,14 @@ oegpatch 001
 
 oegpatch 002
 
-configure --with-libxml-prefix=${OEG_BASE_DIR} --with-libxml-include-prefix=${OEG_BASE_DIR}/include --with-libxml-libs-prefix=${OEG_BASE_DIR}/lib --prefix=${OEG_BASE_DIR}
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --without-python
+# --with-libxml-prefix=${OEG_BASE_DIR} --with-libxml-include-prefix=${OEG_BASE_DIR}/include
+# --with-libxml-libs-prefix=${OEG_BASE_DIR}/lib
+# --without-python because it finds python 2.7 here but then it misses libxml2-python and libxml2 (only in 64 bit, 32 bit works)...
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
-cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive libxslt-1.1.28
+
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

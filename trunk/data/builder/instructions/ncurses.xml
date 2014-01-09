@@ -22,13 +22,13 @@
 
     <downloads>
       <download file="ncurses-5.9.tar.gz">
-        <url checked="2013-07-19">http://ftp.gnu.org/pub/gnu/ncurses/ncurses-5.9.tar.gz</url>
+        <url checked="2014-01-09">http://ftp.gnu.org/pub/gnu/ncurses/ncurses-5.9.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>2.826.473</size>
       </download>
     </downloads>
 
@@ -36,7 +36,7 @@
 oegenv 32
 oegcleanbase
 #regex missing, but compiles
-oegextract ncurses-5.9.tar.gz
+oegextract ncurses
 configure --prefix=${OEG_BASE_DIR} --without-cxx-binding --without-manpages --without-ada --enable-term-driver --enable-sp-funcs --with-normal --disable-home-terminfo --enable-interop
 make
 make install DESTDIR=${OEG_INSTALL_DIR}

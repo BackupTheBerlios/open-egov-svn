@@ -41,7 +41,7 @@
 
     <downloads>
       <download file="xz-5.0.5.tar.xz"> <!-- windows binaries available -->
-        <url type="direct" checked="2013-07-22">http://tukaani.org/xz/xz-5.0.5.tar.xz</url>
+        <url type="direct" checked="2014-01-09">http://tukaani.org/xz/xz-5.0.5.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -52,10 +52,19 @@
     </downloads>
 
     <commands>
-oegenv 32
+oegmingwpath 64
+oegenv 64
+
+PACKAGE_NAME=xz
+PACKAGE_VERSION=5.0.5
 oegcleanbase
-oegextract xz-5.0.5.tar.xz
-configure --prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-gnu-ld
+
+oegimport libiconv
+oegimport gettext
+oegextract ${PACKAGE_NAME}
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR}
+#--includedir
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 cp -a extra ${OEG_INSTALL_DIR}${OEG_BASE_DIR}/share/doc/xz   # copy 7z2lzma.bash and scanlzma.c
@@ -66,20 +75,19 @@ make -C src/liblzma
 make -C src/xzdec
 # no install, because we don't want to overwrite our existing shared binaries and e.g. the man pages...
 #make -C src/xzdec DESTDIR=${OEG_INSTALL_DIR} install-strip
-cp src/xzdec/xzdec.exe   /open-egovernment-install/open-egovernment/bin/xzdec.static.exe
-cp src/xzdec/lzmadec.exe /open-egovernment-install/open-egovernment/bin/lzmadec.static.exe
-strip -s /open-egovernment-install/open-egovernment/bin/xzdec.static.exe
-strip -s /open-egovernment-install/open-egovernment/bin/lzmadec.static.exe
+cp src/xzdec/xzdec.exe   ${OEG_INSTALL_DIR}${OEG_BASE_BIN_DIR}/xzdec.static.exe
+cp src/xzdec/lzmadec.exe ${OEG_INSTALL_DIR}${OEG_BASE_BIN_DIR}/lzmadec.static.exe
+strip -s ${OEG_INSTALL_DIR}${OEG_BASE_BIN_DIR}/xzdec.static.exe
+strip -s ${OEG_INSTALL_DIR}${OEG_BASE_BIN_DIR}/lzmadec.static.exe
 
 make clean
 configure --prefix=${OEG_BASE_DIR} --disable-shared --disable-nls
 make -C src/liblzma
 make -C src/xz
-cp src/xz/xz.exe /open-egovernment-install/open-egovernment/bin/xz.static.exe
-strip -s /open-egovernment-install/open-egovernment/bin/xz.static.exe
+cp src/xz/xz.exe ${OEG_INSTALL_DIR}${OEG_BASE_BIN_DIR}/xz.static.exe
+strip -s ${OEG_INSTALL_DIR}${OEG_BASE_BIN_DIR}/xz.static.exe
 
-cd ${OEG_INSTALL_DIR}${OEG_BASE_DIR}
-oegarchive xz-5.0.5
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>
