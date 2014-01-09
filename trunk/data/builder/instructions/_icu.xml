@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="icu" license="some OSS"> <!-- http://source.icu-project.org/repos/icu/icu/trunk/license.html -->
+  <meta>
+    <homepage>http://site.icu-project.org/home</homepage>
+    <download>http://site.icu-project.org/download</download>
+    <descriptions>
+      <description lang="en" type="short">ICU - International Components for Unicode</description>
+      <description lang="en" type="long">ICU is a mature, widely used set of C/C++ and Java libraries providing Unicode and Globalization support for software applications. ICU is widely portable and gives applications the same results on all platforms and between C/C++ and Java software.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="52.1" date="2013-10-09" state="not-tried">
+
+    <downloads>
+      <download file="icu4c-52_1-src.zip">
+        <url checked="2013-10-28">http://download.icu-project.org/files/icu4c/52.1/icu4c-52_1-src.zip</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <commands>
+PACKAGE_NAME=icu
+PACKAGE_VERSION=52.1
+oegenv 32
+oegcleanbase
+oegextract icu4c-52_1-src.zip
+#oegimport libiconv-1.14
+#oegimport gettext-0.18.3
+configure --prefix=${OEG_BASE_DIR}
+
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

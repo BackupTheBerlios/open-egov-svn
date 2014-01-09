@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="flex" license="BSD License">
+  <meta>
+    <homepage>http://flex.sourceforge.net/</homepage>
+    <download>http://sourceforge.net/projects/flex/files/</download>
+    <descriptions>
+      <description lang="en" type="short">Flex - Fast Lexical Analyzer</description>
+      <description lang="en" type="long">Flex is a tool for generating scanners. A scanner, sometimes called a tokenizer, is a program which recognizes lexical patterns in text. The flex program reads user-specified input files, or its standard input if no file names are given, for a description of a scanner to generate. The description is in the form of pairs of regular expressions and C code, called rules. Flex generates a C source file named, "lex.yy.c", which defines the function yylex(). The file "lex.yy.c" can be compiled and linked to produce an executable. When the executable is run, it analyzes its input for occurrences of text matching the regular expressions for each rule. Whenever it finds a match, it executes the corresponding C code.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="2.5.37" date="2012-08-03" state="not-tried">
+
+    <downloads>
+      <download file="flex-2.5.37.tar.bz2">
+        <url checked="2013-10-28">http://prdownloads.sourceforge.net/flex/flex-2.5.37.tar.bz2?download</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+<!--
+  --disable-dependency-tracking  speeds up one-time build
+  --enable-dependency-tracking   do not reject slow dependency extractors
+-->
+
+    <commands>
+PACKAGE_NAME=flex
+PACKAGE_VERSION=2.5.37
+oegenv 32
+oegcleanbase
+oegimport libiconv-1.14
+oegimport gettext-0.18.3.1
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+configure --prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

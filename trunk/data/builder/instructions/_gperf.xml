@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="gperf" license="">
+  <meta>
+    <homepage>http://www.gnu.org/software/gperf/</homepage>
+    <download>http://ftp.gnu.org/gnu/gperf/</download>
+    <descriptions>
+      <description lang="en" type="short">perfect hash function generator</description>
+      <description lang="en" type="long">GNU gperf is a perfect hash function generator. For a given list of strings, it produces a hash function and hash table, in form of C or C++ code, for looking up a value depending on the input string. The hash function is perfect, which means that the hash table has no collisions, and the hash table lookup needs a single string comparison only. GNU gperf is highly customizable. There are options for generating C or C++ code, for emitting switch statements or nested ifs instead of a hash table, and for tuning the algorithm employed by gperf.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="3.0.4" date="2009-02-03" state="not-tried">
+
+    <downloads>
+      <download file="">
+        <url checked="2013-10-28">http://ftp.gnu.org/gnu/gperf/gperf-3.0.4.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <commands>
+PACKAGE_NAME=
+PACKAGE_VERSION=
+oegenv 32
+oegcleanbase
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+#oegimport libiconv-1.14
+#oegimport gettext-0.18.3
+configure --prefix=${OEG_BASE_DIR}
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+
