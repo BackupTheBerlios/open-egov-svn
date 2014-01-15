@@ -1,0 +1,11 @@
+--- lib/msvc-inval.old.c	2013-04-07 01:59:54 +0000
++++ lib/msvc-inval.c	2014-01-14 10:48:12 +0000
+@@ -28,7 +28,7 @@
+ 
+ # if MSVC_INVALID_PARAMETER_HANDLING == DEFAULT_HANDLING
+ 
+-static void cdecl
++static void
+ gl_msvc_invalid_parameter_handler (const wchar_t *expression,
+                                    const wchar_t *function,
+                                    const wchar_t *file,

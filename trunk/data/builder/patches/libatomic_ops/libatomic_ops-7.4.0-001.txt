@@ -1,0 +1,11 @@
+--- src/Makefile.old	2014-01-15 09:43:59 +0000
++++ src/Makefile	2014-01-15 09:46:50 +0000
+@@ -141,7 +141,7 @@
+ 	-o $@
+ libatomic_ops_gpl_la_LIBADD =
+ am_libatomic_ops_gpl_la_OBJECTS = atomic_ops_stack.lo \
+-	atomic_ops_malloc.lo
++	atomic_ops_malloc.lo atomic_ops.lo
+ libatomic_ops_gpl_la_OBJECTS = $(am_libatomic_ops_gpl_la_OBJECTS)
+ libatomic_ops_gpl_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
+ 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \

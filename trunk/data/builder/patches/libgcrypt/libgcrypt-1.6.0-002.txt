@@ -1,0 +1,20 @@
+--- configure.old	2014-01-15 16:55:48 +0000
++++ configure	2014-01-15 16:57:33 +0000
+@@ -13963,7 +13963,7 @@
+ 
+   if test x$gpg_error_config_prefix != x ; then
+      if test x${GPG_ERROR_CONFIG+set} != xset ; then
+-        GPG_ERROR_CONFIG=$gpg_error_config_prefix/bin/gpg-error-config
++        GPG_ERROR_CONFIG=$gpg_error_config_prefix/bin64/gpg-error-config
+      fi
+   fi
+ 
+@@ -14150,7 +14150,7 @@
+ fi
+ 
+ if test x$pth_config_prefix != x ; then
+-   PTH_CONFIG="$pth_config_prefix/bin/pth-config"
++   PTH_CONFIG="$pth_config_prefix/bin64/pth-config"
+ fi
+ if test "$use_random_daemon" = "yes"; then
+   # Extract the first word of "pth-config", so it can be a program name with args.

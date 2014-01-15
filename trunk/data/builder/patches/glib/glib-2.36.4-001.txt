@@ -1,0 +1,11 @@
+--- glib/tests/gdatetime.old.c	2014-01-14 16:08:16 +0000
++++ glib/tests/gdatetime.c	2014-01-14 16:08:07 +0000
+@@ -844,7 +844,7 @@
+   tt.tm_min = 0;
+   tt.tm_hour = 0;
+   t = mktime (&tt);
+-  g_sprintf (t_str, "%ld", t);
++  g_sprintf (t_str, "%ld", (long int) t);
+ 
+   TEST_PRINTF ("%a", "Sat");
+   TEST_PRINTF ("%A", "Saturday");
