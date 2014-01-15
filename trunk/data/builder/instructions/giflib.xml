@@ -18,32 +18,38 @@
   <comments>
   </comments>
 
-  <set version="5.0.4" date="2013-01-06" state="works">
+  <set version="5.0.5" date="2013-08-29" state="works">
 
     <downloads>
-      <download file="giflib-5.0.4.tar.bz2">
-        <url type="sourceforge" checked="2013-07-23">http://sourceforge.net/projects/giflib/files/giflib-5.x/giflib-5.0.4.tar.bz2/download</url>
+      <download file="giflib-5.0.5.tar.bz2">
+        <url type="sourceforge" checked="2014-01-14">http://sourceforge.net/projects/giflib/files/giflib-5.x/giflib-5.0.5.tar.bz2/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>651.559</size>
       </download>
     </downloads>
 
     <commands>
-export PACKAGE_NAME=giflib
-export PACKAGE_VERSION=5.0.4
-oegenv 32
-oegcleanbase
-oegextract giflib-5.0.4.tar.bz2
+PACKAGE_NAME=giflib
+PACKAGE_VERSION=5.0.5
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
 oegpatch 001     # mingw doesn't have mkstemp(), replaced by mktemp()
-configure --prefix=${OEG_BASE_DIR} --with-gnu-ld
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive giflib-5.0.4
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

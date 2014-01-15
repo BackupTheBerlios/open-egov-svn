@@ -18,45 +18,47 @@
   <comments>
   </comments>
 
-  <set version="7.31.0" date="2013-06-22" state="works">
+  <set version="7.34.0" date="2013-12-17" state="works">
 
     <downloads>
-      <download file="curl-7.31.0.tar.bz2">
-        <url checked="2013-07-19">http://curl.haxx.se/download/curl-7.31.0.tar.bz2</url>
+      <download file="curl-7.34.0.tar.bz2">
+        <url checked="2014-01-15">http://curl.haxx.se/download/curl-7.34.0.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>2.770.438</size>
       </download>
     </downloads>
 
     <commands>
-oegenv 32
-oegcleanbase
-oegimport libidn-1.28       # needs gettext (libintl)
-oegimport gettext-0.18.3    # needs libiconv
-oegimport libiconv-1.14
-oegimport zlib-1.2.8
-oegimport gnutls-3.2.2
-oegimport  gmp-5.1.2       # required
-oegimport   readline-6.2
-oegimport  nettle-2.7.1    # required
-#oegimport  zlib-1.2.8      # optional, for compression
-oegimport  libtasn1-3.3    # optional, for ASN.1 parsing, a copy is included in GnuTLS
-oegimport  p11-kit-0.19.2  # optional, for smart card support
-#oegimport   libiconv-1.14
-oegimport   gettext-0.18.3
-#oegimport   libtasn1-3.3
-oegimport   libffi-3.0.13
-oegimport openssl-1.0.1e
-#oegimport  zlib-1.2.8
-oegextract curl-7.31.0.tar.bz2
+PACKAGE_NAME=curl
+PACKAGE_VERSION=7.34.0
+
+oegimport libidn            # needs gettext (libintl)
+oegimport gettext           # needs libiconv
+oegimport libiconv
+oegimport zlib
+oegimport gnutls
+oegimport  gmp              # required
+oegimport   readline
+oegimport  nettle           # required
+#oegimport  zlib             # optional, for compression
+oegimport  libtasn1          # optional, for ASN.1 parsing, a copy is included in GnuTLS
+oegimport  p11-kit           # optional, for smart card support
+#oegimport   libiconv
+#oegimport   gettext
+#oegimport   libtasn1
+oegimport   libffi
+oegimport openssl
+#oegimport  zlib
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
 
 # no includes in CFLAGS!
-export CFLAGS="-m32 -march=i686 -mtune=i686 -pipe -O2 -mms-bitfields -fomit-frame-pointer"
-export CPPFLAGS="$CFLAGS -I/open-egovernment/include"
+#export CFLAGS="-m32 -march=i686 -mtune=i686 -pipe -O2 -mms-bitfields -fomit-frame-pointer"
+#export CPPFLAGS="$CFLAGS -I/open-egovernment/include"
 
 # disabled most options
 # no: librtmp libmetalink libssh2
@@ -72,11 +74,17 @@ export CPPFLAGS="$CFLAGS -I/open-egovernment/include"
 # removing --enable-threaded-resolver and adding CPPFLAGS='-DUSE_THREADS_WIN32=1'.
 
 # not needed anymore: --without-ssl --without-gnutls
-configure CPPFLAGS='-DUSE_THREADS_WIN32=1' --prefix=${OEG_BASE_DIR} --with-ssl=${OEG_BASE_DIR} --with-gnutls=${OEG_BASE_DIR} --without-polarssl --without-cyassl --without-nss --without-axtls --without-ca-bundle --without-ca-path --without-libmetalink -without-libssh2 --without-librtmp --without-winidn -with-libidn=${OEG_BASE_DIR} --with-winssl --without-darwinssl --enable-ipv6 --with-zlib=${OEG_BASE_DIR} --enable-cookies --enable-sspi --disable-tls-srp --enable-crypto-auth --enable-verbose --enable-manual --disable-gopher --enable-http --enable-ftp --enable-file --enable-rtsp --enable-proxy --enable-dict --enable-telnet --enable-tftp --enable-pop3 --enable-imap --enable-smtp --disable-ldap --disable-ldaps --disable-ares --disable-symbol-hiding
+configure CPPFLAGS='-DUSE_THREADS_WIN32=1' --prefix=${OEG_BASE_DIR} --with-ssl=${OEG_BASE_DIR} --with-gnutls=${OEG_BASE_DIR} --without-polarssl --without-cyassl --without-nss --without-axtls --without-ca-bundle --without-ca-path --without-libmetalink -without-libssh2 --without-librtmp --without-winidn -with-libidn=${OEG_BASE_DIR} --with-winssl --without-darwinssl --enable-ipv6 --with-zlib=${OEG_BASE_DIR} --enable-cookies --enable-sspi --disable-tls-srp --enable-crypto-auth --enable-verbose --enable-manual --disable-gopher --enable-http --enable-ftp --enable-file --enable-rtsp --enable-proxy --enable-dict --enable-telnet --enable-tftp --enable-pop3 --enable-imap --enable-smtp --disable-ldap --disable-ldaps --disable-ares --disable-symbol-hiding --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive curl-7.31.0
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

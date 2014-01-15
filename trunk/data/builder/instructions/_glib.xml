@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="glib" license="">
+  <meta>
+    <homepage>http://www.gtk.org/</homepage>
+    <download>http://ftp.gnome.org/pub/gnome/sources/glib/2.36/</download>
+    <descriptions>
+      <description lang="en" type="short">Cross-platform software utility library</description>
+      <description lang="en" type="long">GLib provides advanced data structures, such as memory chunks, doubly and singly linked lists, hash tables, dynamic strings and string utilities, such as a lexical scanner, string chunks (groups of strings), dynamic arrays, keyed data lists, relations and tuples and routines for memory management and threads.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="2.36.4" date="2013-08-07" state="works">
+
+    <downloads>
+      <download file="glib-2.36.4.tar.xz">
+        <url checked="2014-01-14">http://ftp.gnome.org/pub/gnome/sources/glib/2.36/glib-2.36.4.tar.xz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size>6.570.720</size>
+      </download>
+    </downloads>
+
+    <commands>
+PACKAGE_NAME=glib
+PACKAGE_VERSION=2.36.4
+
+oegimport libiconv
+oegimport zlib
+oegimport libffi     # required
+oegimport gettext    # required
+#oegimport pcre
+#oegimport python     # compile-time only; really needed?
+
+oegimport automake   # compile-time only; docs directory; needs autoconf, m4, perl
+oegimport m4
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+
+oegpatch 001         # missed a cast in test program gdatetime.exe
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --with-threads=win32 --with-pcre=internal --with-libiconv=gnu
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

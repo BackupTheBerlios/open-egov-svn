@@ -22,13 +22,13 @@
 
     <downloads>
       <download file="flac-1.3.0.tar.xz">
-        <url checked="2013-08-05">http://downloads.xiph.org/releases/flac/flac-1.3.0.tar.xz</url>
+        <url checked="2014-01-14">http://downloads.xiph.org/releases/flac/flac-1.3.0.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>1.084.256</size>
       </download>
     </downloads>
 
@@ -79,11 +79,8 @@ Optional Packages:
   --with-xmms-prefix=PFX  Prefix where XMMS is installed (optional)
   --with-xmms-exec-prefix=PFX Exec prefix where XMMS is installed (optional)
   --with-ogg=PFX          Prefix where libogg is installed (optional)
-  --with-ogg-libraries=DIR
-                          Directory where libogg library is installed
-                          (optional)
-  --with-ogg-includes=DIR Directory where libogg header files are installed
-                          (optional)
+  --with-ogg-libraries=DIR Directory where libogg library is installed (optional)
+  --with-ogg-includes=DIR Directory where libogg header files are installed (optional)
   --with-libiconv-prefix[=DIR]  search for libiconv in DIR/include and DIR/lib
   --without-libiconv-prefix     don't search for libiconv in includedir and libd
 ir
@@ -104,18 +101,26 @@ Some influential environment variables:
   CXXCPP      C++ preprocessor
 -->
 
+<!-- wants: ogg xmms -->
+
     <commands>
 PACKAGE_NAME=flac
 PACKAGE_VERSION=1.3.0
-oegenv 32
-oegcleanbase
+
+oegimport libiconv
+#oegimport gettext
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
-oegimport libiconv-1.14
-#oegimport gettext-0.18.3
-configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --disable-rpath --with-libiconv-prefix=${OEG_BASE_DIR}
+
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --disable-rpath --with-libiconv-prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

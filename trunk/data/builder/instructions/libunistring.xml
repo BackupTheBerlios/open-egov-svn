@@ -22,26 +22,34 @@
 
     <downloads>
       <download file="libunistring-0.9.3.tar.gz">
-        <url type="direct" checked="2013-07-20">http://ftp.gnu.org/gnu/libunistring/libunistring-0.9.3.tar.gz</url>
+        <url type="direct" checked="2014-01-13">http://ftp.gnu.org/gnu/libunistring/libunistring-0.9.3.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>2555215</size>
+        <size>2.555.215</size>
       </download>
     </downloads>
 
     <commands>
-oegenv 32
-oegcleanbase
-oegimport libiconv-1.14
-oegextract libunistring-0.9.3.tar.gz
-configure --with-gnu-ld -with-libiconv-prefix=${OEG_BASE_DIR} --without-libpth-prefix --prefix=${OEG_BASE_DIR} --enable-relocatable --enable-threads=win32
+PACKAGE_NAME=libunistring
+PACKAGE_VERSION=0.9.3
+
+oegimport libiconv
+oegextract libunistring
+
+configure --with-gnu-ld -with-libiconv-prefix=${OEG_BASE_DIR} --without-libpth-prefix --prefix=${OEG_BASE_DIR} --enable-relocatable --enable-threads=win32 --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive libunistring-0.9.3
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

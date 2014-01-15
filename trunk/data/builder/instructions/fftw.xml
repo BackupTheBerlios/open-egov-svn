@@ -24,13 +24,13 @@
 
     <downloads>
       <download file="fftw-3.3.3.tar.gz">
-        <url checked="2013-07-31">http://www.fftw.org/fftw-3.3.3.tar.gz</url>
+        <url checked="2014-01-15">http://www.fftw.org/fftw-3.3.3.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>3.920.661</size>
       </download>
     </downloads>
 
@@ -96,14 +96,20 @@ Some influential environment variables:
     <commands>
 PACKAGE_NAME=fftw
 PACKAGE_VERSION=3.3.3
-oegenv 32
-oegcleanbase
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
 # --disable-alloca if alloca() is broken under MinGW 64 bit.
-configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --with-our-malloc --enable-shared --enable-threads --disable-static --with-combined-threads --enable-sse2 --with-windows-f77-mangling --enable-single
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --with-our-malloc --enable-shared --enable-threads --disable-static --with-combined-threads --enable-sse2 --with-windows-f77-mangling --enable-single --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

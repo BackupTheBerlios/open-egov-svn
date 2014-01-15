@@ -50,19 +50,15 @@
     </downloads>
 
     <commands>
-oegmingwpath 64
-oegenv 64
-
 PACKAGE_NAME=libxml2
 PACKAGE_VERSION=2.9.1
-oegcleanbase
 
 oegimport libiconv
 oegimport gettext
 oegimport zlib
 oegextract libxml2
 
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --with-zlib=${OEG_BASE_DIR} --with-iconv=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} --without-python
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --with-zlib=${OEG_BASE_DIR} --with-iconv=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} --without-python ${CONFIGURE_HOST_PARA}
 # ohne: --with-lzma= --with-icu
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}

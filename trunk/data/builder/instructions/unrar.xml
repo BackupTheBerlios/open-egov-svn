@@ -18,40 +18,43 @@
   <comments>
   </comments>
 
-  <set version="5.0.8" date="2013-07-19" state="works">
-    <flags>
-      <required></required>
-      <optional></optional>
-      <recommended></recommended>
-    </flags>
+  <set version="5.0.14" date="2014-01-00" state="works">
 
     <downloads>
-      <download file="unrarsrc-5.0.8.tar.gz">
-        <url type="direct" checked="2013-07-19">http://www.rarlab.com/rar/unrarsrc-5.0.8.tar.gz</url>
+      <download file="unrarsrc-5.0.14.tar.gz">
+        <url type="direct" checked="2014-01-13">http://www.rarlab.com/rar/unrarsrc-5.0.14.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>207917</size>
+        <size>209.707</size>
       </download>
     </downloads>
-
+CXXFLAGS="-O2 -fpermissive" make
     <commands>
-oegenv 32
-oegcleanbase
-oegextract unrarsrc-5.0.8.tar.gz
-cd /work
+PACKAGE_NAME=unrar
+PACKAGE_VERSION=5.0.14
+
+oegimport libiconv
+oegimport gettext
+
+oegextract unrarsrc-5.0.14.tar.gz
+
 cd unrar
+oegpatch 001       # Adds -fpermissive to avoid errors (only during 64 bit build). Ignored but not fixed...
 make
-strip unrar.exe  # "strip unrar" is not enough
+strip unrar.exe    # "strip unrar" is not enough
 # "make install" would install to /usr/bin/unrar.exe
-mkdir ${OEG_INSTALL_DIR}
-mkdir ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
-mkdir ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/bin
-cp unrar ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/bin/unrar.exe
+
+mkdir -p ${OEG_INSTALL_DIR}${OEG_BASE_BIN_DIR}
+cp unrar ${OEG_INSTALL_DIR}/${OEG_BASE_BIN_DIR}/unrar.exe
+
+cp acknow.txt license.txt ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/
+
 cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
-oegarchive unrar-5.0.8
+
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

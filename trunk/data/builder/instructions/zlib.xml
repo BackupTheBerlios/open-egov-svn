@@ -39,16 +39,13 @@
     </downloads>
 
     <commands>
-oegmingwpath 64
-oegenv 64
-
 PACKAGE_NAME=zlib
 PACKAGE_VERSION=1.2.8
-oegcleanbase
 
 oegextract zlib
 
 # configure for MinGW is disabled :-(
+# ${CONFIGURE_HOST_PARA}
 #configure --prefix=${OEG_BASE_DIR} --eprefix=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} --sharedlibdir=${OEG_BASE_BIN_DIR} --includedir=${OEG_BASE_DIR}/include --enable-shared --64
 
 make -fwin32/Makefile.gcc

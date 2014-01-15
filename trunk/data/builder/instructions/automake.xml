@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="automake" license="">
+  <meta>
+    <homepage>http://www.gnu.org/software/automake/</homepage>
+    <download>http://ftp.gnu.org/gnu/automake/</download>
+    <descriptions>
+      <description lang="en" type="short"></description>
+      <description lang="en" type="long"></description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="1.14" date="2013-00-00" state="works">
+
+    <downloads>
+      <download file="automake-1.14.tar.xz">
+        <url checked="2014-01-14">http://ftp.gnu.org/gnu/automake/automake-1.14.tar.xz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size>1.485.516</size>
+      </download>
+    </downloads>
+
+    <commands>
+PACKAGE_NAME=automake
+PACKAGE_VERSION=1.14
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

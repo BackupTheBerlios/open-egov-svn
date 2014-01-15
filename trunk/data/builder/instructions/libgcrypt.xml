@@ -84,35 +84,61 @@ Some influential environment variables:
   CCASFLAGS   assembler compiler flags (defaults to CFLAGS)
 -->
 
-  <set version="1.5.3" date="2013-07-25" state="works">
+  <set version="1.6.0" date="2013-12-16" state="works">
 
     <downloads>
-      <download file="libgcrypt-1.5.3.tar.bz2">
-        <url type="direct" checked="2013-07-20">ftp://ftp.gnupg.org/gcrypt/libgcrypt/libgcrypt-1.5.3.tar.bz2</url>
+      <download file="libgcrypt-1.6.0.tar.bz2">
+        <url type="direct" checked="2014-01-15">ftp://ftp.gnupg.org/gcrypt/libgcrypt/libgcrypt-1.6.0.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>2.499.149</size>
       </download>
     </downloads>
 
     <commands>
 PACKAGE_NAME=libgcrypt
-PACKAGE_VERSION=1.5.3
-oegenv 32
-oegcleanbase
-oegimport libgpg-error-1.12   # optional
-oegimport  libiconv-1.14
-oegimport  gettext-0.18.3
+PACKAGE_VERSION=1.6.0
+
+oegimport libgpg-error  # optional
+oegimport  libiconv
+oegimport  gettext
 #oegimport gnupth  # optional
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
-configure --prefix=${OEG_BASE_DIR} --with-gpg-error-prefix=${OEG_BASE_DIR} --enable-shared --with-gnu-ld --with-sysroot=${OEG_BASE_DIR}
-oegpatch 001       # Removes comments from src/libgcrypt.def, EXPORTS needs to be on the first line!
+
+<if64bits>
+# nur 1.6.0?
+oegpatch 002        # configure searched for ../bin/gpg-error-config instead of ../bin64/gpg-error-config
+</if64bits>
+
+configure --prefix=${OEG_BASE_DIR} --with-gpg-error-prefix=${OEG_BASE_DIR} --enable-shared --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --enable-threads=win32 --disable-padlock-support
+
+#nur version 1.5.3?
+#oegpatch 001       # Removes leading comments from src/libgcrypt.def, EXPORTS needs to be on the first line!
+
+#64 bit error:
+#make[2]: Entering directory `/work/libgcrypt-1.6.0/random'
+#/bin/sh ../libtool --tag=CC    --mode=compile x86_64-w64-mingw32-gcc -DHAVE_CONFIG_H -I. -I..   -I../src -I../src -I/open-egovernment/include -I/open-egovernment/include -m64 -march=nocona -mtune=core2 -pipe -Wall -O2 -mms-bitfields -Wall -MT rndhw.lo -MD -MP -MF .deps/rndhw.Tpo -c -o rndhw.lo rndhw.c
+#libtool: compile:  x86_64-w64-mingw32-gcc -DHAVE_CONFIG_H -I. -I.. -I../src -I../src -I/open-egovernment/include -I/open-egovernment/include -m64 -march=nocona -mtune=core2 -pipe -Wall -O2 -mms-bitfields -Wall -MT rndhw.lo -MD -MP -MF .deps/rndhw.Tpo -c rndhw.c  -DDLL_EXPORT -DPIC -o .libs/rndhw.o
+#{standard input}: Assembler messages:
+#{standard input}:25: Error: unsupported instruction `mov'
+#Makefile:386: recipe for target `rndhw.lo' failed
+#make[2]: *** [rndhw.lo] Error 1
+#make[2]: Leaving directory `/work/libgcrypt-1.6.0/random'
+# maybe a 64 bit error, switching asm off: --disable-asm did not help, --disable-padlock-support works
+
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

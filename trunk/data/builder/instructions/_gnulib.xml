@@ -18,7 +18,7 @@
   <comments>
   </comments>
 
-  <set version="2013-07-26" date="2013-07-26" state="true">
+  <set version="2013-07-26" date="2013-07-26" state="not-tried">
     <downloads>
       <download file="gnulib-2013-07-26.7z">
         <url checked="2013-07-26"></url>

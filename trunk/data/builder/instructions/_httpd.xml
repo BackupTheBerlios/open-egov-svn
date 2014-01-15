@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="httpd" license="Apache License 2.0">
+  <meta>
+    <homepage>http://httpd.apache.org/</homepage>
+    <download>http://httpd.apache.org/download.cgi</download>
+    <descriptions>
+      <description lang="en" type="short">The Apache HTTP Server Project</description>
+      <description lang="en" type="long">The Apache HTTP Server Project is an effort to develop and maintain an open-source HTTP server for modern operating systems including UNIX and Windows NT. The goal of this project is to provide a secure, efficient and extensible server that provides HTTP services in sync with the current HTTP standards.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="2.4.7" date="2013-11-25" state="fails">
+
+    <downloads>
+      <download file="httpd-2.4.7.tar.bz2">
+        <url checked="2014-01-14">http://apache.openmirror.de/httpd/httpd-2.4.7.tar.bz2</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5">170d7fb6fe5f28b87d1878020a9ab94e</hash>
+        <hash type="SHA1">19ed9ee56462e44d61a093ea57e964cf0af05c0e</hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size>5.004.719</size>
+      </download>
+    </downloads>
+
+    <commands>
+PACKAGE_NAME=httpd
+PACKAGE_VERSION=2.4.7
+
+oegimport libiconv
+oegimport gettext
+
+oegimport openssl
+oegimport zlib
+oegimport libxml2
+#pcre
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp ABOUT_APACHE LICENSE README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+# extract apr and apr-util into srclib and with no version numbers!!!
+# http://ftp.halifax.rwth-aachen.de/apache/apr/
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --enable-ssl --enable-http --enable-dav --enable-cgi --enable-info=shared --with-included-apr --enable-rewrite=shared --enable-speling=shared
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

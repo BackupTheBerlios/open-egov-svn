@@ -6,6 +6,7 @@
   <meta>
     <homepage>http://www.pcre.org/</homepage>
     <download>https://sourceforge.net/projects/pcre/files/pcre/</download>
+    <download>ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/</download>
     <descriptions>
       <description lang="en" type="short">PCRE library</description>
       <description lang="en" type="long">Perl Compatible Regular Expressions (PCRE) library.</description>
@@ -18,40 +19,67 @@
   <comments>
   </comments>
 
-  <set version="8.33" date="2013-07-17" state="works">
+  <set version="8.34" date="2013-12-15" state="works">
     <flags>
-      <required></required>
-      <optional></optional>
-      <standard></standard>
+      <flag name="bzip2"
+            required=""
+            standard="yes"
+            imports="bzip2"
+            para-if-pos=""
+            para-if-neg=""
+            info=""  />
+    <flag name="zlib"
+            required=""
+            standard="yes"
+            imports="zlib"
+            para-if-pos="--with-zlib=${OEG_BASE_DIR}"
+            para-if-neg="--without-zlib"
+            info="" />
+      <flag name="libedit"
+            required=""
+            standard="yes"
+            imports="bzip2"
+            para-if-pos=""
+            para-if-neg=""
+            info=""  />
+      <flag name="libreadline"
+            required=""
+            standard="yes"
+            imports="readline"
+            para-if-pos=""
+            para-if-neg=""
+            info=""  />
     </flags>
 
-    <options>
-      <option name="zlib"  value="true" default="true" conditions="" para-if-true="" para-if-false="" />
-      <option name="bzip2" value="true" default="true" conditions="" para-if-true="" req-if-true="" req-if-false="" para-if-false="" />
-      <option name="libedit"  value="true" default="true" conditions="" para-if-true="" para-if-false="" />
-      <option name="libreadline" value="true" default="true" conditions="" para-if-true="" para-if-false="" />
-    </options>
-
     <downloads>
-      <download file="pcre-8.33.tar.gz">
-        <url type="direct" checked="2013-07-17">ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.33.tar.gz</url>
+      <download file="pcre-8.34.tar.gz">
+        <url type="direct" checked="2014-01-15">http://sourceforge.net/projects/pcre/files/pcre/8.34/pcre-8.34.tar.bz2/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>1889401</size>
+        <size>1.468.794</size>
       </download>
     </downloads>
 
     <commands>
-oegextract pcre-8.33.tar.gz
-#you may activate: libz libbz2 libedit libreadline
-configure --prefix=${OEG_BASE_DIR} --enable-utf8 --enable-newline-is-anycrlf
+PACKAGE_NAME=pcre
+PACKAGE_VERSION=8.34
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --enable-utf8 --enable-newline-is-anycrlf --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive pcre-8.33
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

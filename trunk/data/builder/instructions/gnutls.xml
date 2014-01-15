@@ -19,17 +19,17 @@
   <comments>
   </comments>
 
-  <set version="3.2.2" date="2013-07-14" state="works">
+  <set version="3.2.8" date="2013-12-209" state="works">
 
     <downloads>
-      <download file="gnutls-3.2.2.tar.xz">
-        <url checked="2013-07-11">ftp://ftp.gnutls.org/gcrypt/gnutls/v3.2/gnutls-3.2.2.tar.xz</url>
+      <download file="gnutls-3.2.8.tar.xz">
+        <url checked="2014-01-15">ftp://ftp.gnutls.org/gcrypt/gnutls/v3.2/gnutls-3.2.8.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>5.135.984</size>
       </download>
     </downloads>
 
@@ -161,23 +161,26 @@
   LIBIDN_LIBS linker flags for LIBIDN, overriding pkg-config
 -->
     <commands>
-oegenv 32
-oegcleanbase
-oegextract gnutls-3.2.2.tar.xz
-oegimport gmp-5.1.2       # required
-oegimport  readline-6.2
-oegimport nettle-2.7.1    # required
-oegimport zlib-1.2.8      # optional, for compression
-oegimport libtasn1-3.3    # optional, for ASN.1 parsing, a copy is included in GnuTLS
-oegimport p11-kit-0.19.2  # optional, for smart card support
-oegimport  libiconv-1.14
-oegimport  gettext-0.18.3
-oegimport  libtasn1-3.3
-oegimport  libffi-3.0.13
-#oegimport trousers-0.3.10    # optional, for TPM support
-#oegimport libunbound-1.4.20  # optional, for DNSSEC/DANE functionality
+PACKAGE_NAME=gnutls
+PACKAGE_VERSION=3.2.8
 
-configure --prefix=${OEG_BASE_DIR} --with-libz-prefix=${OEG_BASE_DIR} --without-tpm --disable-doc --enable-shared --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --disable-guile --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR}
+oegimport gmp             # required
+oegimport  readline
+oegimport zlib            # optional, for compression
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+
+oegimport nettle-2.7.1    # required
+oegimport libtasn1-3.3    # optional, for ASN.1 parsing, a copy is included in GnuTLS
+oegimport p11-kit         # optional, for smart card support
+oegimport  libiconv
+oegimport  gettext
+oegimport  libtasn1
+oegimport  libffi
+#oegimport trousers     # optional, for TPM support
+#oegimport libunbound   # optional, for DNSSEC/DANE functionality
+
+configure --prefix=${OEG_BASE_DIR} --with-libz-prefix=${OEG_BASE_DIR} --without-tpm --disable-doc --enable-shared --with-gnu-ld --disable-rpath --with-sysroot=${OEG_BASE_DIR} --disable-guile --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 
 # no libdane build da libunbound missed
 # HOGWEED (nettle)? libregex? libopts? libidn?
@@ -189,8 +192,14 @@ configure --prefix=${OEG_BASE_DIR} --with-libz-prefix=${OEG_BASE_DIR} --without-
 
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive gnutls-3.2.2
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

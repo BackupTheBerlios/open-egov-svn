@@ -6,6 +6,7 @@
   <meta>
     <homepage>http://www.freetype.org/</homepage>
     <download>http://sourceforge.net/projects/freetype/</download>
+    <download>http://download.savannah.gnu.org/releases/freetype/</download>
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long">The FreeType project develops free, portable and high-quality software solutions for digital typography.</description>
@@ -18,7 +19,7 @@
   <comments>
   </comments>
 
-  <set version="2.5.0.1" date="2013-06-19" state="works">
+  <set version="2.5.2" date="2014-12-08" state="works">
     <flags>
       <required>bzip2 zlib libpng</required>
       <optional></optional>
@@ -44,8 +45,9 @@
     </options>
 
     <downloads>
-      <download file="freetype-2.5.0.1.tar.bz2">
-        <url type="sourceforge" checked="2013-07-22">http://sourceforge.net/projects/freetype/files/freetype2/2.5.0/freetype-2.5.0.1.tar.bz2/download</url>
+      <download file="freetype-2.5.2.tar.bz2">
+        <url type="sourceforge" checked="2014-01-13">http://sourceforge.net/projects/freetype/files/freetype2/2.5.2/freetype-2.5.2.tar.bz2/download</url>
+        <url type="direct" checked="2014-01-13">http://download.savannah.gnu.org/releases/freetype/freetype-2.5.2.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -56,17 +58,31 @@
     </downloads>
 
     <commands>
-oegenv 32
-oegcleanbase
-oegimport bzip2-1.0.6
-oegimport zlib-1.2.8
-oegimport libpng-1.6.3
-oegextract freetype-2.5.0.1.tar.bz2
+PACKAGE_NAME=freetype
+PACKAGE_VERSION=2.5.2
+
+oegimport bzip2
+oegimport zlib
+oegimport libpng
+
+oegextract freetype
+
 configure --prefix=${OEG_BASE_DIR} --with-gnu-ld
+
+
+--disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+
+
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
+
 cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
-oegarchive freetype-2.5.0.1
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

@@ -18,7 +18,7 @@
   <comments>
   </comments>
 
-  <set version="1.1.10" date="2012-11-29" state="works">
+  <set version="1.1.11" date="2013-08-14" state="works">
     <flags>
       <required>guile</required>
       <optional></optional>
@@ -26,21 +26,22 @@
     </flags>
 
     <downloads>
-      <download file="libmatheval-1.1.10.tar.gz">
-        <url checked="2013-07-19">http://ftp.gnu.org/gnu/libmatheval/libmatheval-1.1.10.tar.gz</url>
+      <download file="libmatheval-1.1.11.tar.gz">
+        <url checked="2014-01-15">http://ftp.gnu.org/gnu/libmatheval/libmatheval-1.1.11.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>551835</size>
+        <size></size>
       </download>
     </downloads>
 
     <commands>
-oegenv 32
-oegcleanbase
-oegimport guile-2.0.9
+PACKAGE_NAME=libmatheval
+PACKAGE_VERSION=1.1.11
+
+oegimport guile-2.0.9            # required
 oegimport  libiconv-1.14
 oegimport  readline-6.2
 oegimport  gettext-0.18.3
@@ -53,11 +54,18 @@ oegimport  gc-7.2d
 # check guile first !!!!
 
 oegextract libmatheval-1.1.10.tar.gz
+
 CFLAGS="-I${OEG_BASE_DIR}/include/guile/2.0" configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR}
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
+
 cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
-oegarchive libmatheval-1.1.10
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

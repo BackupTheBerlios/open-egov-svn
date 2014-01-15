@@ -18,31 +18,40 @@
   <comments>
   </comments>
 
-  <set version="" date="2013-06-22" state="works">
+  <set version="2.11" date="2013-06-22" state="works">
 
     <downloads>
-      <download file="nasm-2.10.09.tar.xz">
-        <url checked="2013-07-23">http://www.nasm.us/pub/nasm/releasebuilds/2.10.09/nasm-2.10.09.tar.xz</url>
+      <download file="nasm-2.11.tar.xz">
+        <url checked="2014-01-13">http://www.nasm.us/pub/nasm/releasebuilds/2.11/nasm-2.11.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>743.396</size>
       </download>
     </downloads>
 
     <commands>
-oegenv 32
-oegcleanbase
-oegextract nasm-2.10.09.tar.xz
+export PACKAGE_NAME=nasm
+export PACKAGE_VERSION=2.11
+
+oegextract nasm
+
 # make ignores "install-strip" and DESTDIR=
 # so we set prefix to install dir to put the binaries there.
-configure --prefix=${OEG_INSTALL_DIR}
+
+configure --prefix="${OEG_INSTALL_DIR}${OEG_BASE_DIR}" --bindir="${OEG_INSTALL_DIR}${OEG_BASE_BIN_DIR}" ${CONFIGURE_HOST_PARA}
 make
+make strip
 make install
-cd "${OEG_INSTALL_DIR}"
-oegarchive nasm-2.10.09
+make install_rdf
+
+cp LICENSE "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/"
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

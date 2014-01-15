@@ -19,36 +19,37 @@
   </comments>
 
   <set version="1.6" date="2013-06-09" state="works">
-    <flags>
-      <required></required>
-      <optional></optional>
-      <recommended></recommended>
-    </flags>
 
     <downloads>
       <download file="gzip-1.6.tar.xz">
-        <url checked="2013-07-19">http://ftp.gnu.org/gnu/gzip/gzip-1.6.tar.xz</url>
+        <url checked="2014-01-14">http://ftp.gnu.org/gnu/gzip/gzip-1.6.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>725.084</size>
       </download>
     </downloads>
 
     <commands>
-export PACKAGE_NAME=gzip
-export PACKAGE_VERSION=1.6
-oegenv 32
-oegcleanbase
-oegextract gzip-1.6.tar.xz
-oegpatch 001
-configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --without-libpth-prefix --enable-threads=windows
+PACKAGE_NAME=gzip
+PACKAGE_VERSION=1.6
+
+oegextract gzip
+oegpatch 001      # missing SIGPIPE definition
+oegpatch 002      # lib/msvc-inval.c - cdecl removed
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING NEWS README THANKS TODO "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+#"${OEG_INSTALL_DIR}${OEG_BASE_DIR}/dependencies.txt"
+
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --without-libpth-prefix --enable-threads=windows --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
+
 cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
-oegarchive gzip-1.6
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

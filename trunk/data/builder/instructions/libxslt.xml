@@ -43,12 +43,8 @@
     </downloads>
 
     <commands>
-oegmingwpath 64
-oegenv 64
-
 export PACKAGE_NAME=libxslt
 export PACKAGE_VERSION=1.1.28
-oegcleanbase
 
 oegimport libiconv
 oegimport gettext
@@ -72,12 +68,19 @@ oegpatch 001
 
 oegpatch 002
 
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --without-python
-# --with-libxml-prefix=${OEG_BASE_DIR} --with-libxml-include-prefix=${OEG_BASE_DIR}/include
-# --with-libxml-libs-prefix=${OEG_BASE_DIR}/lib
-# --without-python because it finds python 2.7 here but then it misses libxml2-python and libxml2 (only in 64 bit, 32 bit works)...
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} --with-gnu-ld --without-python ${CONFIGURE_HOST_PARA} CPPFLAGS="-I/open-egovernment/include/libxml2"
+
+#CPPFLAGS needed because else some includes (include/libxml2/libxml/*) are missing (64 bit compilation).
+
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+<if64bits>
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
 
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

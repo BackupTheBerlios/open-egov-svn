@@ -23,13 +23,13 @@
 
     <downloads>
       <download file="nettle-2.7.1.tar.gz">
-        <url checked="2013-07-24">http://www.lysator.liu.se/~nisse/archive/nettle-2.7.1.tar.gz</url>
+        <url checked="2014-01-15">http://www.lysator.liu.se/~nisse/archive/nettle-2.7.1.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>1.558.863</size>
       </download>
     </downloads>
 
@@ -50,15 +50,22 @@
 -->
 
     <commands>
-oegenv 32
-oegcleanbase
-oegextract nettle-2.7.1.tar.gz
-oegimport gmp-5.1.2    # GMP 3.1+ "required", else support for public key algorithms will be unavailable.
-configure --prefix=${OEG_BASE_DIR} --disable-openssl
+PACKAGE_NAME=nettle
+PACKAGE_VERSION=2.7.1
+
+oegimport gmp                # GMP 3.1+ "required", else support for public key algorithms will be unavailable.
+oegimport  readline
+oegimport openssl            # else --disable-openssl
+oegimport  zlib
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
+configure --prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive nettle-2.7.1
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

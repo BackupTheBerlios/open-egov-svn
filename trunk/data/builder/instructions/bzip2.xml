@@ -22,20 +22,21 @@
 
     <downloads>
       <download file="bzip2-1.0.6.tar.gz">
-        <url checked="2013-07-22">http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz</url>
+        <url checked="2014-01-13">http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>782025</size>
+        <size>782.025</size>
       </download>
     </downloads>
 
     <commands>
-oegenv 32
-oegcleanbase
-oegextract bzip2-1.0.6.tar.gz
+export PACKAGE_NAME=bzip2
+export PACKAGE_VERSION=1.0.6
+
+oegextract bzip2
 make
 # shows commands
 make -n install PREFIX=/open-egovernment
@@ -83,8 +84,15 @@ echo ".so man1/bzgrep.1" > /open-egovernment/man/man1/bzfgrep.1
 echo ".so man1/bzmore.1" > /open-egovernment/man/man1/bzless.1
 echo ".so man1/bzdiff.1" > /open-egovernment/man/man1/bzcmp.1
 
+cp LICENSE /open-egovernment/
+
 cd "${OEG_BASE_DIR}"
-oegarchive bzip2-1.0.6
+
+<if64bits>
+mv bin bin64
+</if64bits>
+
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

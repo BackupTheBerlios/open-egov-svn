@@ -19,36 +19,39 @@
   </comments>
 
   <set version="2.0" date="1995-12-01" state="works">
-    <flags>
-      <required></required>
-      <optional></optional>
-      <recommended></recommended>
-    </flags>
 
     <downloads>
       <download file="termutils-2.0.tar.gz">
-        <url type="direct" checked="2013-07-22">http://ftp.gnu.org/gnu/termutils/termutils-2.0.tar.gz</url>
+        <url type="direct" checked="2014-01-13">http://ftp.gnu.org/gnu/termutils/termutils-2.0.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>117915</size>
+        <size>117.915</size>
       </download>
     </downloads>
 
     <commands>
-oegenv 32
-oegcleanbase
-oegextract termutils-2.0.tar.gz
+PACKAGE_NAME=termutils
+PACKAGE_VERSION=2.0
+
+oegextract termutils
+
 # Prefix is the install dir because it always installs into the prefix dir
 # and it should not install into the base dir in case it is not empty.
 # make install DESTDIR=${OEG_INSTALL_DIR} also copies into the prefix dir.
-configure --prefix=${OEG_INSTALL_DIR}
+configure --prefix=${OEG_INSTALL_DIR}${OEG_BASE_DIR} --bindir=${OEG_INSTALL_DIR}${OEG_BASE_BIN_DIR} --libdir=${OEG_INSTALL_DIR}${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install 
-cd ${OEG_INSTALL_DIR}
-oegarchive termutils-2.0
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+
+<if64bits>
+mv bin bin64
+</if64bits>
+
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

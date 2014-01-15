@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="icu" license="some OSS"> <!-- http://source.icu-project.org/repos/icu/icu/trunk/license.html -->
+  <meta>
+    <homepage>http://site.icu-project.org/home</homepage>
+    <download>http://site.icu-project.org/download</download>
+    <descriptions>
+      <description lang="en" type="short">ICU - International Components for Unicode</description>
+      <description lang="en" type="long">ICU is a mature, widely used set of C/C++ and Java libraries providing Unicode and Globalization support for software applications. ICU is widely portable and gives applications the same results on all platforms and between C/C++ and Java software.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="52.1" date="2013-10-09" state="works">
+
+    <downloads>
+      <download file="icu4c-52_1-src.zip">
+        <url checked="2014-01-13">http://download.icu-project.org/files/icu4c/52.1/icu4c-52_1-src.zip</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size>25.166.385</size>
+      </download>
+    </downloads>
+
+    <commands>
+PACKAGE_NAME=icu
+PACKAGE_VERSION=52.1
+
+oegextract icu4c         # icu4c-52_1-src.zip, not tgz!
+cd icu
+cd source
+
+configure --prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+
+make
+# there is no install-strip!
+make install DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv lib64/*.dll bin64/
+# TODO: Do we need to edit the .la files in lib64?
+# TODO: link files!
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

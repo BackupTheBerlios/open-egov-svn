@@ -19,17 +19,17 @@
   <comments>
   </comments>
 
-  <set version="4.0" date="2013-06-03" state="works">
+  <set version="4.0" date="2013-06-03" state="fails-to-build">
 
     <downloads>
       <download file="pulseaudio-4.0.tar.xz">
-        <url checked="2013-07-31">http://freedesktop.org/software/pulseaudio/releases/pulseaudio-4.0.tar.xz</url>
+        <url checked="2014-01-15">http://freedesktop.org/software/pulseaudio/releases/pulseaudio-4.0.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>1.392.072</size>
       </download>
     </downloads>
 
@@ -258,18 +258,18 @@ Some influential environment variables:
     <commands>
 PACKAGE_NAME=pulseaudio
 PACKAGE_VERSION=4.0
-oegenv 32
-oegcleanbase
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
-oegimport libiconv-1.14
-oegimport gettext-0.18.3          # configure looks for it, needed? or optionally used?
-oegimport libtool-2.4.2           # configure: error: Unable to find libltdl version 2 (libtool 2.4 or later)
+
+oegimport libiconv
+oegimport gettext                 # configure looks for it, needed? or optionally used?
+oegimport libtool                 # configure: error: Unable to find libltdl version 2 (libtool 2.4 or later)
 oegimport json-c-0.11             # configure: error: Package requirements ( json >= 0.9 ) were not met
-oegimport libsndfile-1.0.25
-oegimport pcre-8.33               # regex needed: regcomp(), constants, ...
-#oegimport libatomic_ops-7.2d      # optional, if configure tells us so
-#oegimport openssl-1.0.1e          # optional
-#oegimport  zlib-1.2.8             # if openssl
+oegimport libsndfile
+oegimport pcre                    # regex needed: regcomp(), constants, ...
+#oegimport libatomic_ops           # optional, if configure tells us so
+#oegimport openssl                 # optional
+#oegimport  zlib                   # if openssl
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
 
 # ./configure: /bin/intltool-update: /opt/perl/bin/perl: bad interpreter: No such
 # file or directory
@@ -288,8 +288,7 @@ oegpatch 001  # apply 1x only
 # #include <sys/ioctl.h>
 # ?
 
-
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --enable-shared --disable-rpath --with-libiconv-prefix=${OEG_BASE_DIR} --disable-solaris --disable-x11 --without-caps --disable-manpages
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --enable-shared --disable-rpath --with-libiconv-prefix=${OEG_BASE_DIR} --disable-solaris --disable-x11 --without-caps --disable-manpages --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 # regex, pcre, speex, liboil?
 
 make

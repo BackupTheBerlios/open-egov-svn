@@ -18,17 +18,17 @@
   <comments>
   </comments>
 
-  <set version="0.19.2" date="2013-06-18" state="works">
+  <set version="0.20.2" date="2014-01-20" state="works">
 
     <downloads>
-      <download file="p11-kit-0.19.2.tar.gz">
-        <url checked="2013-07-24">http://p11-glue.freedesktop.org/releases/p11-kit-0.19.2.tar.gz</url>
+      <download file="p11-kit-0.20.2.tar.gz">
+        <url checked="2014-01-15">http://p11-glue.freedesktop.org/releases/p11-kit-0.20.2.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>979.999</size>
       </download>
     </downloads>
 
@@ -61,17 +61,18 @@ LIBFFI_CFLAGS
 LIBFFI_LIBS linker flags for LIBFFI, overriding pkg-config
 -->
     <commands>
-export PACKAGE_NAME=p11-kit
-export PACKAGE_VERSION=0.19.2
-oegenv 32
-oegcleanbase
-oegextract p11-kit-0.19.2.tar.gz
-oegimport libiconv-1.14
-oegimport gettext-0.18.3
-oegimport libtasn1-3.3
-oegimport libffi-3.0.13
+PACKAGE_NAME=p11-kit
+PACKAGE_VERSION=0.20.2
+
+oegimport libiconv
+oegimport gettext
+oegimport libtasn1
+oegimport libffi
 # gtkdoc xsltrans
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-gnu-ld --enable-shared --disable-doc --disable-doc-html --disable-doc-pdf --without-trust-paths
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-gnu-ld --enable-shared --disable-doc --disable-doc-html --disable-doc-pdf --without-trust-paths --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 oegpatch 001       # test case fails because of missing #ifdef #endif
 make
 
@@ -81,8 +82,14 @@ make
 oegpatch 002
 
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive p11-kit-0.19.2
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

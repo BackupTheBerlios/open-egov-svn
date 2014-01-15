@@ -27,13 +27,13 @@
 
     <downloads>
       <download file="guile-2.0.9.tar.xz">
-        <url checked="2013-07-23">ftp://ftp.gnu.org/pub/gnu/guile/guile-2.0.9.tar.xz</url>
+        <url checked="2014-01-15">ftp://ftp.gnu.org/pub/gnu/guile/guile-2.0.9.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>4514000</size>
+        <size>4.514.000</size>
       </download>
     </downloads>
 
@@ -66,13 +66,15 @@
 -->
 
     <commands>
-oegenv 32
-oegcleanbase
-export PKG_CONFIG_PATH=/open-egovernment/lib/pkgconfig
-oegimport libiconv-1.14
-oegimport readline-6.2
-oegimport gettext-0.18.3
-oegimport libunistring-0.9.3
+PACKAGE_NAME=guile
+PACKAGE_VERSION=2.0.9
+
+#export PKG_CONFIG_PATH=/open-egovernment/lib/pkgconfig
+
+oegimport libiconv
+oegimport readline
+oegimport gettext
+oegimport libunistring
 oegimport libtool-2.4.2        # libltdl is required
 oegimport gmp-5.1.2
 oegimport libffi-3.0.13        # required
@@ -106,8 +108,14 @@ oegpatch 003
 
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
+
 cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
-oegarchive guile-2.0.9
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="3.3" date="2013-03-24" state="works">
+  <set version="3.4" date="2013-11-25" state="works">
 
     <downloads>
-      <download file="libtasn1-3.3.tar.gz">
-        <url checked="2013-">http://ftp.gnu.org/gnu/libtasn1/libtasn1-3.3.tar.gz</url>
+      <download file="libtasn1-3.4.tar.gz">
+        <url checked="2014-01-13">http://ftp.gnu.org/gnu/libtasn1/libtasn1-3.4.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -33,14 +33,26 @@
     </downloads>
 
     <commands>
-oegenv 32
-oegcleanbase
-oegextract libtasn1-3.3.tar.gz
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-gtk-doc --disable-gtk-doc-pdf --disable-gtk-doc-html --enable-shared --enable-static
+PACKAGE_NAME=libtasn1
+PACKAGE_VERSION=3.4
+
+oegextract libtasn1
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-gtk-doc --disable-gtk-doc-pdf --disable-gtk-doc-html --enable-shared --enable-static --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+
+oegpatch 001
+
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive libtasn1-3.3
+
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

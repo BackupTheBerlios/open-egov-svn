@@ -22,30 +22,37 @@
 
     <downloads>
       <download file="libffi-3.0.13.tar.gz">
-        <url checked="2013-07-23">ftp://sourceware.org/pub/libffi/libffi-3.0.13.tar.gz</url>
+        <url checked="2014-01-14">ftp://sourceware.org/pub/libffi/libffi-3.0.13.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>845747</size>
+        <size>845.747</size>
       </download>
     </downloads>
 
     <commands>
-oegenv 32
-oegcleanbase
-oegextract libffi-3.0.13.tar.gz
-configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --enable-shared
+PACKAGE_NAME=libffi
+PACKAGE_VERSION=3.0.13
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --enable-shared --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 # error: includes are in lib/libffi-3.0.13/include/*.h
-mv ${OEG_INSTALL_DIR}${OEG_BASE_DIR}/lib/libffi-3.0.13/include ${OEG_INSTALL_DIR}${OEG_BASE_DIR}/
-rm -rf ${OEG_INSTALL_DIR}${OEG_BASE_DIR}/lib/libffi-3.0.13
+mv ${OEG_INSTALL_DIR}${OEG_BASE_LIB_DIR}/libffi-3.0.13/include ${OEG_INSTALL_DIR}${OEG_BASE_DIR}/
+rm -rf ${OEG_INSTALL_DIR}${OEG_BASE_LIB_DIR}/libffi-3.0.13
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive libffi-3.0.13
+<if64bits>
+mv lib/* lib64/
+rm -rf lib
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

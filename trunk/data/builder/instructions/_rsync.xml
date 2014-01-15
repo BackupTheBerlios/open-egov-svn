@@ -5,7 +5,7 @@
 <pack name="rsync" license="GPL">
   <meta>
     <homepage>http://rsync.samba.org/</homepage>
-    <download>http://rsync.samba.org/</download>
+    <download>http://rsync.samba.org/ftp/rsync/src/</download>
     <descriptions>
       <description lang="en" type="short">Rsync file synchronization tool</description>
       <description lang="en" type="long">Rsync is an open source utility that provides fast incremental file transfer.</description>
@@ -18,30 +18,50 @@
   <comments>
   </comments>
 
-  <set version="3.0.9" date="2011-09-23" state="works">
+  <set version="3.1.0" date="2013-09-28" state="fails">
 
     <downloads>
-      <download file="rsync-3.0.9.tar.gz">
-        <url type="direct" checked="2013-07-20">http://rsync.samba.org/ftp/rsync/src/rsync-3.0.9.tar.gz</url>
+      <download file="rsync-3.1.0.tar.gz">
+        <url type="direct" checked="2014-01-14">http://rsync.samba.org/ftp/rsync/src/rsync-3.1.0.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>883.901</size>
       </download>
-      <download file="rsync-patches-3.0.9.tar.gz">
-        <url type="direct" checked="2013-07-19">http://rsync.samba.org/ftp/rsync/src/rsync-patches-3.0.9.tar.gz</url>
+      <download file="rsync-patches-3.1.0.tar.gz">
+        <url type="direct" checked="2014-01-14">http://rsync.samba.org/ftp/rsync/src/rsync-patches-3.1.0.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>174.111</size>
       </download>
     </downloads>
 
     <commands>
+PACKAGE_NAME=rsync
+PACKAGE_VERSION=3.1.0
+
+#oegimport zlib
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+oegextract ${PACKAGE_NAME}-patches-${PACKAGE_VERSION}.tar.gz
+cd ${PACKAGE_NAME}-${PACKAGE_VERSION}
+
+# TODO: apply some patches?
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp COPYING NEWS README TODO "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

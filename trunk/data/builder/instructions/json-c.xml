@@ -24,34 +24,38 @@ If you are on Win32 and are not using the VS project file, be sure to rename con
 git clone https://github.com/json-c/json-c.git
 -->
 
-  <set version="0.11" date="2013-04-03" state="not-tried">
+  <set version="0.11" date="2013-04-03" state="works">
 
     <downloads>
       <download file="json-c-0.11.tar.gz">
-        <url checked="2013-07-31">https://s3.amazonaws.com/json-c_releases/releases/json-c-0.11.tar.gz</url>
+        <url checked="2014-01-15">https://s3.amazonaws.com/json-c_releases/releases/json-c-0.11.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>557263</size>
+        <size>557.263</size>
       </download>
     </downloads>
 
     <commands>
 PACKAGE_NAME=json-c
 PACKAGE_VERSION=0.11
-oegenv 32
-oegcleanbase
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --enable-shared 
+
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --enable-shared --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
-make check
+#make check
 #fails?
-make install
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 # fails, but it seems to be everything at its place...
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin bin64
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

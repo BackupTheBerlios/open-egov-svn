@@ -21,23 +21,21 @@
 
   <set version="5.0.5" date="2013-07-19" state="works">
     <flags>
-      <required></required>
-      <optional>gettext libiconv</optional>
-      <recommended>gettext libiconv</recommended>
+      <flag name="gettext"
+            required="no"
+            standard="yes"
+            imports="gettext"
+            para-if-pos="--with-libintl-prefix=${OEG_BASE_DIR}"
+            para-if-neg="--without-libintl-prefix"
+            info="" />
+      <flag name="libiconv"
+            required="no"
+            standard="yes"
+            imports="libiconv"
+            para-if-pos="--with-libiconv-prefix=${OEG_BASE_DIR}"
+            para-if-neg="--without-libiconv-prefix"
+            info="" />
     </flags>
-
-    <options>
-      <option name="gettext" import-if-pos="gettext"
-              para-if-neu=""
-              para-if-pos="--with-libintl-prefix=${OEG_BASE_DIR}"
-              para-if-neg="--without-libintl-prefix"
-              info="" />
-      <option name="libiconv" import-if-pos="libiconv"
-              para-if-neu=""
-              para-if-pos="--with-libiconv-prefix=${OEG_BASE_DIR}"
-              para-if-neg="--without-libiconv-prefix"
-              info="" />
-    </options>
 
     <downloads>
       <download file="xz-5.0.5.tar.xz"> <!-- windows binaries available -->
@@ -47,30 +45,25 @@
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>928700</size>
+        <size>928.700</size>
       </download>
     </downloads>
 
     <commands>
-oegmingwpath 64
-oegenv 64
-
 PACKAGE_NAME=xz
 PACKAGE_VERSION=5.0.5
-oegcleanbase
 
 oegimport libiconv
 oegimport gettext
 oegextract ${PACKAGE_NAME}
 
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR}
-#--includedir
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 cp -a extra ${OEG_INSTALL_DIR}${OEG_BASE_DIR}/share/doc/xz   # copy 7z2lzma.bash and scanlzma.c
 
 make clean
-configure --prefix=${OEG_BASE_DIR} --disable-shared --disable-nls --disable-encoders --enable-small --disable-threads
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --disable-shared --disable-nls --disable-encoders --enable-small --disable-threads ${CONFIGURE_HOST_PARA}
 make -C src/liblzma
 make -C src/xzdec
 # no install, because we don't want to overwrite our existing shared binaries and e.g. the man pages...
@@ -81,11 +74,19 @@ strip -s ${OEG_INSTALL_DIR}${OEG_BASE_BIN_DIR}/xzdec.static.exe
 strip -s ${OEG_INSTALL_DIR}${OEG_BASE_BIN_DIR}/lzmadec.static.exe
 
 make clean
-configure --prefix=${OEG_BASE_DIR} --disable-shared --disable-nls
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --disable-shared --disable-nls ${CONFIGURE_HOST_PARA}
 make -C src/liblzma
 make -C src/xz
 cp src/xz/xz.exe ${OEG_INSTALL_DIR}${OEG_BASE_BIN_DIR}/xz.static.exe
 strip -s ${OEG_INSTALL_DIR}${OEG_BASE_BIN_DIR}/xz.static.exe
+
+<if64bits>
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+# The bin directory contains only the required dll, the other files are already in bin64.
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
 
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

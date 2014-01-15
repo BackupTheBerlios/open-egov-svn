@@ -22,11 +22,6 @@
   </comments>
 
   <set version="6.2" date="2005-12-08" state="works">
-    <flags>
-      <required></required>
-      <optional></optional>
-      <recommended></recommended>
-    </flags>
 
 <!--
 ftp://ftp.cwru.edu/pub/bash/readline-6.3-rc1.tar.gz
@@ -35,13 +30,13 @@ ftp://ftp.cwru.edu/pub/bash/readline-6.3-rc1.tar.gz
 
     <downloads>
       <download file="readline-6.2.tar.gz">
-        <url type="direct" checked="2013-07-19">ftp://ftp.cwru.edu/pub/bash/readline-6.2.tar.gz</url>
+        <url type="direct" checked="2014-01-13">ftp://ftp.cwru.edu/pub/bash/readline-6.2.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>2030276</size>
+        <size>2.030.276</size>
       </download>
       <!--
 ftp://ftp.cwru.edu/pub/bash/readline-6.2-patches/readline62-001 2011-02-28
@@ -52,23 +47,27 @@ ftp://ftp.cwru.edu/pub/bash/readline-6.2-patches/readline62-004 2012-07-16
     </downloads>
 
     <commands>
-oegenv 32
-oegcleanbase
-export PACKAGE_NAME=readline
-export PACKAGE_VERSION=6.2
-oegimport termcap-1.3.1
+PACKAGE_NAME=readline
+#PACKAGE_VERSION=6.3-rc1
+PACKAGE_VERSION=6.2
+
+oegimport termcap
 oegextract readline-6.2.tar.gz
+
+#6.2:
 oegpatch 001
 oegpatch 002
 oegpatch 003
 oegpatch 004
+
 # --with-curses    use the curses library instead of the termcap library
-configure --prefix=${OEG_BASE_DIR}
+configure --prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 # make don't know how to make "make install-strip"
 make install DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive readline-6.2
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

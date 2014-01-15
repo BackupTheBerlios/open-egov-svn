@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<pack name="yasm" license="">
+<pack name="yasm" license="new BSD license"> <!-- https://github.com/yasm/yasm/blob/master/BSD.txt -->
   <meta>
     <homepage>http://yasm.tortall.net/</homepage>
     <download>http://yasm.tortall.net/Download.html</download>
@@ -11,24 +11,40 @@
       <description lang="en" type="long">Yasm is a complete rewrite of the NASM assembler under the “new” BSD License (some portions are under other licenses, see COPYING for details). Yasm currently supports the x86 and AMD64 instruction sets, accepts NASM and GAS assembler syntaxes, outputs binary, ELF32, ELF64, 32 and 64-bit Mach-O, RDOFF2, COFF, Win32, and Win64 object formats, and generates source debugging information in STABS, DWARF 2, and CodeView 8 formats. Yasm can be easily integrated into Visual Studio 2005/2008 and 2010 for assembly of NASM or GAS syntax code into Win32 or Win64 object files.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
+      <keywords>assembler nasm</keywords>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="1.2.0" date="2011-10-31" state="works">
+    <flags>
+      <flag name="gettext"
+            required="no"
+            standard="yes"
+            imports="gettext"
+            para-if-pos="--with-libintl-prefix=${OEG_BASE_DIR}"
+            para-if-neg="--without-libintl-prefix"
+            info="" />
+      <flag name="libiconv"
+            required="no"
+            standard="yes"
+            imports="libiconv"
+            para-if-pos="--with-libiconv-prefix=${OEG_BASE_DIR}"
+            para-if-neg="--without-libiconv-prefix"
+            info="" />
+    </flags>
 
     <downloads>
       <download file="yasm-1.2.0.tar.gz">
-        <url checked="2013-07-27">http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz</url>
+        <url checked="2014-01-14">http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>1.436.502</size>
       </download>
     </downloads>
 
@@ -75,17 +91,19 @@
     <commands>
 PACKAGE_NAME=yasm
 PACKAGE_VERSION=1.2.0
-oegenv 32
-oegcleanbase
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-oegimport libiconv-1.14
-oegimport gettext-0.18.3
-#oegimport python-3.3.2
+
+oegimport libiconv
+oegimport gettext
+#oegimport python
+oegextract yasm
+
 export PATH=$PATH:/c/Python33          # using the binary from python.org
+# or: --disable-python --disable-python-bindings
 #xmlto   # for man pages
-configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --disable-rpath
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

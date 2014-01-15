@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="1.06" date="2008-11-08" state="works">
+  <set version="1.06" date="2008-11-08" state="fails-to-build">
 
     <downloads>
       <download file="tack-1.06.tar.gz">
-        <url checked="2013-07-24">http://ftp.gnu.org/pub/gnu/ncurses/tack-1.06.tar.gz</url>
+        <url checked="2014-01-15">http://ftp.gnu.org/pub/gnu/ncurses/tack-1.06.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -33,16 +33,24 @@
     </downloads>
 
     <commands>
-oegenv 32
-oegcleanbase
-oegextract tack-1.06.tar.gz
-oegimport ncurses-5.9
-configure --prefix=${OEG_BASE_DIR} --with-ncurses --with-ncurses-dir=${OEG_BASE_DIR}
+PACKAGE_NAME=tack
+PACKAGE_VERSION=1.06
+
+oegimport ncurses
+oegextract tack
+
+configure --prefix=${OEG_BASE_DIR} --with-ncurses --with-ncurses-dir=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 # --with-ncurses  - wants ncurses_mingw.h, else curses.h
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive tack-1.06
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

@@ -21,9 +21,10 @@
   <set version="3.0.9" date="2013-00-00" state="fails-to-build">
 
     <downloads>
-      <download file="aescrypt-3.0.9.tar.gz"> <!-- renamed -->
+      <download file="aescrypt-3.0.9.tar.gz"> <!-- renamed! -->
         <!-- windows source https://www.aescrypt.com/download/v3/windows/AESCrypt_source_v309.zip -->
-        <url checked="2013-07-26">https://www.aescrypt.com/download/v3/linux/aescrypt-3.0.9.tgz</url>
+        <url checked="2014-01-14">https://www.aescrypt.com/download/v3/windows/AESCrypt_source_v309.zip</url>
+        <url checked="2014-01-14">https://www.aescrypt.com/download/v3/linux/aescrypt-3.0.9.tgz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,14 +37,14 @@
     <commands>
 PACKAGE_NAME=aescrypt
 PACKAGE_VERSION=3.0.9
-oegenv 32
-oegcleanbase
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-oegimport libiconv-1.14
-oegimport gettext-0.18.3
+cd src
+
 configure --prefix=${OEG_BASE_DIR}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

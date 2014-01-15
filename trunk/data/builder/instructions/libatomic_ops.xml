@@ -2,13 +2,14 @@
 
 <!-- $Id$ -->
 
-<pack name="libatomic_ops" license="misc">
+<pack name="libatomic_ops" license="misc (MIT-style, GPL)">
   <!-- http://www.hpl.hp.com/research/linux/atomic_ops/LICENSING.txt -->
   <meta>
     <homepage>http://www.hpl.hp.com/research/linux/atomic_ops/index.php4</homepage>
     <download>http://www.hpl.hp.com/research/linux/atomic_ops/download.php4</download>
+    <download>http://www.hpl.hp.com/personal/Hans_Boehm/gc/gc_source/</download>
     <descriptions>
-      <description lang="en" type="short"></description>
+      <description lang="en" type="short">Provides implementations for atomic memory update operations on a number of architectures.</description>
       <description lang="en" type="long"></description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
@@ -19,31 +20,47 @@
   <comments>
   </comments>
 
-  <set version="7.2d" date="2013-00-00" state="works">
+  <set version="7.4.0" date="2013-11-20" state="works">
 
     <downloads>
-      <download file="libatomic_ops-7.2d.tar.gz">
-        <url checked="2013-07-31">http://www.hpl.hp.com/research/linux/atomic_ops/download/libatomic_ops-7.2d.tar.gz</url>
+      <download file="libatomic_ops-7.4.0.tar.gz">
+        <url checked="2014-01-14">http://www.hpl.hp.com/research/linux/atomic_ops/download/libatomic_ops-7.4.0.tar.gz</url>
+        <url checked="2014-01-14">http://www.hpl.hp.com/personal/Hans_Boehm/gc/gc_source/libatomic_ops-7.4.0.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>62.795</size>
       </download>
     </downloads>
 
     <commands>
 PACKAGE_NAME=libatomic_ops
-PACKAGE_VERSION=7.2d
-oegenv 32
-oegcleanbase
+PACKAGE_VERSION=7.4.0
+
+# TODO: ERROR: oegextract selects 7.2d instead of 7.2e
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-cd libatomic_ops-7.2
-configure --prefix=${OEG_BASE_DIR}
+
+# --enable-shared needed by package gc
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --enable-shared --enable-static --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+
+# Linking of libatomic_ops-gpl fails because of a missing AO_pause reference.
+# But this seems to be a function in the non-gpled code. Added it because else it
+# does not build using MinGW and 64 bits. The 32 bit libraries are building without problems.
+
+<if64bits>
+oegpatch 001
+</if64bits>
+
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin bin64
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
