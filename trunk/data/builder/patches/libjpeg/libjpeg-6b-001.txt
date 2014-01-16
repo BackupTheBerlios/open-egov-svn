@@ -1,0 +1,13 @@
+--- Makefile.old	2014-01-16 15:50:56 +0000
++++ Makefile	2014-01-16 15:56:18 +0000
+@@ -11,8 +11,8 @@
+ # Where to install the programs and man pages.
+ prefix = /open-egovernment-install/open-egovernment
+ exec_prefix = ${prefix}
+-bindir = $(exec_prefix)/bin
+-libdir = $(exec_prefix)/lib
++bindir = $(exec_prefix)/bin64
++libdir = $(exec_prefix)/lib64
+ includedir = $(prefix)/include
+ binprefix =
+ manprefix =

@@ -1,0 +1,11 @@
+--- src/Makefile.old	2014-01-16 12:31:29 +0000
++++ src/Makefile	2014-01-16 12:31:11 +0000
+@@ -568,7 +568,7 @@
+ 
+ recode$(EXEEXT): $(recode_OBJECTS) $(recode_DEPENDENCIES) $(EXTRA_recode_DEPENDENCIES) 
+ 	@rm -f recode$(EXEEXT)
+-	$(AM_V_CCLD)$(LINK) $(recode_OBJECTS) $(recode_LDADD) $(LIBS)
++	$(AM_V_CCLD)$(LINK) $(recode_OBJECTS) $(recode_LDADD) $(LTLIBINTL) $(LIBS)
+ 
+ mostlyclean-compile:
+ 	-rm -f *.$(OBJEXT)

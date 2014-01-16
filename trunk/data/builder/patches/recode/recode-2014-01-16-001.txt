@@ -1,0 +1,13 @@
+--- src/task.old.c	2014-01-10 13:51:42 +0000
++++ src/task.c	2014-01-16 12:14:56 +0000
+@@ -25,7 +25,10 @@
+ 
+ #include <sys/types.h>
+ 
++#ifndef __MINGW32__
+ #include <sys/wait.h>
++#endif
++
+ /* Bruno suggests the following, from GNU make 3.79.0.2 in `job.c'.  He also
+    remarks that on Linux, WEXITSTATUS are bits 15..8 and WTERMSIG are bits
+    7..0, while BeOS uses the contrary.  */
