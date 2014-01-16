@@ -19,15 +19,10 @@
   </comments>
 
   <set version="3.1.2" date="2013-01-13" state="works">
-    <flags>
-      <required></required>
-      <optional></optional>
-      <standard></standard>
-    </flags>
 
     <downloads>
       <download file="libarchive-3.1.2.tar.gz">
-        <url type="direct" checked="2013-07-19">http://www.libarchive.org/downloads/libarchive-3.1.2.tar.gz</url>
+        <url type="direct" checked="2014-01-16">http://www.libarchive.org/downloads/libarchive-3.1.2.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -38,24 +33,39 @@
     </downloads>
 
     <commands>
-oegenv 32
-oegcleanbase
-oegimport libiconv-1.14
-oegimport gettext-0.18.3
-oegimport bzip2-1.0.6
-oegimport expat-2.1.0
-oegimport libxml2-2.9.1
-oegimport xz-5.0.5
-oegimport zlib-1.2.8
-oegextract libarchive-3.1.2.tar.gz
-#configure looks for: libpcre, lzo, nettle, openssl
+PACKAGE_NAME=libarchive
+PACKAGE_VERSION=3.1.2
+
+oegimport libiconv
+oegimport gettext
+oegimport bzip2
+oegimport expat
+oegimport libxml2
+oegimport xz
+oegimport zlib
+#oegimport pcre        # fails to link against, looks in wrong place for it
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp COPYING README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+#configure looks for: lzo, nettle, openssl, pcre
 #configure --prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-expat=${OEG_BASE_DIR}
 #export PATH=$PATH:/open-egovernment/bin    # some tool during configure needs expat-1.dll
-configure --prefix=${OEG_BASE_DIR} --without-lzma --without-bz2lib
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --without-lzo2 --without-nettle --without-openssl
+
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive libarchive-3.1.2
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

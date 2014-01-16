@@ -19,21 +19,46 @@
   <comments>
   </comments>
 
-  <set version="" date="2013-07-19" state="works">
+  <set version="2014-01-16" date="2013-07-19" state="works">
 
     <downloads>
-      <download file="Recode-master 2013-07-19.zip">
-        <url type="direct" checked="2013-07-19">https://github.com/pinard/Recode/</url>
+      <download file="Recode-master-2014-01-16.zip">
+        <url type="direct" checked="2014-01-16">https://github.com/pinard/Recode/</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>1.882.962</size>
       </download>
     </downloads>
 
     <commands>
+PACKAGE_NAME=recode
+PACKAGE_VERSION=2014-01-16
+
+oegimport libiconv
+oegimport gettext
+
+oegextract "Recode-master-2014-01-16.zip"
+
+cd Recode-master
+./after-patch.sh
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING THANKS README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR}
+
+oegpatch 001   # src/task.c: MinGW has no sys/wait.h include
+oegpatch 002   # src/Makefile: recode needs to link against libintl (missed libintl_gettext, libintl_fprintf)
+
+make
+
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

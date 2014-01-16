@@ -108,13 +108,11 @@ make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-
 <if64bits>
 mv bin/*.dll bin64/
 rm -rf bin
 # TODO: Do we need to edit the .la files in lib64?
 </if64bits>
-
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

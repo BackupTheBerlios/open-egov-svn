@@ -2,7 +2,7 @@
 
 <!-- $Id$ -->
 
-<pack name="libsdl" license="GNU LGPLv2">
+<pack name="libsdl" license="zlib license">
   <meta>
     <homepage>http://www.libsdl.org/</homepage>
     <download>http://www.libsdl.org/hg.php</download>
@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="2.0.0-7502" date="2013-07-23" state="works">
+  <set version="2.0.1-8054" date="2013-12-07" state="works">
 
     <downloads>
-      <download file="SDL-2.0.0-7502.tar.gz">
-        <url checked="2013-07-26">http://www.libsdl.org/tmp/SDL-2.0.0-7502.tar.gz</url>
+      <download file="SDL-2.0.1-8054.tar.gz">
+        <url checked="2014-01-16">http://www.libsdl.org/tmp/SDL-2.0.1-8054.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -152,19 +152,26 @@
 
     <commands>
 PACKAGE_NAME=libsdl
-PACKAGE_VERSION=2.0.0-7502
-oegenv 32
-oegcleanbase
-oegextract SDL-2.0.0-7502.tar.gz
-#oegimport libiconv-1.14
-#oegimport gettext-0.18.3
-oegimport dbus-1.7.4
-oegimport  expat-2.1.0
-oegimport pthreads-win32-2.9.1
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --enable-dbus --enable-pthreads --enable-shared --without-x
+PACKAGE_VERSION=2.0.1-8054
+
+oegimport dbus
+oegimport  expat
+#oegimport libiconv
+#oegimport gettext
+TODO oegimport pthreads-win32
+
+oegextract SDL-2.0.1-8054.tar.gz
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --enable-dbus --enable-pthreads --enable-shared --without-x
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="mpg123" license="">
+  <meta>
+    <homepage>http://www.mpg123.de/</homepage>
+    <download>http://sourceforge.net/projects/mpg123/files/mpg123/</download>
+    <descriptions>
+      <description lang="en" type="short"></description>
+      <description lang="en" type="long"></description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+<comment>
+  mpg123 1.17.0
+
+  Install path ............ /open-egovernment
+  CPU Optimization ........ x86-64
+  Compiler Optimization ... 2
+  Gapless Support ......... enabled
+  Debugging ............... disabled
+  Seek table size ......... 1000
+  FIFO support ............ enabled
+  Buffer .................. disabled
+  Network (http streams) .. enabled
+  Network Sockets ......... Winsock2
+  IPv6 (getaddrinfo) ...... enabled
+  File offsets ............ default
+  LFS alias symbols ....... enabled (32)
+  LFS alias type .......... long
+
+  Core libmpg123 features:
+  Layer I ................. enabled
+  Layer II ................ enabled
+  Layer III ............... enabled
+  NtoM resampling ......... enabled
+  downsampled decoding .... enabled
+  Feeder/buffered input ... enabled
+  ID3v2 parsing ........... enabled
+  String API .............. enabled
+  ICY parsing/conversion .. enabled
+  Error/warning messages .. enabled
+  Win32 Unicode File Open.. enabled
+  Feature Report Function.. enabled
+  Output formats (nofpu will disable all but 16 or 8 bit!):
+  8 bit integer ........... enabled
+  16 bit integer .......... enabled
+  32/24 bit integer ....... enabled
+  real (32 bit float) ..... enabled
+  Optimization detail:
+  Integer conversion ...... fast
+  New/old WRITE_SAMPLE .... disabled
+  new Huffman scheme ...... enabled
+
+Note: Disabling core features is not commonly done and some combinations might not build/work. If you encounter such a case, help yourself (and provide a patch) or just poke the maintainers.
+
+  Modules ................. enabled
+  Module suffix ........... .dll
+  Checked audio modules ... win32 dummy
+  Detected audio support .. win32 dummy
+  Default output module ... win32
+</comment>
+  </comments>
+
+  <set version="1.17.0" date="2013-12-26" state="works">
+
+    <downloads>
+      <download file="mpg123-1.17.0.tar.bz2">
+        <url checked="2014-01-16">http://sourceforge.net/projects/mpg123/files/mpg123/1.17.0/mpg123-1.17.0.tar.bz2/download</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size>851.203</size>
+      </download>
+    </downloads>
+
+    <commands>
+PACKAGE_NAME=mpg123
+PACKAGE_VERSION=1.17.0
+
+oegimport libtool            # modules require libltdl!
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+TODO: add: --with-cpu=x86-64   --with-cpu=x86
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --with-optimization=2 --with-audio=win32 --with-default-audio=win32 --enable-ipv6=yes --enable-network=yes --enable-modules=yes --with-module-suffix=.dll
+# portaudio pulse arts alsa nas jack coreaudio sdl
+# --disable-modules --disable-shared, sdl needs SDL
+# strip --strip-unneeded "$final/$name/"*.dll
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

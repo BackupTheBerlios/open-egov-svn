@@ -6,6 +6,7 @@
   <meta>
     <homepage>http://www.speex.org/</homepage>
     <download>http://www.speex.org/downloads/</download>
+    <download>http://git.xiph.org/?p=speex.git;a=summary</download>
     <alert>The Speex codec has been obsoleted by Opus. It will continue to be available, but since Opus is better than Speex in all aspects, users are encouraged to switch.</alert>
     <descriptions>
       <description lang="en" type="short">A Free Codec For Free Speech</description>
@@ -81,7 +82,7 @@ Some influential environment variables:
 
     <downloads>
       <download file="">
-        <url checked="2013-07-31">http://downloads.xiph.org/releases/speex/speex-1.2rc1.tar.gz</url>
+        <url checked="2014-01-16">http://downloads.xiph.org/releases/speex/speex-1.2rc1.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>

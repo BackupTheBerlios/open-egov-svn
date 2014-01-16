@@ -56,6 +56,7 @@ PACKAGE_VERSION=2.9.1
 oegimport libiconv
 oegimport gettext
 oegimport zlib
+
 oegextract libxml2
 
 configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --with-zlib=${OEG_BASE_DIR} --with-iconv=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} --without-python ${CONFIGURE_HOST_PARA}
@@ -63,6 +64,12 @@ configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld 
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

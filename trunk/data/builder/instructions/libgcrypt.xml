@@ -102,16 +102,16 @@ Some influential environment variables:
 PACKAGE_NAME=libgcrypt
 PACKAGE_VERSION=1.6.0
 
-oegimport libgpg-error  # optional
+oegimport libgpg-error       # optional
 oegimport  libiconv
 oegimport  gettext
-#oegimport gnupth  # optional
+#oegimport gnupth             # optional
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
 
 <if64bits>
 # nur 1.6.0?
-oegpatch 002        # configure searched for ../bin/gpg-error-config instead of ../bin64/gpg-error-config
+oegpatch 002       # configure searched for ../bin/gpg-error-config instead of ../bin64/gpg-error-config
 </if64bits>
 
 configure --prefix=${OEG_BASE_DIR} --with-gpg-error-prefix=${OEG_BASE_DIR} --enable-shared --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --enable-threads=win32 --disable-padlock-support

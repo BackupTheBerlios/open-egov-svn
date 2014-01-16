@@ -16,6 +16,27 @@
   </meta>
 
   <comments>
+    <comment>
+While compiling in /work/glib-2.36.4/docs/reference/glib make tells us, it needs automake-1.13 (and autoconf, m4, perl). The configure switches --disable-gtk-doc and --disable-gtk-doc-html were ignored. You could remove "docs" from SUBDIRS in Makefile.in. If all fails, install gtk-doc and run "autoreconf -fi".
+
+Reason: Makefile.in for some Makefile.am's that include gtk-doc.make have timestamp a bit older
+than gtk-doc.make, causing attempt to regenerate Makefile.in. That success only
+if system automake is same version than one used in tarball creation system
+(1.13.1). Other versions complain about incompatibility. 
+
+This should work:
+
+cat Makefile.inBAK | sed \
+-e 's|po docs|po|g' \
+-e 's|cd docs && make glib.html|#cd docs && make glib.html|g' > Makefile.in
+
+Faster workaround:
+
+pushd .
+cd docs/reference
+find -type f -name Makefile.in -exec touch {} \;
+popd
+    </comment>
   </comments>
 
   <set version="2.36.4" date="2013-08-07" state="works">
@@ -38,22 +59,32 @@ PACKAGE_VERSION=2.36.4
 
 oegimport libiconv
 oegimport zlib
-oegimport libffi     # required
-oegimport gettext    # required
-#oegimport pcre
-#oegimport python     # compile-time only; really needed?
-
-oegimport automake   # compile-time only; docs directory; needs autoconf, m4, perl
-oegimport m4
+oegimport libffi             # required
+oegimport gettext            # required
+oegimport pcre
+#oegimport python             # compile-time only; really needed?
+oegimport libxml2            # compile-time only?
+oegimport libxslt            # compile-time only?
+#oegimport  libiconv
+#oegimport  gettext
+oegimport  zlib
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
 
-oegpatch 001         # missed a cast in test program gdatetime.exe
+oegpatch 001                 # missed a cast in test program gdatetime.exe
 
 mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
 cp AUTHORS COPYING README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --with-threads=win32 --with-pcre=internal --with-libiconv=gnu
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --with-threads=win32 --with-libiconv=gnu --with-pcre=system
+# --with-pcre=internal
+
+# If make breaks while being in docs/reference (see comment):
+pushd .
+cd docs/reference
+find -type f -name Makefile.in -exec touch {} \;
+popd
+
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 

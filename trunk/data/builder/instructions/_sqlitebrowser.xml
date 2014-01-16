@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="sqlitebrowser" license="Public Domain">
+  <meta>
+    <homepage>http://sourceforge.net/projects/sqlitebrowser/</homepage>
+    <download></download>
+    <descriptions>
+      <description lang="en" type="short">SQLite Database Browser</description>
+      <description lang="en" type="long">SQLite Database browser is a light GUI editor for SQLite databases, built on top of Qt. The main goal of the project is to allow non-technical users to create, modify and edit SQLite databases using a set of wizards and a spreadsheet-like interface.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="2.0-beta1" date="2009-12-10" state="not-tried">
+
+    <downloads>
+      <download file="sqlitebrowser_200_b1_src.tar.gz">
+        <url checked="2014-01-16">http://sourceforge.net/projects/sqlitebrowser/files/sqlitebrowser/2.0%20beta1/sqlitebrowser_200_b1_src.tar.gz/download</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <commands>
+PACKAGE_NAME=sqlitebrowser
+PACKAGE_VERSION=
+
+#oegimport libiconv
+#oegimport gettext
+oegextract ${PACKAGE_NAME}_200_b1_src.tar.gz
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

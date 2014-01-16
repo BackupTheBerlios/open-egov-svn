@@ -83,27 +83,34 @@ Optional Packages:
     <commands>
 PACKAGE_NAME=libwmf
 PACKAGE_VERSION=0.2.8.4
-oegenv 32
-oegcleanbase
+
+oegimport expat
+oegimport zlib
+oegimport libjpeg
+oegimport freetype
+oegimport  bzip2
+#oegimport  zlib
+oegimport  libpng
+#oegimport libpng
+#oegimport  zlib
+#oegimport libxml2   # not used
+#oegimport  libiconv
+#oegimport  gettext
+#oegimport  zlib
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-oegimport expat-2.1.0
-oegimport zlib-1.2.8
-oegimport libjpeg-6b
-oegimport freetype-2.5.0.1
-oegimport  bzip2-1.0.6
-#oegimport  zlib-1.2.8
-oegimport  libpng-1.6.3
-#oegimport libpng-1.6.3
-#oegimport  zlib-1.2.8
-#oegimport libxml2-2.9.1 # not used
-#oegimport  libiconv-1.14
-#oegimport  gettext-0.18.3
-#oegimport  zlib-1.2.8
+
 #not xml2 and expat at the same time. only expat: #--with-libxml2=${OEG_BASE_DIR}
-configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --without-x --with-expat=${OEG_BASE_DIR} --with-freetype=${OEG_BASE_DIR} --with-zlib=${OEG_BASE_DIR} --with-png=${OEG_BASE_DIR} --with-jpeg=${OEG_BASE_DIR}
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --without-x --with-expat=${OEG_BASE_DIR} --with-freetype=${OEG_BASE_DIR} --with-zlib=${OEG_BASE_DIR} --with-png=${OEG_BASE_DIR} --with-jpeg=${OEG_BASE_DIR}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

@@ -4,8 +4,10 @@
 
 <pack name="libjpeg" license="GPLv2">
   <meta>
-    <homepage>http://libjpeg.sourceforge.net/</homepage>
-    <download>http://sourceforge.net/projects/libjpeg/</download>
+    <homepage>http://ijg.org/</homepage>
+    <homepage>http://libjpeg.sourceforge.net/</homepage> <!-- OLD -->
+    <download>http://www.ijg.org/files/</download>
+    <download>http://sourceforge.net/projects/libjpeg/</download> <!-- OLD -->
     <descriptions>
       <description lang="en" type="short">Free JPEG image compression library</description>
       <description lang="en" type="long">The libjpeg is a free software library written for JPEG image compression.</description>
@@ -18,54 +20,50 @@
   <comments>
   </comments>
 
-  <set version="6b" date="2008-12-30" state="works">
-
+  <set version="9" date="2013-01-13" state="works">
     <downloads>
-      <download file="jpegsrc.v6b.tar.gz">
-        <url checked="2013-07-19">http://sourceforge.net/projects/libjpeg/files/libjpeg/6b/jpegsrc.v6b.tar.gz/download</url>
+      <!-- there are zip and tgz files. The zip archive also contains precompiled asms as obj files -->
+      <download file="jpegsrc.v9.tar.gz">
+        <url checked="2014-01-16">http://www.ijg.org/files/jpegsrc.v9.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>613261</size>
+        <size>987.900</size>
       </download>
     </downloads>
 
     <commands>
-oegenv 32
-oegcleanbase
-oegimport libtool-2.4.2   # only to build the shared library
-oegextract jpegsrc.v6b.tar.gz
-cd jpeg-6b
-# "make install" installs to --prefix-dir, but we want it in $OEG_INSTALL_DIR.
-mkdir ${OEG_INSTALL_DIR}/bin
-mkdir ${OEG_INSTALL_DIR}/include
-mkdir ${OEG_INSTALL_DIR}/lib
-mkdir ${OEG_INSTALL_DIR}/man
-mkdir ${OEG_INSTALL_DIR}/man/man1
-configure --prefix=${OEG_INSTALL_DIR} --disable-shared --enable-static
+PACKAGE_NAME=libjpeg
+PACKAGE_VERSION=9
+
+#oegimport libtool            # only to build the shared library
+
+oegextract jpegsrc.v9.tar.gz
+cd jpeg-9
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
-make install
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
-# checking if libtool supports shared libraries... no
-# checking whether to build shared libraries... no
-# checking whether to build static libraries... yes
-#make clean
-#configure --prefix=${OEG_INSTALL_DIR} --enable-shared --disable-static
-#make
-#make install
+#dlltool --export-all-symbols -D jpeg.dll -l libjpeg.dll.a -z in.def .libs/libjpeg.a
+#ranlib libjpeg.dll.a
+#gcc -shared -s -mwindows -def in.def -o jpeg.dll .libs/libjpeg.a
+#make install-headers
+#cp libjpeg.dll.a ${OEG_INSTALL_DIR}${OEG_BASE_LIB_DIR}
+#cp jpeg.dll ${OEG_INSTALL_DIR}${OEG_BASE_BIN_DIR}
 
-dlltool --export-all-symbols -D jpeg.dll -l libjpeg.dll.a -z in.def .libs/libjpeg.a
-ranlib libjpeg.dll.a
-gcc -shared -s -mwindows -def in.def -o jpeg.dll .libs/libjpeg.a
-make install-headers
-cp libjpeg.dll.a ${OEG_INSTALL_DIR}/lib/
-cp jpeg.dll ${OEG_INSTALL_DIR}/bin/
-#make test
-
-cd "${OEG_INSTALL_DIR}"
-oegarchive libjpeg-6b
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>
