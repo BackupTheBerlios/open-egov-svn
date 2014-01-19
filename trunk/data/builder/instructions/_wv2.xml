@@ -35,14 +35,15 @@
     <commands>
 PACKAGE_NAME=wv2
 PACKAGE_VERSION=0.4.2
-oegenv 32
-oegcleanbase
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
-#oegimport libiconv-1.14
-#oegimport gettext-0.18.3
+#oegimport libiconv
+#oegimport gettext
+
 configure --prefix=${OEG_BASE_DIR}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

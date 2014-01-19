@@ -22,7 +22,7 @@
 
     <downloads>
       <download file="glibc-2.18.tar.xz">
-        <url checked="2013-08-15">http://ftp.gnu.org/gnu/glibc/glibc-2.18.tar.xz</url>
+        <url checked="2014-01-18">http://ftp.gnu.org/gnu/glibc/glibc-2.18.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -35,15 +35,16 @@
     <commands>
 PACKAGE_NAME=glibc
 PACKAGE_VERSION=2.18
-oegenv 32
-oegcleanbase
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
-oegimport libiconv-1.14
-oegimport gettext-0.18.3
-#oegimport 
+
+oegimport libiconv
+oegimport gettext
+
 configure --prefix=${OEG_BASE_DIR}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

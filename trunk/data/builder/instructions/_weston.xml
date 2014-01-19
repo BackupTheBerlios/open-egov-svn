@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="1.2.0" date="2013-07-12" state="not-tried">
+  <set version="1.3.91" date="2013-12-17" state="not-tried">
 
     <downloads>
-      <download file="weston-1.2.0.tar.xz">
-        <url checked="2013-08-05">http://wayland.freedesktop.org/releases/weston-1.2.0.tar.xz</url>
+      <download file="weston-1.3.91.tar.xz">
+        <url checked="2014-01-17">http://wayland.freedesktop.org/releases/weston-1.3.91.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -34,15 +34,17 @@
 
     <commands>
 PACKAGE_NAME=weston
-PACKAGE_VERSION=1.2.0
-oegenv 32
-oegcleanbase
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-#oegimport libiconv-1.14
-#oegimport gettext-0.18.3
+PACKAGE_VERSION=1.3.91
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+
+#oegimport libiconv
+#oegimport gettext
+
 configure --prefix=${OEG_BASE_DIR}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

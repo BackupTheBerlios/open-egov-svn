@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="taglib" license="LGPL and MPL">
+  <meta>
+    <homepage>http://taglib.github.io/</homepage>
+    <download></download>
+    <descriptions>
+      <description lang="en" type="short">TagLib Audio Meta-Data Library</description>
+      <description lang="en" type="long">TagLib is a library for reading and editing the meta-data of several popular audio formats. Currently it supports both ID3v1 and ID3v2 for MP3 files, Ogg Vorbis comments and ID3 tags and Vorbis comments in FLAC, MPC, Speex, WavPack TrueAudio, WAV, AIFF, MP4 and ASF files.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="1.9.1" date="2013-10-08" state="not-tried">
+
+    <downloads>
+      <download file="">
+        <url checked="2014-01-17">http://taglib.github.io/releases/taglib-1.9.1.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <commands>
+PACKAGE_NAME=taglib
+PACKAGE_VERSION=1.9.1
+
+oegimport zlib
+#oegimport cmake
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING.* "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+# -DBUILD_EXAMPLES=ON
+# -DENABLE_STATIC=ON -DENABLE_STATIC_RUNTIME=ON
+
+cmake -G "MSYS Makefiles" \
+  -DCMAKE_INSTALL_PREFIX=${OEG_INSTALL_DIR}${OEG_BASE_DIR} \
+  -DZLIB_ROOT=${OEG_BASE_DIR} \
+  -DZLIB_INCLUDE_DIR=${OEG_BASE_DIR}/include \
+  -DZLIB_LIBRARY=${OEG_BASE_LIB_DIR}/libz.a \
+  -DCMAKE_VERBOSE_MAKEFILE=on \
+  -DBUILD_SHARED_LIBS=true \
+  -DCMAKE_SYSTEM_NAME=Windows \
+  -DCMAKE_BUILD_TYPE=Release .
+
+make
+make install
+# no strip?
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin bin64
+mv lib lib64
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

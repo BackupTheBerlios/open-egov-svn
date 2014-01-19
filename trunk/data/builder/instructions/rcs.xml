@@ -18,28 +18,47 @@
   <comments>
   </comments>
 
-  <set version="5.9.0" date="2013-05-06" state="works">
+  <set version="5.9.2" date="2013-11-29" state="works">
 
     <downloads>
-      <download file="${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz">
-        <url type="direct" checked="2013-07-19">http://ftp.gnu.org/pub/gnu/rcs/${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz</url>
+      <download file="rcs-5.9.2.tar.xz">
+        <url type="direct" checked="2014-01-17">http://ftp.gnu.org/pub/gnu/rcs/rcs-5.9.2.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>789296</size>
+        <size></size>
       </download>
     </downloads>
 
     <commands>
-oegenv 32
-oegcleanbase
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-oegpatch 001 # If SA_SIGINFO, SIGHUP, SIGQUIT, SIGPIPE, SIGXCPU, SIGXFSZ are undefined.
-configure --prefix=${OEG_BASE_DIR} --enable-threads=windows --without-libpth-prefix --with-gnu-ld
+PACKAGE_NAME=rcs
+PACKAGE_VERSION=5.9.2
+
+#oegimport ed    # configure looks for it.
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+#oegpatch 001 # v1.6.0: If SA_SIGINFO, SIGHUP, SIGQUIT, SIGPIPE, SIGXCPU, SIGXFSZ are undefined.
+#configure --prefix=${OEG_BASE_DIR} --enable-threads=windows --without-libpth-prefix --with-gnu-ld
+
+# configure:
+# checking for ed... no
+# configure: error: Could not find absolute name of original ed program: ed
+
+# no mmap munmap functions: --disable-mmap wird ignoriert...
+
+configure --prefix=${OEG_BASE_DIR} --enable-threads=windows --without-libpth-prefix --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --disable-mmap
+
+
+
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="libxpm" license="">
+  <meta>
+    <homepage>http://cgit.freedesktop.org/xorg/lib/libXpm</homepage>
+    <download>git://anongit.freedesktop.org/git/xorg/lib/libXpm </download>
+    <descriptions>
+      <description lang="en" type="short"></description>
+      <description lang="en" type="long"></description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long">Unterstützung und gebräuchliche Operationen für das XPM-Pixmap-Format, welches gewöhnlich in älteren X-Anwendungen genutzt wird. XPM ist eine Erweiterung der einfarbigen XBM-Bitmaps, beschrieben im X-Protokoll.</description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="3.5.11" date="2013-09-08" state="fails-to-build">
+
+    <downloads>
+      <download file="libXpm-libXpm-3.5.11.tar.gz">
+        <url checked="2014-01-17">http://cgit.freedesktop.org/xorg/lib/libXpm/snapshot/libXpm-libXpm-3.5.11.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <commands>
+PACKAGE_NAME=libxpm
+PACKAGE_VERSION=3.5.11
+
+#oegimport libiconv
+#oegimport gettext
+
+oegextract libXpm-libXpm-${PACKAGE_VERSION}.tar.gz
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYRIGHT COPYING README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+# no configure
+#configure.ac:17: error: must install xorg-macros 1.8 or later before running autoconf/autogen
+#configure.ac:17: the top level
+#autom4te-2.69: /bin/m4 failed with exit status: 1
+#aclocal: error: /usr/bin/autom4te-2.69 failed with exit status: 1
+#autoreconf: aclocal failed with exit status: 1
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

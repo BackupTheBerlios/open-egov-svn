@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="yaz" license="Revised BSD">
+  <meta>
+    <homepage>http://www.indexdata.com/yaz/</homepage>
+    <download></download>
+    <descriptions>
+      <description lang="en" type="short"></description>
+      <description lang="en" type="long">YAZ is a programmers' toolkit supporting the development of Z39.50/SRW/SRU clients and servers. Z39.50-2003 (version 3) as well as SRU version 1.1 thru 2.0 are supported in both the client and server roles. The Solr webservice is supported in the client role through the ZOOM API.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="5.0.11" date="2014-01-15" state="not-tried">
+
+    <downloads>
+      <download file="yaz-5.0.11.tar.gz">
+        <url checked="2014-01-17">http://ftp.indexdata.dk/pub/yaz/yaz-5.0.11.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <commands>
+PACKAGE_NAME=yaz
+PACKAGE_VERSION=5.0.11
+
+#oegimport libiconv
+#oegimport gettext
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

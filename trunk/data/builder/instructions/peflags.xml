@@ -23,7 +23,7 @@ Gefunden hier: http://download.videolan.org/pub/videolan/contrib/peflags.c
   <set version="1.0" date="2010-07-07" state="works">
     <downloads>
       <download file="">
-        <url checked="2012-11-11"></url>
+        <url checked="2014-01-17"></url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,19 +36,17 @@ Gefunden hier: http://download.videolan.org/pub/videolan/contrib/peflags.c
     <commands>
 PACKAGE_NAME=peflags
 PACKAGE_VERSION=2.4.5
-oegenv 32
-oegcleanbase
 
 mkdir ${PACKAGE_NAME}-${PACKAGE_VERSION}
 cd ${PACKAGE_NAME}-${PACKAGE_VERSION}
 
 cp /i/Projekte/open-egov/data/builder/sources/peflags.c .
 
-gcc -o peflags.exe -DVERSION='"2.4.5"' peflags.c
+gcc ${CFLAGS} ${LDFLAGS} -o peflags.exe -DVERSION='"2.4.5"' peflags.c
 
 strip -s peflags.exe
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/bin"
-cp peflags.exe "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/bin"
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_BIN_DIR}"
+cp peflags.exe "${OEG_INSTALL_DIR}${OEG_BASE_BIN_DIR}"
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}

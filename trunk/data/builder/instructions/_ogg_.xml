@@ -16,36 +16,21 @@
   </meta>
 
   <comments>
-http://www.vorbis.com/setup/
-http://flac.sourceforge.net/download.html
-http://www.theora.org/
+
 http://www.speex.org/downloads/
 http://www.icecast.org/download.php
 
     Vorbis
-    FLAC
-    Theora
     Speex
     Icecast
 
-http://downloads.xiph.org/releases/ogg/libogg-1.3.1.tar.xz
-
-
-
-
-
-
-
-
-
-
   </comments>
 
-  <set version="" date="2012-02-28" state="not-tried">
+  <set version="1.3.1" date="2013-05-20" state="not-tried">
 
     <downloads>
-      <download file="">
-        <url checked="2014-01-14"></url>
+      <download file="libogg-1.3.1.tar.xz">
+        <url checked="2014-01-19">http://downloads.xiph.org/releases/ogg/libogg-1.3.1.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -59,15 +44,26 @@ http://downloads.xiph.org/releases/ogg/libogg-1.3.1.tar.xz
 PACKAGE_NAME=libogg
 PACKAGE_VERSION=1.3.1
 
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-#oegimport libiconv-1.14
-#oegimport gettext-0.18.3
+#oegimport flac
+#oegimport libtheora
+#oegimport libsdl             # libSDL 1.2 or later for the playback example
+#oegimport libvorbis
 
-configure --prefix=${OEG_BASE_DIR}
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+#cp AUTHORS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --disable-sqlite --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

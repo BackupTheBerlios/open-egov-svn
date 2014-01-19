@@ -17,15 +17,14 @@
 
   <comments>
   http://freefr.dl.sourceforge.net/project/ctags/ctags/5.8/ctags58.zip
-  http://freefr.dl.sourceforge.net/project/ctags/ctags/5.8/ctags-5.8.tar.gz
-    <comment date="" author=""></comment>
+  
   </comments>
 
-  <set version="" date="2013-00-00" state="not-tried">
+  <set version="" date="2013-00-00" state="fails-to-build">
 
     <downloads>
-      <download file="">
-        <url checked="2013-"></url>
+      <download file="ctags-5.8.tar.gz">
+        <url checked="2013-01-17">http://freefr.dl.sourceforge.net/project/ctags/ctags/5.8/ctags-5.8.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,16 +35,17 @@
     </downloads>
 
     <commands>
-PACKAGE_NAME=
-PACKAGE_VERSION=
-oegenv 32
-oegcleanbase
+PACKAGE_NAME=ctags
+PACKAGE_VERSION=5.8
+
+#oegimport libiconv
+#oegimport gettext
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-#oegimport libiconv-1.14
-#oegimport gettext-0.18.3
-configure --prefix=${OEG_BASE_DIR}
+
+configure --prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

@@ -17,14 +17,13 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
   <set version="1.2.9" date="2010-10-09" state="works">
 
     <downloads>
-      <download file="">
-        <url checked="2013-07-30">http://www.abisource.com/downloads/wv/1.2.9/wv-1.2.9.tar.gz</url>
+      <download file="wv-1.2.9.tar.gz">
+        <url checked="2014-01-18">http://www.abisource.com/downloads/wv/1.2.9/wv-1.2.9.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -37,18 +36,20 @@
     <commands>
 PACKAGE_NAME=wv
 PACKAGE_VERSION=1.2.9
-oegenv 32
-oegcleanbase
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-#oegimport libiconv-1.14
-#oegimport gettext-0.18.3
 
-oegimport libgsf-1.14.27
-oegimport libpng-1.6.3
-oegimport libwmf-   # optional
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
+#oegimport libiconv
+#oegimport gettext
+
+oegimport libgsf
+oegimport libpng
+oegimport libwmf   # optional
+
 configure --prefix=${OEG_BASE_DIR}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

@@ -22,7 +22,7 @@
 
     <downloads>
       <download file="tiff-4.0.3.tar.gz">
-        <url type="direct" checked="2014-01-14">ftp://ftp.remotesensing.org/pub/libtiff/tiff-4.0.3.tar.gz</url>
+        <url type="direct" checked="2014-01-17">ftp://ftp.remotesensing.org/pub/libtiff/tiff-4.0.3.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
