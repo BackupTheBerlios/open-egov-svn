@@ -1,0 +1,18 @@
+--- make/libtool.mk.old	2013-07-25 23:40:16 +0000
++++ make/libtool.mk	2013-07-25 23:39:30 +0000
+@@ -117,11 +117,11 @@
+ 		$(DESTDIR)$(libdir)/libqpdf.la
+ 	$(LIBTOOL) --finish $(DESTDIR)$(libdir)
+ 	$(LIBTOOL) --mode=install ./install-sh \
+-		qpdf/$(OUTPUT_DIR)/qpdf \
+-		$(DESTDIR)$(bindir)/qpdf
++		qpdf/$(OUTPUT_DIR)/qpdf.exe \
++		$(DESTDIR)$(bindir)/qpdf.exe
+ 	$(LIBTOOL) --mode=install ./install-sh \
+-		zlib-flate/$(OUTPUT_DIR)/zlib-flate \
+-		$(DESTDIR)$(bindir)/zlib-flate
++		zlib-flate/$(OUTPUT_DIR)/zlib-flate.exe \
++		$(DESTDIR)$(bindir)/zlib-flate.exe
+ 	cp qpdf/fix-qdf $(DESTDIR)$(bindir)
+ 	cp include/qpdf/*.h $(DESTDIR)$(includedir)/qpdf
+ 	cp include/qpdf/*.hh $(DESTDIR)$(includedir)/qpdf

@@ -1,0 +1,12 @@
+--- p11-kit/Makefile.old	2014-01-20 16:13:38 +0000
++++ p11-kit/Makefile	2014-01-20 16:13:30 +0000
+@@ -1273,7 +1273,8 @@
+ 
+ # Proxy module is actually same as library, so install a link
+ install-exec-hook:
+-	$(LN_S) -f `readlink $(DESTDIR)$(libdir)/libp11-kit.so` $(DESTDIR)$(libdir)/p11-kit-proxy.so
++	cp $(DESTDIR)$(libdir)/libp11-kit.so $(DESTDIR)$(libdir)/p11-kit-proxy.so
++	#$(LN_S) -f `readlink $(DESTDIR)$(libdir)/libp11-kit.so` $(DESTDIR)$(libdir)/p11-kit-proxy.so
+ 	$(MKDIR_P) $(DESTDIR)$(p11_package_config_modules)
+ 
+ # Tell versions [3.59,3.63) of GNU make to not export all variables.
