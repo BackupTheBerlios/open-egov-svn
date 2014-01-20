@@ -67,11 +67,10 @@ _REGEX_RE_COMP allows us to use BSD regex functions re_comp and re_exec in addit
 -->
 
     <commands>
-export PACKAGE_NAME=regex
-export PACKAGE_VERSION=0.12
-oegenv 32
-oegcleanbase
-oegextract regex-0.12.tar.gz
+PACKAGE_NAME=regex
+PACKAGE_VERSION=0.12
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 configure --prefix=${OEG_BASE_DIR}   # only few parameters
 #make regex.o
 
@@ -82,8 +81,9 @@ cp regex.h ${OEG_BASE_DIR}/include/
 
 #target doc wants tex, target tests fails ("nichts zu tun")
 #make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 #cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-#oegarchive regex-0.12
+#oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

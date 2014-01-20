@@ -27,7 +27,7 @@ The Cygwin project emulates a more or less complete Unix environment to run Unix
 
     <downloads>
       <download file="plibc-0.1.7-src.tar.gz">
-        <url checked="2013-08-01">http://sourceforge.net/projects/plibc/files/plibc/0.1.7/plibc-0.1.7-src.tar.gz/download</url>
+        <url checked="2014-01-21">http://sourceforge.net/projects/plibc/files/plibc/0.1.7/plibc-0.1.7-src.tar.gz/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -42,15 +42,25 @@ The Cygwin project emulates a more or less complete Unix environment to run Unix
     <commands>
 PACKAGE_NAME=plibc
 PACKAGE_VERSION=0.1.7
-oegenv 32
-oegcleanbase
+
+oegimport libtool    # or --with-included-ltdl
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}-src.tar.gz
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
 cd PlibC-0.1.7
-oegimport libtool-2.4.2    # or --with-included-ltdl
-configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --enable-ltdl-install --with-ltdl-lib=${OEG_BASE_DIR}/lib --with-ltdl-include=${OEG_BASE_DIR}/include --enable-static --enable-shared
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --enable-ltdl-install --with-ltdl-lib=${OEG_BASE_DIR}/lib --with-ltdl-include=${OEG_BASE_DIR}/include --enable-static --enable-shared --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

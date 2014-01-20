@@ -22,7 +22,7 @@
 
     <downloads>
       <download file="jwhois-4.0.tar.gz">
-        <url checked="2014-01-16">http://ftp.gnu.org/gnu/jwhois/jwhois-4.0.tar.gz</url>
+        <url checked="2014-01-21">http://ftp.gnu.org/gnu/jwhois/jwhois-4.0.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>

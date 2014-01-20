@@ -18,16 +18,13 @@
   <comments>
   </comments>
 
-  <set version="1.900.1" date="2012-10-19" state="works">
+  <set version="1.900.1" date="2012-10-19" state="not-tried">
     <flags>
-      <required></required>
-      <optional>libglut</optional>
-      <recommended></recommended>
     </flags>
 
     <downloads>
       <download file="jasper-1.900.1.zip">
-        <url checked="2013-07-19">http://www.ece.uvic.ca/~frodo/jasper/software/jasper-1.900.1.zip</url>
+        <url checked="2014-01-20">http://www.ece.uvic.ca/~frodo/jasper/software/jasper-1.900.1.zip</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -38,17 +35,32 @@
     </downloads>
 
     <commands>
-oegenv 32
-oegcleanbase
-oegextract jasper-1.900.1.zip
+PACKAGE_NAME=jasper
+PACKAGE_VERSION=1.900.1
+
+oegimport libglut   # optional
+#oegimport libiconv
+#oegimport gettext
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.zip
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
 # --with-x                use the X Window System
 # --with-glut-include-dir=DIR    Set GLUT include directory.
 # --with-glut-lib-dir=DIR        Set GLUT library directory.
-configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --without-x
+configure --prefix=${OEG_BASE_DIR} --without-x --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
+
 cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
-oegarchive jasper-1.900.1
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

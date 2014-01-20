@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="0.22.5" date="2013-06-16" state="works">
+  <set version="0.24.5" date="2014-01-02" state="works">
 
     <downloads>
-      <download file="poppler-0.22.5.tar.gz">
-        <url checked="2013-07-28">http://poppler.freedesktop.org/poppler-0.22.5.tar.gz</url>
+      <download file="poppler-0.24.5.tar.xz" date="2014-01-02">
+        <url checked="2014-01-21">http://poppler.freedesktop.org/poppler-0.24.5.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -30,8 +30,8 @@
         <hash type="RIPEMD256"></hash>
         <size></size>
       </download>
-      <download file="poppler-data-0.4.6.tar.gz">
-        <url checked="2013-07-28">http://poppler.freedesktop.org/poppler-data-0.4.6.tar.gz</url>
+      <download file="poppler-data-0.4.6.tar.gz" date="2012-10-12">
+        <url checked="2014-01-21">http://poppler.freedesktop.org/poppler-data-0.4.6.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -188,42 +188,55 @@ Building poppler with support for:
 -->
 
     <commands>
+PACKAGE_NAME=poppler
+PACKAGE_VERSION=0.24.5
+
 oegextract poppler-data-0.4.6.tar.gz
-oegextract poppler-0.22.5.tar.gz
-oegimport zlib-1.2.8
-oegimport bzip2-1.0.6
-oegimport pthreads-win32-2.9.1
-oegimport readline-6.2
-oegimport  termcap-1.3.1
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+oegimport zlib
+oegimport bzip2
+oegimport pthreads-win32
+oegimport readline
+oegimport  termcap
 oegimport libjpeg-6b
-oegimport libpng-1.6.3
-#oegimport  zlib-1.2.8
-oegimport libiconv-1.14
-oegimport curl-7.31.0
-oegimport  libidn-1.28       # needs gettext (libintl)
-oegimport  gettext-0.18.3    # needs libiconv
-#oegimport  libiconv-1.14
-#oegimport  zlib-1.2.8
-oegimport  gnutls-3.2.2
-oegimport   gmp-5.1.2       # required
-#oegimport    readline-6.2
-oegimport   nettle-2.7.1    # required
-#oegimport   zlib-1.2.8      # optional, for compression
-oegimport   libtasn1-3.3    # optional, for ASN.1 parsing, a copy is included in GnuTLS
-oegimport   p11-kit-0.19.2  # optional, for smart card support
-oegimport    libiconv-1.14
-oegimport    gettext-0.18.3
-#oegimport    libtasn1-3.3
-oegimport    libffi-3.0.13
-oegimport  openssl-1.0.1e
-#oegimport   zlib-1.2.8
+oegimport libpng
+#oegimport  zlib
+oegimport libiconv
+oegimport curl
+oegimport  libidn            # needs gettext (libintl)
+oegimport  gettext           # needs libiconv
+#oegimport  libiconv
+#oegimport  zlib
+oegimport  gnutls
+oegimport   gmp              # required
+#oegimport    readline
+oegimport   nettle           # required
+#oegimport   zlib             # optional, for compression
+oegimport   libtasn1         # optional, for ASN.1 parsing, a copy is included in GnuTLS
+oegimport   p11-kit          # optional, for smart card support
+oegimport    libiconv
+oegimport    gettext
+#oegimport    libtasn1
+oegimport    libffi
+oegimport  openssl
+#oegimport   zlib
 
 #you may activate: libedit libcairo freetype openjpeg libjpeg6 pthreads
-configure --prefix=${OEG_BASE_DIR} --enable-shared --with-libiconv-prefix=${OEG_BASE_DIR} --with-font-configuration=win32 --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --disable-poppler-qt4 --disable-poppler-cpp --disable-gtk-test --disable-gtk-doc --disable-poppler-glib --enable-zlib --enable-libcurl
+configure --prefix=${OEG_BASE_DIR} --enable-shared --with-libiconv-prefix=${OEG_BASE_DIR} --with-font-configuration=win32 --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --disable-poppler-qt4 --disable-poppler-cpp --disable-gtk-test --disable-gtk-doc --disable-poppler-glib --enable-zlib --enable-libcurl --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive poppler-0.22.5
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>
