@@ -70,13 +70,27 @@ oegpatch 001         # Add missing relocatable.o to DLL.
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
-<if64bits>
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
 # The bin directory contains only the required dlls, the exe is already in bin64.
 mv bin/*.dll bin64/
 rm -rf bin
 # TODO: Do we need to edit the .la files in lib64?
 </if64bits>
+
+# Now fix the .la files:
+
+# TODO
+
+#oeg_fix_libtool_files
+
+
+#dlname='../bin/libiconv-2.dll'
+#dlname='../bin64/libiconv-2.dll'
+#library_names='libiconv.dll.a'
+#old_library='libiconv.a'
+#libdir='/open-egovernment/lib'
+#libdir='/open-egovernment/lib64'
 
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

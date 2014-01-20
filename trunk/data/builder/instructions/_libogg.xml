@@ -35,14 +35,19 @@
     <commands>
 PACKAGE_NAME=libogg
 PACKAGE_VERSION=1.3.1
-oegenv 32
-oegcleanbase
+
+#oegimport libiconv
+#oegimport gettext
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
-#oegimport libiconv-1.14
-#oegimport gettext-0.18.3
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+#cp AUTHORS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
 configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --enable-shared
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

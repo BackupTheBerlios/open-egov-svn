@@ -76,11 +76,11 @@
   --without-libpdcurses-prefix     don't search for libpdcurses in includedir and libdir
 -->
 
-  <set version="0.97.8" date="2013-04-17" state="fails-to-build">
+  <set version="0.98.1" date="2014-01-14" state="fails-to-build">
 
     <downloads>
-      <download file="clamav-0.97.8.tar.gz">
-        <url type="sourceforge" checked="2013-07-25">http://sourceforge.net/projects/clamav/files/clamav/0.97.8/clamav-0.97.8.tar.gz/download</url>
+      <download file="clamav-0.98.1.tar.gz">
+        <url type="sourceforge" checked="2014-01-20">http://sourceforge.net/projects/clamav/files/clamav/0.98.1/clamav-0.98.1.tar.gz/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -92,19 +92,21 @@
 
     <commands>
 export PACKAGE_NAME=clamav
-export PACKAGE_VERSION=0.97.8
-oegenv 32
-oegcleanbase
+export PACKAGE_VERSION=0.98.1
+
+oegimport libiconv     # optional
+oegimport gettext      # maybe not needed
+oegimport zlib
+oegimport bzip2        # optional
+oegimport ncurses
+oegimport libtool      # optional
+
 oegextract clamav-0.97.8.tar.gz
-oegimport libiconv-1.14      # optional
-oegimport gettext-0.18.3     # maybe not needed
-oegimport zlib-1.2.8
-oegimport bzip2-1.0.6        # optional
-oegimport ncurses-5.9
-oegimport libtool-2.4.2      # optional
+
 configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-zlib=${OEG_BASE_DIR} --disable-rpath --enable-shared --with-iconv --with-libncurses-prefix=${OEG_BASE_DIR} --with-ltdl-include=${OEG_BASE_DIR}/include --with-ltdl-lib=${OEG_BASE_DIR}/lib
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive clamav-0.97.8
     </commands>

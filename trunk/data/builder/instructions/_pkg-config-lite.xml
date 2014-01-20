@@ -22,26 +22,29 @@
 
     <downloads>
       <download file="pkg-config-lite-0.28-1.tar.gz">
-        <url checked="2013-07-23">http://sourceforge.net/projects/pkgconfiglite/files/0.28-1/pkg-config-lite-0.28-1.tar.gz/download</url>
+        <url checked="2014-01-20">http://sourceforge.net/projects/pkgconfiglite/files/0.28-1/pkg-config-lite-0.28-1.tar.gz/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>391826</size>
+        <size>391.826</size>
       </download>
     </downloads>
 
     <commands>
-oegenv 32
-oegcleanbase
-oegextract pkg-config-lite-0.28-1.tar.gz
+PACKAGE_NAME=pkg-config-lite
+PACKAGE_VERSION=0.28-1
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
 configure --prefix=${OEG_BASE_DIR} --with-pc-path=${OEG_BASE_DIR}/lib/pkgconfig:${OEG_BASE_DIR}/share/pkgconfig:/usr/local/lib/pkgconfig:/usr/lib/pkgconfig:/mingw/lib/pkgconfig
 make
 make check
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive pkg-config-lite-0.28-1
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

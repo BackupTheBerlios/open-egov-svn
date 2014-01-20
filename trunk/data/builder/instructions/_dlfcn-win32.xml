@@ -2,9 +2,9 @@
 
 <!-- $Id$ -->
 
-<pack name=" dlfcn-win32" license="GNU LGPL">
+<pack name="dlfcn-win32" license="GNU LGPL">
   <meta>
-    <homepage></homepage>
+    <homepage>https://code.google.com/p/dlfcn-win32/</homepage>
     <download></download>
     <descriptions>
       <description lang="en" type="short">dlfcn library for Windows</description>
@@ -22,7 +22,7 @@
 
     <downloads>
       <download file="dlfcn-win32-r19.tar.bz2">
-        <url checked="2013-">http://dlfcn-win32.googlecode.com/files/dlfcn-win32-r19.tar.bz2</url>
+        <url checked="2014-01-20">http://dlfcn-win32.googlecode.com/files/dlfcn-win32-r19.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -48,13 +48,19 @@
     <commands>
 PACKAGE_NAME=dlfcn-win32
 PACKAGE_VERSION=r19
-oegenv 32
-oegcleanbase
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+
 configure --prefix=${OEG_BASE_DIR} --libdir=${OEG_BASE_DIR}/lib --incdir=${OEG_BASE_DIR}/include --enable-shared --enable-static --enable-stripping
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin bin64
+mv lib lib64
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

@@ -22,24 +22,29 @@ http://download.savannah.gnu.org/releases/freetype/freetype-doc-2.5.2.tar.gz
   </comments>
 
   <set version="2.5.2" date="2014-12-08" state="works">
-
-    <options>
-      <option name="bzip2" import-if-pos="bzip2"
-              para-if-neu=""
-              para-if-pos=""
-              para-if-neg="--without-bzip2"
-              info="do not support bzip2 compressed fonts" />
-      <option name="zlib" import-if-pos="zlib"
-              para-if-neu=""
-              para-if-pos=""
-              para-if-neg="--without-zlib"
-              info="use internal zlib instead of system-wide" />
-      <option name="libpng" import-if-pos="libpng"
-              para-if-neu=""
-              para-if-pos=""
-              para-if-neg="--without-png"
-              info="do not support png compressed OpenType embedded bitmaps" />
-    </options>
+    <flags>
+      <flag name="bzip2"
+            required="no"
+            standard="yes"
+            imports="bzip2"
+            para-if-pos=""
+            para-if-neg="--without-bzip2"
+            info="support for bzip2 compressed fonts"  />
+      <flag name="zlib"
+            required="no"
+            standard="yes"
+            imports="zlib"
+            para-if-pos=""
+            para-if-neg="--without-zlib"
+            info="use system-wide zlib instead of internal"  />
+      <flag name="libpng"
+            required="no"
+            standard="yes"
+            imports="libpng"
+            para-if-pos=""
+            para-if-neg="--without-png"
+            info="support png compressed OpenType embedded bitmaps"  />
+    </flags>
 
     <downloads>
       <download file="freetype-2.5.2.tar.bz2">
@@ -50,7 +55,7 @@ http://download.savannah.gnu.org/releases/freetype/freetype-doc-2.5.2.tar.gz
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>1.676.373</size>
       </download>
     </downloads>
 
@@ -64,11 +69,17 @@ oegimport libpng
 
 oegextract freetype
 
-configure --prefix=${OEG_BASE_DIR} --with-gnu-ld
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp README docs/GPL* docs/LICENSE.TXT "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
+# configure failed in 2.5.2 (.tar.bz2). Diffed against the zip archive:
+# diff -riEBbw --strip-trailing-cr freetype-2.5.2-tbz freetype-2.5.2-zip
+# many PaxHeaders.20920 directories, we have to remove them all:
 
---disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+find . -name "PaxHeaders.20920" -exec rm -rf {} \;
 
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+#--disable-mmap 
 
 make
 make install DESTDIR=${OEG_INSTALL_DIR}

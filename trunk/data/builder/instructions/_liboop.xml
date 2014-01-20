@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="liboop-1.0.tar.gz" date="2013-00-00" state="fails-to-build">
+  <set version="1.0" date="2013-00-00" state="fails-to-build">
 
     <downloads>
       <download file="liboop.tar.gz">
-        <url checked="2013-07-24">http://download.ofb.net/liboop/liboop.tar.gz</url>
+        <url checked="2014-01-20">http://download.ofb.net/liboop/liboop.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -46,15 +46,29 @@
   --with-libwww           build libwww adapter
 -->
     <commands>
-oegenv 32
-oegcleanbase
+PACKAGE_NAME=liboop
+PACKAGE_VERSION=1.0
+
+#oegimport glib
+#oegimport adns
+
 oegextract liboop.tar.gz
 cd liboop-1.0
-configure --prefix=${OEG_BASE_DIR} --with-gnu-ld 
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp COPYING "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --without-tcl --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
-cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive liboop-1.0
+
+cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

@@ -27,7 +27,7 @@
 
     <downloads>
       <download file="guile-2.0.9.tar.xz">
-        <url checked="2014-01-15">ftp://ftp.gnu.org/pub/gnu/guile/guile-2.0.9.tar.xz</url>
+        <url checked="2014-01-20">ftp://ftp.gnu.org/pub/gnu/guile/guile-2.0.9.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -75,12 +75,14 @@ oegimport libiconv
 oegimport readline
 oegimport gettext
 oegimport libunistring
-oegimport libtool-2.4.2        # libltdl is required
-oegimport gmp-5.1.2
-oegimport libffi-3.0.13        # required
-oegimport gc-7.2d              # required
-oegimport pkg-config-lite-0.28-1  # only build, exists already with mingw/msys
+oegimport libtool        # libltdl is required
+oegimport gmp
+oegimport libffi        # required
+oegimport gc              # required
+oegimport pkg-config-lite  # only build, exists already with mingw/msys
+
 oegextract guile-2.0.9.tar.xz
+
 # --without-libltdl-prefix doesn't work
 # --without-libgmp-prefix possible?
 BDW_GC_CFLAGS="-L/open-egovernment/lib" BDW_GC_LIBS="-lgc" LIBFFI_CFLAGS="-I/open-egovernment/include -L/open-egovernment/lib" LIBFFI_LIBS="-lffi" configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --with-libreadline-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-libunistring-prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libltdl-prefix=${OEG_BASE_DIR} --with-libgmp-prefix=${OEG_BASE_DIR} --without-threads

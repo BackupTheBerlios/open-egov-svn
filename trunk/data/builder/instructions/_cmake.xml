@@ -19,11 +19,11 @@
   <comments>
   </comments>
 
-  <set version="2.8.11.2" date="2013-07-03" state="fails-to-build">
+  <set version="2.8.12.2" date="2014-01-16" state="fails-to-build">
 
     <downloads>
-      <download file="cmake-2.8.11.2.tar.gz">
-        <url type="direct" checked="2013-07-22">http://www.cmake.org/files/v2.8/cmake-2.8.11.2.tar.gz</url>
+      <download file="cmake-2.8.12.2.tar.gz">
+        <url type="direct" checked="2014-01-20">http://www.cmake.org/files/v2.8/cmake-2.8.12.2.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -35,41 +35,42 @@
 
 <!--
 if you want our own libs:
-oegimport expat-2.1.0
-oegimport zlib-1.2.8
+oegimport expat
+oegimport zlib
 oegimport curl-7.31.0
-oegimport  libidn-1.28
-oegimport  gettext-0.18.3
-oegimport  libiconv-1.14
-oegimport  zlib-1.2.8
-oegimport  gnutls-3.2.2
-oegimport   gmp-5.1.2
-oegimport    readline-6.2
-oegimport   nettle-2.7.1
-#oegimport   zlib-1.2.8
-oegimport   libtasn1-3.3
-oegimport   p11-kit-0.19.2
-#oegimport    libiconv-1.14
-oegimport    gettext-0.18.3
-#oegimport    libtasn1-3.3
-oegimport    libffi-3.0.13
-oegimport  openssl-1.0.1e
-#oegimport   zlib-1.2.8
-oegimport bzip2-1.0.6
-oegimport libarchive-3.1.2
-#oegimport  libiconv-1.14
-#oegimport  gettext-0.18.3
-#oegimport  bzip2-1.0.6
-#oegimport  expat-2.1.0
-oegimport  libxml2-2.9.1
-oegimport  xz-5.0.5
-#oegimport  zlib-1.2.8
+oegimport  libidn
+oegimport  gettext
+oegimport  libiconv
+oegimport  zlib
+oegimport  gnutls
+oegimport   gmp
+oegimport    readline
+oegimport   nettle
+#oegimport   zlib
+oegimport   libtasn1
+oegimport   p11-kit
+#oegimport    libiconv
+oegimport    gettext
+#oegimport    libtasn1
+oegimport    libffi
+oegimport  openssl
+#oegimport   zlib
+oegimport bzip2
+oegimport libarchive
+#oegimport  libiconv
+#oegimport  gettext
+#oegimport  bzip2
+#oegimport  expat
+oegimport  libxml2
+oegimport  xz
+#oegimport  zlib
 -->
 
     <commands>
-oegenv 32
-oegcleanbase
-oegextract cmake-2.8.11.2.zip
+PACKAGE_NAME=cmake
+PACKAGE_VERSION=2.8.12.2
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
 # Remove Qt paths from PATH!
 # configure: don't use --no-qt-gui, this tests for qt and fails if Qt5.1 instead of Qt4 is found...
@@ -84,8 +85,9 @@ configure --prefix=/open-egovernment --no-qt-gui --no-system-libs
 
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}/msys${OEG_BASE_DIR}"
-oegarchive cmake-2.8.11.2
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
 
 #echo 'find_package(Qt4 REQUIRED)' > CMakeLists.txt; mkdir build; cd build; cmake ..
     </commands>

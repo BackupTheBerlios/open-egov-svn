@@ -2,9 +2,9 @@
 
 <!-- $Id$ -->
 
-<pack name="gnu-crypto" license="">
+<pack name="gnu-crypto" license="GPL+library exception">
   <meta>
-    <homepage></homepage>
+    <homepage>http://www.gnu.org/software/gnu-crypto/</homepage>
     <download></download>
     <descriptions>
       <description lang="en" type="short"></description>
@@ -16,17 +16,13 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
-
+  <set version="2.0.1" date="2005-01-17" working="fails-to-build">
+<!-- ftp://ftp.gnu.org/gnu/gnu-crypto/gnu-crypto-2.1.0.tar.bz2 2005-10-23-->
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="gnu-crypto-2.0.1.tar.bz2">
+        <url type="direct" checked="2014-01-20">ftp://ftp.gnu.org/gnu/gnu-crypto/releases/gnu-crypto-2.0.1.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -43,9 +39,30 @@
     </patch>
 
     <compile>
-./configure --prefix=${PREFIX}
+PACKAGE_NAME=gnu-crypto
+PACKAGE_VERSION=2.1.0
+
+#oegimport libiconv
+#oegimport gettext
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+NEEDS JAVA COMPILER
+
+configure --prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
-make install
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </compile>
 
     <install>

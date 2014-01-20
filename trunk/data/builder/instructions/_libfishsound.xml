@@ -2,10 +2,10 @@
 
 <!-- $Id$ -->
 
-<pack name="libvorbis" license="">
+<pack name="libfishsound" license="">
   <meta>
-    <homepage>http://www.vorbis.com/setup/</homepage>
-    <download>http://downloads.xiph.org/releases/vorbis/</download>
+    <homepage></homepage>
+    <download>http://downloads.xiph.org/releases/libfishsound/</download>
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long"></description>
@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="1.3.3" date="2012-02-03" state="not-tried">
+  <set version="1.0.0" date="2010-02-04" state="not-tried">
 
     <downloads>
-      <download file="libvorbis-1.3.3.tar.xz">
-        <url checked="2014-01-">http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.3.tar.xz</url>
+      <download file="libfishsound-1.0.0.tar.gz">
+        <url checked="2014-01-20">http://downloads.xiph.org/releases/libfishsound/libfishsound-1.0.0.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -33,13 +33,13 @@
     </downloads>
 
     <commands>
-PACKAGE_NAME=libvorbis
-PACKAGE_VERSION=1.3.3
+PACKAGE_NAME=libfishsound
+PACKAGE_VERSION=1.0.0
 
 #oegimport libiconv
 #oegimport gettext
 
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
 mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
 #cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"

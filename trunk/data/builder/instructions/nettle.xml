@@ -23,7 +23,7 @@
 
     <downloads>
       <download file="nettle-2.7.1.tar.gz">
-        <url checked="2014-01-15">http://www.lysator.liu.se/~nisse/archive/nettle-2.7.1.tar.gz</url>
+        <url checked="2014-01-20">http://www.lysator.liu.se/~nisse/archive/nettle-2.7.1.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>

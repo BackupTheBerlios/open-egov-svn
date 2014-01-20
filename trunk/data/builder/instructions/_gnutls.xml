@@ -19,11 +19,11 @@
   <comments>
   </comments>
 
-  <set version="3.2.8" date="2013-12-209" state="works">
+  <set version="3.2.8.1" date="2013-12-21" state="not-tried">
 
     <downloads>
-      <download file="gnutls-3.2.8.tar.xz">
-        <url checked="2014-01-15">ftp://ftp.gnutls.org/gcrypt/gnutls/v3.2/gnutls-3.2.8.tar.xz</url>
+      <download file="gnutls-3.2.8.1.tar.xz">
+        <url checked="2014-01-20">ftp://ftp.gnutls.org/gcrypt/gnutls/v3.2/gnutls-3.2.8.1.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -162,16 +162,14 @@
 -->
     <commands>
 PACKAGE_NAME=gnutls
-PACKAGE_VERSION=3.2.8
+PACKAGE_VERSION=3.2.8.1
 
 oegimport gmp             # required
 oegimport  readline
 oegimport zlib            # optional, for compression
 
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
-
-oegimport nettle-2.7.1    # required
-oegimport libtasn1-3.3    # optional, for ASN.1 parsing, a copy is included in GnuTLS
+oegimport nettle          # required
+oegimport libtasn1        # optional, for ASN.1 parsing, a copy is included in GnuTLS
 oegimport p11-kit         # optional, for smart card support
 oegimport  libiconv
 oegimport  gettext
@@ -179,6 +177,8 @@ oegimport  libtasn1
 oegimport  libffi
 #oegimport trousers     # optional, for TPM support
 #oegimport libunbound   # optional, for DNSSEC/DANE functionality
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
 
 configure --prefix=${OEG_BASE_DIR} --with-libz-prefix=${OEG_BASE_DIR} --without-tpm --disable-doc --enable-shared --with-gnu-ld --disable-rpath --with-sysroot=${OEG_BASE_DIR} --disable-guile --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 

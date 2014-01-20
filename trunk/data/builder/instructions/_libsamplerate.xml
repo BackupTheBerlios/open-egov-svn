@@ -18,7 +18,7 @@
   <comments>
   </comments>
 
-  <set version="0.1.8" date="2011-08-15" state="not-tried">
+  <set version="0.1.8" date="2011-08-15" state="works">
 
     <downloads>
       <download file="libsamplerate-0.1.8.tar.gz">
@@ -43,8 +43,7 @@ Optional Features:
   --enable-dependency-tracking   do not reject slow dependency extractors
   --enable-shared[=PKGS]  build shared libraries [default=yes]
   --enable-static[=PKGS]  build static libraries [default=yes]
-  --enable-fast-install[=PKGS]
-                          optimize for fast installation [default=yes]
+  --enable-fast-install[=PKGS]   optimize for fast installation [default=yes]
   --disable-libtool-lock  avoid locking (might break parallel builds)
   --enable-gcc-werror     enable -Werror in all Makefiles
   --disable-gcc-pipe      disable gcc -pipe option
@@ -57,16 +56,36 @@ Optional Features:
     <commands>
 PACKAGE_NAME=libsamplerate
 PACKAGE_VERSION=0.1.8
-oegenv 32
-oegcleanbase
+
+oegimport libsndfile
+#oegimport fftw         # only needed for building tests
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-oegimport libsndfile-1.0.25
-oegimport fftw-3.3.3
-# configure findet FFTW3 nicht!!
-configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --enable-shared
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING ChangeLog NEWS README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+# configure findet FFTW3 nicht von allein!
+#FFTW3_LIBS="${OEG_BASE_LIB_DIR}/libfftw3f.la"
+#FFTW3_LIBS="-L${OEG_BASE_LIB_DIR} -lfftw3f" FFTW3_CFLAGS="-I ${OEG_BASE_DIR}/include"
+# Linken gegen FFTW 3.3.3 klappt nicht:
+#multi_channel_test-calc_snr.o:calc_snr.c:(.text+0x136): undefined reference to `fftw_plan_r2r_1d'
+#multi_channel_test-calc_snr.o:calc_snr.c:(.text+0x14f): undefined reference to `fftw_execute'
+#multi_channel_test-calc_snr.o:calc_snr.c:(.text+0x159): undefined reference to `fftw_destroy_plan'
+# daher: --disable-fftw
+# müsste eigentlich auch von alleine die lib ignorieren, wenn sie nicht da ist.
+
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --enable-shared --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --disable-fftw
+
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

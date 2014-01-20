@@ -5,6 +5,7 @@
 <pack name="fontconfig" license="">
   <meta>
     <homepage>http://www.freedesktop.org/wiki/Software/fontconfig/</homepage>
+    <homepage>http://www.fontconfig.org/</homepage>
     <download>http://www.freedesktop.org/software/fontconfig/release/</download>
     <descriptions>
       <description lang="en" type="short">library for configuring and customizing font access</description>
@@ -16,20 +17,19 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="2.10.93" date="2013-05-20" state="works">
+  <set version="2.11.0" date="2013-10-10" state="works">
 
     <downloads>
-      <download file="fontconfig-2.10.93.tar.bz2">
-        <url checked="2013-07-30">http://www.freedesktop.org/software/fontconfig/release/fontconfig-2.10.93.tar.bz2</url>
+      <download file="fontconfig-2.11.0.tar.bz2">
+        <url checked="2014-01-20">http://www.freedesktop.org/software/fontconfig/release/fontconfig-2.11.0.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size></size>
+        <size>1.541.382</size>
       </download>
     </downloads>
 
@@ -100,22 +100,86 @@ Some influential environment variables:
 
     <commands>
 PACKAGE_NAME=fontconfig
-PACKAGE_VERSION=2.10.93
-oegenv 32
-oegcleanbase
+PACKAGE_VERSION=2.11.0
+
+oegimport libiconv
+oegimport freetype
+oegimport  bzip2
+oegimport  zlib
+oegimport  libpng
+oegimport expat        # or use instead libxml2
+oegimport gettext
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
-oegimport libiconv-1.14
-oegimport freetype-2.5.0.1
-oegimport  bzip2-1.0.6
-oegimport  zlib-1.2.8
-oegimport  libpng-1.6.3
-oegimport expat-2.1.0
-#oegimport gettext-0.18.3
-configure --prefix=${OEG_BASE_DIR} --enable-iconv --enable-shared --with-libiconv=${OEG_BASE_DIR} --with-expat=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR}
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --enable-iconv --enable-shared --with-libiconv=${OEG_BASE_DIR}  --with-libiconv-lib="${OEG_BASE_LIB_DIR}" --with-expat=${OEG_BASE_DIR} --with-expat-lib=${OEG_BASE_LIB_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+# --disable-docs
+# --with-sysroot=${OEG_BASE_DIR}  # else error (wrong path to libs /oeg/oeg/..; wrong libtool archive entries)
+
+# Errors: mkdir with second argument, struct dirent with no member d_type,
+# DT_DIR undeclared. maybe easy to fix?
+cd test
+cat >Makefile <<EOF
+all:
+
+install:
+
+EOF
+cd ..
+
+# Make does only work if the needed libraries (libiconv-2.dll!) are correctly
+# installed. This means /open-egovernment/lib[64]/libiconv.la has to be valid.
+# Check esp. the following entries:
+# # The name that we can dlopen(3).
+# dlname='../bin64/libiconv-2.dll'
+# # Names of this library.
+# library_names='libiconv.dll.a'
+
 make
+
+# make install[-strip] with DESTDIR does not work because it
+# wants to create symbolic links to the real destination dir
+# but the files reside in DESTDIR... But simply installing
+# into a cleaned oeg base directory will not work because
+# it wants to compile some code while installing. So we install
+# the conf.d directory to the oeg base dir and later we disable
+# the install target in the conf.d directory while installing
+# into the oeg install dir.
+
+cd conf.d
+make install-strip
+# this installs to /open-egovernment/share/fontconfig/
+# and /open-egovernment/etc/fonts/conf.d .
+
+cat >Makefile <<EOF
+all:
+
+install:
+
+install-strip:
+
+EOF
+cd ..
+
+# Now install the other files into the oeg install dir.
+
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
-# fails with an error, check if all files are copied correctly!!
+
+# With the last step we merge the installed data into the oeg install dir.
+
+mv /open-egovernment/etc/fonts/conf.d /open-egovernment-install/open-egovernment/etc/fonts/
+mv /open-egovernment/share/fontconfig /open-egovernment-install/open-egovernment/share/
+
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

@@ -22,7 +22,7 @@
 
     <downloads>
       <download file="bison-3.0.tar.xz">
-        <url checked="2013-10-28">http://ftp.gnu.org/gnu/bison/bison-3.0.tar.xz</url>
+        <url checked="2014-01-20">http://ftp.gnu.org/gnu/bison/bison-3.0.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -41,14 +41,16 @@
     <commands>
 PACKAGE_NAME=bison
 PACKAGE_VERSION=3.0
-oegenv 32
-oegcleanbase
-oegimport libiconv-1.14
-oegimport gettext-0.18.3.1
+
+oegimport libiconv
+oegimport gettext
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+
 configure --prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --without-libpth-prefix --enable-threads=windows --with-gnu-ld --disable-rpath
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

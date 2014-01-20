@@ -17,6 +17,7 @@
   </meta>
 
   <comments>
+  23-sep-2010 http://downloads.xiph.org/releases/theora/libtheora-1.2.0alpha1.tar.xz
   </comments>
 
   <set version="1.1.1" date="2010-01-25" state="not-tried">
@@ -37,15 +38,20 @@
 PACKAGE_NAME=libtheora
 PACKAGE_VERSION=1.1.1
 
+oegimport libogg
+oegimport libvorbis
+oegimport libsdl
 #oegimport libiconv
 #oegimport gettext
+#oegimport libpng
+#oegimport cairo
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
 
 mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+cp AUTHORS COPYING LICENSE README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --disable-examples --disable-oggtest --disable-vorbistest --disable-sdltest
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 

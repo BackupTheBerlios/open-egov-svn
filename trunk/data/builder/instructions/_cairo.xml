@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="1.12.14" date="2013-02-10" state="works">
+  <set version="1.12.16" date="2013-08-26" state="fails-to-build">
 
     <downloads>
-      <download file="cairo-1.12.14.tar.xz">
-        <url checked="2013-07-30">http://www.cairographics.org/releases/cairo-1.12.14.tar.xz</url>
+      <download file="cairo-1.12.16.tar.xz">
+        <url checked="2014-01-20">http://www.cairographics.org/releases/cairo-1.12.16.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -271,25 +271,101 @@ Some influential environment variables:
   glib_LIBS   linker flags for glib, overriding pkg-config
   gtk_CFLAGS  C compiler flags for gtk, overriding pkg-config
   gtk_LIBS    linker flags for gtk, overriding pkg-config
+
+
+cairo (version 1.12.16 [release]) will be compiled with:
+
+The following surface backends:
+  Image:         yes (always builtin)
+  Recording:     yes (always builtin)
+  Observer:      yes (always builtin)
+  Mime:          yes (always builtin)
+  Tee:           no (disabled, use --enable-tee to enable)
+  XML:           no (disabled, use --enable-xml to enable)
+  Skia:          no (disabled, use --enable-skia to enable)
+  Xlib:          no (requires X development libraries)
+  Xlib Xrender:  no (requires --enable-xlib)
+  Qt:            no (disabled, use --enable-qt to enable)
+  Quartz:        no (requires CoreGraphics framework)
+  Quartz-image:  no (disabled, use --enable-quartz-image to enable)
+  XCB:           no (requires xcb >= 1.6 xcb-render >= 1.6 http://xcb.freedesktop.org)
+  Win32:         yes
+  OS2:           no (disabled, use --enable-os2 to enable)
+  CairoScript:   yes
+  PostScript:    yes
+  PDF:           yes
+  SVG:           yes
+  OpenGL:        no (disabled, use --enable-gl to enable)
+  OpenGL ES 2.0: no (disabled, use --enable-glesv2 to enable)
+  BeOS:          no (disabled, use --enable-beos to enable)
+  DirectFB:      no (disabled, use --enable-directfb to enable)
+  OpenVG:        no (disabled, use --enable-vg to enable)
+  DRM:           no (disabled, use --enable-drm to enable)
+  Cogl:          no (disabled, use --enable-cogl to enable)
+
+The following font backends:
+  User:          yes (always builtin)
+  FreeType:      yes
+  Fontconfig:    no (requires fontconfig >= 2.2.95)
+  Win32:         yes
+  Quartz:        no (requires CoreGraphics framework)
+
+The following functions:
+  PNG functions:   yes
+  GLX functions:   no (not required by any backend)
+  WGL functions:   no (not required by any backend)
+  EGL functions:   no (not required by any backend)
+  X11-xcb functions: no (disabled, use --enable-xlib-xcb to enable)
+  XCB-shm functions: no (requires --enable-xcb)
+
+The following features and utilities:
+  cairo-trace:                no (requires dynamic linker and zlib and real pthreads)
+  cairo-script-interpreter:   yes
+
+And the following internal features:
+  pthread:       yes
+  gtk-doc:       no
+  gcov support:  no
+  symbol-lookup: no (requires bfd)
+  test surfaces: no (disabled, use --enable-test-surfaces to enable)
+  ps testing:    no (requires libspectre)
+  pdf testing:   no (requires poppler-glib >= 0.17.4)
+  svg testing:   no (requires librsvg-2.0 >= 2.15.0)
+  win32 printing testing:    no (requires ghostscript)
 -->
 
     <commands>
 PACKAGE_NAME=cairo
-PACKAGE_VERSION=1.12.14
-oegenv 32
-oegcleanbase
-oegimport libpng-1.6.3
-oegimport  zlib-1.2.8
-oegimport pixman-0.30.0
-oegimport freetype-2.5.0.1
-oegimport  bzip2-1.0.6
-#oegimport  zlib-1.2.8
-#oegimport  libpng-1.6.3
+PACKAGE_VERSION=1.12.16
+
+oegimport libpng
+oegimport  zlib
+oegimport pixman
+oegimport freetype
+oegimport  bzip2
+#oegimport  zlib
+#oegimport  libpng
+#poppler gtk poppler directfb librsvg ghostscript ...
+
+oegimport fontconfig
+oegimport  libiconv
+oegimport  freetype
+oegimport   bzip2
+oegimport   zlib
+oegimport   libpng
+oegimport  expat
+oegimport  gettext
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING* README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
 # ghostscript - no win32 printing; lzo2 glib-2.0 pthread libiberty
 configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --disable-gtk-doc-html
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

@@ -6,7 +6,7 @@
   <meta>
     <homepage>http://www.opus-codec.org/</homepage>
     <download>http://www.opus-codec.org/downloads/</download>
-    <!-- http://downloads.xiph.org/releases/opus/ -->
+    <download>http://downloads.xiph.org/releases/opus/</download>
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long"></description>
@@ -19,11 +19,11 @@
   <comments>
   </comments>
 
-  <set state="not-tried">
+  <set version="0.1.8" date="2013-12-06" state="not-tried">
 
     <downloads>
-      <download file="opus-tools-0.1.6.tar.gz" version="0.1.6" date="2012-12-13">
-        <url checked="2013-07-31">http://downloads.xiph.org/releases/opus/opus-tools-0.1.6.tar.gz</url>
+      <download file="opus-tools-0.1.8.tar.gz">
+        <url checked="2014-01-20">http://downloads.xiph.org/releases/opus/opus-tools-0.1.8.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -35,16 +35,31 @@
 
     <commands>
 PACKAGE_NAME=opus-tools
-PACKAGE_VERSION=0.1.6
-oegenv 32
-oegcleanbase
+PACKAGE_VERSION=0.1.8
+
+oegimport opus      # optional?
+oegimport libogg    # optional
+oegimport flac      # optional
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-#oegimport libiconv-1.14
-#oegimport gettext-0.18.3
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+#cp AUTHORS COPYING README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
 configure --prefix=${OEG_BASE_DIR}
+
+#--with-ogg=${OEG_BASE_DIR} --with-ogg-libraries=${OEG_BASE_LIB_DIR} --with-ogg-includes=${OEG_BASE_DIR}/include
+#--with-opus=${OEG_BASE_DIR} --with-opus-libraries=${OEG_BASE_LIB_DIR} --with-opus-includes=${OEG_BASE_DIR}/include
+#--without-flac          disable FLAC support
+
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin bin64
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

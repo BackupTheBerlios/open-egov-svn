@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="0.30.0" date="2013-05-08" state="works">
+  <set version="0.32.4" date="2013-11-17" state="works">
 
     <downloads>
-      <download file="pixman-0.30.0.tar.gz">
-        <url checked="2013-07-30">http://www.cairographics.org/releases/pixman-0.30.0.tar.gz</url>
+      <download file="pixman-0.32.4.tar.gz">
+        <url checked="2014-01-20">http://www.cairographics.org/releases/pixman-0.32.4.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -86,16 +86,29 @@
 
     <commands>
 PACKAGE_NAME=pixman
-PACKAGE_VERSION=0.30.0
-oegenv 32
-oegcleanbase
+PACKAGE_VERSION=0.32.4
+
+#gtk?      # optional
+oegimport libpng      # optional
+oegimport  zlib
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-#oegimport libiconv-1.14
-#oegimport gettext-0.18.3
-configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR}
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING NEWS README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --disable-gtk --enable-libpng --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mkdir -p bin64
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

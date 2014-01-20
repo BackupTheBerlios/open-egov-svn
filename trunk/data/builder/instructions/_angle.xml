@@ -37,8 +37,8 @@
 PACKAGE_NAME=angle
 PACKAGE_VERSION=
 
-#oegimport libiconv-1.14
-#oegimport gettext-0.18.3
+#oegimport libiconv
+#oegimport gettext
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 

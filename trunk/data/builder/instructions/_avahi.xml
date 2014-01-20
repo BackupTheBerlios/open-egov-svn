@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="0.6.31" date="2012-03-14" state="not-tried">
+  <set version="0.6.31" date="2012-02-14" state="not-tried">
 
     <downloads>
       <download file="avahi-0.6.31.tar.gz">
-        <url checked="2013-07-31">http://avahi.org/download/avahi-0.6.31.tar.gz</url>
+        <url checked="2014-01-20">http://avahi.org/download/avahi-0.6.31.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -35,14 +35,16 @@
     <commands>
 PACKAGE_NAME=avahi
 PACKAGE_VERSION=0.6.31
-oegenv 32
-oegcleanbase
+
+#oegimport libiconv
+#oegimport gettext
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-#oegimport libiconv-1.14
-#oegimport gettext-0.18.3
+
 configure --prefix=${OEG_BASE_DIR}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
