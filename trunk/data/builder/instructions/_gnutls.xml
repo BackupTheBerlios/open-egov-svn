@@ -34,6 +34,71 @@
     </downloads>
 
 <!--
+
+  version:              3.2.8 shared 57:0:29
+  Host/Target system:   i686-w64-mingw32
+  Build system:         i686-pc-mingw32
+  Install prefix:       /open-egovernment
+  Compiler:             i686-w64-mingw32-gcc
+  CFlags:               -m32 -march=i686 -mtune=i686 -pipe -Wall -O2 -mms-bitfie
+lds
+  Library types:        Shared=yes, Static=yes
+
+configure: External hardware support:
+
+  /dev/crypto:          no
+  Hardware accel:       x86
+  PKCS#11 support:      yes
+  TPM support:          no
+
+configure: Optional features:
+(note that included applications might not compile properly
+if features are disabled)
+
+  DTLS-SRTP support:    yes
+  ALPN support:         yes
+  OCSP support:         yes
+  OpenPGP support:      yes
+  SRP support:          yes
+  PSK support:          yes
+  DHE support:          yes
+  ECDHE support:        yes
+  Anon auth support:    yes
+  Heartbeat support:    yes
+  RSA-EXPORT compat:    yes
+  Unicode support:      yes
+  Non-SuiteB curves:    yes
+
+configure: Optional applications:
+
+  crywrap app:
+  local libopts:        yes
+  local libtasn1:       no
+
+configure: Optional libraries:
+
+  Guile wrappers:       no
+  C++ library:          yes
+  DANE library:         yes
+  OpenSSL compat:       yes
+
+configure: System files:
+
+  Trust store pkcs:
+  Trust store file:
+  Blacklist file:
+  CRL file:
+  DNSSEC root key file: /etc/unbound/root.key
+
+configure: WARNING:
+***
+*** The DNSSEC root key file in /etc/unbound/root.key was not found.
+*** This file is needed for the verification of DNSSEC responses.
+*** Use the command: unbound-anchor -a "/etc/unbound/root.key"
+*** to generate or update it.
+***
+
+
   --disable-option-checking  ignore unrecognized --enable/--with options
   --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
@@ -164,31 +229,73 @@
 PACKAGE_NAME=gnutls
 PACKAGE_VERSION=3.2.8.1
 
-oegimport gmp             # required
+oegimport gmp                # required
 oegimport  readline
-oegimport zlib            # optional, for compression
-
-oegimport nettle          # required
-oegimport libtasn1        # optional, for ASN.1 parsing, a copy is included in GnuTLS
-oegimport p11-kit         # optional, for smart card support
+oegimport zlib               # optional, for compression
+oegimport nettle             # required, has to contain libhogweed (means: compiled with gmp support)
+#oegimport  gmp
+#oegimport   readline
+oegimport  openssl
+#oegimport   zlib
+oegimport libtasn1           # optional, for ASN.1 parsing, a copy is included in GnuTLS
+oegimport p11-kit            # optional, for smart card support
 oegimport  libiconv
 oegimport  gettext
 oegimport  libtasn1
 oegimport  libffi
-#oegimport trousers     # optional, for TPM support
-#oegimport libunbound   # optional, for DNSSEC/DANE functionality
+#oegimport trousers           # optional, for TPM support
+oegimport unbound            # optional, for DNSSEC/DANE functionality
+oegimport  expat
+oegimport  openssl           # or let it out
+oegimport   zlib
+oegimport  pthreads-win32    # or use: --without-pthreads
+oegimport  ldns              # required
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+cd gnutls-3.2.8
 
-configure --prefix=${OEG_BASE_DIR} --with-libz-prefix=${OEG_BASE_DIR} --without-tpm --disable-doc --enable-shared --with-gnu-ld --disable-rpath --with-sysroot=${OEG_BASE_DIR} --disable-guile --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
-
-# no libdane build da libunbound missed
-# HOGWEED (nettle)? libregex? libopts? libidn?
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING* README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
 # The DNSSEC root key file in C:\Program Files\Unbound\root.key was not found.
 # This file is needed for the verification of DNSSEC responses.
 # Use the command: unbound-anchor -a "C:\Program Files\Unbound\root.key"
 # to generate or update it.
+#
+# We use: --with-unbound-root-key-file="/etc/unbound/root.key" because the standard value
+# defined in config.h as:
+#   #define UNBOUND_ROOT_KEY_FILE "C:\Program Files\Unbound\root.key"
+# results in an error in libdane/dane.c: incomplete universal character name \U.
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/etc/unbound"             # Home of the DNSSEC root key.
+
+# Removed: --with-sysroot=${OEG_BASE_DIR}, because libffi had a doubled oeg base path else.
+
+configure --prefix=${OEG_BASE_DIR} --with-libz-prefix=${OEG_BASE_DIR} --without-tpm --disable-doc --enable-shared --with-gnu-ld --disable-rpath --disable-guile --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --disable-tests --with-unbound-root-key-file="/etc/unbound/root.key"
+
+# Check warnings:
+# libunbound was not found. Libdane will not be built.
+# p11-kit was not found. PKCS #11 support will be disabled.
+
+# Error while linking libgnutls.la in the lib directory:
+# /bin/grep: /open-egovernment/lib64/../lib/libffi.la: No such file or directory
+#
+# libp11-kit.la:
+# # Libraries that this one depends upon.
+# dependency_libs=' -R=/lib64 -L=/lib64 =/open-egovernment/lib64/../lib/libffi.la -L=/lib64 -lintl'
+#
+# make[4]: Entering directory `/work/gnutls-3.2.8/lib'
+#   CCLD     libgnutls.la
+# libtool: link: warning: `/open-egovernment/lib64/libffi.la' seems to be moved
+# libtool: link: warning: library `/open-egovernment/lib64/libffi.la' was moved.
+#
+# *** Warning: This system can not link to static lib archive /open-egovernment/lib64/libiconv.la.
+# *** I have the capability to make that library automatically link in when
+# *** you link to this library.  But I can only do this if you have a
+# *** shared version of the library, which you do not appear to have.
+# fix libiconv.la!
+
+# libregex? libopts - builtin? libidn?
 
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}

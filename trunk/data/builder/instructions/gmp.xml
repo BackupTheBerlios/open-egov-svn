@@ -19,6 +19,15 @@
   </comments>
 
   <set version="5.1.3" date="2013-09-3" state="works">
+    <flags>
+      <flag name="readline"
+            required="no"
+            standard="yes"
+            imports="readline"
+            para-if-pos="--with-readline"
+            para-if-neg="--without-readline"
+            info="Needed for demo executable. --with-readline is optional, package is auto-detected."  />
+    </flags>
 
     <downloads>
       <download file="gmp-5.1.3.tar.xz">
@@ -39,7 +48,9 @@ PACKAGE_VERSION=5.1.3
 oegimport readline
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
 
-# --with-readline is optional, because auto-detected, readline is needed for demo executable
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING* README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
 configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-readline --disable-assembly --with-sysroot=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 #make check

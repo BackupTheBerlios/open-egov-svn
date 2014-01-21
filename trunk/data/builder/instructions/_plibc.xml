@@ -8,8 +8,7 @@
     <download>http://sourceforge.net/projects/plibc/files/plibc/</download>
     <descriptions>
       <description lang="en" type="short">A POSIX compliant libc for Windows</description>
-      <description lang="en" type="long">PlibC is a C runtime library for Windows that extends the MS libc by providing features defined in the POSIX standard and the Single Unix Specification. Applications written for Unix often rely on functions that are incomplete or unimplemented in the Microsoft C runtime library.
-The Cygwin project emulates a more or less complete Unix environment to run Unix based applications under Windows. PlibC (re)implements typical C functions as defined in the POSIX standard and the Single Unix Specification to extend the MS C runtime library without loosing the integration into Windows.</description>
+      <description lang="en" type="long">PlibC is a C runtime library for Windows that extends the MS libc by providing features defined in the POSIX standard and the Single Unix Specification. Applications written for Unix often rely on functions that are incomplete or unimplemented in the Microsoft C runtime library. The Cygwin project emulates a more or less complete Unix environment to run Unix based applications under Windows. PlibC (re)implements typical C functions as defined in the POSIX standard and the Single Unix Specification to extend the MS C runtime library without loosing the integration into Windows.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
@@ -23,7 +22,7 @@ The Cygwin project emulates a more or less complete Unix environment to run Unix
     <!-- https://plibc.svn.sourceforge.net/svnroot/plibc/trunk/plibc -->
   </set>
 
-  <set version="0.1.7" date="2012-05-05" state="works">
+  <set version="0.1.7" date="2012-05-05" state="fails-to-build">
 
     <downloads>
       <download file="plibc-0.1.7-src.tar.gz">
@@ -47,10 +46,11 @@ oegimport libtool    # or --with-included-ltdl
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}-src.tar.gz
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
-
 cd PlibC-0.1.7
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
 configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --enable-ltdl-install --with-ltdl-lib=${OEG_BASE_DIR}/lib --with-ltdl-include=${OEG_BASE_DIR}/include --enable-static --enable-shared --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}

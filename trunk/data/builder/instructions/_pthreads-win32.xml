@@ -35,9 +35,11 @@
     <commands>
 PACKAGE_NAME=pthreads-win32
 PACKAGE_VERSION=2.9.1
-oegenv 32
-oegcleanbase
+
 oegextract pthreads-w32-2-9-1-release.tar.gz
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp CONTRIBUTORS COPYING* MAINTAINERS README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
 # type "make" to see all possible targets
 
@@ -49,24 +51,24 @@ oegextract pthreads-w32-2-9-1-release.tar.gz
 
 oegpatch 001
 
-mkdir /open-egovernment-install/bin
-mkdir /open-egovernment-install/include
-mkdir /open-egovernment-install/lib
+mkdir -p ${OEG_INSTALL_DIR}${OEG_BASE_BIN_DIR}
+mkdir -p ${OEG_INSTALL_DIR}${OEG_BASE_DIR}/include
+mkdir -p ${OEG_INSTALL_DIR}${OEG_BASE_LIB_DIR}
 
 make clean GC
-cp pthreadGC2.dll /open-egovernment-install/bin/
-cp libpthreadGC2.a /open-egovernment-install/lib/libpthreadGC2.dll.a
+cp pthreadGC2.dll ${OEG_INSTALL_DIR}${OEG_BASE_BIN_DIR}
+cp libpthreadGC2.a ${OEG_INSTALL_DIR}${OEG_BASE_LIB_DIR}/libpthreadGC2.dll.a
 
 make clean GCE
-cp pthreadGCE2.dll /open-egovernment-install/bin/
-cp libpthreadGCE2.a /open-egovernment-install/lib/libpthreadGCE2.dll.a
+cp pthreadGCE2.dll ${OEG_INSTALL_DIR}${OEG_BASE_BIN_DIR}
+cp libpthreadGCE2.a ${OEG_INSTALL_DIR}${OEG_BASE_LIB_DIR}/libpthreadGCE2.dll.a
 
 make clean GC-static
-cp libpthreadGC2.a /open-egovernment-install/lib/
+cp libpthreadGC2.a ${OEG_INSTALL_DIR}${OEG_BASE_LIB_DIR}
 
-cp need_errno.h pthread.h sched.h semaphore.h /open-egovernment-install/include/
+cp need_errno.h pthread.h sched.h semaphore.h ${OEG_INSTALL_DIR}${OEG_BASE_DIR}/include
 
-cd "${OEG_INSTALL_DIR}"
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

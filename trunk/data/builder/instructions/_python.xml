@@ -18,11 +18,14 @@
   <comments>
   </comments>
 
+  <!-- http://www.python.org/ftp/python/3.4.0/Python-3.4.0b2.tar.xz 5.1.14
+       http://www.python.org/ftp/python/3.3.3/Python-3.3.3.tar.xz  17-Nov-2013 -->
+
   <set version="3.3.2" date="2013-05-15" state="fails-to-build">
 
     <downloads>
       <download file="Python-3.3.2.tar.bz2">
-        <url checked="2013-07-28">http://www.python.org/ftp/python/3.3.2/Python-3.3.2.tar.bz2</url>
+        <url checked="2014-01-21">http://www.python.org/ftp/python/3.3.2/Python-3.3.2.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -97,20 +100,23 @@ http://www.google.co.ma/url?sa=t&rct=j&q=python%20mingw&source=web&cd=7&cad=rja&
     <commands>
 PACKAGE_NAME=python
 PACKAGE_VERSION=3.3.2
-oegenv 32
-oegcleanbase
-oegimport expat-2.1.0
-oegimport libffi-3.0.13
+
+oegimport expat
+oegimport libffi
 #libmpdec
 #sqlite
 #pthreads?
 #libutil
 #pty
-oegextract Python-3.3.2.tar.bz2
+
+oegextract Python-${PACKAGE_VERSION}.tar.bz2
+
 oegpatch 001       # Remove check for getaddrinfo(). It fails, but we need it for IPv6.
-configure --prefix=${OEG_BASE_DIR} --enable-ipv6 --enable-shared --with-suffix=.exe --without-pydebug --with-system-expat --with-system-ffi 
+configure --prefix=${OEG_BASE_DIR} --enable-ipv6 --enable-shared --with-suffix=.exe --without-pydebug --with-system-expat --with-system-ffi
+
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

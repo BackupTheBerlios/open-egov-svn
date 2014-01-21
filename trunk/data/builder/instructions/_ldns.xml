@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="1.6.16" date="2013-00-00" state="works">
+  <set version="1.6.17" date="2014-01-10" state="works">
 
     <downloads>
-      <download file="">
-        <url checked="2012-11-13">http://www.nlnetlabs.nl/downloads/ldns/ldns-1.6.16.tar.gz</url>
+      <download file="ldns-1.6.17.tar.gz">
+        <url checked="2014-01-21">http://www.nlnetlabs.nl/downloads/ldns/ldns-1.6.17.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -71,38 +71,71 @@ Optional Packages:
 
     <commands>
 PACKAGE_NAME=ldns
-PACKAGE_VERSION=1.6.16
-oegenv 32
-oegcleanbase
+PACKAGE_VERSION=1.6.17
+
+oegimport openssl
+oegimport  zlib
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-oegimport openssl-1.0.1e
-oegimport  zlib-1.2.8
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --with-ssl=${OEG_BASE_DIR} --disable-rpath --enable-shared --enable-static
-oegpatch 001
-oegpatch 002
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp LICENSE README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --with-ssl=${OEG_BASE_DIR} --disable-rpath --enable-shared --enable-static --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+oegpatch 001         # Makefile: cp instead ln -s
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
+
+# Create an archive and install it into the OEG base directory. Then configure "drill"
+# with ldns option.
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
 
 # Default trust anchor: /open-egovernment/etc/unbound/root.key
 
-oegimport ldns-1.6.16
+oegimport ${PACKAGE_NAME}-${PACKAGE_VERSION}
 
-cd drill
-configure --prefix=${OEG_BASE_DIR} --with-ssl=${OEG_BASE_DIR} --disable-rpath --with-ldns=${OEG_BASE_DIR}
+############### MAKING: drill
+
+cd /work/${PACKAGE_NAME}-${PACKAGE_VERSION}/drill
+configure --prefix=${OEG_BASE_DIR} --with-ssl=${OEG_BASE_DIR} --disable-rpath --with-ldns=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+# --with-trust-anchor=
 make
-#make install DESTDIR=${OEG_INSTALL_DIR}   # error, chmod has problems
+oegpatch 002            # error, chmod has problems, because of missing exe extension
+make install DESTDIR=${OEG_INSTALL_DIR}
+
 cd ..
+
+############### MAKING: examples
 
 cp -R .libs lib   # no link to the library binary there, we copy it simply
 cd examples
-configure --prefix=${OEG_BASE_DIR} --with-ssl=${OEG_BASE_DIR} --disable-rpath --with-ldns=${OEG_BASE_DIR}
-oegpatch 003   # all examples, added missing functions, changed includes.
+configure --prefix=${OEG_BASE_DIR} --with-ssl=${OEG_BASE_DIR} --disable-rpath --with-ldns=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+# missed pcap library
+
+cd ..
+oegpatch 004            # examples/Makefile (make install): problem with missing exe extensions
+oegpatch 003            # all examples, added missing functions, changed includes.
+                        # 1/4 fails, but that is okay. fixed already.
+cd examples
+
 make
-#make install DESTDIR=${OEG_INSTALL_DIR}   # error, chmod has problems
+
+# errors with 64 bit:
+# libtool --tag=CC --quiet --mode=link gcc -I. -I. -m64 -march=nocona -mtune=core2 -pipe -Wall -O2 -mms-bitfields -O2 -L.. -L../lib -L/open-egovernment -L/open-egovernment/lib -m64 -pipe -L/open-egovernment/lib64 -lws2_32 -lws2_32 -lldns -L/open-egovernment/lib -lssl -lcrypto -o ldns-dane ldns-dane.o
+# ./.libs/lt-ldns-dane.c:1:0: error: CPU you selected does not support x86-64 instruction set
+
+make install DESTDIR=${OEG_INSTALL_DIR}
 cd ..
 
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

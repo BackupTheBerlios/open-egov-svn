@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="1.4.20" date="2013-03-21" state="works">
+  <set version="1.4.21" date="2013-09-10" state="works">
 
     <downloads>
-      <download file="unbound-1.4.20.tar.gz">
-        <url checked="2013-07-24">http://unbound.net/downloads/unbound-1.4.20.tar.gz</url>
+      <download file="unbound-1.4.21.tar.gz">
+        <url checked="2014-01-20">http://www.unbound.net/downloads/unbound-1.4.21.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -98,23 +98,34 @@ Some influential environment variables:
 -->
 
     <commands>
-oegenv 32
-oegcleanbase
-oegextract unbound-1.4.20.tar.gz
-oegimport expat-2.1.0
-oegimport openssl-1.0.1e               # or let it out
-oegimport  zlib-1.2.8
-oegimport pthreads-win32-2.9.1         # or use: --without-pthreads
-oegimport ldns-1.6.16
-#oegimport  openssl-1.0.1e
-#oegimport   zlib-1.2.8
-oegimport ldns-1.6.16                  # required
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --with-pthreads=${OEG_BASE_DIR} --with-libexpat=${OEG_BASE_DIR} --with-ssl=${OEG_BASE_DIR} --with-ldns=${OEG_BASE_DIR}
+PACKAGE_NAME=unbound
+PACKAGE_VERSION=1.4.21
+
+oegimport expat
+oegimport openssl            # or let it out
+oegimport  zlib
+oegimport pthreads-win32     # or use: --without-pthreads
+oegimport ldns               # required
+#oegimport  openssl
+#oegimport   zlib
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp LICENSE README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --with-pthreads=${OEG_BASE_DIR} --with-libexpat=${OEG_BASE_DIR} --with-ssl=${OEG_BASE_DIR} --with-ldns=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 #--with-libunbound-only
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive unbound-1.4.20
+<if64bits>
+mv bin bin64
+mv sbin sbin64
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

@@ -95,6 +95,7 @@ PACKAGE_VERSION=1.2.0
 oegimport libiconv
 oegimport gettext
 #oegimport python
+
 oegextract yasm
 
 export PATH=$PATH:/c/Python33          # using the binary from python.org

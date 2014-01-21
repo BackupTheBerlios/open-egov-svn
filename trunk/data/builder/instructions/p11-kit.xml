@@ -92,13 +92,14 @@ configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-libicon
 #         You should only need it if you modified 'acinclude.m4' or
 #         'configure.ac' or m4 files included by 'configure.ac'.
 
+aclocal
 automake
 
 oegpatch 002       # test-token.c: mingw has no getuid() function. Skipped this code.
 
 make
 
-oegpatch 003       # copy lib instead of creating a link
+oegpatch 003       # p11-kit/Makefile: removed "ln -s $(libdir)/libp11-kit.so $(libdir)/p11-kit-proxy.so"
 
 # install failed here (v0.19.2):
 # cp -pR $(DESTDIR)$(libdir)/libp11-kit.so $(DESTDIR)$(libdir)/p11-kit-proxy.so
@@ -106,8 +107,6 @@ oegpatch 003       # copy lib instead of creating a link
 #oegpatch 002      # old
 
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
-
-# make always fails at the end. Why? TODO..
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 <if64bits>

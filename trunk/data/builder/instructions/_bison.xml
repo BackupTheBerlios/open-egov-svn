@@ -19,6 +19,15 @@
   </comments>
 
   <set version="3.0" date="2013-07-25" state="not-tried">
+    <flags>
+      <flag name="libpth"
+            required="no"
+            standard="no"
+            imports="libpth"
+            para-if-pos="--with-libpth-prefix=${OEG_BASE_DIR}"
+            para-if-neg="--without-libpth-prefix"
+            info="search for libpth in DIR/include and DIR/lib"  />
+    <flags>
 
     <downloads>
       <download file="bison-3.0.tar.xz">
@@ -32,11 +41,7 @@
       </download>
     </downloads>
 
-<!--
-  --with-libpth-prefix[=DIR]  search for libpth in DIR/include and DIR/lib
-  --without-libpth-prefix     don't search for libpth in includedir and libdir
-  --with-dmalloc          use dmalloc, as in http://www.dmalloc.com/dmalloc.tar.gz
--->
+<!-- --with-dmalloc          use dmalloc, as in http://www.dmalloc.com/dmalloc.tar.gz -->
 
     <commands>
 PACKAGE_NAME=bison
@@ -47,10 +52,14 @@ oegimport gettext
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
 
-configure --prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --without-libpth-prefix --enable-threads=windows --with-gnu-ld --disable-rpath
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --without-libpth-prefix --enable-threads=windows --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

@@ -17,9 +17,26 @@
   </meta>
 
   <comments>
+    <comment>The nettle library v2.0+ is split into two libraries, libnettle and libhogweed. libnettle contains the symmetric crypto algorithms that don't depend on GMP, while libhogweed contains the public key algorithms that depend on GMP. Using a single library worked fine with static linking, but not with dynamic linking. Consider an application that uses nettle and which doesn't use any public key cryptography. If this application is linked dynamically to nettle, it would have to be linked also with GMP if and only if public key support was enabled when the nettle library was installed.</comment>
   </comments>
 
   <set version="2.7.1" date="2013-05-29" state="works">
+    <flags>
+      <flag name="gmp"
+            required="no"
+            standard="yes"
+            imports="gmp"
+            para-if-pos=""
+            para-if-neg="--disable-public-key"
+            info="GNU MP needed for gnutls!"  />
+      <flag name="openssl"
+            required="no"
+            standard="yes"
+            imports="openssl"
+            para-if-pos=""
+            para-if-neg="--disable-openssl"
+            info=""  />
+    </flags>
 
     <downloads>
       <download file="nettle-2.7.1.tar.gz">
@@ -55,12 +72,18 @@ PACKAGE_VERSION=2.7.1
 
 oegimport gmp                # GMP 3.1+ "required", else support for public key algorithms will be unavailable.
 oegimport  readline
-oegimport openssl            # else --disable-openssl
+oegimport openssl
 oegimport  zlib
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-configure --prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING.LIB README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --with-lib-path=${OEG_BASE_LIB_DIR} --with-include-path=${OEG_BASE_DIR}/include
+
+# Optional: Check summary output here. Public key crypto has to be "yes" - else GNU MP is missing somewhere above.
+
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
 
