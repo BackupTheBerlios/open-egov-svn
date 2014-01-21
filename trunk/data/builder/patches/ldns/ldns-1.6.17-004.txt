@@ -1,0 +1,11 @@
+--- examples/Makefile.old	2014-01-21 11:43:38 +0000
++++ examples/Makefile	2014-01-21 11:45:26 +0000
+@@ -169,7 +169,7 @@
+ 		$(INSTALL) -d -m 755 $(DESTDIR)$(mandir)
+ 		$(INSTALL) -d -m 755 $(DESTDIR)$(mandir)/man1
+ 		for i in $(PROGRAMS) $(SSL_PROGRAMS); do \
+-			$(libtool) --tag=CC --mode=install ${INSTALL} -c $$i $(DESTDIR)$(bindir) ; \
++			$(libtool) --tag=CC --mode=install ${INSTALL} -c $$i.exe $(DESTDIR)$(bindir) ; \
+ 			if test -f $$i.1 ; \
+ 			then $(INSTALL) -c -m 644 $$i.1 $(DESTDIR)$(mandir)/man1/$$i.1 ; \
+ 			else $(INSTALL) -c -m 644 $(srcdir)/$$i.1 $(DESTDIR)$(mandir)/man1/$$i.1 ; \

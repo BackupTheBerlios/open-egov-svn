@@ -1,0 +1,13 @@
+--- Makefile.old	2014-01-21 11:28:42 +0000
++++ Makefile	2014-01-21 11:30:39 +0000
+@@ -98,8 +98,8 @@
+ 
+ install: all
+ 	$(INSTALL) -d $(DESTDIR)$(bindir)
+-	$(INSTALL) drill $(DESTDIR)$(bindir)/drill
+-	$(INSTALL) -m 644 drill.1 $(DESTDIR)$(mandir)/man1/drill.1
++	$(INSTALL) drill.exe $(DESTDIR)$(bindir)/drill.exe
++	$(INSTALL) drill.1 $(DESTDIR)$(mandir)/man1/drill.1
+ 
+ uninstall:
+ 	@echo
