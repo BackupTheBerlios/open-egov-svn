@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="2.4.6.1" date="2013-07-10" state="works">
+  <set version="2.4.8" date="2013-12-30" state="works">
 
     <downloads>
-      <download file="opencv-2.4.6.1.tar.gz">
-        <url checked="2013-07-24">http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.6.1/opencv-2.4.6.1.tar.gz/download</url>
+      <download file="opencv-2.4.8.zip">
+        <url checked="2014-01-22">http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.8/opencv-2.4.8.zip/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -33,14 +33,20 @@
     </downloads>
 
     <commands>
-oegenv 32
-oegcleanbase
-oegextract opencv-2.4.6.1.tar.gz
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --enable-shared --enable-static
+PACKAGE_NAME=opencv
+PACKAGE_VERSION=2.4.8
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.zip
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --enable-shared --enable-static --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive opencv-2.4.6.1
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

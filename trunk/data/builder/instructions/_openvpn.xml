@@ -4,7 +4,7 @@
 
 <pack name="openvpn" license="">
   <meta>
-    <homepage></homepage>
+    <homepage>http://openvpn.net/</homepage>
     <download></download>
     <descriptions>
       <description lang="en" type="short"></description>
@@ -16,14 +16,15 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
+https://community.openvpn.net/openvpn
+https://community.openvpn.net/openvpn/wiki/BuildingOnWindows#BuildingLZO
   </comments>
 
-  <set version="" date="2013-00-00" state="works">
+  <set version="2.3.2" date="2013-06-03" state="works">
 
     <downloads>
       <download file="">
-        <url checked="2013-"></url>
+        <url checked="2013-01-22">http://swupdate.openvpn.org/community/releases/openvpn-2.3.2.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -35,15 +36,20 @@
 
     <commands>
 PACKAGE_NAME=openvpn
-PACKAGE_VERSION=
-oegenv 32
-oegcleanbase
+PACKAGE_VERSION=2.3.2
+
+#oegimport libiconv
+#oegimport gettext
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-#oegimport libiconv-1.14
-#oegimport gettext-0.18.3
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
 configure --prefix=${OEG_BASE_DIR}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

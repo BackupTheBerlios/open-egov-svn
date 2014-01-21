@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="0.3.10" date="2012-09-25" state="fails-to-build">
+  <set version="0.3.11.2" date="2013-08-19" state="fails-to-build">
 
     <downloads>
-      <download file="trousers-0.3.10.tar.gz">
-        <url checked="2013-07-24">http://sourceforge.net/projects/trousers/files/trousers/0.3.10/trousers-0.3.10.tar.gz/download</url>
+      <download file="trousers-0.3.11.2.tar.gz">
+        <url checked="2014-01-21">http://sourceforge.net/projects/trousers/files/trousers/0.3.11/trousers-0.3.11.2.tar.gz/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -53,18 +53,22 @@ GTK_CFLAGS  C compiler flags for GTK, overriding pkg-config
 GTK_LIBS    linker flags for GTK, overriding pkg-config
 -->
     <commands>
-oegenv 32
-oegcleanbase
-oegextract trousers-0.3.10.tar.gz
-oegimport openssl-1.0.1e
-oegimport  zlib-1.2.8   # needed by openssl
-oegimport gmp-5.1.2
-oegimport  readline-6.2
+PACKAGE_NAME=trousers
+PACKAGE_VERSION=0.3.11.2
+
+oegimport openssl
+oegimport  zlib
+oegimport gmp
+oegimport  readline
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
 configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gui=none --with-openssl=${OEG_BASE_DIR} --with-gnu-ld --enable-shared --with-gmp
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive trousers-0.3.10
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

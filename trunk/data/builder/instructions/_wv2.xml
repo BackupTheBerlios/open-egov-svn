@@ -22,7 +22,7 @@
 
     <downloads>
       <download file="wv2-0.4.2.tar.bz2">
-        <url checked="2013-07-30">http://sourceforge.net/projects/wvware/files/wv2-0.4.2.tar.bz2/download</url>
+        <url checked="2014-01-21">http://sourceforge.net/projects/wvware/files/wv2-0.4.2.tar.bz2/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>

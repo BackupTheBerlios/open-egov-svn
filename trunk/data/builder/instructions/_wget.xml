@@ -18,35 +18,35 @@
   <comments>
   </comments>
 
-  <set version="1.14" date="2012-08-05" state="works">
+  <set version="1.15" date="2014-01-19" state="works">
     <flags>
-      <required>libiconv-1.14, gettext-0.18.3</required>
-      <optional></optional>
-      <recommended>libiconv-1.14, gettext-0.18.3</recommended>
     </flags>
 
     <downloads>
-      <download file="wget-1.14.tar.xz">
-        <url type="direct" checked="2013-07-19">http://ftp.gnu.org/gnu/wget/wget-1.14.tar.xz</url>
+      <download file="wget-1.15.tar.xz">
+        <url type="direct" checked="2014-01-21">http://ftp.gnu.org/gnu/wget/wget-1.15.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>1584060</size>
+        <size></size>
       </download>
     </downloads>
 
     <commands>
 export PACKAGE_NAME=wget
-export PACKAGE_VERSION=1.14
-oegenv 32
-oegcleanbase
-oegimport libiconv-1.14
-oegimport gettext-0.18.2.1
+export PACKAGE_VERSION=1.15
+
+oegimport libiconv
+oegimport gettext
 # noch testen, ob zlib vergessen (-lz)
 # pfad prüfen!
-oegextract wget-1.14.tar.xz
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
 oegpatch 001   # needed, if during linking: undefined reference to `IN6_ARE_ADDR_EQUAL'
 configure --prefix=${OEG_BASE_DIR} --without-ssl --with-gnu-ld --with-libiconv-prefix=${OEG_BASE_DIR}
 make
@@ -54,7 +54,7 @@ make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 cd "${OEG_INSTALL_DIR}"
 cd "${OEG_BASE_DIR}"    # okay????
-oegarchive wget-1.14
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

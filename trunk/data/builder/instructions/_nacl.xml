@@ -37,11 +37,12 @@
     <commands>
 PACKAGE_NAME=nacl
 PACKAGE_VERSION=2011-02-21
-oegenv 32
-oegcleanbase
+
 oegextract nacl-20110221.tar.bz2
-#oegimport libiconv-1.14
-#oegimport gettext-0.18.3
+
+#oegimport libiconv
+#oegimport gettext
+
 #configure --prefix=${OEG_BASE_DIR}
 #make
 #make install-strip DESTDIR=${OEG_INSTALL_DIR}

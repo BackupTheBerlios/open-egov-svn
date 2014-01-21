@@ -2,13 +2,13 @@
 
 <!-- $Id$ -->
 
-<pack name="djvulibre" license="">
+<pack name="djview" license="">
   <meta>
     <homepage>http://djvu.org/</homepage>
     <download>http://sourceforge.net/projects/djvu/files</download>
     <descriptions>
-      <description lang="en" type="short">DjVu library</description>
-      <description lang="en" type="long">DjVu (pronounced "déjà vu") is a digital document format with advanced compression technology and high performance value. DjVu allows for the distribution on the Internet and on DVD of very high resolution images of scanned documents, digital documents, and photographs.</description>
+      <description lang="en" type="short"></description>
+      <description lang="en" type="long"></description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="3.5.25.3" date="2012-05-08" state="not-tried">
+  <set version="4.9" date="2012-04-10" state="not-tried">
 
     <downloads>
-      <download file="djvulibre-3.5.25.3.tar.gz">
-        <url checked="2014-01-21">http://sourceforge.net/projects/djvu/files/DjVuLibre/3.5.25/djvulibre-3.5.25.3.tar.gz/download</url>
+      <download file="djview-4.9.tar.gz">
+        <url checked="2014-01-21">http://sourceforge.net/projects/djvu/files/DjView/4.9/djview-4.9.tar.gz/download</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -33,25 +33,27 @@
     </downloads>
 
     <commands>
-PACKAGE_NAME=djvulibre
-PACKAGE_VERSION=3.5.25.3
-oegenv 32
-oegcleanbase
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-cd djvulibre-3.5.25
+PACKAGE_NAME=djview
+PACKAGE_VERSION=4.9
+
+oegimport djvulibre
 oegimport libjpeg-6b
-oegimport tiff-4.0.3
-oegimport  zlib-1.2.8
-oegimport  xz-5.0.5
+oegimport tiff
+oegimport  zlib
+oegimport  xz
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
 configure --prefix=${OEG_BASE_DIR} --enable-shared --with-gnu-ld --with-jpeg=/open-egovernment --with-tiff=/open-egovernment
 mingw32-make
 #../libtool: eval: line 7861: unexpected EOF while looking for matching `''
 #../libtool: eval: line 7862: syntax error: unexpected end of file
 #Makefile:79: recipe for target `libdjvulibre.la' failed
 
-#make install-strip DESTDIR=${OEG_INSTALL_DIR}
-#cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-#oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

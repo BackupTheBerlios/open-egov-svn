@@ -23,7 +23,7 @@
 
     <downloads>
       <download file="make-4.0.tar.bz2">
-        <url checked="2013-10-10">http://mirror.checkdomain.de/gnu/make/make-4.0.tar.bz2</url>
+        <url checked="2014-01-22">http://mirror.checkdomain.de/gnu/make/make-4.0.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,14 +36,16 @@
     <commands>
 PACKAGE_NAME=make
 PACKAGE_VERSION=4.0
-oegenv 32
-oegcleanbase
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
-#oegimport libiconv-1.14
-#oegimport gettext-0.18.3
+
+#oegimport libiconv
+#oegimport gettext
+
 configure --prefix=${OEG_BASE_DIR}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

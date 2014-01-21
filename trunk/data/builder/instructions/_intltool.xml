@@ -22,7 +22,7 @@
 
     <downloads>
       <download file="intltool-0.50.2.tar.gz">
-        <url checked="2013-">http://launchpad.net/intltool/trunk/0.50.2/+download/intltool-0.50.2.tar.gz</url>
+        <url checked="2014-01-21">http://launchpad.net/intltool/trunk/0.50.2/+download/intltool-0.50.2.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -69,12 +69,13 @@ updates the po template files and merges them with the translations.
     <commands>
 PACKAGE_NAME=intltool
 PACKAGE_VERSION=0.50.2
-oegenv 32
-oegcleanbase
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
 configure --prefix=${OEG_BASE_DIR}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

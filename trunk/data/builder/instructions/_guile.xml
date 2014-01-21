@@ -75,11 +75,11 @@ oegimport libiconv
 oegimport readline
 oegimport gettext
 oegimport libunistring
-oegimport libtool        # libltdl is required
+oegimport libtool            # libltdl is required
 oegimport gmp
-oegimport libffi        # required
-oegimport gc              # required
-oegimport pkg-config-lite  # only build, exists already with mingw/msys
+oegimport libffi             # required
+oegimport gc                 # required
+oegimport pkg-config-lite    # only build, exists already with mingw/msys
 
 oegextract guile-2.0.9.tar.xz
 

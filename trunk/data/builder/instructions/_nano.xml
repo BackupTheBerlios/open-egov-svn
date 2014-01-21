@@ -27,7 +27,7 @@
 
     <downloads>
       <download file="nano-2.3.2.tar.gz">
-        <url type="direct" checked="2013-07-22">http://ftp.gnu.org/pub/gnu/nano/nano-2.3.2.tar.gz</url>
+        <url type="direct" checked="2014-01-22">http://ftp.gnu.org/pub/gnu/nano/nano-2.3.2.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -38,15 +38,16 @@
     </downloads>
 
     <commands>
-oegenv 32
-oegcleanbase
+
 oegextract nano-2.3.2.tar.gz
+
 # --with-slang=DIR      Use the slang library instead of curses
 # no regex.h in c library - needed to --disable-color
 # no --enable-utf8: slang needs UTF-8 support and curses wide character support - later!
 configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-libintl-prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --disable-browser --disable-color
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
+
 cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
 oegarchive nano-2.3.2
     </commands>
