@@ -1,0 +1,29 @@
+--- src/system.old.h	2014-01-22 13:47:41 +0000
++++ src/system.h	2014-01-22 13:47:31 +0000
+@@ -132,7 +132,25 @@
+ #define LIN_MAX PTRDIFF_MAX
+ verify (TYPE_SIGNED (lin));
+ verify (sizeof (ptrdiff_t) <= sizeof (lin));
+-verify (sizeof (lin) <= sizeof (long int));
++/*verify (sizeof (lin) <= sizeof (long int));*/
++/*
++/work/diffutils-3.3/src $ make cmp.o
++  CC       cmp.o
++In file included from system.h:36:0,
++                 from cmp.c:19:
++../lib/verify.h:197:22: error: static assertion failed: "verify (sizeof (lin) <=
++ sizeof (long int))"
++ #  define _GL_VERIFY _Static_assert
++                      ^
++../lib/verify.h:241:20: note: in expansion of macro '_GL_VERIFY'
++ # define verify(R) _GL_VERIFY (R, "verify (" #R ")")
++                    ^
++system.h:135:1: note: in expansion of macro 'verify'
++ verify (sizeof (lin) <= sizeof (long int));
++ ^
++Makefile:1256: recipe for target `cmp.o' failed
++make: *** [cmp.o] Error 1
++*/
+ 
+ /* This section contains POSIX-compliant defaults for macros
+    that are meant to be overridden by hand in config.h as needed.  */

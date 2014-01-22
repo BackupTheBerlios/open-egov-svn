@@ -1,0 +1,7 @@
+--- Makefile.old	2014-01-22 11:50:45 +0000
++++ Makefile	2014-01-22 12:30:47 +0000
+@@ -418,2 +418,2 @@
+-CCLD_FOR_BUILD = cc
+-CC_FOR_BUILD = cc
++CCLD_FOR_BUILD = $(CC)
++CC_FOR_BUILD = $(CC)
