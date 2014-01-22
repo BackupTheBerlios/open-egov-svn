@@ -4,7 +4,7 @@
 
 <pack name="librtmp" license="">
   <meta>
-    <homepage></homepage>
+    <homepage>http://rtmpdump.mplayerhq.hu/</homepage>
     <download></download>
     <descriptions>
       <description lang="en" type="short"></description>
@@ -16,7 +16,6 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
   <set version="" date="2013-00-00" state="not-tried">
@@ -34,7 +33,7 @@
     </downloads>
 
     <commands>
-PACKAGE_NAME=
+PACKAGE_NAME=librtmp
 PACKAGE_VERSION=
 
 #oegimport libiconv

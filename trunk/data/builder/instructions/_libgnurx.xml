@@ -46,9 +46,8 @@
 
     <commands>
 export PACKAGE_NAME=libgnurx
-export PACKAGE_VERSION=
-oegenv 32
-oegcleanbase
+export PACKAGE_VERSION=0.12
+
 oegextract regex-0.12.tar.gz
 configure --prefix=${OEG_BASE_DIR}   # only few parameters
 #make regex.o
@@ -60,6 +59,7 @@ cp regex.h ${OEG_BASE_DIR}/include/
 
 #target doc wants tex, target tests fails ("nichts zu tun")
 #make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 #cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 #oegarchive regex-0.12
     </commands>

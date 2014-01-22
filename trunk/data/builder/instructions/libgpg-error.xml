@@ -20,9 +20,6 @@
 
   <set version="1.12" date="2013-06-24" state="works">
     <flags>
-      <required></required>
-      <optional>gettext libiconv</optional>
-      <recommended>gettext libiconv</recommended>
     </flags>
 
     <options>

@@ -20,7 +20,7 @@
   <comments>
   </comments>
 
-  <set version="0.60.6.1" date="2011-07-04" state="works">
+  <set version="0.60.6.1" date="2011-07-04" state="fails-to-build">
 
     <downloads>
       <download file="aspell-0.60.6.1.tar.gz">
@@ -85,11 +85,17 @@ PACKAGE_VERSION=0.60.6.1
 
 oegimport libiconv
 oegimport gettext
-oegimport regex
+#oegimport regex
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-configure --prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --enable-shared --disable-regex --disable-wide-curses --disable-curses --enable-win32-relocatable
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp COPYING README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --enable-shared --disable-regex --disable-wide-curses --disable-curses --enable-win32-relocatable --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --enable-nls
+# NLS needed for gettext
+# common/file_util.cpp: add #include "asc_ctype.hpp"
+
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 

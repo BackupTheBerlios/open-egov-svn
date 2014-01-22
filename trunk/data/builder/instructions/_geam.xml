@@ -5,7 +5,7 @@
 <pack name="geam" license="">
   <meta>
     <homepage></homepage>
-    <download></download>
+    <download>ftp://ftp.gnupg.org/gcrypt/geam/</download>
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long"></description>
@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="" date="" state="works">
+  <set version="0.8.4" date="2004-05-07" state="works">
 
     <downloads>
       <download file="">
-        <url type="direct" checked="2013-07-14"></url>
+        <url type="direct" checked="2014-01-22">ftp://ftp.gnupg.org/gcrypt/geam/geam-0.8.4.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -34,14 +34,20 @@
 
     <commands>
 PACKAGE_NAME=geam
-PACKAGE_VERSION=
+PACKAGE_VERSION=0.8.4
 
-#oegimport libiconv
-#oegimport gettext
+#oegimport docbook            # optional, but needed to build the documentation
+oegimport pth                # required
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-configure --prefix=${OEG_BASE_DIR}
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+# --with-pth-prefix=PFX   Prefix where Pth is installed (optional)
+# --disable-pthtest    Do not try to compile and run a test Pth program
+
+configure --prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 

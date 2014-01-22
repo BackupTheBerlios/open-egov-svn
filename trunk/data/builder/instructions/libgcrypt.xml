@@ -105,7 +105,7 @@ PACKAGE_VERSION=1.6.0
 oegimport libgpg-error       # optional
 oegimport  libiconv
 oegimport  gettext
-#oegimport gnupth             # optional
+#oegimport pth                # optional
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
 

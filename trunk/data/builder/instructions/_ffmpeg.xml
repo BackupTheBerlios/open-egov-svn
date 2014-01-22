@@ -70,6 +70,7 @@ Standard options:
   --prefix=PREFIX          install in PREFIX []
   --bindir=DIR             install binaries in DIR [PREFIX/bin]
   --datadir=DIR            install data files in DIR [PREFIX/share/ffmpeg]
+  --docdir=DIR             install documentation in DIR [PREFIX/share/doc/ffmpeg]
   --libdir=DIR             install libs in DIR [PREFIX/lib]
   --shlibdir=DIR           install shared libs in DIR [PREFIX/lib]
   --incdir=DIR             install includes in DIR [PREFIX/include]
@@ -92,6 +93,7 @@ Configuration options:
   --disable-all            disable building components, libraries and programs
   --enable-incompatible-libav-abi enable incompatible Libav fork ABI [no]
   --enable-incompatible-fork-abi  enable incompatible Libav fork ABI (deprecated) [no]
+  --enable-raise-major     increase major version numbers in sonames [no]
 
 Program options:
   --disable-programs       do not build command line programs
@@ -174,12 +176,13 @@ Individual component options:
   --disable-filters        disable all filters
 
 External library support:
-  --enable-avisynth        enable reading of AVISynth script files [no]
+  --enable-avisynth        enable reading of AviSynth script files [no]
   --disable-bzlib          disable bzlib [autodetect]
   --enable-fontconfig      enable fontconfig
   --enable-frei0r          enable frei0r video filtering
   --enable-gnutls          enable gnutls [no]
   --disable-iconv          disable iconv [autodetect]
+  --enable-ladspa          enable LADSPA audio filtering
   --enable-libaacplus      enable AAC+ encoding via libaacplus [no]
   --enable-libass          enable libass subtitles rendering [no]
   --enable-libbluray       enable BluRay reading using libbluray [no]
@@ -189,7 +192,7 @@ External library support:
   --enable-libdc1394       enable IIDC-1394 grabbing using libdc1394
                            and libraw1394 [no]
   --enable-libfaac         enable AAC encoding via libfaac [no]
-  --enable-libfdk-aac      enable AAC encoding via libfdk-aac [no]
+  --enable-libfdk-aac      enable AAC de/encoding via libfdk-aac [no]
   --enable-libflite        enable flite (voice synthesis) support via libflite [no]
   --enable-libfreetype     enable libfreetype [no]
   --enable-libgme          enable Game Music Emu via libgme [no]
@@ -212,6 +215,7 @@ External library support:
   --enable-libshine        enable fixed-point MP3 encoding via libshine [no]
   --enable-libsoxr         enable Include libsoxr resampling [no]
   --enable-libspeex        enable Speex de/encoding via libspeex [no]
+  --enable-libssh          enable SFTP protocol via libssh [no]
   --enable-libstagefright-h264  enable H.264 decoding via libstagefright [no]
   --enable-libtheora       enable Theora encoding via libtheora [no]
   --enable-libtwolame      enable MP2 encoding via libtwolame [no]
@@ -229,6 +233,7 @@ External library support:
   --enable-libxvid         enable Xvid encoding via xvidcore,
                            native MPEG-4/Xvid encoder exists [no]
   --enable-libzmq          enable message passing via libzmq [no]
+  --enable-libzvbi         enable teletext support via libzvbi [no]
   --enable-openal          enable OpenAL 1.1 capture support [no]
   --enable-opencl          enable OpenCL code
   --enable-openssl         enable openssl [no]
@@ -244,6 +249,7 @@ Advanced options (experts only):
   --target-exec=CMD        command to run executables on target
   --target-path=DIR        path to view of build directory on target
   --target-samples=DIR     path to samples directory on target
+  --tempprefix=PATH        force fixed dir/prefix instead of mktemp for checks
   --toolchain=NAME         set tool defaults according to NAME
   --nm=NM                  use nm tool NM [nm -g]
   --ar=AR                  use archive tool AR [ar]
@@ -298,6 +304,7 @@ Optimization options (experts only):
   --disable-sse42          disable SSE4.2 optimizations
   --disable-avx            disable AVX optimizations
   --disable-fma4           disable FMA4 optimizations
+  --disable-avx2           disable AVX2 optimizations
   --disable-armv5te        disable armv5te optimizations
   --disable-armv6          disable armv6 optimizations
   --disable-armv6t2        disable armv6t2 optimizations
@@ -364,10 +371,40 @@ oegimport freetype
 #oegimport  zlib
 oegimport  libpng
 
+#oegimport speex
+#oegimport librtmp
+#oegimport libwavpack
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
 
-configure --prefix=${OEG_BASE_DIR} --disable-debug --disable-random
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp COPYING CREDITS LICENSE MAINTAINERS README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --disable-debug --disable-random --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} --disable-doc
+# --disable-doc - remove later
+# ${CONFIGURE_HOST_PARA} - unknown option --host
 make
+
+
+
+
+
+
+LD      ffprobe_g.exe
+libavcodec/libavcodec.a(h263dec.o):h263dec.c:(.text+0xefd): undefined reference to `ff_h263_find_frame_end'
+libavcodec/libavcodec.a(hevc_parser.o):hevc_parser.c:(.text+0x282): undefined reference to `ff_hevc_extract_rbsp'
+libavcodec/libavcodec.a(hevc_parser.o):hevc_parser.c:(.text+0x304): undefined reference to `ff_hevc_decode_nal_sei'
+libavcodec/libavcodec.a(hevc_parser.o):hevc_parser.c:(.text+0x324): undefined reference to `ff_hevc_decode_nal_pps'
+libavcodec/libavcodec.a(hevc_parser.o):hevc_parser.c:(.text+0x528): undefined reference to `ff_hevc_decode_nal_sps'
+libavcodec/libavcodec.a(hevc_parser.o):hevc_parser.c:(.text+0x535): undefined reference to `ff_hevc_decode_nal_vps'
+libavcodec/libavcodec.a(hevc_parser.o):hevc_parser.c:(.text+0x6c3): undefined reference to `ff_hevc_compute_poc'
+d:/dev/mingw32/bin/../lib/gcc/i686-w64-mingw32/4.8.2/../../../../i686-w64-mingw3
+2/bin/ld.exe: libavcodec/libavcodec.a(hevc_parser.o): bad reloc address 0x18 in section `.data'
+collect2.exe: error: ld returned 1 exit status
+Makefile:105: recipe for target `ffprobe_g.exe' failed
+make: *** [ffprobe_g.exe] Error 1
+
+
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"

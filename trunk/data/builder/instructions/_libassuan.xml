@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="2.1.1" date="" state="fails-to-build">
+  <set version="2.1.1" date="2013-06-24" state="works">
 
     <downloads>
       <download file="libassuan-2.1.1.tar.bz2">
-        <url type="direct" checked="2013-07-19">ftp://ftp.gnupg.org/gcrypt/libassuan/libassuan-2.1.1.tar.bz2</url>
+        <url type="direct" checked="2014-01-22">ftp://ftp.gnupg.org/gcrypt/libassuan/libassuan-2.1.1.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -40,6 +40,16 @@ configure: WARNING:
 *** Descriptor passing won't work.
 ***
 
+IF:
+# checking for x86_64-w64-mingw32-gpg-error-config... /open-egovernment/bin/gpg-error-config
+# checking for GPG Error - version >= 1.8... no
+Do not use: --with-libgpg-error-prefix=${OEG_BASE_DIR}
+
+IF WRONG FILE SELECTED: change PATH to contain the right path first!!
+checking for x86_64-w64-mingw32-gpg-error-config... no
+checking for gpg-error-config... /d/dev/Qt-5.2.0-x86_64/bin/gpg-error-config
+checking for GPG Error - version >= 1.8... yes (1.12)
+
 checking for fopencookie... no
 configure: WARNING:
 ***
@@ -50,18 +60,35 @@ configure: WARNING:
 -->
 
     <commands>
-export PACKAGE_NAME=libassuan
-export PACKAGE_VERSION=2.1.1
-oegenv 32
-oegcleanbase
-oegextract libassuan-2.1.1.tar.bz2
-oegimport libgpg-error-1.12
-configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-libgpg-error-prefix=${OEG_BASE_DIR}
-#oegpatch 001
+PACKAGE_NAME=libassuan
+PACKAGE_VERSION=2.1.1
+
+oegimport libgpg-error
+oegimport  libiconv
+oegimport  gettext
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING* README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+
+oegpatch 001   # only 64 bit: src/libassuan.def: remove junk before EXPORTS
+
+# TODO: check in 64 bit make if there is an error which prevents the automatic
+# correction of libassuan.def. maybe export symbols are missing...?
+
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive libassuan-2.1.1
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

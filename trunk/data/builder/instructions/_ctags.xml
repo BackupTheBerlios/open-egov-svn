@@ -17,7 +17,7 @@
 
   <comments>
   http://freefr.dl.sourceforge.net/project/ctags/ctags/5.8/ctags58.zip
-  
+  http://sourceforge.net/p/ctags/code/HEAD/tarball?path=/trunk
   </comments>
 
   <set version="" date="2013-00-00" state="fails-to-build">
@@ -40,7 +40,11 @@ PACKAGE_VERSION=5.8
 
 #oegimport libiconv
 #oegimport gettext
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp COPYING MAINTAINERS README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
 configure --prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make

@@ -98,10 +98,17 @@ oegimport gettext
 
 oegextract yasm
 
-export PATH=$PATH:/c/Python33          # using the binary from python.org
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+#export PATH=$PATH:/c/Python33          # using the binary from python.org
 # or: --disable-python --disable-python-bindings
 #xmlto   # for man pages
-configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR}
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+
+# patch shortened. 2x3 lines removed before/after...
+oegpatch 001                 # wanted to use "cc" to build some sources
+
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 

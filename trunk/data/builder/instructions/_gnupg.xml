@@ -19,11 +19,11 @@
   <comments>
   </comments>
 
-    <set version="1.4.13" date="2012-12-20" state="works">
+    <set version="1.4.16" date="2013-12-18" state="works">
 
     <downloads>
-      <download file="gnupg-1.4.13.tar.bz2">
-        <url type="direct" checked="2013-07-20">ftp://ftp.gnupg.org/gcrypt/gnupg/gnupg-1.4.13.tar.bz2</url>
+      <download file="gnupg-1.4.16.tar.bz2">
+        <url type="direct" checked="2014-01-22">ftp://ftp.gnupg.org/gcrypt/gnupg/gnupg-1.4.16.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -34,14 +34,67 @@
     </downloads>
 
     <commands>
+  --disable-gpg           do not build the gpg program
+  --disable-gpgsm         do not build the gpgsm program
+  --disable-agent         do not build the agent program
+  --disable-scdaemon      do not build the scdaemon program
+  --disable-tools         do not build the tools program
+  --disable-doc           do not build the doc program
+  --enable-symcryptrun    build the symcryptrun program
+  --enable-gpgtar         build the gpgtar program
+  --enable-agent-only     build only the gpg-agent
+  --disable-bzip2         disable the BZIP2 compression algorithm
+  --disable-exec          disable all external program execution
+  --disable-photo-viewers disable photo ID viewers
+  --disable-keyserver-helpers  disable all external keyserver support
+  --disable-ldap          disable LDAP keyserver interface only
+  --disable-hkp           disable HKP keyserver interface only
+  --disable-finger        disable finger key fetching interface only
+  --disable-generic       disable generic object key fetching interface only
+  --enable-mailto         enable email keyserver interface only
+  --disable-keyserver-path disable the exec-path option for keyserver helpers
+  --enable-key-cache=SIZE Set key cache to SIZE (default 4096)
+  --disable-ccid-driver   disable the internal CCID driver
+  --enable-standard-socket use a standard socket for the agent by default
+  --disable-dns-srv       disable the use of DNS SRV in HKP and HTTP
+  --disable-dns-pka       disable the use of PKA records in DNS
+  --disable-dns-cert      disable the use of CERT records in DNS
+  --disable-nls           do not use Native Language Support
+  --disable-endian-check  disable the endian check and trust the OS provided macros
+  --disable-regex         do not handle regular expressions in trust signatures
+  --with-agent-pgm=PATH  Use PATH as the default for the agent)
+  --with-pinentry-pgm=PATH  Use PATH as the default for the pinentry)
+  --with-scdaemon-pgm=PATH  Use PATH as the default for the scdaemon)
+  --with-dirmngr-pgm=PATH  Use PATH as the default for the dirmngr)
+  --with-protect-tool-pgm=PATH  Use PATH as the default for the protect-tool)
+  --with-photo-viewer=FIXED_VIEWER  set a fixed photo ID viewer
+  --with-capabilities     use linux capabilities default=no
+  --with-tar=PATH         look for a tar program in PATH
+  --with-libgpg-error-prefix=PFX prefix where GPG Error is installed (optional)
+  --with-libgcrypt-prefix=PFX    prefix where LIBGCRYPT is installed (optional)
+  --with-libassuan-prefix=PFX    prefix where LIBASSUAN is installed (optional)
+  --with-ksba-prefix=PFX  prefix where KSBA is installed (optional)
+  --with-pth-prefix=PFX   prefix where GNU Pth is installed
+  --with-adns=DIR         look for the adns library in DIR
+  --with-ldap=DIR         look for the LDAP library in DIR
+  --with-libcurl=DIR      look for the curl library in DIR
+  --with-mailprog=NAME    use "NAME -t" for mail transport
+  --with-libiconv-prefix[=DIR]  search for libiconv in DIR/include and DIR/lib
+  --without-libiconv-prefix     don't search for libiconv in includedir and libdir
+  --with-libintl-prefix[=DIR]  search for libintl in DIR/include and DIR/lib
+  --without-libintl-prefix     don't search for libintl in includedir and libdir
+  --with-regex=DIR        look for regex in DIR
+  --with-zlib=DIR         use libz in DIR
+  --with-bzip2=DIR        look for bzip2 in DIR
+  --with-readline=DIR     look for the readline library in DIR
     </commands>
   </set>
 
-  <set version="2.0.20" date="2013-05-10" state="works">
+  <set version="2.0.22" date="2014-10-04" state="works">
 
     <downloads>
-      <download file="gnupg-2.0.20.tar.bz2">
-        <url type="direct" checked="2013-07-20">ftp://ftp.gnupg.org/gcrypt/gnupg/gnupg-2.0.20.tar.bz2</url>
+      <download file="gnupg-2.0.22.tar.bz2">
+        <url type="direct" checked="2014-01-22">ftp://ftp.gnupg.org/gcrypt/gnupg/gnupg-2.0.22.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -52,6 +105,59 @@
     </downloads>
 
     <commands>
+PACKAGE_NAME=gnupg
+PACKAGE_VERSION=2.0.22
+
+oegimport  libiconv
+oegimport  gettext
+oegimport libgpg-error
+#oegimport  libiconv
+#oegimport  gettext
+oegimport libassuan          # optional
+#oegimport  libgpg-error
+#oegimport   libiconv
+#oegimport   gettext
+
+#oegimport pth   # optional
+
+oegimport libgcrypt       # optional
+#oegimport  libgpg-error
+#oegimport  libiconv
+#oegimport  gettext
+#oegimport  pth                # optional
+
+oegimport libksba              # required
+#oegimport  libgpg-error
+#oegimport   libiconv
+#oegimport   gettext
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING* README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+
+
+
+
+
+
+oegpatch 001   # only 64 bit: src/libassuan.def: remove junk before EXPORTS
+
+# TODO: check in 64 bit make if there is an error which prevents the automatic
+# correction of libassuan.def. maybe export symbols are missing...?
+
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

@@ -47,10 +47,13 @@ oegimport  pcre
 oegimport  libxml2            # compile-time only?
 oegimport  libxslt            # compile-time only?
 oegimport dbus               # required
-oegimport dbus-glib # ???
+oegimport dbus-glib          # required: dbus-1 >= 1.0.0 dbus-glib-1 >= 0.74
 oegimport  expat
 
 oegextract GConf-${PACKAGE_VERSION}.tar.xz
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+#cp AUTHORS COPYING README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
 configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --disable-gtk --disable-documentation --disable-gtk-doc --disable-gtk-doc-html
 make

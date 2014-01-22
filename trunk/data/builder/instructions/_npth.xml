@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="npth" license="">
+  <meta>
+    <homepage>http://www.gnu.org/software/pth/</homepage>
+    <download>ftp://ftp.gnu.org/gnu/pth/</download>
+    <!-- http://ftp.gnu.org/pub/gnu/pth/
+http://www.ossp.org/pkg/lib/pth/
+ftp://ftp.ossp.org/pkg/lib/pth/
+-->
+    <descriptions>
+      <description lang="en" type="short">GNU Portable Threads</description>
+      <description lang="en" type="long">Pth is a very portable POSIX/ANSI-C based library for Unix platforms which provides non-preemptive priority-based scheduling for multiple threads of execution ("multithreading") inside server applications. All threads run in the same address space of the server application, but each thread has it's own individual program-counter, run-time stack, signal mask and errno variable.</description>
+      <description lang="de" type="short">GNU Portable Threads</description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords>gnu, pth</keywords>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="0.91" date="2012-08-08" working="fails-to-build">
+
+    <downloads>
+      <download file="npth-0.91.tar.bz2">
+        <url type="direct" checked="2014-01-22">ftp://ftp.gnupg.org/gcrypt/npth/npth-0.91.tar.bz2</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <compile>
+PACKAGE_NAME=npth
+PACKAGE_VERSION=0.91
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING* README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${PREFIX} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+# --disable-tests
+# --with-sysroot
+make
+
+# Error:
+# In file included from npth.c:39:0:
+# npth.h:50:8: error: redefinition of 'struct timespec'
+
+
+
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </compile>
+  </set>
+</pack>
+

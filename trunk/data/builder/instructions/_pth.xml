@@ -19,7 +19,7 @@
   <comments>
   </comments>
 
-  <set version="2.0.7" date="2006-06-08" working="false">
+  <set version="2.0.7" date="2006-06-08" working="fails-to-build">
 
     <downloads>
       <download file="pth-2.0.7.tar.gz">
@@ -37,10 +37,28 @@
 PACKAGE_NAME=pth
 PACKAGE_VERSION=2.0.7
 
-configure --prefix=${PREFIX}
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${PREFIX} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+
+# checking for sigsuspend... no
+# ./configure:Error: decision on mandatory system headers and functions failed.
+# ./configure:Hint: see config.log for more details!
+# Error was: undefined reference to `sigsuspend'
+
+
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </compile>
   </set>

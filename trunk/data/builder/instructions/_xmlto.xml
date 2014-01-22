@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="xmlto" license="">
+  <meta>
+    <homepage>https://fedorahosted.org/xmlto/</homepage>
+    <download>https://fedorahosted.org/releases/x/m/xmlto/</download>
+    <descriptions>
+      <description lang="en" type="short"></description>
+      <description lang="en" type="long">xmlto converts an XML file (DocBook or XSL-FO) into a specified format (PS, PDF, HTML, man, ASCII, XSL-FO, etc.) by applying an appropriate XSL-T stylesheet and then performing whatever post-processing is necessary.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+<!-- needed by yasm for man pages -->
+
+  <comments>
+  </comments>
+
+  <set version="0.0.25" date="2013-03-18" state="not-tried">
+
+    <downloads>
+      <download file="">
+        <url checked="2014-01-22">https://fedorahosted.org/releases/x/m/xmlto/xmlto-0.0.25.tar.bz2</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+<!--
+  --with-backend=[passivetex|fop|dblatex]
+                          The default processing backend [default=DEFAULT]
+  --with-webbrowser=[w3m|lynx|links|any]
+                          The default processing backend [default=w3m]
+
+  MKTEMP      Name of the `mktemp' program.
+  FIND        Name of the GNU `find' program.
+  BASH        Name and path of the GNU `bash' shell.
+  GETOPT      Name of the `getopt' program (requires longopt support).
+  PAPER_CONF  Name and path of the `paperconf' (libpaper) program.
+  LOCALE      Name and path of the `locale' program.
+  XMLLINT     Name and path of the `xmllint' program.
+  XSLTPROC    Name and path of the `xsltproc' program.
+  DBLATEX     Name and path of the `dblatex' utility.
+  FOP         Name and path of the `fop' utility.
+  XMLTEX      Name and path of the `xmltex' utility.
+  PDFXMLTEX   Name and path of the `pdfxmltex' utility.
+  LYNX        Name and path of the `lynx' browser.
+  LINKS       Name and path of the `links' browser.
+  W3M         Name and path of the `w3m' browser.
+  TAIL        Name and path of a tail binary that supports -n.
+  GREP        Name and path of a GNU grep binary.
+  GCP         Name and path of a GNU cp binary (need at least -P)
+  ZIP         Name and path of a zip binary (compatible with PKZIP)
+
+Use these variables to override the choices made by `configure' or to help
+it to find libraries and programs with nonstandard names/locations.
+-->
+
+    <commands>
+PACKAGE_NAME=xmlto
+PACKAGE_VERSION=0.0.25
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

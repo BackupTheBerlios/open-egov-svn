@@ -45,11 +45,13 @@ oegimport libglut   # optional
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.zip
 
 mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+cp COPYRIGHT LICENSE README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
 # --with-x                use the X Window System
 # --with-glut-include-dir=DIR    Set GLUT include directory.
 # --with-glut-lib-dir=DIR        Set GLUT library directory.
+# --disable-libjpeg    Force the IJG JPEG library to be ignored
+# --disable-opengl    Disable use of OpenGL.
 configure --prefix=${OEG_BASE_DIR} --without-x --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install DESTDIR=${OEG_INSTALL_DIR}

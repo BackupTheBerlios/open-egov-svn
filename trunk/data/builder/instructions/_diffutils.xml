@@ -34,19 +34,31 @@
     </downloads>
 
     <commands>
-export PACKAGE_NAME=diffutils
-export PACKAGE_VERSION=3.3
-oegenv 32
-oegcleanbase
-oegimport libiconv-1.14
-oegimport gettext-0.18.3
-oegextract diffutils-3.3.tar.xz
-configure --prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-gnu-ld --without-libsigsegv-prefix
-oegpatch 001       # Removes the kill() call in sdiff.c
+PACKAGE_NAME=diffutils
+PACKAGE_VERSION=3.3
+
+oegimport libiconv
+oegimport gettext
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+#  --with-libsigsegv-prefix[=DIR]  search for libsigsegv in DIR/include and DIR/lib
+#  --without-libsigsegv-prefix     don't search for libsigsegv in includedir and libdir
+
+configure --prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --without-libsigsegv-prefix --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+
+oegpatch 001                 # sdiff.c: Removes the kill() call
+oegpatch 002                 # lib/msvc-inval.c: Removes cdecl
+oegpatch 003                 # 64 bit only: src/cmp.c src/system.h: static assertion failed. needs a real fix?
+
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
+
 cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
-oegarchive diffutils-3.3
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>
