@@ -1,0 +1,11 @@
+--- configure.old	2014-01-23 09:09:31 +0000
++++ configure	2014-01-23 09:09:20 +0000
+@@ -3064,7 +3064,7 @@
+ # Check whether --with-openssl was given.
+ if test "${with_openssl+set}" = set; then :
+   withval=$with_openssl; OPENSSL_INCLUDE_DIR="$withval/include"
+-	 OPENSSL_LIB_DIR="$withval/lib"
++	 OPENSSL_LIB_DIR="$withval/lib64"
+ 	 if [ ! -d $OPENSSL_INCLUDE_DIR -o ! -d $OPENSSL_LIB_DIR ]; then
+ 		as_fn_error $? "$OPENSSL_INCLUDE_DIR or $OPENSSL_LIB_DIR doen't exist!" "$LINENO" 5
+ 	 else

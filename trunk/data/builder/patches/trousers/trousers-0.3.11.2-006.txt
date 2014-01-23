@@ -1,0 +1,12 @@
+--- src/include/tsplog.old.h	2014-01-23 09:54:55 +0000
++++ src/include/tsplog.h	2014-01-23 09:56:14 +0000
+@@ -13,7 +13,9 @@
+ #define _TSPLOG_H_
+ 
+ #include <stdio.h>
++#ifndef _WIN32
+ #include <syslog.h>
++#endif
+ #include <stdlib.h>
+ 
+ /* Debug logging */

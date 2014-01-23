@@ -1,0 +1,44 @@
+--- src/trspi/trousers.old.c	2014-01-23 09:41:26 +0000
++++ src/trspi/trousers.c	2014-01-23 10:39:40 +0000
+@@ -8,14 +8,19 @@
+  *
+  */
+ 
++#ifdef _WIN32
++#include <windows.h>
++#endif
+ 
+ #include <stdlib.h>
+ #include <stdio.h>
+ #include <string.h>
+ #include <unistd.h>
+ #include <sys/types.h>
++#ifndef _WIN32
+ #include <sys/mman.h>
+ #include <langinfo.h>
++#endif
+ #include <iconv.h>
+ #include <wchar.h>
+ #include <errno.h>
+@@ -1513,6 +1518,21 @@
+ 
+ #define MAX_BUF_SIZE	4096
+ 
++#ifdef _WIN32
++/* http://man7.org/linux/man-pages/man3/nl_langinfo.3.html */
++
++#define CODESET 1
++#define CODESETLENGTH 15
++
++char *nl_langinfo(long cs)
++{
++  static char csbuf[CODESETLENGTH];
++  snprintf(csbuf, CODESETLENGTH, "CP%u", GetACP());
++  return csbuf;
++}
++#endif
++
++
+ BYTE *
+ Trspi_Native_To_UNICODE(BYTE *string, unsigned *size)
+ {

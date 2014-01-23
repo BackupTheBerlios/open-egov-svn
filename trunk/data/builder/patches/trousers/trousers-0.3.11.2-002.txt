@@ -1,0 +1,12 @@
+--- src/include/spi_utils.old.h	2014-01-23 09:49:57 +0000
++++ src/include/spi_utils.h	2014-01-23 09:54:28 +0000
+@@ -13,7 +13,9 @@
+ #define _SPI_UTILS_H_
+ 
+ #include "threads.h"
++#ifndef _WIN32
+ #include <netinet/in.h> // for endian routines
++#endif
+ 
+ #include "trousers_types.h"
+ #include "trousers/trousers.h"

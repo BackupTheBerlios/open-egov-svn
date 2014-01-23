@@ -1,0 +1,12 @@
+--- src/include/tcsd.old.h	2014-01-23 12:00:10 +0000
++++ src/include/tcsd.h	2014-01-23 12:03:02 +0000
+@@ -157,7 +157,9 @@
+ void	   thread_signal_init();
+ 
+ /* signal handling */
++#ifndef WIN32
+ struct sigaction tcsd_sa_int;
+ struct sigaction tcsd_sa_chld;
++#endif
+ 
+ #endif

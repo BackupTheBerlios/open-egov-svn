@@ -1,0 +1,13 @@
+--- src/include/tddl.old.h	2014-01-23 10:52:42 +0000
++++ src/include/tddl.h	2014-01-23 10:53:56 +0000
+@@ -12,6 +12,10 @@
+ #ifndef _TDDL_H_
+ #define _TDDL_H_
+ 
++#ifdef _WIN32
++#include <windows.h>
++#endif
++
+ #include <threads.h>
+ #include "tcsd_wrap.h"
+ #include "tcsd.h"
