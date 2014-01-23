@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="2.2" date="2013-05-28" state="not-tried">
+  <set version="2.4.4997" date="2014-01-07" state="not-tried">
 
     <downloads>
-      <download file="jitsi-src-2.2.4603.9615.zip">
-        <url checked="2013-08-03">https://download.jitsi.org/jitsi/src/jitsi-src-2.2.4603.9615.zip</url>
+      <download file="jitsi-src-2.4.4997.zip">
+        <url checked="2014-01-22">https://download.jitsi.org/jitsi/src/jitsi-src-2.4.4997.zip</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -34,15 +34,15 @@
 
     <commands>
 PACKAGE_NAME=jitsi
-PACKAGE_VERSION=2.2
-oegenv 32
-oegcleanbase
+PACKAGE_VERSION=2.4.4997
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 #oegimport libiconv-1.14
 #oegimport gettext-0.18.3
 configure --prefix=${OEG_BASE_DIR}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

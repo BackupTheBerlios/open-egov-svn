@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="w32pth" license="">
+  <meta>
+    <homepage>ftp://ftp.g10code.com/g10code/w32pth</homepage>
+    <download></download>
+    <descriptions>
+      <description lang="en" type="short">Pth emulation </description>
+      <description lang="en" type="long"></description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+    <keywords></keywords>
+  </meta>
+
+  alert
+  we don't develop w32pth anymore - it has been superseded by npth.
+  only static library, because of issue with -lws2_32
+
+  <comments>
+*** Warning: linker path does not have real file for library -lws2_32."
+*** I have the capability to make that library automatically link in when"
+*** you link to this library. But I can only do this if you have a"
+*** shared version of the library, which you do not appear to have"
+*** because I did check the linker path looking for a file starting"
+
+I try to trace what's wrong in libtool ... and found that libtool try to search
+libws2_32.dll under couple paths ... but libtool does not know the
+real DLL is c:\windows\system32\ws2_32.dll !!
+
+If I copy/rename c:\windows\system32\ws2_32.dll to c:\mingw\bin\libws2_32.dll
+then everything work OK.
+  </comments>
+
+  <set version="2.0.5" date="2013-04-23" state="not-tried">
+
+    <downloads>
+      <download file="w32pth-2.0.5.tar.bz2">
+        <url checked="2014-01-23">ftp://ftp.g10code.com/g10code/w32pth/w32pth-2.0.5.tar.bz2</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <commands>
+PACKAGE_NAME=w32pth
+PACKAGE_VERSION=2.0.5
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+
+oegimport libgpg-error
+oegimport  libiconv
+oegimport  gettext
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING* README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+oegpatch 001 # configure.ac: AC_CANONICAL_HOST
+
+autoconf     # we changed configure.ac
+
+oegpatch 002 # .def: removed comments
+
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --enable-shared --enable-static
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin/*.dll bin64/
+rm -rf bin
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

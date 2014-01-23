@@ -20,13 +20,16 @@ ftp://ftp.ossp.org/pkg/lib/pth/
   </meta>
 
   <comments>
+http://git.gnupg.org/cgi-bin/gitweb.cgi?p=npth.git
+git://git.gnupg.org/npth.git
+http://git.gnupg.org/cgi-bin/gitweb.cgi?p=npth.git;a=tree;hb=b116a29432172f2f65e9755dae8d1b976cbc8a8a
   </comments>
 
   <set version="0.91" date="2012-08-08" working="fails-to-build">
 
     <downloads>
       <download file="npth-0.91.tar.bz2">
-        <url type="direct" checked="2014-01-22">ftp://ftp.gnupg.org/gcrypt/npth/npth-0.91.tar.bz2</url>
+        <url type="direct" checked="2014-01-23">ftp://ftp.gnupg.org/gcrypt/npth/npth-0.91.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -45,16 +48,18 @@ oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
 mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
 cp AUTHORS COPYING* README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
+oegpatch 002 # configure.ac: NETLIBS substitution
+oegpatch 003 # w32/npth.def: comments removed
+
+autoconf     # we changed configure.ac
+
 configure --prefix=${PREFIX} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 # --disable-tests
 # --with-sysroot
+
+oegpatch 001 # npth.h: struct timespec already defined
+
 make
-
-# Error:
-# In file included from npth.c:39:0:
-# npth.h:50:8: error: redefinition of 'struct timespec'
-
-
 
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 

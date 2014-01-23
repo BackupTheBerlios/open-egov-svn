@@ -17,6 +17,14 @@
   </meta>
 
   <comments>
+alert:  Building GnuPG as 64 bit programs is not supported.
+
+http://clbianco.altervista.org/gnupg/eng/gnupg.html
+
+iconv -f LATIN1 -t cp850 po/it.po > po/it2.po && mv po/it2.po po/it.po && msgfmt -o po/it.gmo po/it.po
+where "it" can be changed with the localization file of your choice (e.g., "fr" for French, "es" for Spanish, ecc.) and "cp850" must of course be changed with the actual codepage (some sort of "character table") used by your Windows version in the command prompt windows. The codepage 850 is the one, so called, of Western Europe, and it is used by Italian versions. To know the codepage used by your Windows version, open a command prompt window and use the command "chcp". If you are interested in more than a GnuPG localization, repeat this point "e" for all the localization files of your choice.
+
+GnuPG installation procedure, described in the README-W32.txt file, creating the required registry keys.
   </comments>
 
     <set version="1.4.16" date="2013-12-18" state="works">
@@ -108,25 +116,22 @@
 PACKAGE_NAME=gnupg
 PACKAGE_VERSION=2.0.22
 
-oegimport  libiconv
-oegimport  gettext
+oegimport libiconv
+oegimport gettext
 oegimport libgpg-error
 #oegimport  libiconv
 #oegimport  gettext
-oegimport libassuan          # optional
+oegimport libassuan          # optional, +pth support!
 #oegimport  libgpg-error
 #oegimport   libiconv
 #oegimport   gettext
-
-#oegimport pth   # optional
-
-oegimport libgcrypt       # optional
+oegimport w32pth               # required, pth/w32pth are old, replaced by npth
+oegimport libgcrypt          # optional
 #oegimport  libgpg-error
 #oegimport  libiconv
 #oegimport  gettext
-#oegimport  pth                # optional
-
-oegimport libksba              # required
+#oegimport  pth              # optional
+oegimport libksba            # required
 #oegimport  libgpg-error
 #oegimport   libiconv
 #oegimport   gettext
@@ -138,17 +143,16 @@ cp AUTHORS COPYING* README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${
 
 configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 
-
-
-
-
-
-oegpatch 001   # only 64 bit: src/libassuan.def: remove junk before EXPORTS
-
 # TODO: check in 64 bit make if there is an error which prevents the automatic
 # correction of libassuan.def. maybe export symbols are missing...?
 
+
+
+
+
+
 make
+#make check
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"

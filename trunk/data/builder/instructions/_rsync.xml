@@ -46,8 +46,8 @@ PACKAGE_NAME=rsync
 PACKAGE_VERSION=3.1.0
 
 #oegimport zlib
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 oegextract ${PACKAGE_NAME}-patches-${PACKAGE_VERSION}.tar.gz
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 cd ${PACKAGE_NAME}-${PACKAGE_VERSION}
 
 # TODO: apply some patches?

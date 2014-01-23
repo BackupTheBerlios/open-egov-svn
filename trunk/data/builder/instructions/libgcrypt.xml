@@ -18,6 +18,16 @@
   </meta>
 
   <comments>
+http://www.securitypunk.com/libgcrypt/
+
+After downloading and unpacking the libgcrypt source:
+
+    Find the line ac_cv_sys_symbol_underscore=yes in ./configure (there's probably only one), and add | i686-pc-mingw32 to the line above so that it reads i386-emx-os2 | i[3456]86-pc-os2*emx | i386-pc-msdosdjgpp | i686-pc-mingw32)
+    Run ./configure --prefix=/mingw && make - this will error out on random.c, but don't worry about it - just run make install (which will also error out; again, don't worry)
+    Download Joe Testa's libgcrypt.def (local mirror) into the libgcrypt source directory. You can then build and strip the DLL with gcc -shared -o libgcrypt.dll libgcrypt.def src/.libs/libgcrypt.a /mingw/lib/libgpg-error.a and strip libgcrypt.dll
+    Install it by copying libgcrypt.dll to /mingw/bin and /mingw/lib. Find the libgcrypt-config script and put that in /mingw/bin too (you'll need it for compiling libgnutls later).
+http://www.securitypunk.com/misc/libgcrypt.def
+http://kayalang.org/src/libgcrypt.def
   </comments>
 
 <!--

@@ -2,12 +2,12 @@
 
 <!-- $Id$ -->
 
-<pack name="lzo" license="">
+<pack name="pdcurses" license="">
   <meta>
-    <homepage>http://www.oberhumer.com/opensource/lzo/</homepage>
-    <download>http://www.oberhumer.com/opensource/lzo/download/</download>
+    <homepage>http://pdcurses.sourceforge.net/</homepage>
+    <download></download>
     <descriptions>
-      <description lang="en" type="short">LZO is a portable lossless data compression library</description>
+      <description lang="en" type="short"></description>
       <description lang="en" type="long"></description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
@@ -16,14 +16,13 @@
   </meta>
 
   <comments>
-http://www.oberhumer.com/opensource/lzo/download/minilzo-2.06.tar.gz
   </comments>
 
-  <set version="2.06" date="2011-08-12" state="not-tried">
+  <set version="" date="" state="not-tried">
 
     <downloads>
-      <download file="lzo-2.06.tar.gz">
-        <url checked="2014-01-22">http://www.oberhumer.com/opensource/lzo/download/lzo-2.06.tar.gz</url>
+      <download file="">
+        <url checked="2014-01-"></url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -34,19 +33,22 @@ http://www.oberhumer.com/opensource/lzo/download/minilzo-2.06.tar.gz
     </downloads>
 
     <commands>
-PACKAGE_NAME=lzo
-PACKAGE_VERSION=2.06
+PACKAGE_NAME=pdcurses
+PACKAGE_VERSION=
+
+#oegimport libiconv
+#oegimport gettext
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
 mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp AUTHORS COPYING README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
-configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --enable-shared --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
-#make check
-#make test
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+# once you've installed it, you'll want to copy /mingw/lib/libpdcurses.* to /mingw/lib/libcurses.* and /mingw/include/pdcurses.h to /mingw/include/curses.h
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 <if64bits>

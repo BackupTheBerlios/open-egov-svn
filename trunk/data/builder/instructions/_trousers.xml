@@ -16,6 +16,11 @@
   </meta>
 
   <comments>
+http://security.polito.it/trusted-computing/trousers-for-windows/
+http://sourceforge.net/mailarchive/message.php?msg_id=26115126
+http://sourceforge.net/mailarchive/forum.php?thread_name=F514203A-7194-4A57-B6F3-E241AA78C5C7%40linux.vnet.ibm.com&forum_name=trousers-tech
+http://permalink.gmane.org/gmane.comp.encryption.trousers.devel/427
+http://code.ohloh.net/file?fid=KxvSgX81mXbw_w2yoYNxdijclpI&cid=wHGgz7qfIF4&s=&fp=498327&mp&projSelected=true#L0
   </comments>
 
   <set version="0.3.11.2" date="2013-08-19" state="fails-to-build">
@@ -44,13 +49,6 @@
   --with-gmp              build TrouSerS with the GMP math lib (used in DAA)
   --with-gui              type of gui popup (gtk/none) [default=gtk]
   --with-api              Version of the TSS API to build [default=1.2]
-PKG_CONFIG  path to pkg-config utility
-PKG_CONFIG_PATH
-            directories to add to pkg-config's search path
-PKG_CONFIG_LIBDIR
-            path overriding pkg-config's built-in search path
-GTK_CFLAGS  C compiler flags for GTK, overriding pkg-config
-GTK_LIBS    linker flags for GTK, overriding pkg-config
 -->
     <commands>
 PACKAGE_NAME=trousers
@@ -63,7 +61,27 @@ oegimport  readline
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gui=none --with-openssl=${OEG_BASE_DIR} --with-gnu-ld --enable-shared --with-gmp
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS LICENSE README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+<if64bits>
+oegpatch 001  # configure: if --with-openssl given it searched for */lib instead of */lib64
+</if64bits>
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gui=none --with-gnu-ld --enable-shared --with-gmp --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --with-openssl=${OEG_BASE_DIR}
+
+oegpatch 002  # src/include/spi_utils.h
+oegpatch 003  # src/include/tcslog.h
+oegpatch 004  # src/include/tddl.h
+oegpatch 005  # src/include/trousers_types.h
+oegpatch 006  # src/include/tsplog.h
+oegpatch 007  # src/tddl/tddl.c
+oegpatch 008  # src/trspi/trousers.c
+oegpatch 009  # src/include/tcsd.h
+oegpatch 010  # src/include/tcslog.h
+oegpatch 011  # src/tcs/log.c
+oegpatch 012  # src/tcs/tcs_caps.c
+
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 

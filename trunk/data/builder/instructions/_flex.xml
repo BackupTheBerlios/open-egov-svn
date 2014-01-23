@@ -43,6 +43,7 @@ PACKAGE_VERSION=2.5.37
 
 oegimport libiconv
 oegimport gettext
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
 
 mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"

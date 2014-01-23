@@ -5,9 +5,9 @@
 <pack name="gpgme" license="">
   <meta>
     <homepage></homepage>
-    <download></download>
+    <download>ftp://ftp.gnupg.org/gcrypt/gpgme/</download>
     <descriptions>
-      <description lang="en" type="short"></description>
+      <description lang="en" type="short">GnuPG Made Easy library</description>
       <description lang="en" type="long"></description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
@@ -16,17 +16,13 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="1.4.3" date="2013-08-12" working="not-tried">
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="gpgme-1.4.3.tar.bz2">
+        <url type="direct" checked="2014-01-23">ftp://ftp.gnupg.org/gcrypt/gpgme/gpgme-1.4.3.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,20 +32,20 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
     <compile>
-./configure --prefix=${PREFIX}
+PACKAGE_NAME=gpgme
+PACKAGE_VERSION=1.4.3
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+#cp AUTHORS COPYING README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${PREFIX}
 make
 make install
-    </compile>
 
-    <install>
-    </install>
+    </compile>
   </set>
 </pack>
 

@@ -18,7 +18,7 @@
   <comments>
   </comments>
 
-  <set version="7.6.1" date="2013-00-00" state="not-tried">
+  <set version="7.6.1" date="2012-06-25" state="not-tried">
 
     <downloads>
       <download file="libjson_7.6.1.zip">
@@ -35,14 +35,16 @@
     <commands>
 PACKAGE_NAME=libjson
 PACKAGE_VERSION=7.6.1
-oegenv 32
-oegcleanbase
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
 #oegimport libiconv-1.14
 #oegimport gettext-0.18.3
+
+oegextract ${PACKAGE_NAME}_${PACKAGE_VERSION}.zip
+
 configure --prefix=${OEG_BASE_DIR}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

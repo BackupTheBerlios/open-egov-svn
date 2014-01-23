@@ -148,8 +148,10 @@ PACKAGE_VERSION=1.3.2
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}-source.tar.gz
 cd fltk-1.3.2
 
+# TODO apply patches here
+
 mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-#cp AUTHORS COPYING.LIB README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+cp COPYING CREDITS README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
 # optional: libjpeg zlib pnglib
 configure --prefix=${OEG_BASE_DIR} --enable-gl --enable-shared --enable-threads

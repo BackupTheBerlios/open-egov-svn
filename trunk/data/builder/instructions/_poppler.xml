@@ -191,12 +191,6 @@ Building poppler with support for:
 PACKAGE_NAME=poppler
 PACKAGE_VERSION=0.24.5
 
-oegextract poppler-data-0.4.6.tar.gz
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
-
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
-
 oegimport zlib
 oegimport bzip2
 oegimport pthreads-win32
@@ -224,6 +218,12 @@ oegimport    gettext
 oegimport    libffi
 oegimport  openssl
 #oegimport   zlib
+
+oegextract poppler-data-0.4.6.tar.gz
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS LICENSE "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
 #you may activate: libedit libcairo freetype openjpeg libjpeg6 pthreads
 configure --prefix=${OEG_BASE_DIR} --enable-shared --with-libiconv-prefix=${OEG_BASE_DIR} --with-font-configuration=win32 --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --disable-poppler-qt4 --disable-poppler-cpp --disable-gtk-test --disable-gtk-doc --disable-poppler-glib --enable-zlib --enable-libcurl --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
