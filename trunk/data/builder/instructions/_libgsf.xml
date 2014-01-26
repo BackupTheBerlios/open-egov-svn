@@ -8,7 +8,7 @@
     <download>http://ftp.gnome.org/pub/gnome/sources/libgsf/</download>
     <!-- http://www.linuxfromscratch.org/blfs/view/svn/general/libgsf.html -->
     <descriptions>
-      <description lang="en" type="short"></description>
+      <description lang="en" type="short">GNOME Structured File Library</description>
       <description lang="en" type="long">The libgsf package contains the library used for providing an extensible input/output abstraction layer for structured file formats.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
@@ -36,18 +36,34 @@
 PACKAGE_NAME=libgsf
 PACKAGE_VERSION=1.14.29
 
-oegimport libxml2            # required: libxml2-2.9.1
-oegimport glib               # required: GLib-2.36.3
-oegimport intltool           # required: Intltool-0.50.2
-#oegimport gdk-pixbuf         # recommended: gdk-pixbuf-2.28.2 (To build gsf-office-thumbnailer)
-#oegimport gobject-introspection  # optional: gobject-introspection-1.36.0
-#oegimport gtkdoc             # optional: GTK-Doc-1.19
+oegimport libxml2            # required: 2.9.1
+oegimport glib               # required: 2.36.3
+
+oegimport  libiconv
+oegimport  zlib
+oegimport  libffi             # required
+oegimport  gettext            # required
+oegimport  pcre
+##oegimport  python             # compile-time only; really needed?
+oegimport  libxml2            # compile-time only?
+oegimport  libxslt            # compile-time only?
+#oegimport   libiconv
+#oegimport   gettext
+#oegimport   zlib
+
+oegimport intltool           # required: 0.50.2
+#oegimport gdk-pixbuf         # recommended: 2.28.2 (To build gsf-office-thumbnailer)
+#oegimport gobject-introspection  # optional: 1.36.0
+#oegimport gtkdoc             # optional: GTK-Doc 1.19
 #oegimport libiconv
 #oegimport gettext
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
 
-configure --prefix=${OEG_BASE_DIR}
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING* README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --disable-gtk-doc --disable-gtk-doc-html --disable-gtk-doc-pdf --without-gdk-pixbuf --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 

@@ -4,7 +4,7 @@
 
 <pack name="polarssl" license="">
   <meta>
-    <homepage></homepage>
+    <homepage>https://polarssl.org/</homepage>
     <download>https://polarssl.org/download</download>
     <descriptions>
       <description lang="en" type="short"></description>

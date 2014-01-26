@@ -5,7 +5,7 @@
 <pack name="cryptplug" license="">
   <meta>
     <homepage></homepage>
-    <download></download>
+    <download>http://ftp.freenet.de/pub/ftp.gnupg.org/gcrypt/alpha/cryptplug/</download>
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long"></description>
@@ -16,17 +16,13 @@
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="0.3.16" date="2003-05-13" working="not-tried">
 
     <downloads>
-      <download file="">
-        <url type="direct" checked="2012-11-11"></url>
+      <download file="cryptplug-0.3.16.tar.gz">
+        <url type="direct" checked="2014-01-24">http://ftp.freenet.de/pub/ftp.gnupg.org/gcrypt/alpha/cryptplug/cryptplug-0.3.16.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,20 +32,25 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
     <compile>
-./configure --prefix=${PREFIX}
-make
-make install
-    </compile>
+PACKAGE_NAME=cryptplug
+PACKAGE_VERSION=0.3.16
 
-    <install>
-    </install>
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
+#oeg_include_files AUTHORS COPYING* README
+
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+<if64bits>
+mv bin bin64
+# TODO: Do we need to edit the .la files in lib64?
+</if64bits>
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </compile>
   </set>
 </pack>
 

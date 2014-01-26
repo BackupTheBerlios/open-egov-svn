@@ -15,11 +15,10 @@
     <keywords></keywords>
   </meta>
 
-  alert
-  we don't develop w32pth anymore - it has been superseded by npth.
-  only static library, because of issue with -lws2_32
-
   <comments>
+alert: we don't develop w32pth anymore - it has been superseded by npth.
+only static library, because of issue with -lws2_32
+
 *** Warning: linker path does not have real file for library -lws2_32."
 *** I have the capability to make that library automatically link in when"
 *** you link to this library. But I can only do this if you have a"

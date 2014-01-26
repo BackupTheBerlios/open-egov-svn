@@ -19,7 +19,7 @@
   <comments>
   </comments>
 
-  <set version="2.8.12.2" date="2014-01-16" state="fails-to-build">
+  <set version="2.8.12.2" date="2014-01-16" state="works">
 
     <downloads>
       <download file="cmake-2.8.12.2.tar.gz">
@@ -72,13 +72,16 @@ PACKAGE_VERSION=2.8.12.2
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
+oeg_include_files AUTHORS COPYING* README
+
 # Remove Qt paths from PATH!
 # configure: don't use --no-qt-gui, this tests for qt and fails if Qt5.1 instead of Qt4 is found...
 # A fast fix was to remove the "Qt Version" in CMakeLists.txt or remove it together with "Qt required"
 # completely as KDE was also required in the CMakeLists.txt and has Qt as it's dependency.
 
+# TODO: try
 # --no-system-libarchive
-configure --prefix=/open-egovernment --no-qt-gui --system-expat --system-curl --system-zlib --system-bzip2 --system-libarchive
+#configure --prefix=/open-egovernment --no-qt-gui --system-expat --system-curl --system-zlib --system-bzip2 --system-libarchive
 
 # Minimal setup with included copies of all the libraries.
 configure --prefix=/open-egovernment --no-qt-gui --no-system-libs
@@ -86,7 +89,10 @@ configure --prefix=/open-egovernment --no-qt-gui --no-system-libs
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
 
-cd "${OEG_INSTALL_DIR}/msys${OEG_BASE_DIR}"
+cd "${OEG_INSTALL_DIR}/dev/msys${OEG_BASE_DIR}"        # check
+<if64bits>
+mv bin bin64
+</if64bits>
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
 
 #echo 'find_package(Qt4 REQUIRED)' > CMakeLists.txt; mkdir build; cd build; cmake ..

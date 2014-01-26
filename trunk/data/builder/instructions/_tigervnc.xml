@@ -42,17 +42,33 @@ oegimport cmake
 oegimport gettext
 oegimport  libiconv
 oegimport gnutls        # compiled with libgcrypt?
-oegimport  gmp
+
+# for gnutls:
+oegimport  gmp                # required
 oegimport   readline
-oegimport  nettle
-oegimport  zlib
-oegimport  libtasn1
-oegimport  p11-kit
-#oegimport   libiconv
-#oegimport   gettext
-#oegimport   libtasn1
+oegimport  zlib               # optional, for compression
+oegimport  nettle             # required, has to contain libhogweed (means: compiled with gmp support)
+#oegimport   gmp
+#oegimport    readline
+oegimport   openssl
+#oegimport    zlib
+oegimport  libtasn1           # optional, for ASN.1 parsing, a copy is included in GnuTLS
+oegimport  p11-kit            # optional, for smart card support
+oegimport   libiconv
+oegimport   gettext
+oegimport   libtasn1
 oegimport   libffi
+#oegimport  trousers           # optional, for TPM support
+oegimport  unbound            # optional, for DNSSEC/DANE functionality
+oegimport   expat
+oegimport   openssl           # or let it out
+oegimport    zlib
+oegimport   pthreads-win32    # or use: --without-pthreads
+oegimport   ldns              # required
+
 oegimport fltk
+#oegimport  zlib
+
 oegimport libgcrypt
 oegimport  libgpg-error
 #oegimport   libiconv
@@ -64,12 +80,14 @@ oegimport libjpeg-turbo
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
 
+oeg_include_file LICENCE.TXT
+
 #cmake -G "MSYS Makefiles" -DCMAKE_INSTALL_PREFIX=${OEG_INSTALL_DIR} -DGETTEXT_INCLUDE_DIR=/open-egovernment/include -DLIBINTL_LIBRARY=/open-egovernment/lib/libintl.dll.a -DJPEG_INCLUDE_DIR=/open-egovernment/include -DJPEG_LIBRARY=/open-egovernment/lib/libjpeg.a
 #LIBINTL_LIBRARY   else: C:/msys/bin/intl.dll
 #JPEG_LIBRARY      not .dll.a
 
 # static build:
-cmake -G "MSYS Makefiles" -DCMAKE_INSTALL_PREFIX=${OEG_INSTALL_DIR}  -DGETTEXT_INCLUDE_DIR=/open-egovernment/include -DLIBINTL_LIBRARY=/open-egovernment/lib/libintl.a -DJPEG_INCLUDE_DIR=/open-egovernment/include -DJPEG_LIBRARY=/open-egovernment/lib/libjpeg.a -DZLIB_INCLUDE_DIR=/open-egovernment/include -DZLIB_LIBRARY=/open-egovernment/lib/libz.a -DGNUTLS_INCLUDE_DIR=/open-egovernment/include -DGNUTLS_LIBRARY=/open-egovernment/lib/libgnutls.a -DICONV_INCLUDE_DIR=/open-egovernment/include -DICONV_LIBRARIES=/open-egovernment/lib/libiconv.a -DBUILD_STATIC=1
+cmake -G "MSYS Makefiles" -DCMAKE_INSTALL_PREFIX=${OEG_INSTALL_DIR}  -DGETTEXT_INCLUDE_DIR=/open-egovernment/include -DLIBINTL_LIBRARY=/open-egovernment/lib/libintl.a -DJPEG_INCLUDE_DIR=/open-egovernment/include -DJPEG_LIBRARY=/open-egovernment/lib/libjpeg.a -DZLIB_INCLUDE_DIR=/open-egovernment/include -DZLIB_LIBRARY=/open-egovernment/lib/libz.a -DGNUTLS_INCLUDE_DIR=/open-egovernment/include -DGNUTLS_LIBRARY='/open-egovernment/lib/libgnutls.a;/open-egovernment/lib/libgcrypt.a;/open-egovernment/lib/libtasn1.a;/open-egovernment/lib/libgpg-error.a' -DICONV_INCLUDE_DIR=/open-egovernment/include -DICONV_LIBRARIES=/open-egovernment/lib/libiconv.a -DBUILD_STATIC=1
 
 
 #GNUTLS_INCLUDE_DIR:PATH=/open-egovernment/include

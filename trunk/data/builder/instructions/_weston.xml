@@ -4,11 +4,11 @@
 
 <pack name="weston" license="">
   <meta>
-    <homepage>http://wayland.freedesktop.org/releases.html</homepage>
-    <download></download>
+    <homepage>http://wayland.freedesktop.org/</homepage>
+    <download>http://wayland.freedesktop.org/releases.html</download>
     <descriptions>
-      <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="short">Reference implementation of a Wayland compositor</description>
+      <description lang="en" type="long">The Weston reference implementation of a Wayland compositor can run as an X client or under Linux KMS and ships with a few demo clients. The Weston compositor is a minimal and fast compositor and is suitable for many embedded and mobile use cases.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="1.3.91" date="2013-12-17" state="not-tried">
+  <set version="1.4.0" date="2014-01-23" state="not-tried">
 
     <downloads>
-      <download file="weston-1.3.91.tar.xz">
-        <url checked="2014-01-17">http://wayland.freedesktop.org/releases/weston-1.3.91.tar.xz</url>
+      <download file="weston-1.4.0.tar.xz">
+        <url checked="2014-01-24">http://wayland.freedesktop.org/releases/weston-1.4.0.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -34,7 +34,7 @@
 
     <commands>
 PACKAGE_NAME=weston
-PACKAGE_VERSION=1.3.91
+PACKAGE_VERSION=1.4.0
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
 

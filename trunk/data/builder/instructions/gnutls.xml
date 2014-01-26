@@ -252,7 +252,7 @@ oegimport  pthreads-win32    # or use: --without-pthreads
 oegimport  ldns              # required
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
-cd gnutls-3.2.8
+cd ${PACKAGE_NAME}-3.2.8
 
 mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
 cp AUTHORS COPYING* README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"

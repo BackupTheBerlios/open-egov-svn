@@ -4,8 +4,8 @@
 
 <pack name="tellico" license="">
   <meta>
-    <homepage></homepage>
-    <download></download>
+    <homepage>http://tellico-project.org/</homepage>
+    <download>http://tellico-project.org/files/</download>
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long"></description>
@@ -18,11 +18,11 @@
   <comments>
   </comments>
 
-  <set version="2.3.8" date="2013-00-00" state="not-tried">
+  <set version="2.3.8" date="2013-07-07" state="not-tried">
 
     <downloads>
       <download file="tellico-2.3.8.tar.bz2">
-        <url checked="2014-">http://tellico-project.org/files/tellico-2.3.8.tar.bz2</url>
+        <url checked="2014-01-26">http://tellico-project.org/files/tellico-2.3.8.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -36,10 +36,10 @@
 PACKAGE_NAME=tellico
 PACKAGE_VERSION=2.3.8
 
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+
 oegimport libiconv
 oegimport gettext
-
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
 
 mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
 cp AUTHORS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"

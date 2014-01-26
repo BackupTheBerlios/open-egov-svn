@@ -115,12 +115,13 @@ PACKAGE_VERSION=1.6.0
 oegimport libgpg-error       # optional
 oegimport  libiconv
 oegimport  gettext
-#oegimport pth                # optional
+oegimport npth                # optional, eigentlich pth
+oegimport w32pth                # optional, welches nimmt er?
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
 
 mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-#cp AUTHORS COPYING README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+cp AUTHORS COPYING* LICENSES README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
 <if64bits>
 # nur 1.6.0?

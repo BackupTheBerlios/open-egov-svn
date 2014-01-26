@@ -20,6 +20,27 @@
 
   <set version="1.15" date="2014-01-19" state="works">
     <flags>
+      <flag name="pth"
+            required="no"
+            standard="no"
+            imports="pth"
+            para-if-pos="--with-libpth-prefix=${OEG_BASE_DIR}"
+            para-if-neg="--without-libpth-prefix"
+            info=""  />
+      <flag name="openssl"
+            required="no"
+            standard="no"
+            imports="pth"
+            para-if-pos="--with-libpth-prefix=${OEG_BASE_DIR}"
+            para-if-neg="--without-ssl"
+            info=""  />
+      <flag name="gnutls"
+            required="no"
+            standard="no"
+            imports="pth"
+            para-if-pos="--with-libpth-prefix=${OEG_BASE_DIR}"
+            para-if-neg="--without-libpth-prefix"
+            info=""  />
     </flags>
 
     <downloads>
@@ -35,25 +56,52 @@
     </downloads>
 
     <commands>
-export PACKAGE_NAME=wget
-export PACKAGE_VERSION=1.15
+PACKAGE_NAME=wget
+PACKAGE_VERSION=1.15
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
 
 oegimport libiconv
 oegimport gettext
+oegimport libidn             # optional
+oegimport gnutls             # optional
+
+#for gnutls:
+oegimport gmp                # required
+oegimport  readline
+oegimport zlib               # optional, for compression
+oegimport nettle             # required, has to contain libhogweed (means: compiled with gmp support)
+#oegimport  gmp
+#oegimport   readline
+oegimport  openssl
+#oegimport   zlib
+oegimport libtasn1           # optional, for ASN.1 parsing, a copy is included in GnuTLS
+oegimport p11-kit            # optional, for smart card support
+oegimport  libiconv
+oegimport  gettext
+oegimport  libtasn1
+oegimport  libffi
+#oegimport trousers           # optional, for TPM support
+oegimport unbound            # optional, for DNSSEC/DANE functionality
+oegimport  expat
+oegimport  openssl           # or let it out
+oegimport   zlib
+oegimport  pthreads-win32    # or use: --without-pthreads
+oegimport  ldns              # required
+
 # noch testen, ob zlib vergessen (-lz)
 # pfad prüfen!
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
 
 mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+cp AUTHORS COPYING README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
-oegpatch 001   # needed, if during linking: undefined reference to `IN6_ARE_ADDR_EQUAL'
-configure --prefix=${OEG_BASE_DIR} --without-ssl --with-gnu-ld --with-libiconv-prefix=${OEG_BASE_DIR}
+oegpatch 001   # wget 1.14: needed, if during linking: undefined reference to `IN6_ARE_ADDR_EQUAL'
+
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-ssl=gnutls --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
-#make install DESTDIR=/tmp/inst$$
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
-cd "${OEG_INSTALL_DIR}"
-cd "${OEG_BASE_DIR}"    # okay????
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

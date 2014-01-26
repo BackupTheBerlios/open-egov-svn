@@ -36,15 +36,40 @@
 PACKAGE_NAME=yaz
 PACKAGE_VERSION=5.0.11
 
-#oegimport libiconv
-#oegimport gettext
+oegimport libiconv
+oegimport gettext
+oegimport libxml2
+oegimport libxslt
+oegimport gnutls
+oegimport  gmp
+oegimport   readline
+oegimport  zlib
+oegimport  nettle
+#oegimport   gmp
+#oegimport    readline
+oegimport   openssl
+#oegimport    zlib
+oegimport  libtasn1
+oegimport  p11-kit
+#oegimport   libiconv
+#oegimport   gettext
+oegimport   libtasn1
+oegimport   libffi
+##oegimport  trousers
+oegimport  unbound
+oegimport   expat
+#oegimport   openssl
+#oegimport    zlib
+oegimport   pthreads-win32
+oegimport   ldns
+oegimport icu
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
 mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+cp LICENSE README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+##configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
