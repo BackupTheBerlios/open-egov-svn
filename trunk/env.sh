@@ -8,6 +8,122 @@
 #
 # Run a MSYS shell and source this file!
 
+# TODO:
+#
+# * use own temporary work directories for multiple sessions
+# * recursive oegimport function
+
+function oeg_include_configure_flags {
+  echo ""
+
+}
+
+# Add a file to the packages/name-version/ directory of the archive.
+
+function oeg_include_file {
+  if [ ! -f "$1" ]; then
+    echo File $1 does not exist!
+    return
+  fi
+
+  local OEG_ADD_FILES_DIR="${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+  mkdir -p "${OEG_ADD_FILES_DIR}"
+  cp "$1" "${OEG_ADD_FILES_DIR}/"
+}
+
+# Add a file or a list of files to the packages/name-version/
+# directory of the archive. Currently unused.
+
+function oeg_include_files {
+  if [ $# == 0 ]; then
+    echo "Usage: oeg_include_files <file1> [<file2>] ..."
+    return
+  fi
+
+  for file in "$@"
+  do
+    echo "$file"
+    #oeg_include_file "$file"
+  done
+}
+
+# Includes the configure help text into the package
+# which allows to check for other possible flags or
+# packages without opening the builder or installing
+# the package sources first.
+
+function oeg_include_configure_output {
+  local OEG_CONFIGURE_HELP_FILE="/tmp/configure-help.txt"
+  configure --help > ${OEG_CONFIGURE_HELP_FILE}
+
+  oeg_include_file ${OEG_CONFIGURE_HELP_FILE}
+  rm -f ${OEG_CONFIGURE_HELP_FILE}
+}
+
+# Copies the dependencies.txt file, where every oegimport
+# was logged, to the packages/name-version/ directory.
+
+function oeg_include_dependencies {
+  oeg_include_file "${OEG_DEPENDENCIES_FILE}"
+}
+
+# Add infos: time needed, system, compiler, flags, current date.
+
+function oeg_include_build_info_file {
+  echo "Package: ${PACKAGE_NAME}"
+  echo "Version: ${PACKAGE_VERSION}"
+  echo "Date: `date +\"%T %d.%m.%Y %Z\"`"
+  echo "Time needed: "
+  echo "Compiler: `gcc -v`"
+  echo "Host: `gcc -dumpmachine`"
+}
+
+# Inserts a file about the OEG project.
+
+function oeg_include_oeg_info_file {
+  oeg_include_file "${OEG_PROJECT_DIR}/info.txt"
+}
+
+# Creates a list of all setup files and adds it to the archive.
+# The list doesn't contain information about files below the
+# packages directory (no OEG files and no manually included files).
+# It is needed to check for possible conflicts with already imported
+# packages before importing a package.
+
+function oeg_include_file_list {
+  find . | grep -v "./packages" | grep -v "^.$" > /tmp/file-list.txt
+}
+
+# Called from oegimport. Looks into the extracted dependencies.txt file
+# and imports all dependencies which are not already imported. If a package
+# is already imported will be determined by looking for the corresponding
+# packages/name-version directory. This function ensures, that all imports
+# are recursively applied and no archive will imported twice.
+
+function oeg_import_dependencies {
+  echo "oeg_import_dependencies:"
+
+  local DEPS_FILE="${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/dependencies.txt"
+
+  if [ ! -f "${DEPS_FILE}" ]; then
+    echo "dependencies.txt file not found."
+    return
+  fi
+
+  cat "${DEPS_FILE}"
+  echo ""
+
+  # Read file line by line.
+
+  # Look for an already installed package, skip if found
+  
+  # else add the name to the TODO list
+  
+  # if finished, import the files from the TODO list
+  
+  # until the list is empty
+}
+
 function oegdebug {
   if [ ! $# == 1 ]; then
     echo "Usage: oegdebug <1 or 0>"
@@ -17,16 +133,39 @@ function oegdebug {
   export OEG_DEBUG="$1"
 }
 
-function oegmingwpath {
+# Sets the path to the MinGW binary directory.
+
+function oeg_mingw_path {
   if [ ! $# == 1 ]; then
-    echo "Usage: oegmingwpath <32 or 64 bits as number>"
+    echo "Usage: oeg_mingw_path <32 or 64 bits as number>"
     return
   fi
 
   if [ "$1" = "32" ]; then
-    export PATH=/d/dev/mingw32/bin:/d/dev/Qt-5.2.0-i686/bin:$PATH
+    export PATH=/d/dev/mingw32/bin:$PATH
   elif [ "$1" = "64" ]; then
-    export PATH=/d/dev/mingw64/bin:/d/dev/Qt-5.2.0-x86_64/bin:$PATH
+    export PATH=/d/dev/mingw64/bin:$PATH
+  else
+    echo Wrong parameter: $1
+    return
+  fi
+}
+
+# Sets the Qt path. Separated from setting the MinGW path to allow
+# building open source software with a clean environment, which means
+# there is no possibility that configure uses libraries or tools from
+# the Qt directories by accident.
+
+function oeg_qt_path {
+  if [ ! $# == 1 ]; then
+    echo "Usage: oeg_qt_path <32 or 64 bits as number>"
+    return
+  fi
+
+  if [ "$1" = "32" ]; then
+    export PATH=/d/dev/Qt-5.2.0-i686/bin:$PATH
+  elif [ "$1" = "64" ]; then
+    export PATH=/d/dev/Qt-5.2.0-x86_64/bin:$PATH
   else
     echo Wrong parameter: $1
     return
@@ -39,12 +178,16 @@ function oegenv {
     return   # don’t use exit!
   fi
 
+  export EDITOR="/c/Program Files (x86)/Notepad++/notepad++.exe"
   export OEG_BASE_DIR="/open-egovernment"
   export OEG_INSTALL_DIR="/open-egovernment-install"
   export OEG_WORK_DIR="/work"
   export OEG_PROJECT_DIR="/i/Projekte/open-egov"
   export OEG_DOWNLOADS_DIR="${OEG_PROJECT_DIR}/data/builder/downloads"
   export OEG_PATCHES_DIR="${OEG_PROJECT_DIR}/data/builder/patches"
+
+  # or better into the $OEG_WORK_DIR?
+  export OEG_DEPENDENCIES_FILE="${OEG_INSTALL_DIR}/dependencies.txt"
 
   export LINGUAS="en de ar"
   export LANG=de
@@ -60,6 +203,10 @@ function oegenv {
 
   # Should oegarchive remove or update the target archive if there already exists one?
   export OEG_CFG_REMOVE_BINARY_ARCHIVE="yes"
+
+  # Show the list of files while extracting an archived package? This could hide
+  # error messages (filesystem full, e.g. if you have MSYS/MinGW in a RAM disk).
+  export OEG_CFG_SHOW_FILES_WHILE_IMPORT="no"
 
   # -fomit-frame-pointer?
   local STDCFLAGS="-pipe -Wall -O2 -mms-bitfields"
@@ -85,13 +232,19 @@ function oegenv {
     return
   fi
 
+  oeg_mingw_path $1
+  #oeg_qt_path $1
+  export PATH="${OEG_BASE_BIN_DIR}:${PATH}"                          # At first place!
+
   export CVS_RSH=ssh
-  export PATH="${OEG_BASE_BIN_DIR}:${PATH}"
 
   export CXXFLAGS="$CFLAGS"
   export CPPFLAGS="-I${OEG_BASE_DIR}/include"
 
   export OEG_ARCHIVES_DIR="${OEG_PROJECT_DIR}/data/builder/archives/windows-${TARGETBITS}"
+
+  mkdir -p ${OEG_WORK_DIR} ${OEG_BASE_DIR} ${OEG_INSTALL_DIR}        # In case they are missing...
+  cd ${OEG_WORK_DIR}
 }
 
 function oegpatch {
@@ -100,7 +253,7 @@ function oegpatch {
     return
   fi
 
-  #create: diff -Naur src src.neu > patch.txt
+  #create: diff -Naur src.old src.new > patch.txt
   #apply: patch --dry-run -p0 < patch.txt
 
   patch -p0 < ${OEG_PATCHES_DIR}/${PACKAGE_NAME}/${PACKAGE_NAME}-${PACKAGE_VERSION}-$1.txt
@@ -134,11 +287,16 @@ function oegarchive {
   if [ -f "${ARCHIVEFILENAME}.${OEG_ARCHIVE_FORMAT}" ]; then
     if [ "$OEG_CFG_REMOVE_BINARY_ARCHIVE" = "yes" ]; then
       echo Error: The target file already existed and was deleted!
-      rm -rf "${ARCHIVEFILENAME}.${OEG_ARCHIVE_FORMAT}"
+      rm -f "${ARCHIVEFILENAME}.${OEG_ARCHIVE_FORMAT}"
     fi
   fi
 
-  # Insert text files about the OEG project and the required dependencies here.
+  # Insert text files about the OEG project, the required dependencies, ... here.
+
+  oeg_include_dependencies
+  oeg_include_build_info_file
+  oeg_include_oeg_info_file
+  oeg_include_file_list
 
   case "${OEG_ARCHIVE_FORMAT}" in
     '7z')
@@ -159,16 +317,14 @@ function oegarchive {
   cd ${OEG_WORK_DIR}
 }
 
-function oegcleaninstalldir {
-  cd ${OEG_WORK_DIR}
-  
+function oeg_clean_install_dir {
+  cd /
   rm -rf ${OEG_INSTALL_DIR}
   mkdir ${OEG_INSTALL_DIR}
 }
 
-function oegcleanbasedir {
-  cd ${OEG_WORK_DIR}
-
+function oeg_clean_base_dir {
+  cd /
   rm -rf ${OEG_BASE_DIR}
   mkdir ${OEG_BASE_DIR}
 }
@@ -177,12 +333,14 @@ function oeg_clean_work_dir {
   cd /
   rm -rf ${OEG_WORK_DIR}
   mkdir ${OEG_WORK_DIR}
+
   cd ${OEG_WORK_DIR}
 }
 
-function oegcleanbase {
-  oegcleanbasedir
-  oegcleaninstalldir
+function oegclean {
+  oeg_clean_base_dir
+  oeg_clean_install_dir
+  oeg_clean_work_dir                   # last position, changes into work dir
 }
 
 function formatversion {
@@ -301,6 +459,7 @@ function oegextract {
     fi
   fi
 
+  mkdir -p ${OEG_WORK_DIR}
   cd ${OEG_WORK_DIR}
 
   SEL_BASENAME=
@@ -338,7 +497,7 @@ function oegextract {
         SEL_EXTENSION=$FILE_EXTENSION
       fi
 
-      if [ "$SEL_BASENAME" != "$FILE_BASENAME" ]; then               # Next file with a different basename?
+      if [ "$SEL_BASENAME" != "$FILE_BASENAME" ]; then     # Next file with a different basename?
         echo "Error: More than one basename found. Selecting exact matches only.";
         if [ "$OEG_DEBUG" = "1" ]; then
           echo "Selected: $SEL_BASENAME; found: $FILE_BASENAME";
@@ -407,6 +566,9 @@ function oegextractwithfilename {
     echo Error: The file does not exist.
     return
   fi
+
+  rm -f "${OEG_DEPENDENCIES_FILE}"               # Remove old entries from other packages.
+  touch "${OEG_DEPENDENCIES_FILE}"               # Ensures, every package gets such a file included.
 
   cd ${OEG_WORK_DIR}
 
@@ -565,25 +727,46 @@ function oegimportwithfilename {
     return
   fi
 
-  pushd .
+  local OEG_IMPORT_FILENAME="${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}"
 
+  if [ -f "${OEG_IMPORT_FILENAME}" ]
+  then
+    echo "Found file: ${OEG_IMPORT_FILENAME}"
+  else
+    echo Error: The file ${OEG_IMPORT_FILENAME} does not exist.
+    return
+  fi
+
+  pushd . > /dev/null
   cd "${OEG_BASE_DIR}"
-  case "${OEG_ARCHIVE_FORMAT}" in
-    '7z')
-      echo "Searching for 7-zip binary archive ..."
-      echo "Filename: ${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}"
-      "${OEG_PATH_TO_7ZIP}" x -y "${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}"
-      ;;
-    'zip')
-      echo "Searching for zip binary archive ..."
-      "${OEG_PATH_TO_7ZIP}" x -y "${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}"
-      ;;
-    *)
-      echo "Unknown binary archive format: \"${OEG_ARCHIVE_FORMAT}\"!"
-      ;;
-  esac
 
-  popd
+  if [ "$OEG_CFG_SHOW_FILES_WHILE_IMPORT" = "no" ]; then
+    case "${OEG_ARCHIVE_FORMAT}" in
+      '7z')
+        "${OEG_PATH_TO_7ZIP}" x -y "${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}" > /dev/null
+        ;;
+      'zip')
+        "${OEG_PATH_TO_7ZIP}" x -y "${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}" > /dev/null
+        ;;
+      *)
+        echo "Unknown binary archive format: \"${OEG_ARCHIVE_FORMAT}\"!"
+        ;;
+    esac
+  else
+    case "${OEG_ARCHIVE_FORMAT}" in
+      '7z')
+        "${OEG_PATH_TO_7ZIP}" x -y "${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}"
+        ;;
+      'zip')
+        "${OEG_PATH_TO_7ZIP}" x -y "${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}"
+        ;;
+      *)
+        echo "Unknown binary archive format: \"${OEG_ARCHIVE_FORMAT}\"!"
+        ;;
+    esac
+  fi
+
+  popd > /dev/null
 
   # After importing the archive, make an entry to the file dependencies.txt
   # in the installation directory. Later, this will be included into the
@@ -594,7 +777,13 @@ function oegimportwithfilename {
   # TODO: Do not log imports depending on the already logged package!
   # Put the data into the dependencies file only if it isn't the current package itself.
 
-  echo "$1" >> "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/dependencies.txt"
+  echo "$1" >> "${OEG_DEPENDENCIES_FILE}"
+
+  # We just imported an package into ${OEG_BASE_DIR}. Its dependencies can be found
+  # in ${OEG_BASE_DIR}/packages/name-version/dependencies.txt. Read it and add all
+  # missing depending packages to the import list.
+
+  oeg_import_dependencies
 }
 
 function oegimport {
