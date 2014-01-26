@@ -37,17 +37,16 @@
 PACKAGE_NAME=icecast
 PACKAGE_VERSION=2.4-beta3
 
-#oegimport libiconv
-#oegimport gettext
-
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+#oeg_include_files
 
 configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+#oegimport libiconv
+#oegimport gettext
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 <if64bits>

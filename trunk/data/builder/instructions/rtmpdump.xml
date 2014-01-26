@@ -36,10 +36,10 @@
 PACKAGE_NAME=rtmpdump
 PACKAGE_VERSION=2.3
 
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
 oegimport openssl
 oegimport  zlib
-
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
 mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
 cp librtmp/COPYING COPYING.librtmp
