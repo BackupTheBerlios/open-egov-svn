@@ -1,0 +1,17 @@
+diff -Naur src/host.c src.neu/host.c
+--- src/host.c	2012-05-12 15:18:27 +0000
++++ src.neu/host.c	2013-07-22 08:55:22 +0000
+@@ -70,6 +70,13 @@
+ extern int h_errno;
+ #endif
+ 
++/* From: http://gitorious.org/mingw/mingw-w32api/blobs/240e5bbe9b18a18f3c975ba5ac923a4c537f3bb6/include/ws2tcpip.h */
++
++/* Described in RFC 2292, but not in 2553 */
++/* int IN6_ARE_ADDR_EQUAL(const struct in6_addr * a, const struct in6_addr * b) */
++
++#define IN6_ARE_ADDR_EQUAL(a, b) \
++    (memcmp ((void*)(a), (void*)(b), sizeof (struct in6_addr)) == 0)
+ 
+ /* Lists of IP addresses that result from running DNS queries.  See
+    lookup_host for details.  */
