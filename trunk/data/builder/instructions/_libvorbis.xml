@@ -36,10 +36,10 @@
 PACKAGE_NAME=libvorbis
 PACKAGE_VERSION=1.3.3
 
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+
 #oegimport libiconv
 #oegimport gettext
-
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
 
 mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
 #cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"

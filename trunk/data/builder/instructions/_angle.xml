@@ -19,11 +19,11 @@
   <comments>
   </comments>
 
-  <set version="2013-10-28" date="2013-10-28" state="not-tried">
+  <set version="2014-01-26" date="2014-01-26" state="not-tried">
 
     <downloads>
-      <download file="angleproject-b4e0003292f8.zip">
-        <url checked="2013-10-28">http://angleproject.googlecode.com/archive/b4e0003292f829a0f88a14df4b02a785fcf2b45f.zip</url>
+      <download file="angleproject-b3ecc641124f.zip">
+        <url checked="2014-01-26">http://angleproject.googlecode.com/archive/b3ecc641124f22a9879b207c095dfab351e7ed16.zip</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -35,17 +35,19 @@
 
     <commands>
 PACKAGE_NAME=angle
-PACKAGE_VERSION=
+PACKAGE_VERSION=2014-01-26
+
+oegextract angleproject-b3ecc641124f.zip
 
 #oegimport libiconv
 #oegimport gettext
 
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-
 mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-#cp README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+cp AUTHORS CONTRIBUTORS LICENSE "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+???
+
+#configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 

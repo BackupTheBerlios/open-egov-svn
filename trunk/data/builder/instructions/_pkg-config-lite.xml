@@ -38,7 +38,10 @@ PACKAGE_VERSION=0.28-1
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-configure --prefix=${OEG_BASE_DIR} --with-pc-path=${OEG_BASE_DIR}/lib/pkgconfig:${OEG_BASE_DIR}/share/pkgconfig:/usr/local/lib/pkgconfig:/usr/lib/pkgconfig:/mingw/lib/pkgconfig
+mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
+cp AUTHORS COPYING README* "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+
+configure --prefix=${OEG_BASE_DIR} --with-pc-path=${OEG_BASE_DIR}/lib/pkgconfig:${OEG_BASE_DIR}/share/pkgconfig:/usr/local/lib/pkgconfig:/usr/lib/pkgconfig:/mingw/lib/pkgconfig --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make check
 make install-strip DESTDIR=${OEG_INSTALL_DIR}

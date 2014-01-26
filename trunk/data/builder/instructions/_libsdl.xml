@@ -158,7 +158,7 @@ oegimport dbus
 oegimport  expat
 #oegimport libiconv
 #oegimport gettext
-TODO oegimport pthreads-win32
+oegimport pthreads-win32
 
 oegextract SDL-2.0.1-8054.tar.gz
 

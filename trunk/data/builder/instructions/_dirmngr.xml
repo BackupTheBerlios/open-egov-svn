@@ -53,18 +53,18 @@ ir
 PACKAGE_NAME=dirmngr
 PACKAGE_VERSION=1.1.1
 
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+
 oegimport libiconv
 oegimport gettext
 oegimport libassuan
 oegimport libksba
 oegimport libgcrypt
 oegimport libgpg-error
-oegimport pth
-
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+oegimport w32pth             # pth
 
 mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+cp AUTHORS COPYING README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
 configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 

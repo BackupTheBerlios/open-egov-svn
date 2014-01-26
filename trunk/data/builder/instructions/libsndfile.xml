@@ -98,11 +98,11 @@ Some influential environment variables:
 PACKAGE_NAME=libsndfile
 PACKAGE_VERSION=1.0.25
 
+oegextract ${PACKAGE_NAME}
+
 #oegimport libiconv
 #oegimport gettext
 #todo: add flac, ogg, vorbis, speex
-
-oegextract ${PACKAGE_NAME}
 
 mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
 #cp AUTHORS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
