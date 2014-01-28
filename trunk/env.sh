@@ -12,10 +12,82 @@
 #
 # * use own temporary work directories for multiple sessions
 # * recursive oegimport function
+# * oegimportwithfilename: show errors if needed. missing space, file already exists, ...
+
+# Patches certain fields of a named libtool archive file.
+# Example call:
+# oeg_fix_libtool_file libiconv.la libiconv-2.dll libiconv.dll.a libiconv.a
+# Changes these values:
+#dlname='../bin/libiconv-2.dll'
+#dlname='../bin64/libiconv-2.dll'
+#library_names='libiconv.dll.a'
+#old_library='libiconv.a'
+#libdir='/open-egovernment/lib'
+#libdir='/open-egovernment/lib64'
+
+# empty parameters "" are allowed
+
+function oeg_fix_libtool_file {
+  local TARGETBITSFORDIR=""
+
+  if [ "${TARGETBITS}" == "64" ]; then
+    TARGETBITSFORDIR="64"
+  fi
+
+  if [ ! -f "lib${TARGETBITSFORDIR}/$1" ]; then
+    echo "libtool archive file not found: lib${TARGETBITSFORDIR}/$1"
+    return
+  fi
+
+  libtool --finish "lib${TARGETBITSFORDIR}/$1"
+
+  # If we use -i (inline edit) then we get an error:
+  # sed: preserving permissions for `lib/sed003912': Permission denied
+  # It's caused by the windows security. In the folder's properties dialog,
+  # select the security option, then grant all privelega to the current user.
+  # If you try without this setting, the la file will become read-only.
+
+  if [ "$2" == "" ]; then
+    sed -e "s/dlname='.*'/dlname='$2'/g" "lib${TARGETBITSFORDIR}/$1" > "lib${TARGETBITSFORDIR}/$1.new"
+  else
+    sed -e "s/dlname='.*'/dlname='..\/bin${TARGETBITSFORDIR}\/$2'/g" "lib${TARGETBITSFORDIR}/$1" > "lib${TARGETBITSFORDIR}/$1.new"
+  fi
+  mv -f "lib${TARGETBITSFORDIR}/$1.new" "lib${TARGETBITSFORDIR}/$1"
+
+  sed -e "s/library_names='.*'/library_names='$3'/g" "lib${TARGETBITSFORDIR}/$1" > "lib${TARGETBITSFORDIR}/$1.new"
+  mv -f "lib${TARGETBITSFORDIR}/$1.new" "lib${TARGETBITSFORDIR}/$1"
+  sed -e "s/old_library='.*'/old_library='$4'/g" "lib${TARGETBITSFORDIR}/$1" > "lib${TARGETBITSFORDIR}/$1.new"
+  mv -f "lib${TARGETBITSFORDIR}/$1.new" "lib${TARGETBITSFORDIR}/$1"
+  sed -e "s/libdir='.*'/libdir='\\${OEG_BASE_DIR}\/lib${TARGETBITSFORDIR}'/g" "lib${TARGETBITSFORDIR}/$1" > "lib${TARGETBITSFORDIR}/$1.new"
+  mv -f "lib${TARGETBITSFORDIR}/$1.new" "lib${TARGETBITSFORDIR}/$1"
+
+  # TODO: dependency_libs=' -L/lib64 ' is wrong
+}
+
+# Correct wrong path names and moves the contents to the correct path.
+# * bin -> bin64, lib -> lib64 if 64 bit environment
+
+function oeg_fix_path_names {
+  cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+
+  if [ "${TARGETBITS}" == "64" ]; then
+    if [ -d bin ]; then
+      mkdir -p bin64
+      mv -i bin/* bin64/                         # Contains normally only *.exe and *.dll files.
+      rm -rf bin
+    fi
+    if [ -d lib ]; then
+      mkdir -p lib64
+      mv -i lib/* lib64/                         # Contains normally only *.a and *.la files.
+      rm -rf lib
+    fi
+  fi
+}
+
+#
 
 function oeg_include_configure_flags {
-  echo ""
-
+  :
 }
 
 # Add a file to the packages/name-version/ directory of the archive.
@@ -42,8 +114,7 @@ function oeg_include_files {
 
   for file in "$@"
   do
-    echo "$file"
-    #oeg_include_file "$file"
+    oeg_include_file "$file"
   done
 }
 
@@ -67,6 +138,16 @@ function oeg_include_dependencies {
   oeg_include_file "${OEG_DEPENDENCIES_FILE}"
 }
 
+# After importing an archive, make an entry to the file dependencies.txt
+# in the work directory. Later, this will be included into the binary
+# archive of the current package. So all imports may be reimported again
+# automatically when installing the newly created binary archive.
+
+function oeg_add_to_current_dependencies_file {
+  mkdir -p ${OEG_WORK_DIR}                                           # The directory needs to be already there!
+  echo "$1" >> "${OEG_DEPENDENCIES_FILE}"
+}
+
 # Add infos: time needed, system, compiler, flags, current date.
 
 function oeg_include_build_info_file {
@@ -81,7 +162,8 @@ function oeg_include_build_info_file {
 # Inserts a file about the OEG project.
 
 function oeg_include_oeg_info_file {
-  oeg_include_file "${OEG_PROJECT_DIR}/info.txt"
+  cp "${OEG_PROJECT_DIR}/info.txt" /tmp/Open\ E-Government.txt
+  oeg_include_file /tmp/Open\ E-Government.txt
 }
 
 # Creates a list of all setup files and adds it to the archive.
@@ -92,36 +174,48 @@ function oeg_include_oeg_info_file {
 
 function oeg_include_file_list {
   find . | grep -v "./packages" | grep -v "^.$" > /tmp/file-list.txt
+  oeg_include_file /tmp/file-list.txt
+  rm -f /tmp/file-list.txt
 }
 
-# Called from oegimport. Looks into the extracted dependencies.txt file
+# Called from oegimport. Looks into all extracted dependencies.txt files
 # and imports all dependencies which are not already imported. If a package
 # is already imported will be determined by looking for the corresponding
 # packages/name-version directory. This function ensures, that all imports
 # are recursively applied and no archive will imported twice.
 
 function oeg_import_dependencies {
-  echo "oeg_import_dependencies:"
+  echo "Importing dependencies:"
 
-  local DEPS_FILE="${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/dependencies.txt"
+  local OEG_REQUIRED_DEPS_FILE="/work/required-deps.txt"
 
-  if [ ! -f "${DEPS_FILE}" ]; then
-    echo "dependencies.txt file not found."
-    return
-  fi
+  if [ -f "${OEG_REQUIRED_DEPS_FILE}" ]; then              # We call ourself recursively. Don't create a new file.
+    return                                                 # We delete it at the end of all imports and then we
+  fi                                                       # call this function again to install the open requirements.
 
-  cat "${DEPS_FILE}"
-  echo ""
+  cat ${OEG_BASE_DIR}/packages/*/dependencies.txt | sort | uniq > "${OEG_REQUIRED_DEPS_FILE}"
 
-  # Read file line by line.
+  if [ -f "${OEG_REQUIRED_DEPS_FILE}.old" ]; then          # We compare the old file against the new one and if
+    if $(diff "${OEG_REQUIRED_DEPS_FILE}" "${OEG_REQUIRED_DEPS_FILE}.old"); then  # both are identical that
+      rm -f "${OEG_REQUIRED_DEPS_FILE}" "${OEG_REQUIRED_DEPS_FILE}.old"           # means there are no new
+      return                                               # dependencies to install. We break our loop.
+    fi
+  fi                                                                 
 
-  # Look for an already installed package, skip if found
-  
-  # else add the name to the TODO list
-  
-  # if finished, import the files from the TODO list
-  
-  # until the list is empty
+  while read REQUIRED_DEPENDENCY ; do                      # Read required deps file line by line.
+    echo "${REQUIRED_DEPENDENCY}"
+    if [ ! -d "${OEG_BASE_DIR}/packages/${REQUIRED_DEPENDENCY}" ]    # There isn't already an installed package with this name.
+    then
+      oegimportwithfilename "${REQUIRED_DEPENDENCY}"
+      #counter=`expr $counter + 1`;
+    fi
+  done < "${OEG_REQUIRED_DEPS_FILE}"                        # From a file, redirection with <(cmd) fails here.
+
+  mv -f "${OEG_REQUIRED_DEPS_FILE}" "${OEG_REQUIRED_DEPS_FILE}.old"  # We remove this file to allow us to rescan everything.
+
+  # TODO: Ignore not existing requirements with an error message.
+
+  oeg_import_dependencies                                  # Repeat until all open requirements are installed.
 }
 
 function oegdebug {
@@ -185,9 +279,7 @@ function oegenv {
   export OEG_PROJECT_DIR="/i/Projekte/open-egov"
   export OEG_DOWNLOADS_DIR="${OEG_PROJECT_DIR}/data/builder/downloads"
   export OEG_PATCHES_DIR="${OEG_PROJECT_DIR}/data/builder/patches"
-
-  # or better into the $OEG_WORK_DIR?
-  export OEG_DEPENDENCIES_FILE="${OEG_INSTALL_DIR}/dependencies.txt"
+  export OEG_DEPENDENCIES_FILE="${OEG_WORK_DIR}/dependencies.txt"
 
   export LINGUAS="en de ar"
   export LANG=de
@@ -207,6 +299,9 @@ function oegenv {
   # Show the list of files while extracting an archived package? This could hide
   # error messages (filesystem full, e.g. if you have MSYS/MinGW in a RAM disk).
   export OEG_CFG_SHOW_FILES_WHILE_IMPORT="no"
+
+  # While oegimport: Show the full archive file name or is a "ok" (=found it) enough?
+  export OEG_CFG_IMPORT_SHOW_FULL_FILE_NAME="no"
 
   # -fomit-frame-pointer?
   local STDCFLAGS="-pipe -Wall -O2 -mms-bitfields"
@@ -286,7 +381,7 @@ function oegarchive {
 
   if [ -f "${ARCHIVEFILENAME}.${OEG_ARCHIVE_FORMAT}" ]; then
     if [ "$OEG_CFG_REMOVE_BINARY_ARCHIVE" = "yes" ]; then
-      echo Error: The target file already existed and was deleted!
+      echo "Error: The target file already existed and was deleted!"
       rm -f "${ARCHIVEFILENAME}.${OEG_ARCHIVE_FORMAT}"
     fi
   fi
@@ -550,6 +645,8 @@ function oegextract {
   oegextractwithfilename "$SEL_BASENAME-$SEL_VERSION$SEL_EXTENSION"
 }
 
+# Extracts a source archive into the work directory and changes into it.
+
 function oegextractwithfilename {
   if [ ! $# == 1 ]; then
     echo "Usage: oegextract \"name-version.extension\""
@@ -567,6 +664,7 @@ function oegextractwithfilename {
     return
   fi
 
+  mkdir -p "${OEG_WORK_DIR}"
   rm -f "${OEG_DEPENDENCIES_FILE}"               # Remove old entries from other packages.
   touch "${OEG_DEPENDENCIES_FILE}"               # Ensures, every package gets such a file included.
 
@@ -710,6 +808,7 @@ function oegextractwithfilename {
 }
 
 # Extracts a binary archive into the base directory ("/open-egovernment").
+# The function gets the basename and version of the package as parameter.
 
 function oegimportwithfilename {
   if [ ! $# == 1 ]; then
@@ -731,10 +830,21 @@ function oegimportwithfilename {
 
   if [ -f "${OEG_IMPORT_FILENAME}" ]
   then
-    echo "Found file: ${OEG_IMPORT_FILENAME}"
+    if [ "$OEG_CFG_IMPORT_SHOW_FULL_FILE_NAME" = "yes" ]; then
+      echo "Found file: ${OEG_IMPORT_FILENAME}"
+    fi
   else
-    echo Error: The file ${OEG_IMPORT_FILENAME} does not exist.
+    echo "Error: The file ${OEG_IMPORT_FILENAME} does not exist."
     return
+  fi
+
+  # Ignore this function call if the archive was already imported. Don't import twice!
+
+  if [ -f "${OEG_DEPENDENCIES_FILE}" ]; then
+    if $(grep -q "$1" "${OEG_DEPENDENCIES_FILE}"); then
+      echo "Package already imported (skipped): $1"
+      return
+    fi
   fi
 
   pushd . > /dev/null
@@ -743,7 +853,13 @@ function oegimportwithfilename {
   if [ "$OEG_CFG_SHOW_FILES_WHILE_IMPORT" = "no" ]; then
     case "${OEG_ARCHIVE_FORMAT}" in
       '7z')
-        "${OEG_PATH_TO_7ZIP}" x -y "${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}" > /dev/null
+        if $("${OEG_PATH_TO_7ZIP}" x -y "${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}" | grep -q 'Everything is Ok') ; then
+          # 30-37: set foreground color, 40-47: set background color, 0: normal screen.
+          #echo -e "\033[42m\033[37mArchive extracted.\033[0m"
+          :
+        else
+          echo -e "\033[41m\033[37mError while extracting archive!\033[0m"
+        fi
         ;;
       'zip')
         "${OEG_PATH_TO_7ZIP}" x -y "${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}" > /dev/null
@@ -755,7 +871,9 @@ function oegimportwithfilename {
   else
     case "${OEG_ARCHIVE_FORMAT}" in
       '7z')
-        "${OEG_PATH_TO_7ZIP}" x -y "${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}"
+        echo
+        "${OEG_PATH_TO_7ZIP}" x -y "${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}" | grep -v -e "Processing archive" -e "Copyright (c) 1999-2011 Igor Pavlov" -e "Folders: " -e "Files: " -e "Size: " -e "Compressed: " -e "Everything is Ok" -e "^$"
+        echo
         ;;
       'zip')
         "${OEG_PATH_TO_7ZIP}" x -y "${OEG_ARCHIVES_DIR}/$1.${OEG_ARCHIVE_FORMAT}"
@@ -768,23 +886,27 @@ function oegimportwithfilename {
 
   popd > /dev/null
 
-  # After importing the archive, make an entry to the file dependencies.txt
-  # in the installation directory. Later, this will be included into the
-  # binaries archive of the current package.
+  local DEPS_FILE="${OEG_BASE_DIR}/packages/$1/dependencies.txt"
+  if [ ! -f "${DEPS_FILE}" ]; then
+    echo "Dependencies file not found."
+  fi
 
-  mkdir -p ${OEG_INSTALL_DIR}${OEG_BASE_DIR}               # The directory needs to be already there!
+  # Do not log imports depending on the already logged package!
 
-  # TODO: Do not log imports depending on the already logged package!
-  # Put the data into the dependencies file only if it isn't the current package itself.
-
-  echo "$1" >> "${OEG_DEPENDENCIES_FILE}"
+  if [ "${PACKAGE_NAME}-${PACKAGE_VERSION}" != "$1" ]; then          # Log the data only if it isn't the current package itself.
+    oeg_add_to_current_dependencies_file "$1"                        # Log the import into dependencies.txt file.
+  fi
 
   # We just imported an package into ${OEG_BASE_DIR}. Its dependencies can be found
   # in ${OEG_BASE_DIR}/packages/name-version/dependencies.txt. Read it and add all
   # missing depending packages to the import list.
 
-  oeg_import_dependencies
+  oeg_import_dependencies                                            # Recursively import all dependent packages.
 }
+
+# This function imports a package without a version parameter.
+# It looks for all files starting with the "name" parameter and
+# tries to select the newest.
 
 function oegimport {
   if [ ! $# == 1 ]; then
@@ -862,7 +984,8 @@ function oegimport {
   fi
 
   if [ "$2" = "" ] || [ "$OEG_DEBUG" = "1" ]; then                   # Version parameter was empty.
-    echo "Selected: $SEL_BASENAME-$SEL_VERSION"
+    # Show the selected archive to be able to verify the correct version.
+    echo "Importing: $SEL_BASENAME-$SEL_VERSION"
   fi
 
   # Look for the dependencies file and import them too!
