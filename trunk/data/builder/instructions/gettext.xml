@@ -12,7 +12,6 @@
       <description lang="de" type="short">GNU gettext</description>
       <description lang="de" type="long">GNU gettext</description>
     </descriptions>
-    <keywords>gettext, localization, internationalization, i10n, i18n</keywords>
   </meta>
 
   <comments>
@@ -76,7 +75,7 @@ Example:
 
     <downloads>
       <download file="gettext-0.18.3.2.tar.gz">
-        <url type="direct" checked="2014-01-09">http://ftp.gnu.org/pub/gnu/gettext/gettext-0.18.3.2.tar.gz</url>
+        <url type="direct" checked="2014-01-27">http://ftp.gnu.org/pub/gnu/gettext/gettext-0.18.3.2.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -86,56 +85,30 @@ Example:
       </download>
     </downloads>
 
-<!--
-  --disable-openmp        do not use OpenMP
-  --disable-acl           do not support ACLs
-  --disable-curses        do not use libncurses, libtermcap even if they exist
-  --with-included-gettext use the GNU gettext library included here
-  --with-libintl-prefix[=DIR]  search for PACKLIBS in DIR/include and DIR/lib
-  --without-libintl-prefix     don't search for PACKLIBS in includedir and libdir
-  --with-included-glib    use the glib2 included here
-  --with-libglib-2.0-prefix[=DIR]  search for PACKLIBS in DIR/include and DIR/lib
-  --without-libglib-2.0-prefix     don't search for PACKLIBS in includedir and libdir
-  --with-included-libcroco  use the libcroco included here
-  --with-libcroco-0.6-prefix[=DIR]  search for PACKLIBS in DIR/include and DIR/lib
-  --without-libcroco-0.6-prefix     don't search for PACKLIBS in includedir and libdir
-  --with-libncurses-prefix[=DIR]  search for PACKLIBS in DIR/include and DIR/lib
-  --without-libncurses-prefix     don't search for PACKLIBS in includedir and libdir
-  --with-libtermcap-prefix[=DIR]  search for PACKLIBS in DIR/include and DIR/lib
-  --without-libtermcap-prefix     don't search for PACKLIBS in includedir and libdir
-  --with-libxcurses-prefix[=DIR]  search for PACKLIBS in DIR/include and DIR/lib
-  --without-libxcurses-prefix     don't search for PACKLIBS in includedir and libdir
-  --with-libcurses-prefix[=DIR]  search for PACKLIBS in DIR/include and DIR/lib
-  --without-libcurses-prefix     don't search for PACKLIBS in includedir and libdir
-  --without-included-regex     don't compile regex; this is the default on systems
-                          with recent-enough versions of the GNU C Library
-                          (use with caution on other systems).
-  --with-libexpat-prefix[=DIR]  search for PACKLIBS in DIR/include and DIR/lib
-  --without-libexpat-prefix     don't search for PACKLIBS in includedir and libdir
-  --without-emacs         do not use Emacs, don't install po-mode
-  --with-lispdir          override the default lisp directory
-  --without-git           don't use git to compress the infrastructure archive
-  --with-cvs              use cvs to compress the infrastructure archive
-                          (deprecated)
-  --without-bzip2         don't use bzip2 to compress the infrastructure archive
-  --without-xz            don't use xz to compress the infrastructure archive
--->
     <commands>
 PACKAGE_NAME=gettext
 PACKAGE_VERSION=0.18.3.2
 
-oegimport libiconv
 oegextract ${PACKAGE_NAME}
+
+oeg_include_files AUTHORS COPYING THANKS
+
+oegimport libiconv
+
 configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --enable-relocatable --disable-rpath --with-libiconv-prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --without-emacs
 make
+cp gettext-runtime/intl/libintl.la ${OEG_INSTALL_DIR}/${OEG_BASE_LIB_DIR}/
 make install DESTDIR=${OEG_INSTALL_DIR}
 
+# TODO: package is splitted into gettext-tools and gettext-runtime.
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+oeg_fix_libtool_file libasprintf.la   libasprintf-0.dll        libasprintf.dll.a   libasprintf.a
+oeg_fix_libtool_file libgettextlib.la libgettextlib-0-18-3.dll libgettextlib.dll.a libgettextlib.a
+oeg_fix_libtool_file libgettextpo.la  libgettextpo-0.dll       libgettextpo.dll.a  libgettextpo.a
+oeg_fix_libtool_file libgettextsrc.la libgettextsrc-0-18-3.dll libgettextsrc.dll.a libgettextsrc.a
+oeg_fix_libtool_file libintl.la       libintl-8.dll            libintl.dll.a       libintl.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

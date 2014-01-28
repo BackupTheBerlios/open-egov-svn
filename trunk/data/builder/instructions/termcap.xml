@@ -12,7 +12,6 @@
       <description lang="de" type="short">Terminal-Datenbank und DLL</description>
       <description lang="de" type="long">Termcap ist eine Bibliothek und Datenbank, die es Programmen ermöglicht, Display-Terminals in einer Terminal-unabhängigen Weise zu nutzen.</description>
     </descriptions>
-    <keywords>terminal, termcap</keywords>
   </meta>
 
   <comments>

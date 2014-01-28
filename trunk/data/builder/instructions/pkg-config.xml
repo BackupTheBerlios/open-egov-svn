@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="pkg-config" license="GPL2+">
+  <meta>
+    <homepage>http://www.freedesktop.org/wiki/Software/pkg-config/</homepage>
+    <download>http://pkgconfig.freedesktop.org/releases/</download>
+    <download>git://anongit.freedesktop.org/pkg-config</download>
+    <descriptions>
+      <description lang="en" type="short"></description>
+      <description lang="en" type="long">pkg-config is a helper tool used when compiling applications and libraries. It helps you insert the correct compiler options on the command line so an application can use gcc -o test test.cpkg-config --libs --cflags glib-2.0 for instance, rather than hard-coding values on where to find glib (or other libraries). It is language-agnostic, so it can be used for defining the location of documentation tools, for instance.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="0.28" date="2013-01-24" state="works">
+
+    <downloads>
+      <download file="pkg-config-0.28.tar.gz">
+        <url checked="2014-01-28">http://pkgconfig.freedesktop.org/releases/pkg-config-0.28.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <commands>
+PACKAGE_NAME=pkg-config
+PACKAGE_VERSION=0.28
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
+oeg_include_files AUTHORS COPYING README*
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --with-internal-glib
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

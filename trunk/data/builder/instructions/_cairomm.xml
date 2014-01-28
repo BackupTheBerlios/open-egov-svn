@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="1.10.0" date="2011-05-09" state="fails-to-build">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="cairomm-1.10.0.tar.gz">

@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>libcroco</keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="0.6.8" date="2012-10-25" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="libcroco-0.6.8.tar.xz">

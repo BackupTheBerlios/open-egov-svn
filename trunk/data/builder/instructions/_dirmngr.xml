@@ -12,13 +12,15 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>dirmngr, gnupg</keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="1.1.1" date="2013-04-26" state="works">
+    <flags>
+    </flags>
+
 <!--
   --with-gnu-ld           assume the C compiler uses GNU ld default=no
   --with-libiconv-prefix[=DIR]  search for libiconv in DIR/include and DIR/lib
@@ -55,6 +57,8 @@ PACKAGE_VERSION=1.1.1
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
 
+oeg_include_files AUTHORS COPYING README THANKS
+
 oegimport libiconv
 oegimport gettext
 oegimport libassuan
@@ -62,9 +66,6 @@ oegimport libksba
 oegimport libgcrypt
 oegimport libgpg-error
 oegimport w32pth             # pth
-
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp AUTHORS COPYING README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
 configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 
@@ -74,11 +75,7 @@ make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

@@ -12,13 +12,15 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>gnu, gnu-crypto</keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="2.0.1" date="2005-01-17" working="fails-to-build">
+    <flags>
+    </flags>
+
 <!-- ftp://ftp.gnu.org/gnu/gnu-crypto/gnu-crypto-2.1.0.tar.bz2 2005-10-23-->
     <downloads>
       <download file="gnu-crypto-2.0.1.tar.bz2">
@@ -31,12 +33,6 @@
         <size></size>
       </download>
     </downloads>
-
-    <options>
-    </options>
-
-    <patch>
-    </patch>
 
     <compile>
 PACKAGE_NAME=gnu-crypto
@@ -64,9 +60,6 @@ rm -rf bin
 </if64bits>
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </compile>
-
-    <install>
-    </install>
   </set>
 </pack>
 

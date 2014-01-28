@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="2.69" date="2013-00-00" state="fails-to-build">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="autoconf-2.69.tar.xz">
@@ -36,25 +37,24 @@
 PACKAGE_NAME=autoconf
 PACKAGE_VERSION=2.69
 
-oegimport m4
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp AUTHORS COPYING* README THANKS TODO "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+oeg_include_files AUTHORS COPYING* README THANKS TODO
+
+oegimport m4
 
 configure --prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 
-
+# Error:
+#Makefile:599: recipe for target `m4sugar.m4f' failed
+#make[3]: *** [m4sugar.m4f] Error 1
+#make[3]: Leaving directory `/work/autoconf-2.69/lib/m4sugar'
 
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

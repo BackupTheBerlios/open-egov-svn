@@ -12,7 +12,6 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>libgpg-error, gnupg</keywords>
   </meta>
 
   <comments>
@@ -20,20 +19,21 @@
 
   <set version="1.12" date="2013-06-24" state="works">
     <flags>
+      <flag name="gettext"
+            required="no"
+            standard="yes"
+            imports="gettext"
+            para-if-pos="--with-libintl-prefix=${OEG_BASE_DIR}"
+            para-if-neg="--without-libintl-prefix"
+            info="" />
+      <flag name="libiconv"
+            required="no"
+            standard="yes"
+            imports="libiconv"
+            para-if-pos="--with-libiconv-prefix=${OEG_BASE_DIR}"
+            para-if-neg="--without-libiconv-prefix"
+            info="" />
     </flags>
-
-    <options>
-      <option name="gettext" import-if-pos="gettext"
-              para-if-neu=""
-              para-if-pos="--with-libintl-prefix=${OEG_BASE_DIR}"
-              para-if-neg="--without-libintl-prefix"
-              info="" />
-      <option name="libiconv" import-if-pos="libiconv"
-              para-if-neu=""
-              para-if-pos="--with-libiconv-prefix=${OEG_BASE_DIR}"
-              para-if-neg="--without-libiconv-prefix"
-              info="" />
-    </options>
 
     <downloads>
       <download file="libgpg-error-1.12.tar.bz2">
@@ -49,14 +49,11 @@
 
 <!--
 for i in $(./potomo --get-linguas ./po); do \
-           /bin/mkdir -p "/open-egovernment-install/open-egovernment/share/local
-e/$i/LC_MESSAGES" || true; \
-           rm -f "/open-egovernment-install/open-egovernment/share/locale/$i/LC_
-MESSAGES/libgpg-error.mo" \
+           /bin/mkdir -p "/open-egovernment-install/open-egovernment/share/locale/$i/LC_MESSAGES" || true; \
+           rm -f "/open-egovernment-install/open-egovernment/share/locale/$i/LC_MESSAGES/libgpg-error.mo" \
                                                  2>/dev/null || true; \
            ./potomo ./po/$i.po \
-              "/open-egovernment-install/open-egovernment/share/locale/$i/LC_MES
-SAGES/libgpg-error.mo" ; \
+              "/open-egovernment-install/open-egovernment/share/locale/$i/LC_MESSAGES/libgpg-error.mo" ; \
 done
 potomo: './po/cs.po' keeping UTF-8
 potomo: './po/da.po' keeping UTF-8
@@ -79,20 +76,20 @@ make[3]: Leaving directory `/work/libgpg-error-1.12'
 PACKAGE_NAME=libgpg-error
 PACKAGE_VERSION=1.12
 
+oegextract libgpg-error
+
+oeg_include_files AUTHORS COPYING* README THANKS
+
 oegimport libiconv
 oegimport gettext
-oegextract libgpg-error
 
 configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
 
 cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+oeg_fix_libtool_file libgpg-error.la libgpg-error-0.dll libgpg-error.dll.a -
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

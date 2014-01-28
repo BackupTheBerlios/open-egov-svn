@@ -12,7 +12,6 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>gnupg, poldi</keywords>
   </meta>
 
   <comments>
@@ -22,7 +21,7 @@
 
     <downloads>
       <download file="poldi-0.4.1.tar.bz2">
-        <url type="direct" checked="2013-07-20">ftp://ftp.gnupg.org/gcrypt/alpha/poldi/poldi-0.4.1.tar.bz2</url>
+        <url type="direct" checked="2014-01-26">ftp://ftp.gnupg.org/gcrypt/alpha/poldi/poldi-0.4.1.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -33,6 +32,28 @@
     </downloads>
 
     <commands>
+PACKAGE_NAME=poldi
+PACKAGE_VERSION=0.4.1
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+
+oeg_include_files AUTHORS COPYING README THANKS
+
+oegimport libiconv
+oegimport gettext
+oegimport libksba
+oegimport libgcrypt
+oegimport libgpg-error
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oeg_fix_path_names
+#
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+
     </commands>
   </set>
 </pack>

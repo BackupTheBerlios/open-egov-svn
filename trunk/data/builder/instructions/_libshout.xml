@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="2.3.1" date="2012-05-25" state="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="libshout-2.3.1.tar.gz">

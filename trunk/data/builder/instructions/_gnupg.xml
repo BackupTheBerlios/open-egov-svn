@@ -13,7 +13,6 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>gnupg</keywords>
   </meta>
 
   <comments>
@@ -27,7 +26,9 @@ where "it" can be changed with the localization file of your choice (e.g., "fr" 
 GnuPG installation procedure, described in the README-W32.txt file, creating the required registry keys.
   </comments>
 
-    <set version="1.4.16" date="2013-12-18" state="works">
+  <set version="1.4.16" date="2013-12-18" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="gnupg-1.4.16.tar.bz2">
@@ -99,6 +100,8 @@ GnuPG installation procedure, described in the README-W32.txt file, creating the
   </set>
 
   <set version="2.0.22" date="2014-10-04" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="gnupg-2.0.22.tar.bz2">

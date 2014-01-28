@@ -12,7 +12,6 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>tf, tinyfugue</keywords>
   </meta>
 
   <comments>
@@ -22,9 +21,6 @@ cd tf-version</comment>
 
   <set version="5.0 beta 8" date="2007-01-14" state="fails-to-build">
     <flags>
-      <required>pcre</required>
-      <optional></optional>
-      <recommended></recommended>
     </flags>
 
     <downloads>
@@ -80,17 +76,17 @@ cd tf-version</comment>
 -->
 
     <commands>
-export PACKAGE_NAME=tf
-export PACKAGE_VERSION=5.0b8
-oegenv 32
-oegcleanbase
-oegimport libiconv-1.14
-oegimport gettext-0.18.2.1
-oegimport pcre-8.33
-oegimport ncurses-5.9
-oegimport zlib-1.2.8
-oegimport openssl-1.0.1e
+PACKAGE_NAME=tf
+PACKAGE_VERSION=5.0b8
+
 oegextract tf-50b8.tar.gz
+
+oegimport libiconv
+oegimport gettext
+oegimport pcre
+oegimport ncurses
+oegimport zlib
+oegimport openssl
 
 rm -rf autom4te.cache
 rm -rf macos

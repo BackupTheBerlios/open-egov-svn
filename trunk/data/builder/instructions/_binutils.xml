@@ -2,13 +2,13 @@
 
 <!-- $Id$ -->
 
-<pack name="gpa" license="">
+<pack name="binutils" license="">
   <meta>
-    <homepage>http://www.gnupg.org/related_software/gpa/</homepage>
-    <download>ftp://ftp.gnupg.org/gcrypt/gpa/</download>
+    <homepage>http://www.gnu.org/software/binutils/</homepage>
+    <download>http://ftp.gnu.org/gnu/binutils</download>
     <descriptions>
-      <description lang="en" type="short">GNU Privacy Assistant</description>
-      <description lang="en" type="long">The GNU Privacy Assistant (GPA) is a graphical user interface for the GnuPG (GNU Privacy Guard).</description>
+      <description lang="en" type="short"></description>
+      <description lang="en" type="long"></description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
@@ -17,13 +17,13 @@
   <comments>
   </comments>
 
-  <set version="0.9.4" date="2013-05-01" state="not-tried">
+  <set version="2.24" date="2013-12-02" state="not-tried">
     <flags>
     </flags>
 
     <downloads>
-      <download file="">
-        <url checked="2014-01-23">ftp://ftp.gnupg.org/gcrypt/gpa/gpa-0.9.4.tar.bz2</url>
+      <download file="binutils-2.24.tar.bz2">
+        <url checked="2014-01-28">http://ftp.gnu.org/gnu/binutils/binutils-2.24.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -34,27 +34,23 @@
     </downloads>
 
     <commands>
-PACKAGE_NAME=gpa
-PACKAGE_VERSION=0.9.4
-
-#oegimport libiconv
-#oegimport gettext
+PACKAGE_NAME=binutils
+PACKAGE_VERSION=2.24
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+oeg_include_files 
+
+#oegimport libiconv
+#oegimport gettext
 
 configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+#oeg_fix_libtool_file libidn.la libidn-11.dll libidn.dll.a libidn.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

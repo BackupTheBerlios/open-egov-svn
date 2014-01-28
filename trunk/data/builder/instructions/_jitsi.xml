@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="2.4.4997" date="2014-01-07" state="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="jitsi-src-2.4.4997.zip">

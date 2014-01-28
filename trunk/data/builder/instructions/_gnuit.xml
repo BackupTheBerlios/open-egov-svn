@@ -12,15 +12,16 @@
       <description lang="de" type="short">GNU Interactive Tools</description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>gnu, gnuit</keywords>
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
   <set version="4.9.5" date="2009-02-23" state="fails-to-build">
-    <!-- pwd.h grp.h getpwnam() getpwuid() getgrgid() getgrnam() ... ->
+    <!-- pwd.h grp.h getpwnam() getpwuid() getgrgid() getgrnam() ... -->
+
+    <flags>
+    </flags>
 
     <downloads>
       <download file="gnuit-4.9.5.tar.gz">
@@ -37,13 +38,14 @@
     <commands>
 PACKAGE_NAME=gnuit
 PACKAGE_VERSION=4.9.5
-oegenv 32
-oegcleanbase
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-oegimport ncurses-5.9   # or termcap, curses, ncursesw, termlib, ...
+oegimport ncurses   # or termcap, curses, ncursesw, termlib, ...
+
 configure --prefix=${PREFIX} --enable-gcc-warnings
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

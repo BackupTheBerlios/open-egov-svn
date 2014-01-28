@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="4.9" date="2012-04-10" state="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="djview-4.9.tar.gz">

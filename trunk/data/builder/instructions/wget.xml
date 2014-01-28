@@ -12,7 +12,6 @@
       <description lang="de" type="short">GNU Wget</description>
       <description lang="de" type="long">GNU Wget ist ein freies Software-Paket zum Abrufen von Dateien über HTTP, HTTPS und FTP. Es ist ein nicht-interaktives Kommandozeilen-Tool, so dass es leicht von Skripten, Cron-Jobs oder Terminals aus aufgerufen werden kann. GNU Wget hat viele Funktionen, die das Abrufen von großen Dateien oder Spiegeln von gesamten Web oder FTP-Sites einfach machen.</description>
     </descriptions>
-    <keywords>wget</keywords>
   </meta>
 
   <comments>
@@ -61,6 +60,8 @@ PACKAGE_VERSION=1.15
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
 
+oeg_include_files AUTHORS COPYING README
+
 oegimport libiconv
 oegimport gettext
 oegimport libidn             # optional
@@ -91,9 +92,6 @@ oegimport  ldns              # required
 
 # noch testen, ob zlib vergessen (-lz)
 # pfad prüfen!
-
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp AUTHORS COPYING README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
 oegpatch 001   # wget 1.14: needed, if during linking: undefined reference to `IN6_ARE_ADDR_EQUAL'
 

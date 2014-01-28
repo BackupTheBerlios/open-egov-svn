@@ -12,13 +12,12 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>gnu, tar</keywords>
   </meta>
 
   <comments>
   </comments>
 
-  <set version="1.26" date="2011-03-12" state="fails-to-build">
+  <set version="1.27.1" date="2013-11-17" state="fails-to-build">
 <!--
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
@@ -42,31 +41,35 @@
 -->
 
     <downloads>
-      <download file="tar-1.26.tar.xz">
-        <url type="direct" checked="2013-07-22">http://ftp.gnu.org/gnu/tar/tar-1.26.tar.xz</url>
+      <download file="tar-1.27.1.tar.bz2">
+        <url type="direct" checked="2014-01-28">http://ftp.gnu.org/gnu/tar/tar-1.27.1.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>1783904</size>
+        <size></size>
       </download>
     </downloads>
 
     <commands>
-oegenv 32
-oegcleanbase
-oegimport libiconv-1.14
-oegimport gettext-0.18.3
-oegimport zlib-1.2.8
-oegimport bzip2-1.0.6
-oegimport xz-5.0.5
-oegextract tar-1.26.tar.xz
-configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR}
-make # fails
+PACKAGE_NAME=tar
+PACKAGE_VERSION=1.27.1
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+
+oegimport libiconv
+oegimport gettext
+oegimport zlib
+oegimport bzip2
+oegimport xz
+
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --disable-acl --without-posix-acls
+make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-oegarchive tar-1.26
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

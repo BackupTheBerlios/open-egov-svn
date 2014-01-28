@@ -12,7 +12,6 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
@@ -84,10 +83,15 @@ Optional Packages:
 PACKAGE_NAME=libwmf
 PACKAGE_VERSION=0.2.8.4
 
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
+oeg_include_files AUTHORS COPYING CREDITS README
+
 oegimport expat
 oegimport zlib
 oegimport libjpeg
 oegimport freetype
+
 oegimport  bzip2
 #oegimport  zlib
 oegimport  libpng
@@ -98,19 +102,14 @@ oegimport  libpng
 #oegimport  gettext
 #oegimport  zlib
 
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-
 #not xml2 and expat at the same time. only expat: #--with-libxml2=${OEG_BASE_DIR}
 configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --without-x --with-expat=${OEG_BASE_DIR} --with-freetype=${OEG_BASE_DIR} --with-zlib=${OEG_BASE_DIR} --with-png=${OEG_BASE_DIR} --with-jpeg=${OEG_BASE_DIR}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+#oeg_fix_libtool_file libidn.la libidn-11.dll libidn.dll.a libidn.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

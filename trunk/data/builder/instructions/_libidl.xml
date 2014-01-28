@@ -13,13 +13,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="0.8.14" date="2010-03-30" state="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="libIDL-0.8.14.tar.bz2">

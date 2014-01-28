@@ -12,7 +12,6 @@
       <description lang="de" type="short">UnRAR</description>
       <description lang="de" type="long">RAR ist das Dateiformat des WinRAR-Archivierers. Wie andere Archive sind RAR-Dateien Datencontainer, die Dateien in komprimierter Form enthalten.</description>
     </descriptions>
-    <keywords>unrar, rar, packer</keywords>
   </meta>
 
   <comments>
@@ -36,12 +35,14 @@ CXXFLAGS="-O2 -fpermissive" make
 PACKAGE_NAME=unrar
 PACKAGE_VERSION=5.0.14
 
+oegextract unrarsrc-5.0.14.tar.gz
+cd unrar
+
+oeg_include_files
+
 oegimport libiconv
 oegimport gettext
 
-oegextract unrarsrc-5.0.14.tar.gz
-
-cd unrar
 oegpatch 001       # Adds -fpermissive to avoid errors (only during 64 bit build). Ignored but not fixed...
 make
 strip unrar.exe    # "strip unrar" is not enough
@@ -53,7 +54,6 @@ cp unrar ${OEG_INSTALL_DIR}/${OEG_BASE_BIN_DIR}/unrar.exe
 cp acknow.txt license.txt ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}/
 
 cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
-
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

@@ -12,7 +12,6 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long">GNU Zip ist ein Komprimierprogramm, welches als Ersatz für compress entwickelt wurde. Die wichtigsten Vorteile gegenüber "compress" sind eine viel bessere Kompression und die Freiheit von patentierten Algorithmen.</description>
     </descriptions>
-    <keywords>gzip, packer</keywords>
   </meta>
 
   <comments>

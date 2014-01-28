@@ -14,7 +14,6 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>libgcrypt, gnupg</keywords>
   </meta>
 
   <comments>
@@ -120,8 +119,7 @@ oegimport w32pth                # optional, welches nimmt er?
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp AUTHORS COPYING* LICENSES README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+oeg_include_files AUTHORS COPYING* LICENSES README THANKS
 
 <if64bits>
 # nur 1.6.0?
@@ -148,11 +146,8 @@ make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+#
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

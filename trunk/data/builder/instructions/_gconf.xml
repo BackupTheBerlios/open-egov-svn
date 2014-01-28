@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="3.2.6" date="2013-01-22" state="fails">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="GConf-3.2.6.tar.xz">

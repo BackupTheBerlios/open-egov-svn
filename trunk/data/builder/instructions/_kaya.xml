@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="0.5.2" date="" state="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="kaya-0.5.2.tgz">

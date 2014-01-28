@@ -12,7 +12,6 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>nano</keywords>
   </meta>
 
   <comments>
@@ -20,9 +19,6 @@
 
   <set version="2.3.2" date="2013-03-22" state="fails-to-build">
     <flags>
-      <required>curses|slang gettext libiconv</required>
-      <optional></optional>
-      <recommended></recommended>
     </flags>
 
     <downloads>
@@ -40,6 +36,8 @@
     <commands>
 
 oegextract nano-2.3.2.tar.gz
+
+oegimport curses|slang gettext libiconv  # required
 
 # --with-slang=DIR      Use the slang library instead of curses
 # no regex.h in c library - needed to --disable-color

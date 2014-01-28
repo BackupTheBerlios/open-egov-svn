@@ -12,7 +12,6 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
@@ -21,6 +20,8 @@
   </comments>
 
   <set version="" date="2013-00-00" state="fails-to-build">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="ctags-5.8.tar.gz">

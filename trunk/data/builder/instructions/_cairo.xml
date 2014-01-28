@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="1.12.16" date="2013-08-26" state="fails-to-build">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="cairo-1.12.16.tar.xz">

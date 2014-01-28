@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="2.4.7" date="2013-11-25" state="fails">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="httpd-2.4.7.tar.bz2">

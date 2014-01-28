@@ -12,13 +12,14 @@
       <description lang="de" type="short">Boost C++ Libraries</description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>boost</keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="1.55.0" date="2013-11-11" state="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="boost_1_55_0.7z">
@@ -36,24 +37,20 @@
 PACKAGE_NAME=boost
 PACKAGE_VERSION=1.55.0
 
-#oegimport libiconv
-#oegimport gettext
-
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+oeg_include_files
+
+#oegimport libiconv
+#oegimport gettext
 
 configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+#
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </command>
   </set>

@@ -13,7 +13,6 @@
       <description lang="de" type="short">PCRE-Bibliothek</description>
       <description lang="de" type="long">Perl Compatible Regular Expressions (PCRE)-Bibliothek.</description>
     </descriptions>
-    <keywords>pcre</keywords>
   </meta>
 
   <comments>

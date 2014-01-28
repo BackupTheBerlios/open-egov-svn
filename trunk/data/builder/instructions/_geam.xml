@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="0.8.4" date="2004-05-07" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="">

@@ -14,13 +14,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="4.1.175" date="2013-08-03" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="beaengine-4.1.175.zip"> <!-- renamed! -->

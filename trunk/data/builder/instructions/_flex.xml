@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="2.5.37" date="2012-08-03" state="fails">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="flex-2.5.37.tar.bz2">

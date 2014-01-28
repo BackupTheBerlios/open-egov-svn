@@ -12,7 +12,6 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
@@ -39,7 +38,7 @@ PACKAGE_VERSION=
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-oeg_include_files XXX
+oeg_include_files 
 
 #oegimport libiconv
 #oegimport gettext
@@ -49,11 +48,8 @@ make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+#oeg_fix_libtool_file libidn.la libidn-11.dll libidn.dll.a libidn.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

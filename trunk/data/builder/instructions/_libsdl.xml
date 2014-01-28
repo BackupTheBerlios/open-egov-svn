@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="2.0.1-8054" date="2013-12-07" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="SDL-2.0.1-8054.tar.gz">
@@ -154,24 +155,23 @@
 PACKAGE_NAME=libsdl
 PACKAGE_VERSION=2.0.1-8054
 
+oegextract SDL-2.0.1-8054.tar.gz
+
+oeg_include_files README-SDL.txt CREDITS.txt COPYING.txt
+
 oegimport dbus
 oegimport  expat
 #oegimport libiconv
 #oegimport gettext
 oegimport pthreads-win32
 
-oegextract SDL-2.0.1-8054.tar.gz
-
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --enable-dbus --enable-pthreads --enable-shared --without-x
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --enable-dbus --enable-pthreads --enable-shared --without-x
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+oeg_fix_libtool_file libSDL2.la SDL2.dll libSDL2.dll.a libSDL2.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

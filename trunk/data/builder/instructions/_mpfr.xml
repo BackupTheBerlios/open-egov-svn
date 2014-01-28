@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="mpfr" license="">
+  <meta>
+    <homepage>http://www.mpfr.org/</homepage>
+    <download>ftp://ftp.gnu.org/gnu/mpfr</download>
+    <download>http://www.mpfr.org/mpfr-current/#download</download>
+    <descriptions>
+      <description lang="en" type="short"></description>
+      <description lang="en" type="long">The MPFR library is a C library for multiple-precision floating-point computations with correct rounding. The main goal of MPFR is to provide a library for multiple-precision floating-point computation which is both efficient and has a well-defined semantics. It copies the good ideas from the ANSI/IEEE-754 standard for double-precision floating-point arithmetic (53-bit significand).</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="3.1.2" date="2013-03-13" state="not-tried">
+
+    <downloads>
+      <download file="mpfr-3.1.2.tar.xz">
+        <url checked="2014-01-28">ftp://ftp.gnu.org/gnu/mpfr/mpfr-3.1.2.tar.xz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <commands>
+PACKAGE_NAME=mpfr
+PACKAGE_VERSION=3.1.2
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+
+oeg_include_files AUTHORS COPYING* REAME
+
+oegimport gmp
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --disable-static --enable-shared
+# static build requires static gmp and it's include with the static define.
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oeg_fix_path_names
+oeg_fix_libtool_file libmpfr.la libmpfr-4.dll libmpfr.dll.a ""
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

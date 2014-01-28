@@ -15,7 +15,6 @@
       <description lang="de" type="short">Die GNU Readline Bibliothek</description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>gnu, readline</keywords>
   </meta>
 
   <comments>
@@ -51,8 +50,11 @@ PACKAGE_NAME=readline
 #PACKAGE_VERSION=6.3-rc1
 PACKAGE_VERSION=6.2
 
-oegimport termcap
 oegextract readline-6.2.tar.gz
+
+oeg_include_files COPYING README
+
+oegimport termcap
 
 #6.2:
 oegpatch 001

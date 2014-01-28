@@ -12,7 +12,6 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>libidn</keywords>
   </meta>
 
   <comments>
@@ -36,10 +35,12 @@
 PACKAGE_NAME=libidn
 PACKAGE_VERSION=1.28
 
+oegextract libidn
+
+oeg_include_files AUTHORS COPYING* README THANKS
+
 oegimport libiconv
 oegimport gettext
-
-oegextract libidn
 
 configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --without-libpth-prefix --enable-threads=windows --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 
@@ -47,11 +48,8 @@ make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+oeg_fix_libtool_file libidn.la libidn-11.dll libidn.dll.a libidn.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

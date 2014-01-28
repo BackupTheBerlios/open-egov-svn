@@ -16,32 +16,33 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>bash</keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="4.2" date="2011-02-13" state="works">
+    <flags>
+    </flags>
 
     <downloads>
-      <download file="bash-4.2.tar.gz">
+      <download file="bash-4.2.tar.gz" date="2011-02-13">
         <url type="direct" checked="2013-07-19">http://ftp.gnu.org/gnu/bash/bash-4.2.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>7009201</size>
+        <size>7.009.201</size>
       </download>
-      <download file="bash-doc-3.2.tar.gz">
+      <download file="bash-doc-3.2.tar.gz" date="2006-10-11">
         <url type="direct" checked="2013-07-19">http://ftp.gnu.org/gnu/bash/bash-doc-3.2.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>2194482</size>
+        <size>2.194.482</size>
       </download>
     </downloads>
 
@@ -136,19 +137,27 @@
     <commands>
 PACKAGE_NAME=bash
 PACKAGE_VERSION=4.2
-oegenv 32
-oegcleanbase
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-oegimport libiconv-1.14
-oegimport gettext-0.18.3
-oegimport readline-6.2
 
-configure --prefix=${OEG_BASE_DIR} --with-libiconv-prefix=/open-egovernment --with-gnu-ld --with-libintl-prefix=/open-egovernment --enable-readline --with-installed-readline --enable-alias --enable-cond-command --enable-prompt-string-decoding --with-gnu-malloc --disable-rpath
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
+oeg_include_files AUTHORS COPYING README
+
+for i in $(seq -f "%03g" 45)
+do
+  oegpatch $i
+done
+
+oegimport libiconv
+oegimport gettext
+oegimport readline
+
+configure --prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-gnu-ld --with-libintl-prefix=${OEG_BASE_DIR} --enable-readline --with-installed-readline --enable-alias --enable-cond-command --enable-prompt-string-decoding --with-gnu-malloc --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 
 # error, no pwd.h
 
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

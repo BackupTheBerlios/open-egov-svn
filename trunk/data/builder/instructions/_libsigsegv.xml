@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>libsigsegv, gnu</keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="2.10" date="2011-04-03" state="not-build">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="libsigsegv-2.10.tar.gz">

@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="3.15.4" date="2012-10-27" state="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="FreeImage3154.zip">
@@ -36,24 +37,47 @@
 PACKAGE_NAME=freeimage
 PACKAGE_VERSION=3.15.4
 
-#oegimport libiconv
-#oegimport gettext
+oegextract FreeImage3154.zip
+cd FreeImage
 
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+oeg_include_files license*
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+# more patches here:
+# http://sourceforge.net/p/freeimage/patches/
 
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
-make
+oegpatch 001                 # missed memset(), included string.h
+
+CC=gcc make                  # Avoid "cc" calls - we use gcc.
+#make -f Makefile.mingw
+
+# static lib builds, dynamic one has errors:
+
+./Source/FreeImage/BitmapAccess.o:BitmapAccess.cpp:(.text+0x9bb): undefined reference to `_imp__FreeImage_GetScanLine@8'
+./Source/FreeImage/BitmapAccess.o:BitmapAccess.cpp:(.text+0x131d): undefined reference to `_imp__FreeImage_DeleteTag@4'
+./Source/FreeImage/BitmapAccess.o:BitmapAccess.cpp:(.text+0x1508): undefined reference to `_imp__FreeImage_GetTagKey@4'
+./Source/FreeImage/BitmapAccess.o:BitmapAccess.cpp:(.text+0x1542): undefined reference to `_imp__FreeImage_GetTagCount@4'
+./Source/FreeImage/BitmapAccess.o:BitmapAccess.cpp:(.text+0x1553): undefined reference to `_imp__FreeImage_GetTagType@4'
+./Source/FreeImage/BitmapAccess.o:BitmapAccess.cpp:(.text+0x156f): undefined reference to `_imp__FreeImage_GetTagLength@4'
+./Source/FreeImage/BitmapAccess.o:BitmapAccess.cpp:(.text+0x1592): undefined reference to `_imp__FreeImage_OutputMessageProc'
+./Source/FreeImage/BitmapAccess.o:BitmapAccess.cpp:(.text+0x15b1): undefined reference to `_imp__FreeImage_SetTagKey@8'
+./Source/FreeImage/BitmapAccess.o:BitmapAccess.cpp:(.text+0x166e): undefined reference to `_imp__FreeImage_DeleteTag@4'
+./Source/FreeImage/BitmapAccess.o:BitmapAccess.cpp:(.text+0x16e3): undefined reference to `_imp__FreeImage_CloneTag@4'
+./Source/FreeImage/BitmapAccess.o:BitmapAccess.cpp:(.text+0x1738): undefined reference to `_imp__FreeImage_SetTagID@8'
+./Source/FreeImage/BitmapAccess.o:BitmapAccess.cpp:(.text+0x1818): undefined reference to `_imp__FreeImage_DeleteTag@4'
+./Source/FreeImage/BitmapAccess.o:BitmapAccess.cpp:(.text+0x18c0): undefined reference to `_imp__FreeImage_DeleteTag@4'
+./Source/FreeImage/BitmapAccess.o:BitmapAccess.cpp:(.text+0x210a): undefined reference to `_imp__FreeImage_CloneTag@4'
+./Source/FreeImage/BitmapAccess.o:BitmapAccess.cpp:(.text+0x2604): undefined reference to `_imp__FreeImage_CloneTag@4'
+d:/dev/mingw32/bin/../lib/gcc/i686-w64-mingw32/4.8.2/../../../../i686-w64-mingw32/bin/ld.exe: ./Source/FreeImage/BitmapAccess.o: bad reloc address 0x44 in section `.rdata'
+collect2.exe: error: ld returned 1 exit status
+Makefile.mingw:125: recipe for target `FreeImage.dll' failed
+
+
+
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+#
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>glibc</keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="2.18" date="2013-08-12" state="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="glibc-2.18.tar.xz">

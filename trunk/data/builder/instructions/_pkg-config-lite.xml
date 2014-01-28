@@ -5,14 +5,13 @@
 <pack name="pkg-config-lite" license="">
   <meta>
     <homepage>http://sourceforge.net/projects/pkgconfiglite/</homepage>
-    <download></download>
+    <download>http://sourceforge.net/projects/pkgconfiglite/files/</download>
     <descriptions>
-      <description lang="en" type="short"></description>
+      <description lang="en" type="short">pkgconfig </description>
       <description lang="en" type="long"></description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>pkgconfig</keywords>
   </meta>
 
   <comments>
@@ -38,8 +37,7 @@ PACKAGE_VERSION=0.28-1
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp AUTHORS COPYING README* "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+oeg_include_files AUTHORS COPYING README*
 
 configure --prefix=${OEG_BASE_DIR} --with-pc-path=${OEG_BASE_DIR}/lib/pkgconfig:${OEG_BASE_DIR}/share/pkgconfig:/usr/local/lib/pkgconfig:/usr/lib/pkgconfig:/mingw/lib/pkgconfig --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make

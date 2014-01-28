@@ -13,7 +13,6 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>libnettle</keywords>
   </meta>
 
   <comments>
@@ -70,15 +69,14 @@
 PACKAGE_NAME=nettle
 PACKAGE_VERSION=2.7.1
 
-oegimport gmp                # GMP 3.1+ "required", else support for public key algorithms will be unavailable.
-oegimport  readline
-oegimport openssl
-oegimport  zlib
-
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp AUTHORS COPYING.LIB README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+oeg_include_files AUTHORS COPYING.LIB README
+
+oegimport gmp                # GMP 3.1+ "required", else support for public key algorithms will be unavailable.
+#oegimport  readline
+oegimport openssl
+#oegimport  zlib
 
 configure --prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --with-lib-path=${OEG_BASE_LIB_DIR} --with-include-path=${OEG_BASE_DIR}/include
 

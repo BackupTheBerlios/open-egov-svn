@@ -12,17 +12,13 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long">Implementierung der ISO 14882 Standard C++ Bibliothek.</description>
     </descriptions>
-    <keywords>libstdc++</keywords>
   </meta>
 
   <comments>
     <comment date="" author="">moved to gcc package</comment>
   </comments>
 
-  <set version="" date="" working="true">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+  <set version="" date="" working="">
 
     <downloads>
       <download file="">
@@ -36,20 +32,11 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
     <compile>
 ./configure --prefix=${PREFIX}
 make
 make install
     </compile>
-
-    <install>
-    </install>
   </set>
 </pack>
 

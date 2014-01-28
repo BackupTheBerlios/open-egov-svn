@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>gpgme</keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="1.4.3" date="2013-08-12" working="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="gpgme-1.4.3.tar.bz2">

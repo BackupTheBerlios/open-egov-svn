@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="7.6.1" date="2012-06-25" state="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="libjson_7.6.1.zip">

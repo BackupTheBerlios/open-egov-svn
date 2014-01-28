@@ -12,7 +12,6 @@
       <description lang="de" type="short">XZ Komprimierungswerkzeuge</description>
       <description lang="de" type="long">XZ Utils ist eine kostenlose Allzweck-Datenkomprimierungs-Software mit hoher Komprimierungsrate. XZ Utils sind die Nachfolger der LZMA Utils.</description>
     </descriptions>
-    <keywords>xz, packer</keywords>
   </meta>
 
   <comments>
@@ -53,9 +52,12 @@
 PACKAGE_NAME=xz
 PACKAGE_VERSION=5.0.5
 
+oegextract ${PACKAGE_NAME}
+
+oeg_include_files
+
 oegimport libiconv
 oegimport gettext
-oegextract ${PACKAGE_NAME}
 
 configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make

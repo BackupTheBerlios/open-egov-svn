@@ -13,13 +13,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="2014-01-26" date="2014-01-26" state="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="angleproject-b3ecc641124f.zip">
@@ -39,11 +40,10 @@ PACKAGE_VERSION=2014-01-26
 
 oegextract angleproject-b3ecc641124f.zip
 
+oeg_include_files AUTHORS CONTRIBUTORS LICENSE
+
 #oegimport libiconv
 #oegimport gettext
-
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp AUTHORS CONTRIBUTORS LICENSE "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
 ???
 

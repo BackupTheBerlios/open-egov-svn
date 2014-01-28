@@ -13,7 +13,6 @@
       <description lang="de" type="short">Komprimierungs-Bibliothek</description>
       <description lang="de" type="long">zlib ist eine freie, allgemeine Zwecke, juristisch unverbundene, verlustfreie Komprimierungs-Bibliothek für den Einsatz auf nahezu jeder Computer-Hardware und jedem Betriebssystem.</description>
     </descriptions>
-    <keywords>zlib, gzip, zip, packer</keywords>
   </meta>
 
   <comments>
@@ -21,9 +20,6 @@
 
   <set version="1.2.8" date="2013-04-28" state="works">
     <flags>
-      <required></required>
-      <optional></optional>
-      <standard></standard>
     </flags>
 
     <downloads>
@@ -43,6 +39,8 @@ PACKAGE_NAME=zlib
 PACKAGE_VERSION=1.2.8
 
 oegextract zlib
+
+oeg_include_files
 
 # configure for MinGW is disabled :-(
 # ${CONFIGURE_HOST_PARA}

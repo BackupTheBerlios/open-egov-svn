@@ -12,7 +12,6 @@
       <description lang="de" type="short">POSIX-Portierung von 7-zip</description>
       <description lang="de" type="long">Das ist die POSIX-Portierung (UNIX, Linux, MacOS, ...) des 7-zip-Archivierers.</description>
     </descriptions>
-    <keywords>p7zip</keywords>
   </meta>
 
   <comments>

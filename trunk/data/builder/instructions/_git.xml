@@ -12,17 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>git</keywords>
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
   <set version="" date="2012-11-13" working="false">
-    <requires>
-      <app name="" version="" type="required" />
-    </requires>
+    <flags>
+    </flags>
 
     <downloads>
       <download file="git-master 2012-11-13.zip">
@@ -36,20 +33,11 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
     <compile>
 ./configure --prefix=${PREFIX}
 make
 make install
     </compile>
-
-    <install>
-    </install>
   </set>
 </pack>
 

@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="5.16.2" date="2012-08-11" state="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="autogen-5.16.2.tar.xz">

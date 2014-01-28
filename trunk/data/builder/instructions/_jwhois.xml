@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="4.0" date="2007-07-01" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="jwhois-4.0.tar.gz">
@@ -52,14 +53,13 @@
 PACKAGE_NAME=jwhois
 PACKAGE_VERSION=4.0
 
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
+oeg_include_files AUTHORS COPYING README
+
 oegimport libiconv
 oegimport gettext
 oegimport libidn
-
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
-
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp AUTHORS COPYING README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
 configure --prefix=${OEG_BASE_DIR} --disable-rpath --with-libidn=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 

@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="1.1.0" date="2011-02-22" state="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="libao-1.1.0.tar.gz">

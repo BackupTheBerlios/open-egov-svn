@@ -7,12 +7,11 @@
     <homepage>http://www.gnu.org/software/termutils/manual/termutils-2.0/html_mono/tput.html</homepage>
     <download>ftp://ftp.gnu.org/gnu/termutils/</download>
     <descriptions>
-      <description lang="en" type="short">Terminal utilities</description>
+      <description lang="en" type="short">Terminal utilities (tput, tabs)</description>
       <description lang="en" type="long">Portable terminal control from scripts.</description>
-      <description lang="de" type="short">Terminal-Steuerprogramme</description>
+      <description lang="de" type="short">Terminal-Steuerprogramme (tput, tabs)</description>
       <description lang="de" type="long">Portierbare Terminal-Steuerung von Skripten.</description>
     </descriptions>
-    <keywords>terminal, tput, tabs, termutils</keywords>
   </meta>
 
   <comments>

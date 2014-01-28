@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="mpc" license="GNU LGPL 3+">
+  <meta>
+    <homepage>http://www.multiprecision.org/index.php?prog=mpc</homepage>
+    <download>ftp://ftp.gnu.org/gnu/mpc/</download>
+    <descriptions>
+      <description lang="en" type="short"></description>
+      <description lang="en" type="long">Gnu Mpc is a C library for the arithmetic of complex numbers with arbitrarily high precision and correct rounding of the result. It extends the principles of the IEEE-754 standard for fixed precision real floating point numbers to complex numbers, providing well-defined semantics for every operation. At the same time, speed of operation at high precision is a major design goal.</description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="1.0.2" date="2014-01-15" state="not-tried">
+
+    <downloads>
+      <download file="mpc-1.0.2.tar.gz">
+        <url checked="2014-01-28">ftp://ftp.gnu.org/gnu/mpc/mpc-1.0.2.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <commands>
+PACKAGE_NAME=mpc
+PACKAGE_VERSION=1.0.2
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
+oeg_include_files AUTHORS COPYING* README
+
+oegimport gmp                # required: 4.3.2+
+oegimport mpfr               # required: 2.4.2+
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --disable-static --enable-shared
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oeg_fix_path_names
+oeg_fix_libtool_file libmpc.la libmpc-3.dll libmpc.dll.a ""
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

@@ -12,18 +12,13 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
-    <comment date="" author=""></comment>
   </comments>
 
-  <set version="" date="" state="works">
+  <set version="" date="" state="">
     <flags>
-      <required></required>
-      <optional></optional>
-      <recommended></recommended>
     </flags>
 
     <downloads>

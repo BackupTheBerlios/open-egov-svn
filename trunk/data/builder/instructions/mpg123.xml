@@ -12,7 +12,6 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
@@ -85,12 +84,11 @@ Note: Disabling core features is not commonly done and some combinations might n
 PACKAGE_NAME=mpg123
 PACKAGE_VERSION=1.17.0
 
-oegimport libtool            # modules require libltdl!
-
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp AUTHORS COPYING README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+oeg_include_files AUTHORS COPYING README
+
+oegimport libtool            # modules require libltdl!
 
 TODO: add: --with-cpu=x86-64   --with-cpu=x86
 configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --with-optimization=2 --with-audio=win32 --with-default-audio=win32 --enable-ipv6=yes --enable-network=yes --enable-modules=yes --with-module-suffix=.dll
@@ -101,11 +99,7 @@ make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

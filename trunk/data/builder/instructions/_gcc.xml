@@ -12,18 +12,56 @@
       <description lang="de" type="short">GNU Compiler Collection</description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>gnu, gcc, c++, compiler</keywords>
   </meta>
 
   <comments>
     <comment date="" author="">http://gcc.gnu.org/install/prerequisites.html</comment>
+
+gcc -v
+
+GCC_COMMON_CFG_FLAGS="--enable-threads=posix --enable-shared --enable-static --disable-multilib --enable-languages=ada,c,c++,fortran,objc,obj-c++,lto --disable-rpath --with-gnu-as --with-gnu-ld --with-libiconv --with-system-zlib --with-pkgversion='i686-posix-dwarf, Built by Open E-Government project, www.open-egov.de' --with-bugurl=http://sourceforge.net/projects/open-egov --enable-libstdcxx-time=yes --enable-libgomp --enable-lto --enable-graphite --enable-checking=release --enable-fully-dynamic-string --enable-version-specific-runtime-libs --disable-isl-version-check --disable-cloog-version-check --disable-libstdcxx-pch --disable-libstdcxx-debug --enable-bootstrap --disable-win32-registry --disable-nls --disable-werror --disable-symvers"
+
+x86_64-posix-seh:
+--host=x86_64-w64-mingw32 --build=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 --with-arch=nocona --with-tune=core2 --prefix=/mingw64
+
+--with-sysroot=/c/mingw482/x86_64-482-posix-seh-rt_v3-r2/mingw64
+--with-gxx-include-dir=/mingw64/x86_64-w64-mingw32/include/c++
+--with-gmp=/c/mingw482/prerequisites/x86_64-w64-mingw32-static
+--with-mpfr=/c/mingw482/prerequisites/x86_64-w64-mingw32-static
+--with-mpc=/c/mingw482/prerequisites/x86_64-w64-mingw32-static
+--with-isl=/c/mingw482/prerequisites/x86_64-w64-mingw32-static
+--with-cloog=/c/mingw482/prerequisites/x86_64-w64-mingw32-static --enable-cloog-backend=isl
+
+i686-posix-dwarf:
+--host=i686-w64-mingw32 --build=i686-w64-mingw32 --target=i686-w64-mingw32 --with-arch=i686 --with-tune=generic --disable-sjlj-exceptions --with-dwarf2 --prefix=/mingw32
+
+--with-sysroot=/c/mingw482/i686-482-posix-dwarf-rt_v3-r2/mingw32
+--with-gxx-include-dir=/mingw32/i686-w64-mingw32/include/c++
+--with-gmp=/c/mingw482/prerequisites/i686-w64-mingw32-static
+--with-mpfr=/c/mingw482/prerequisites/i686-w64-mingw32-static
+--with-mpc=/c/mingw482/prerequisites/i686-w64-mingw32-static
+--with-isl=/c/mingw482/prerequisites/i686-w64-mingw32-static --with-cloog=/c/mingw482/prerequisites/i686-w64-mingw32-static --enable-cloog-backend=isl
+
+CFLAGS='-O2 -pipe -I/c/mingw482/x86_64-482-posix-seh-rt_v3-r2/mingw64/opt/include -I/c/mingw482/prerequisites/x86_64-zlib-static/include -I/c/mingw482/prerequisites/x86_64-w64-mingw32-static/include'
+CXXFLAGS='-O2 -pipe -I/c/mingw482/x86_64-482-posix-seh-rt_v3-r2/mingw64/opt/include -I/c/mingw482/prerequisites/x86_64-zlib-static/include -I/c/mingw482/prerequisites/x86_64-w64-mingw32-static/include'
+CPPFLAGS=
+LDFLAGS='-pipe -L/c/mingw482/x86_64-482-posix-seh-rt_v3-r2/mingw64/opt/lib -L/c/mingw482/prerequisites/x86_64-zlib-static/lib -L/c/mingw482/prerequis
+ites/x86_64-w64-mingw32-static/lib '
+
+CFLAGS='-O2 -pipe -I/c/mingw482/i686-482-posix-dwarf-rt_v3-r2/mingw32/opt/include -I/c/mingw482/prerequisites/i686-zlib-static/include -I/c/mingw482/prerequisites/i686-w64-mingw32-static/include'
+CXXFLAGS='-O2 -pipe -I/c/mingw482/i686-482-posix-dwarf-rt_v3-r2/mingw32/opt/include -I/c/mingw482/prere
+quisites/i686-zlib-static/include -I/c/mingw482/prerequisites/i686-w64-mingw32-static/include'
+CPPFLAGS=
+LDFLAGS='-pipe -L/c/mingw482/i686-482-posix-dwarf-rt_v3-r2/mingw32/opt/lib -L/c/mingw482/prerequisites/i686-zlib-static/lib -L/c/mingw482/prerequisites/i686-w64-mingw32-static/lib -Wl,--large-address-aware'
   </comments>
 
-  <set version="4.8.1" date="2013-05-31" state="works">
+  <set version="4.8.2" date="2013-10-16" state="works">
+    <flags>
+    </flags>
 
     <downloads>
-      <download file="gcc-4.8.1.tar.bz2">
-        <url type="direct" checked="2013-07-19">http://ftp.gnu.org/pub/gnu/gcc/gcc-4.8.1/gcc-4.8.1.tar.bz2</url>
+      <download file="gcc-4.8.2.tar.bz2">
+        <url type="direct" checked="2014-01-28">http://ftp.gnu.org/pub/gnu/gcc/gcc-4.8.2/gcc-4.8.2.tar.bz2</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -34,6 +72,35 @@
     </downloads>
 
     <commands>
+PACKAGE_NAME=gcc
+PACKAGE_VERSION=4.8.2
+
+oegextract ${PACKAGE_NAME}
+
+oeg_include_files COPYING* MAINTAINERS README
+
+# ftp://gcc.gnu.org/pub/gcc/infrastructure/.
+# http://gcc.gnu.org/install/prerequisites.html
+
+oegimport gmp                # required: 4.2+
+oegimport mpfr               # required: 2.4.0+
+oegimport mpc                # required: 0.8.0+
+oegimport libiconv           # optional
+oegimport gettext            # needed? only added because of --enable-nls; TODO: Check
+
+mkdir build
+cd build
+../configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+
+
+
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

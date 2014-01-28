@@ -13,13 +13,15 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="1.14.29" date="2014-01-05" state="works">
+    <flags>
+    </flags>
+
     <downloads>
       <download file="libgsf-1.14.29.tar.xz">
         <url checked="2014-01-21">http://ftp.gnome.org/pub/gnome/sources/libgsf/1.14/libgsf-1.14.29.tar.xz</url>

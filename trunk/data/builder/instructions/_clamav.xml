@@ -14,7 +14,6 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>antivirus, clamav</keywords>
   </meta>
 
   <comments>
@@ -77,6 +76,8 @@
 -->
 
   <set version="0.98.1" date="2014-01-14" state="fails-to-build">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="clamav-0.98.1.tar.gz">
@@ -91,8 +92,10 @@
     </downloads>
 
     <commands>
-export PACKAGE_NAME=clamav
-export PACKAGE_VERSION=0.98.1
+PACKAGE_NAME=clamav
+PACKAGE_VERSION=0.98.1
+
+oegextract clamav-0.97.8.tar.gz
 
 oegimport libiconv     # optional
 oegimport gettext      # maybe not needed
@@ -100,8 +103,6 @@ oegimport zlib
 oegimport bzip2        # optional
 oegimport ncurses
 oegimport libtool      # optional
-
-oegextract clamav-0.97.8.tar.gz
 
 configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-zlib=${OEG_BASE_DIR} --disable-rpath --enable-shared --with-iconv --with-libncurses-prefix=${OEG_BASE_DIR} --with-ltdl-include=${OEG_BASE_DIR}/include --with-ltdl-lib=${OEG_BASE_DIR}/lib
 make

@@ -14,7 +14,6 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>antivirus, clamwin, clamav</keywords>
   </meta>
 
   <comments>
@@ -22,9 +21,8 @@
   </comments>
 
   <set version="0.97.6" date="2012-10-06" working="false">
-    <requires>
-      <app name="clamav" version="0.97.6" type="optional" />
-    </requires>
+    <flags>
+    </flags>
 
     <downloads>
       <download file="clamwin-0.97.6-setup.exe">
@@ -38,17 +36,10 @@
       </download>
     </downloads>
 
-    <options>
-    </options>
-
-    <patch>
-    </patch>
-
     <compile>
-    </compile>
 
-    <install>
-    </install>
+oegimport clamav   # optional: 0.97.6
+    </compile>
   </set>
 </pack>
 

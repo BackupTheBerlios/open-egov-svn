@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="0.9.33" date="2013-12-21" state="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="libmicrohttpd-0.9.33.tar.gz">

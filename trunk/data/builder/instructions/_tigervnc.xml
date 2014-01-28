@@ -14,7 +14,6 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
@@ -37,6 +36,10 @@
     <commands>
 PACKAGE_NAME=tigervnc
 PACKAGE_VERSION=1.3.0
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+
+oeg_include_file LICENCE.TXT
 
 oegimport cmake
 oegimport gettext
@@ -77,10 +80,6 @@ oegimport  libgpg-error
 oegimport libjpeg-turbo
 # we always need libjpeg-turbo as static library, else the app crashes when
 # opening the vnc window after login telling it needs jpeg 6 and not 8.
-
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
-
-oeg_include_file LICENCE.TXT
 
 #cmake -G "MSYS Makefiles" -DCMAKE_INSTALL_PREFIX=${OEG_INSTALL_DIR} -DGETTEXT_INCLUDE_DIR=/open-egovernment/include -DLIBINTL_LIBRARY=/open-egovernment/lib/libintl.dll.a -DJPEG_INCLUDE_DIR=/open-egovernment/include -DJPEG_LIBRARY=/open-egovernment/lib/libjpeg.a
 #LIBINTL_LIBRARY   else: C:/msys/bin/intl.dll

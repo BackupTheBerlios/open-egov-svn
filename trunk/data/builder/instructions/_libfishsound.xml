@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="1.0.0" date="2010-02-04" state="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="libfishsound-1.0.0.tar.gz">

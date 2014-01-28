@@ -12,7 +12,6 @@
       <description lang="de" type="short">Rsync Dateisynchronisierungswerkzeug</description>
       <description lang="de" type="long">Rsync ist ein Open-Source-Werkzeug für einen schnellen, inkrementellen Dateitransfer.</description>
     </descriptions>
-    <keywords>rsync</keywords>
   </meta>
 
   <comments>

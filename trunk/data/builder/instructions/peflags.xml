@@ -12,7 +12,6 @@
       <description lang="de" type="short">Verändert Sicherheitseinstellungen von ausführbaren Dateien</description>
       <description lang="de" type="long">PEFlags ist ein Kommandozeilen-Werkzeug, welches die DEP und ASLR Kennzeichnungen im PE-Header von Binärdateien setzen kann. Damit können Windows Anwendungen und DLLs die Datenausführungsverhinderung (Data Execution Prevention, DEP) und die Speicherverwürfelung (Adress Space Layout Randomisation, ASLR) nutzen und Angriffe auf Schwachstellen erschweren.</description>
     </descriptions>
-    <keywords>DEP, ASLR, Exploit Prevention Mechanism, XPM</keywords>
   </meta>
 
   <comments>

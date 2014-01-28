@@ -12,15 +12,17 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="2.1.3" date="2014-01-15" state="works">
+    <flags>
+    </flags>
 
-    <!-- http://ffmpeg.mplayerhq.hu/releases/ffmpeg-snapshot.tar.bz2 -->
+    <!-- http://ffmpeg.mplayerhq.hu/releases/ffmpeg-snapshot.tar.bz2
+         ffmpeg-snapshot-git-2014-01-27.tar.bz2 -->
     <downloads>
       <download file="ffmpeg-2.1.3.tar.bz2">
         <url checked="2014-01-20">http://ffmpeg.mplayerhq.hu/releases/ffmpeg-2.1.3.tar.bz2</url>
@@ -350,6 +352,10 @@ Developer options (useful when working on FFmpeg itself):
 PACKAGE_NAME=ffmpeg
 PACKAGE_VERSION=2.1.3
 
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+
+oeg_include_files COPYING CREDITS LICENSE MAINTAINERS README
+
 oegimport libiconv
 #oegimport gettext
 oegimport yasm               # for build only
@@ -374,11 +380,6 @@ oegimport  libpng
 #oegimport speex
 #oegimport librtmp
 #oegimport libwavpack
-
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
-
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp COPYING CREDITS LICENSE MAINTAINERS README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
 configure --prefix=${OEG_BASE_DIR} --disable-debug --disable-random --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} --disable-doc
 # --disable-doc - remove later

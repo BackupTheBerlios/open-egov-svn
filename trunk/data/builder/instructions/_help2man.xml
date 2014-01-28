@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="1.43.3" date="2013-00-00" state="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="help2man-1.43.3.tar.gz">

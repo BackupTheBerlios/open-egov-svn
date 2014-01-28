@@ -12,7 +12,6 @@
       <description lang="de" type="short">GNU libiconv</description>
       <description lang="de" type="long">GNU libiconv</description>
     </descriptions>
-    <keywords>localization, internationalization, i10n, i18n</keywords>
   </meta>
 
   <comments>
@@ -70,11 +69,14 @@ EOF
 PACKAGE_NAME=libiconv
 PACKAGE_VERSION=1.14
 
+oegextract libiconv
+
+oeg_include_files AUTHORS COPYING* THANKS
+
 <onflag name="gettext">
 oegimport libiconv    # For gettext binaries, called during the libiconv build.
 oegimport gettext
 </onflag>
-oegextract libiconv
 
 # --enable-relocatable doesn't work in 1.14, just remove this parameter:
 #../srclib/libicrt.a(progreloc.o):progreloc.c:(.text+0x156): undefined reference to `compute_curr_prefix'
@@ -96,26 +98,10 @@ make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-# The bin directory contains only the required dlls, the exe is already in bin64.
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
 
-# Now fix the .la files:
-
-# TODO
-
-#oeg_fix_libtool_files
-
-
-#dlname='../bin/libiconv-2.dll'
-#dlname='../bin64/libiconv-2.dll'
-#library_names='libiconv.dll.a'
-#old_library='libiconv.a'
-#libdir='/open-egovernment/lib'
-#libdir='/open-egovernment/lib64'
+oeg_fix_path_names
+oeg_fix_libtool_file libiconv.la   libiconv-2.dll   libiconv.dll.a   libiconv.a
+oeg_fix_libtool_file libcharset.la libcharset-1.dll libcharset.dll.a libcharset.a
 
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>

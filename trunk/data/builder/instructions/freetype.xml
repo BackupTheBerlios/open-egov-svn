@@ -13,7 +13,6 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords>freetype</keywords>
   </meta>
 
   <comments>
@@ -63,14 +62,13 @@ http://download.savannah.gnu.org/releases/freetype/freetype-doc-2.5.2.tar.gz
 PACKAGE_NAME=freetype
 PACKAGE_VERSION=2.5.2
 
+oegextract freetype
+
+oeg_include_files README docs/GPL* docs/LICENSE.TXT
+
 oegimport bzip2
 oegimport zlib
 oegimport libpng
-
-oegextract freetype
-
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp README docs/GPL* docs/LICENSE.TXT "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
 
 # configure failed in 2.5.2 (.tar.bz2). Diffed against the zip archive:
 # diff -riEBbw --strip-trailing-cr freetype-2.5.2-tbz freetype-2.5.2-zip
@@ -79,17 +77,16 @@ cp README docs/GPL* docs/LICENSE.TXT "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages
 find . -name "PaxHeaders.20920" -exec rm -rf {} \;
 
 configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
-#--disable-mmap 
+#--disable-mmap
 
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
 
+TODO: DLL missing
+
 cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+oeg_fix_libtool_file libfreetype.la libfreetype-6.dll libfreetype.dll.a libfreetype.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

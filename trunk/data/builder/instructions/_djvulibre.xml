@@ -12,13 +12,14 @@
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
-    <keywords></keywords>
   </meta>
 
   <comments>
   </comments>
 
   <set version="3.5.25.3" date="2012-05-08" state="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="djvulibre-3.5.25.3.tar.gz">
@@ -35,23 +36,29 @@
     <commands>
 PACKAGE_NAME=djvulibre
 PACKAGE_VERSION=3.5.25.3
-oegenv 32
-oegcleanbase
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 cd djvulibre-3.5.25
+
+#oeg_include_files
+
 oegimport libjpeg-6b
-oegimport tiff-4.0.3
-oegimport  zlib-1.2.8
-oegimport  xz-5.0.5
-configure --prefix=${OEG_BASE_DIR} --enable-shared --with-gnu-ld --with-jpeg=/open-egovernment --with-tiff=/open-egovernment
+oegimport tiff
+oegimport  zlib
+oegimport  xz
+
+configure --prefix=${OEG_BASE_DIR} --enable-shared --with-gnu-ld --with-jpeg=/open-egovernment 
+--with-tiff=/open-egovernment
 mingw32-make
 #../libtool: eval: line 7861: unexpected EOF while looking for matching `''
 #../libtool: eval: line 7862: syntax error: unexpected end of file
 #Makefile:79: recipe for target `libdjvulibre.la' failed
 
-#make install-strip DESTDIR=${OEG_INSTALL_DIR}
-#cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-#oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oeg_fix_path_names
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>
