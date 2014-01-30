@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- $Id$ -->
+
+<pack name="rtaudio" license="own">
+  <meta>
+    <homepage>http://www.music.mcgill.ca/~gary/rtaudio/index.html</homepage>
+    <download></download>
+    <descriptions>
+      <description lang="en" type="short"></description>
+      <description lang="en" type="long"></description>
+      <description lang="de" type="short"></description>
+      <description lang="de" type="long"></description>
+    </descriptions>
+  </meta>
+
+  <comments>
+  </comments>
+
+  <set version="4.0.12" date="2013-04-16" state="not-tried">
+    <flags>
+    </flags>
+
+    <downloads>
+      <download file="">
+        <url checked="2014-01-">http://www.music.mcgill.ca/~gary/rtaudio/release/rtaudio-4.0.12.tar.gz</url>
+        <hash type="CRC32"></hash>
+        <hash type="MD5"></hash>
+        <hash type="SHA1"></hash>
+        <hash type="SHA512"></hash>
+        <hash type="RIPEMD256"></hash>
+        <size></size>
+      </download>
+    </downloads>
+
+    <commands>
+PACKAGE_NAME=rtaudio
+PACKAGE_VERSION=4.0.12
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+
+oeg_include_files readme
+
+configure --prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --with-asio
+#--with-ds --with-pulse
+make
+make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+
+
+/d/dev/mingw32/bin/ar ruv librtaudio.a RtAudio.o asio.o asiodrivers.o asiolist.o
+ iasiothiscallresolver.o
+d:\dev\mingw32\bin\ar.exe: creating librtaudio.a
+a - RtAudio.o
+a - asio.o
+a - asiodrivers.o
+a - asiolist.o
+a - iasiothiscallresolver.o
+ranlib librtaudio.a
+i686-w64-mingw32-g++ -fPIC -shared -Wl,-soname,librtaudio.so.4 -o librtaudio.so.
+4.0.12 RtAudio.o asio.o asiodrivers.o asiolist.o iasiothiscallresolver.o -lole32
+
+/bin/ln -sf librtaudio.so.4.0.12 librtaudio.so
+/bin/ln -sf librtaudio.so.4.0.12 librtaudio.so.4
+
+
+
+
+
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oeg_fix_path_names
+#oeg_fix_libtool_file libidn.la libidn-11.dll libidn.dll.a libidn.a
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
+    </commands>
+  </set>
+</pack>
+

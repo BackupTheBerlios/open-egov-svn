@@ -18,6 +18,8 @@
   </comments>
 
   <set version="1.6" date="2013-06-09" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="gzip-1.6.tar.xz">
@@ -36,12 +38,11 @@ PACKAGE_NAME=gzip
 PACKAGE_VERSION=1.6
 
 oegextract gzip
-oegpatch 001      # missing SIGPIPE definition
-oegpatch 002      # lib/msvc-inval.c - cdecl removed
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp AUTHORS COPYING NEWS README THANKS TODO "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
-#"${OEG_INSTALL_DIR}${OEG_BASE_DIR}/dependencies.txt"
+oeg_include_files AUTHORS COPYING NEWS README THANKS TODO
+
+oegpatch 001       # missing SIGPIPE definition
+oegpatch 002       # lib/msvc-inval.c - cdecl removed
 
 configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --without-libpth-prefix --enable-threads=windows --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make

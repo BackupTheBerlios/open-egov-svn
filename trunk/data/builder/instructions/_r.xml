@@ -2,10 +2,11 @@
 
 <!-- $Id$ -->
 
-<pack name="libao" license="">
+<pack name="r" license="">
   <meta>
-    <homepage>http://www.xiph.org/ao/</homepage>
-    <download>http://downloads.xiph.org/releases/ao/</download>
+    <homepage>http://www.r-project.org/</homepage>
+    <download>http://cran.r-project.org/mirrors.html</download>
+    <download>http://mirrors.softliste.de/cran/src/base/R-3/</download>
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long"></description>
@@ -17,13 +18,11 @@
   <comments>
   </comments>
 
-  <set version="1.2.0" date="2014-01-28" state="not-tried">
-    <flags>
-    </flags>
+  <set version="3.0.2" date="2013-09-25" state="not-tried">
 
     <downloads>
-      <download file="libao-1.2.0.tar.gz">
-        <url checked="2014-01-30">http://downloads.xiph.org/releases/ao/libao-1.2.0.tar.gz</url>
+      <download file="">
+        <url checked="2014-01-29">http://mirrors.softliste.de/cran/src/base/R-3/R-3.0.2.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -34,22 +33,23 @@
     </downloads>
 
     <commands>
-PACKAGE_NAME=libao
-PACKAGE_VERSION=1.2.0
+PACKAGE_NAME=r
+PACKAGE_VERSION=3.0.2
 
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
+oegextract R-${PACKAGE_VERSION}.tar.gz
 
-oeg_include_files AUTHORS COPYING README
+oeg_include_files 
 
-#oegimport pulseaudio   # --enable-pulse
+#oegimport libiconv
+#oegimport gettext
 
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --enable-static --enable-shared --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --enable-wmm
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oeg_fix_path_names
-oeg_fix_libtool_file libao.la libao-0.dll libao.dll.a libao.a
+#oeg_fix_libtool_file libidn.la libidn-11.dll libidn.dll.a libidn.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

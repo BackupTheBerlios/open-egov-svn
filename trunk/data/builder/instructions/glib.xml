@@ -39,6 +39,8 @@ popd
   </comments>
 
   <set version="2.36.4" date="2013-08-07" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="glib-2.36.4.tar.xz">
@@ -56,27 +58,22 @@ popd
 PACKAGE_NAME=glib
 PACKAGE_VERSION=2.36.4
 
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+
+oeg_include_files AUTHORS COPYING README
+
 oegimport libiconv
 oegimport zlib
 oegimport libffi             # required
 oegimport gettext            # required
-oegimport pcre
-#oegimport python             # compile-time only; really needed?
+oegimport pcre               # optional: pcre with unicode properties; or --with-pcre=internal
 oegimport libxml2            # compile-time only?
 oegimport libxslt            # compile-time only?
-#oegimport  libiconv
-#oegimport  gettext
-oegimport  zlib
-
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+oegimport python             # compile-time only; v2.5; really needed?
 
 oegpatch 001                 # missed a cast in test program gdatetime.exe
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp AUTHORS COPYING README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
-
 configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --with-threads=win32 --with-libiconv=gnu --with-pcre=system
-# --with-pcre=internal
 
 # If make breaks while being in docs/reference (see comment):
 pushd .
@@ -88,11 +85,8 @@ make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+###oeg_fix_libtool_file libglib.la libglib-0.dll libglib.dll.a libglib.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

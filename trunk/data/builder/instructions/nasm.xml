@@ -18,6 +18,8 @@
   </comments>
 
   <set version="2.11" date="2013-06-22" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="nasm-2.11.tar.xz">
@@ -32,10 +34,12 @@
     </downloads>
 
     <commands>
-export PACKAGE_NAME=nasm
-export PACKAGE_VERSION=2.11
+PACKAGE_NAME=nasm
+PACKAGE_VERSION=2.11
 
 oegextract nasm
+
+oeg_include_files LICENSE
 
 # make ignores "install-strip" and DESTDIR=
 # so we set prefix to install dir to put the binaries there.
@@ -46,10 +50,7 @@ make strip
 make install
 make install_rdf
 
-cp LICENSE "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/"
-
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

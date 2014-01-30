@@ -18,6 +18,8 @@
   </comments>
 
   <set version="0.9.3" date="2010-05-02" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="libunistring-0.9.3.tar.gz">
@@ -35,19 +37,19 @@
 PACKAGE_NAME=libunistring
 PACKAGE_VERSION=0.9.3
 
-oegimport libiconv
 oegextract libunistring
+
+oeg_include_files AUTHORS COPYING* README
+
+oegimport libiconv           # required
 
 configure --with-gnu-ld -with-libiconv-prefix=${OEG_BASE_DIR} --without-libpth-prefix --prefix=${OEG_BASE_DIR} --enable-relocatable --enable-threads=win32 --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+oeg_fix_libtool_file libunistring.la libunistring-0.dll libunistring.dll.a libunistring.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

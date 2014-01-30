@@ -19,6 +19,8 @@
   </comments>
 
   <set version="2.11.0" date="2013-10-10" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="fontconfig-2.11.0.tar.bz2">
@@ -101,18 +103,14 @@ Some influential environment variables:
 PACKAGE_NAME=fontconfig
 PACKAGE_VERSION=2.11.0
 
-oegimport libiconv
-oegimport freetype
-oegimport  bzip2
-oegimport  zlib
-oegimport  libpng
-oegimport expat        # or use instead libxml2
-oegimport gettext
-
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp AUTHORS COPYING "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+oeg_include_files AUTHORS COPYING
+
+oegimport libiconv           # required
+oegimport freetype
+oegimport expat              # or use instead libxml2
+oegimport gettext
 
 configure --prefix=${OEG_BASE_DIR} --enable-iconv --enable-shared --with-libiconv=${OEG_BASE_DIR}  --with-libiconv-lib="${OEG_BASE_LIB_DIR}" --with-expat=${OEG_BASE_DIR} --with-expat-lib=${OEG_BASE_LIB_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 # --disable-docs
@@ -174,11 +172,8 @@ mv /open-egovernment/share/fontconfig /open-egovernment-install/open-egovernment
 
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+oeg_fix_libtool_file libfontconfig.la libfontconfig-1.dll libfontconfig.dll.a libfontconfig.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

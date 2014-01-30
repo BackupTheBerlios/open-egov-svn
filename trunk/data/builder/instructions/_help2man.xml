@@ -17,13 +17,13 @@
   <comments>
   </comments>
 
-  <set version="1.43.3" date="2013-00-00" state="not-tried">
+  <set version="1.43.3" date="2013-06-30" state="works">
     <flags>
     </flags>
 
     <downloads>
       <download file="help2man-1.43.3.tar.gz">
-        <url checked="2014-">http://ftp.gnu.org/gnu/help2man/help2man-1.43.3.tar.gz</url>
+        <url checked="2014-01-29">http://ftp.gnu.org/gnu/help2man/help2man-1.43.3.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -41,19 +41,14 @@ PACKAGE_VERSION=1.43.3
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp COPYING README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+oeg_include_files COPYING README THANKS
 
 configure --prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
-make install-strip DESTDIR=${OEG_INSTALL_DIR}
+#no strip
+make install DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

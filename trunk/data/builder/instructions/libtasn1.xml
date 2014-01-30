@@ -18,6 +18,8 @@
   </comments>
 
   <set version="3.4" date="2013-11-25" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="libtasn1-3.4.tar.gz">
@@ -36,6 +38,9 @@ PACKAGE_NAME=libtasn1
 PACKAGE_VERSION=3.4
 
 oegextract libtasn1
+
+oeg_include_files AUTHORS COPYING* README THANKS
+
 configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-gtk-doc --disable-gtk-doc-pdf --disable-gtk-doc-html --enable-shared --enable-static --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 
 oegpatch 001
@@ -44,13 +49,8 @@ make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
-
+oeg_fix_path_names
+oeg_fix_libtool_file libtasn1.la libtasn1-6.dll libtasn1.dll.a libtasn1.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

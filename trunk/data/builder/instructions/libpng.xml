@@ -20,6 +20,8 @@
   </comments>
 
   <set version="1.6.8" date="2013-12-19" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <!-- only the .tar.?? files have a configure script -->

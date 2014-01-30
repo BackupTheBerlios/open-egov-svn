@@ -23,11 +23,6 @@
   </comments>
 
 <!--
-Optional Features:
-  --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
-  --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
-  --enable-maintainer-mode  enable make rules and dependencies not useful
-                          (and sometimes confusing) to the casual installer
   --enable-shared[=PKGS]  build shared libraries [default=yes]
   --enable-static[=PKGS]  build static libraries [default=yes]
   --enable-fast-install[=PKGS]
@@ -46,8 +41,6 @@ Optional Features:
   --enable-blackfin-asm   Make use of Blackfin assembly optimizations
   --enable-fixed-point-debug  Debug fixed-point implementation
   --enable-ti-c55x        Enable support for TI C55X DSP
-
-Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
   --with-tags[=TAGS]      include additional configurations [automatic]
@@ -60,27 +53,11 @@ ptional)
                           choices are kiss (default fixed point), smallft
                           (default floating point), gpl-fftw3 and
                           proprietary-intel-mkl
-
-Some influential environment variables:
-  CC          C compiler command
-  CFLAGS      C compiler flags
-  LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
-              nonstandard directory <lib dir>
-  LIBS        libraries to pass to the linker, e.g. -l<library>
-  CPPFLAGS    C/C++/Objective C preprocessor flags, e.g. -I<include dir> if
-              you have headers in a nonstandard directory <include dir>
-  CPP         C preprocessor
-  CXX         C++ compiler command
-  CXXFLAGS    C++ compiler flags
-  CXXCPP      C++ preprocessor
-  F77         Fortran 77 compiler command
-  FFLAGS      Fortran 77 compiler flags
-  PKG_CONFIG  path to pkg-config utility
-  FFT_CFLAGS  C compiler flags for FFT, overriding pkg-config
-  FFT_LIBS    linker flags for FFT, overriding pkg-config
 -->
 
-  <set version="1.2rc1" date="2008-07-24" state="not-tried">
+  <set version="1.2rc1" date="2008-07-24" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="speex-1.2rc1.tar.gz">
@@ -102,18 +79,20 @@ PACKAGE_VERSION=1.2rc1
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
+oeg_include_files AUTHORS COPYING README
+
 oegimport libogg   # optional
 oegimport fftw     # optional
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-#cp AUTHORS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
-
-configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-ogg=${OEG_BASE_DIR}
-# fails: --with-fft=gpl-fftw3
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-ogg=${OEG_BASE_DIR} --with-fft=gpl-fftw3
 make
+# libtool generates no shared version because of -lwinmm
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oeg_fix_path_names
+oeg_fix_libtool_file libspeex.la    "" "" libspeex.a
+oeg_fix_libtool_file libspeexdsp.la "" "" libspeexdsp.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

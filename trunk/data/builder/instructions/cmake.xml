@@ -19,6 +19,8 @@
   </comments>
 
   <set version="2.8.12.2" date="2014-01-16" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="cmake-2.8.12.2.tar.gz">
@@ -89,9 +91,7 @@ make
 make install DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}/dev/msys${OEG_BASE_DIR}"        # check
-<if64bits>
-mv bin bin64
-</if64bits>
+oeg_fix_path_names
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
 
 #echo 'find_package(Qt4 REQUIRED)' > CMakeLists.txt; mkdir build; cd build; cmake ..

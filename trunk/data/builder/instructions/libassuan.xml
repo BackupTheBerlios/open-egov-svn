@@ -18,6 +18,8 @@
   </comments>
 
   <set version="2.1.1" date="2013-06-24" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="libassuan-2.1.1.tar.bz2">
@@ -62,16 +64,13 @@ configure: WARNING:
 PACKAGE_NAME=libassuan
 PACKAGE_VERSION=2.1.1
 
-oegimport libgpg-error
-oegimport  libiconv
-oegimport  gettext
-
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp AUTHORS COPYING* README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+oeg_include_files AUTHORS COPYING* README THANKS
 
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+oegimport libgpg-error       # required: 1.8+
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --enable-static --enable-shared
 
 oegpatch 001   # only 64 bit: src/libassuan.def: remove junk before EXPORTS
 
@@ -82,11 +81,8 @@ make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+oeg_fix_libtool_file libassuan.la libassuan-0.dll libassuan.dll.a libassuan.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

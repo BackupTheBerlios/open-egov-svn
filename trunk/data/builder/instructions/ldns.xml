@@ -18,6 +18,8 @@
   </comments>
 
   <set version="1.6.17" date="2014-01-10" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="ldns-1.6.17.tar.gz">
@@ -32,6 +34,8 @@
     </downloads>
 
 <!--
+configure: Default trust anchor: /open-egovernment/etc/unbound/root.key
+
  --disable-ldns-config  disable installation of ldns-config (default=enabled)
   --enable-shared[=PKGS]  build shared libraries [default=yes]
   --enable-static[=PKGS]  build static libraries [default=yes]
@@ -72,13 +76,12 @@ Optional Packages:
 PACKAGE_NAME=ldns
 PACKAGE_VERSION=1.6.17
 
-oegimport openssl
-oegimport  zlib
-
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp LICENSE README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+oeg_include_files LICENSE README
+
+oegimport openssl
+#oegimport  zlib
 
 configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --with-ssl=${OEG_BASE_DIR} --disable-rpath --enable-shared --enable-static --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 oegpatch 001         # Makefile: cp instead ln -s
@@ -129,11 +132,8 @@ make install DESTDIR=${OEG_INSTALL_DIR}
 cd ..
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+oeg_fix_libtool_file libldns.la libldns-1.dll libldns.dll.a libldns.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

@@ -18,6 +18,8 @@
   </comments>
 
   <set version="r19" date="2010-05-04" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="dlfcn-win32-r19.tar.bz2">
@@ -50,16 +52,15 @@ PACKAGE_VERSION=r19
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
 
+oeg_include_files COPYING README
+
 configure --prefix=${OEG_BASE_DIR} --libdir=${OEG_BASE_DIR}/lib --incdir=${OEG_BASE_DIR}/include --enable-shared --enable-static --enable-stripping
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin bin64
-mv lib lib64
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+# no .la file
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

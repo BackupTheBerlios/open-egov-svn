@@ -37,20 +37,20 @@
 PACKAGE_NAME=libcroco
 PACKAGE_VERSION=0.6.8
 
-oegimport glib     # required
-oegimport libxml2  # required
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+
+oeg_include_files AUTHORS COPYING* README
+
+oegimport glib               # required
+oegimport libxml2            # required
 
 configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+####oeg_fix_libtool_file libcroco.la libcroco-0.dll libcroco.dll.a libcroco.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

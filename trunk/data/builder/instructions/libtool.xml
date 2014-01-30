@@ -18,6 +18,8 @@
   </comments>
 
   <set version="2.4.2" date="2011-10-18" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="libtool-2.4.2.tar.xz">
@@ -37,16 +39,15 @@ PACKAGE_VERSION=2.4.2
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
 
+oeg_include_files AUTHORS COPYING README THANKS
+
 configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --enable-ltdl-install --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --with-sysroot=${OEG_BASE_DIR}
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
 
 cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+oeg_fix_libtool_file libltdl.la libltdl-7.dll libltdl.dll.a libltdl.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

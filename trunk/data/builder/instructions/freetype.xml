@@ -82,7 +82,7 @@ configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld 
 make
 make install DESTDIR=${OEG_INSTALL_DIR}
 
-TODO: DLL missing
+# TODO: DLL was missing, only 64 bits! -lbz2 failed
 
 cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
 oeg_fix_path_names

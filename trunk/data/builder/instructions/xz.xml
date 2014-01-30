@@ -54,7 +54,7 @@ PACKAGE_VERSION=5.0.5
 
 oegextract ${PACKAGE_NAME}
 
-oeg_include_files
+oeg_include_files AUTHORS COPYING* README THANKS
 
 oegimport libiconv
 oegimport gettext
@@ -82,14 +82,9 @@ make -C src/xz
 cp src/xz/xz.exe ${OEG_INSTALL_DIR}${OEG_BASE_BIN_DIR}/xz.static.exe
 strip -s ${OEG_INSTALL_DIR}${OEG_BASE_BIN_DIR}/xz.static.exe
 
-<if64bits>
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-# The bin directory contains only the required dll, the other files are already in bin64.
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
-
+oeg_fix_path_names
+oeg_fix_libtool_file liblzma.la liblzma-5.dll liblzma.dll.a liblzma.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

@@ -21,6 +21,8 @@
   </comments>
 
   <set version="6.2" date="2005-12-08" state="works">
+    <flags>
+    </flags>
 
 <!--
 ftp://ftp.cwru.edu/pub/bash/readline-6.3-rc1.tar.gz

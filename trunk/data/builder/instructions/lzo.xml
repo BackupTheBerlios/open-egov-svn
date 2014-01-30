@@ -18,7 +18,9 @@
 http://www.oberhumer.com/opensource/lzo/download/minilzo-2.06.tar.gz
   </comments>
 
-  <set version="2.06" date="2011-08-12" state="not-tried">
+  <set version="2.06" date="2011-08-12" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="lzo-2.06.tar.gz">
@@ -48,7 +50,12 @@ make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oeg_fix_path_names
-oeg_fix_libtool_file liblzo2.la "" "" liblzo2.a
+
+# missed shared library, here is one. but what was the reason? TODO
+mkdir -p ..${OEG_BASE_BIN_DIR}
+gcc -shared -o ..${OEG_BASE_BIN_DIR}/liblzo2-2.dll -Wl,--out-implib,../${OEG_BASE_LIB_DIR}/liblzo2.dll.a -Wl,--whole-archive ..${OEG_BASE_LIB_DIR}/liblzo2.a -Wl,--no-whole-archive -L/mingw/lib -lwinmm
+
+oeg_fix_libtool_file liblzo2.la liblzo2-2.dll liblzo2.dll.a liblzo2.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

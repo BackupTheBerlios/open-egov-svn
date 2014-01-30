@@ -17,11 +17,13 @@
   <comments>
   </comments>
 
-  <set version="1.3.3" date="2012-02-03" state="not-tried">
+  <set version="1.3.4" date="2014-01-22" state="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
-      <download file="libvorbis-1.3.3.tar.xz">
-        <url checked="2014-01-">http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.3.tar.xz</url>
+      <download file="libvorbis-1.3.4.tar.xz">
+        <url checked="2014-01-30">http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.4.tar.xz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -33,26 +35,24 @@
 
     <commands>
 PACKAGE_NAME=libvorbis
-PACKAGE_VERSION=1.3.3
+PACKAGE_VERSION=1.3.4
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
 
-#oegimport libiconv
-#oegimport gettext
+oeg_include_files AUTHORS COPYING README
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+oegimport libogg
 
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+# --enable-docs ignored if not possible
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --disable-oggtest --enable-examples --enable-docs --with-ogg=${OEG_BASE_DIR}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+oeg_fix_libtool_file libvorbis.la     libvorbis-0.dll     libvorbis.dll.a     libvorbis.a
+oeg_fix_libtool_file libvorbisenc.la  libvorbisenc-2.dll  libvorbisenc.dll.a  libvorbisenc.a
+oeg_fix_libtool_file libvorbisfile.la libvorbisfile-3.dll libvorbisfile.dll.a libvorbisfile.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

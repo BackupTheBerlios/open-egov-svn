@@ -84,12 +84,14 @@ oegimport libiconv
 oegimport gettext
 
 configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+
 make
+oegpatch 001                 # iconv.exe with --silent option hangs with MinGW.
 make install DESTDIR=${OEG_INSTALL_DIR}
 
 cd ${OEG_INSTALL_DIR}/${OEG_BASE_DIR}
 oeg_fix_path_names
-oeg_fix_libtool_file libgpg-error.la libgpg-error-0.dll libgpg-error.dll.a -
+oeg_fix_libtool_file libgpg-error.la libgpg-error-0.dll libgpg-error.dll.a ""
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

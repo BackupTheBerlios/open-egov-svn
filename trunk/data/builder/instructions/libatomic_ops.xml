@@ -20,6 +20,8 @@
   </comments>
 
   <set version="7.4.0" date="2013-11-20" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="libatomic_ops-7.4.0.tar.gz">
@@ -41,6 +43,8 @@ PACKAGE_VERSION=7.4.0
 # TODO: ERROR: oegextract selects 7.2d instead of 7.2e
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
+oeg_include_files AUTHORS COPYING README.md
+
 # --enable-shared needed by package gc
 configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --enable-shared --enable-static --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 
@@ -56,10 +60,10 @@ make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin bin64
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+# maybe no shared version because of static-only speex package
+oeg_fix_libtool_file libatomic_ops.la libatomic_ops-1.dll libatomic_ops.dll.a libatomic_ops.a
+oeg_fix_libtool_file libatomic_ops_gpl.la libatomic_ops_gpl-1.dll libatomic_ops_gpl.dll.a libatomic_ops_gpl.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

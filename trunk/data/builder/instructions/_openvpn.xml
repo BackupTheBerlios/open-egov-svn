@@ -20,6 +20,8 @@ https://community.openvpn.net/openvpn/wiki/BuildingOnWindows#BuildingLZO
   </comments>
 
   <set version="2.3.2" date="2013-06-03" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="">
@@ -37,13 +39,12 @@ https://community.openvpn.net/openvpn/wiki/BuildingOnWindows#BuildingLZO
 PACKAGE_NAME=openvpn
 PACKAGE_VERSION=2.3.2
 
-#oegimport libiconv
-#oegimport gettext
-
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+oeg_include_files
+
+#oegimport libiconv
+#oegimport gettext
 
 configure --prefix=${OEG_BASE_DIR}
 make

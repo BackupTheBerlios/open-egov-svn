@@ -2,13 +2,14 @@
 
 <!-- $Id$ -->
 
-<pack name="binutils" license="">
+<pack name="openjpeg" license="BSD">
   <meta>
-    <homepage>http://www.gnu.org/software/binutils/</homepage>
-    <download>http://ftp.gnu.org/gnu/binutils</download>
+    <homepage>http://www.openjpeg.org/</homepage>
+    <download>http://code.google.com/p/openjpeg/</download>
+    <download>http://code.google.com/p/openjpeg/downloads/list</download>
     <descriptions>
       <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="long">The OpenJPEG library is an open-source JPEG 2000 codec written in C language.</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
@@ -17,13 +18,13 @@
   <comments>
   </comments>
 
-  <set version="2.24" date="2013-12-02" state="not-tried">
+  <set version="2.0.0" date="2012-11-19" state="not-tried">
     <flags>
     </flags>
 
     <downloads>
-      <download file="binutils-2.24.tar.bz2">
-        <url checked="2014-01-28">http://ftp.gnu.org/gnu/binutils/binutils-2.24.tar.bz2</url>
+      <download file="">
+        <url checked="2014-01-29">http://openjpeg.googlecode.com/files/openjpeg-2.0.0.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -34,14 +35,13 @@
     </downloads>
 
     <commands>
-PACKAGE_NAME=binutils
-PACKAGE_VERSION=2.24
+PACKAGE_NAME=openjpeg
+PACKAGE_VERSION=2.0.0
 
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-oeg_include_files COPYING* MAINTAINERS README
+oeg_include_files 
 
-#oegimport isl cloog gmp mpfr mpc
 #oegimport libiconv
 #oegimport gettext
 

@@ -18,6 +18,8 @@
   </comments>
 
   <set version="52.1" date="2013-10-09" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="icu4c-52_1-src.zip">
@@ -35,14 +37,12 @@
 PACKAGE_NAME=icu
 PACKAGE_VERSION=52.1
 
-oegextract icu4c         # icu4c-52_1-src.zip, not tgz!
+oegextract icu4c             # icu4c-52_1-src.zip, not tgz!
 cd icu
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-#cp AUTHORS COPYING.LIB README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+oeg_include_files license.html readme.html
 
 cd source
-
 configure --prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 
 make
@@ -50,11 +50,9 @@ make
 make install DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv lib64/*.dll bin64/
-# TODO: Do we need to edit the .la files in lib64?
-# TODO: link files!
-</if64bits>
+oeg_fix_path_names
+mv ..${OEG_BASE_LIB_DIR}/*.dll ..${OEG_BASE_BIN_DIR}/
+#no .la files
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

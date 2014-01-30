@@ -18,10 +18,12 @@
   </comments>
 
   <set version="1.4.0" date="2010-03-26" state="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="">
-        <url checked="2014-01-20">http://downloads.xiph.org/releases/vorbis/vorbis-tools-1.4.0.tar.gz</url>
+        <url checked="2014-01-30">http://downloads.xiph.org/releases/vorbis/vorbis-tools-1.4.0.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -35,24 +37,27 @@
 PACKAGE_NAME=vorbis-tools
 PACKAGE_VERSION=1.4.0
 
-#oegimport libiconv
-#oegimport gettext
-
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-#cp XXX "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+oeg_include_files AUTHORS COPYING README
 
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+oegimport libiconv           # required 
+oegimport gettext            # optional, else with included library
+oegimport flac
+oegimport libogg
+oegimport libvorbis
+oegimport speex
+#oegimport libao              # optional: 1.0.0+
+#oegimport kate
+#oegimport curl
+
+configure --prefix=${OEG_BASE_DIR} --enable-threads=win32 --enable-static --enable-shared --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --disable-curltest --without-libpth-prefix --without-kate
 make
+#no shared lib because speex is only static
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

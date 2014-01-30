@@ -18,6 +18,8 @@
   </comments>
 
   <set version="3.99.5" date="2012-02-28" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="lame-3.99.5.tar.gz">
@@ -48,7 +50,7 @@ make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oeg_fix_path_names
-#
+oeg_fix_libtool_file libmp3lame.la libmp3lame-0.dll libmp3lame.dll.a libmp3lame.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

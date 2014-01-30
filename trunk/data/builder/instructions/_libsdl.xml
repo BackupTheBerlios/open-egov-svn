@@ -160,7 +160,7 @@ oegextract SDL-2.0.1-8054.tar.gz
 oeg_include_files README-SDL.txt CREDITS.txt COPYING.txt
 
 oegimport dbus
-oegimport  expat
+#oegimport  expat
 #oegimport libiconv
 #oegimport gettext
 oegimport pthreads-win32

@@ -18,6 +18,8 @@
   </comments>
 
   <set version="7.4.0" date="2013-11-20" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="gc-7.4.0.tar.gz">
@@ -40,18 +42,20 @@ BDWGC supports two threading models - posix (pthreads) and win32. For Windows (e
 PACKAGE_NAME=gc
 PACKAGE_VERSION=7.4.0
 
-oegimport libatomic_ops      # required, or copy the sources into gc's source tree.
 oegextract gc
+
+oeg_include_files AUTHORS README.*
+
+oegimport libatomic_ops      # required, or copy the sources into gc's source tree.
 
 configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --enable-treads=win32 --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin bin64
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+oeg_fix_libtool_file libcord.la libcord-1.dll libcord.dll.a libcord.a
+oeg_fix_libtool_file libgc.la libgc-1.dll libgc.dll.a libgc.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

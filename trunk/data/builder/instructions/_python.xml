@@ -17,10 +17,19 @@
   <comments>
   </comments>
 
-  <!-- http://www.python.org/ftp/python/3.4.0/Python-3.4.0b2.tar.xz 5.1.14
-       http://www.python.org/ftp/python/3.3.3/Python-3.3.3.tar.xz  17-Nov-2013 -->
+<!--
+http://www.python.org/ftp/python/3.4.0/Python-3.4.0b2.tar.xz 5.1.14
+http://www.python.org/ftp/python/3.3.3/Python-3.3.3.tar.xz
+17-Nov-2013
+
+http://www.python.org/ftp/python/3.4.0/Python-3.4.0b3.tar.xz
+http://www.python.org/ftp/python/3.3.4/Python-3.3.4rc1.tar.xz
+2014-01-27
+-->
 
   <set version="3.3.2" date="2013-05-15" state="fails-to-build">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="Python-3.3.2.tar.bz2">
@@ -98,20 +107,28 @@ http://www.google.co.ma/url?sa=t&rct=j&q=python%20mingw&source=web&cd=7&cad=rja&
 
     <commands>
 PACKAGE_NAME=python
-PACKAGE_VERSION=3.3.2
+PACKAGE_VERSION=3.4.0b3
 
-oegimport expat
-oegimport libffi
-#libmpdec
+oegextract Python-${PACKAGE_VERSION}.tar.xz
+
+oeg_include_files LICENSE README
+
+#oegimport expat
+#oegimport libffi
+#oegimport libmpdec
 #sqlite
 #pthreads?
 #libutil
 #pty
 
-oegextract Python-${PACKAGE_VERSION}.tar.bz2
 
-oegpatch 001       # Remove check for getaddrinfo(). It fails, but we need it for IPv6.
-configure --prefix=${OEG_BASE_DIR} --enable-ipv6 --enable-shared --with-suffix=.exe --without-pydebug --with-system-expat --with-system-ffi
+#oegpatch 001       # Remove check for getaddrinfo(). It fails, but we need it for IPv6. --disable-ipv6
+
+configure --prefix=${OEG_BASE_DIR} --disable-ipv6 --enable-shared --with-suffix=.exe --without-pydebug
+# --with-system-expat --with-system-ffi
+
+# Objects/exceptions.c:2528:32: error: 'ESHUTDOWN' undeclared (first use in this function)
+#     ADD_ERRNO(BrokenPipeError, ESHUTDOWN);
 
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}

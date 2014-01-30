@@ -18,6 +18,8 @@
   </comments>
 
   <set version="1.14" date="2013-00-00" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="automake-1.14.tar.xz">
@@ -37,8 +39,7 @@ PACKAGE_VERSION=1.14
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp AUTHORS COPYING README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+oeg_include_files AUTHORS COPYING README THANKS
 
 configure --prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make

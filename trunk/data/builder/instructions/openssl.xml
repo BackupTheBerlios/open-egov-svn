@@ -18,10 +18,12 @@
   </comments>
 
   <set version="1.0.1f" date="2014-01-06" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="openssl-1.0.1f.tar.gz">
-        <url checked="2014-01-14">http://www.openssl.org/source/openssl-1.0.1f.tar.gz</url>
+        <url checked="2014-01-30">http://www.openssl.org/source/openssl-1.0.1f.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -35,12 +37,12 @@
 PACKAGE_NAME=openssl
 PACKAGE_VERSION=1.0.1f
 
-oegimport nasm         # for building
-oegimport zlib         # linked dynamically!!!
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp LICENSE "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+oeg_include_files LICENSE
+
+oegimport nasm         # for building
+oegimport zlib         # linked dynamically!!!
 
 # needs perl to handle config and Configure scripts
 # It's possible to cross-compile it on Linux by configuring
@@ -48,16 +50,12 @@ cp LICENSE "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE
 # You may call ./config and it will guess the OS and call Configure or you may call:
 #./Configure mingw   # only static builds
 # zlib or zlib-shared
-<if32bits>
-./Configure --openssldir=/open-egovernment/var/ssl --prefix=/open-egovernment threads shared zlib-dynamic no-hw mingw
-</if32bits>
-<if64bits>
-./Configure --openssldir=/open-egovernment/var/ssl --prefix=/open-egovernment threads shared zlib-dynamic no-hw mingw64
-</if64bits>
+
+./Configure --openssldir=${OEG_BASE_DIR}/var/ssl --prefix=${OEG_BASE_DIR} threads shared zlib-dynamic no-hw mingw${OEG_TARGETBITS_DIR_EXT}
 
 # You really should use: tar xzf openssl-x.y.z.tar.gz. Else there are files
 # like test/md2test.c which are linked to other files (dummytest.c) and now
-# contain only the file name of the target.
+# contain only the file name of the target. We fix that now:
 cp test/dummytest.c test/md2test.c
 cp test/dummytest.c test/rc5test.c
 cp test/dummytest.c test/jpaketest.c
@@ -89,10 +87,8 @@ make
 make INSTALL_PREFIX=${OEG_INSTALL_DIR} install
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin bin64
-mv lib lib64
-</if64bits>
+oeg_fix_path_names
+# no .la files
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

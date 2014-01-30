@@ -20,6 +20,8 @@
 <!-- https://github.com/FFTW/fftw3 -->
 
   <set version="3.3.3" date="2012-11-25" state="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="fftw-3.3.3.tar.gz">
@@ -98,17 +100,16 @@ PACKAGE_VERSION=3.3.3
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
+oeg_include_files AUTHORS COPYING COPYRIGHT README
+
 # --disable-alloca if alloca() is broken under MinGW 64 bit.
-configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --with-our-malloc --enable-shared --enable-threads --disable-static --with-combined-threads --enable-sse2 --with-windows-f77-mangling --enable-single --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --with-our-malloc --enable-shared --enable-threads --enable-static --with-combined-threads --enable-sse2 --with-windows-f77-mangling --enable-single --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+oeg_fix_libtool_file libfftw3f.la libfftw3f-3.dll libfftw3f.dll.a libfftw3f.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

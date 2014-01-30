@@ -40,7 +40,7 @@ PACKAGE_VERSION=1.2.8
 
 oegextract zlib
 
-oeg_include_files
+oeg_include_files README
 
 # configure for MinGW is disabled :-(
 # ${CONFIGURE_HOST_PARA}

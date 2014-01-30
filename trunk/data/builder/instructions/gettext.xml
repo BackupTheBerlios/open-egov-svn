@@ -100,7 +100,7 @@ make
 cp gettext-runtime/intl/libintl.la ${OEG_INSTALL_DIR}/${OEG_BASE_LIB_DIR}/
 make install DESTDIR=${OEG_INSTALL_DIR}
 
-# TODO: package is splitted into gettext-tools and gettext-runtime.
+# TODO: package could be splitted into gettext-tools and gettext-runtime.
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oeg_fix_path_names

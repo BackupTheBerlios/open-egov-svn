@@ -18,6 +18,8 @@
   </comments>
 
   <set version="2.0" date="1995-12-01" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="termutils-2.0.tar.gz">
@@ -37,6 +39,8 @@ PACKAGE_VERSION=2.0
 
 oegextract termutils
 
+oeg_include_files COPYING README
+
 # Prefix is the install dir because it always installs into the prefix dir
 # and it should not install into the base dir in case it is not empty.
 # make install DESTDIR=${OEG_INSTALL_DIR} also copies into the prefix dir.
@@ -45,11 +49,7 @@ make
 make install 
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-
-<if64bits>
-mv bin bin64
-</if64bits>
-
+oeg_fix_path_names
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

@@ -66,20 +66,22 @@
 PACKAGE_NAME=pcre
 PACKAGE_VERSION=8.34
 
-# oegimport zlib, bzip2
-
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
 
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --enable-utf8 --enable-newline-is-anycrlf --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+oeg_include_files AUTHORS COPYING LICENCE README
+
+#oegimport zlib, bzip2  # needed only to link against pcregrep, readline and edit for pcretest
+
+# --enable-unicode-properties needed by glib
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --enable-utf8 --enable-unicode-properties --enable-newline-is-anycrlf --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+oeg_fix_libtool_file libpcre.la      libpcre-1.dll      libpcre.dll.a      libpcre.a
+oeg_fix_libtool_file libpcrecpp.la   libpcrecpp-0.dll   libpcrecpp.dll.a   libpcrecpp.a
+oeg_fix_libtool_file libpcreposix.la libpcreposix-0.dll libpcreposix.dll.a libpcreposix.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

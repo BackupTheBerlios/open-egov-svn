@@ -18,6 +18,8 @@
   </comments>
 
   <set version="1.0.25" date="2011-07-13" state="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="libsndfile-1.0.25.tar.gz">
@@ -32,19 +34,6 @@
     </downloads>
 
 <!--
-  --enable-silent-rules          less verbose build output (undo: `make V=1')
-  --disable-silent-rules         verbose build output (undo: `make V=0')
-  --disable-dependency-tracking  speeds up one-time build
-  --enable-dependency-tracking   do not reject slow dependency extractors
-  --enable-shared[=PKGS]  build shared libraries [default=yes]
-  --enable-static[=PKGS]  build static libraries [default=yes]
-  --enable-fast-install[=PKGS] optimize for fast installation [default=yes]
-  --disable-libtool-lock  avoid locking (might break parallel builds)
-  --enable-experimental   enable experimental code
-  --enable-gcc-werror     enable -Werror in all Makefiles
-  --disable-gcc-pipe      disable gcc -pipe option
-  --disable-gcc-opt       disable gcc optimisations
-  --disable-cpu-clip      disable tricky cpu specific clipper
   --enable-bow-docs       enable black-on-white html docs
   --disable-sqlite        disable use of sqlite
   --disable-alsa          disable use of ALSA
@@ -55,42 +44,6 @@
   --with-octave           choose the octave version
   --with-mkoctfile        choose the mkoctfile version
   --with-octave-config    choose the octave-config version
-
-Some influential environment variables:
-  CC          C compiler command
-  CFLAGS      C compiler flags
-  LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
-              nonstandard directory <lib dir>
-  LIBS        libraries to pass to the linker, e.g. -l<library>
-  CPPFLAGS    (Objective) C/C++ preprocessor flags, e.g. -I<include dir> if
-              you have headers in a nonstandard directory <include dir>
-  CXX         C++ compiler command
-  CXXFLAGS    C++ compiler flags
-  CPP         C preprocessor
-  CXXCPP      C++ preprocessor
-  PKG_CONFIG  path to pkg-config utility
-  PKG_CONFIG_PATH
-              directories to add to pkg-config's search path
-  PKG_CONFIG_LIBDIR
-              path overriding pkg-config's built-in search path
-  FLAC_CFLAGS C compiler flags for FLAC, overriding pkg-config
-  FLAC_LIBS   linker flags for FLAC, overriding pkg-config
-  OGG_CFLAGS  C compiler flags for OGG, overriding pkg-config
-  OGG_LIBS    linker flags for OGG, overriding pkg-config
-  SPEEX_CFLAGS
-              C compiler flags for SPEEX, overriding pkg-config
-  SPEEX_LIBS  linker flags for SPEEX, overriding pkg-config
-  VORBIS_CFLAGS
-              C compiler flags for VORBIS, overriding pkg-config
-  VORBIS_LIBS linker flags for VORBIS, overriding pkg-config
-  VORBISENC_CFLAGS
-              C compiler flags for VORBISENC, overriding pkg-config
-  VORBISENC_LIBS
-              linker flags for VORBISENC, overriding pkg-config
-  SQLITE3_CFLAGS
-              C compiler flags for SQLITE3, overriding pkg-config
-  SQLITE3_LIBS
-              linker flags for SQLITE3, overriding pkg-config
 -->
 
     <commands>
@@ -99,23 +52,24 @@ PACKAGE_VERSION=1.0.25
 
 oegextract ${PACKAGE_NAME}
 
-#oegimport libiconv
-#oegimport gettext
-#todo: add flac, ogg, vorbis, speex
+oeg_include_files AUTHORS COPYING README
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-#cp AUTHORS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+#oegimport libogg         # else undefined references, TODO
+#oegimport libvorbis      # else undefined references
+#oegimport flac           # all 3 or nothing
 
-configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --disable-sqlite --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+#oegimport speex
+oegimport sqlite          # 3.2+, --disable-sqlite
+#oegimport octave
+
+configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
+oeg_fix_path_names
+# maybe no shared version because of static-only speex package
+oeg_fix_libtool_file libsndfile.la libsndfile-1.dll libsndfile.dll.a libsndfile.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

@@ -45,11 +45,14 @@
 export PACKAGE_NAME=libxslt
 export PACKAGE_VERSION=1.1.28
 
+oegextract libxslt
+
+oeg_include_files AUTHORS COPYING Copyright README
+
 oegimport libiconv
 oegimport gettext
 oegimport zlib
-oegimport libxml2   # important
-oegextract libxslt
+oegimport libxml2            # required
 
 # config.status: executing libtool commands
 # /bin/rm: cannot lstat `libtoolT': No such file or directory
@@ -67,20 +70,17 @@ oegpatch 001
 
 oegpatch 002
 
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} --with-gnu-ld --without-python ${CONFIGURE_HOST_PARA} CPPFLAGS="-I/open-egovernment/include/libxml2"
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} --with-gnu-ld --without-python ${CONFIGURE_HOST_PARA} CPPFLAGS="-I${OEG_BASE_DIR}/include/libxml2"
 
 #CPPFLAGS needed because else some includes (include/libxml2/libxml/*) are missing (64 bit compilation).
 
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
-<if64bits>
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-mv bin/*.dll bin64/
-rm -rf bin
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
-
+oeg_fix_path_names
+oeg_fix_libtool_file libxslt.la  libxslt-1.dll  libxslt.dll.a  libxslt.a
+oeg_fix_libtool_file libexslt.la libexslt-0.dll libexslt.dll.a libexslt.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

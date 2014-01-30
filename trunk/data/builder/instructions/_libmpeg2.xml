@@ -2,28 +2,27 @@
 
 <!-- $Id$ -->
 
-<pack name="libao" license="">
+<pack name="libmpeg2" license="GPLv2">
   <meta>
-    <homepage>http://www.xiph.org/ao/</homepage>
-    <download>http://downloads.xiph.org/releases/ao/</download>
+    <homepage>http://libmpeg2.sourceforge.net/</homepage>
+    <download></download>
     <descriptions>
       <description lang="en" type="short"></description>
-      <description lang="en" type="long"></description>
+      <description lang="en" type="long">libmpeg2 is a free MPEG-2 video stream decoder</description>
       <description lang="de" type="short"></description>
       <description lang="de" type="long"></description>
     </descriptions>
   </meta>
 
   <comments>
+http://libmpeg2.cvs.sourceforge.net/viewvc/libmpeg2/?view=tar
   </comments>
 
-  <set version="1.2.0" date="2014-01-28" state="not-tried">
-    <flags>
-    </flags>
+  <set version="0.5.1" date="2008-07-19" state="not-tried">
 
     <downloads>
-      <download file="libao-1.2.0.tar.gz">
-        <url checked="2014-01-30">http://downloads.xiph.org/releases/ao/libao-1.2.0.tar.gz</url>
+      <download file="libmpeg2-0.5.1.tar.gz">
+        <url checked="2014-01-30">http://libmpeg2.sourceforge.net/files/libmpeg2-0.5.1.tar.gz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -34,22 +33,23 @@
     </downloads>
 
     <commands>
-PACKAGE_NAME=libao
-PACKAGE_VERSION=1.2.0
+PACKAGE_NAME=libmpeg2
+PACKAGE_VERSION=0.5.1
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-oeg_include_files AUTHORS COPYING README
+oeg_include_files 
 
-#oegimport pulseaudio   # --enable-pulse
+#oegimport libiconv
+#oegimport gettext
 
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --enable-static --enable-shared --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --enable-wmm
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oeg_fix_path_names
-oeg_fix_libtool_file libao.la libao-0.dll libao.dll.a libao.a
+#oeg_fix_libtool_file libidn.la libidn-11.dll libidn.dll.a libidn.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

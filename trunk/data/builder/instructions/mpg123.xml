@@ -90,7 +90,7 @@ oeg_include_files AUTHORS COPYING README
 
 oegimport libtool            # modules require libltdl!
 
-TODO: add: --with-cpu=x86-64   --with-cpu=x86
+#TODO: add: --with-cpu=x86-64   --with-cpu=x86
 configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA} --with-optimization=2 --with-audio=win32 --with-default-audio=win32 --enable-ipv6=yes --enable-network=yes --enable-modules=yes --with-module-suffix=.dll
 # portaudio pulse arts alsa nas jack coreaudio sdl
 # --disable-modules --disable-shared, sdl needs SDL

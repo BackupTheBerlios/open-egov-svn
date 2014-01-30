@@ -18,6 +18,8 @@
   </comments>
 
   <set version="5.1.1" date="2014-01-14" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="qpdf-5.1.1.tar.gz">
@@ -56,6 +58,7 @@ make
 make install DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+#no shared dll
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

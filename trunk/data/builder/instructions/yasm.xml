@@ -93,11 +93,11 @@ PACKAGE_VERSION=1.2.0
 
 oegextract yasm
 
-oeg_include_files
+oeg_include_files AUTHORS Artistic.txt BSD.txt COPYING GNU* README
 
 oegimport libiconv
 oegimport gettext
-#oegimport python
+#oegimport python    # >= 2.4, optional
 
 #export PATH=$PATH:/c/Python33          # using the binary from python.org
 # or: --disable-python --disable-python-bindings

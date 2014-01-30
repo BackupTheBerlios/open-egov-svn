@@ -18,6 +18,8 @@
   </comments>
 
   <set version="1.28" date="2013-07-10" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="libidn-1.28.tar.gz">

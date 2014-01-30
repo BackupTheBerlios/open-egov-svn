@@ -18,6 +18,8 @@
   </comments>
 
   <set version="2.9.1" date="2012-05-27" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="pthreads-w32-2-9-1-release.tar.gz">
@@ -37,8 +39,7 @@ PACKAGE_VERSION=2.9.1
 
 oegextract pthreads-w32-2-9-1-release.tar.gz
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp CONTRIBUTORS COPYING* MAINTAINERS README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+oeg_include_files CONTRIBUTORS COPYING* MAINTAINERS README
 
 # type "make" to see all possible targets
 

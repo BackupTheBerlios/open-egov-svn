@@ -28,14 +28,12 @@ make install
 -->
   <set file="repository" type="svn">
     <get>https://subversion.assembla.com/svn/portaudio/portaudio/</get>
-    <update></update>
 
     <commands>
 PACKAGE_NAME=portaudio
 PACKAGE_VERSION=svn-DATE
-oegenv 32
-oegcleanbase
-#oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tgz
+
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tgz
 
 make install DESTDIR=${OEG_INSTALL_DIR}
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
@@ -43,11 +41,11 @@ oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 
-  <set version="19-20111121" date="2011-11-21" state="works">
+  <set version="19-20140121" date="2014-01-21" state="works">
 
     <downloads>
-      <download file="pa_stable_v19_20111121.tgz ">
-        <url checked="2013-07-30">http://www.portaudio.com/archives/pa_stable_v19_20111121.tgz</url>
+      <download file="pa_stable_v19_20140121_rc.tar.gz"> <!-- renamed -->
+        <url checked="2014-01-30">http://www.portaudio.com/archives/pa_stable_v19_20140121_rc.tgz</url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -70,18 +68,21 @@ oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
 
     <commands>
 PACKAGE_NAME=portaudio
-PACKAGE_VERSION=19-20111121
-oegenv 32
-oegcleanbase
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tgz
-#oegimport libiconv-1.14
-#oegimport gettext-0.18.3
+PACKAGE_VERSION=19-20140121
+
+oegextract pa_stable_v19_20140121_rc.tar.gz
 cd portaudio
+
+oeg_include_files LICENSE.txt README.txt
+
 configure --prefix=${OEG_BASE_DIR} --with-gnu-ld --with-sysroot=${OEG_BASE_DIR} --disable-cxx --enable-shared --enable-static --disable-debug-output
 make
 make tests
 make install DESTDIR=${OEG_INSTALL_DIR}
+
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oeg_fix_path_names
+oeg_fix_libtool_file libportaudio.la libportaudio-2.dll libportaudio.dll.a libportaudio.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

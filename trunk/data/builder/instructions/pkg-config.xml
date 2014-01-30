@@ -19,6 +19,8 @@
   </comments>
 
   <set version="0.28" date="2013-01-24" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="pkg-config-0.28.tar.gz">

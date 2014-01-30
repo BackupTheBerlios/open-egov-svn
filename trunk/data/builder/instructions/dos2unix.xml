@@ -20,6 +20,8 @@
   </comments>
 
   <set version="6.0.4" date="2014-01-11" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="dos2unix-6.0.4.tar.gz">
@@ -47,21 +49,19 @@
 PACKAGE_NAME=dos2unix
 PACKAGE_VERSION=6.0.4
 
-oegimport libiconv
-oegimport gettext
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp *.txt "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+oeg_include_files *.txt
+
+oegimport libiconv
+oegimport gettext
 
 make CC=gcc PREFIX="${OEG_INSTALL_DIR}${OEG_BASE_DIR}" ENABLE_NLS=1 LIBS_EXTRA="-L${OEG_BASE_LIB_DIR} -lintl -liconv" -f mingw.mak
 make -f mingw.mak strip
 make -f mingw.mak install prefix="${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin bin64
-</if64bits>
+oeg_fix_path_names
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

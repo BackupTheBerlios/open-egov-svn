@@ -19,6 +19,8 @@
   </comments>
 
   <set version="3.3" date="2013-03-24" state="works">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="diffutils-3.3.tar.xz">
@@ -36,13 +38,12 @@
 PACKAGE_NAME=diffutils
 PACKAGE_VERSION=3.3
 
-oegimport libiconv
-oegimport gettext
-
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-cp AUTHORS COPYING README THANKS "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+oeg_include_files AUTHORS COPYING README THANKS
+
+oegimport libiconv
+oegimport gettext
 
 #  --with-libsigsegv-prefix[=DIR]  search for libsigsegv in DIR/include and DIR/lib
 #  --without-libsigsegv-prefix     don't search for libsigsegv in includedir and libdir

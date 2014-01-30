@@ -18,6 +18,9 @@
   </comments>
 
   <set version="2.3" date="2010-06-30" state="not-tried">
+    <flags>
+    </flags>
+
 <!-- git clone git://git.ffmpeg.org/rtmpdump   2.4! -->
     <downloads>
       <download file="rtmpdump-2.3.tar.gz"> <!-- renamed! -->
@@ -37,20 +40,19 @@ PACKAGE_VERSION=2.3
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-oegimport openssl
-oegimport  zlib
-
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
 cp librtmp/COPYING COPYING.librtmp
-cp COPYING* README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+oeg_include_files COPYING* README
 
-XLDFLAGS="-L${OEG_BASE_LIB_DIR}" make SYS=mingw CRYPTO=OPENSSL prefix=/open-egovernment-install${OEG_BASE_DIR} libdir=${OEG_BASE_LIB_DIR} bindir=${OEG_BASE_BIN_DIR}
-XLDFLAGS="-L${OEG_BASE_LIB_DIR}" make install SYS=mingw CRYPTO=OPENSSL prefix=/open-egovernment-install${OEG_BASE_DIR} libdir=${OEG_BASE_LIB_DIR} bindir=${OEG_BASE_BIN_DIR} DESTDIR=${OEG_INSTALL_DIR}
+oegimport openssl  # required, needs zlib
 
+XLDFLAGS="-L${OEG_BASE_LIB_DIR}" make SYS=mingw CRYPTO=OPENSSL prefix=${OEG_BASE_DIR} libdir=${OEG_BASE_LIB_DIR} bindir=${OEG_BASE_BIN_DIR}
+XLDFLAGS="-L${OEG_BASE_LIB_DIR}" make install SYS=mingw CRYPTO=OPENSSL prefix=${OEG_BASE_DIR} libdir=${OEG_BASE_LIB_DIR} bindir=${OEG_BASE_BIN_DIR} DESTDIR=${OEG_INSTALL_DIR}
 # ${CONFIGURE_HOST_PARA}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-mv ../open-egovernment-install/open-egovernment/* .
+mv -i sbin/* bin${OEG_TARGETBITS_DIR_EXT}/
+rm -rf sbin                  # Windows doesn't know anything about sbin directories.
+# no .la files
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
