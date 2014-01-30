@@ -31,7 +31,7 @@ cd tf-version</comment>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>1221169</size>
+        <size>1.221.169</size>
       </download>
       <download file="tf-50b8.tar.gz">
         <url type="direct" checked="2012-11-13">http://sourceforge.net/projects/tinyfugue/files/tinyfugue/5.0%20beta%208/tf-50b8.tar.gz/download</url>
@@ -40,7 +40,7 @@ cd tf-version</comment>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>719553</size>
+        <size>719.553</size>
       </download>
       <download file="tf-50b8-help.tar.gz">
         <url type="direct" checked="2012-11-13">http://sourceforge.net/projects/tinyfugue/files/tinyfugue/5.0%20beta%208/tf-50b8-help.tar.gz/download</url>
@@ -49,7 +49,7 @@ cd tf-version</comment>
         <hash type="SHA1"></hash>
         <hash type="SHA512"></hash>
         <hash type="RIPEMD256"></hash>
-        <size>175591</size>
+        <size>175.591</size>
       </download>
     </downloads>
 
@@ -128,7 +128,7 @@ oegpatch 014       # forgot to remove init_exename call/declaration
 #make install-strip DESTDIR=${OEG_INSTALL_DIR}
 #cd "${OEG_INSTALL_DIR}"
 #cd "${OEG_BASE_DIR}"    # okay????
-#oegarchive wget-1.14
+oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
 </pack>

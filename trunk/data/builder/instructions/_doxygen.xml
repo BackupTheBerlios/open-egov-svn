@@ -2,10 +2,10 @@
 
 <!-- $Id$ -->
 
-<pack name="autogen" license="">
+<pack name="doxygen" license="">
   <meta>
     <homepage></homepage>
-    <download>http://sourceforge.net/projects/autogen/files/AutoGen/</download>
+    <download></download>
     <descriptions>
       <description lang="en" type="short"></description>
       <description lang="en" type="long"></description>
@@ -17,13 +17,13 @@
   <comments>
   </comments>
 
-  <set version="5.16.2" date="2012-08-11" state="not-tried">
+  <set version="" date="" state="not-tried">
     <flags>
     </flags>
 
     <downloads>
-      <download file="autogen-5.16.2.tar.xz">
-        <url checked="2014-01-21">http://sourceforge.net/projects/autogen/files/AutoGen/AutoGen-5.16.2/autogen-5.16.2.tar.xz/download</url>
+      <download file="">
+        <url checked="2014-02-"></url>
         <hash type="CRC32"></hash>
         <hash type="MD5"></hash>
         <hash type="SHA1"></hash>
@@ -34,25 +34,23 @@
     </downloads>
 
     <commands>
-PACKAGE_NAME=autogen
-PACKAGE_VERSION=5.16.2
+PACKAGE_NAME=doxygen
+PACKAGE_VERSION=
 
-oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.xz
+oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-oeg_include_files AUTHORS COPYING README THANKS
+oeg_include_files 
 
-oegimport libguile           # required
 #oegimport libiconv
 #oegimport gettext
-#libxml2
-#libregex
 
-configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oeg_fix_path_names
+#oeg_fix_libtool_file libidn.la libidn-11.dll libidn.dll.a libidn.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
