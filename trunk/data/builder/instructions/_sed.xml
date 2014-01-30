@@ -50,15 +50,21 @@
     <commands>
 PACKAGE_NAME=sed
 PACKAGE_VERSION=4.2.2
-oegenv 32
-oegcleanbase
-oegimport libiconv-1.14
-oegimport gettext-0.18.3.1
+
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.bz2
+
+oeg_include_files AUTHORS COPYING* README THANKS
+
+oegimport libiconv
+oegimport gettext
+
 oegpatch 001
-configure --prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --disable-acl
+configure --prefix=${OEG_BASE_DIR} --with-libiconv-prefix=${OEG_BASE_DIR} --with-libintl-prefix=${OEG_BASE_DIR} --with-gnu-ld --disable-rpath --disable-acl --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
+
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
+
+cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

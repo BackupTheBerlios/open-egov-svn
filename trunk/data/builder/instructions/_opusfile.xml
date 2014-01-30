@@ -19,6 +19,8 @@
   </comments>
 
   <set version="0.5" date="2014-01-10" state="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="opusfile-0.5.tar.gz">
@@ -38,14 +40,21 @@ PACKAGE_VERSION=0.5
 
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-#oegimport libiconv
-#oegimport gettext
+oeg_include_files AUTHORS COPYING README.txt
 
-configure --prefix=${OEG_BASE_DIR}
+oegimport openssl            # required
+oegimport opus               # required: 1.0.1+
+oegimport libogg             # required: 1.3+
+#oegimport doxygen            # optional
+
+configure --prefix=${OEG_BASE_DIR} --with-sysroot=${OEG_BASE_DIR} --enable-static --enable-shared --with-gnu-ld --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
+oeg_fix_path_names
+oeg_fix_libtool_file libopusurl.la  libopusurl-0.dll  libopusurl.dll.a  libopusurl.a
+oeg_fix_libtool_file libopusfile.la libopusfile-0.dll libopusfile.dll.a libopusfile.a
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>

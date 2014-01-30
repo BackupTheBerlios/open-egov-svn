@@ -19,6 +19,8 @@
   </comments>
 
   <set version="0.1.8" date="2013-12-06" state="not-tried">
+    <flags>
+    </flags>
 
     <downloads>
       <download file="opus-tools-0.1.8.tar.gz">
@@ -36,16 +38,15 @@
 PACKAGE_NAME=opus-tools
 PACKAGE_VERSION=0.1.8
 
-oegimport opus      # optional?
-oegimport libogg    # optional
-oegimport flac      # optional
-
 oegextract ${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz
 
-mkdir -p "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}"
-#cp AUTHORS COPYING README "${OEG_INSTALL_DIR}${OEG_BASE_DIR}/packages/${PACKAGE_NAME}-${PACKAGE_VERSION}/"
+oeg_include_files AUTHORS COPYING README
 
-configure --prefix=${OEG_BASE_DIR}
+oegimport opus               # optional?
+oegimport libogg             # optional
+oegimport flac               # optional
+
+configure --prefix=${OEG_BASE_DIR} --bindir=${OEG_BASE_BIN_DIR} --libdir=${OEG_BASE_LIB_DIR} ${CONFIGURE_HOST_PARA}
 
 #--with-ogg=${OEG_BASE_DIR} --with-ogg-libraries=${OEG_BASE_LIB_DIR} --with-ogg-includes=${OEG_BASE_DIR}/include
 #--with-opus=${OEG_BASE_DIR} --with-opus-libraries=${OEG_BASE_LIB_DIR} --with-opus-includes=${OEG_BASE_DIR}/include
@@ -55,10 +56,6 @@ make
 make install-strip DESTDIR=${OEG_INSTALL_DIR}
 
 cd "${OEG_INSTALL_DIR}${OEG_BASE_DIR}"
-<if64bits>
-mv bin bin64
-# TODO: Do we need to edit the .la files in lib64?
-</if64bits>
 oegarchive ${PACKAGE_NAME}-${PACKAGE_VERSION}
     </commands>
   </set>
