@@ -308,24 +308,24 @@ function oegenv {
 
   if [ "$1" = "32" ]; then
     export TARGETBITS="32"
-    export OEG_BASE_BIN_DIR="${OEG_BASE_DIR}/bin"
-    export OEG_BASE_LIB_DIR="${OEG_BASE_DIR}/lib"
+    export OEG_TARGETBITS_DIR_EXT=""
     export CFLAGS="-m${TARGETBITS} -march=i686 -mtune=i686 $STDCFLAGS"
-    export LDFLAGS="-m${TARGETBITS} -pipe -L${OEG_BASE_LIB_DIR}"
     export CONFIGURE_HOST_PARA="--host=i686-w64-mingw32"
     export PKG_CONFIG_PATH="${OEG_BASE_DIR}/lib/pkgconfig"
   elif [ "$1" = "64" ]; then
     export TARGETBITS="64"
-    export OEG_BASE_BIN_DIR="${OEG_BASE_DIR}/bin64"
-    export OEG_BASE_LIB_DIR="${OEG_BASE_DIR}/lib64"
+    export OEG_TARGETBITS_DIR_EXT="64"
     export CFLAGS="-m${TARGETBITS} -march=nocona -mtune=core2 $STDCFLAGS"
-    export LDFLAGS="-m${TARGETBITS} -pipe -L${OEG_BASE_LIB_DIR}"
     export CONFIGURE_HOST_PARA="--host=x86_64-w64-mingw32"
     export PKG_CONFIG_PATH="${OEG_BASE_DIR}/lib${TARGETBITS}/pkgconfig"
   else
     echo Wrong parameter: $1
     return
   fi
+
+  export OEG_BASE_BIN_DIR="${OEG_BASE_DIR}/bin${OEG_TARGETBITS_DIR_EXT}"
+  export OEG_BASE_LIB_DIR="${OEG_BASE_DIR}/lib${OEG_TARGETBITS_DIR_EXT}"
+  export LDFLAGS="-m${TARGETBITS} -pipe -L${OEG_BASE_LIB_DIR}"
 
   oeg_mingw_path $1
   #oeg_qt_path $1
