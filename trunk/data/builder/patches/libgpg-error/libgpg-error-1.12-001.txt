@@ -1,0 +1,11 @@
+--- potomo.old	2014-01-29 23:03:21 +0000
++++ potomo	2014-01-29 23:02:54 +0000
+@@ -57,7 +57,7 @@
+         ;;   
+     *)
+         echo "potomo: '$infile' converting from $fromset to utf-8" >&2
+-        iconv --silent --from-code=$fromset --to-code=utf-8 < "$infile" |\
++        iconv --from-code=$fromset --to-code=utf-8 < "$infile" |\
+             sed "/^\"Content-Type:/ s/charset=[a-zA-Z0-9_-]*/charset=utf-8/"|\
+             msgfmt --output-file="$outfile" -
+         ;;

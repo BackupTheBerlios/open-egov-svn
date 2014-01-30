@@ -1,0 +1,20 @@
+--- Makefile.old	2014-01-30 13:05:25 +0000
++++ Makefile	2014-01-30 13:05:05 +0000
+@@ -198,7 +198,7 @@
+ LIBS = 
+ LIBTOOL = $(SHELL) $(top_builddir)/libtool
+ LIPO = 
+-LN_S = cp -p
++LN_S = cp -pr
+ LTLIBOBJS = 
+ MAKEINFO = ${SHELL} /work/json-c-0.11/missing --run makeinfo
+ MKDIR_P = /bin/mkdir -p
+@@ -974,7 +974,7 @@
+ 
+ install-data-hook:
+ 	test \! -e "$(DESTDIR)${prefix}/include/json" || rm "$(DESTDIR)${prefix}/include/json"
+-	$(LN_S) json-c "$(DESTDIR)${prefix}/include/json"
++	$(LN_S) "$(DESTDIR)${prefix}/include/json-c" "$(DESTDIR)${prefix}/include/json"
+ 
+ uninstall-local:
+ 	rm -f "$(DESTDIR)${prefix}/include/json"

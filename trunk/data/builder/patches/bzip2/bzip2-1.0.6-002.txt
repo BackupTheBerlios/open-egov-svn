@@ -1,0 +1,43 @@
+--- Makefile-libbz2_so.old	2014-01-29 15:54:15 +0000
++++ Makefile-libbz2_so	2014-01-29 15:53:10 +0000
+@@ -26,6 +26,9 @@
+ BIGFILES=-D_FILE_OFFSET_BITS=64
+ CFLAGS=-fpic -fPIC -Wall -Winline -O2 -g $(BIGFILES)
+ 
++# Where you want it installed when you do 'make install'
++PREFIX=/usr/local
++
+ OBJS= blocksort.o  \
+       huffman.o    \
+       crctable.o   \
+@@ -35,13 +38,26 @@
+       bzlib.o
+ 
+ all: $(OBJS)
+-	$(CC) -shared -Wl,-soname -Wl,libbz2.so.1.0 -o libbz2.so.1.0.6 $(OBJS)
+-	$(CC) $(CFLAGS) -o bzip2-shared bzip2.c libbz2.so.1.0.6
++	$(CC) $(CFLAGS) -shared -Wl,--out-implib -Wl,libbz2.dll.a -Wl,-soname -Wl,bz2-1.dll -o bz2-1.dll $(OBJS)
++	#$(CC) $(CFLAGS) -shared -Wl,-soname -Wl,--out-implib -Wl,libbz2.dll.a -Wl,bz2-1.dll -o bz2-1.dll $(OBJS)
++	$(CC) $(CFLAGS) -o bzip2-shared bzip2.c bz2-1.dll
++	#$(CC) -shared -Wl,-soname -Wl,libbz2.so.1.0 -o libbz2.so.1.0.6 $(OBJS)
++	#$(CC) $(CFLAGS) -o bzip2-shared bzip2.c libbz2.so.1.0.6
+ 	rm -f libbz2.so.1.0
+ 	ln -s libbz2.so.1.0.6 libbz2.so.1.0
+ 
+-clean: 
+-	rm -f $(OBJS) bzip2.o libbz2.so.1.0.6 libbz2.so.1.0 bzip2-shared
++clean:
++	rm -f $(OBJS) bzip2.o bz2-1.dll libbz2.dll.a bzip2-shared.exe
++	#rm -f $(OBJS) bzip2.o libbz2.so.1.0.6 libbz2.so.1.0 bzip2-shared
++
++install:
++	mkdir -p $(PREFIX)/bin
++	mkdir -p $(PREFIX)/lib
++	mkdir -p $(PREFIX)/include
++	cp -f bz2-1.dll $(PREFIX)/bin/bz2-1.dll
++	cp -f bzip2-shared.exe $(PREFIX)/bin/bzip2-shared.exe
++	cp -f bzlib.h $(PREFIX)/include
++	cp -f libbz2.dll.a $(PREFIX)/lib
+ 
+ blocksort.o: blocksort.c
+ 	$(CC) $(CFLAGS) -c blocksort.c

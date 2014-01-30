@@ -1,0 +1,12 @@
+--- Source/OpenEXR/IlmImf/ImfAutoArray.h.old	2014-01-28 09:23:44 +0000
++++ Source/OpenEXR/IlmImf/ImfAutoArray.h	2014-01-28 09:24:37 +0000
+@@ -45,6 +45,9 @@
+ //-----------------------------------------------------------------------------
+ 
+ #include "OpenEXRConfig.h"
++#ifdef __MINGW32__
++#include <string.h>          // memset()
++#endif
+ 
+ namespace Imf {
+ 
